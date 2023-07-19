@@ -1,0 +1,15 @@
+{
+  "translation": {
+    "domain": "Messenger",
+    "welcome": {
+      "language": "Select the program language",
+      "font": "Select the program font size",
+      "color": "Select the program color",
+      "background": "Select the program background",
+      "theme": "Select the program theme",
+      "next_button": "Next",
+      "prev_button": "Prev",
+      "finish": "Finish"
+    }
+  }
+}
