@@ -1,14 +1,24 @@
 {
   "translation": {
     "domain": "Messenger",
-    "welcome": {
+    "typography": {
       "language": "Select the program language",
-      "font": "Select the program font size",
+      "fontSize": "Select the program font size",
+      "first_message": "Hello . How are you ?",
+      "second_message": "I`m fine . Thanks",
       "color": "Select the program color",
       "background": "Select the program background",
-      "theme": "Select the program theme",
-      "next_button": "Next",
-      "prev_button": "Prev",
+      "theme": "Select the program theme"
+    },
+    "select": {
+      "persian": "Persian",
+      "english": "English",
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "button": {
+      "next": "Next",
+      "prev": "Prev",
       "finish": "Finish"
     }
   }

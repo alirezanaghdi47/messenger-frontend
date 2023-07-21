@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {backgrounds, colors} from "@/utils/constants.js";
+import {backgroundList, colorList} from "@/utils/constants.js";
 
 const initialState = {
     username: "",
@@ -10,11 +10,11 @@ const initialState = {
     status: "",
     language: "fa",
     darkMode: false,
-    size: 16,
-    color: colors[0].value,
+    fontSize: 16,
+    color: colorList[0].value,
     background: {
-        desktop: backgrounds[0].desktop,
-        mobile: backgrounds[0].mobile
+        desktop: backgroundList[0].src.desktop,
+        mobile: backgroundList[0].src.mobile
     },
     accessToken: "",
     refreshToken: "",
@@ -25,15 +25,29 @@ export const account = createSlice({
     name: 'account',
     initialState,
     reducers: {
-        setAccount: (state, action) => {
-            state.language = action.payload.language;
+        setLanguage: (state, action) => {
+            state.language = action.payload;
         },
-        removeAccount: () => initialState
+        setSize: (state, action) => {
+            state.fontSize = action.payload;
+        },
+        setColor: (state, action) => {
+            state.color = action.payload;
+        },
+        setBackground: (state, action) => {
+            state.background = {
+                desktop: backgroundList[action.payload].src.desktop,
+                mobile: backgroundList[action.payload].src.mobile,
+            };
+        },
+        setTheme: (state, action) => {
+            state.darkMode = action.payload;
+        },
     },
 })
 
 export const {
-    setAccount, removeAccount
+    setLanguage , setSize,setColor,setBackground,setTheme
 } = account.actions
 
 export default account.reducer

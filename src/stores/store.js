@@ -1,14 +1,18 @@
+// libraries
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import storageSession from 'redux-persist/lib/storage/session';
+import thunk from "redux-thunk";
 import { persistReducer, persistStore } from 'redux-persist';
+import storageSession from 'redux-persist/lib/storage/session';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
-import thunk from "redux-thunk";
 
+// stores
 import accountReducer from "@/stores/slices/account.js";
+import appReducer from "@/stores/slices/app.js";
 
 const reducers = combineReducers({
     account: accountReducer,
+    app: appReducer
 });
 
 const persistConfig = {

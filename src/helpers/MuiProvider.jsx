@@ -1,7 +1,8 @@
+// libraries
 import {useMemo, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {CacheProvider} from "@emotion/react";
-import {createTheme, ThemeProvider} from "@mui/material";
+import {createTheme, ThemeProvider, responsiveFontSizes, alpha} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {enUS, faIR} from "@mui/material/locale";
 import createCache from "@emotion/cache";
@@ -19,7 +20,7 @@ const emptyCache = createCache({
 
 const MuiProvider = ({children}) => {
 
-    const {language, darkMode , color} = useSelector(state => state.account);
+    const {language, darkMode, color} = useSelector(state => state.account);
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -83,9 +84,156 @@ const MuiProvider = ({children}) => {
         typography: {
             fontFamily: "Vazirmatn , sans-serif"
         },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        borderRadius: theme.shape.borderRadius,
+                        fontWeight: "bold",
+                    })
+                },
+                defaultProps: {
+                    disableElevation: true,
+                    disableRipple: true
+                }
+            },
+            MuiIconButton: {
+                variants: [
+                    {
+                        props: {variant: "contained"},
+                        style: ({theme, ownerState}) => ({
+                            background: theme.palette[ownerState.color].main,
+                            color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
+                        })
+                    },
+                    {
+                        props: {variant: "outlined"},
+                        style: ({theme, ownerState}) => ({
+                            background: alpha(theme.palette[ownerState.color].main, 0.5),
+                            color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
+                        })
+                    }
+                ],
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        borderRadius: `${theme.shape.borderRadius} !important`,
+                    })
+                },
+                defaultProps: {
+                    disableRipple: true
+                }
+            },
+            MuiFormLabel: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        fontWeight: "bold",
+                    })
+                }
+            },
+            MuiTextField: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        fontWeight: "bold",
+                    })
+                },
+                defaultProps: {
+                    size: "small"
+                }
+            },
+            MuiInputBase: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        background: theme.palette.background.paper,
+                        fontWeight: "bold",
+                        color: theme.palette.common.black,
+                        borderRadius: theme.shape.borderRadius,
+                    }),
+                }
+            },
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    notchedOutline: ({theme, ownerState}) => ({
+                        border: `none`,
+                    }),
+                }
+            },
+            MuiSelect: {
+                defaultProps: {
+                    MenuProps: {
+                        elevation: 2
+                    }
+                }
+            },
+            MuiSlider: {
+                styleOverrides: {
+                    valueLabel: ({theme, ownerState}) => ({
+                        background: theme.palette.primary.main,
+                        fontWeight: "bold",
+                        color: theme.palette.getContrastText(theme.palette.primary.main),
+                        borderRadius: theme.shape.borderRadius,
+                    }),
+                }
+            },
+            MuiList: {
+                defaultProps: {
+                    disablePadding: true
+                }
+            },
+            MuiMenu: {
+                styleOverrides: {
+                    paper: ({theme, ownerState}) => ({
+                        maxWidth: 320,
+                        maxHeight: "unset",
+                        marginTop: 8,
+                    }),
+                    list: ({theme, ownerState}) => ({
+                        "&::-webkit-scrollbar": {
+                            display: "none ",
+                        },
+                        scrollbarWidth: "none ",
+                        msOverflowStyle: "none "
+                    })
+                },
+                defaultProps: {
+                    elevation: 2
+                }
+            },
+            MuiMenuItem: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        // minHeight: "unset",
+                        fontSize: theme.typography.body2.fontSize,
+                        fontWeight: "bold",
+                        color: theme.palette.common.black,
+                        "&.Mui-selected": {
+                            background: `${theme.palette.primary.main} !important`,
+                            color: `${theme.palette.getContrastText(theme.palette.primary.light)} !important`,
+                            "&:hover": {
+                                background: theme.palette.primary.light,
+                            }
+                        }
+                    })
+                }
+            },
+            MuiTooltip: {
+                styleOverrides: {
+                    tooltip: ({theme, ownerState}) => ({
+                        background: theme.palette.primary.main,
+                        color: theme.palette.getContrastText(theme.palette.primary.main),
+                        fontSize: theme.typography.caption.fontSize,
+                        fontWeight: "bold",
+                    }),
+                    arrow: ({theme, ownerState}) => ({
+                        "&::before": {
+                            background: theme.palette.primary.main,
+                        }
+                    })
+                }
+            },
+        }
     }, language === "fa" ? faIR : enUS);
 
-    const customizedTheme = useMemo(() => addonTheme, [language, darkMode]);
+    const customizedTheme = useMemo(() => responsiveFontSizes(addonTheme), [language, darkMode, color]);
 
     return (
         <CacheProvider value={language === "fa" ? cacheRtl : emptyCache}>

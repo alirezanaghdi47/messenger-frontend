@@ -1,4 +1,4 @@
-import Primary from "@/components/layouts/Primary.jsx";
+import Primary from "@/layouts/Primary.jsx";
 
 const Home = () => {
 

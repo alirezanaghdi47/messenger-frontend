@@ -1,4 +1,4 @@
-import Other from "@/components/layouts/Other.jsx";
+import Other from "@/layouts/Other.jsx";
 
 const NotFound = () => {
 
