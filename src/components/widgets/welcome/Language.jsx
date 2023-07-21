@@ -3,7 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {
+    Box,
     Button,
+    Card,
     Container,
     FormControl,
     MenuItem,
@@ -18,7 +20,7 @@ import logo from "@/assets/images/logo.png";
 
 // stores
 import {setLanguage} from "@/stores/slices/account.js";
-import {setCurrentPage} from "@/stores/slices/app.js";
+import {setActivePage} from "@/stores/slices/other.js";
 
 // utils
 import {languageList} from "@/utils/constants.js";
@@ -31,7 +33,7 @@ const Language = () => {
 
     return (
         <Container
-            maxWidth="xs"
+            maxWidth="sm"
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -40,75 +42,104 @@ const Language = () => {
                 minHeight: "100dvh",
             }}
         >
-            <Stack
-                direction="column"
-                gap={2}
+
+            <Card
                 sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     width: "100%",
-                    padding: 2
+                    padding: 4
                 }}
             >
 
-                <LazyLoadImage
-                    src={logo}
-                    alt="logo"
-                    width={80}
-                    height={60}
-                />
-
-                <Typography
-                    variant="h6"
-                    fontWeight="bold"
+                <Stack
+                    direction="column"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                    }}
                 >
-                    {t("typography.language")}
-                </Typography>
 
-                <FormControl
-                    fullWidth
-                    size="small"
-                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            gap: 2,
+                            justifyContent: "start",
+                            alignItems: 'center',
+                        }}
+                    >
+
+                        <LazyLoadImage
+                            src={logo}
+                            alt="logo"
+                            width={40}
+                            height={40}
+                        />
+
+                        <Typography
+                            variant="subtitle1"
+                            color="textPrimary"
+                            fontWeight="bold"
+                        >
+                            {t("domain")}
+                        </Typography>
+
+                    </Box>
 
                     <Typography
                         variant="subtitle1"
-                        gutterBottom
+                        color="textPrimary"
                         fontWeight="bold"
                     >
-                        {i18n.language === "fa" ? "زبان" : "Language"}
+                        {t("typography.language")}
                     </Typography>
 
-                    <Select
-                        value={language}
-                        label={i18n.language === "fa" ? "زبان" : "Language"}
-                        onChange={(e) => dispatch(setLanguage(e.target.value))}
-                        IconComponent={FiChevronDown}
+                    <FormControl
+                        fullWidth
+                        size="small"
                     >
-                        {
-                            languageList.map(languageItem =>
-                                <MenuItem
-                                    key={languageItem.id}
-                                    value={languageItem.value}
-                                >
-                                    {t(languageItem.title)}
-                                </MenuItem>
-                            )
-                        }
-                    </Select>
 
-                </FormControl>
+                        <Typography
+                            variant="subtitle1"
+                            gutterBottom
+                            fontWeight="bold"
+                        >
+                            {i18n.language === "fa" ? "زبان" : "Language"}
+                        </Typography>
 
-                <Button
-                    variant="text"
-                    color="primary"
-                    fullWidth
-                    onClick={() => dispatch(setCurrentPage({data: null, type: "fontSize"}))}
-                >
-                    {t("button.next")}
-                </Button>
+                        <Select
+                            value={language}
+                            label={i18n.language === "fa" ? "زبان" : "Language"}
+                            onChange={(e) => dispatch(setLanguage(e.target.value))}
+                            IconComponent={FiChevronDown}
+                        >
+                            {
+                                languageList.map(languageItem =>
+                                    <MenuItem
+                                        key={languageItem.id}
+                                        value={languageItem.value}
+                                    >
+                                        {t(languageItem.title)}
+                                    </MenuItem>
+                                )
+                            }
+                        </Select>
 
-            </Stack>
+                    </FormControl>
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={() => dispatch(setActivePage({data: null, type: "fontSize"}))}
+                    >
+                        {t("button.next")}
+                    </Button>
+
+                </Stack>
+
+            </Card>
 
         </Container>
     )

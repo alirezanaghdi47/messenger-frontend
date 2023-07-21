@@ -8,11 +8,11 @@ import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 // stores
 import accountReducer from "@/stores/slices/account.js";
-import appReducer from "@/stores/slices/app.js";
+import otherReducer from "@/stores/slices/other.js";
 
 const reducers = combineReducers({
     account: accountReducer,
-    app: appReducer
+    other: otherReducer,
 });
 
 const persistConfig = {

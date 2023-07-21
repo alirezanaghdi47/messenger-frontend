@@ -4,17 +4,31 @@
     "typography": {
       "language": "زبان برنامه را انتخاب کنید",
       "fontSize": "اندازه فونت برنامه را انتخاب کنید",
-      "first_message": "سلام حالت چطوره ؟",
-      "second_message": "ممنون خوبم .",
+      "firstMessage": "سلام حالت چطوره ؟",
+      "secondMessage": "ممنون خوبم .",
       "color": "رنگ برنامه را انتخاب کنید",
       "background": "پس زمینه برنامه را انتخاب کنید",
-      "theme": "تم برنامه را انتخاب کنید"
+      "theme": "تم برنامه را انتخاب کنید",
+      "lastSeen": "آخرین حضور"
     },
     "select": {
       "persian": "فارسی",
       "english": "انگلیسی",
       "dark": "تاریک",
       "light": "روشن"
+    },
+    "input": {
+      "search": "جستجو کنید ...",
+      "message": "متن پیام"
+    },
+    "menu": {
+      "file": "فایل",
+      "image": "عکس",
+      "voice": "صدا",
+      "location": "موقعیت",
+      "deleteChat": "حذف گفتگو ها",
+      "createChat": "ایجاد گفتگو جدید",
+      "createGroup": "ایجاد گروه جدید"
     },
     "button": {
       "next": "بعدی",

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {
+    Box,
     Button,
     Card,
     Container,
@@ -17,7 +18,7 @@ import logo from "@/assets/images/logo.png";
 
 // stores
 import {setSize} from "@/stores/slices/account.js";
-import {setCurrentPage} from "@/stores/slices/app.js";
+import {setActivePage} from "@/stores/slices/other.js";
 
 // utils
 import {fontSizeList} from "@/utils/constants.js";
@@ -31,7 +32,7 @@ const FontSize = () => {
 
     return (
         <Container
-            maxWidth="xs"
+            maxWidth="sm"
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -41,129 +42,157 @@ const FontSize = () => {
             }}
         >
 
-            <Stack
-                direction="column"
-                gap={2}
+            <Card
                 sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     width: "100%",
-                    padding: 2
+                    padding: 4
                 }}
             >
 
-                <LazyLoadImage
-                    src={logo}
-                    alt="logo"
-                    width={80}
-                    height={60}
-                />
-
-                <Typography
-                    variant="h6"
-                    fontWeight="bold"
-                >
-                    {t("typography.fontSize")}
-                </Typography>
-
                 <Stack
-                    direction="row"
+                    direction="column"
                     gap={2}
                     sx={{
                         display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "start",
-                        width: "100%"
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
                     }}
                 >
 
-                    <Card
+                    <Box
                         sx={{
                             display: "flex",
+                            gap: 2,
                             justifyContent: "start",
-                            alignItems: "center",
-                            maxWidth: "45%",
-                            bgcolor: "primary.main",
-                            padding: 2
+                            alignItems: 'center',
                         }}
                     >
 
-                        <Typography
-                            variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
-                            color={theme.palette.getContrastText(theme.palette.primary.main)}
-                            fontWeight="bold"
-                        >
-                            {t("typography.first_message")}
-                        </Typography>
-
-                    </Card>
-
-                    <Card
-                        sx={{
-                            display: "flex",
-                            justifyContent: "end",
-                            alignItems: "center",
-                            maxWidth: "45%",
-                            marginTop: 4,
-                            padding: 2,
-                        }}
-                    >
+                        <LazyLoadImage
+                            src={logo}
+                            alt="logo"
+                            width={40}
+                            height={40}
+                        />
 
                         <Typography
-                            variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                            variant="subtitle1"
                             color="textPrimary"
                             fontWeight="bold"
                         >
-                            {t("typography.second_message")}
+                            {t("domain")}
                         </Typography>
 
-                    </Card>
+                    </Box>
+
+                    <Typography
+                        variant="subtitle1"
+                        color="textPrimary"
+                        fontWeight="bold"
+                    >
+                        {t("typography.fontSize")}
+                    </Typography>
+
+                    <Stack
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "start",
+                            width: "100%"
+                        }}
+                    >
+
+                        <Card
+                            sx={{
+                                display: "flex",
+                                justifyContent: "start",
+                                alignItems: "center",
+                                maxWidth: "45%",
+                                bgcolor: "primary.main",
+                                padding: 2
+                            }}
+                        >
+
+                            <Typography
+                                variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                                color={theme.palette.getContrastText(theme.palette.primary.main)}
+                                fontWeight="bold"
+                            >
+                                {t("typography.firstMessage")}
+                            </Typography>
+
+                        </Card>
+
+                        <Card
+                            sx={{
+                                display: "flex",
+                                justifyContent: "end",
+                                alignItems: "center",
+                                maxWidth: "45%",
+                                marginTop: 4,
+                                padding: 2,
+                            }}
+                        >
+
+                            <Typography
+                                variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                                color="textPrimary"
+                                fontWeight="bold"
+                            >
+                                {t("typography.secondMessage")}
+                            </Typography>
+
+                        </Card>
+
+                    </Stack>
+
+                    <Slider
+                        value={fontSize}
+                        valueLabelDisplay="auto"
+                        step={2}
+                        marks
+                        min={12}
+                        max={20}
+                        onChange={(e, newValue) => dispatch(setSize(newValue))}
+                    />
+
+                    <Stack
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%"
+                        }}
+                    >
+
+                        <Button
+                            variant="text"
+                            color="primary"
+                            fullWidth
+                            onClick={() => dispatch(setActivePage({data: null, type: "language"}))}
+                        >
+                            {t("button.prev")}
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            onClick={() => dispatch(setActivePage({data: null, type: "color"}))}
+                        >
+                            {t("button.next")}
+                        </Button>
+
+                    </Stack>
 
                 </Stack>
 
-                <Slider
-                    value={fontSize}
-                    valueLabelDisplay="auto"
-                    step={2}
-                    marks
-                    min={12}
-                    max={20}
-                    onChange={(e, newValue) => dispatch(setSize(newValue))}
-                />
-
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%"
-                    }}
-                >
-
-                    <Button
-                        variant="text"
-                        color="primary"
-                        fullWidth
-                        onClick={() => dispatch(setCurrentPage({data: null , type: "language"}))}
-                    >
-                        {t("button.prev")}
-                    </Button>
-
-                    <Button
-                        variant="text"
-                        color="primary"
-                        fullWidth
-                        onClick={() => dispatch(setCurrentPage({data: null , type: "color"}))}
-                    >
-                        {t("button.next")}
-                    </Button>
-
-                </Stack>
-
-            </Stack>
+            </Card>
 
         </Container>
     )

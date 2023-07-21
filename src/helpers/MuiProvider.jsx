@@ -55,6 +55,9 @@ const MuiProvider = ({children}) => {
             primary: {
                 main: color,
             },
+            secondary: {
+                main: darkMode ? "#e2e8f0" : "#475569"
+            },
             error: {
                 main: "#DB4437",
             },
@@ -85,10 +88,29 @@ const MuiProvider = ({children}) => {
             fontFamily: "Vazirmatn , sans-serif"
         },
         components: {
+            MuiCssBaseline:{
+                styleOverrides: {
+                    ul: {
+                        margin: 0,
+                        padding: 0,
+                    },
+                    li: {
+                        margin: 0,
+                        padding: 0,
+                        listStyleType: "none"
+                    },
+                    p: {
+                        margin: 0
+                    },
+                    video:{
+                        borderRadius: 8
+                    }
+                }
+            },
             MuiButton: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
-                        borderRadius: theme.shape.borderRadius,
+                        borderRadius: `${theme.shape.borderRadius}px`,
                         fontWeight: "bold",
                     })
                 },
@@ -112,11 +134,18 @@ const MuiProvider = ({children}) => {
                             background: alpha(theme.palette[ownerState.color].main, 0.5),
                             color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
                         })
+                    },
+                    {
+                        props: {variant: "text"},
+                        style: ({theme, ownerState}) => ({
+                            background: "transparent",
+                            color: theme.palette[ownerState.color].main,
+                        })
                     }
                 ],
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
-                        borderRadius: `${theme.shape.borderRadius} !important`,
+                        borderRadius: `${theme.shape.borderRadius}px`,
                     })
                 },
                 defaultProps: {
@@ -135,15 +164,12 @@ const MuiProvider = ({children}) => {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
                     })
-                },
-                defaultProps: {
-                    size: "small"
                 }
             },
             MuiInputBase: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
-                        background: theme.palette.background.paper,
+                        background: theme.palette.background.default,
                         fontWeight: "bold",
                         color: theme.palette.common.black,
                         borderRadius: theme.shape.borderRadius,
@@ -174,6 +200,15 @@ const MuiProvider = ({children}) => {
                     }),
                 }
             },
+            MuiBadge:{
+                styleOverrides:{
+                    badge: ({theme, ownerState}) => ({
+                        width: 12,
+                        height: 12,
+                        borderRadius: theme.shape.borderRadius,
+                    }),
+                }
+            },
             MuiList: {
                 defaultProps: {
                     disablePadding: true
@@ -184,14 +219,14 @@ const MuiProvider = ({children}) => {
                     paper: ({theme, ownerState}) => ({
                         maxWidth: 320,
                         maxHeight: "unset",
-                        marginTop: 8,
                     }),
                     list: ({theme, ownerState}) => ({
                         "&::-webkit-scrollbar": {
                             display: "none ",
                         },
                         scrollbarWidth: "none ",
-                        msOverflowStyle: "none "
+                        msOverflowStyle: "none ",
+                        padding: 8,
                     })
                 },
                 defaultProps: {
@@ -205,6 +240,7 @@ const MuiProvider = ({children}) => {
                         fontSize: theme.typography.body2.fontSize,
                         fontWeight: "bold",
                         color: theme.palette.common.black,
+                        borderRadius: theme.shape.borderRadius,
                         "&.Mui-selected": {
                             background: `${theme.palette.primary.main} !important`,
                             color: `${theme.palette.getContrastText(theme.palette.primary.light)} !important`,

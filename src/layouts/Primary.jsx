@@ -1,29 +1,23 @@
 // libraries
 import PropTypes from "prop-types";
-import {useMediaQuery} from "@react-hooks-library/core";
-
-const MobileHomeLayout = ({children}) => {
-   return (
-       <>
-           {children}
-       </>
-   )
-}
-
-const DesktopHomeLayout = ({children}) => {
-    return (
-        <>
-            {children}
-        </>
-    )
-}
+import {Box} from "@mui/material";
 
 const Primary = ({children}) => {
-    const isDesktop = useMediaQuery('(min-width: 992px)');
-    const isMobile = useMediaQuery('(max-width: 992px)');
 
-    if (isDesktop) return <DesktopHomeLayout children={children}/>
-    if (isMobile) return <MobileHomeLayout children={children}/>
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                justifyContent: 'start',
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+            }}
+        >
+            {children}
+        </Box>
+    )
+
 }
 
 Primary.prototype = {

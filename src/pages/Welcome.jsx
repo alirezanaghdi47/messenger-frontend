@@ -1,7 +1,7 @@
 // libraries
 import {useLayoutEffect} from "react";
-import {useSelector , useDispatch} from "react-redux";
-import {setCurrentPage} from "@/stores/slices/app.js";
+import {useSelector, useDispatch} from "react-redux";
+import {setActivePage} from "@/stores/slices/other.js";
 
 // components
 import Language from "@/components/widgets/welcome/Language.jsx";
@@ -16,20 +16,20 @@ import Other from "@/layouts/Other.jsx";
 const Welcome = () => {
 
     const dispatch = useDispatch();
-    const {currentPage} = useSelector(state => state.app);
+    const {activePage} = useSelector(state => state.other);
 
     useLayoutEffect(() => {
-        dispatch(setCurrentPage({data: null , type: "language"}));
-    } , []);
+        dispatch(setActivePage({data: null, type: "language"}));
+    }, []);
 
     return (
         <Other>
 
-            {currentPage.type === "language" && <Language/>}
-            {currentPage.type === "fontSize" && <FontSize/>}
-            {currentPage.type === "color" && <Color/>}
-            {currentPage.type === "background" && <Background/>}
-            {currentPage.type === "theme" && <Theme/>}
+            {activePage.type === "language" && <Language/>}
+            {activePage.type === "fontSize" && <FontSize/>}
+            {activePage.type === "color" && <Color/>}
+            {activePage.type === "background" && <Background/>}
+            {activePage.type === "theme" && <Theme/>}
 
         </Other>
     )

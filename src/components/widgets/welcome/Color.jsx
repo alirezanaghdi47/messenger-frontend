@@ -9,6 +9,7 @@ import {
     IconButton,
     Stack,
     Typography,
+    Card
 } from "@mui/material";
 
 // assets
@@ -16,7 +17,7 @@ import logo from "@/assets/images/logo.png";
 
 // stores
 import {setColor} from "@/stores/slices/account.js";
-import {setCurrentPage} from "@/stores/slices/app.js";
+import {setActivePage} from "@/stores/slices/other.js";
 
 // utils
 import {colorList} from "@/utils/constants.js";
@@ -29,7 +30,7 @@ const Color = () => {
 
     return (
         <Container
-            maxWidth="xs"
+            maxWidth="sm"
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -39,97 +40,125 @@ const Color = () => {
             }}
         >
 
-            <Stack
-                direction="column"
-                gap={2}
+            <Card
                 sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     width: "100%",
-                    padding: 2
+                    padding: 4
                 }}
             >
 
-                <LazyLoadImage
-                    src={logo}
-                    alt="logo"
-                    width={80}
-                    height={60}
-                />
-
-                <Typography
-                    variant="h6"
-                    fontWeight="bold"
-                >
-                    {t("typography.color")}
-                </Typography>
-
                 <Stack
-                    direction="row"
+                    direction="column"
+                    gap={2}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        width: "100%"
+                        width: "100%",
                     }}
                 >
 
-                    {
-                        colorList.map(colorItem =>
-                            <IconButton
-                                variant={colorItem.value === color ? "outlined" : "text"}
-                                size="large"
-                                color="primary"
-                                key={colorItem.id}
-                                onClick={() => dispatch(setColor(colorItem.value))}
-                            >
-                                <Box
-                                    sx={{
-                                        width: 16,
-                                        height: 16,
-                                        backgroundColor: colorItem.title,
-                                        borderRadius: 1
-                                    }}
-                                />
-                            </IconButton>
-                        )
-                    }
+                    <Box
+                        sx={{
+                            display: "flex",
+                            gap: 2,
+                            justifyContent: "start",
+                            alignItems: 'center',
+                        }}
+                    >
+
+                        <LazyLoadImage
+                            src={logo}
+                            alt="logo"
+                            width={40}
+                            height={40}
+                        />
+
+                        <Typography
+                            variant="subtitle1"
+                            color="textPrimary"
+                            fontWeight="bold"
+                        >
+                            {t("domain")}
+                        </Typography>
+
+                    </Box>
+
+                    <Typography
+                        variant="subtitle1"
+                        color="textPrimary"
+                        fontWeight="bold"
+                    >
+                        {t("typography.color")}
+                    </Typography>
+
+                    <Stack
+                        direction="row"
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "100%"
+                        }}
+                    >
+
+                        {
+                            colorList.map(colorItem =>
+                                <IconButton
+                                    variant={colorItem.value === color ? "outlined" : "text"}
+                                    size="large"
+                                    color="primary"
+                                    key={colorItem.id}
+                                    onClick={() => dispatch(setColor(colorItem.value))}
+                                >
+                                    <Box
+                                        sx={{
+                                            width: 16,
+                                            height: 16,
+                                            backgroundColor: colorItem.title,
+                                            borderRadius: 1
+                                        }}
+                                    />
+                                </IconButton>
+                            )
+                        }
+
+                    </Stack>
+
+                    <Stack
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%"
+                        }}
+                    >
+
+                        <Button
+                            variant="text"
+                            color="primary"
+                            fullWidth
+                            onClick={() => dispatch(setActivePage({data: null, type: "fontSize"}))}
+                        >
+                            {t("button.prev")}
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            onClick={() => dispatch(setActivePage({data: null, type: "background"}))}
+                        >
+                            {t("button.next")}
+                        </Button>
+
+                    </Stack>
 
                 </Stack>
 
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%"
-                    }}
-                >
-
-                    <Button
-                        variant="text"
-                        color="primary"
-                        fullWidth
-                        onClick={() => dispatch(setCurrentPage({data: null , type: "fontSize"}))}
-                    >
-                        {t("button.prev")}
-                    </Button>
-
-                    <Button
-                        variant="text"
-                        color="primary"
-                        fullWidth
-                        onClick={() => dispatch(setCurrentPage({data: null , type: "background"}))}
-                    >
-                        {t("button.next")}
-                    </Button>
-
-                </Stack>
-
-            </Stack>
+            </Card>
 
         </Container>
     )

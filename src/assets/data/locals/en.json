@@ -4,17 +4,31 @@
     "typography": {
       "language": "Select the program language",
       "fontSize": "Select the program font size",
-      "first_message": "Hello . How are you ?",
-      "second_message": "I`m fine . Thanks",
+      "firstMessage": "Hello . How are you ?",
+      "secondMessage": "I`m fine . Thanks",
       "color": "Select the program color",
       "background": "Select the program background",
-      "theme": "Select the program theme"
+      "theme": "Select the program theme",
+      "lastSeen": "Last Seen"
     },
     "select": {
       "persian": "Persian",
       "english": "English",
       "dark": "Dark",
       "light": "Light"
+    },
+    "input": {
+      "search": "Search ...",
+      "message": "Message"
+    },
+    "menu": {
+      "file": "File",
+      "image": "Image",
+      "voice": "Voice",
+      "location": "Location",
+      "deleteChat": "Delete Chats",
+      "createChat": "Create New Chat",
+      "createGroup": "Create New Group"
     },
     "button": {
       "next": "Next",

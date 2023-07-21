@@ -8,7 +8,7 @@ const initialState = {
     avatar: "",
     lastSeen: "",
     status: "",
-    language: "fa",
+    language: "en",
     darkMode: false,
     fontSize: 16,
     color: colorList[0].value,
@@ -48,6 +48,6 @@ export const account = createSlice({
 
 export const {
     setLanguage , setSize,setColor,setBackground,setTheme
-} = account.actions
+} = account.actions;
 
-export default account.reducer
+export default account.reducer;
