@@ -12,23 +12,22 @@ import {
     MenuItem,
     Menu
 } from "@mui/material";
-import {FiChevronLeft, FiChevronRight, FiMoreVertical, FiPhone, FiSearch, FiTrash, FiVideo} from "react-icons/fi";
+import {
+    FiBell,
+    FiChevronLeft,
+    FiChevronRight,
+    FiMoreVertical,
+    FiPhone,
+    FiSearch,
+    FiTrash,
+    FiVideo
+} from "react-icons/fi";
 
 // assets
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {store} from "@/stores/store.js";
 import {removeActivePage} from "@/stores/slices/other.js";
-
-const toolBarList = [
-    {
-        id: 1,
-        title: "menu.deleteChat",
-        value: "deleteChat",
-        icon: <FiTrash size={20} color={store.getState().account.darkMode ? "#e2e8f0" : "#475569"}/>
-    },
-];
 
 const UserInfo = () => {
 
@@ -39,7 +38,7 @@ const UserInfo = () => {
         <Stack
             component="li"
             direction="row"
-            gap={2}
+            gap={1}
             sx={{
                 display: "flex",
                 justifyContent: isTablet ? "center" : "start",
@@ -52,6 +51,7 @@ const UserInfo = () => {
             <Badge
                 color="success"
                 variant="dot"
+                overlap='circular'
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
@@ -63,7 +63,7 @@ const UserInfo = () => {
                     alt="logo"
                     width={40}
                     height={40}
-                    style={{borderRadius: 8}}
+                    style={{borderRadius: "50%"}}
                 />
 
             </Badge>
@@ -74,7 +74,6 @@ const UserInfo = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "start",
-                    width: "calc(100% - 72px)",
                 }}
             >
 
@@ -83,7 +82,6 @@ const UserInfo = () => {
                     color="textPrimary"
                     fontWeight='bold'
                     noWrap
-                    sx={{width: 150, overflow: "hidden"}}
                 >
                     علیرضا نقدی
                 </Typography>
@@ -92,9 +90,9 @@ const UserInfo = () => {
                     variant="caption"
                     color="textSecondary"
                     noWrap
-                    sx={{width: 150, overflow: "hidden"}}
                 >
-                    {t("typography.lastSeen")} 11:11
+                    {t("typography.lastSeen")}
+                    11:11
                 </Typography>
 
             </Stack>
@@ -103,22 +101,174 @@ const UserInfo = () => {
     )
 }
 
-const ToolBar = () => {
+const MobileToolbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const {darkMode} = useSelector(state => state.account);
     const {t} = useTranslation();
 
     return (
-        <Stack
-            direction="row"
-            gap={1}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: 'center',
-            }}
-        >
+        <>
+
+            <IconButton
+                variant="text"
+                color="secondary"
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+            >
+                <FiMoreVertical
+                    size={20}
+                    color={darkMode ? "#e2e8f0" : "#475569"}
+                />
+            </IconButton>
+
+            <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+            >
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiSearch
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.searchChat")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiVideo
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.videoCall")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiPhone
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.voiceCall")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiTrash
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.deleteChat")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiBell
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.muteChat")}
+                    </Typography>
+
+                </MenuItem>
+
+            </Menu>
+
+        </>
+    )
+}
+
+const DesktopToolbar = () => {
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const {darkMode} = useSelector(state => state.account);
+    const {t} = useTranslation();
+
+    return(
+        <>
 
             <IconButton
                 variant="text"
@@ -175,34 +325,82 @@ const ToolBar = () => {
                 onClose={() => setAnchorEl(null)}
             >
 
-                {
-                    toolBarList.map(toolBarItem =>
-                        <MenuItem
-                            key={toolBarItem.id}
-                            onClick={() => console.log(toolBarItem.value)}
-                            sx={{
-                                display: "flex",
-                                gap: 1,
-                                justifyContent: "start",
-                                alignItems: "center",
-                            }}
-                        >
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
 
-                            {toolBarItem.icon}
+                    <FiTrash
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
 
-                            <Typography
-                                variant="body2"
-                                color="textPrimary"
-                                fontWeight='bold'
-                            >
-                                {t(toolBarItem.title)}
-                            </Typography>
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.deleteChat")}
+                    </Typography>
 
-                        </MenuItem>
-                    )
-                }
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiBell
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.muteChat")}
+                    </Typography>
+
+                </MenuItem>
 
             </Menu>
+
+        </>
+    )
+}
+
+const ToolBar = () => {
+
+    const isTablet = useMediaQuery('(max-width: 768px)');
+
+    return (
+        <Stack
+            direction="row"
+            gap={1}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: 'center',
+            }}
+        >
+
+            {
+                isTablet ? (
+                    <MobileToolbar/>
+                ) : (
+                    <DesktopToolbar/>
+                )
+            }
 
         </Stack>
     )
@@ -264,4 +462,3 @@ const AppBar = () => {
 }
 
 export default AppBar;
-

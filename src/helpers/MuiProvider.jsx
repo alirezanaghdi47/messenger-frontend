@@ -110,7 +110,6 @@ const MuiProvider = ({children}) => {
             MuiButton: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
-                        borderRadius: `${theme.shape.borderRadius}px`,
                         fontWeight: "bold",
                     })
                 },
@@ -143,11 +142,6 @@ const MuiProvider = ({children}) => {
                         })
                     }
                 ],
-                styleOverrides: {
-                    root: ({theme, ownerState}) => ({
-                        borderRadius: `${theme.shape.borderRadius}px`,
-                    })
-                },
                 defaultProps: {
                     disableRipple: true
                 }
@@ -224,8 +218,8 @@ const MuiProvider = ({children}) => {
                         "&::-webkit-scrollbar": {
                             display: "none ",
                         },
-                        scrollbarWidth: "none ",
-                        msOverflowStyle: "none ",
+                        scrollbarWidth: "none",
+                        msOverflowStyle: "none",
                         padding: 8,
                     })
                 },

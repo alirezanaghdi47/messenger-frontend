@@ -60,7 +60,7 @@ const MessageItem = ({chat}) => {
         <Stack
             component="li"
             direction="row"
-            gap={2}
+            gap={1}
             sx={{
                 direction: chat.me ? "rtl" : "ltr",
                 display: "flex",
@@ -73,9 +73,9 @@ const MessageItem = ({chat}) => {
             <LazyLoadImage
                 src={logo}
                 alt="logo"
-                width={40}
-                height={40}
-                style={{borderRadius: 8}}
+                width={30}
+                height={30}
+                style={{borderRadius: "50%"}}
             />
 
             <Stack

@@ -27,6 +27,11 @@
       "voice": "صدا",
       "location": "موقعیت",
       "deleteChat": "حذف گفتگو ها",
+      "searchChat": "جستجوی گفتگو ها",
+      "videoCall": "تماس تصویری",
+      "voiceCall": "تماس صوتی",
+      "muteChat": "فعال سازی سکوت",
+      "unMuteChat": "فعال سازی صدا",
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید"
     },

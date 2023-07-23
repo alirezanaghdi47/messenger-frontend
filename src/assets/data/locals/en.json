@@ -27,6 +27,11 @@
       "voice": "Voice",
       "location": "Location",
       "deleteChat": "Delete Chats",
+      "searchChat": "Search Chats",
+      "videoCall": "Video Call",
+      "voiceCall": "Voice Call",
+      "muteChat": "Mute Chat",
+      "unMuteChat": "UnMute Chat",
       "createChat": "Create New Chat",
       "createGroup": "Create New Group"
     },

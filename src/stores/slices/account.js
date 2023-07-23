@@ -8,8 +8,8 @@ const initialState = {
     avatar: "",
     lastSeen: "",
     status: "",
-    language: "en",
-    darkMode: false,
+    language: "fa",
+    darkMode: true,
     fontSize: 16,
     color: colorList[0].value,
     background: {

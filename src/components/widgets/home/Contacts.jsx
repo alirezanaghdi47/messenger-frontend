@@ -30,8 +30,6 @@ const ContactList = () => {
                 alignItems: "center",
                 width: "100%",
                 height: "calc(100vh - 150px)",
-                paddingTop: 1,
-                paddingBottom: 1,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"
@@ -77,6 +75,7 @@ const ContactItem = ({user}) => {
             <Badge
                 color="success"
                 variant="dot"
+                overlap="circular"
                 anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
@@ -88,9 +87,7 @@ const ContactItem = ({user}) => {
                     alt="logo"
                     width={40}
                     height={40}
-                    style={{
-                        borderRadius: 8
-                    }}
+                    style={{borderRadius: "50%"}}
                 />
 
             </Badge>
