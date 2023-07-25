@@ -17,8 +17,7 @@ import {
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setSize} from "@/stores/slices/account.js";
-import {setActivePage} from "@/stores/slices/other.js";
+import {setFontSize , setActivity} from "@/stores/slices/user.js";
 
 // utils
 import {fontSizeList} from "@/utils/constants.js";
@@ -26,7 +25,7 @@ import {fontSizeList} from "@/utils/constants.js";
 const FontSize = () => {
 
     const dispatch = useDispatch();
-    const {fontSize} = useSelector(state => state.account);
+    const {fontSize} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -112,7 +111,7 @@ const FontSize = () => {
                                 alignItems: "center",
                                 maxWidth: "45%",
                                 bgcolor: "primary.main",
-                                padding: 2
+                                padding: 1
                             }}
                         >
 
@@ -132,8 +131,9 @@ const FontSize = () => {
                                 justifyContent: "end",
                                 alignItems: "center",
                                 maxWidth: "45%",
+                                bgcolor: "background.default",
                                 marginTop: 4,
-                                padding: 2,
+                                padding: 1,
                             }}
                         >
 
@@ -156,7 +156,7 @@ const FontSize = () => {
                         marks
                         min={12}
                         max={20}
-                        onChange={(e, newValue) => dispatch(setSize(newValue))}
+                        onChange={(e, newValue) => dispatch(setFontSize(newValue))}
                     />
 
                     <Stack
@@ -174,7 +174,7 @@ const FontSize = () => {
                             variant="text"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null, type: "language"}))}
+                            onClick={() => dispatch(setActivity("language"))}
                         >
                             {t("button.prev")}
                         </Button>
@@ -183,7 +183,7 @@ const FontSize = () => {
                             variant="contained"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null, type: "color"}))}
+                            onClick={() => dispatch(setActivity("color"))}
                         >
                             {t("button.next")}
                         </Button>

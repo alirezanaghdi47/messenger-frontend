@@ -13,8 +13,7 @@ import 'swiper/css/effect-cards';
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setBackground} from "@/stores/slices/account.js";
-import {setActivePage} from "@/stores/slices/other.js";
+import {setBackground , setActivity} from "@/stores/slices/user.js";
 
 // utils
 import {backgroundList} from "@/utils/constants.js";
@@ -22,7 +21,7 @@ import {backgroundList} from "@/utils/constants.js";
 const Background = () => {
 
     const dispatch = useDispatch();
-    const {background, language} = useSelector(state => state.account);
+    const {background, language} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(min-width: 768px)');
 
@@ -149,7 +148,7 @@ const Background = () => {
                             variant="text"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null , type: "color"}))}
+                            onClick={() => dispatch(setActivity("color"))}
                         >
                             {t("button.prev")}
                         </Button>
@@ -158,7 +157,7 @@ const Background = () => {
                             variant="contained"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null , type: "theme"}))}
+                            onClick={() => dispatch(setActivity("theme"))}
                         >
                             {t("button.next")}
                         </Button>

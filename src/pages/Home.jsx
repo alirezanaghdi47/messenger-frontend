@@ -17,14 +17,14 @@ import ActionBar from "@/components/widgets/home/ActionBar.jsx";
 
 const Home = () => {
 
-    const {activePage} = useSelector(state => state.other);
+    const {activeChat} = useSelector(state => state.chat);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Primary>
 
             {
-                !(isTablet && activePage?.type === "chat") && (
+                !(isTablet && activeChat._id) && (
                     <Stack
                         component="aside"
                         direction="column"
@@ -56,7 +56,7 @@ const Home = () => {
             }
 
             {
-                activePage?.type === "chat" && (
+                activeChat._id && (
                     <Stack
                         direction="column"
                         sx={{
@@ -79,7 +79,7 @@ const Home = () => {
             }
 
             {
-                !isTablet && activePage?.type === null && (
+                !isTablet && !activeChat._id && (
                     <>
                     </>
                 )

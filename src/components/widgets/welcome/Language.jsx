@@ -19,8 +19,7 @@ import {FiChevronDown} from "react-icons/fi";
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setLanguage} from "@/stores/slices/account.js";
-import {setActivePage} from "@/stores/slices/other.js";
+import {setLanguage , setActivity} from "@/stores/slices/user.js";
 
 // utils
 import {languageList} from "@/utils/constants.js";
@@ -28,7 +27,7 @@ import {languageList} from "@/utils/constants.js";
 const Language = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.account);
+    const {language} = useSelector(state => state.user.setting);
     const {t, i18n} = useTranslation();
 
     return (
@@ -132,7 +131,7 @@ const Language = () => {
                         variant="contained"
                         color="primary"
                         fullWidth
-                        onClick={() => dispatch(setActivePage({data: null, type: "fontSize"}))}
+                        onClick={() => dispatch(setActivity("fontSize"))}
                     >
                         {t("button.next")}
                     </Button>

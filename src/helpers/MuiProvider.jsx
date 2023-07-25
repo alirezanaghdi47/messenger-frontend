@@ -20,7 +20,7 @@ const emptyCache = createCache({
 
 const MuiProvider = ({children}) => {
 
-    const {language, darkMode, color} = useSelector(state => state.account);
+    const {language, darkMode, color} = useSelector(state => state.user.setting);
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -90,6 +90,9 @@ const MuiProvider = ({children}) => {
         components: {
             MuiCssBaseline:{
                 styleOverrides: {
+                    body:{
+                        userSelect: "none"
+                    },
                     ul: {
                         margin: 0,
                         padding: 0,

@@ -1,7 +1,7 @@
 // libraries
 import {useLayoutEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {setActivePage} from "@/stores/slices/other.js";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 // components
 import Language from "@/components/widgets/welcome/Language.jsx";
@@ -15,21 +15,21 @@ import Other from "@/layouts/Other.jsx";
 
 const Welcome = () => {
 
-    const dispatch = useDispatch();
-    const {activePage} = useSelector(state => state.other);
+    const navigate = useNavigate();
+    const {activity} = useSelector(state => state.user.setting);
 
     useLayoutEffect(() => {
-        dispatch(setActivePage({data: null, type: "language"}));
-    }, []);
+        if (activity === "finish") navigate("/");
+    }, [activity]);
 
     return (
         <Other>
 
-            {activePage.type === "language" && <Language/>}
-            {activePage.type === "fontSize" && <FontSize/>}
-            {activePage.type === "color" && <Color/>}
-            {activePage.type === "background" && <Background/>}
-            {activePage.type === "theme" && <Theme/>}
+            {activity === "language" && <Language/>}
+            {activity === "fontSize" && <FontSize/>}
+            {activity === "color" && <Color/>}
+            {activity === "background" && <Background/>}
+            {activity === "theme" && <Theme/>}
 
         </Other>
     )

@@ -27,7 +27,7 @@ import {
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {removeActivePage} from "@/stores/slices/other.js";
+import {removeActiveChat} from "@/stores/slices/chat.js";
 
 const UserInfo = () => {
 
@@ -92,6 +92,7 @@ const UserInfo = () => {
                     noWrap
                 >
                     {t("typography.lastSeen")}
+                    &nbsp;
                     11:11
                 </Typography>
 
@@ -104,7 +105,7 @@ const UserInfo = () => {
 const MobileToolbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (
@@ -264,7 +265,7 @@ const MobileToolbar = () => {
 const DesktopToolbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return(
@@ -409,7 +410,7 @@ const ToolBar = () => {
 const AppBar = () => {
 
     const dispatch = useDispatch();
-    const {darkMode , language} = useSelector(state => state.account);
+    const {darkMode , language} = useSelector(state => state.user.setting);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -434,7 +435,7 @@ const AppBar = () => {
                     <IconButton
                         variant="text"
                         color="secondary"
-                        onClick={() => dispatch(removeActivePage())}
+                        onClick={() => dispatch(removeActiveChat())}
                     >
                         {
                             language === "fa" ? (

@@ -6,7 +6,7 @@ import {FiSearch} from "react-icons/fi";
 
 const SearchBar = () => {
 
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (

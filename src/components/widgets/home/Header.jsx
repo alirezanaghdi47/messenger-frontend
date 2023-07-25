@@ -10,7 +10,7 @@ import logo from "@/assets/images/logo.png";
 
 const Header = () => {
 
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (

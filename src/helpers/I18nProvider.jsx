@@ -10,7 +10,7 @@ import en from "@/assets/data/locals/en.json";
 
 const I18nProvider = () => {
 
-    const {language} = useSelector(state => state.account);
+    const {language} = useSelector(state => state.user.setting);
 
     useEffect(() => {
 

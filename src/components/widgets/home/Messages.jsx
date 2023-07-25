@@ -54,7 +54,7 @@ const MessageList = () => {
 const MessageItem = ({chat}) => {
 
     const theme = useTheme();
-    const {fontSize} = useSelector(state => state.account);
+    const {fontSize} = useSelector(state => state.user.setting);
 
     return (
         <Stack
@@ -96,7 +96,7 @@ const MessageItem = ({chat}) => {
                         alignItems: "center",
                         maxWidth: "45%",
                         bgcolor: chat.me ? "primary.main" : "background.paper",
-                        padding: 2,
+                        padding: 1,
                     }}
                 >
 

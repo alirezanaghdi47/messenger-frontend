@@ -13,40 +13,10 @@ import {
 } from "@mui/material";
 import {FiFile, FiImage, FiMapPin, FiMusic, FiPaperclip, FiSend} from "react-icons/fi";
 
-// stores
-import {store} from "@/stores/store.js";
-
-const attachmentList = [
-    {
-        id: 1,
-        title: "menu.file",
-        value: "file",
-        icon: <FiFile size={20} color={store.getState().account.darkMode ? "#e2e8f0" : "#475569"}/>
-    },
-    {
-        id: 2,
-        title: "menu.image",
-        value: "image",
-        icon: <FiImage size={20} color={store.getState().account.darkMode ? "#e2e8f0" : "#475569"}/>
-    },
-    {
-        id: 3,
-        title: "menu.voice",
-        value: "voice",
-        icon: <FiMusic size={20} color={store.getState().account.darkMode ? "#e2e8f0" : "#475569"}/>
-    },
-    {
-        id: 4,
-        title: "menu.location",
-        value: "location",
-        icon: <FiMapPin size={20} color={store.getState().account.darkMode ? "#e2e8f0" : "#475569"}/>
-    },
-];
-
 const Attachment = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (
@@ -77,32 +47,105 @@ const Attachment = () => {
                 onClose={() => setAnchorEl(null)}
             >
 
-                {
-                    attachmentList.map(attachmentItem =>
-                        <MenuItem
-                            key={attachmentItem.id}
-                            onClick={() => console.log(attachmentItem.value)}
-                            sx={{
-                                display: "flex",
-                                gap: 1,
-                                justifyContent: "start",
-                                alignItems: "center",
-                            }}
-                        >
+                <MenuItem
+                    onClick={() => console.log("file")}
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
 
-                            {attachmentItem.icon}
+                    <FiFile
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
 
-                            <Typography
-                                variant="body2"
-                                color="textPrimary"
-                                fontWeight='bold'
-                            >
-                                {t(attachmentItem.title)}
-                            </Typography>
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.file")}
+                    </Typography>
 
-                        </MenuItem>
-                    )
-                }
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => console.log("image")}
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiImage
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.image")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => console.log("voice")}
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiMusic
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.voice")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => console.log("location")}
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiMapPin
+                        size={20}
+                        color={darkMode ? "#e2e8f0" : "#475569"}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.location")}
+                    </Typography>
+
+                </MenuItem>
 
             </Menu>
 
@@ -112,7 +155,7 @@ const Attachment = () => {
 
 const Text = () => {
 
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (

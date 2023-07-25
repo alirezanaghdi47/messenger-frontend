@@ -1,20 +1,20 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Stack, Typography} from "@mui/material";
+import {Badge, Stack, Typography, useTheme} from "@mui/material";
 
 // assets
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setActivePage, removeActivePage} from "@/stores/slices/other.js";
+import {setActiveChat, removeActiveChat} from "@/stores/slices/chat.js";
 
 const userList = [
-    {id: 1 , userName: "علیرضا نقدی"},
-    {id: 2 , userName: "علیرضا نقدی"},
-    {id: 3 , userName: "علیرضا نقدی"},
-    {id: 4 , userName: "علیرضا نقدی"},
-    {id: 5 , userName: "علیرضا نقدی"},
+    {_id: 1},
+    {_id: 2},
+    {_id: 3},
+    {_id: 4},
+    {_id: 5},
 ];
 
 const ContactList = () => {
@@ -23,7 +23,6 @@ const ContactList = () => {
         <Stack
             component="ul"
             direction="column"
-            gap={2}
             sx={{
                 display: "flex",
                 justifyContent: "start",
@@ -51,7 +50,8 @@ const ContactList = () => {
 const ContactItem = ({user}) => {
 
     const dispatch = useDispatch();
-    const {activePage} = useSelector(state => state.other);
+    const {activeChat} = useSelector(state => state.chat);
+    const theme = useTheme();
 
     return (
         <Stack
@@ -60,15 +60,18 @@ const ContactItem = ({user}) => {
             gap={1}
             sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "start",
                 alignItems: "center",
+                bgcolor: activeChat._id === user._id && "primary.main",
                 width: "100%",
-                cursor: "pointer"
+                cursor: "pointer",
+                borderRadius: 1,
+                padding: 1,
             }}
             onClick={
-                () => activePage.type === "chat" && activePage.data === user ?
-                    dispatch(removeActivePage()) :
-                    dispatch(setActivePage({type: 'chat', data: user}))
+                () => activeChat._id === user._id ?
+                    dispatch(removeActiveChat()) :
+                    dispatch(setActiveChat({_id: user._id}))
             }
         >
 
@@ -104,7 +107,7 @@ const ContactItem = ({user}) => {
 
                 <Typography
                     variant="subtitle2"
-                    color="textPrimary"
+                    color={activeChat._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     fontWeight='bold'
                     noWrap
                     sx={{width: "100%", overflow: "hidden"}}
@@ -114,7 +117,7 @@ const ContactItem = ({user}) => {
 
                 <Typography
                     variant="caption"
-                    color="textSecondary"
+                    color={activeChat._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     11:11
                 </Typography>

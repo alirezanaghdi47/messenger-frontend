@@ -16,8 +16,7 @@ import {
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setColor} from "@/stores/slices/account.js";
-import {setActivePage} from "@/stores/slices/other.js";
+import {setColor , setActivity} from "@/stores/slices/user.js";
 
 // utils
 import {colorList} from "@/utils/constants.js";
@@ -25,7 +24,7 @@ import {colorList} from "@/utils/constants.js";
 const Color = () => {
 
     const dispatch = useDispatch();
-    const {color} = useSelector(state => state.account);
+    const {color} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (
@@ -140,7 +139,7 @@ const Color = () => {
                             variant="text"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null, type: "fontSize"}))}
+                            onClick={() => dispatch(setActivity("fontSize"))}
                         >
                             {t("button.prev")}
                         </Button>
@@ -149,7 +148,7 @@ const Color = () => {
                             variant="contained"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null, type: "background"}))}
+                            onClick={() => dispatch(setActivity("background"))}
                         >
                             {t("button.next")}
                         </Button>

@@ -16,8 +16,7 @@ import {
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setTheme} from "@/stores/slices/account.js";
-import {removeActivePage, setActivePage} from "@/stores/slices/other.js";
+import {setTheme, setActivity} from "@/stores/slices/user.js";
 
 // utils
 import {themeList} from "@/utils/constants.js";
@@ -26,7 +25,7 @@ const Theme = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {darkMode} = useSelector(state => state.account);
+    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (
@@ -145,7 +144,7 @@ const Theme = () => {
                             variant="text"
                             color="primary"
                             fullWidth
-                            onClick={() => dispatch(setActivePage({data: null, type: "background"}))}
+                            onClick={() => dispatch(setActivity("background"))}
                         >
                             {t("button.prev")}
                         </Button>
@@ -154,10 +153,7 @@ const Theme = () => {
                             variant="contained"
                             color="primary"
                             fullWidth
-                            onClick={async () => {
-                                navigate("/");
-                                dispatch(removeActivePage());
-                            }}
+                            onClick={() => dispatch(setActivity("finish"))}
                         >
                             {t("button.finish")}
                         </Button>
