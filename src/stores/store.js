@@ -5,20 +5,17 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
-import { createFilter } from "redux-persist-transform-filter";
 
 // stores
-import userReducer from "@/stores/slices/user.js";
 import chatReducer from "@/stores/slices/chat.js";
 import messageReducer from "@/stores/slices/message.js";
+import userReducer from "@/stores/slices/user.js";
 
 const reducers = combineReducers({
-    user: userReducer,
     chat: chatReducer,
     message: messageReducer,
+    user: userReducer,
 });
-
-const userSubsetFilter = createFilter("user", ["account" , "setting"]);
 
 const persistConfig = {
     key: 'messenger',
@@ -27,7 +24,6 @@ const persistConfig = {
     whitelist: ['user'],
     stateReconciler: autoMergeLevel2,
     transforms: [
-        userSubsetFilter,
         encryptTransform({
             secretKey: import.meta.env.VITE_REDUX_PERSIST_SECRET_KEY
         })

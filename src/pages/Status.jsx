@@ -33,7 +33,7 @@ const Sidebar = () => {
                 padding: 2
             }}
         >
-            profile sidebar
+            status sidebar
         </Stack>
     )
 }
@@ -60,12 +60,12 @@ const Main = () => {
                 height: "100dvh",
             }}
         >
-            profile main
+            status main
         </Stack>
     )
 }
 
-const Profile = () => {
+const Status = () => {
 
     return (
         <Primary>
@@ -78,4 +78,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default Status;

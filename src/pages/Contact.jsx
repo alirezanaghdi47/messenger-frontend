@@ -33,7 +33,7 @@ const Sidebar = () => {
                 padding: 2
             }}
         >
-            profile sidebar
+            contact sidebar
         </Stack>
     )
 }
@@ -60,12 +60,12 @@ const Main = () => {
                 height: "100dvh",
             }}
         >
-            profile main
+            contact main
         </Stack>
     )
 }
 
-const Profile = () => {
+const Contact = () => {
 
     return (
         <Primary>
@@ -78,4 +78,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default Contact;

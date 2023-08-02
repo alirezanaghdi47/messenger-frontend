@@ -3,15 +3,15 @@ import {StrictMode} from "react";
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 
-// helpers
-import ReduxProvider from "@/helpers/ReduxProvider.jsx";
-import I18nProvider from "@/helpers/I18nProvider.jsx";
+// components
+import Redux from "@/components/providers/Redux.jsx";
+import I18n from "@/components/providers/I18n.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <ReduxProvider>
-            <I18nProvider/>
+        <Redux>
+            <I18n/>
             <App/>
-        </ReduxProvider>
+        </Redux>
     </StrictMode>
 );

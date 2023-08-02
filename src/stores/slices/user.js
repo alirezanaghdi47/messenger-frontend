@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {backgroundList, colorList} from "@/utils/constants.js";
 
 const initialState = {
-    account: {
+    profile: {
         username: "",
         phoneNumber: "",
         biography: "",
@@ -13,17 +13,17 @@ const initialState = {
         refreshToken: "",
         expireDate: "",
     },
-    setting:{
+    setting: {
+        setup: "language",
         language: "fa",
-        darkMode: true,
-        fontSize: 16,
+        darkMode: false,
+        fontSize: 14,
         color: colorList[0].value,
         background: {
             desktop: backgroundList[0].src.desktop,
             mobile: backgroundList[0].src.mobile
         },
-        activity: "language"
-    }
+    },
 }
 
 export const user = createSlice({
@@ -48,19 +48,19 @@ export const user = createSlice({
         setTheme: (state, action) => {
             state.setting.darkMode = action.payload;
         },
-        setActivity: (state, action) => {
-            state.setting.activity = action.payload;
+        setSetup: (state, action) => {
+            state.setting.setup = action.payload;
         },
     },
 })
 
 export const {
-    setLanguage ,
+    setLanguage,
     setFontSize,
     setColor,
     setBackground,
     setTheme,
-    setActivity
+    setSetup,
 } = user.actions;
 
 export default user.reducer;

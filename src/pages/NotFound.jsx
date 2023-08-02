@@ -1,11 +1,15 @@
-import Other from "@/layouts/Other.jsx";
+// components
+import Secondary from "@/components/layouts/Secondary.jsx";
+import Client from "@/components/widgets/error/Client.jsx";
 
 const NotFound = () => {
 
     return (
-        <Other>
-            404
-        </Other>
+        <Secondary>
+
+            <Client/>
+
+        </Secondary>
     )
 }
 

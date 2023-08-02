@@ -5,6 +5,12 @@ import {Stack} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
+import Actionbar from "@/components/widgets/chat/Actionbar.jsx";
+import Header from "@/components/widgets/chat/Header.jsx";
+import Contacts from "@/components/widgets/chat/Contacts.jsx";
+import Footer from "@/components/widgets/chat/Footer.jsx";
+import Messages from "@/components/widgets/chat/Messages.jsx";
+import SearchBar from "@/components/widgets/chat/Searchbar.jsx";
 
 const Sidebar = () => {
 
@@ -33,7 +39,13 @@ const Sidebar = () => {
                 padding: 2
             }}
         >
-            profile sidebar
+
+            <SearchBar/>
+
+            <Contacts/>
+
+            <Actionbar/>
+
         </Stack>
     )
 }
@@ -41,6 +53,7 @@ const Sidebar = () => {
 const Main = () => {
 
     const {activeChat} = useSelector(state => state.chat);
+    const {background} = useSelector(state => state.user.setting);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return activeChat && (
@@ -58,14 +71,23 @@ const Main = () => {
                 alignItems: "center",
                 width: isTablet ? "100%" : "calc(100% - 400px)",
                 height: "100dvh",
+                backgroundImage: isTablet ? `url(${background.mobile})` : `url(${background.desktop})`,
+                backgroundPosition: 'center',
+                backgroundSize: "cover",
             }}
         >
-            profile main
+
+            <Header/>
+
+            <Messages/>
+
+            <Footer/>
+
         </Stack>
     )
 }
 
-const Profile = () => {
+const VoiceCall = () => {
 
     return (
         <Primary>
@@ -78,4 +100,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default VoiceCall;

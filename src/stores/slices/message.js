@@ -4,14 +4,16 @@ const initialState = {
 
 }
 
-export const message = createSlice({
-    name: 'message',
+export const chat = createSlice({
+    name: 'chat',
     initialState,
     reducers: {
 
     },
 })
 
-// export const {} = message.actions;
+export const {
 
-export default message.reducer;
+} = chat.actions;
+
+export default chat.reducer;

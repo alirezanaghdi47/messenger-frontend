@@ -1,15 +1,16 @@
-// helpers
-import MuiProvider from "@/helpers/MuiProvider.jsx";
-import RouterProvider from "@/helpers/RouterProvider.jsx";
+// components
+import Mui from "@/components/providers/Mui.jsx";
+import Router from "@/components/providers/Router.jsx";
 
 // styles
 import "@/styles/global.scss";
 
 const App = () => {
+
     return (
-        <MuiProvider>
-           <RouterProvider/>
-        </MuiProvider>
+        <Mui>
+            <Router/>
+        </Mui>
     )
 };
 

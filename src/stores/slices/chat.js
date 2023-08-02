@@ -1,15 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-    activeChat: {
-        _id: null,
-        name: null,
-        avatar: null,
-        biography: null,
-        users: [],
-        lastMessageDate: null,
-        isGroup: false,
-    }
+    activeChat: null
 }
 
 export const chat = createSlice({
@@ -17,17 +9,16 @@ export const chat = createSlice({
     initialState,
     reducers: {
         setActiveChat: (state, action) => {
-            state.activeChat._id = action.payload._id;
+            state.activeChat= action.payload;
         },
         removeActiveChat: (state) => {
-            state.activeChat = initialState.activeChat
-        }
+            state.activeChat= initialState.activeChat
+        },
     },
 })
 
 export const {
-    setActiveChat,
-    removeActiveChat
+    setActiveChat , removeActiveChat
 } = chat.actions;
 
 export default chat.reducer;

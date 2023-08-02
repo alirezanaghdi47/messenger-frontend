@@ -9,7 +9,10 @@
       "color": "رنگ برنامه را انتخاب کنید",
       "background": "پس زمینه برنامه را انتخاب کنید",
       "theme": "تم برنامه را انتخاب کنید",
-      "lastSeen": "آخرین بازدید"
+      "lastSeen": "آخرین بازدید",
+      "selectChat": "گفتگویی را انتخاب کنید",
+      "selectItem": "موردی را انتخاب کنید",
+      "notFound": "صفحه مورد نظر یافت نشد"
     },
     "select": {
       "persian": "فارسی",
@@ -20,6 +23,14 @@
     "input": {
       "search": "جستجو کنید ...",
       "message": "متن پیام"
+    },
+    "list": {
+      "chat": "گفتگو",
+      "voiceCall": "صوتی",
+      "videoCall": "تصویری",
+      "status": "وضعیت",
+      "contact": "مخاطبین",
+      "profile": "حساب کاربری"
     },
     "menu": {
       "file": "فایل",
@@ -33,12 +44,20 @@
       "muteChat": "فعال سازی سکوت",
       "unMuteChat": "فعال سازی صدا",
       "createChat": "ایجاد گفتگو جدید",
-      "createGroup": "ایجاد گروه جدید"
+      "createGroup": "ایجاد گروه جدید",
+      "profile": "حساب کاربری",
+      "setting": "تنظیمات",
+      "logout": "خروج"
     },
     "button": {
+      "back": "بازگشت",
       "next": "بعدی",
       "prev": "قبلی",
-      "finish": "پایان"
+      "finish": "پایان",
+      "profile": "حساب کاربری",
+      "chatSettings": "تنظیمات گفتگو ها",
+      "devices": "دستگاه ها",
+      "logout": "خروج"
     }
   }
 }
