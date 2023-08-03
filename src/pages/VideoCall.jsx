@@ -1,16 +1,14 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack} from "@mui/material";
+import {alpha, Stack, useTheme} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
-import Actionbar from "@/components/widgets/chat/Actionbar.jsx";
-import Header from "@/components/widgets/chat/Header.jsx";
-import Contacts from "@/components/widgets/chat/Contacts.jsx";
-import Footer from "@/components/widgets/chat/Footer.jsx";
-import Messages from "@/components/widgets/chat/Messages.jsx";
-import SearchBar from "@/components/widgets/chat/Searchbar.jsx";
+import Header from "@/components/widgets/videoCall/Header.jsx";
+import Contacts from "@/components/widgets/videoCall/Contacts.jsx";
+import SearchBar from "@/components/widgets/videoCall/Searchbar.jsx";
+import Logs from "@/components/widgets/videoCall/Logs.jsx";
 
 const Sidebar = () => {
 
@@ -44,8 +42,6 @@ const Sidebar = () => {
 
             <Contacts/>
 
-            <Actionbar/>
-
         </Stack>
     )
 }
@@ -54,6 +50,7 @@ const Main = () => {
 
     const {activeChat} = useSelector(state => state.chat);
     const {background} = useSelector(state => state.user.setting);
+    const theme = useTheme();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return activeChat && (
@@ -74,14 +71,21 @@ const Main = () => {
                 backgroundImage: isTablet ? `url(${background.mobile})` : `url(${background.desktop})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
+                "&::after":{
+                    content: "''",
+                    position: "fixed",
+                    top: 70,
+                    left: 0,
+                    width: "100%",
+                    height: "calc(100dvh - 70px)",
+                    background: alpha(theme.palette.common.black , 0.25)
+                }
             }}
         >
 
             <Header/>
 
-            <Messages/>
-
-            <Footer/>
+            <Logs/>
 
         </Stack>
     )

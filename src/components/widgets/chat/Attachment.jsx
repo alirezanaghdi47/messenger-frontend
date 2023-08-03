@@ -2,7 +2,8 @@
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
-import {FiFile, FiImage, FiMapPin, FiMusic, FiPaperclip} from "react-icons/fi";
+import {FiFile, FiImage, FiMapPin, FiMusic, FiVideo} from "react-icons/fi";
+import {LuPaperclip} from "react-icons/lu";
 
 const Attachment = () => {
 
@@ -17,7 +18,7 @@ const Attachment = () => {
                 color="secondary"
                 onClick={(e) => setAnchorEl(e.currentTarget)}
             >
-                <FiPaperclip size={20}/>
+                <LuPaperclip size={20}/>
             </IconButton>
 
             <Menu
@@ -74,6 +75,28 @@ const Attachment = () => {
                         fontWeight='bold'
                     >
                         {t("menu.image")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => console.log("video")}
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiVideo size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.video")}
                     </Typography>
 
                 </MenuItem>

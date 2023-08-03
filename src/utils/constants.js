@@ -33,10 +33,8 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, title: "red", value: "#DB4437"},
-    {id: 2, title: "green", value: "#0F9D58"},
-    {id: 3, title: "blue", value: "#4285F4"},
-    {id: 4, title: "yellow", value: "#F4B400"},
+    {id: 1, title: "blue", value: "#4285F4"},
+    {id: 2, title: "yellow", value: "#F4B400"},
 ];
 
 export const backgroundList = [

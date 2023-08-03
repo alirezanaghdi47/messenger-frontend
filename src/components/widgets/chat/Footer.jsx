@@ -1,8 +1,8 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {Stack} from "@mui/material";
-import {FiSend} from "react-icons/fi";
+import {IconButton, Stack} from "@mui/material";
+import {LuLaugh, LuMic, LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "@/components/modules/TextInput.jsx";
@@ -38,19 +38,39 @@ const Footer = () => {
             }}
         >
 
+            <IconButton
+                varinat="text"
+                color="secondary"
+            >
+                <LuMic size={20}/>
+            </IconButton>
+
             <Attachment/>
+
+            <IconButton
+                varinat="text"
+                color="secondary"
+            >
+                <LuLaugh size={20}/>
+            </IconButton>
 
             <TextInput
                 color="primary"
                 size="small"
                 name="message"
                 placeholder={t("input.message")}
-                icon={<FiSend size={20}/>}
-                iconPosition="end"
                 value={formik.values.message}
                 onChange={formik.handleChange}
                 error={formik.errors.message}
             />
+
+            <IconButton
+                varinat="text"
+                color="secondary"
+                onClick={formik.handleSubmit}
+            >
+                <LuSend size={20}/>
+            </IconButton>
 
         </Stack>
     )

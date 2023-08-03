@@ -11,7 +11,7 @@ import {
     Box
 } from "@mui/material";
 import {
-    FiBell,
+    FiBell, FiLogOut,
     FiMoreVertical,
     FiSearch,
     FiTrash,
@@ -83,7 +83,7 @@ const MobileToolbar = () => {
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.deleteChat")}
+                        {t("menu.deleteAll")}
                     </Typography>
 
                 </MenuItem>
@@ -108,6 +108,27 @@ const MobileToolbar = () => {
                     </Typography>
 
                 </MenuItem>
+
+                {/*<MenuItem*/}
+                {/*    sx={{*/}
+                {/*        display: "flex",*/}
+                {/*        gap: 1,*/}
+                {/*        justifyContent: "start",*/}
+                {/*        alignItems: "center",*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                {/*    <FiLogOut size={20}/>*/}
+
+                {/*    <Typography*/}
+                {/*        variant="body2"*/}
+                {/*        color="textSecondary"*/}
+                {/*        fontWeight='bold'*/}
+                {/*    >*/}
+                {/*        {t("menu.leaveGroup")}*/}
+                {/*    </Typography>*/}
+
+                {/*</MenuItem>*/}
 
             </Menu>
 
@@ -183,7 +204,7 @@ const DesktopToolbar = () => {
                             color="textSecondary"
                             fontWeight='bold'
                         >
-                            {t("menu.deleteChat")}
+                            {t("menu.deleteAll")}
                         </Typography>
 
                     </MenuItem>
@@ -208,6 +229,27 @@ const DesktopToolbar = () => {
                         </Typography>
 
                     </MenuItem>
+
+                    {/*<MenuItem*/}
+                    {/*    sx={{*/}
+                    {/*        display: "flex",*/}
+                    {/*        gap: 1,*/}
+                    {/*        justifyContent: "start",*/}
+                    {/*        alignItems: "center",*/}
+                    {/*    }}*/}
+                    {/*>*/}
+
+                    {/*    <FiLogOut size={20}/>*/}
+
+                    {/*    <Typography*/}
+                    {/*        variant="body2"*/}
+                    {/*        color="textSecondary"*/}
+                    {/*        fontWeight='bold'*/}
+                    {/*    >*/}
+                    {/*        {t("menu.leaveGroup")}*/}
+                    {/*    </Typography>*/}
+
+                    {/*</MenuItem>*/}
 
                 </Menu>
 

@@ -1,5 +1,5 @@
 // libraries
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
@@ -9,12 +9,10 @@ import avatar from "@/assets/images/avatar.png";
 
 const UserInfo = () => {
 
-    const params = useParams();
     const {t} = useTranslation();
 
     return (
         <Link
-            // to={`/${params.id}/info`}
             to={`/coming-soon`}
             style={{textDecoration: "none"}}
         >
@@ -40,6 +38,7 @@ const UserInfo = () => {
 
                 <Stack
                     direction="column"
+                    gap={0.5}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
@@ -65,6 +64,16 @@ const UserInfo = () => {
                         &nbsp;
                         11:11
                     </Typography>
+
+                    {/*<Typography*/}
+                    {/*    variant="caption"*/}
+                    {/*    color="textSecondary"*/}
+                    {/*    noWrap*/}
+                    {/*>*/}
+                    {/*    {t("typography.members")}*/}
+                    {/*    &nbsp;*/}
+                    {/*    1111*/}
+                    {/*</Typography>*/}
 
                 </Stack>
 
