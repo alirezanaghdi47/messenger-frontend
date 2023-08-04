@@ -9,7 +9,7 @@ const VoiceCall = lazy(() => import("@/pages/VoiceCall.jsx"));
 const VideoCall = lazy(() => import("@/pages/VideoCall.jsx"));
 const Status = lazy(() => import("@/pages/Status.jsx"));
 const Contact = lazy(() => import("@/pages/Contact.jsx"));
-const Profile = lazy(() => import("@/pages/Profile.jsx"));
+const Setting = lazy(() => import("@/pages/Setting.jsx"));
 const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
 
 const Router = () => {
@@ -33,7 +33,7 @@ const Router = () => {
 
                     <Route path="/contact" element={<Contact/>}/>
 
-                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/setting" element={<Setting/>}/>
 
                     <Route path="/*" element={<NotFound/>}/>
 

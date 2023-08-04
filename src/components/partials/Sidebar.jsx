@@ -2,7 +2,7 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Grid, Stack, Typography} from "@mui/material";
-import {FiMessageCircle, FiPhone, FiUser, FiVideo} from "react-icons/fi";
+import {FiMessageCircle, FiPhone, FiSettings, FiVideo} from "react-icons/fi";
 import {LuContact, LuDisc} from "react-icons/lu";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 
@@ -15,7 +15,7 @@ const sidebarLinks = [
     {id: 3, title: "list.videoCall", href: "/video-call", icon: <FiVideo size={20}/>},
     {id: 4, title: "list.status", href: "/status", icon: <LuDisc size={20}/>},
     {id: 5, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
-    {id: 6, title: "list.profile", href: "/profile", icon: <FiUser size={20}/>},
+    {id: 6, title: "list.setting", href: "/setting", icon: <FiSettings size={20}/>},
 ];
 
 const Sidebar = () => {

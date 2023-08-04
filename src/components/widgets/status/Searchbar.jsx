@@ -2,17 +2,9 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {FormControl, InputAdornment, OutlinedInput,} from "@mui/material";
-import {FiMessageCircle, FiSearch, FiUser} from "react-icons/fi";
-import {LuContact, LuDisc} from "react-icons/lu";
+import {FiSearch} from "react-icons/fi";
 
-const footerLinks = [
-    {id: 1, title: "typography.chat", href: "/chat", icon: <FiMessageCircle size={20}/>},
-    {id: 2, title: "typography.status", href: "/status", icon: <LuDisc size={20}/>},
-    {id: 3, title: "typography.contact", href: "/contact", icon: <LuContact size={20}/>},
-    {id: 4, title: "typography.setting", href: "/setting", icon: <FiUser size={20}/>},
-];
-
-const GroupFilter = () => {
+const SearchBar = () => {
 
     const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
@@ -39,4 +31,4 @@ const GroupFilter = () => {
     )
 }
 
-export default GroupFilter;
+export default SearchBar;

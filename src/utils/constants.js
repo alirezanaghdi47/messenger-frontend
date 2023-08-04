@@ -14,6 +14,8 @@ import en from "@/assets/images/en.png";
 import dark from "@/assets/images/mobile-4.jpg";
 import light from "@/assets/images/mobile-5.jpg";
 
+export const version = "0.2.9";
+
 export const languageList = [
     {id: 1, title: "select.persian", value: "fa", flag: fa},
     {id: 2, title: "select.english", value: "en", flag: en},
@@ -33,8 +35,9 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, title: "blue", value: "#4285F4"},
-    {id: 2, title: "yellow", value: "#F4B400"},
+    {id: 1, title: "blue", value: "#2146C7"},
+    {id: 2, title: "rose", value: "#A75D5D"},
+    {id: 3, title: "purple", value: "#8F43EE"},
 ];
 
 export const backgroundList = [

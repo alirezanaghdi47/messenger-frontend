@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Box, Button, Stack, Typography} from "@mui/material";
-import {FiUser} from "react-icons/fi";
+import {FiSettings, FiUser} from "react-icons/fi";
 
 // assets
 import logo from "@/assets/images/logo.png";
@@ -61,13 +61,13 @@ const Header = () => {
 
             <Button
                 component={Link}
-                to="/profile"
+                to="/setting"
                 variant="text"
                 size="small"
-                color={location.pathname === "/profile" ? "primary" : "secondary"}
-                startIcon={<FiUser size={20}/>}
+                color={location.pathname === "/setting" ? "primary" : "secondary"}
+                startIcon={<FiSettings size={20}/>}
             >
-                {t("list.profile")}
+                {t("list.setting")}
             </Button>
 
         </Stack>

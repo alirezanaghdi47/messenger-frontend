@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme} from "@mui/material";
 
@@ -9,6 +10,9 @@ import Header from "@/components/widgets/videoCall/Header.jsx";
 import Contacts from "@/components/widgets/videoCall/Contacts.jsx";
 import SearchBar from "@/components/widgets/videoCall/Searchbar.jsx";
 import Logs from "@/components/widgets/videoCall/Logs.jsx";
+
+// stores
+import {removeActiveChat} from "@/stores/slices/chat.js";
 
 const Sidebar = () => {
 
@@ -92,6 +96,12 @@ const Main = () => {
 }
 
 const VideoCall = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => dispatch(removeActiveChat());
+    } , []);
 
     return (
         <Primary>

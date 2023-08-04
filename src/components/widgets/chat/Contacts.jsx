@@ -82,7 +82,7 @@ const ContactItem = ({user}) => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "start",
-                        width: "calc(100% - 90px)",
+                        width: "100%",
                     }}
                 >
 
@@ -91,7 +91,11 @@ const ContactItem = ({user}) => {
                         color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         noWrap
-                        sx={{width: "100%", overflow: "hidden"}}
+                        sx={{
+                            width: "100%",
+                            maxWidth: 120,
+                            overflow: "hidden",
+                        }}
                     >
                         علیرضا نقدی
                     </Typography>
@@ -103,6 +107,7 @@ const ContactItem = ({user}) => {
                             display: "flex",
                             justifyContent: "start",
                             alignItems: "center",
+                            width: "100%",
                             color: activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
@@ -117,6 +122,11 @@ const ContactItem = ({user}) => {
                         <Typography
                             variant="caption"
                             color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            sx={{
+                                width: "100%",
+                                maxWidth: 100,
+                                overflow: "hidden",
+                            }}
                         >
                             {user.type === "text" && t("typography.text")}
                             {user.type === "image" && t("typography.image")}

@@ -5,6 +5,9 @@ import {Stack} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
+import UserInfo from "@/components/widgets/setting/UserInfo.jsx";
+import Version from "@/components/widgets/setting/Version.jsx";
+import Navbar from "@/components/widgets/setting/Navbar.jsx";
 
 const Sidebar = () => {
 
@@ -24,7 +27,7 @@ const Sidebar = () => {
                 bottom: 0,
                 zIndex: 50,
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: "space-between",
                 alignItems: "center",
                 width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 300,
                 height: isMobile ? "calc(100dvh - 140px)" : "100dvh",
@@ -33,7 +36,13 @@ const Sidebar = () => {
                 padding: 2
             }}
         >
-            profile sidebar
+
+            <UserInfo/>
+
+            <Navbar/>
+
+            <Version/>
+
         </Stack>
     )
 }
@@ -60,12 +69,12 @@ const Main = () => {
                 height: "100dvh",
             }}
         >
-            profile main
+
         </Stack>
     )
 }
 
-const Profile = () => {
+const Setting = () => {
 
     return (
         <Primary>
@@ -78,4 +87,4 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+export default Setting;

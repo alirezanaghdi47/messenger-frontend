@@ -27,7 +27,8 @@
       "location": "موقعیت",
       "isTyping": "در حال نوشتن",
       "members": "اعضاء",
-      "currentLocation": "موقعیت فعلی"
+      "currentLocation": "موقعیت فعلی",
+      "version": "نسخه"
     },
     "select": {
       "persian": "فارسی",
@@ -45,7 +46,7 @@
       "videoCall": "تصویری",
       "status": "وضعیت",
       "contact": "مخاطبین",
-      "profile": "حساب کاربری"
+      "setting": "تنظیمات"
     },
     "menu": {
       "file": "فایل",
@@ -62,19 +63,19 @@
       "leaveGroup": "ترک گروه",
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید",
+      "addContact": "افزودن مخاطب جدید",
+      "createStatus": "افزودن وضعیت جدید",
       "profile": "حساب کاربری",
-      "setting": "تنظیمات",
+      "chat": "گفتگو",
+      "session": "تاریخچه ورود",
+      "personalization": "شخصی سازی",
       "logout": "خروج"
     },
     "button": {
       "back": "بازگشت",
       "next": "بعدی",
       "prev": "قبلی",
-      "finish": "پایان",
-      "profile": "حساب کاربری",
-      "chatSettings": "تنظیمات گفتگو ها",
-      "devices": "دستگاه ها",
-      "logout": "خروج"
+      "finish": "پایان"
     }
   }
 }

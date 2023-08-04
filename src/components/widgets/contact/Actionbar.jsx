@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
-import {FiMessageCircle, FiPlus, FiUsers} from "react-icons/fi";
+import {FiPlus, FiUser, FiUsers} from "react-icons/fi";
 
 const Actionbar = () => {
 
@@ -45,7 +45,7 @@ const Actionbar = () => {
             >
 
                 <MenuItem
-                    onClick={() => console.log("create chat")}
+                    onClick={() => console.log("add contact")}
                     sx={{
                         display: "flex",
                         gap: 1,
@@ -54,14 +54,14 @@ const Actionbar = () => {
                     }}
                 >
 
-                    <FiMessageCircle size={20}/>
+                    <FiUser size={20}/>
 
                     <Typography
                         variant="body2"
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.createChat")}
+                        {t("menu.addContact")}
                     </Typography>
 
                 </MenuItem>

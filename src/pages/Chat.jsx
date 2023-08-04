@@ -1,16 +1,19 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
-import Actionbar from "@/components/widgets/chat/Actionbar.jsx";
 import Header from "@/components/widgets/chat/Header.jsx";
 import Contacts from "@/components/widgets/chat/Contacts.jsx";
 import Footer from "@/components/widgets/chat/Footer.jsx";
 import Messages from "@/components/widgets/chat/Messages.jsx";
 import SearchBar from "@/components/widgets/chat/Searchbar.jsx";
+
+// stores
+import {removeActiveChat} from "@/stores/slices/chat.js";
 
 const Sidebar = () => {
 
@@ -43,8 +46,6 @@ const Sidebar = () => {
             <SearchBar/>
 
             <Contacts/>
-
-            <Actionbar/>
 
         </Stack>
     )
@@ -98,6 +99,12 @@ const Main = () => {
 }
 
 const Chat = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => dispatch(removeActiveChat());
+    } , []);
 
     return (
         <Primary>

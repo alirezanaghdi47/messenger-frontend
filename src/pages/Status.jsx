@@ -1,10 +1,13 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack} from "@mui/material";
+import {alpha, Stack, useTheme} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
+import Actionbar from "@/components/widgets/status/Actionbar.jsx";
+import Contacts from "@/components/widgets/status/Contacts.jsx";
+import SearchBar from "@/components/widgets/status/Searchbar.jsx";
 
 const Sidebar = () => {
 
@@ -33,7 +36,13 @@ const Sidebar = () => {
                 padding: 2
             }}
         >
-            status sidebar
+
+            <SearchBar/>
+
+            <Contacts/>
+
+            <Actionbar/>
+
         </Stack>
     )
 }
@@ -41,6 +50,8 @@ const Sidebar = () => {
 const Main = () => {
 
     const {activeChat} = useSelector(state => state.chat);
+    const {background} = useSelector(state => state.user.setting);
+    const theme = useTheme();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return activeChat && (
@@ -58,9 +69,21 @@ const Main = () => {
                 alignItems: "center",
                 width: isTablet ? "100%" : "calc(100% - 400px)",
                 height: "100dvh",
+                backgroundImage: isTablet ? `url(${background.mobile})` : `url(${background.desktop})`,
+                backgroundPosition: 'center',
+                backgroundSize: "cover",
+                "&::after":{
+                    content: "''",
+                    position: "fixed",
+                    top: 70,
+                    left: 0,
+                    width: "100%",
+                    height: "calc(100dvh - 140px)",
+                    background: alpha(theme.palette.common.black , 0.25)
+                }
             }}
         >
-            status main
+
         </Stack>
     )
 }

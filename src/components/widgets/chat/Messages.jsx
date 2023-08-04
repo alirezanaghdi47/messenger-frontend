@@ -135,7 +135,7 @@ const ImageMessage = ({chat}) => {
 
                 <Typography
                     variant="caption"
-                    color="white"
+                    color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {convertByte(300000)}
                 </Typography>
@@ -426,7 +426,7 @@ const VideoMessage = ({chat}) => {
 
                     <Typography
                         variant="caption"
-                        color="white"
+                        color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         {convertByte(300000)}
                     </Typography>
