@@ -1,7 +1,7 @@
 // libraries
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {Grid, Stack, Typography} from "@mui/material";
+import {Badge, Grid, Stack, Typography} from "@mui/material";
 import {FiMessageCircle, FiPhone, FiSettings, FiVideo} from "react-icons/fi";
 import {LuContact, LuDisc} from "react-icons/lu";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -26,7 +26,7 @@ const Sidebar = () => {
 
     return (
         <Stack
-            component="aside"
+            component="nav"
             direction="column"
             gap={1}
             sx={{
@@ -92,17 +92,29 @@ const Sidebar = () => {
                                 flexDirection: "column",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                color: location.pathname === sidebarLink.href ? "primary.main" : "text.secondary",
+                                color: location.pathname === sidebarLink.href ? "primary.main" : "ternary.main",
                                 cursor: "pointer"
                             }}
                             onClick={() => navigate(sidebarLink.href)}
                         >
 
-                            {sidebarLink.icon}
+                            <Badge
+                                color="error"
+                                variant="standard"
+                                overlap="rectangular"
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                badgeContent={100}
+                                max={9}
+                            >
+                                {sidebarLink.icon}
+                            </Badge>
 
                             <Typography
                                 variant="caption"
-                                color={location.pathname === sidebarLink.href ? "primary.main" : "secondary"}
+                                color={location.pathname === sidebarLink.href ? "primary" : "ternary"}
                                 fontWeight="bold"
                                 textAlign="center"
                                 lineHeight={1.5}
@@ -135,7 +147,7 @@ const Sidebar = () => {
                                 flexDirection: "column",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                color: location.pathname === sidebarLink.href ? "primary.main" : "text.secondary",
+                                color: location.pathname === sidebarLink.href ? "primary.main" : "ternary.main",
                                 cursor: "pointer"
                             }}
                             onClick={() => navigate(sidebarLink.href)}
@@ -145,7 +157,7 @@ const Sidebar = () => {
 
                             <Typography
                                 variant="caption"
-                                color={location.pathname === sidebarLink.href ? "primary" : "secondary"}
+                                color={location.pathname === sidebarLink.href ? "primary" : "ternary"}
                                 fontWeight="bold"
                                 textAlign="center"
                                 lineHeight={1.5}

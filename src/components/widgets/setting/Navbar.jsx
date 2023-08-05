@@ -21,7 +21,7 @@ const Navbar = () => {
             direction="column"
             sx={{
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
                 overflowY: "auto",
@@ -39,7 +39,7 @@ const Navbar = () => {
                             display: "flex",
                             justifyContent: "start",
                             alignItems: "center",
-                            width: "100%",
+                            width: 150,
                             color: "text.secondary",
                             padding: 1.5,
                             cursor: "pointer",
@@ -68,7 +68,7 @@ const Navbar = () => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    width: "100%",
+                    width: 150,
                     color: "error.main",
                     padding: 1.5,
                     cursor: "pointer"

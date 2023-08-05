@@ -35,15 +35,16 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, title: "blue", value: "#2146C7"},
-    {id: 2, title: "rose", value: "#A75D5D"},
-    {id: 3, title: "purple", value: "#8F43EE"},
+    {id: 1, color: {dark: "#60a5fa" , light: "#2563eb"}},
+    {id: 2, color: {dark: "#fb923c" , light: "#d97706"}},
+    {id: 3, color: {dark: "#e879f9" , light: "#c026d3"}},
+    {id: 4, color: {dark: "#22d3ee" , light: "#0891b2"}},
 ];
 
 export const backgroundList = [
-    {id: 1, src: {desktop: desktop1, mobile: mobile1}},
-    {id: 2, src: {desktop: desktop2, mobile: mobile2}},
-    {id: 3, src: {desktop: desktop3, mobile: mobile3}},
-    {id: 4, src: {desktop: desktop4, mobile: mobile4}},
-    {id: 5, src: {desktop: desktop5, mobile: mobile5}},
+    {id: 1, background: {desktop: desktop1, mobile: mobile1}},
+    {id: 2, background: {desktop: desktop2, mobile: mobile2}},
+    {id: 3, background: {desktop: desktop3, mobile: mobile3}},
+    {id: 4, background: {desktop: desktop4, mobile: mobile4}},
+    {id: 5, background: {desktop: desktop5, mobile: mobile5}},
 ];

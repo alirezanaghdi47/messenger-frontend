@@ -9,7 +9,6 @@ import Footer from "@/components/partials/Footer.jsx";
 
 const Primary = ({children}) => {
 
-    const isTablet = useMediaQuery('(max-width: 768px)');
     const isMobile = useMediaQuery('(max-width: 576px)');
 
     return (

@@ -9,11 +9,11 @@ const UserInfo = () => {
 
     return (
         <Stack
-            direction="row"
+            direction="column"
             gap={2}
             sx={{
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: "center",
                 alignItems: "center",
                 width: "100%"
             }}
@@ -33,7 +33,7 @@ const UserInfo = () => {
                 sx={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "start",
+                    alignItems: "center",
                 }}
             >
 
@@ -46,11 +46,11 @@ const UserInfo = () => {
                 </Typography>
 
                 <Typography
-                    variant="caption"
+                    variant="subtitle1"
                     color="textPrimary"
                     fontWeight='bold'
                 >
-                    09195610753
+                    alirezanaghdi47
                 </Typography>
 
                 <Typography

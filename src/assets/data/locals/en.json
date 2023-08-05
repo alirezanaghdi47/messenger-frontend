@@ -28,7 +28,8 @@
       "isTyping": "Is typing",
       "members": "Members",
       "currentLocation": "Current location",
-      "version": "Version"
+      "version": "Version",
+      "forwarded": "Forwarded from"
     },
     "select": {
       "persian": "Persian",
@@ -46,7 +47,10 @@
       "videoCall": "Video",
       "status": "Status",
       "contact": "Contact",
-      "setting": "Setting"
+      "setting": "Setting",
+      "all": "All",
+      "user": "User",
+      "group": "Group"
     },
     "menu": {
       "file": "File",

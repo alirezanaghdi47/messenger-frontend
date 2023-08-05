@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // pages
 const Setup = lazy(() => import("@/pages/Setup.jsx"));
+const Home = lazy(() => import("@/pages/Home.jsx"));
 const Chat = lazy(() => import("@/pages/Chat.jsx"));
 const VoiceCall = lazy(() => import("@/pages/VoiceCall.jsx"));
 const VideoCall = lazy(() => import("@/pages/VideoCall.jsx"));
@@ -22,6 +23,8 @@ const Router = () => {
                 <Routes>
 
                     <Route path="/setup" element={<Setup/>}/>
+
+                    <Route path="/" element={<Home/>}/>
 
                     <Route path="/chat" element={<Chat/>}/>
 

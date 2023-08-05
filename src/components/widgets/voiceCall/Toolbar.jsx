@@ -10,7 +10,7 @@ import {
     Menu,
     Box
 } from "@mui/material";
-import {FiBell, FiMoreVertical, FiPhone, FiTrash, FiVideo,} from "react-icons/fi";
+import {FiMoreVertical, FiPhone, FiTrash} from "react-icons/fi";
 
 const MobileToolbar = () => {
 
@@ -21,7 +21,7 @@ const MobileToolbar = () => {
         <>
             <IconButton
                 variant="text"
-                color="secondary"
+                color="ternary"
                 onClick={(e) => setAnchorEl(e.currentTarget)}
             >
                 <FiMoreVertical size={20}/>
@@ -83,27 +83,6 @@ const MobileToolbar = () => {
 
                 </MenuItem>
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiBell size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.muteChat")}
-                    </Typography>
-
-                </MenuItem>
-
             </Menu>
 
         </>
@@ -131,7 +110,7 @@ const DesktopToolbar = () => {
 
                 <IconButton
                     variant="text"
-                    color="secondary"
+                    color="ternary"
                 >
                     <FiPhone size={20}/>
                 </IconButton>
@@ -142,7 +121,7 @@ const DesktopToolbar = () => {
 
                 <IconButton
                     variant="text"
-                    color="secondary"
+                    color="ternary"
                     onClick={(e) => setAnchorEl(e.currentTarget)}
                 >
                     <FiMoreVertical size={20}/>
@@ -179,27 +158,6 @@ const DesktopToolbar = () => {
                             fontWeight='bold'
                         >
                             {t("menu.deleteAll")}
-                        </Typography>
-
-                    </MenuItem>
-
-                    <MenuItem
-                        sx={{
-                            display: "flex",
-                            gap: 1,
-                            justifyContent: "start",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <FiBell size={20}/>
-
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            fontWeight='bold'
-                        >
-                            {t("menu.muteChat")}
                         </Typography>
 
                     </MenuItem>

@@ -11,10 +11,11 @@ import {
     Box
 } from "@mui/material";
 import {
-    FiBell, FiLogOut,
+    FiBell,
     FiMoreVertical,
+    FiPhone,
     FiSearch,
-    FiTrash,
+    FiTrash, FiVideo,
 } from "react-icons/fi";
 
 const MobileToolbar = () => {
@@ -26,7 +27,7 @@ const MobileToolbar = () => {
         <>
             <IconButton
                 variant="text"
-                color="secondary"
+                color="ternary"
                 onClick={(e) => setAnchorEl(e.currentTarget)}
             >
                 <FiMoreVertical size={20}/>
@@ -63,6 +64,48 @@ const MobileToolbar = () => {
                         fontWeight='bold'
                     >
                         {t("menu.searchChat")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiPhone size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.voiceCall")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <FiVideo size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.videoCall")}
                     </Typography>
 
                 </MenuItem>
@@ -157,7 +200,7 @@ const DesktopToolbar = () => {
 
                 <IconButton
                     variant="text"
-                    color="secondary"
+                    color="ternary"
                 >
                     <FiSearch size={20}/>
                 </IconButton>
@@ -168,7 +211,29 @@ const DesktopToolbar = () => {
 
                 <IconButton
                     variant="text"
-                    color="secondary"
+                    color="ternary"
+                >
+                    <FiPhone size={20}/>
+                </IconButton>
+
+            </Box>
+
+            <Box component="li">
+
+                <IconButton
+                    variant="text"
+                    color="ternary"
+                >
+                    <FiVideo size={20}/>
+                </IconButton>
+
+            </Box>
+
+            <Box component="li">
+
+                <IconButton
+                    variant="text"
+                    color="ternary"
                     onClick={(e) => setAnchorEl(e.currentTarget)}
                 >
                     <FiMoreVertical size={20}/>

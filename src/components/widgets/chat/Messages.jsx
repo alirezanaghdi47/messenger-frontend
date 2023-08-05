@@ -1,9 +1,11 @@
 // libraries
 import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Box, Card, IconButton, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Chip, Divider, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble, BiCheck} from "react-icons/bi";
-import {FaMapMarkerAlt, FaPlay} from "react-icons/fa";
+import {FaPlay} from "react-icons/fa";
+import {FiCornerUpRight} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
@@ -44,6 +46,7 @@ const chatList = [
 const TextMessage = ({chat}) => {
 
     const {fontSize} = useSelector(state => state.user.setting);
+    const {t} = useTranslation();
     const theme = useTheme();
 
     return (
@@ -54,10 +57,34 @@ const TextMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
         >
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <FiCornerUpRight size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    fontWeight="bold"
+                >
+                    {t("typography.forwarded")} &nbsp;     علیرضا نقدی
+                </Typography>
+
+            </Stack>
 
             <Typography
                 variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
@@ -108,59 +135,63 @@ const ImageMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
         >
 
-            <LazyLoadImage
-                src={chat.content}
-                alt="image"
-                width={266}
-                height={200}
-                style={{borderRadius: 8}}
-            />
+            <Box sx={{position: "relative"}}>
+
+                <LazyLoadImage
+                    src={chat.content}
+                    alt="image"
+                    width={266}
+                    height="100%"
+                    style={{borderRadius: 8}}
+                />
+
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Chip
+                        variant="caption"
+                        color={chat.me ? "primary" : "secondary"}
+                        size="small"
+                        label={convertByte(300000)}
+                    />
+
+                </Box>
+
+            </Box>
 
             <Stack
                 direction="row"
                 gap={0.5}
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "end",
                     alignItems: "center",
-                    color: "text.secondary",
-                    width: "100%"
+                    width: "100%",
+                    color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
+
+                <BiCheckDouble size={20}/>
 
                 <Typography
                     variant="caption"
                     color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    {convertByte(300000)}
+                    11:11 | 1400/1/1
                 </Typography>
-
-                <Stack
-                    direction="row"
-                    gap={0.5}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                    }}
-                >
-
-                    <BiCheckDouble size={20}/>
-
-                    <Typography
-                        variant="caption"
-                        color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        11:11 | 1400/1/1
-                    </Typography>
-
-                </Stack>
 
             </Stack>
 
@@ -181,7 +212,7 @@ const FileMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
         >
@@ -220,7 +251,6 @@ const FileMessage = ({chat}) => {
                     <Typography
                         variant="subtitle2"
                         color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        fontWeight='bold'
                     >
                         نام فایل
                     </Typography>
@@ -276,7 +306,7 @@ const VoiceMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
         >
@@ -292,13 +322,21 @@ const VoiceMessage = ({chat}) => {
                 }}
             >
 
+                <IconButton
+                    variant="contained"
+                    color={chat.me ? "primary" : "secondary"}
+                    size="large"
+                >
+                    <FaPlay size={20}/>
+                </IconButton>
+
                 <Stack
                     direction="column"
                     gap={1}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "end",
+                        alignItems: "start",
                         width: 150,
                     }}
                 >
@@ -318,14 +356,6 @@ const VoiceMessage = ({chat}) => {
                     </Typography>
 
                 </Stack>
-
-                <IconButton
-                    color="secondary"
-                    variant="contained"
-                    size="large"
-                >
-                    <FaPlay size={20}/>
-                </IconButton>
 
             </Stack>
 
@@ -369,26 +399,64 @@ const VideoMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
         >
 
-            <Box
-                sx={{position: "relative",}}
-            >
+            <Box sx={{position: "relative"}}>
 
                 <LazyLoadImage
                     src={image}
                     alt="image"
                     width={266}
-                    height={200}
+                    height="100%"
                     style={{borderRadius: 8}}
                 />
 
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Chip
+                        variant="caption"
+                        color={chat.me ? "primary" : "secondary"}
+                        label="11:11"
+                        size="small"
+                    />
+
+                </Box>
+
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        left: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Chip
+                        variant="caption"
+                        color={chat.me ? "primary" : "secondary"}
+                        size="small"
+                        label={convertByte(300000)}
+                    />
+
+                </Box>
+
                 <IconButton
                     variant="contained"
-                    color="secondary"
+                    color={chat.me ? "primary" : "secondary"}
                     size="large"
                     sx={{
                         position: "absolute",
@@ -407,60 +475,21 @@ const VideoMessage = ({chat}) => {
                 gap={0.5}
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "end",
                     alignItems: "center",
-                    color: "text.secondary",
-                    width: "100%"
+                    width: "100%",
+                    color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <Stack
-                    direction="row"
-                    gap={1}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-
-                    <Typography
-                        variant="caption"
-                        color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        {convertByte(300000)}
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="white"
-                    >
-                        11:11
-                    </Typography>
-
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    gap={0.5}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                    }}
-                >
-
-                    <BiCheckDouble size={20}/>
-
-                    <Typography
-                        variant="caption"
-                        color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        11:11 | 1400/1/1
-                    </Typography>
-
-                </Stack>
+                    11:11 | 1400/1/1
+                </Typography>
 
             </Stack>
 
@@ -481,7 +510,7 @@ const LocationMessage = ({chat}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: chat.me ? "primary.main" : "background.paper",
+                bgcolor: chat.me ? "primary.light" : "background.default",
                 padding: 1,
             }}
         >
@@ -490,7 +519,7 @@ const LocationMessage = ({chat}) => {
                 src={image}
                 alt="image"
                 width={250}
-                height={150}
+                height="100%"
                 style={{borderRadius: 8}}
             />
 

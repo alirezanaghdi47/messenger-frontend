@@ -1,7 +1,7 @@
 // libraries
-import {IconButton, OutlinedInput, InputAdornment, FormControl} from "@mui/material";
+import {OutlinedInput, InputAdornment, FormControl} from "@mui/material";
 
-const TextInput = ({name, placeholder , value, onChange, icon, size, color}) => {
+const TextInput = ({name, placeholder , value, onChange, startIcon , endIcon, size, color}) => {
 
     return (
         <FormControl fullWidth>
@@ -17,28 +17,16 @@ const TextInput = ({name, placeholder , value, onChange, icon, size, color}) => 
                 value={value}
                 onChange={onChange}
                 endAdornment={
-                    icon?.position === "end" ? (
+                    endIcon ? (
                         <InputAdornment position="end">
-                            <IconButton
-                                varinat="text"
-                                color="secondary"
-                                onClick={icon?.event}
-                            >
-                                {icon?.icon}
-                            </IconButton>
+                            {endIcon}
                         </InputAdornment>
                     ) : null
                 }
                 startAdornment={
-                    icon?.position === "start" ? (
+                    startIcon ? (
                         <InputAdornment position="start">
-                            <IconButton
-                                varinat="text"
-                                color="secondary"
-                                onClick={icon?.event}
-                            >
-                                {icon?.icon}
-                            </IconButton>
+                            {startIcon}
                         </InputAdornment>
                     ) : null
                 }

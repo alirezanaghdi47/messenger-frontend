@@ -1,9 +1,9 @@
 // libraries
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {Stack, Typography} from "@mui/material";
+import {Stack, Typography , Badge} from "@mui/material";
 import {FiMessageCircle, FiPhone, FiVideo} from "react-icons/fi";
-import {LuContact, LuDisc} from "react-icons/lu";
+import {LuContact, LuDisc, LuSettings} from "react-icons/lu";
 
 const footerLinks = [
     {id: 1, title: "list.chat", href: "/chat", icon: <FiMessageCircle size={20}/>},
@@ -11,6 +11,7 @@ const footerLinks = [
     {id: 3, title: "list.videoCall", href: "/video-call", icon: <FiVideo size={20}/>},
     {id: 4, title: "list.status", href: "/status", icon: <LuDisc size={20}/>},
     {id: 5, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
+    {id: 6, title: "list.setting", href: "/setting", icon: <LuSettings size={20}/>},
 ];
 
 const Footer = () => {
@@ -31,9 +32,9 @@ const Footer = () => {
                 zIndex: 100,
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "end",
                 width: "100%",
-                height: 70,
+                height: 90,
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2
@@ -64,17 +65,29 @@ const Footer = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 width: "20%",
-                                color: location.pathname === footerLink.href ? "primary.main" : "text.secondary",
+                                color: location.pathname === footerLink.href ? "primary.main" : "ternary.main",
                                 cursor: "pointer"
                             }}
                             onClick={() => navigate(footerLink.href)}
                         >
 
-                            {footerLink.icon}
+                            {/*<Badge*/}
+                            {/*    color="error"*/}
+                            {/*    variant="standard"*/}
+                            {/*    overlap="rectangular"*/}
+                            {/*    anchorOrigin={{*/}
+                            {/*        vertical: 'top',*/}
+                            {/*        horizontal: 'left',*/}
+                            {/*    }}*/}
+                            {/*    badgeContent={100}*/}
+                            {/*    max={9}*/}
+                            {/*>*/}
+                                {footerLink.icon}
+                            {/*</Badge>*/}
 
                             <Typography
                                 variant="caption"
-                                color={location.pathname === footerLink.href ? "primary" : "secondary"}
+                                color={location.pathname === footerLink.href ? "primary" : "ternary"}
                                 fontWeight="bold"
                                 textAlign="center"
                                 lineHeight={1.5}

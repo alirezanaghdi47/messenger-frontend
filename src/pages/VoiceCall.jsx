@@ -24,7 +24,7 @@ const Sidebar = () => {
         <Stack
             component="aside"
             direction="column"
-            gap={1}
+            gap={2}
             sx={{
                 position: 'fixed',
                 top: isMobile ? 70 : 0,
@@ -35,7 +35,7 @@ const Sidebar = () => {
                 justifyContent: "start",
                 alignItems: "center",
                 width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 300,
-                height: isMobile ? "calc(100dvh - 140px)" : "100dvh",
+                height: isMobile ? "calc(100dvh - 160px)" : "100dvh",
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2
@@ -82,7 +82,7 @@ const Main = () => {
                     left: 0,
                     width: "100%",
                     height: "calc(100dvh - 70px)",
-                    background: alpha(theme.palette.common.black , 0.25)
+                    background: alpha(theme.palette.common.black , 0.5)
                 }
             }}
         >

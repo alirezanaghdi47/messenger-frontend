@@ -15,7 +15,7 @@ const Attachment = () => {
 
             <IconButton
                 varinat="text"
-                color="secondary"
+                color="ternary"
                 onClick={(e) => setAnchorEl(e.currentTarget)}
             >
                 <LuPaperclip size={20}/>

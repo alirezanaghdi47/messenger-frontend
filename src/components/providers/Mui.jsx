@@ -50,13 +50,16 @@ const Mui = ({children}) => {
             },
             background: {
                 paper: darkMode ? "#334155" : "#f8fafc",
-                default: darkMode ? "#1e293b" : "#f1f5f9"
+                default: darkMode ? "#1e293b" : "#f1f5f9",
             },
             primary: {
-                main: color,
+                main: darkMode ? color.dark : color.light,
             },
             secondary: {
-                main: darkMode ? "#f8fafc" : "#334155"
+                main: darkMode ? "#475569" : "#e2e8f0"
+            },
+            ternary: {
+                main: darkMode ? "#e2e8f0" : "#475569"
             },
             error: {
                 main: "#DB4437",
@@ -86,14 +89,14 @@ const Mui = ({children}) => {
         ],
         typography: {
             fontFamily: "Vazirmatn , sans-serif",
-            caption:{
+            caption: {
                 lineHeight: 1
             }
         },
         components: {
-            MuiCssBaseline:{
+            MuiCssBaseline: {
                 styleOverrides: {
-                    body:{
+                    body: {
                         userSelect: "none"
                     },
                     ul: {
@@ -108,7 +111,7 @@ const Mui = ({children}) => {
                     p: {
                         margin: 0
                     },
-                    video:{
+                    video: {
                         borderRadius: 8
                     }
                 }
@@ -152,6 +155,13 @@ const Mui = ({children}) => {
                     disableRipple: true
                 }
             },
+            MuiChip: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        borderRadius: theme.shape.borderRadius,
+                    })
+                }
+            },
             MuiFormLabel: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
@@ -169,9 +179,9 @@ const Mui = ({children}) => {
             MuiInputBase: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
-                        background: theme.palette.background.default,
+                        background: theme.palette.secondary.main,
                         fontWeight: "bold",
-                        color: theme.palette.common.black,
+                        color: theme.palette.getContrastText(theme.palette.secondary.main),
                         borderRadius: theme.shape.borderRadius,
                     }),
                 }
@@ -200,12 +210,19 @@ const Mui = ({children}) => {
                     }),
                 }
             },
-            MuiBadge:{
-                styleOverrides:{
-                    badge: ({theme, ownerState}) => ({
+            MuiBadge: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        borderRadius: theme.shape.borderRadius,
+                    }),
+                    dot: ({theme, ownerState}) => ({
                         width: 12,
                         height: 12,
                         borderRadius: theme.shape.borderRadius,
+                    }),
+                    anchorOriginTopLeftRectangular: ({theme, ownerState}) => ({
+                        top: 0,
+                        left: -4
                     }),
                 }
             },
@@ -239,13 +256,13 @@ const Mui = ({children}) => {
                         minHeight: "unset",
                         fontSize: theme.typography.body2.fontSize,
                         fontWeight: "bold",
-                        color: theme.palette.secondary.main,
+                        color: theme.palette.getContrastText(theme.palette.secondary.main),
                         borderRadius: theme.shape.borderRadius,
                         "&.Mui-selected": {
                             background: `${theme.palette.primary.main} !important`,
-                            color: `${theme.palette.getContrastText(theme.palette.primary.light)} !important`,
+                            color: `${theme.palette.getContrastText(theme.palette.primary.main)} !important`,
                             "&:hover": {
-                                background: theme.palette.primary.light,
+                                background: theme.palette.primary.main,
                             }
                         }
                     })

@@ -18,10 +18,13 @@ const initialState = {
         language: "fa",
         darkMode: false,
         fontSize: 14,
-        color: colorList[0].value,
+        color: {
+            light: colorList[0].color.light,
+            dark: colorList[0].color.dark,
+        },
         background: {
-            desktop: backgroundList[0].src.desktop,
-            mobile: backgroundList[0].src.mobile
+            desktop: backgroundList[0].background.desktop,
+            mobile: backgroundList[0].background.mobile
         },
     },
 }
@@ -37,12 +40,15 @@ export const user = createSlice({
             state.setting.fontSize = action.payload;
         },
         setColor: (state, action) => {
-            state.setting.color = action.payload;
+            state.setting.color = {
+                light: colorList[action.payload].color.light,
+                dark: colorList[action.payload].color.dark,
+            };
         },
         setBackground: (state, action) => {
             state.setting.background = {
-                desktop: backgroundList[action.payload].src.desktop,
-                mobile: backgroundList[action.payload].src.mobile,
+                desktop: backgroundList[action.payload].background.desktop,
+                mobile: backgroundList[action.payload].background.mobile,
             };
         },
         setTheme: (state, action) => {

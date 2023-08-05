@@ -2,7 +2,7 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Card, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, getContrastRatio, Stack, Typography, useTheme} from "@mui/material";
 import {FiArrowDownLeft, FiArrowUpRight} from "react-icons/fi";
 
 // assets
@@ -71,7 +71,6 @@ const LogItem = ({chat}) => {
                         alignItems: "start",
                         bgcolor: chat.me ? "primary.main" : "background.paper",
                         padding: 1,
-                        color: chat.status === "incoming" || chat.status === "outgoing" ? "success.main" : "error.main"
                     }}
                 >
 
@@ -85,8 +84,23 @@ const LogItem = ({chat}) => {
                         }}
                     >
 
-                        {(chat.status === "incoming" || chat.status === "declined") && <FiArrowDownLeft size={20}/>}
-                        {(chat.status === "outgoing" || chat.status === "cancelled") && <FiArrowUpRight size={20}/>}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: 32,
+                                height: 32,
+                                bgcolor: chat.status === "incoming" || chat.status === "outgoing" ? "success.main" : "error.main",
+                                color: "common.black",
+                                borderRadius: 1
+                            }}
+                        >
+
+                            {(chat.status === "incoming" || chat.status === "declined") && <FiArrowDownLeft size={20}/>}
+                            {(chat.status === "outgoing" || chat.status === "cancelled") && <FiArrowUpRight size={20}/>}
+
+                        </Box>
 
                         <Stack
                             direction="column"
@@ -101,7 +115,6 @@ const LogItem = ({chat}) => {
                             <Typography
                                 variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
                                 color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                                fontWeight='bold'
                             >
                                 {t(chat.title)}
                             </Typography>

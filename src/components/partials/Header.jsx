@@ -1,9 +1,7 @@
 // libraries
-import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Box, Button, Stack, Typography} from "@mui/material";
-import {FiSettings, FiUser} from "react-icons/fi";
+import {Box, Stack, Typography} from "@mui/material";
 
 // assets
 import logo from "@/assets/images/logo.png";
@@ -58,17 +56,6 @@ const Header = () => {
                 </Typography>
 
             </Box>
-
-            <Button
-                component={Link}
-                to="/setting"
-                variant="text"
-                size="small"
-                color={location.pathname === "/setting" ? "primary" : "secondary"}
-                startIcon={<FiSettings size={20}/>}
-            >
-                {t("list.setting")}
-            </Button>
 
         </Stack>
     )

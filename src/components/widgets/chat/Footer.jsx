@@ -2,11 +2,12 @@
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {IconButton, Stack} from "@mui/material";
-import {LuLaugh, LuMic, LuSend} from "react-icons/lu";
+import {LuMic, LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "@/components/modules/TextInput.jsx";
 import Attachment from "@/components/widgets/chat/Attachment.jsx";
+import Emoji from "@/components/widgets/chat/Emoji.jsx";
 
 const Footer = () => {
 
@@ -40,37 +41,32 @@ const Footer = () => {
 
             <IconButton
                 varinat="text"
-                color="secondary"
+                color="ternary"
             >
                 <LuMic size={20}/>
             </IconButton>
 
             <Attachment/>
 
-            <IconButton
-                varinat="text"
-                color="secondary"
-            >
-                <LuLaugh size={20}/>
-            </IconButton>
-
             <TextInput
                 color="primary"
                 size="small"
                 name="message"
                 placeholder={t("input.message")}
+                startIcon={<Emoji/>}
+                endIcon={
+                    <IconButton
+                        varinat="text"
+                        color="ternary"
+                        onClick={formik.handleSubmit}
+                    >
+                        <LuSend size={20}/>
+                    </IconButton>
+                }
                 value={formik.values.message}
                 onChange={formik.handleChange}
                 error={formik.errors.message}
             />
-
-            <IconButton
-                varinat="text"
-                color="secondary"
-                onClick={formik.handleSubmit}
-            >
-                <LuSend size={20}/>
-            </IconButton>
 
         </Stack>
     )

@@ -16,7 +16,7 @@ import {colorList} from "@/utils/constants.js";
 const Color = () => {
 
     const dispatch = useDispatch();
-    const {color} = useSelector(state => state.user.setting);
+    const {color , darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
     return (
@@ -76,19 +76,19 @@ const Color = () => {
             >
 
                 {
-                    colorList.map(colorItem =>
+                    colorList.map((colorItem , index) =>
                         <IconButton
                             key={colorItem.id}
-                            variant={colorItem.value === color ? "outlined" : "text"}
+                            variant={colorItem.color.light === color.light ? "outlined" : "text"}
                             size="large"
                             color="primary"
-                            onClick={() => dispatch(setColor(colorItem.value))}
+                            onClick={() => dispatch(setColor(index))}
                         >
                             <Box
                                 sx={{
                                     width: 16,
                                     height: 16,
-                                    backgroundColor: colorItem.title,
+                                    backgroundColor: darkMode ? colorItem.color.dark : colorItem.color.light,
                                     borderRadius: 1
                                 }}
                             />

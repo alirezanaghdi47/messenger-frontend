@@ -13,7 +13,7 @@ const Version = () => {
         <Box
             sx={{
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
             }}

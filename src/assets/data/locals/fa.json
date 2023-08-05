@@ -28,7 +28,8 @@
       "isTyping": "در حال نوشتن",
       "members": "اعضاء",
       "currentLocation": "موقعیت فعلی",
-      "version": "نسخه"
+      "version": "نسخه",
+      "forwarded": "هدایت شده از"
     },
     "select": {
       "persian": "فارسی",
@@ -46,7 +47,10 @@
       "videoCall": "تصویری",
       "status": "وضعیت",
       "contact": "مخاطبین",
-      "setting": "تنظیمات"
+      "setting": "تنظیمات",
+      "all": "همه",
+      "user": "کاربر",
+      "group": "گروه"
     },
     "menu": {
       "file": "فایل",

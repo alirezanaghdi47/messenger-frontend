@@ -33,6 +33,7 @@ const ContactItem = ({user}) => {
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
+                    cursor: "pointer",
                     textDecoration: 'none'
                 }}
             >

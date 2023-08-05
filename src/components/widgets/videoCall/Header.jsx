@@ -37,7 +37,7 @@ const Header = () => {
                 isTablet && (
                     <IconButton
                         variant="text"
-                        color="secondary"
+                        color="ternary"
                         onClick={() => dispatch(removeActiveChat())}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}

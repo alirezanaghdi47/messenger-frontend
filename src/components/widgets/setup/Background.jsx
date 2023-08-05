@@ -88,7 +88,7 @@ const Background = () => {
                 spaceBetween={16}
                 allowTouchMove={true}
                 draggable={true}
-                initialSlide={backgroundList.find(backgroundItem => backgroundItem.src.desktop === background.desktop).id - 1}
+                initialSlide={backgroundList.find(backgroundItem => backgroundItem.background.desktop === background.desktop).id - 1}
                 onSlideChange={(swiper) => dispatch(setBackground(swiper.activeIndex || 0))}
             >
 
@@ -100,7 +100,7 @@ const Background = () => {
                         >
                             <LazyLoadImage
                                 alt={backgroundItem.id}
-                                src={isTablet ? backgroundItem.src.desktop : backgroundItem.src.mobile}
+                                src={isTablet ? backgroundItem.background.desktop : backgroundItem.background.mobile}
                                 width="100%"
                                 height="100%"
                                 effect="fade"
