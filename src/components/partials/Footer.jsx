@@ -9,9 +9,8 @@ const footerLinks = [
     {id: 1, title: "list.chat", href: "/chat", icon: <FiMessageCircle size={20}/>},
     {id: 2, title: "list.voiceCall", href: "/voice-call", icon: <FiPhone size={20}/>},
     {id: 3, title: "list.videoCall", href: "/video-call", icon: <FiVideo size={20}/>},
-    {id: 4, title: "list.status", href: "/status", icon: <LuDisc size={20}/>},
-    {id: 5, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
-    {id: 6, title: "list.setting", href: "/setting", icon: <LuSettings size={20}/>},
+    {id: 4, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
+    {id: 5, title: "list.setting", href: "/setting", icon: <LuSettings size={20}/>},
 ];
 
 const Footer = () => {
@@ -32,9 +31,9 @@ const Footer = () => {
                 zIndex: 100,
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "end",
+                alignItems: "center",
                 width: "100%",
-                height: 90,
+                height: 80,
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2

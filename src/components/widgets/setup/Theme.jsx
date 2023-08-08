@@ -67,10 +67,9 @@ const Theme = () => {
 
             <Stack
                 direction="row"
-                gap={2}
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
                     alignItems: "center",
                     width: "100%"
                 }}
@@ -84,9 +83,7 @@ const Theme = () => {
                             startIcon={themeItem.icon}
                             fullWidth
                             onClick={() => dispatch(setTheme(themeItem.value))}
-                            sx={{
-                                padding: 2
-                            }}
+                            sx={{padding: 2}}
                         >
                             <LazyLoadImage
                                 src={themeItem.src}
@@ -123,7 +120,7 @@ const Theme = () => {
                 </Button>
 
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     fullWidth
                     onClick={() => dispatch(setSetup("finish"))}

@@ -8,7 +8,7 @@ import {Box, Button, IconButton, Stack, Typography} from "@mui/material";
 import logo from "@/assets/images/logo.png";
 
 // stores
-import {setColor , setSetup} from "@/stores/slices/user.js";
+import {setColor, setSetup, setTheme} from "@/stores/slices/user.js";
 
 // utils
 import {colorList} from "@/utils/constants.js";
@@ -16,8 +16,10 @@ import {colorList} from "@/utils/constants.js";
 const Color = () => {
 
     const dispatch = useDispatch();
-    const {color , darkMode} = useSelector(state => state.user.setting);
+    const {color} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
+
+    console.log(color)
 
     return (
         <Stack
@@ -77,22 +79,22 @@ const Color = () => {
 
                 {
                     colorList.map((colorItem , index) =>
-                        <IconButton
+                        <Button
                             key={colorItem.id}
-                            variant={colorItem.color.light === color.light ? "outlined" : "text"}
-                            size="large"
-                            color="primary"
+                            variant={colorItem.color.dark === color.dark ? "contained" : "text"}
+                            color={colorItem.color.dark === color.dark ? "primary" : "ternary"}
+                            fullWidth
                             onClick={() => dispatch(setColor(index))}
+                            sx={{padding: 2}}
                         >
-                            <Box
-                                sx={{
-                                    width: 16,
-                                    height: 16,
-                                    backgroundColor: darkMode ? colorItem.color.dark : colorItem.color.light,
-                                    borderRadius: 1
-                                }}
+                            <LazyLoadImage
+                                src={colorItem.image}
+                                alt="color"
+                                width="100%"
+                                height="100%"
+                                style={{borderRadius: 8}}
                             />
-                        </IconButton>
+                        </Button>
                     )
                 }
 
@@ -119,7 +121,7 @@ const Color = () => {
                 </Button>
 
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     fullWidth
                     onClick={() => dispatch(setSetup("background"))}

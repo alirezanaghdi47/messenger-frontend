@@ -31,8 +31,6 @@ const Primary = ({children}) => {
 
                 {!isMobile && <Sidebar/>}
 
-                {isMobile && <Header/>}
-
                 {children}
 
                 {isMobile && <Footer/>}

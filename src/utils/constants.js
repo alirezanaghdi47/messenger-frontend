@@ -17,8 +17,8 @@ import light from "@/assets/images/mobile-5.jpg";
 export const version = "0.2.9";
 
 export const languageList = [
-    {id: 1, title: "select.persian", value: "fa", flag: fa},
-    {id: 2, title: "select.english", value: "en", flag: en},
+    {id: 1, title: "button.persian", value: "fa", flag: fa},
+    {id: 2, title: "button.english", value: "en", flag: en},
 ];
 
 export const themeList = [
@@ -35,10 +35,10 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, color: {dark: "#60a5fa" , light: "#2563eb"}},
-    {id: 2, color: {dark: "#fb923c" , light: "#d97706"}},
-    {id: 3, color: {dark: "#e879f9" , light: "#c026d3"}},
-    {id: 4, color: {dark: "#22d3ee" , light: "#0891b2"}},
+    {id: 1, color: {dark: "#60a5fa" , light: "#2563eb"} , image: mobile1},
+    {id: 2, color: {dark: "#fb923c" , light: "#d97706"} , image: mobile2},
+    {id: 3, color: {dark: "#e879f9" , light: "#c026d3"} , image: mobile3},
+    {id: 4, color: {dark: "#22d3ee" , light: "#0891b2"} , image: mobile4},
 ];
 
 export const backgroundList = [

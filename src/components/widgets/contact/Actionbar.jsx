@@ -23,8 +23,8 @@ const Actionbar = () => {
                 sx={{
                     position: "fixed",
                     zIndex: 150,
-                    left: isTablet ? "calc(100% - 60px)" : "calc(400px - 60px)",
-                    bottom: isMobile ? 106 : 16
+                    left: isTablet ? "calc(100% - 60px)" : "calc(460px - 60px)",
+                    bottom: isMobile ? 96 : 16
                 }}
             >
                 <FiPlus size={20}/>

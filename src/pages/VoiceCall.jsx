@@ -2,7 +2,7 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {alpha, Stack, useTheme} from "@mui/material";
+import {Stack} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
@@ -27,15 +27,15 @@ const Sidebar = () => {
             gap={2}
             sx={{
                 position: 'fixed',
-                top: isMobile ? 70 : 0,
+                top: 0,
                 left: isMobile ? 0 : 100,
                 bottom: 0,
                 zIndex: 50,
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "center",
-                width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 300,
-                height: isMobile ? "calc(100dvh - 160px)" : "100dvh",
+                width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 360,
+                height: isMobile ? "calc(100dvh - 80px)" : "100dvh",
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2
@@ -54,7 +54,6 @@ const Main = () => {
 
     const {activeChat} = useSelector(state => state.chat);
     const {background} = useSelector(state => state.user.setting);
-    const theme = useTheme();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return activeChat && (
@@ -65,25 +64,16 @@ const Main = () => {
                 position: "fixed",
                 top: 0,
                 bottom: 0,
-                left: isTablet ? 0 : 400,
+                left: isTablet ? 0 : 460,
                 zIndex: activeChat && isTablet ? 150 : 0,
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "center",
-                width: isTablet ? "100%" : "calc(100% - 400px)",
+                width: isTablet ? "100%" : "calc(100% - 460px)",
                 height: "100dvh",
                 backgroundImage: isTablet ? `url(${background.mobile})` : `url(${background.desktop})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
-                "&::after":{
-                    content: "''",
-                    position: "fixed",
-                    top: 70,
-                    left: 0,
-                    width: "100%",
-                    height: "calc(100dvh - 70px)",
-                    background: alpha(theme.palette.common.black , 0.5)
-                }
             }}
         >
 

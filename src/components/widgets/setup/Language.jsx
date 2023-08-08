@@ -2,16 +2,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {
-    Box,
-    Button,
-    FormControl,
-    MenuItem,
-    Select,
-    Stack,
-    Typography,
-} from "@mui/material";
-import {FiChevronDown} from "react-icons/fi";
+import {Box, Button, Stack, Typography} from "@mui/material";
 
 // assets
 import logo from "@/assets/images/logo.png";
@@ -74,41 +65,45 @@ const Language = () => {
                 {t("typography.language")}
             </Typography>
 
-            <FormControl
-                fullWidth
-                size="small"
+            <Stack
+                component="ul"
+                direction={language === "fa" ? "row" : "row-reverse"}
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: 'center',
+                    width: "100%",
+                }}
             >
 
-                <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    fontWeight="bold"
-                >
-                    {i18n.language === "fa" ? "زبان" : "Language"}
-                </Typography>
+                {
+                    languageList.map(languageItem =>
+                        <Button
+                            key={languageItem.id}
+                            variant={languageItem.value === language ? "contained" : "text"}
+                            color={languageItem.value === language ? "primary" : "ternary"}
+                            size="large"
+                            fullWidth
+                            startIcon={
+                                <LazyLoadImage
+                                    src={languageItem.flag}
+                                    alt={languageItem.value}
+                                    width={24}
+                                    height={16}
+                                />
+                            }
+                            onClick={() => dispatch(setLanguage(languageItem.value))}
+                        >
+                            {t(languageItem.title)}
+                        </Button>
+                    )
+                }
 
-                <Select
-                    value={language}
-                    label={i18n.language === "fa" ? "زبان" : "Language"}
-                    onChange={(e) => dispatch(setLanguage(e.target.value))}
-                    IconComponent={FiChevronDown}
-                >
-                    {
-                        languageList.map(languageItem =>
-                            <MenuItem
-                                key={languageItem.id}
-                                value={languageItem.value}
-                            >
-                                {t(languageItem.title)}
-                            </MenuItem>
-                        )
-                    }
-                </Select>
-
-            </FormControl>
+            </Stack>
 
             <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 fullWidth
                 onClick={() => dispatch(setSetup("fontSize"))}

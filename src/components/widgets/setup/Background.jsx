@@ -136,7 +136,7 @@ const Background = () => {
                 </Button>
 
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     fullWidth
                     onClick={() => dispatch(setSetup("theme"))}

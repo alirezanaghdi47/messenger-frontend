@@ -26,7 +26,7 @@ const Header = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
-                height: 70,
+                height: 80,
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2

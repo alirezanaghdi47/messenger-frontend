@@ -91,8 +91,7 @@ const LogItem = ({chat}) => {
                                 alignItems: "center",
                                 width: 32,
                                 height: 32,
-                                bgcolor: chat.status === "incoming" || chat.status === "outgoing" ? "success.main" : "error.main",
-                                color: "common.black",
+                                color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
                                 borderRadius: 1
                             }}
                         >

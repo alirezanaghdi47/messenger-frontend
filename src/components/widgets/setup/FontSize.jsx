@@ -161,7 +161,7 @@ const FontSize = () => {
                 </Button>
 
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     fullWidth
                     onClick={() => dispatch(setSetup("color"))}

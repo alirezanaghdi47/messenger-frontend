@@ -32,8 +32,6 @@
       "forwarded": "هدایت شده از"
     },
     "select": {
-      "persian": "فارسی",
-      "english": "انگلیسی",
       "dark": "تاریک",
       "light": "روشن"
     },
@@ -76,6 +74,8 @@
       "logout": "خروج"
     },
     "button": {
+      "persian": "فارسی",
+      "english": "انگلیسی",
       "back": "بازگشت",
       "next": "بعدی",
       "prev": "قبلی",

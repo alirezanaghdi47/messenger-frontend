@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
-import {LuDisc} from "react-icons/lu";
+import {LuTarget} from "react-icons/lu";
 
 const Actionbar = () => {
 
@@ -24,8 +24,8 @@ const Actionbar = () => {
                 sx={{
                     position: "fixed",
                     zIndex: 150,
-                    left: isTablet ? "calc(100% - 60px)" : "calc(400px - 60px)",
-                    bottom: isMobile ? 106 : 16
+                    left: isTablet ? "calc(100% - 60px)" : "calc(460px - 60px)",
+                    bottom: isMobile ? 96 : 16
                 }}
             >
                 <FiPlus size={20}/>
@@ -46,7 +46,7 @@ const Actionbar = () => {
             >
 
                 <MenuItem
-                    onClick={() => console.log("create chat")}
+                    onClick={() => console.log("add contact")}
                     sx={{
                         display: "flex",
                         gap: 1,
@@ -55,7 +55,7 @@ const Actionbar = () => {
                     }}
                 >
 
-                    <LuDisc size={20}/>
+                    <LuTarget size={20}/>
 
                     <Typography
                         variant="body2"

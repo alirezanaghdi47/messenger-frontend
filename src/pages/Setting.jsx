@@ -22,15 +22,15 @@ const Sidebar = () => {
             gap={2}
             sx={{
                 position: 'fixed',
-                top: isMobile ? 70 : 0,
+                top: 0,
                 left: isMobile ? 0 : 100,
                 bottom: 0,
                 zIndex: 50,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 300,
-                height: isMobile ? "calc(100dvh - 160px)" : "100dvh",
+                width: isMobile ? "100%" : isTablet ? "calc(100% - 100px)" : 360,
+                height: isMobile ? "calc(100dvh - 80px)" : "100dvh",
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2
@@ -60,12 +60,12 @@ const Main = () => {
                 position: "fixed",
                 top: 0,
                 bottom: 0,
-                left: isTablet ? 0 : 400,
+                left: isTablet ? 0 : 460,
                 zIndex: activeChat && isTablet ? 150 : 0,
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "center",
-                width: isTablet ? "100%" : "calc(100% - 400px)",
+                width: isTablet ? "100%" : "calc(100% - 460px)",
                 height: "100dvh",
             }}
         >

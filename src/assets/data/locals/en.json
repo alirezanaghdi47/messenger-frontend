@@ -32,8 +32,6 @@
       "forwarded": "Forwarded from"
     },
     "select": {
-      "persian": "Persian",
-      "english": "English",
       "dark": "Dark",
       "light": "Light"
     },
@@ -76,6 +74,8 @@
       "logout": "Logout"
     },
     "button": {
+      "persian": "Persian",
+      "english": "English",
       "back": "Back",
       "next": "Next",
       "prev": "Prev",

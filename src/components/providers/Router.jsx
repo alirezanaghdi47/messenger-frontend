@@ -8,7 +8,6 @@ const Home = lazy(() => import("@/pages/Home.jsx"));
 const Chat = lazy(() => import("@/pages/Chat.jsx"));
 const VoiceCall = lazy(() => import("@/pages/VoiceCall.jsx"));
 const VideoCall = lazy(() => import("@/pages/VideoCall.jsx"));
-const Status = lazy(() => import("@/pages/Status.jsx"));
 const Contact = lazy(() => import("@/pages/Contact.jsx"));
 const Setting = lazy(() => import("@/pages/Setting.jsx"));
 const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
@@ -31,8 +30,6 @@ const Router = () => {
                     <Route path="/voice-call" element={<VoiceCall/>}/>
 
                     <Route path="/video-call" element={<VideoCall/>}/>
-
-                    <Route path="/status" element={<Status/>}/>
 
                     <Route path="/contact" element={<Contact/>}/>
 

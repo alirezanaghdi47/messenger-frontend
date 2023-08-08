@@ -13,9 +13,8 @@ const sidebarLinks = [
     {id: 1, title: "list.chat", href: "/chat", icon: <FiMessageCircle size={20}/>},
     {id: 2, title: "list.voiceCall", href: "/voice-call", icon: <FiPhone size={20}/>},
     {id: 3, title: "list.videoCall", href: "/video-call", icon: <FiVideo size={20}/>},
-    {id: 4, title: "list.status", href: "/status", icon: <LuDisc size={20}/>},
-    {id: 5, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
-    {id: 6, title: "list.setting", href: "/setting", icon: <FiSettings size={20}/>},
+    {id: 4, title: "list.contact", href: "/contact", icon: <LuContact size={20}/>},
+    {id: 5, title: "list.setting", href: "/setting", icon: <FiSettings size={20}/>},
 ];
 
 const Sidebar = () => {
@@ -80,7 +79,7 @@ const Sidebar = () => {
             >
 
                 {
-                    sidebarLinks.slice(0,5).map(sidebarLink =>
+                    sidebarLinks.slice(0,4).map(sidebarLink =>
                         <Grid
                             key={sidebarLink.id}
                             component="li"
