@@ -13,7 +13,7 @@ const footerLinks = [
     {id: 5, title: "list.setting", href: "/setting", icon: <LuSettings size={20}/>},
 ];
 
-const Footer = () => {
+const Appbar = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,10 +25,10 @@ const Footer = () => {
             direction="row"
             gap={1}
             sx={{
-                position: 'fixed',
+                position: 'absolute',
+                zIndex: 100,
                 bottom: 0,
                 left: 0,
-                zIndex: 100,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -104,5 +104,5 @@ const Footer = () => {
     )
 }
 
-export default Footer;
+export default Appbar;
 

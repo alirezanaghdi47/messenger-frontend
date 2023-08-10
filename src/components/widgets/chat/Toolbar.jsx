@@ -11,11 +11,11 @@ import {
     Box
 } from "@mui/material";
 import {
-    FiBell,
     FiMoreVertical,
     FiPhone,
     FiSearch,
-    FiTrash, FiVideo,
+    FiTrash,
+    FiVideo,
 } from "react-icons/fi";
 
 const MobileToolbar = () => {
@@ -127,27 +127,6 @@ const MobileToolbar = () => {
                         fontWeight='bold'
                     >
                         {t("menu.deleteAll")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiBell size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.muteChat")}
                     </Typography>
 
                 </MenuItem>
@@ -274,27 +253,6 @@ const DesktopToolbar = () => {
 
                     </MenuItem>
 
-                    <MenuItem
-                        sx={{
-                            display: "flex",
-                            gap: 1,
-                            justifyContent: "start",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <FiBell size={20}/>
-
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            fontWeight='bold'
-                        >
-                            {t("menu.muteChat")}
-                        </Typography>
-
-                    </MenuItem>
-
                     {/*<MenuItem*/}
                     {/*    sx={{*/}
                     {/*        display: "flex",*/}
@@ -325,8 +283,8 @@ const DesktopToolbar = () => {
 }
 
 const Toolbar = () => {
-    const isTablet = useMediaQuery('(max-width: 768px)');
-    return isTablet ? <MobileToolbar/> : <DesktopToolbar/>
+    const isDesktop = useMediaQuery('(max-width: 992px)');
+    return isDesktop ? <MobileToolbar/> : <DesktopToolbar/>
 }
 
 export default Toolbar;

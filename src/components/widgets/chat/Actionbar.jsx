@@ -10,8 +10,7 @@ const Actionbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const {t} = useTranslation();
-    const isTablet = useMediaQuery('(max-width: 768px)');
-    const isMobile = useMediaQuery('(max-width: 576px)');
+    const isDesktop = useMediaQuery('(max-width: 992px)');
 
     return (
         <>
@@ -22,10 +21,10 @@ const Actionbar = () => {
                 size="large"
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 sx={{
-                    position: "fixed",
+                    position: 'absolute',
                     zIndex: 150,
-                    left: isTablet ? "calc(100% - 60px)" : "calc(460px - 60px)",
-                    bottom: isMobile ? 96 : 16
+                    left: isDesktop ? "calc(100% - 60px)" : "calc(360px - 60px)",
+                    bottom: 16
                 }}
             >
                 <FiPlus size={20}/>

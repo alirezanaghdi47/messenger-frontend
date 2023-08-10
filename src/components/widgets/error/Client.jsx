@@ -12,7 +12,7 @@ import notFoundLight from "@/assets/images/not-found-light.svg";
 const Client = () => {
 
     const navigate = useNavigate();
-    const {darkMode} = useSelector(state => state.user.setting);
+    const {darkMode} = useSelector(state => state.user);
     const {t} = useTranslation();
 
     return (

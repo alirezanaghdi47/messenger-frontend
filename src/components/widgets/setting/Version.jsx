@@ -1,6 +1,6 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {Box, Typography} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 
 // utils
 import {version} from "@/utils/constants.js";
@@ -10,7 +10,9 @@ const Version = () => {
     const {t} = useTranslation();
 
     return (
-        <Box
+        <Stack
+            direction="column"
+            gap={1}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -27,7 +29,7 @@ const Version = () => {
                 {t("typography.version")} {version}
             </Typography>
 
-        </Box>
+        </Stack>
     )
 }
 

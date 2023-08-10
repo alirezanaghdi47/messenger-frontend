@@ -1,7 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {alpha, Box, Grid, Typography, useTheme} from "@mui/material";
+import {Box, Grid, Typography, useTheme} from "@mui/material";
 
 const filterList = [
     {_id: 1, title: "list.all", value: "all"},
@@ -11,7 +10,6 @@ const filterList = [
 
 const FilterItem = ({filter}) => {
 
-    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
     const theme = useTheme();
 

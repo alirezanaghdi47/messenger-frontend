@@ -2,7 +2,7 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Box, Card, getContrastRatio, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Stack, Typography, useTheme} from "@mui/material";
 import {FiArrowDownLeft, FiArrowUpRight} from "react-icons/fi";
 
 // assets
@@ -16,14 +16,14 @@ import {BiCheckDouble} from "react-icons/bi";
 const logList = [
     {id: 1, title: "typography.incoming", time: 60 * 1000, me: true, status: "incoming"},
     {id: 2, title: "typography.outgoing", time: 90 * 1000, me: false, status: "outgoing"},
-    {id: 3, title: "typography.declined", time: 0, me: false, status: "declined"},
+    {id: 3, title: "typography.declined", time: 50 * 1000, me: false, status: "declined"},
     {id: 4, title: "typography.cancelled", time: 0, me: true, status: "cancelled"},
 ];
 
 const LogItem = ({chat}) => {
 
     const theme = useTheme();
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const {t} = useTranslation();
 
     return (
@@ -179,7 +179,7 @@ const Logs = () => {
                 alignItems: "start",
                 width: "100%",
                 height: "100%",
-                padding: 2,
+                padding: 4,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

@@ -1,10 +1,10 @@
 // libraries
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Grid, Stack, Typography} from "@mui/material";
 import {FiMessageCircle, FiPhone, FiSettings, FiVideo} from "react-icons/fi";
 import {LuContact, LuDisc} from "react-icons/lu";
-import {LazyLoadImage} from "react-lazy-load-image-component";
 
 // assets
 import logo from "@/assets/images/logo.png";
@@ -17,7 +17,7 @@ const sidebarLinks = [
     {id: 5, title: "list.setting", href: "/setting", icon: <FiSettings size={20}/>},
 ];
 
-const Sidebar = () => {
+const Navbar = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -29,11 +29,11 @@ const Sidebar = () => {
             direction="column"
             gap={1}
             sx={{
-                position: 'fixed',
+                position: 'absolute',
+                zIndex: 300,
                 top: 0,
                 left: 0,
                 bottom: 0,
-                zIndex: 100,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -174,5 +174,5 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar;
+export default Navbar;
 

@@ -1,36 +1,79 @@
 // libraries
-import {OutlinedInput, InputAdornment, FormControl} from "@mui/material";
+import {InputAdornment, FormControl, Typography, TextField} from "@mui/material";
 
-const TextInput = ({name, placeholder , value, onChange, startIcon , endIcon, size, color}) => {
+const TextInput = ({
+                       name,
+                       label,
+                       placeholder,
+                       value,
+                       onChange,
+                       startIcon,
+                       endIcon,
+                       rows = 1,
+                       size = "small",
+                       color = "primary",
+                       variant = "outlined",
+                       touched,
+                       error,
+                       disabled = false
+                   }) => {
 
     return (
-        <FormControl fullWidth>
+        <FormControl
+            variant={variant}
+            fullWidth
+        >
 
-            <OutlinedInput
-                variant="outlined"
+            {
+                label && (
+                    <Typography
+                        variant="subtitle2"
+                        fontWeight="bold"
+                        color="textSecondary"
+                        gutterBottom
+                    >
+                        {label}
+                    </Typography>
+                )
+            }
+
+            <TextField
+                variant={variant}
                 color={color}
                 size={size}
                 placeholder={placeholder}
-                inputProps={{
-                    name: name
-                }}
-                value={value}
-                onChange={onChange}
-                endAdornment={
-                    endIcon ? (
+                InputProps={{
+                    name: name,
+                    startAdornment: startIcon ? (
+                        <InputAdornment position="start">
+                            {startIcon}
+                        </InputAdornment>
+                    ) : null,
+                    endAdornment: endIcon ? (
                         <InputAdornment position="end">
                             {endIcon}
                         </InputAdornment>
                     ) : null
-                }
-                startAdornment={
-                    startIcon ? (
-                        <InputAdornment position="start">
-                            {startIcon}
-                        </InputAdornment>
-                    ) : null
-                }
+                }}
+                value={value}
+                multiline={rows > 1}
+                rows={rows}
+                onChange={onChange}
+                disabled={disabled}
             />
+
+            {
+                (touched && error) && (
+                    <Typography
+                        variant="caption"
+                        fontWeight="bold"
+                        color="error"
+                        sx={{marginTop: 1}}
+                    >
+                        {error}
+                    </Typography>
+                )
+            }
 
         </FormControl>
     )

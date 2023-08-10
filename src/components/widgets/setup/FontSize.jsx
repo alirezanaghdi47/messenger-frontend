@@ -24,7 +24,7 @@ import {fontSizeList} from "@/utils/constants.js";
 const FontSize = () => {
 
     const dispatch = useDispatch();
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -71,7 +71,7 @@ const FontSize = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.fontSize")}
+                {t("typography.fontSizeMessage")}
             </Typography>
 
             <Stack

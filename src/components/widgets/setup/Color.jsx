@@ -16,10 +16,8 @@ import {colorList} from "@/utils/constants.js";
 const Color = () => {
 
     const dispatch = useDispatch();
-    const {color} = useSelector(state => state.user.setting);
+    const {color} = useSelector(state => state.user);
     const {t} = useTranslation();
-
-    console.log(color)
 
     return (
         <Stack
@@ -64,7 +62,7 @@ const Color = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.color")}
+                {t("typography.colorMessage")}
             </Typography>
 
             <Stack

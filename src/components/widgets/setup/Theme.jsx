@@ -16,7 +16,7 @@ import {themeList} from "@/utils/constants.js";
 const Theme = () => {
 
     const dispatch = useDispatch();
-    const {darkMode} = useSelector(state => state.user.setting);
+    const {darkMode} = useSelector(state => state.user);
     const {t} = useTranslation();
 
     return (
@@ -62,7 +62,7 @@ const Theme = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.theme")}
+                {t("typography.themeMessage")}
             </Typography>
 
             <Stack

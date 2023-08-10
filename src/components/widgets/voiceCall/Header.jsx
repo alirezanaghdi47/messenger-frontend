@@ -9,13 +9,13 @@ import UserInfo from "@/components/widgets/voiceCall/UserInfo.jsx";
 import Toolbar from "@/components/widgets/voiceCall/Toolbar.jsx";
 
 // stores
-import {removeActiveChat} from "@/stores/slices/chat.js";
+import {removeActiveCall} from "@/stores/slices/voiceCall.js";
 
 const Header = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.user.setting);
-    const isTablet = useMediaQuery('(max-width: 768px)');
+    const {language} = useSelector(state => state.user);
+    const isDesktop = useMediaQuery('(max-width: 992px)');
 
     return (
         <Stack
@@ -34,11 +34,11 @@ const Header = () => {
         >
 
             {
-                isTablet && (
+                isDesktop && (
                     <IconButton
                         variant="text"
                         color="ternary"
-                        onClick={() => dispatch(removeActiveChat())}
+                        onClick={() => dispatch(removeActiveCall())}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
                     </IconButton>

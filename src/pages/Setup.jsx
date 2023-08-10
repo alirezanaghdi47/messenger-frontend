@@ -14,7 +14,7 @@ import Theme from "@/components/widgets/setup/Theme.jsx";
 const Setup = () => {
 
     const navigate = useNavigate();
-    const {setup} = useSelector(state => state.user.setting);
+    const {setup} = useSelector(state => state.user);
 
     useLayoutEffect(() => {
         if (setup === "finish") navigate("/chat");

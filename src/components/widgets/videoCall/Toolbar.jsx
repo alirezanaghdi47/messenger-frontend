@@ -171,8 +171,8 @@ const DesktopToolbar = () => {
 }
 
 const Toolbar = () => {
-    const isTablet = useMediaQuery('(max-width: 768px)');
-    return isTablet ? <MobileToolbar/> : <DesktopToolbar/>
+    const isDesktop = useMediaQuery('(max-width: 992px)');
+    return isDesktop ? <MobileToolbar/> : <DesktopToolbar/>
 }
 
 export default Toolbar;

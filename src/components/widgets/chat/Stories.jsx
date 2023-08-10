@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Stack, Typography} from "@mui/material";
@@ -22,8 +22,7 @@ const storyList = [
 
 const Stories = () => {
 
-    const dispatch = useDispatch();
-    const {language} = useSelector(state => state.user.setting);
+    const {language} = useSelector(state => state.user);
 
     return (
         <Stack
@@ -39,7 +38,6 @@ const Stories = () => {
 
             <Swiper
                 dir={language === "fa" ? "rtl" : "ltr"}
-                // modules={[EffectCoverflow]}
                 grabCursor={true}
                 spaceBetween={16}
                 allowTouchMove={true}
@@ -47,15 +45,15 @@ const Stories = () => {
                 breakpoints={{
                     320: {slidesPerView: 4},
                     576: {slidesPerView: 5},
-                    768: {slidesPerView: 4},
+                    768: {slidesPerView: 6},
+                    992: {slidesPerView: 4},
                 }}
-                // onSlideChange={(swiper) => dispatch(setBackground(swiper.activeIndex || 0))}
             >
 
                 {
                     storyList.map(storyItem =>
                         <SwiperSlide
-                            key={storyItem.id}
+                            key={storyItem._id}
                             style={{
                                 display: "flex",
                                 gap: 8,
@@ -66,7 +64,7 @@ const Stories = () => {
                         >
 
                             <LazyLoadImage
-                                alt={storyItem.id}
+                                alt={storyItem._id}
                                 src={storyItem.image}
                                 width={50}
                                 height={50}

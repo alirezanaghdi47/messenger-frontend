@@ -23,7 +23,7 @@ const logList = [
 const LogItem = ({chat}) => {
 
     const theme = useTheme();
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const {t} = useTranslation();
 
     return (
@@ -179,7 +179,7 @@ const Logs = () => {
                 alignItems: "start",
                 width: "100%",
                 height: "100%",
-                padding: 2,
+                padding: 4,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

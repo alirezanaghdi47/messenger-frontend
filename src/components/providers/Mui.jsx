@@ -3,6 +3,8 @@ import {useMemo, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {CacheProvider} from "@emotion/react";
 import {createTheme, ThemeProvider, responsiveFontSizes, alpha} from "@mui/material";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFnsJalali} from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import CssBaseline from "@mui/material/CssBaseline";
 import {enUS, faIR} from "@mui/material/locale";
 import createCache from "@emotion/cache";
@@ -20,7 +22,7 @@ const emptyCache = createCache({
 
 const Mui = ({children}) => {
 
-    const {language, darkMode, color} = useSelector(state => state.user.setting);
+    const {language, darkMode, color} = useSelector(state => state.user);
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -116,6 +118,80 @@ const Mui = ({children}) => {
                     }
                 }
             },
+            MuiDayCalendar: {
+                styleOverrides: {
+                    weekDayLabel: ({theme, ownerState}) => ({
+                        color: theme.palette.common.dark,
+                        fontSize: theme.typography.subtitle2.fontSize,
+                        fontWeight: "bold",
+                    }),
+                }
+            },
+            MuiPickersToolbarText: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        color: theme.palette.common.black,
+                        fontWeight: "bold",
+                        "&.Mui-selected": {
+                            color: theme.palette.primary.main,
+                        }
+                    }),
+                    separator: ({theme, ownerState}) => ({
+                        color: theme.palette.secondary.main,
+                    }),
+                }
+            },
+            MuiDatePickerToolbar: {
+                styleOverrides: {
+                    title: ({theme, ownerState}) => ({
+                        color: theme.palette.common.black,
+                        fontWeight: "bold"
+                    }),
+                }
+            },
+            MuiPickersCalendarHeader: {
+                styleOverrides: {
+                    label: ({theme, ownerState}) => ({
+                        color: theme.palette.common.black,
+                        fontWeight: "bold"
+                    }),
+                }
+            },
+            MuiPickersYear: {
+                styleOverrides: {
+                    yearButton: ({theme, ownerState}) => ({
+                        color: theme.palette.common.black,
+                        fontWeight: "bold",
+                        "&.Mui-selected": {
+                            background: theme.palette.primary.main
+                        }
+                    }),
+                }
+            },
+            MuiPickersDay: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        color: theme.palette.common.dark,
+                        fontWeight: "bold",
+                        border: 'none !important',
+                        "&.Mui-selected": {
+                            background: `${theme.palette.primary.main}!important`,
+                            color: `${theme.palette.getContrastText(theme.palette.primary.main)}!important`
+                        },
+                        "&:hover": {
+                            background: alpha(theme.palette.primary.light, 0.24),
+                        },
+                    }),
+                    today: ({theme, ownerState}) => ({
+                        background: `${theme.palette.secondary.main}!important`,
+                        color: `${theme.palette.getContrastText(theme.palette.secondary.main)}!important`,
+                        "&:hover": {
+                            background: theme.palette.secondary.main,
+                            color: theme.palette.getContrastText(theme.palette.secondary.main),
+                        }
+                    })
+                }
+            },
             MuiButton: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
@@ -165,6 +241,20 @@ const Mui = ({children}) => {
             MuiFormLabel: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
+                        fontWeight: "bold",
+                    })
+                }
+            },
+            MuiFormControlLabel: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        margin: 0
+                    }),
+                    label: ({theme, ownerState}) => ({
+                        fontSize: theme.typography.subtitle2.fontSize,
                         fontWeight: "bold",
                     })
                 }
@@ -290,10 +380,19 @@ const Mui = ({children}) => {
 
     return (
         <CacheProvider value={language === "fa" ? cacheRtl : emptyCache}>
+
             <ThemeProvider theme={customizedTheme}>
-                <CssBaseline/>
-                {children}
+
+                <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+
+                    <CssBaseline/>
+
+                    {children}
+
+                </LocalizationProvider>
+
             </ThemeProvider>
+
         </CacheProvider>
     );
 }

@@ -21,7 +21,7 @@ import {backgroundList} from "@/utils/constants.js";
 const Background = () => {
 
     const dispatch = useDispatch();
-    const {background, language} = useSelector(state => state.user.setting);
+    const {background, language} = useSelector(state => state.user);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(min-width: 768px)');
 
@@ -68,7 +68,7 @@ const Background = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.background")}
+                {t("typography.backgroundMessage")}
             </Typography>
 
             <Swiper

@@ -2,7 +2,7 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Box, Card, Chip, Divider, IconButton, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble, BiCheck} from "react-icons/bi";
 import {FaPlay} from "react-icons/fa";
 import {FiCornerUpRight} from "react-icons/fi";
@@ -45,7 +45,7 @@ const chatList = [
 
 const TextMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -123,7 +123,7 @@ const TextMessage = ({chat}) => {
 
 const ImageMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const theme = useTheme();
 
     return (
@@ -201,7 +201,7 @@ const ImageMessage = ({chat}) => {
 
 const FileMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const theme = useTheme();
 
     return (
@@ -295,7 +295,7 @@ const FileMessage = ({chat}) => {
 
 const VoiceMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize , language} = useSelector(state => state.user);
     const theme = useTheme();
 
     return (
@@ -326,6 +326,7 @@ const VoiceMessage = ({chat}) => {
                     variant="contained"
                     color={chat.me ? "primary" : "secondary"}
                     size="large"
+                    sx={{order: language === "fa" ? 2 : 1}}
                 >
                     <FaPlay size={20}/>
                 </IconButton>
@@ -334,9 +335,10 @@ const VoiceMessage = ({chat}) => {
                     direction="column"
                     gap={1}
                     sx={{
+                        order: language === "fa" ? 1 : 2,
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "start",
+                        alignItems: language === "fa" ? "end" : "start",
                         width: 150,
                     }}
                 >
@@ -388,7 +390,7 @@ const VoiceMessage = ({chat}) => {
 
 const VideoMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const theme = useTheme();
 
     return (
@@ -499,7 +501,7 @@ const VideoMessage = ({chat}) => {
 
 const LocationMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.user.setting);
+    const {fontSize} = useSelector(state => state.user);
     const theme = useTheme();
 
     return (
@@ -609,14 +611,12 @@ const Messages = () => {
             direction="column"
             gap={2}
             sx={{
-                position: "relative",
-                zIndex: 20,
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
                 height: "100%",
-                padding: 2,
+                padding: 4,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

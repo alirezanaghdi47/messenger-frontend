@@ -29,11 +29,11 @@ const UserInfo = () => {
 
             <Stack
                 direction="column"
-                gap={1}
                 sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    width: "100%"
                 }}
             >
 
@@ -41,14 +41,16 @@ const UserInfo = () => {
                     variant="subtitle1"
                     color="textPrimary"
                     fontWeight='bold'
+                    gutterBottom
                 >
                     علیرضا نقدی
                 </Typography>
 
                 <Typography
-                    variant="subtitle1"
+                    variant="subtitle2"
                     color="textPrimary"
                     fontWeight='bold'
+                    gutterBottom
                 >
                     alirezanaghdi47
                 </Typography>

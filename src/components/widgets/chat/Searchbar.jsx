@@ -1,33 +1,43 @@
 // libraries
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {FormControl, InputAdornment, OutlinedInput,} from "@mui/material";
+import {useFormik} from "formik";
+import {IconButton} from "@mui/material";
 import {FiSearch} from "react-icons/fi";
+
+// components
+import TextInput from "@/components/modules/TextInput.jsx";
 
 const SearchBar = () => {
 
-    const {darkMode} = useSelector(state => state.user.setting);
     const {t} = useTranslation();
 
+    const formik = useFormik({
+        initialValues: {
+            search: "",
+        },
+        // validationSchema: ,
+        onSubmit: async (data) => {
+            console.log(data)
+        }
+    });
+
     return (
-        <FormControl fullWidth>
-
-            <OutlinedInput
-                variant="outlined"
-                color="primary"
-                size="small"
-                placeholder={t("input.search")}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <FiSearch
-                            size={20}
-                            color={darkMode ? "#e2e8f0" : "#475569"}
-                        />
-                    </InputAdornment>
-                }
-            />
-
-        </FormControl>
+        <TextInput
+            name="search"
+            placeholder={t("input.search")}
+            endIcon={
+                <IconButton
+                    varinat="text"
+                    color="ternary"
+                    onClick={formik.handleSubmit}
+                >
+                    <FiSearch size={20}/>
+                </IconButton>
+            }
+            value={formik.values.search}
+            onChange={formik.handleChange}
+            error={formik.errors.search}
+        />
     )
 }
 

@@ -16,8 +16,8 @@ import {languageList} from "@/utils/constants.js";
 const Language = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.user.setting);
-    const {t, i18n} = useTranslation();
+    const {language} = useSelector(state => state.user);
+    const {t} = useTranslation();
 
     return (
         <Stack
@@ -62,7 +62,7 @@ const Language = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.language")}
+                {t("typography.languageMessage")}
             </Typography>
 
             <Stack

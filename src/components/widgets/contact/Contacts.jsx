@@ -1,9 +1,11 @@
 // libraries
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, Stack, Typography} from "@mui/material";
+import {Badge, Box, IconButton, Stack, Typography} from "@mui/material";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
+import {FiMessageCircle, FiPhone, FiVideo} from "react-icons/fi";
+import {useNavigate} from "react-router-dom";
 
 const userList = [
     {_id: "1"},
@@ -15,6 +17,8 @@ const userList = [
 ];
 
 const ContactItem = ({user}) => {
+
+    const navigate = useNavigate();
 
     return (
         <Box
@@ -33,7 +37,6 @@ const ContactItem = ({user}) => {
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
-                    cursor: "pointer",
                     textDecoration: 'none'
                 }}
             >
@@ -53,7 +56,10 @@ const ContactItem = ({user}) => {
                         alt="avatar"
                         width={40}
                         height={40}
-                        style={{borderRadius: "50%"}}
+                        style={{
+                            borderRadius: "50%",
+                            cursor: "pointer",
+                        }}
                     />
 
                 </Badge>
@@ -63,7 +69,8 @@ const ContactItem = ({user}) => {
                         display: "flex",
                         justifyContent: "start",
                         alignItems: "center",
-                        width: "100%"
+                        width: "calc(100% - 180px)",
+                        cursor: "pointer",
                     }}
                 >
 
@@ -72,17 +79,54 @@ const ContactItem = ({user}) => {
                         color="textPrimary"
                         // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
-                        noWrap
-                        sx={{
-                            width: "100%",
-                            maxWidth: 120,
-                            overflow: "hidden",
-                        }}
+                        className="text-truncate"
                     >
                         علیرضا نقدی
                     </Typography>
 
                 </Box>
+
+                <Stack
+                    direction="row"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <IconButton
+                        variant="text"
+                        color="primary"
+                        onClick={() => {
+                            navigate("/video-call");
+                        }}
+                    >
+                        <FiVideo size={20}/>
+                    </IconButton>
+
+                    <IconButton
+                        variant="text"
+                        color="primary"
+                        onClick={() => {
+                            navigate("/voice-call");
+                        }}
+                    >
+                        <FiPhone size={20}/>
+                    </IconButton>
+
+                    <IconButton
+                        variant="text"
+                        color="primary"
+                        onClick={() => {
+                            navigate("/chat");
+                        }}
+                    >
+                        <FiMessageCircle size={20}/>
+                    </IconButton>
+
+                </Stack>
 
             </Stack>
 

@@ -14,8 +14,8 @@ import {removeActiveChat} from "@/stores/slices/chat.js";
 const Header = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.user.setting);
-    const isTablet = useMediaQuery('(max-width: 768px)');
+    const {language} = useSelector(state => state.user);
+    const isDesktop = useMediaQuery('(max-width: 992px)');
 
     return (
         <Stack
@@ -34,7 +34,7 @@ const Header = () => {
         >
 
             {
-                isTablet && (
+                isDesktop && (
                     <IconButton
                         variant="text"
                         color="ternary"

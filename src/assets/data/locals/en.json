@@ -2,13 +2,18 @@
   "translation": {
     "domain": "Messenger",
     "typography": {
-      "language": "Select the program language",
-      "fontSize": "Select the program font size",
+      "language": "Language",
+      "languageMessage": "Select the program language",
+      "fontSize": "Font size",
+      "fontSizeMessage": "Select the program font size",
       "firstMessage": "Hello . How are you ?",
       "secondMessage": "I`m fine . Thanks",
-      "color": "Select the program color",
-      "background": "Select the program background",
-      "theme": "Select the program theme",
+      "color": "Color",
+      "colorMessage": "Select the program color",
+      "background": "Background",
+      "backgroundMessage": "Select the program background",
+      "theme": "Theme",
+      "themeMessage": "Select the program theme",
       "lastSeen": "Last seen",
       "selectChat": "Select a chat",
       "selectItem": "Select an item",
@@ -29,7 +34,15 @@
       "members": "Members",
       "currentLocation": "Current location",
       "version": "Version",
-      "forwarded": "Forwarded from"
+      "forwarded": "Forwarded from",
+      "copyRight": "Designed and developed by Alireza Naghdi",
+      "profile": "Profile",
+      "chat": "Chat",
+      "session": "Sessions",
+      "appearance": "Appearance",
+      "notification": "Notification",
+      "thisDevice": "This device",
+      "otherDevices": "Other devices"
     },
     "select": {
       "dark": "Dark",
@@ -37,7 +50,15 @@
     },
     "input": {
       "search": "Search ...",
-      "message": "Message"
+      "message": "Message",
+      "avatar": "Avatar",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "userName": "User name",
+      "phoneNumber": "Phone number",
+      "birthDay": "Birth day",
+      "gender": "Gender",
+      "biography": "Biography"
     },
     "list": {
       "chat": "Chat",
@@ -48,7 +69,8 @@
       "setting": "Setting",
       "all": "All",
       "user": "User",
-      "group": "Group"
+      "group": "Group",
+      "vibrate": "Vibrate"
     },
     "menu": {
       "file": "File",
@@ -70,8 +92,10 @@
       "profile": "Profile",
       "chat": "Chat",
       "session": "Sessions",
-      "personalization": "Personalization",
-      "logout": "Logout"
+      "appearance": "Appearance",
+      "notification": "Notification",
+      "logout": "Logout",
+      "empty": "Empty"
     },
     "button": {
       "persian": "Persian",
@@ -79,7 +103,9 @@
       "back": "Back",
       "next": "Next",
       "prev": "Prev",
-      "finish": "Finish"
+      "finish": "Finish",
+      "submit": "Submit",
+      "cancel": "Cancel"
     }
   }
 }

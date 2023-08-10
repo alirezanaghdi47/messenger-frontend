@@ -49,8 +49,6 @@ const Footer = () => {
             <Attachment/>
 
             <TextInput
-                color="primary"
-                size="small"
                 name="message"
                 placeholder={t("input.message")}
                 startIcon={<Emoji/>}

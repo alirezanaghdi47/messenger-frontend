@@ -14,7 +14,7 @@ import en from "@/assets/images/en.png";
 import dark from "@/assets/images/mobile-4.jpg";
 import light from "@/assets/images/mobile-5.jpg";
 
-export const version = "0.2.9";
+export const version = "0.3.3";
 
 export const languageList = [
     {id: 1, title: "button.persian", value: "fa", flag: fa},

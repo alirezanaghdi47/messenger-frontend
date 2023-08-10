@@ -3,13 +3,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
+import {FiArrowDownLeft, FiArrowUpRight} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
 
 // stores
-import {setActiveChat} from "@/stores/slices/chat.js";
-import {FiArrowDownLeft, FiArrowUpRight} from "react-icons/fi";
+import {setActiveCall} from "@/stores/slices/voiceCall.js";
 
 const userList = [
     {_id: "1", title: "typography.incoming" ,time: 60 * 1000, status: "incoming"},
@@ -21,7 +21,7 @@ const userList = [
 const ContactItem = ({user}) => {
 
     const dispatch = useDispatch();
-    const {activeChat} = useSelector(state => state.chat);
+    const {activeCall} = useSelector(state => state.voiceCall);
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -29,7 +29,7 @@ const ContactItem = ({user}) => {
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => dispatch(setActiveChat(user))}
+            onClick={() => dispatch(setActiveCall(user))}
         >
 
             <Stack
@@ -39,7 +39,7 @@ const ContactItem = ({user}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: activeChat?._id === user._id && "primary.main",
+                    bgcolor: activeCall?._id === user._id && "primary.main",
                     width: "100%",
                     cursor: "pointer",
                     borderRadius: 1,
@@ -75,20 +75,15 @@ const ContactItem = ({user}) => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "start",
-                        width: "100%"
+                        width: "calc(100% - 100px)",
                     }}
                 >
 
                     <Typography
                         variant="subtitle2"
-                        color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={activeCall?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
-                        noWrap
-                        sx={{
-                            width: "100%",
-                            maxWidth: 120,
-                            overflow: "hidden",
-                        }}
+                        className="text-truncate"
                     >
                         علیرضا نقدی
                     </Typography>
@@ -101,7 +96,7 @@ const ContactItem = ({user}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: activeCall?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
@@ -112,12 +107,8 @@ const ContactItem = ({user}) => {
 
                         <Typography
                             variant="caption"
-                            color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                            sx={{
-                                width: "100%",
-                                maxWidth: 100,
-                                overflow: "hidden",
-                            }}
+                            color={activeCall?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            className="text-truncate"
                         >
                             {user.status === "incoming" && t("typography.incoming")}
                             {user.status === "outgoing" && t("typography.outgoing")}
@@ -142,7 +133,7 @@ const ContactItem = ({user}) => {
 
                     <Typography
                         variant="caption"
-                        color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={activeCall?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>
