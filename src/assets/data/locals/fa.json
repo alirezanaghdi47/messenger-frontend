@@ -36,13 +36,16 @@
       "version": "نسخه",
       "forwarded": "هدایت شده از",
       "copyRight": "طراحی و توسعه توسط علیرضا نقدی",
-      "profile": "حساب کاربری",
+      "application": "برنامه",
+      "account": "حساب کاربری",
       "chat": "گفتگو",
       "session": "تاریخچه ورود",
       "appearance": "ظاهر",
       "notification": "اعلانات",
       "thisDevice": "این دستگاه",
-      "otherDevices": "دستگاه های دیگر"
+      "otherDevices": "دستگاه های دیگر",
+      "dateTime": "تاریخ و زمان",
+      "keyboard": "صفحه کلید"
     },
     "select": {
       "dark": "تاریک",
@@ -70,7 +73,8 @@
       "all": "همه",
       "user": "کاربر",
       "group": "گروه",
-      "vibrate": "لرزش"
+      "vibrate": "لرزش",
+      "call": "تماس"
     },
     "menu": {
       "file": "فایل",
@@ -89,11 +93,14 @@
       "createGroup": "ایجاد گروه جدید",
       "addContact": "افزودن مخاطب جدید",
       "createStatus": "افزودن وضعیت جدید",
-      "profile": "حساب کاربری",
+      "application": "برنامه",
+      "account": "حساب کاربری",
       "chat": "گفتگو",
       "session": "تاریخچه ورود",
       "appearance": "ظاهر",
       "notification": "اعلانات",
+      "install": "نصب",
+      "update": "بروز رسانی",
       "logout": "خروج",
       "empty": "داده ای یافت نشد"
     },
@@ -105,7 +112,12 @@
       "prev": "قبلی",
       "finish": "پایان",
       "submit": "ثبت",
-      "cancel": "انصراف"
+      "cancel": "انصراف",
+      "deleteAll": "حذف همه",
+      "12h": "12 ساعته",
+      "24h": "24 ساعته",
+      "enter": "ارسال با Enter",
+      "ctrlEnter": "ارسال با Ctrl + Enter"
     }
   }
 }

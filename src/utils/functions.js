@@ -1,6 +1,4 @@
 import i18n from "i18next";
-import Jalaali from "jalaali-js";
-import {format} from "date-fns-jalali";
 
 export const convertTimestamp = (ms) => {
 
@@ -40,18 +38,3 @@ export const convertByte = (byte) => {
     return `${Math.max(byte, 0.1).toFixed(1)} ${byteUnit[i]}`;
 
 }
-
-export const getIsoStringFromDate = (date) => {
-    const year = Number(date?.split("/")[0]);
-    const month = Number(date?.split("/")[1]);
-    const day = Number(date?.split("/")[2]);
-
-    const {gy, gm, gd} = Jalaali.toGregorian(year, month, day);
-
-    const parsedDate = new Date();
-    parsedDate.setFullYear(gy, gm - 1, gd);
-
-    return new Date(parsedDate);
-}
-
-export const getDateFromIsoString = (isoString) => format(new Date(isoString), "yyyy/MM/dd");

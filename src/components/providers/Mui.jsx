@@ -3,8 +3,6 @@ import {useMemo, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {CacheProvider} from "@emotion/react";
 import {createTheme, ThemeProvider, responsiveFontSizes, alpha} from "@mui/material";
-import {LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDateFnsJalali} from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import CssBaseline from "@mui/material/CssBaseline";
 import {enUS, faIR} from "@mui/material/locale";
 import createCache from "@emotion/cache";
@@ -22,7 +20,7 @@ const emptyCache = createCache({
 
 const Mui = ({children}) => {
 
-    const {language, darkMode, color} = useSelector(state => state.user);
+    const {language, darkMode, color} = useSelector(state => state.profile.setting);
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
@@ -118,79 +116,25 @@ const Mui = ({children}) => {
                     }
                 }
             },
-            MuiDayCalendar: {
-                styleOverrides: {
-                    weekDayLabel: ({theme, ownerState}) => ({
-                        color: theme.palette.common.dark,
-                        fontSize: theme.typography.subtitle2.fontSize,
-                        fontWeight: "bold",
+            MuiTabs:{
+                styleOverrides:{
+                    indicator:  ({theme, ownerState}) => ({
+                        height: 4,
+                        borderRadius: 8
                     }),
                 }
             },
-            MuiPickersToolbarText: {
-                styleOverrides: {
+            MuiTab:{
+                defaultProps:{
+                  disableRipple: true,
+                  disableTouchRipple: true,
+                  disableFocusRipple: true
+                },
+                styleOverrides:{
                     root: ({theme, ownerState}) => ({
-                        color: theme.palette.common.black,
                         fontWeight: "bold",
-                        "&.Mui-selected": {
-                            color: theme.palette.primary.main,
-                        }
                     }),
-                    separator: ({theme, ownerState}) => ({
-                        color: theme.palette.secondary.main,
-                    }),
-                }
-            },
-            MuiDatePickerToolbar: {
-                styleOverrides: {
-                    title: ({theme, ownerState}) => ({
-                        color: theme.palette.common.black,
-                        fontWeight: "bold"
-                    }),
-                }
-            },
-            MuiPickersCalendarHeader: {
-                styleOverrides: {
-                    label: ({theme, ownerState}) => ({
-                        color: theme.palette.common.black,
-                        fontWeight: "bold"
-                    }),
-                }
-            },
-            MuiPickersYear: {
-                styleOverrides: {
-                    yearButton: ({theme, ownerState}) => ({
-                        color: theme.palette.common.black,
-                        fontWeight: "bold",
-                        "&.Mui-selected": {
-                            background: theme.palette.primary.main
-                        }
-                    }),
-                }
-            },
-            MuiPickersDay: {
-                styleOverrides: {
-                    root: ({theme, ownerState}) => ({
-                        color: theme.palette.common.dark,
-                        fontWeight: "bold",
-                        border: 'none !important',
-                        "&.Mui-selected": {
-                            background: `${theme.palette.primary.main}!important`,
-                            color: `${theme.palette.getContrastText(theme.palette.primary.main)}!important`
-                        },
-                        "&:hover": {
-                            background: alpha(theme.palette.primary.light, 0.24),
-                        },
-                    }),
-                    today: ({theme, ownerState}) => ({
-                        background: `${theme.palette.secondary.main}!important`,
-                        color: `${theme.palette.getContrastText(theme.palette.secondary.main)}!important`,
-                        "&:hover": {
-                            background: theme.palette.secondary.main,
-                            color: theme.palette.getContrastText(theme.palette.secondary.main),
-                        }
-                    })
-                }
+                },
             },
             MuiButton: {
                 styleOverrides: {
@@ -200,7 +144,9 @@ const Mui = ({children}) => {
                 },
                 defaultProps: {
                     disableElevation: true,
-                    disableRipple: true
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                    disableFocusRipple: true
                 }
             },
             MuiIconButton: {
@@ -228,7 +174,9 @@ const Mui = ({children}) => {
                     }
                 ],
                 defaultProps: {
-                    disableRipple: true
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                    disableFocusRipple: true
                 }
             },
             MuiChip: {
@@ -383,13 +331,9 @@ const Mui = ({children}) => {
 
             <ThemeProvider theme={customizedTheme}>
 
-                <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+                <CssBaseline/>
 
-                    <CssBaseline/>
-
-                    {children}
-
-                </LocalizationProvider>
+                {children}
 
             </ThemeProvider>
 

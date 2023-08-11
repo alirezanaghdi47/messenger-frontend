@@ -36,13 +36,15 @@
       "version": "Version",
       "forwarded": "Forwarded from",
       "copyRight": "Designed and developed by Alireza Naghdi",
-      "profile": "Profile",
+      "account": "Account",
       "chat": "Chat",
       "session": "Sessions",
       "appearance": "Appearance",
       "notification": "Notification",
       "thisDevice": "This device",
-      "otherDevices": "Other devices"
+      "otherDevices": "Other devices",
+      "dateTime": "Date & time",
+      "keyboard": "Keyboard"
     },
     "select": {
       "dark": "Dark",
@@ -70,7 +72,8 @@
       "all": "All",
       "user": "User",
       "group": "Group",
-      "vibrate": "Vibrate"
+      "vibrate": "Vibrate",
+      "call": "Call"
     },
     "menu": {
       "file": "File",
@@ -89,11 +92,14 @@
       "createGroup": "Create new group",
       "addContact": "Add new contact",
       "createStatus": "Create new status",
-      "profile": "Profile",
+      "application": "Application",
+      "account": "Account",
       "chat": "Chat",
       "session": "Sessions",
       "appearance": "Appearance",
       "notification": "Notification",
+      "install": "Install",
+      "update": "Update",
       "logout": "Logout",
       "empty": "Empty"
     },
@@ -105,7 +111,12 @@
       "prev": "Prev",
       "finish": "Finish",
       "submit": "Submit",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "deleteAll": "Delete all",
+      "12h": "12 hour",
+      "24h": "24 hour",
+      "enter": "Send by enter",
+      "ctrlEnter": "Send by ctrl + enter"
     }
   }
 }

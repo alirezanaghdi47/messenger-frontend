@@ -6,24 +6,24 @@ import {Stack} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
-import Header from "@/components/widgets/home/Header.jsx";
-import Contacts from "@/components/widgets/home/Contacts.jsx";
-import Footer from "@/components/widgets/home/Footer.jsx";
-import Messages from "@/components/widgets/home/Messages.jsx";
-import Filter from "@/components/widgets/home/Filter.jsx";
-import ActionButton from "@/components/widgets/home/ActionButton.jsx";
-import ScrollToBottom from "@/components/widgets/home/ScrollToBottom.jsx";
-import Appbar from "@/components/widgets/home/Appbar.jsx";
+import Header from "@/components/widgets/profile/Header.jsx";
+import Appbar from "@/components/widgets/profile/Appbar.jsx";
 
 // stores
-import {removeActiveChat} from "@/stores/slices/chat.js";
+import {removeActiveProfile} from "@/stores/slices/profile.js";
+import Links from "@/components/widgets/profile/Links.jsx";
+import Version from "@/components/widgets/profile/Version.jsx";
+import Appearance from "@/components/widgets/profile/Appearance.jsx";
+import Account from "@/components/widgets/profile/Account.jsx";
+import Session from "@/components/widgets/profile/Session.jsx";
+import Application from "@/components/widgets/profile/Application.jsx";
 
 const Sidebar = () => {
 
-    const {activeChat} = useSelector(state => state.chat);
+    const {activeProfile} = useSelector(state => state.profile);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    return ((!activeChat && isTablet) || !isTablet) && (
+    return ((!activeProfile && isTablet) || !isTablet) && (
         <Stack
             component="aside"
             direction="column"
@@ -35,7 +35,7 @@ const Sidebar = () => {
                 left: 0,
                 bottom: 0,
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: "space-between",
                 alignItems: "center",
                 width: isTablet ? "100%" : 360,
                 height: "100dvh",
@@ -47,11 +47,9 @@ const Sidebar = () => {
 
             <Appbar/>
 
-            <Filter/>
+            <Links/>
 
-            <Contacts/>
-
-            <ActionButton/>
+            <Version/>
 
         </Stack>
     )
@@ -59,11 +57,10 @@ const Sidebar = () => {
 
 const Main = () => {
 
-    const {activeChat} = useSelector(state => state.chat);
-    const {background} = useSelector(state => state.profile.setting);
+    const {activeProfile} = useSelector(state => state.profile);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    return activeChat && (
+    return activeProfile && (
         <Stack
             component="main"
             direction="column"
@@ -78,30 +75,26 @@ const Main = () => {
                 alignItems: "center",
                 width: isTablet ? "100%" : "calc(100% - 360px)",
                 height: "100dvh",
-                backgroundImage: isTablet ? `url(${background.mobile})` : `url(${background.desktop})`,
-                backgroundPosition: 'center',
-                backgroundSize: "cover",
             }}
         >
 
             <Header/>
 
-            <Messages/>
-
-            <ScrollToBottom/>
-
-            <Footer/>
+            {activeProfile === "application" && <Application/>}
+            {activeProfile === "appearance" && <Appearance/>}
+            {activeProfile === "account" && <Account/>}
+            {activeProfile === "session" && <Session/>}
 
         </Stack>
     )
 }
 
-const Home = () => {
+const Profile = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        return () => dispatch(removeActiveChat());
+        return () => dispatch(removeActiveProfile());
     } , []);
 
     return (
@@ -115,4 +108,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Profile;

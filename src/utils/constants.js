@@ -13,8 +13,19 @@ import fa from "@/assets/images/fa.png";
 import en from "@/assets/images/en.png";
 import dark from "@/assets/images/mobile-4.jpg";
 import light from "@/assets/images/mobile-5.jpg";
+import auto from "@/assets/images/mobile-1.jpg";
 
-export const version = "0.3.3";
+export const version = "0.3.5";
+
+export const dateTimeList = [
+    {id: 1, title: "button.12h", value: "12h"},
+    {id: 2, title: "button.24h", value: "24h"},
+];
+
+export const keyboardList = [
+    {id: 1, title: "button.enter", value: "enter"},
+    {id: 2, title: "button.ctrlEnter", value: "ctrlEnter"},
+];
 
 export const languageList = [
     {id: 1, title: "button.persian", value: "fa", flag: fa},
@@ -24,6 +35,7 @@ export const languageList = [
 export const themeList = [
     {id: 1, title: "select.light", value: false, src: light},
     {id: 2, title: "select.dark", value: true, src: dark},
+    {id: 3, title: "select.auto", value: "auto", src: auto},
 ];
 
 export const fontSizeList = [
