@@ -44,7 +44,8 @@
       "thisDevice": "This device",
       "otherDevices": "Other devices",
       "dateTime": "Date & time",
-      "keyboard": "Keyboard"
+      "phoneNumber": "Phone number",
+      "biography": "Biography"
     },
     "select": {
       "dark": "Dark",
@@ -92,14 +93,12 @@
       "createGroup": "Create new group",
       "addContact": "Add new contact",
       "createStatus": "Create new status",
-      "application": "Application",
       "account": "Account",
       "chat": "Chat",
       "session": "Sessions",
       "appearance": "Appearance",
       "notification": "Notification",
-      "install": "Install",
-      "update": "Update",
+      "privacy": "Privacy",
       "logout": "Logout",
       "empty": "Empty"
     },
@@ -114,9 +113,7 @@
       "cancel": "Cancel",
       "deleteAll": "Delete all",
       "12h": "12 hour",
-      "24h": "24 hour",
-      "enter": "Send by enter",
-      "ctrlEnter": "Send by ctrl + enter"
+      "24h": "24 hour"
     }
   }
 }

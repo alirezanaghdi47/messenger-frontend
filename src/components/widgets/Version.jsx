@@ -16,7 +16,7 @@ const Version = () => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "start",
                 width: "100%",
             }}
         >

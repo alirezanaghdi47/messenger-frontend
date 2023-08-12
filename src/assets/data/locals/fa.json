@@ -45,7 +45,8 @@
       "thisDevice": "این دستگاه",
       "otherDevices": "دستگاه های دیگر",
       "dateTime": "تاریخ و زمان",
-      "keyboard": "صفحه کلید"
+      "phoneNumber": "شماره همراه",
+      "biography": "بیوگرافی"
     },
     "select": {
       "dark": "تاریک",
@@ -93,14 +94,12 @@
       "createGroup": "ایجاد گروه جدید",
       "addContact": "افزودن مخاطب جدید",
       "createStatus": "افزودن وضعیت جدید",
-      "application": "برنامه",
       "account": "حساب کاربری",
       "chat": "گفتگو",
       "session": "تاریخچه ورود",
       "appearance": "ظاهر",
       "notification": "اعلانات",
-      "install": "نصب",
-      "update": "بروز رسانی",
+      "privacy": "محرمانگی",
       "logout": "خروج",
       "empty": "داده ای یافت نشد"
     },
@@ -115,9 +114,7 @@
       "cancel": "انصراف",
       "deleteAll": "حذف همه",
       "12h": "12 ساعته",
-      "24h": "24 ساعته",
-      "enter": "ارسال با Enter",
-      "ctrlEnter": "ارسال با Ctrl + Enter"
+      "24h": "24 ساعته"
     }
   }
 }

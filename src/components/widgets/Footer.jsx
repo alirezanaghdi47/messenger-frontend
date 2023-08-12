@@ -6,8 +6,8 @@ import {LuMic, LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "@/components/modules/TextInput.jsx";
-import Attachment from "@/components/widgets/home/Attachment.jsx";
-import Emoji from "@/components/widgets/home/Emoji.jsx";
+import Attachment from "@/components/widgets/Attachment.jsx";
+import Emoji from "@/components/widgets/Emoji.jsx";
 
 const Footer = () => {
 

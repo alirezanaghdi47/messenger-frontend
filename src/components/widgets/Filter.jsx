@@ -7,7 +7,6 @@ const filterList = [
     {_id: 1, title: "list.all", value: "all"},
     {_id: 2, title: "list.user", value: "user"},
     {_id: 3, title: "list.group", value: "group"},
-    {_id: 4, title: "list.call", value: "call"},
 ];
 
 const Filter = () => {
@@ -25,7 +24,7 @@ const Filter = () => {
         >
 
             <Tabs
-                variant="fullWidth"
+                // variant="fullWidth"
                 scrollButtons
                 allowScrollButtonsMobile
                 value={value}

@@ -1,5 +1,5 @@
 // libraries
-import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Grid, IconButton} from "@mui/material";
 import {FiSearch, FiUser} from "react-icons/fi";
@@ -7,9 +7,12 @@ import {FiSearch, FiUser} from "react-icons/fi";
 // assets
 import logo from "@/assets/images/logo.png";
 
+// stores
+import {setActiveProfile} from "@/stores/slices/profile.js";
+
 const Appbar = () => {
 
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     return (
         <Grid
@@ -69,7 +72,7 @@ const Appbar = () => {
                 <IconButton
                     variant="text"
                     color="ternary"
-                    onClick={() => navigate("/profile")}
+                    onClick={() => dispatch(setActiveProfile("profile"))}
                 >
                     <FiUser size={20}/>
                 </IconButton>

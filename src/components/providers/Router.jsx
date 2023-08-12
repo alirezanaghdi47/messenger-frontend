@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // pages
 const Home = lazy(() => import("@/pages/Home.jsx"));
-const Profile = lazy(() => import("@/pages/Profile.jsx"));
 const NotFound = lazy(() => import("@/pages/NotFound.jsx"));
 
 const Router = () => {
@@ -17,8 +16,6 @@ const Router = () => {
                 <Routes>
 
                     <Route path="/" element={<Home/>}/>
-
-                    <Route path="/profile" element={<Profile/>}/>
 
                     <Route path="/*" element={<NotFound/>}/>
 
