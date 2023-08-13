@@ -19,8 +19,7 @@ export const chat = createSlice({
 })
 
 export const {
-    setActiveChat ,
-    removeActiveChat
+    setActiveChat , removeActiveChat
 } = chat.actions;
 
 export default chat.reducer;
