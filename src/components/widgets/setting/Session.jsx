@@ -2,11 +2,15 @@
 import {Box, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+
+// assets
+import avatar from "@/assets/images/avatar.png";
 
 const sessions = [
-    {id: 1, platform: "desktop", os: "windows 11", browser: 'chrome 113', country: "iran", ip: "192.168.1.1", createDate: "1400/1/1 | 11:11"},
-    {id: 2, platform: "mobile", os: "android 13", browser: 'chrome 113', country: "iran", ip: "192.168.1.1", createDate: "1400/1/1 | 11:11"},
-    {id: 3, platform: "mobile", os: "android 10", browser: 'chrome 112', country: "turkey", ip: "192.168.1.1", createDate: "1400/1/1 | 11:11"},
+    {id: 1, platform: "desktop", browser: 'chrome 113', country: "iran", city: "tehran", createDate: "1400/1/1 | 11:11"},
+    {id: 2, platform: "mobile", browser: 'chrome 113', country: "iran", city: "tehran", createDate: "1400/1/1 | 11:11"},
+    {id: 3, platform: "mobile", browser: 'chrome 112', country: "turkey", city: "stanbul", createDate: "1400/1/1 | 11:11"},
 ];
 
 const SessionItem = ({session}) => {
@@ -28,14 +32,14 @@ const SessionItem = ({session}) => {
                     display: 'flex',
                     justifyContent: "center",
                     alignItems: "center",
-                    width: 80,
-                    height: 80,
+                    width: 48,
+                    height: 48,
                     bgcolor: "secondary.main",
                     color: "ternary.main",
                     borderRadius: 1,
                 }}
             >
-                {session.platform === "mobile" ? <LuSmartphone size={32}/> : <LuMonitor size={32}/>}
+                {session.platform === "mobile" ? <LuSmartphone size={24}/> : <LuMonitor size={24}/>}
             </Box>
 
             <Stack
@@ -48,50 +52,65 @@ const SessionItem = ({session}) => {
                 }}
             >
 
-                <Typography
-                    variant="body1"
-                    color="textPrimary"
-                    noWrap
+                <Stack
+                    direction="row"
+                    gap={1}
                     sx={{
-                        width: "100%",
-                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
                     }}
                 >
-                    {session.os} , {session.browser}
-                </Typography>
 
-                <Typography
-                    variant="body2"
-                    color="textPrimary"
-                    fontWeight="bold"
-                    noWrap
-                    sx={{
-                        width: "100%",
-                        overflow: "hidden",
-                    }}
-                >
-                    {session.country}
-                </Typography>
+                    <LazyLoadImage
+                        src={avatar}
+                        alt="browser"
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
+                    />
 
-                <Typography
-                    variant="body2"
-                    color="textPrimary"
-                    fontWeight="bold"
-                    noWrap
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                    >
+                        {session.browser}
+                    </Typography>
+
+                </Stack>
+
+                <Stack
+                    direction="row"
+                    gap={1}
                     sx={{
-                        width: "100%",
-                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
                     }}
                 >
-                    {session.ip}
-                </Typography>
+
+                    <LazyLoadImage
+                        src={avatar}
+                        alt="browser"
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                    >
+                        {session.city} , {session.country}
+                    </Typography>
+
+                </Stack>
 
             </Stack>
 
             <Typography
                 variant="caption"
                 color="textPrimary"
-                fontWeight="bold"
                 sx={{marginLeft: "auto"}}
             >
                 1400/1/1 | 14:00

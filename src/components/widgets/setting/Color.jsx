@@ -2,7 +2,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Container, Box, Stack, Typography, IconButton} from "@mui/material";
+import {Container, Box, Stack, Typography} from "@mui/material";
 
 // stores
 import {setColor} from "@/stores/slices/profile.js";
@@ -46,7 +46,7 @@ const Color = () => {
                 >
 
                     <Typography
-                        variant="subtitle2"
+                        variant="subtitle1"
                         color="textPrimary"
                         fontWeight='bold'
                     >
@@ -56,6 +56,7 @@ const Color = () => {
                 </Box>
 
                 <Stack
+                    component="ul"
                     direction="row"
                     gap={2}
                     sx={{
@@ -68,21 +69,27 @@ const Color = () => {
 
                     {
                         colorList.map((colorItem, index) =>
-                            <IconButton
+                            <Box
                                 key={colorItem.id}
-                                variant={colorItem.color.dark === color.dark ? "contained" : "text"}
-                                color={colorItem.color.dark === color.dark ? "primary" : "ternary"}
+                                component="li"
+                                sx={{
+                                    position: "relative",
+                                    width: 40,
+                                    height: 40,
+                                    background: darkMode ? colorItem.color.dark : colorItem.color.light,
+                                    borderRadius: "50%",
+                                    cursor: "pointer",
+                                    "&::after":{
+                                        content: colorItem.color.dark === color.dark ? "'x'" : '""',
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50% , -50%)",
+                                        color: darkMode ? "ternary.main" : "secondary.main",
+                                    }
+                                }}
                                 onClick={() => dispatch(setColor(index))}
-                            >
-                                <Box
-                                    sx={{
-                                        width: 20,
-                                        height: 20,
-                                        background: darkMode ? colorItem.color.dark : colorItem.color.light,
-                                        borderRadius: "50%",
-                                    }}
-                                />
-                            </IconButton>
+                            />
                         )
                     }
 

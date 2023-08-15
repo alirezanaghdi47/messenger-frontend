@@ -47,7 +47,7 @@ const FontSize = () => {
                 >
 
                     <Typography
-                        variant="subtitle2"
+                        variant="subtitle1"
                         color="textPrimary"
                         fontWeight='bold'
                     >

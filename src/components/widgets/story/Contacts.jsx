@@ -1,11 +1,10 @@
 // libraries
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, IconButton, Stack, Typography} from "@mui/material";
+import {Badge, Box, Stack, Typography} from "@mui/material";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-import {FiMessageCircle, FiPhone, FiVideo} from "react-icons/fi";
-import {useNavigate} from "react-router-dom";
+import {BiCheckDouble} from "react-icons/bi";
 
 const userList = [
     {_id: "1"},
@@ -18,12 +17,14 @@ const userList = [
 
 const ContactItem = ({user}) => {
 
-    const navigate = useNavigate();
-
     return (
         <Box
             component="li"
-            sx={{width: "100%"}}
+            sx={{
+                width: "100%",
+                cursor: "pointer",
+            }}
+            onClick={() => console.log("show story modal")}
         >
 
             <Stack
@@ -56,75 +57,49 @@ const ContactItem = ({user}) => {
                         alt="avatar"
                         width={40}
                         height={40}
-                        style={{
-                            borderRadius: "50%",
-                            cursor: "pointer",
-                        }}
+                        style={{borderRadius: "50%"}}
                     />
 
                 </Badge>
 
-                <Box
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    fontWeight='bold'
+                    className="text-truncate"
+                >
+                    علیرضا نقدی
+                </Typography>
+
+                <Stack
+                    direction="column"
+                    gap={1}
                     sx={{
                         display: "flex",
-                        justifyContent: "start",
-                        alignItems: "center",
-                        width: "calc(100% - 180px)",
-                        cursor: "pointer",
+                        justifyContent: "center",
+                        alignItems: "end",
+                        width: 50,
+                        color: "text.secondary",
+                        marginLeft: "auto"
                     }}
                 >
 
                     <Typography
-                        variant="subtitle2"
-                        color="textPrimary"
-                        // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        fontWeight='bold'
-                        className="text-truncate"
+                        variant="caption"
+                        color="textSecondary"
                     >
-                        علیرضا نقدی
+                        11:11
                     </Typography>
 
-                </Box>
+                    <BiCheckDouble size={20}/>
 
-                <Stack
-                    direction="row"
-                    gap={1}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/video-call");
-                        }}
-                    >
-                        <FiVideo size={20}/>
-                    </IconButton>
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/voice-call");
-                        }}
-                    >
-                        <FiPhone size={20}/>
-                    </IconButton>
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/chat");
-                        }}
-                    >
-                        <FiMessageCircle size={20}/>
-                    </IconButton>
+                    {/*<Chip*/}
+                    {/*    variant="filled"*/}
+                    {/*    size="small"*/}
+                    {/*    color="success"*/}
+                    {/*    label="1"*/}
+                    {/*/>*/}
 
                 </Stack>
 

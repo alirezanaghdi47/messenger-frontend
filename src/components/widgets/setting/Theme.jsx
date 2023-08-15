@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Container, Box, Button, Stack, Typography} from "@mui/material";
+import {Container, Box, Stack, Typography, Grid} from "@mui/material";
 
 // stores
 import {setTheme} from "@/stores/slices/profile.js";
@@ -59,38 +59,48 @@ const Theme = () => {
                 <Stack
                     component="ul"
                     direction="row"
+                    flexWrap="wrap"
                     gap={2}
                     sx={{
-                        display: "flex",
-                        justifyContent: "center",
+                        display: 'flex',
+                        justifyContent: "start",
                         alignItems: "center",
                         width: "100%"
                     }}
                 >
                     {
                         themeList.map(themeItem =>
-                            <Button
+                            <Box
                                 component="li"
                                 key={themeItem.id}
-                                variant={themeItem.value === darkMode ? "contained" : "text"}
-                                color="primary"
-                                startIcon={themeItem.icon}
-                                fullWidth
+                                sx={{
+                                    position: "relative",
+                                    width: "25%",
+                                    minWidth: 200,
+                                    borderRadius: "50%",
+                                    cursor:"pointer",
+                                    "&::after":{
+                                        content: themeItem.value === darkMode ? "'x'" : '""',
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50% , -50%)",
+                                        color: darkMode ? "ternary.main" : "secondary.main",
+                                    }
+                                }}
                                 onClick={() => dispatch(setTheme(themeItem.value))}
-                                sx={{padding: 2}}
                             >
                                 <LazyLoadImage
                                     src={themeItem.src}
                                     alt={t(themeItem.title)}
                                     width="100%"
                                     height="100%"
-                                    style={{
-                                        borderRadius: 8
-                                    }}
+                                    style={{borderRadius: 8}}
                                 />
-                            </Button>
+                            </Box>
                         )
                     }
+
                 </Stack>
 
             </Stack>

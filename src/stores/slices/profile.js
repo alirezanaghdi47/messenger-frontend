@@ -20,9 +20,8 @@ const initialState = {
         expireDate: "",
     },
     setting: {
-        setup: "language",
         dateFormat: "24h",
-        keyboard: "enter",
+        notification: ["chat" , "group" , "story"],
         language: "fa",
         darkMode: false,
         fontSize: 14,
@@ -31,8 +30,8 @@ const initialState = {
             dark: colorList[0].color.dark,
         },
         background: {
-            desktop: backgroundList[0].background.desktop,
-            mobile: backgroundList[0].background.mobile
+            desktop: backgroundList[0].background,
+            mobile: backgroundList[0].background
         },
     }
 }
@@ -46,9 +45,6 @@ export const profile = createSlice({
         },
         removeActiveProfile: (state) => {
             state.activeProfile = initialState.activeProfile
-        },
-        setKeyboard: (state, action) => {
-            state.setting.keyboard = action.payload;
         },
         setDateFormat: (state, action) => {
             state.setting.dateFormat = action.payload;
@@ -66,16 +62,13 @@ export const profile = createSlice({
             };
         },
         setBackground: (state, action) => {
-            state.setting.background = {
-                desktop: backgroundList[action.payload].background.desktop,
-                mobile: backgroundList[action.payload].background.mobile,
-            };
+            state.setting.background = backgroundList[action.payload].background;
         },
         setTheme: (state, action) => {
             state.setting.darkMode = action.payload;
         },
-        setSetup: (state, action) => {
-            state.setting.setup = action.payload;
+        setNotification: (state, action) => {
+            state.setting.notification = action.payload;
         },
     },
 })
@@ -83,14 +76,13 @@ export const profile = createSlice({
 export const {
     setActiveProfile,
     removeActiveProfile,
-    setKeyboard,
     setDateFormat,
     setLanguage,
     setFontSize,
     setColor,
     setBackground,
     setTheme,
-    setSetup,
+    setNotification,
 } = profile.actions;
 
 export default profile.reducer;

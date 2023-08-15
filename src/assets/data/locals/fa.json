@@ -39,15 +39,21 @@
       "application": "برنامه",
       "profile": "حساب کاربری",
       "chat": "گفتگو",
-      "session": "تاریخچه ورود",
-      "appearance": "ظاهر",
-      "notification": "اعلانات",
-      "thisDevice": "این دستگاه",
+      "call": "تماس",
+      "appearance": "ظاهر و شخصی سازی",
+      "notification": "اعلانات و پیام ها",
+      "thisDevice": "دستگاه فعلی",
       "otherDevices": "دستگاه های دیگر",
       "dateTime": "تاریخ و زمان",
       "userName": "نام کاربری",
       "phoneNumber": "شماره همراه",
-      "biography": "بیوگرافی"
+      "biography": "بیوگرافی",
+      "blockedUsers": "کاربران مسدود شده",
+      "lastSeenUsers": "آخرین حضور یا بر خط",
+      "lock": "قفل ورود",
+      "session": "تاریخچه ورود",
+      "registerDate": "عضو شده",
+      "ago": "پیش"
     },
     "select": {
       "dark": "تاریک",
@@ -73,7 +79,7 @@
       "contact": "مخاطبین",
       "setting": "تنظیمات",
       "all": "همه",
-      "user": "کاربر",
+      "private": "شخصی",
       "group": "گروه",
       "vibrate": "لرزش",
       "call": "تماس"
@@ -100,9 +106,9 @@
       "profile": "حساب کاربری",
       "chat": "گفتگو",
       "session": "تاریخچه ورود",
-      "appearance": "ظاهر",
-      "notification": "اعلانات",
-      "privacy": "محرمانگی",
+      "appearance": "ظاهر و شخصی سازی",
+      "notification": "اعلانات و پیام ها",
+      "privacy": "محرمانگی و امنیت",
       "logout": "خروج",
       "empty": "داده ای یافت نشد"
     },
@@ -117,7 +123,13 @@
       "cancel": "انصراف",
       "deleteAll": "حذف همه",
       "12h": "12 ساعته",
-      "24h": "24 ساعته"
+      "24h": "24 ساعته",
+      "count": "مورد",
+      "contacts": "مخاطبین",
+      "all": "همه",
+      "nothing": "هیچ",
+      "lock": "دارای قفل",
+      "unLock": "بدون قفل"
     }
   }
 }

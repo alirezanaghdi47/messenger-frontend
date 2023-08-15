@@ -4,27 +4,14 @@ import desktop2 from "@/assets/images/desktop-2.png";
 import desktop3 from "@/assets/images/desktop-3.jpg";
 import desktop4 from "@/assets/images/desktop-4.jpg";
 import desktop5 from "@/assets/images/desktop-5.jpg";
-import mobile1 from "@/assets/images/mobile-1.jpg";
-import mobile2 from "@/assets/images/mobile-2.png";
-import mobile3 from "@/assets/images/mobile-3.jpg";
-import mobile4 from "@/assets/images/mobile-4.jpg";
-import mobile5 from "@/assets/images/mobile-5.jpg";
 import fa from "@/assets/images/fa.png";
 import en from "@/assets/images/en.png";
-import dark from "@/assets/images/mobile-4.jpg";
-import light from "@/assets/images/mobile-5.jpg";
-import auto from "@/assets/images/mobile-1.jpg";
 
-export const version = "0.3.5";
+export const version = "0.3.7";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},
     {id: 2, title: "button.24h", value: "24h"},
-];
-
-export const keyboardList = [
-    {id: 1, title: "button.enter", value: "enter"},
-    {id: 2, title: "button.ctrlEnter", value: "ctrlEnter"},
 ];
 
 export const languageList = [
@@ -32,10 +19,20 @@ export const languageList = [
     {id: 2, title: "button.english", value: "en", flag: en},
 ];
 
+export const chatList = [
+    {id: 1, title: "list.private", value: false},
+    {id: 2, title: "list.group", value: false},
+    {id: 3, title: "list.story", value: false},
+];
+
+export const callList = [
+    {id: 1, title: "list.voiceCall", value: false},
+    {id: 2, title: "list.videoCall", value: false},
+];
+
 export const themeList = [
-    {id: 1, title: "select.light", value: false, src: light},
-    {id: 2, title: "select.dark", value: true, src: dark},
-    {id: 3, title: "select.auto", value: "auto", src: auto},
+    {id: 1, title: "select.light", value: false, src: desktop1},
+    {id: 2, title: "select.dark", value: true, src: desktop2},
 ];
 
 export const fontSizeList = [
@@ -47,16 +44,16 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, color: {dark: "#60a5fa" , light: "#2563eb"} , image: mobile1},
-    {id: 2, color: {dark: "#fb923c" , light: "#d97706"} , image: mobile2},
-    {id: 3, color: {dark: "#e879f9" , light: "#c026d3"} , image: mobile3},
-    {id: 4, color: {dark: "#22d3ee" , light: "#0891b2"} , image: mobile4},
+    {id: 1, color: {dark: "#60a5fa", light: "#2563eb"}, image: desktop1},
+    {id: 2, color: {dark: "#fb923c", light: "#d97706"}, image: desktop2},
+    {id: 3, color: {dark: "#e879f9", light: "#c026d3"}, image: desktop3},
+    {id: 4, color: {dark: "#22d3ee", light: "#0891b2"}, image: desktop4},
 ];
 
 export const backgroundList = [
-    {id: 1, background: {desktop: desktop1, mobile: mobile1}},
-    {id: 2, background: {desktop: desktop2, mobile: mobile2}},
-    {id: 3, background: {desktop: desktop3, mobile: mobile3}},
-    {id: 4, background: {desktop: desktop4, mobile: mobile4}},
-    {id: 5, background: {desktop: desktop5, mobile: mobile5}},
+    {id: 1, background: desktop1},
+    {id: 2, background: desktop2},
+    {id: 3, background: desktop3},
+    {id: 4, background: desktop4},
+    {id: 5, background: desktop5},
 ];

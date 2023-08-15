@@ -2,8 +2,8 @@
 import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
-import {FiLogOut, FiMonitor, FiUser} from "react-icons/fi";
-import {LuBell, LuLock, LuPalette} from "react-icons/lu";
+import {FiLogOut} from "react-icons/fi";
+import {LuBell, LuMonitor, LuPalette} from "react-icons/lu";
 
 // stores
 import {setActiveSetting} from "@/stores/slices/setting.js";
@@ -11,10 +11,8 @@ import {setActiveSetting} from "@/stores/slices/setting.js";
 const linkList = [
     {id: 1, title: "menu.appearance", value: "appearance", icon: <LuPalette size={24}/>},
     {id: 2, title: "menu.notification", value: "notification", icon: <LuBell size={24}/>},
-    {id: 3, title: "menu.privacy", value: "privacy", icon: <LuLock size={24}/>},
-    {id: 4, title: "menu.profile", value: "profile", icon: <FiUser size={24}/>},
-    {id: 5, title: "menu.session", value: "session", icon: <FiMonitor size={24}/>},
-    {id: 6, title: "menu.logout", value: "logout", icon: <FiLogOut size={24}/>},
+    {id: 3, title: "menu.session", value: "session", icon: <LuMonitor size={24}/>},
+    {id: 4, title: "menu.logout", value: "logout", icon: <FiLogOut size={24}/>},
 ];
 
 const Links = () => {

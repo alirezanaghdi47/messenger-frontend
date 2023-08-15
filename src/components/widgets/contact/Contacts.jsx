@@ -1,11 +1,10 @@
 // libraries
+import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, IconButton, Stack, Typography} from "@mui/material";
+import {Badge, Box, Stack, Typography} from "@mui/material";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-import {FiMessageCircle, FiPhone, FiVideo} from "react-icons/fi";
-import {useNavigate} from "react-router-dom";
 
 const userList = [
     {_id: "1"},
@@ -18,12 +17,16 @@ const userList = [
 
 const ContactItem = ({user}) => {
 
-    const navigate = useNavigate();
+    const {t} = useTranslation();
 
     return (
         <Box
             component="li"
-            sx={{width: "100%"}}
+            sx={{
+                width: "100%",
+                cursor: "pointer",
+            }}
+            onClick={() => console.log("show user modal")}
         >
 
             <Stack
@@ -56,77 +59,30 @@ const ContactItem = ({user}) => {
                         alt="avatar"
                         width={40}
                         height={40}
-                        style={{
-                            borderRadius: "50%",
-                            cursor: "pointer",
-                        }}
+                        style={{borderRadius: "50%"}}
                     />
 
                 </Badge>
 
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "start",
-                        alignItems: "center",
-                        width: "calc(100% - 180px)",
-                        cursor: "pointer",
-                    }}
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    fontWeight='bold'
+                    className="text-truncate"
                 >
+                    علیرضا نقدی
+                </Typography>
 
-                    <Typography
-                        variant="subtitle2"
-                        color="textPrimary"
-                        // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        fontWeight='bold'
-                        className="text-truncate"
-                    >
-                        علیرضا نقدی
-                    </Typography>
-
-                </Box>
-
-                <Stack
-                    direction="row"
-                    gap={1}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                    }}
+                <Typography
+                    variant="caption"
+                    color="textPrimary"
+                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    className="text-truncate"
+                    sx={{marginLeft: "auto"}}
                 >
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/video-call");
-                        }}
-                    >
-                        <FiVideo size={20}/>
-                    </IconButton>
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/voice-call");
-                        }}
-                    >
-                        <FiPhone size={20}/>
-                    </IconButton>
-
-                    <IconButton
-                        variant="text"
-                        color="primary"
-                        onClick={() => {
-                            navigate("/chat");
-                        }}
-                    >
-                        <FiMessageCircle size={20}/>
-                    </IconButton>
-
-                </Stack>
+                    2 ماه {t("typography.ago")} {t("typography.registerDate")}
+                </Typography>
 
             </Stack>
 

@@ -2,8 +2,8 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton, Stack, Typography} from "@mui/material";
-import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
+import {Box, IconButton, Stack, Typography} from "@mui/material";
+import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // stores
 import {removeActiveSetting} from "@/stores/slices/setting.js";
@@ -39,20 +39,24 @@ const Header = () => {
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>
 
-            <Typography
-                variant="subtitle1"
-                color="textPrimary"
-                fontWeight='bold'
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%"
+                }}
             >
-                {t(`typography.${activeSetting}`)}
-            </Typography>
 
-            <IconButton
-                variant="text"
-                color="ternary"
-            >
-                <FiLogOut size={20}/>
-            </IconButton>
+                <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    fontWeight='bold'
+                >
+                    {t(`typography.${activeSetting}`)}
+                </Typography>
+
+            </Box>
 
         </Stack>
     )

@@ -47,7 +47,7 @@ const Language = () => {
                 >
 
                     <Typography
-                        variant="subtitle2"
+                        variant="subtitle1"
                         color="textPrimary"
                         fontWeight='bold'
                     >
@@ -74,8 +74,6 @@ const Language = () => {
                                 key={languageItem.id}
                                 variant={languageItem.value === language ? "contained" : "text"}
                                 color={languageItem.value === language ? "primary" : "ternary"}
-                                size="large"
-                                fullWidth
                                 startIcon={
                                     <LazyLoadImage
                                         src={languageItem.flag}

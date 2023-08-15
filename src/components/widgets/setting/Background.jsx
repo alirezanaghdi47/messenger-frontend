@@ -3,11 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Container , Box, Stack, Typography} from "@mui/material";
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {EffectCoverflow} from "swiper/modules";
-import 'swiper/css';
-import 'swiper/css/effect-cards';
+import {Container, Box, Stack, Typography, Grid} from "@mui/material";
 
 // stores
 import {setBackground} from "@/stores/slices/profile.js";
@@ -18,10 +14,9 @@ import {backgroundList} from "@/utils/constants.js";
 const Background = () => {
 
     const dispatch = useDispatch();
-    const {background} = useSelector(state => state.profile.setting);
+    const {background , darkMode} = useSelector(state => state.profile.setting);
     const {t} = useTranslation();
     const isDesktop = useMediaQuery('(max-width: 992px)');
-    const isTablet = useMediaQuery('(min-width: 768px)');
 
     return (
         <Container
@@ -52,7 +47,7 @@ const Background = () => {
                 >
 
                     <Typography
-                        variant="subtitle2"
+                        variant="subtitle1"
                         color="textPrimary"
                         fontWeight='bold'
                     >
@@ -61,37 +56,43 @@ const Background = () => {
 
                 </Box>
 
-                <Swiper
-                    dir="ltr"
-                    modules={[EffectCoverflow]}
-                    effect="coverflow"
-                    coverflowEffect={{
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 16,
-                        modifier: 16,
-                        slideShadows: false
+                <Stack
+                    component="ul"
+                    direction="row"
+                    flexWrap="wrap"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        width: "100%"
                     }}
-                    grabCursor={true}
-                    centeredSlides={true}
-                    slidesPerView="auto"
-                    spaceBetween={16}
-                    allowTouchMove={true}
-                    draggable={true}
-                    loop={true}
-                    initialSlide={backgroundList.find(backgroundItem => backgroundItem.background.desktop === background.desktop).id - 1}
-                    onSlideChange={(swiper) => dispatch(setBackground(swiper.activeIndex || 0))}
                 >
-
                     {
-                        backgroundList.map(backgroundItem =>
-                            <SwiperSlide
+                        backgroundList.map((backgroundItem , index) =>
+                            <Box
+                                component="li"
                                 key={backgroundItem.id}
-                                style={{width: isTablet ? "100%" : "50%"}}
+                                sx={{
+                                    position: "relative",
+                                    width: "25%",
+                                    minWidth: 200,
+                                    borderRadius: "50%",
+                                    cursor:"pointer",
+                                    "&::after":{
+                                        content: backgroundItem.background === background ? "'x'" : '""',
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50% , -50%)",
+                                        color: darkMode ? "ternary.main" : "secondary.main",
+                                    }
+                                }}
+                                onClick={() => dispatch(setBackground(index))}
                             >
                                 <LazyLoadImage
                                     alt={backgroundItem.id}
-                                    src={isTablet ? backgroundItem.background.desktop : backgroundItem.background.mobile}
+                                    src={backgroundItem.background}
                                     width="100%"
                                     height="100%"
                                     effect="fade"
@@ -100,11 +101,11 @@ const Background = () => {
                                         objectFit: "cover"
                                     }}
                                 />
-                            </SwiperSlide>
+                            </Box>
                         )
                     }
 
-                </Swiper>
+                </Stack>
 
             </Stack>
 

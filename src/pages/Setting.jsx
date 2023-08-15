@@ -10,13 +10,13 @@ import Version from "@/components/widgets/setting/Version.jsx";
 import Links from "@/components/widgets/setting/Links.jsx";
 import Appearance from "@/components/widgets/setting/Appearance.jsx";
 import Header from "@/components/widgets/setting/Header.jsx";
-
-// stores
-import {removeActiveSetting} from "@/stores/slices/setting.js";
-import Profile from "@/components/widgets/setting/Profile.jsx";
 import Notification from "@/components/widgets/setting/Notification.jsx";
 import Session from "@/components/widgets/setting/Session.jsx";
 import UserInfo from "@/components/widgets/setting/UserInfo.jsx";
+import Profile from "@/components/widgets/setting/Profile.jsx";
+
+// stores
+import {removeActiveSetting} from "@/stores/slices/setting.js";
 
 const Sidebar = () => {
 

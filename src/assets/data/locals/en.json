@@ -38,15 +38,21 @@
       "copyRight": "Designed and developed by Alireza Naghdi",
       "profile": "Profile",
       "chat": "Chat",
-      "session": "Sessions",
+      "call": "Call",
       "appearance": "Appearance",
       "notification": "Notification",
-      "thisDevice": "This device",
+      "thisDevice": "Current device",
       "otherDevices": "Other devices",
       "dateTime": "Date & time",
       "userName": "User name",
       "phoneNumber": "Phone number",
-      "biography": "Biography"
+      "biography": "Biography",
+      "blockedUsers": "Blocked users",
+      "lastSeenUsers": "Last seen or online",
+      "lock": "Lock",
+      "session": "Sessions",
+      "registerDate": "Registered",
+      "ago": "Ago"
     },
     "select": {
       "dark": "Dark",
@@ -72,7 +78,7 @@
       "contact": "Contact",
       "setting": "Setting",
       "all": "All",
-      "user": "User",
+      "private": "Private",
       "group": "Group",
       "vibrate": "Vibrate",
       "call": "Call"
@@ -100,8 +106,8 @@
       "chat": "Chat",
       "session": "Sessions",
       "appearance": "Appearance",
-      "notification": "Notification",
-      "privacy": "Privacy",
+      "notification": "Notification & sound",
+      "privacy": "Privacy & security",
       "logout": "Logout",
       "empty": "Empty"
     },
@@ -116,7 +122,13 @@
       "cancel": "Cancel",
       "deleteAll": "Delete all",
       "12h": "12 hour",
-      "24h": "24 hour"
+      "24h": "24 hour",
+      "count": "Count",
+      "contacts": "Contacts",
+      "all": "All",
+      "nothing": "Nothing",
+      "lock": "Lock",
+      "unLock": "Unlock"
     }
   }
 }
