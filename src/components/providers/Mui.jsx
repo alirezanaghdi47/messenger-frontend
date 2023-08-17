@@ -20,7 +20,7 @@ const emptyCache = createCache({
 
 const Mui = ({children}) => {
 
-    const {language, darkMode, color} = useSelector(state => state.profile.setting);
+    const {language, darkMode, color} = useSelector(state => state.setting.appearance);
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";

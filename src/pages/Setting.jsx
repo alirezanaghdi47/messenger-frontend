@@ -6,6 +6,7 @@ import {Stack} from "@mui/material";
 
 // components
 import Primary from "@/components/layouts/Primary.jsx";
+import Appbar from "@/components/widgets/setting/Appbar.jsx";
 import Version from "@/components/widgets/setting/Version.jsx";
 import Links from "@/components/widgets/setting/Links.jsx";
 import Appearance from "@/components/widgets/setting/Appearance.jsx";
@@ -20,10 +21,9 @@ import {removeActiveSetting} from "@/stores/slices/setting.js";
 const Sidebar = () => {
 
     const {activeSetting} = useSelector(state => state.setting);
-    const isDesktop = useMediaQuery('(max-width: 992px)');
-    const isMobile = useMediaQuery('(max-width: 576px)');
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
-    return ((!activeSetting && isDesktop) || !isDesktop) && (
+    return ((!activeSetting && isTablet) || !isTablet) && (
         <Stack
             component="aside"
             direction="column"
@@ -32,18 +32,20 @@ const Sidebar = () => {
                 position: 'absolute',
                 zIndex: 200,
                 top: 0,
-                left: isMobile ? 0 : 100,
+                left: 0,
                 bottom: 0,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: isMobile ? "100%" : isDesktop ? "calc(100% - 100px)" : 360,
-                height: isMobile ? "calc(100dvh - 80px)" : "100dvh",
+                width: isTablet ? "100%" : 360,
+                height: "100dvh",
                 bgcolor: "background.paper",
                 boxShadow: 1,
                 padding: 2
             }}
         >
+
+            <Appbar/>
 
             <UserInfo/>
 
@@ -58,7 +60,7 @@ const Sidebar = () => {
 const Main = () => {
 
     const {activeSetting} = useSelector(state => state.setting);
-    const isDesktop = useMediaQuery('(max-width: 992px)');
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return activeSetting && (
         <Stack
@@ -69,11 +71,11 @@ const Main = () => {
                 zIndex: 200,
                 top: 0,
                 bottom: 0,
-                left: isDesktop ? 0 : 460,
+                left: isTablet ? 0 : 360,
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "center",
-                width: isDesktop ? "100%" : "calc(100% - 460px)",
+                width: isTablet ? "100%" : "calc(100% - 360px)",
                 height: "100dvh",
             }}
         >

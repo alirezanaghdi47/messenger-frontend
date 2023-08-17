@@ -5,7 +5,7 @@ import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble, BiCheck} from "react-icons/bi";
 import {FaPlay} from "react-icons/fa";
-import {FiCornerUpRight} from "react-icons/fi";
+import {FiCornerUpRight, FiPhone, FiVideo} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
@@ -16,7 +16,7 @@ import voice from "@/assets/other/lorem-ipsum.mp3";
 
 // utils
 import {fontSizeList} from "@/utils/constants.js";
-import {convertByte} from "@/utils/functions.js";
+import {convertByte, convertTimestamp} from "@/utils/functions.js";
 
 const chatList = [
     {
@@ -41,11 +41,15 @@ const chatList = [
     {id: 10, type: "voice", content: voice, me: true},
     {id: 11, type: "location", content: [35, 51], me: true},
     {id: 12, type: "location", content: [35, 51], me: false},
+    {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
+    {id: 14, type: "log", content: {time: 90 * 1000, status: "voiceCall"}, me: false},
+    {id: 15, type: "log", content: {time: 50 * 1000, status: "voiceCall"}, me: false},
+    {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
 ];
 
 const TextMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.profile.setting);
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -123,7 +127,7 @@ const TextMessage = ({chat}) => {
 
 const ImageMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.profile.setting);
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     return (
@@ -201,7 +205,7 @@ const ImageMessage = ({chat}) => {
 
 const FileMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.profile.setting);
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     return (
@@ -295,7 +299,7 @@ const FileMessage = ({chat}) => {
 
 const VoiceMessage = ({chat}) => {
 
-    const {fontSize , language} = useSelector(state => state.profile.setting);
+    const {fontSize, language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     return (
@@ -390,7 +394,7 @@ const VoiceMessage = ({chat}) => {
 
 const VideoMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.profile.setting);
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     return (
@@ -501,7 +505,7 @@ const VideoMessage = ({chat}) => {
 
 const LocationMessage = ({chat}) => {
 
-    const {fontSize} = useSelector(state => state.profile.setting);
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     return (
@@ -524,6 +528,111 @@ const LocationMessage = ({chat}) => {
                 height="100%"
                 style={{borderRadius: 8}}
             />
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+const LogMessage = ({chat}) => {
+
+    const {fontSize} = useSelector(state => state.setting.appearance);
+    const {t} = useTranslation();
+    const theme = useTheme();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 2,
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: chat.me ? "primary.main" : "background.paper",
+                padding: 1,
+            }}
+        >
+
+            <Stack
+                direction="row"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center"
+                }}
+            >
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: 32,
+                        height: 32,
+                        color: chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
+                        borderRadius: 1
+                    }}
+                >
+
+                    {(chat.content.status === "voiceCall") && <FiPhone size={20}/>}
+                    {(chat.content.status === "videoCall") && <FiVideo size={20}/>}
+
+                </Box>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                    }}
+                >
+
+                    <Typography
+                        variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                        color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        {t(`typography.${chat.content.status}`)}
+                    </Typography>
+
+                    {
+                        chat.content.time > 0 && (
+                            <Typography
+                                variant="caption"
+                                color={chat.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                            >
+                                {convertTimestamp(chat.content.time)}
+                            </Typography>
+                        )
+                    }
+
+                </Stack>
+
+            </Stack>
 
             <Stack
                 direction="row"
@@ -596,6 +705,7 @@ const MessageItem = ({chat}) => {
                 {chat.type === "voice" && <VoiceMessage chat={chat}/>}
                 {chat.type === "video" && <VideoMessage chat={chat}/>}
                 {chat.type === "location" && <LocationMessage chat={chat}/>}
+                {chat.type === "log" && <LogMessage chat={chat}/>}
 
             </Stack>
 

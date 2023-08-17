@@ -6,8 +6,8 @@ import {LuMic, LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "@/components/modules/TextInput.jsx";
-import Attachment from "@/components/widgets/chat/Attachment.jsx";
-import Emoji from "@/components/widgets/chat/Emoji.jsx";
+import Attachment from "@/components/widgets/home/Attachment.jsx";
+import Emoji from "@/components/widgets/home/Emoji.jsx";
 
 const Footer = () => {
 
@@ -28,6 +28,7 @@ const Footer = () => {
             direction="row"
             gap={1}
             sx={{
+                zIndex: 100,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",

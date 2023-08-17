@@ -4,7 +4,8 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
-import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic} from "react-icons/lu";
+import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
+import {FiPhone, FiVideo} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
@@ -17,12 +18,16 @@ import voice from "@/assets/other/lorem-ipsum.mp3";
 import {setActiveChat} from "@/stores/slices/chat.js";
 
 const userList = [
-    {_id: "1", type: "text", content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد. معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند که صفحه طراحی یا صفحه بندی شده بعد از اینکه متن در آن قرار گیرد چگونه به نظر می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته شده‌است. از آنجایی که طراحان عموما نویسنده متن نیستند و وظیفه رعایت حق تکثیر متون را ندارند و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند."},
+    {_id: "1", type: "text", content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود."},
     {_id: "2", type: "image", content: image},
     {_id: "3", type: "file", content: file},
     {_id: "4", type: "video", content: video},
     {_id: "5", type: "voice", content: voice},
     {_id: "6", type: "location", content: [35, 51]},
+    {_id: "7", type: "log", status: "voiceCall"},
+    {_id: "8", type: "log", status: "voiceCall"},
+    {_id: "9", type: "log", status: "videoCall"},
+    {_id: "10", type: "log", status: "videoCall"},
 ];
 
 const ContactItem = ({user}) => {
@@ -107,42 +112,32 @@ const ContactItem = ({user}) => {
                         }}
                     >
 
+                        {user.type === "text" && <LuText size={16}/>}
                         {user.type === "image" && <LuImage size={16}/>}
                         {user.type === "video" && <LuFilm size={16}/>}
                         {user.type === "voice" && <LuMusic size={16}/>}
                         {user.type === "file" && <LuFile size={16}/>}
                         {user.type === "location" && <LuMapPin size={16}/>}
+                        {user.type === "log" && user.status === "voiceCall" && <FiPhone size={16}/>}
+                        {user.type === "log" && user.status === "videoCall" && <FiVideo size={16}/>}
 
-                        {
-                            user.type !== "text" && (
-                                <Typography
-                                    variant="caption"
-                                    color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                                    sx={{
-                                        width: "100%",
-                                        overflow: "hidden",
-                                    }}
-                                >
-                                    {user.type === "image" && t("typography.image")}
-                                    {user.type === "video" && t("typography.video")}
-                                    {user.type === "voice" && t("typography.voice")}
-                                    {user.type === "file" && t("typography.file")}
-                                    {user.type === "location" && t("typography.location")}
-                                </Typography>
-                            )
-                        }
-
-                        {
-                            user.type === "text" && (
-                                <Typography
-                                    variant="caption"
-                                    color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                                    className="text-truncate"
-                                >
-                                    {user.content}
-                                </Typography>
-                            )
-                        }
+                        <Typography
+                            variant="caption"
+                            color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            sx={{
+                                width: "100%",
+                                overflow: "hidden",
+                            }}
+                        >
+                            {user.type === "text" && t("typography.text")}
+                            {user.type === "image" && t("typography.image")}
+                            {user.type === "video" && t("typography.video")}
+                            {user.type === "voice" && t("typography.voice")}
+                            {user.type === "file" && t("typography.file")}
+                            {user.type === "location" && t("typography.location")}
+                            {user.type === "log" && user.status === "voiceCall" && t("typography.voiceCall")}
+                            {user.type === "log" && user.status === "videoCall" && t("typography.videoCall")}
+                        </Typography>
 
                     </Stack>
 
@@ -202,7 +197,7 @@ const Contacts = () => {
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
-                height: "calc(100vh - 150px)",
+                height: "100%",
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

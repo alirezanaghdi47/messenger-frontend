@@ -1,22 +1,24 @@
 // libraries
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Stack, Typography} from "@mui/material";
-import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
+import {Box, IconButton, Stack, Typography} from "@mui/material";
+import {FiChevronRight, FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
 
 const previewList = [
-    {id: 1 ,title: "typography.userName", value: "alirezanaghdi47" , icon: <FiUser size={24}/>},
-    {id: 2 ,title: "typography.phoneNumber", value: "09195610753" , icon: <FiPhone size={24}/>},
-    {id: 3 ,title: "typography.biography", value: "Front End Developer" , icon: <FiInfo size={24}/>},
+    {id: 1 ,title: "typography.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},
+    {id: 2 ,title: "typography.phoneNumber", value: "09195610753" , icon: <FiPhone size={20}/>},
+    {id: 3 ,title: "typography.biography", value: "Front End Developer" , icon: <FiInfo size={20}/>},
 ];
 
 const UserInfo = () => {
 
-    const {darkMode} = useSelector(state => state.profile.setting);
+    const navigate = useNavigate();
+    const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
     return (
@@ -27,7 +29,7 @@ const UserInfo = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width: "100%"
+                width: "100%",
             }}
         >
 
@@ -35,7 +37,8 @@ const UserInfo = () => {
                 sx={{
                     position: "relative",
                     width: "calc(100% + 32px)",
-                    marginTop: "-16px"
+                    height: 250,
+                    marginTop: "-16px",
                 }}
             >
 
@@ -44,7 +47,7 @@ const UserInfo = () => {
                     alt="avatar"
                     style={{
                         width: "100%",
-                        maxHeight: "250px",
+                        height: "100%",
                         objectFit: "cover",
                         objectPosition: "center",
                     }}
@@ -55,6 +58,7 @@ const UserInfo = () => {
                     gap={1}
                     sx={{
                         position: 'absolute',
+                        zIndex: 50,
                         bottom: 0,
                         left: 0,
                         display: "flex",
@@ -62,7 +66,7 @@ const UserInfo = () => {
                         alignItems: "start",
                         width: "100%",
                         height: "100%",
-                        background: "linear-gradient(180deg, rgba(32, 32, 32, 0) 0%, #000 100%)",
+                        background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%)",
                         padding: 2
                     }}
                 >
@@ -139,7 +143,6 @@ const UserInfo = () => {
                                 <Typography
                                     variant="caption"
                                     color="textSecondary"
-                                    fontWeight='bold'
                                     noWrap
                                 >
                                     {t(previewItem.title)}

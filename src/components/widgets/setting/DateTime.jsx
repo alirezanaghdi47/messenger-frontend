@@ -1,11 +1,10 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Box, Button, Container, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Typography} from "@mui/material";
 
 // stores
-import {setDateFormat} from "@/stores/slices/profile.js";
+import {setDateFormat} from "@/stores/slices/setting.js";
 
 // utils
 import {dateTimeList} from "@/utils/constants.js";
@@ -13,78 +12,69 @@ import {dateTimeList} from "@/utils/constants.js";
 const DateTime = () => {
 
     const dispatch = useDispatch();
-    const {dateFormat} = useSelector(state => state.profile.setting);
+    const {dateFormat} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
-    const isDesktop = useMediaQuery('(max-width: 992px)');
 
     return (
-        <Container
-            maxWidth="md"
-            disableGutters
-            sx={{marginLeft: isDesktop ? "auto" : 0}}
+        <Stack
+            direction="column"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "start",
+                width: "100%",
+            }}
         >
 
-            <Stack
-                direction="column"
-                gap={2}
+            <Box
                 sx={{
                     display: "flex",
+                    gap: 2,
                     justifyContent: "start",
-                    alignItems: "center",
+                    alignItems: 'center',
                     width: "100%",
                 }}
             >
 
-                <Box
-                    sx={{
-                        display: "flex",
-                        gap: 2,
-                        justifyContent: "start",
-                        alignItems: 'center',
-                        width: "100%",
-                    }}
+                <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    fontWeight='bold'
                 >
+                    {t("typography.dateTime")}
+                </Typography>
 
-                    <Typography
-                        variant="subtitle1"
-                        color="textPrimary"
-                        fontWeight='bold'
-                    >
-                        {t("typography.dateTime")}
-                    </Typography>
+            </Box>
 
-                </Box>
+            <Stack
+                component="ul"
+                direction={"row"}
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: 'center',
+                    width: "100%",
+                }}
+            >
 
-                <Stack
-                    component="ul"
-                    direction={"row"}
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "start",
-                        alignItems: 'center',
-                        width: "100%",
-                    }}
-                >
-
-                    {
-                        dateTimeList.map(dateTimeItem =>
-                            <Button
-                                key={dateTimeItem.id}
-                                variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
-                                color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
-                                onClick={() => dispatch(setDateFormat(dateTimeItem.value))}
-                            >
-                                {t(dateTimeItem.title)}
-                            </Button>
-                        )
-                    }
-
-                </Stack>
+                {
+                    dateTimeList.map(dateTimeItem =>
+                        <Button
+                            key={dateTimeItem.id}
+                            variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
+                            color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
+                            onClick={() => dispatch(setDateFormat(dateTimeItem.value))}
+                        >
+                            {t(dateTimeItem.title)}
+                        </Button>
+                    )
+                }
 
             </Stack>
 
-        </Container>
+        </Stack>
     )
 }
 

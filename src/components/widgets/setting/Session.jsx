@@ -154,14 +154,13 @@ const Session = () => {
     return (
         <Stack
             direction="column"
-            gap={2}
+            gap={4}
             sx={{
                 display: "flex",
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                height: "100%",
-                padding: 4,
+                padding: 2,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

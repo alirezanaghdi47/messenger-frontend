@@ -20,7 +20,7 @@ const Appearance = () => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                padding: 4,
+                padding: 2,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

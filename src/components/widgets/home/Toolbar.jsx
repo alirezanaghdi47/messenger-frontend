@@ -10,7 +10,7 @@ import {
     Menu,
     Box
 } from "@mui/material";
-import {FiBellOff, FiMoreVertical, FiTrash, FiVideo} from "react-icons/fi";
+import {FiMoreVertical, FiTrash, FiBellOff , FiPhone , FiVideo} from "react-icons/fi";
 
 const MobileToolbar = () => {
 
@@ -47,6 +47,29 @@ const MobileToolbar = () => {
                         gap: 1,
                         justifyContent: "start",
                         alignItems: "center",
+                        color: "ternary.main"
+                    }}
+                >
+
+                    <FiPhone size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.voiceCall")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                        color: "ternary.main"
                     }}
                 >
 
@@ -90,6 +113,7 @@ const MobileToolbar = () => {
                         gap: 1,
                         justifyContent: "start",
                         alignItems: "center",
+                        color: "ternary.main"
                     }}
                 >
 
@@ -127,6 +151,17 @@ const DesktopToolbar = () => {
                 alignItems: 'center',
             }}
         >
+
+            <Box component="li">
+
+                <IconButton
+                    variant="text"
+                    color="ternary"
+                >
+                    <FiPhone size={20}/>
+                </IconButton>
+
+            </Box>
 
             <Box component="li">
 
@@ -191,6 +226,7 @@ const DesktopToolbar = () => {
                             gap: 1,
                             justifyContent: "start",
                             alignItems: "center",
+                            color: "ternary.main"
                         }}
                     >
 

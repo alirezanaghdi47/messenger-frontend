@@ -35,7 +35,7 @@ const Profile = () => {
             spacing={4}
             sx={{
                 width: "100%",
-                padding: 4,
+                padding: 2,
                 overflowY: "auto",
             }}
             className="remove-scrollbar"

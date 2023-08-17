@@ -41,6 +41,7 @@
     "react-spinners": "^0.13.8",
     "redux-persist": "^6.0.0",
     "redux-persist-transform-encrypt": "^5.0.0",
+    "redux-persist-transform-filter": "^0.0.22",
     "redux-thunk": "^2.4.2",
     "stylis": "^4.3.0",
     "stylis-plugin-rtl": "^2.1.1",

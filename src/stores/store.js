@@ -5,33 +5,27 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
+import { createFilter } from "redux-persist-transform-filter";
 
 // stores
 import chatReducer from "@/stores/slices/chat.js";
-import storyReducer from "@/stores/slices/story.js";
-import voiceCallReducer from "@/stores/slices/voiceCall.js";
-import videoCallReducer from "@/stores/slices/videoCall.js";
-import contactReducer from "@/stores/slices/contact.js";
 import settingReducer from "@/stores/slices/setting.js";
-import profileReducer from "@/stores/slices/profile.js";
 
 const reducers = combineReducers({
     chat: chatReducer,
-    story: storyReducer,
-    voiceCall: voiceCallReducer,
-    videoCall: videoCallReducer,
-    contact: contactReducer,
     setting: settingReducer,
-    profile: profileReducer,
 });
+
+const settingSubsetFilter = createFilter("setting", ["profile" , "appearance"]);
 
 const persistConfig = {
     key: 'messenger',
     version: 1,
     storage: storageSession,
-    whitelist: ['profile'],
+    whitelist: ['setting'],
     stateReconciler: autoMergeLevel2,
     transforms: [
+        settingSubsetFilter,
         encryptTransform({
             secretKey: import.meta.env.VITE_REDUX_PERSIST_SECRET_KEY
         })

@@ -5,17 +5,17 @@ import {IconButton, Stack} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import UserInfo from "@/components/widgets/videoCall/UserInfo.jsx";
-import Toolbar from "@/components/widgets/videoCall/Toolbar.jsx";
+import UserInfo from "@/components/widgets/home/UserInfo.jsx";
+import Toolbar from "@/components/widgets/home/Toolbar.jsx";
 
 // stores
-import {removeActiveCall} from "@/stores/slices/videoCall.js";
+import {removeActiveChat} from "@/stores/slices/chat.js";
 
 const Header = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.profile.setting);
-    const isDesktop = useMediaQuery('(max-width: 992px)');
+    const {language} = useSelector(state => state.setting.appearance);
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Stack
@@ -35,11 +35,11 @@ const Header = () => {
         >
 
             {
-                isDesktop && (
+                isTablet && (
                     <IconButton
                         variant="text"
                         color="ternary"
-                        onClick={() => dispatch(removeActiveCall())}
+                        onClick={() => dispatch(removeActiveChat())}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
                     </IconButton>

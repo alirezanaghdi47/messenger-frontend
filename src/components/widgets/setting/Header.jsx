@@ -11,12 +11,12 @@ import {removeActiveSetting} from "@/stores/slices/setting.js";
 const Header = () => {
 
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.profile.setting);
+    const {language} = useSelector(state => state.setting.appearance);
     const {activeSetting} = useSelector(state => state.setting);
     const {t} = useTranslation();
-    const isDesktop = useMediaQuery('(max-width: 992px)');
+    const isTablet = useMediaQuery('(max-width: 768px)');
     
-    return isDesktop && (
+    return isTablet && (
         <Stack
             direction="row"
             sx={{

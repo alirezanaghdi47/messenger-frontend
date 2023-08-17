@@ -10,7 +10,7 @@ import en from "@/assets/data/locals/en.json";
 
 const I18n = ({children}) => {
 
-    const {language} = useSelector(state => state.profile.setting);
+    const {language} = useSelector(state => state.setting.appearance);
 
     useEffect(() => {
         document.documentElement.lang = language;

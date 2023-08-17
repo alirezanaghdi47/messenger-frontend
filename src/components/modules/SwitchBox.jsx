@@ -14,7 +14,7 @@ const SwitchBox = ({
                        variant = "outlined"
                    }) => {
 
-    const {language} = useSelector(state => state.profile.setting);
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <FormControl
