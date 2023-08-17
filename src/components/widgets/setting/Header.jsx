@@ -20,6 +20,7 @@ const Header = () => {
         <Stack
             direction="row"
             sx={{
+                zIndex: 100,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",

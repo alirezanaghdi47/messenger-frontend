@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
-import {FiPlus, FiUsers} from "react-icons/fi";
+import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle} from "react-icons/lu";
 
 const ActionButton = () => {
@@ -62,28 +62,6 @@ const ActionButton = () => {
                         fontWeight='bold'
                     >
                         {t("menu.createChat")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={() => console.log("create group")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiUsers size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.createGroup")}
                     </Typography>
 
                 </MenuItem>

@@ -1,21 +1,27 @@
 // libraries
+import {useMediaQuery} from "@react-hooks-library/core";
 import {Container, Stack} from "@mui/material";
 
 const Secondary = ({children}) => {
 
+    const isMobile = useMediaQuery('(max-width: 576px)');
+
     return (
-        <Container maxWidth="sm">
+        <Container
+            maxWidth="xl"
+            disableGutters
+        >
 
             <Stack
-                direction="column"
-                gap={4}
+                direction={isMobile ? "column" : "row"}
                 sx={{
-                    display: 'flex',
+                    position: "relative",
+                    display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
-                    minHeight: "100dvh",
                     height: "100%",
+                    minHeight: "100dvh",
                 }}
             >
 

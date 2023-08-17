@@ -13,7 +13,7 @@ const sessions = [
     {id: 3, platform: "mobile", browser: 'chrome 112', country: "turkey", city: "stanbul", createDate: "1400/1/1 | 11:11"},
 ];
 
-const SessionItem = ({session}) => {
+const SessionItem = ({sessionItem}) => {
 
     return (
         <Stack
@@ -39,7 +39,7 @@ const SessionItem = ({session}) => {
                     borderRadius: 1,
                 }}
             >
-                {session.platform === "mobile" ? <LuSmartphone size={24}/> : <LuMonitor size={24}/>}
+                {sessionItem.platform === "mobile" ? <LuSmartphone size={24}/> : <LuMonitor size={24}/>}
             </Box>
 
             <Stack
@@ -74,7 +74,7 @@ const SessionItem = ({session}) => {
                         variant="body2"
                         color="textPrimary"
                     >
-                        {session.browser}
+                        {sessionItem.browser}
                     </Typography>
 
                 </Stack>
@@ -101,7 +101,7 @@ const SessionItem = ({session}) => {
                         variant="body2"
                         color="textPrimary"
                     >
-                        {session.city} , {session.country}
+                        {sessionItem.city} , {sessionItem.country}
                     </Typography>
 
                 </Stack>
@@ -113,8 +113,35 @@ const SessionItem = ({session}) => {
                 color="textPrimary"
                 sx={{marginLeft: "auto"}}
             >
-                1400/1/1 | 14:00
+                {sessionItem.createDate}
             </Typography>
+
+        </Stack>
+    )
+}
+
+const SessionList = ({sessionList}) => {
+
+    return(
+        <Stack
+            direction="column"
+            gap={4}
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%"
+            }}
+        >
+
+            {
+                sessionList?.map(sessionItem =>
+                    <SessionItem
+                        key={sessionItem.id}
+                        sessionItem={sessionItem}
+                    />
+                )
+            }
 
         </Stack>
     )
@@ -148,7 +175,7 @@ const Session = () => {
                 {t("typography.thisDevice")}
             </Typography>
 
-            <SessionItem session={sessions[0]}/>
+            <SessionItem sessionItem={sessions[0]}/>
 
             <Typography
                 variant="subtitle1"
@@ -159,27 +186,7 @@ const Session = () => {
                 {t("typography.otherDevices")}
             </Typography>
 
-            <Stack
-                direction="column"
-                gap={4}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%"
-                }}
-            >
-
-                {
-                    sessions.slice(1,3).map(sessionItem =>
-                        <SessionItem
-                            key={sessionItem.id}
-                            session={sessionItem}
-                        />
-                    )
-                }
-
-            </Stack>
+            <SessionList sessionList={sessions.slice(1,3)}/>
 
         </Stack>
     )

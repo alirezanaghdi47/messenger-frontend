@@ -1,15 +1,15 @@
 // components
-import Secondary from "@/components/layouts/Secondary.jsx";
+import Ternary from "@/components/layouts/Ternary.jsx";
 import Client from "@/components/widgets/error/Client.jsx";
 
 const NotFound = () => {
 
     return (
-        <Secondary>
+        <Ternary>
 
             <Client/>
 
-        </Secondary>
+        </Ternary>
     )
 }
 

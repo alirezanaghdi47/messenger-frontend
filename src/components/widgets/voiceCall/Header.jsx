@@ -22,6 +22,7 @@ const Header = () => {
             direction="row"
             gap={2}
             sx={{
+                zIndex: 100,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",

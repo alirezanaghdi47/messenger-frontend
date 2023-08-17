@@ -1,14 +1,14 @@
 // libraries
-import {useEffect} from "react";
+import {useEffect, useMemo} from "react";
 import {useSelector} from "react-redux";
-import {initReactI18next} from "react-i18next";
+import {I18nextProvider, initReactI18next} from "react-i18next";
 import i18n from "i18next";
 
 // assets
 import fa from "@/assets/data/locals/fa.json";
 import en from "@/assets/data/locals/en.json";
 
-const I18n = () => {
+const I18n = ({children}) => {
 
     const {language} = useSelector(state => state.profile.setting);
 
@@ -16,17 +16,25 @@ const I18n = () => {
         document.documentElement.lang = language;
     }, [language]);
 
-    i18n
-        .use(initReactI18next)
-        .init({
-            debug: false,
-            resources: {en, fa},
-            lng: language,
-            fallbackLng: "fa",
-            interpolation: {
-                escapeValue: false
-            }
-        });
+    const customizedI18n = useMemo(() => {
+        i18n
+            .use(initReactI18next)
+            .init({
+                debug: false,
+                resources: {en, fa},
+                lng: language,
+                fallbackLng: "fa",
+                interpolation: {
+                    escapeValue: false
+                }
+            });
+    } , [language]);
+
+    return(
+        <I18nextProvider i18n={customizedI18n}>
+            {children}
+        </I18nextProvider>
+    )
 
 }
 

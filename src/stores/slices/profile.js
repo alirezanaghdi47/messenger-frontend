@@ -29,10 +29,7 @@ const initialState = {
             light: colorList[0].color.light,
             dark: colorList[0].color.dark,
         },
-        background: {
-            desktop: backgroundList[0].background,
-            mobile: backgroundList[0].background
-        },
+        background: backgroundList[0].background,
     }
 }
 

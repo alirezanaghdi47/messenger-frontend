@@ -11,7 +11,6 @@ import Contacts from "@/components/widgets/chat/Contacts.jsx";
 import Footer from "@/components/widgets/chat/Footer.jsx";
 import Messages from "@/components/widgets/chat/Messages.jsx";
 import SearchBar from "@/components/widgets/chat/Searchbar.jsx";
-import Filter from "@/components/widgets/chat/Filter.jsx";
 import ActionButton from "@/components/widgets/chat/ActionButton.jsx";
 import ScrollToBottom from "@/components/widgets/chat/ScrollToBottom.jsx";
 
@@ -48,8 +47,6 @@ const Sidebar = () => {
 
             <SearchBar/>
 
-            <Filter/>
-
             <Contacts/>
 
             <ActionButton/>
@@ -79,7 +76,7 @@ const Main = () => {
                 alignItems: "center",
                 width: isDesktop ? "100%" : "calc(100% - 460px)",
                 height: "100dvh",
-                backgroundImage: isDesktop ? `url(${background.mobile})` : `url(${background.desktop})`,
+                backgroundImage: `url(${background})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
             }}

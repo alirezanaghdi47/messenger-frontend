@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -9,13 +10,16 @@ import ActionButton from "@/components/widgets/story/ActionButton.jsx";
 import Contacts from "@/components/widgets/story/Contacts.jsx";
 import SearchBar from "@/components/widgets/story/Searchbar.jsx";
 
+// stores
+import {removeActiveStory} from "@/stores/slices/story.js";
+
 const Sidebar = () => {
 
-    const {activeChat} = useSelector(state => state.chat);
+    const {activeStory} = useSelector(state => state.story);
     const isDesktop = useMediaQuery('(max-width: 992px)');
     const isMobile = useMediaQuery('(max-width: 576px)');
 
-    return ((!activeChat && isDesktop) || !isDesktop) && (
+    return ((!activeStory && isDesktop) || !isDesktop) && (
         <Stack
             component="aside"
             direction="column"
@@ -49,10 +53,10 @@ const Sidebar = () => {
 
 const Main = () => {
 
-    const {activeChat} = useSelector(state => state.chat);
+    const {activeStory} = useSelector(state => state.story);
     const isDesktop = useMediaQuery('(max-width: 992px)');
 
-    return activeChat && (
+    return activeStory && (
         <Stack
             component="main"
             direction="column"
@@ -75,6 +79,12 @@ const Main = () => {
 }
 
 const Story = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => dispatch(removeActiveStory());
+    }, []);
 
     return (
         <Primary>

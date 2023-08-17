@@ -10,7 +10,7 @@ import {
     Menu,
     Box
 } from "@mui/material";
-import {FiMoreVertical, FiTrash, FiVideo} from "react-icons/fi";
+import {FiBellOff, FiMoreVertical, FiTrash, FiVideo} from "react-icons/fi";
 
 const MobileToolbar = () => {
 
@@ -58,6 +58,28 @@ const MobileToolbar = () => {
                         fontWeight='bold'
                     >
                         {t("menu.videoCall")}
+                    </Typography>
+
+                </MenuItem>
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                        color: "ternary.main"
+                    }}
+                >
+
+                    <FiBellOff size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.mute")}
                     </Typography>
 
                 </MenuItem>
@@ -140,6 +162,28 @@ const DesktopToolbar = () => {
                     open={Boolean(anchorEl)}
                     onClose={() => setAnchorEl(null)}
                 >
+
+                    <MenuItem
+                        sx={{
+                            display: "flex",
+                            gap: 1,
+                            justifyContent: "start",
+                            alignItems: "center",
+                            color: "ternary.main"
+                        }}
+                    >
+
+                        <FiBellOff size={20}/>
+
+                        <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            fontWeight='bold'
+                        >
+                            {t("menu.mute")}
+                        </Typography>
+
+                    </MenuItem>
 
                     <MenuItem
                         sx={{

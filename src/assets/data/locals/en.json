@@ -77,11 +77,12 @@
       "story": "Story",
       "contact": "Contact",
       "setting": "Setting",
-      "all": "All",
-      "private": "Private",
-      "group": "Group",
-      "vibrate": "Vibrate",
-      "call": "Call"
+      "call": "Call",
+      "file": "File",
+      "image": "Image",
+      "video": "Video",
+      "voice": "Voice",
+      "location": "Location"
     },
     "menu": {
       "file": "File",
@@ -93,9 +94,8 @@
       "searchChat": "Search chats",
       "videoCall": "Video call",
       "voiceCall": "Voice call",
-      "muteChat": "Mute chat",
-      "unMuteChat": "Unmute chat",
-      "leaveGroup": "Leave group",
+      "mute": "Mute",
+      "unMute": "Unmute",
       "createChat": "Create new chat",
       "createGroup": "Create new group",
       "addContact": "Add new contact",
@@ -122,13 +122,20 @@
       "cancel": "Cancel",
       "deleteAll": "Delete all",
       "12h": "12 hour",
-      "24h": "24 hour",
-      "count": "Count",
-      "contacts": "Contacts",
-      "all": "All",
-      "nothing": "Nothing",
-      "lock": "Lock",
-      "unLock": "Unlock"
+      "24h": "24 hour"
+    },
+    "error": {
+      "avatarSize": "Avatar size should be less than 5MB",
+      "avatarType": "Avatar type should be png , jpg , jpeg",
+      "userNameRequired": "User name is require",
+      "userNameMaxLength": "User name characters should be less than 20",
+      "firstNameRequired": "first name is require",
+      "firstNameMaxLength": "first name characters should be less than 20",
+      "lastNameRequired": "last name is require",
+      "lastNameMaxLength": "last name characters should be less than 20",
+      "phoneNumberRequired": "phone number is require",
+      "phoneNumberFormat": "phone number format is wrong",
+      "biographyMaxLength": "biography characters should be less than 50"
     }
   }
 }

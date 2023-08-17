@@ -7,20 +7,23 @@ import {Grid} from "@mui/material";
 import TextInput from "@/components/modules/TextInput.jsx";
 import AvatarInput from "@/components/modules/AvatarInput.jsx";
 
+// utils
+import {editProfileSchema} from "@/utils/validations.js";
+
 const Profile = () => {
 
     const {t} = useTranslation();
 
     const formik = useFormik({
         initialValues: {
-            avatar: "",
+            avatar: {},
             firstName: "",
             lastName: "",
             userName: "",
             phoneNumber: "",
             birthDay: "",
         },
-        // validationSchema: ,
+        validationSchema: editProfileSchema,
         onSubmit: async (data) => {
             console.log(data)
         }
@@ -49,6 +52,7 @@ const Profile = () => {
                     // preview={session?.user?.avatar}
                     value={formik.values.avatar}
                     onChange={(value) => formik.setFieldValue("avatar", value)}
+                    onBlur={() => formik.setFieldTouched("avatar")}
                     touched={formik.touched.avatar}
                     error={formik.errors.avatar}
                 />
@@ -66,6 +70,7 @@ const Profile = () => {
                     name="firstName"
                     value={formik.values.firstName}
                     onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("firstName")}
                     error={formik.errors.firstName}
                     touched={formik.touched.firstName}
                 />
@@ -83,6 +88,7 @@ const Profile = () => {
                     name="lastName"
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("lastName")}
                     error={formik.errors.lastName}
                     touched={formik.touched.lastName}
                 />
@@ -99,6 +105,7 @@ const Profile = () => {
                     name="userName"
                     value={formik.values.userName}
                     onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("userName")}
                     error={formik.errors.userName}
                     touched={formik.touched.userName}
                 />
@@ -115,6 +122,7 @@ const Profile = () => {
                     name="phoneNumber"
                     value={formik.values.phoneNumber}
                     onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("phoneNumber")}
                     error={formik.errors.phoneNumber}
                     touched={formik.touched.phoneNumber}
                 />
@@ -132,6 +140,7 @@ const Profile = () => {
                     rows={6}
                     value={formik.values.biography}
                     onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("biography")}
                     error={formik.errors.biography}
                     touched={formik.touched.biography}
                 />

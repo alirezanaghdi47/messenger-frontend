@@ -8,10 +8,10 @@ import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic} from "react-icons/lu";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-import file from "@/assets/files/lorem-ipsum.pdf";
-import image from "@/assets/images/lorem-ipsum.jpg";
-import video from "@/assets/videos/lorem-ipsum.mp4";
-import voice from "@/assets/voices/lorem-ipsum.mp3";
+import file from "@/assets/other/lorem-ipsum.pdf";
+import image from "@/assets/other/lorem-ipsum.jpg";
+import video from "@/assets/other/lorem-ipsum.mp4";
+import voice from "@/assets/other/lorem-ipsum.mp3";
 
 // stores
 import {setActiveChat} from "@/stores/slices/chat.js";
@@ -48,10 +48,10 @@ const ContactItem = ({user}) => {
                     alignItems: "center",
                     bgcolor: activeChat?._id === user._id && "primary.main",
                     width: "100%",
-                    cursor: "pointer",
                     borderRadius: 1,
                     padding: 1.5,
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    cursor: "pointer",
                 }}
             >
 

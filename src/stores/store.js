@@ -8,19 +8,21 @@ import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 // stores
 import chatReducer from "@/stores/slices/chat.js";
-import profileReducer from "@/stores/slices/profile.js";
+import storyReducer from "@/stores/slices/story.js";
 import voiceCallReducer from "@/stores/slices/voiceCall.js";
 import videoCallReducer from "@/stores/slices/videoCall.js";
 import contactReducer from "@/stores/slices/contact.js";
 import settingReducer from "@/stores/slices/setting.js";
+import profileReducer from "@/stores/slices/profile.js";
 
 const reducers = combineReducers({
     chat: chatReducer,
-    profile: profileReducer,
+    story: storyReducer,
     voiceCall: voiceCallReducer,
     videoCall: videoCallReducer,
     contact: contactReducer,
     setting: settingReducer,
+    profile: profileReducer,
 });
 
 const persistConfig = {

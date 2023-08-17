@@ -78,11 +78,12 @@
       "story": "وضعیت",
       "contact": "مخاطبین",
       "setting": "تنظیمات",
-      "all": "همه",
-      "private": "شخصی",
-      "group": "گروه",
-      "vibrate": "لرزش",
-      "call": "تماس"
+      "call": "تماس",
+      "file": "فایل",
+      "image": "عکس",
+      "video": "فیلم",
+      "voice": "صدا",
+      "location": "موقعیت"
     },
     "menu": {
       "file": "فایل",
@@ -94,9 +95,8 @@
       "searchChat": "جستجوی گفتگو ها",
       "videoCall": "تماس تصویری",
       "voiceCall": "تماس صوتی",
-      "muteChat": "فعال سازی سکوت",
-      "unMuteChat": "فعال سازی صدا",
-      "leaveGroup": "ترک گروه",
+      "mute": "فعال سازی سکوت",
+      "unMute": "فعال سازی صدا",
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید",
       "addContact": "افزودن مخاطب جدید",
@@ -123,13 +123,20 @@
       "cancel": "انصراف",
       "deleteAll": "حذف همه",
       "12h": "12 ساعته",
-      "24h": "24 ساعته",
-      "count": "مورد",
-      "contacts": "مخاطبین",
-      "all": "همه",
-      "nothing": "هیچ",
-      "lock": "دارای قفل",
-      "unLock": "بدون قفل"
+      "24h": "24 ساعته"
+    },
+    "error": {
+      "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",
+      "avatarType": "فرمت های مورد قبول برای آواتار عبارت اند از png , jpg , jpeg",
+      "userNameRequired": "نام کاربری الزامی است",
+      "userNameMaxLength": "تعداد کاراکتر های نام کاربری باید کمتر از 20 باشد",
+      "firstNameRequired": "نام الزامی است",
+      "firstNameMaxLength": "تعداد کاراکتر های نام باید کمتر از 20 باشد",
+      "lastNameRequired": "نام خانوادگی الزامی است",
+      "lastNameMaxLength": "تعداد کاراکتر های نام خانوادگی کاربری باید کمتر از 20 باشد",
+      "phoneNumberRequired": "شماره همراه الزامی است",
+      "phoneNumberFormat": "فرمت شماره همراه اشتباه است",
+      "biographyMaxLength": "تعداد کاراکتر های بیوگرافی باید کمتر از 50 باشد"
     }
   }
 }

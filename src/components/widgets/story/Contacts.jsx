@@ -1,10 +1,15 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, Stack, Typography} from "@mui/material";
+import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
+import {BiCheckDouble} from "react-icons/bi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-import {BiCheckDouble} from "react-icons/bi";
+
+// stores
+import {setActiveStory} from "@/stores/slices/story.js";
+import {useTranslation} from "react-i18next";
 
 const userList = [
     {_id: "1"},
@@ -17,14 +22,16 @@ const userList = [
 
 const ContactItem = ({user}) => {
 
+    const dispatch = useDispatch();
+    const {activeStory} = useSelector(state => state.story);
+    const {t} = useTranslation();
+    const theme = useTheme();
+
     return (
         <Box
             component="li"
-            sx={{
-                width: "100%",
-                cursor: "pointer",
-            }}
-            onClick={() => console.log("show story modal")}
+            sx={{width: "100%"}}
+            onClick={() => dispatch(setActiveStory(user))}
         >
 
             <Stack
@@ -34,11 +41,12 @@ const ContactItem = ({user}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    // bgcolor: activeChat?._id === user._id && "primary.main",
+                    bgcolor: activeStory?._id === user._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    cursor: 'pointer'
                 }}
             >
 
@@ -64,8 +72,7 @@ const ContactItem = ({user}) => {
 
                 <Typography
                     variant="subtitle2"
-                    color="textPrimary"
-                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    color={activeStory?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     fontWeight='bold'
                     className="text-truncate"
                 >
@@ -80,14 +87,14 @@ const ContactItem = ({user}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: "text.secondary",
+                        color: activeStory?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
                         marginLeft: "auto"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color="textSecondary"
+                        color={activeStory?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
                         11:11
                     </Typography>

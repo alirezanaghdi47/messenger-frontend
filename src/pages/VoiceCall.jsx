@@ -74,7 +74,7 @@ const Main = () => {
                 alignItems: "center",
                 width: isDesktop ? "100%" : "calc(100% - 460px)",
                 height: "100dvh",
-                backgroundImage: isDesktop ? `url(${background.mobile})` : `url(${background.desktop})`,
+                backgroundImage: `url(${background})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
             }}

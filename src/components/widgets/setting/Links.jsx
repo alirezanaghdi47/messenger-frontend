@@ -3,14 +3,14 @@ import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 import {FiLogOut} from "react-icons/fi";
-import {LuBell, LuMonitor, LuPalette} from "react-icons/lu";
+import {LuMonitor, LuPalette, LuUser} from "react-icons/lu";
 
 // stores
 import {setActiveSetting} from "@/stores/slices/setting.js";
 
 const linkList = [
-    {id: 1, title: "menu.appearance", value: "appearance", icon: <LuPalette size={24}/>},
-    {id: 2, title: "menu.notification", value: "notification", icon: <LuBell size={24}/>},
+    {id: 1, title: "menu.profile", value: "profile", icon: <LuUser size={24}/>},
+    {id: 2, title: "menu.appearance", value: "appearance", icon: <LuPalette size={24}/>},
     {id: 3, title: "menu.session", value: "session", icon: <LuMonitor size={24}/>},
     {id: 4, title: "menu.logout", value: "logout", icon: <FiLogOut size={24}/>},
 ];

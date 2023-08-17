@@ -13,9 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         <Redux>
 
-            <I18n/>
+            <I18n>
 
-            <App/>
+                <App/>
+
+            </I18n>
 
         </Redux>
 

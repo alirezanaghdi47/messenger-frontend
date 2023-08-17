@@ -10,7 +10,7 @@ import {
     Menu,
     Box
 } from "@mui/material";
-import {FiMoreVertical, FiPhone, FiTrash, FiVideo} from "react-icons/fi";
+import {FiMoreVertical, FiTrash, FiBellOff} from "react-icons/fi";
 
 const MobileToolbar = () => {
 
@@ -51,36 +51,14 @@ const MobileToolbar = () => {
                     }}
                 >
 
-                    <FiPhone size={20}/>
+                    <FiBellOff size={20}/>
 
                     <Typography
                         variant="body2"
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.voiceCall")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                >
-
-                    <FiVideo size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.videoCall")}
+                        {t("menu.mute")}
                     </Typography>
 
                 </MenuItem>
@@ -107,28 +85,6 @@ const MobileToolbar = () => {
 
                 </MenuItem>
 
-                {/*<MenuItem*/}
-                {/*    sx={{*/}
-                {/*        display: "flex",*/}
-                {/*        gap: 1,*/}
-                {/*        justifyContent: "start",*/}
-                {/*        alignItems: "center",*/}
-                {/*        color: "ternary.main"*/}
-                {/*    }}*/}
-                {/*>*/}
-
-                {/*    <FiLogOut size={20}/>*/}
-
-                {/*    <Typography*/}
-                {/*        variant="body2"*/}
-                {/*        color="textSecondary"*/}
-                {/*        fontWeight='bold'*/}
-                {/*    >*/}
-                {/*        {t("menu.leaveGroup")}*/}
-                {/*    </Typography>*/}
-
-                {/*</MenuItem>*/}
-
             </Menu>
 
         </>
@@ -151,28 +107,6 @@ const DesktopToolbar = () => {
                 alignItems: 'center',
             }}
         >
-
-            <Box component="li">
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                >
-                    <FiPhone size={20}/>
-                </IconButton>
-
-            </Box>
-
-            <Box component="li">
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                >
-                    <FiVideo size={20}/>
-                </IconButton>
-
-            </Box>
 
             <Box component="li">
 
@@ -208,6 +142,28 @@ const DesktopToolbar = () => {
                         }}
                     >
 
+                        <FiBellOff size={20}/>
+
+                        <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            fontWeight='bold'
+                        >
+                            {t("menu.mute")}
+                        </Typography>
+
+                    </MenuItem>
+
+                    <MenuItem
+                        sx={{
+                            display: "flex",
+                            gap: 1,
+                            justifyContent: "start",
+                            alignItems: "center",
+                            color: "ternary.main"
+                        }}
+                    >
+
                         <FiTrash size={20}/>
 
                         <Typography
@@ -219,28 +175,6 @@ const DesktopToolbar = () => {
                         </Typography>
 
                     </MenuItem>
-
-                    {/*<MenuItem*/}
-                    {/*    sx={{*/}
-                    {/*        display: "flex",*/}
-                    {/*        gap: 1,*/}
-                    {/*        justifyContent: "start",*/}
-                    {/*        alignItems: "center",*/}
-                    {/*        color: "ternary.main"*/}
-                    {/*    }}*/}
-                    {/*>*/}
-
-                    {/*    <FiLogOut size={20}/>*/}
-
-                    {/*    <Typography*/}
-                    {/*        variant="body2"*/}
-                    {/*        color="textSecondary"*/}
-                    {/*        fontWeight='bold'*/}
-                    {/*    >*/}
-                    {/*        {t("menu.leaveGroup")}*/}
-                    {/*    </Typography>*/}
-
-                    {/*</MenuItem>*/}
 
                 </Menu>
 

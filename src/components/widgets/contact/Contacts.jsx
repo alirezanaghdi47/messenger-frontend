@@ -1,10 +1,14 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, Stack, Typography} from "@mui/material";
+import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
+
+// stores
+import {setActiveContact} from "@/stores/slices/contact.js";
 
 const userList = [
     {_id: "1"},
@@ -17,16 +21,16 @@ const userList = [
 
 const ContactItem = ({user}) => {
 
+    const dispatch = useDispatch();
+    const {activeContact} = useSelector(state => state.contact);
     const {t} = useTranslation();
+    const theme = useTheme();
 
     return (
         <Box
             component="li"
-            sx={{
-                width: "100%",
-                cursor: "pointer",
-            }}
-            onClick={() => console.log("show user modal")}
+            sx={{width: "100%"}}
+            onClick={() => dispatch(setActiveContact(user))}
         >
 
             <Stack
@@ -36,11 +40,12 @@ const ContactItem = ({user}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    // bgcolor: activeChat?._id === user._id && "primary.main",
+                    bgcolor: activeContact?._id === user._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    cursor: "pointer",
                 }}
             >
 
@@ -66,8 +71,7 @@ const ContactItem = ({user}) => {
 
                 <Typography
                     variant="subtitle2"
-                    color="textPrimary"
-                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    color={activeContact?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     fontWeight='bold'
                     className="text-truncate"
                 >
@@ -76,8 +80,7 @@ const ContactItem = ({user}) => {
 
                 <Typography
                     variant="caption"
-                    color="textPrimary"
-                    // color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    color={activeContact?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     className="text-truncate"
                     sx={{marginLeft: "auto"}}
                 >

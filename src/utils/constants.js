@@ -7,7 +7,7 @@ import desktop5 from "@/assets/images/desktop-5.jpg";
 import fa from "@/assets/images/fa.png";
 import en from "@/assets/images/en.png";
 
-export const version = "0.3.7";
+export const version = "0.4.0";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},
@@ -19,20 +19,9 @@ export const languageList = [
     {id: 2, title: "button.english", value: "en", flag: en},
 ];
 
-export const chatList = [
-    {id: 1, title: "list.private", value: false},
-    {id: 2, title: "list.group", value: false},
-    {id: 3, title: "list.story", value: false},
-];
-
-export const callList = [
-    {id: 1, title: "list.voiceCall", value: false},
-    {id: 2, title: "list.videoCall", value: false},
-];
-
 export const themeList = [
-    {id: 1, title: "select.light", value: false, src: desktop1},
-    {id: 2, title: "select.dark", value: true, src: desktop2},
+    {id: 1, title: "select.light", value: false, background: desktop1},
+    {id: 2, title: "select.dark", value: true, background: desktop2},
 ];
 
 export const fontSizeList = [
@@ -44,10 +33,10 @@ export const fontSizeList = [
 ];
 
 export const colorList = [
-    {id: 1, color: {dark: "#60a5fa", light: "#2563eb"}, image: desktop1},
-    {id: 2, color: {dark: "#fb923c", light: "#d97706"}, image: desktop2},
-    {id: 3, color: {dark: "#e879f9", light: "#c026d3"}, image: desktop3},
-    {id: 4, color: {dark: "#22d3ee", light: "#0891b2"}, image: desktop4},
+    {id: 1, color: {dark: "#60a5fa", light: "#2563eb"}},
+    {id: 2, color: {dark: "#fb923c", light: "#d97706"}},
+    {id: 3, color: {dark: "#e879f9", light: "#c026d3"}},
+    {id: 4, color: {dark: "#22d3ee", light: "#0891b2"}},
 ];
 
 export const backgroundList = [

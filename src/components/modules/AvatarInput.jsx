@@ -11,11 +11,9 @@ const AvatarInput = ({
                          value,
                          preview,
                          onChange,
-                         size = "small",
-                         color = "primary",
-                         variant = "outlined",
                          error,
                          touched,
+                         onBlur,
                      }) => {
 
     const [file, setFile] = useState({});
@@ -35,8 +33,9 @@ const AvatarInput = ({
 
     return (
         <FormControl
-            variant={variant}
+            variant="outlined"
             fullWidth
+            onBlur={onBlur}
         >
 
             {

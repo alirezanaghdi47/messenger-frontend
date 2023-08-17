@@ -10,7 +10,6 @@ import Version from "@/components/widgets/setting/Version.jsx";
 import Links from "@/components/widgets/setting/Links.jsx";
 import Appearance from "@/components/widgets/setting/Appearance.jsx";
 import Header from "@/components/widgets/setting/Header.jsx";
-import Notification from "@/components/widgets/setting/Notification.jsx";
 import Session from "@/components/widgets/setting/Session.jsx";
 import UserInfo from "@/components/widgets/setting/UserInfo.jsx";
 import Profile from "@/components/widgets/setting/Profile.jsx";
@@ -83,7 +82,6 @@ const Main = () => {
 
             {activeSetting === "profile" && <Profile/>}
             {activeSetting === "appearance" && <Appearance/>}
-            {activeSetting === "notification" && <Notification/>}
             {activeSetting === "session" && <Session/>}
 
         </Stack>

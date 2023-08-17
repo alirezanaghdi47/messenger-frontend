@@ -116,38 +116,38 @@ const Mui = ({children}) => {
                     }
                 }
             },
-            MuiTabs:{
-                styleOverrides:{
-                    indicator:  ({theme, ownerState}) => ({
+            MuiTabs: {
+                styleOverrides: {
+                    indicator: ({theme, ownerState}) => ({
                         height: 4,
                         borderRadius: 8
                     }),
                 }
             },
-            MuiTab:{
-                defaultProps:{
-                  disableRipple: true,
-                  disableTouchRipple: true,
-                  disableFocusRipple: true
-                },
-                styleOverrides:{
+            MuiTab: {
+                // defaultProps: {
+                //     disableRipple: true,
+                //     disableTouchRipple: true,
+                //     disableFocusRipple: true
+                // },
+                styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
                     }),
                 },
             },
             MuiButton: {
+                // defaultProps: {
+                //     disableElevation: true,
+                //     disableRipple: true,
+                //     disableTouchRipple: true,
+                //     disableFocusRipple: true
+                // },
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
                     }),
                 },
-                defaultProps: {
-                    disableElevation: true,
-                    disableRipple: true,
-                    disableTouchRipple: true,
-                    disableFocusRipple: true
-                }
             },
             MuiIconButton: {
                 variants: [
@@ -156,13 +156,9 @@ const Mui = ({children}) => {
                         style: ({theme, ownerState}) => ({
                             background: theme.palette[ownerState.color].main,
                             color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
-                        })
-                    },
-                    {
-                        props: {variant: "outlined"},
-                        style: ({theme, ownerState}) => ({
-                            background: alpha(theme.palette[ownerState.color].main, 0.5),
-                            color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
+                            "&:hover":{
+                                background: theme.palette[ownerState.color].main,
+                            }
                         })
                     },
                     {
@@ -173,11 +169,11 @@ const Mui = ({children}) => {
                         })
                     }
                 ],
-                defaultProps: {
-                    disableRipple: true,
-                    disableTouchRipple: true,
-                    disableFocusRipple: true
-                }
+                // defaultProps: {
+                //     disableRipple: true,
+                //     disableTouchRipple: true,
+                //     disableFocusRipple: true
+                // }
             },
             MuiChip: {
                 styleOverrides: {
@@ -238,6 +234,19 @@ const Mui = ({children}) => {
                     }
                 }
             },
+            MuiSwitch: {
+                // defaultProps: {
+                //     disableRipple: false,
+                //     disableTouchRipple: false,
+                //     disableFocusRipple: false
+                // },
+                styleOverrides: {
+                    thumb: ({theme, ownerState}) => ({}),
+                    track: ({theme, ownerState}) => ({
+                        background: theme.palette.ternary.main
+                    }),
+                }
+            },
             MuiSlider: {
                 styleOverrides: {
                     valueLabel: ({theme, ownerState}) => ({
@@ -265,11 +274,14 @@ const Mui = ({children}) => {
                 }
             },
             MuiList: {
-                defaultProps: {
-                    disablePadding: true
-                }
+                // defaultProps: {
+                //     disablePadding: true
+                // }
             },
             MuiMenu: {
+                defaultProps: {
+                    elevation: 2
+                },
                 styleOverrides: {
                     paper: ({theme, ownerState}) => ({
                         maxWidth: 320,
@@ -283,9 +295,6 @@ const Mui = ({children}) => {
                         msOverflowStyle: "none",
                         padding: 8,
                     })
-                },
-                defaultProps: {
-                    elevation: 2
                 }
             },
             MuiMenuItem: {

@@ -9,10 +9,10 @@ import {FiCornerUpRight} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-import file from "@/assets/files/lorem-ipsum.pdf";
-import image from "@/assets/images/lorem-ipsum.jpg";
-import video from "@/assets/videos/lorem-ipsum.mp4";
-import voice from "@/assets/voices/lorem-ipsum.mp3";
+import file from "@/assets/other/lorem-ipsum.pdf";
+import image from "@/assets/other/lorem-ipsum.jpg";
+import video from "@/assets/other/lorem-ipsum.mp4";
+import voice from "@/assets/other/lorem-ipsum.mp3";
 
 // utils
 import {fontSizeList} from "@/utils/constants.js";

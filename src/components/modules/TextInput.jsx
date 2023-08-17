@@ -10,18 +10,17 @@ const TextInput = ({
                        startIcon,
                        endIcon,
                        rows = 1,
-                       size = "small",
-                       color = "primary",
-                       variant = "outlined",
                        touched,
                        error,
+                       onBlur,
                        disabled = false
                    }) => {
 
     return (
         <FormControl
-            variant={variant}
+            variant="outlined"
             fullWidth
+            onBlur={onBlur}
         >
 
             {
@@ -38,9 +37,9 @@ const TextInput = ({
             }
 
             <TextField
-                variant={variant}
-                color={color}
-                size={size}
+                variant="outlined"
+                color="primary"
+                size="small"
                 placeholder={placeholder}
                 InputProps={{
                     name: name,

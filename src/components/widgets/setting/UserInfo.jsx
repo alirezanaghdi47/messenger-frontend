@@ -1,15 +1,12 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, IconButton, Stack, Typography} from "@mui/material";
-import {FiEdit2, FiInfo, FiPhone, FiUser} from "react-icons/fi";
+import {Box, Stack, Typography} from "@mui/material";
+import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
 // assets
 import avatar from "@/assets/images/avatar.png";
-
-// stores
-import {setActiveSetting} from "@/stores/slices/setting.js";
 
 const previewList = [
     {id: 1 ,title: "typography.userName", value: "alirezanaghdi47" , icon: <FiUser size={24}/>},
@@ -19,7 +16,6 @@ const previewList = [
 
 const UserInfo = () => {
 
-    const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.profile.setting);
     const {t} = useTranslation();
 
@@ -42,21 +38,6 @@ const UserInfo = () => {
                     marginTop: "-16px"
                 }}
             >
-
-                <IconButton
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    sx={{
-                        position: 'absolute',
-                        zIndex: 10,
-                        bottom: -22,
-                        right: 16,
-                    }}
-                    onClick={() => dispatch(setActiveSetting("profile"))}
-                >
-                    <FiEdit2 size={20}/>
-                </IconButton>
 
                 <LazyLoadImage
                     src={avatar}

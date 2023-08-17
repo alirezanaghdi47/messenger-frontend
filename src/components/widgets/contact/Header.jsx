@@ -5,11 +5,11 @@ import {IconButton, Stack} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import UserInfo from "@/components/widgets/videoCall/UserInfo.jsx";
-import Toolbar from "@/components/widgets/videoCall/Toolbar.jsx";
+import UserInfo from "@/components/widgets/contact/UserInfo.jsx";
+import Toolbar from "@/components/widgets/contact/Toolbar.jsx";
 
 // stores
-import {removeActiveCall} from "@/stores/slices/videoCall.js";
+import {removeActiveChat} from "@/stores/slices/chat.js";
 
 const Header = () => {
 
@@ -39,7 +39,7 @@ const Header = () => {
                     <IconButton
                         variant="text"
                         color="ternary"
-                        onClick={() => dispatch(removeActiveCall())}
+                        onClick={() => dispatch(removeActiveChat())}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
                     </IconButton>

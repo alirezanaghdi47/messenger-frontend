@@ -1,12 +1,22 @@
+// libraries
+import {useLayoutEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
 // components
-import Secondary from "@/components/layouts/Secondary.jsx";
+import Ternary from "@/components/layouts/Ternary.jsx";
 
 const Home = () => {
 
-    return (
-        <Secondary>
+    const navigate = useNavigate();
 
-        </Secondary>
+    useLayoutEffect(() => {
+        navigate("/chat");
+    }, []);
+
+    return (
+        <Ternary>
+
+        </Ternary>
     )
 }
 

@@ -91,7 +91,7 @@ const Theme = () => {
                                 onClick={() => dispatch(setTheme(themeItem.value))}
                             >
                                 <LazyLoadImage
-                                    src={themeItem.src}
+                                    src={themeItem.background}
                                     alt={t(themeItem.title)}
                                     width="100%"
                                     height="100%"
