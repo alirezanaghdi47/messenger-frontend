@@ -14,14 +14,50 @@ const linkList = [
     {id: 3, title: "menu.session", value: "session", icon: <LuMonitor size={20}/>},
 ];
 
-const Links = () => {
+const LinkItem = ({item}) => {
 
     const dispatch = useDispatch();
     const {activeSetting} = useSelector(state => state.setting);
     const {t} = useTranslation();
     const theme = useTheme();
 
-    return (
+    return(
+        <Stack
+            component="li"
+            direction="row"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                width: "100%",
+                bgcolor: activeSetting === item.value && "primary.main",
+                color: activeSetting === item.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
+                borderRadius: 1,
+                padding: 1.5,
+                cursor: "pointer"
+            }}
+            onClick={() => dispatch(setActiveSetting(item.value))}
+        >
+
+            {item.icon}
+
+            <Typography
+                variant="subtitle2"
+                color={activeSetting === item.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                fontWeight='bold'
+                noWrap
+            >
+                {t(item.title)}
+            </Typography>
+
+        </Stack>
+    )
+}
+
+const LinkList = ({list}) => {
+
+    return(
         <Stack
             component="ul"
             direction="column"
@@ -34,42 +70,22 @@ const Links = () => {
         >
 
             {
-                linkList.map(linkItem =>
-                    <Stack
-                        key={linkItem.id}
-                        component="li"
-                        direction="row"
-                        gap={2}
-                        sx={{
-                            display: "flex",
-                            justifyContent: "start",
-                            alignItems: "center",
-                            width: "100%",
-                            bgcolor: activeSetting === linkItem.value && "primary.main",
-                            color: activeSetting === linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
-                            borderRadius: 1,
-                            padding: 1.5,
-                            cursor: "pointer"
-                        }}
-                        onClick={() => dispatch(setActiveSetting(linkItem.value))}
-                    >
-
-                        {linkItem.icon}
-
-                        <Typography
-                            variant="subtitle2"
-                            color={activeSetting === linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                            fontWeight='bold'
-                            noWrap
-                        >
-                            {t(linkItem.title)}
-                        </Typography>
-
-                    </Stack>
+                list.map(item =>
+                    <LinkItem
+                        key={item.id}
+                        item={item}
+                    />
                 )
             }
 
         </Stack>
+    )
+}
+
+const Links = () => {
+
+    return (
+        <LinkList list={linkList}/>
     )
 }
 

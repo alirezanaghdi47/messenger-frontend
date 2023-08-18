@@ -1,7 +1,7 @@
 // components
 import Mui from "@/components/providers/Mui.jsx";
 import Router from "@/components/providers/Router.jsx";
-import PreventContextMenu from "@/components/helpers/PreventContextMenu.jsx";
+import ContextMenu from "@/components/helpers/ContextMenu.jsx";
 
 // styles
 import "@/styles/global.scss";
@@ -13,7 +13,7 @@ const App = () => {
 
             <Router/>
 
-            <PreventContextMenu/>
+            <ContextMenu/>
 
         </Mui>
     )

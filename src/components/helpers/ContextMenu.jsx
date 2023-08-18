@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-const PreventContextMenu = () => {
+const ContextMenu = () => {
 
     const handleContextMenu = (e) => e.preventDefault();
 
@@ -16,4 +16,4 @@ const PreventContextMenu = () => {
 
 }
 
-export default PreventContextMenu;
+export default ContextMenu;

@@ -9,11 +9,70 @@ import {setDateFormat} from "@/stores/slices/setting.js";
 // utils
 import {dateTimeList} from "@/utils/constants.js";
 
-const DateTime = () => {
+const Title = ({title}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                gap: 2,
+                justifyContent: "start",
+                alignItems: 'center',
+                width: "100%",
+            }}
+        >
+
+            <Typography
+                variant="subtitle1"
+                color="textPrimary"
+                fontWeight='bold'
+            >
+                {t(title)}
+            </Typography>
+
+        </Box>
+    )
+}
+
+const Content = ({list}) => {
 
     const dispatch = useDispatch();
     const {dateFormat} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+
+    return (
+        <Stack
+            component="ul"
+            direction={"row"}
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: 'center',
+                width: "100%",
+            }}
+        >
+
+            {
+                list.map(item =>
+                    <Button
+                        key={item.id}
+                        variant={item.value === dateFormat ? "contained" : "text"}
+                        color={item.value === dateFormat ? "primary" : "ternary"}
+                        onClick={() => dispatch(setDateFormat(item.value))}
+                    >
+                        {t(item.title)}
+                    </Button>
+                )
+            }
+
+        </Stack>
+    )
+}
+
+const DateTime = () => {
 
     return (
         <Stack
@@ -27,52 +86,9 @@ const DateTime = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
+            <Title title="typography.dateTime"/>
 
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.dateTime")}
-                </Typography>
-
-            </Box>
-
-            <Stack
-                component="ul"
-                direction={"row"}
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                {
-                    dateTimeList.map(dateTimeItem =>
-                        <Button
-                            key={dateTimeItem.id}
-                            variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
-                            color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
-                            onClick={() => dispatch(setDateFormat(dateTimeItem.value))}
-                        >
-                            {t(dateTimeItem.title)}
-                        </Button>
-                    )
-                }
-
-            </Stack>
+            <Content list={dateTimeList}/>
 
         </Stack>
     )

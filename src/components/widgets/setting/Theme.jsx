@@ -10,11 +10,77 @@ import {setTheme} from "@/stores/slices/setting.js";
 // utils
 import {themeList} from "@/utils/constants.js";
 
-const Theme = () => {
+const Title = ({title}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                gap: 2,
+                justifyContent: "start",
+                alignItems: 'center',
+                width: "100%",
+            }}
+        >
+
+            <Typography
+                variant="subtitle1"
+                color="textPrimary"
+                fontWeight='bold'
+            >
+                {t(title)}
+            </Typography>
+
+        </Box>
+    )
+}
+
+const Content = ({list}) => {
 
     const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+
+    return (
+        <Grid
+            component="ul"
+            container
+            spacing={2}
+            sx={{width: "100%"}}
+        >
+            {
+                list.map(item =>
+                    <Grid
+                        key={item.id}
+                        component="li"
+                        item
+                        xs={6}
+                        sm={4}
+                        lg={3}
+                        sx={{
+                            cursor:"pointer",
+                            opacity: darkMode === item.value ? 1: 0.5,
+                        }}
+                        onClick={() => dispatch(setTheme(item.value))}
+                    >
+                        <LazyLoadImage
+                            src={item.background}
+                            alt={t(item.title)}
+                            width="100%"
+                            height="100%"
+                            style={{borderRadius: 8}}
+                        />
+                    </Grid>
+                )
+            }
+
+        </Grid>
+    )
+}
+
+const Theme = () => {
 
     return (
         <Stack
@@ -28,59 +94,9 @@ const Theme = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
+            <Title title="typography.theme"/>
 
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.theme")}
-                </Typography>
-
-            </Box>
-
-            <Grid
-                component="ul"
-                container
-                spacing={2}
-                sx={{width: "100%"}}
-            >
-                {
-                    themeList.map(themeItem =>
-                        <Grid
-                            key={themeItem.id}
-                            component="li"
-                            item
-                            xs={6}
-                            sm={4}
-                            lg={3}
-                            sx={{
-                                cursor:"pointer",
-                                opacity: darkMode === themeItem.value ? 1: 0.5,
-                            }}
-                            onClick={() => dispatch(setTheme(themeItem.value))}
-                        >
-                            <LazyLoadImage
-                                src={themeItem.background}
-                                alt={t(themeItem.title)}
-                                width="100%"
-                                height="100%"
-                                style={{borderRadius: 8}}
-                            />
-                        </Grid>
-                    )
-                }
-
-            </Grid>
+            <Content list={themeList}/>
 
         </Stack>
     )

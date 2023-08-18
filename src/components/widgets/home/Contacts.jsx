@@ -17,7 +17,7 @@ import voice from "@/assets/other/lorem-ipsum.mp3";
 // stores
 import {setActiveChat} from "@/stores/slices/chat.js";
 
-const userList = [
+const contactList = [
     {_id: "1", type: "text", content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود."},
     {_id: "2", type: "image", content: image},
     {_id: "3", type: "file", content: file},
@@ -30,7 +30,7 @@ const userList = [
     {_id: "10", type: "log", status: "videoCall"},
 ];
 
-const ContactItem = ({user}) => {
+const ContactItem = ({item}) => {
 
     const dispatch = useDispatch();
     const {activeChat} = useSelector(state => state.chat);
@@ -41,7 +41,7 @@ const ContactItem = ({user}) => {
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => dispatch(setActiveChat(user))}
+            onClick={() => dispatch(setActiveChat(item))}
         >
 
             <Stack
@@ -51,7 +51,7 @@ const ContactItem = ({user}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: activeChat?._id === user._id && "primary.main",
+                    bgcolor: activeChat?._id === item._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
@@ -93,7 +93,7 @@ const ContactItem = ({user}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         className="text-truncate"
                     >
@@ -108,42 +108,42 @@ const ContactItem = ({user}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
-                        {user.type === "text" && <LuText size={16}/>}
-                        {user.type === "image" && <LuImage size={16}/>}
-                        {user.type === "video" && <LuFilm size={16}/>}
-                        {user.type === "voice" && <LuMusic size={16}/>}
-                        {user.type === "file" && <LuFile size={16}/>}
-                        {user.type === "location" && <LuMapPin size={16}/>}
-                        {user.type === "log" && user.status === "voiceCall" && <FiPhone size={16}/>}
-                        {user.type === "log" && user.status === "videoCall" && <FiVideo size={16}/>}
+                        {item.type === "text" && <LuText size={16}/>}
+                        {item.type === "image" && <LuImage size={16}/>}
+                        {item.type === "video" && <LuFilm size={16}/>}
+                        {item.type === "voice" && <LuMusic size={16}/>}
+                        {item.type === "file" && <LuFile size={16}/>}
+                        {item.type === "location" && <LuMapPin size={16}/>}
+                        {item.type === "log" && item.status === "voiceCall" && <FiPhone size={16}/>}
+                        {item.type === "log" && item.status === "videoCall" && <FiVideo size={16}/>}
 
                         <Typography
                             variant="caption"
-                            color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                             sx={{
                                 width: "100%",
                                 overflow: "hidden",
                             }}
                         >
-                            {user.type === "text" && t("typography.text")}
-                            {user.type === "image" && t("typography.image")}
-                            {user.type === "video" && t("typography.video")}
-                            {user.type === "voice" && t("typography.voice")}
-                            {user.type === "file" && t("typography.file")}
-                            {user.type === "location" && t("typography.location")}
-                            {user.type === "log" && user.status === "voiceCall" && t("typography.voiceCall")}
-                            {user.type === "log" && user.status === "videoCall" && t("typography.videoCall")}
+                            {item.type === "text" && t("typography.text")}
+                            {item.type === "image" && t("typography.image")}
+                            {item.type === "video" && t("typography.video")}
+                            {item.type === "voice" && t("typography.voice")}
+                            {item.type === "file" && t("typography.file")}
+                            {item.type === "location" && t("typography.location")}
+                            {item.type === "log" && item.status === "voiceCall" && t("typography.voiceCall")}
+                            {item.type === "log" && item.status === "videoCall" && t("typography.videoCall")}
                         </Typography>
 
                     </Stack>
 
                     {/*<Typography*/}
                     {/*    variant="caption"*/}
-                    {/*    color={activeChat?._id === profile._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
+                    {/*    color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
                     {/*>*/}
                     {/*    ... {t("typography.isTyping")}*/}
                     {/*</Typography>*/}
@@ -158,13 +158,13 @@ const ContactItem = ({user}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                        color: activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color={activeChat?._id === user._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>
@@ -186,7 +186,7 @@ const ContactItem = ({user}) => {
     )
 }
 
-const Contacts = () => {
+const ContactList = ({list}) => {
 
     return (
         <Stack
@@ -204,15 +204,22 @@ const Contacts = () => {
         >
 
             {
-                userList.map(userItem =>
+                list.map(item =>
                     <ContactItem
-                        key={userItem._id}
-                        user={userItem}
+                        key={item._id}
+                        item={item}
                     />
                 )
             }
 
         </Stack>
+    )
+}
+
+const Contacts = () => {
+
+    return (
+        <ContactList list={contactList}/>
     )
 }
 

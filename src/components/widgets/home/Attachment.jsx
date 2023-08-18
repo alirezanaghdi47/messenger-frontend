@@ -5,10 +5,77 @@ import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiFile, FiImage, FiMapPin, FiMusic, FiFilm} from "react-icons/fi";
 import {LuPaperclip} from "react-icons/lu";
 
+const attachmentList = [
+    {id: 1 , title: "menu.file", value: "file" , icon: <FiFile size={20}/>},
+    {id: 2 , title: "menu.image", value: "image" , icon: <FiImage size={20}/>},
+    {id: 3 , title: "menu.movie", value: "movie" , icon: <FiFilm size={20}/>},
+    {id: 4 , title: "menu.music", value: "music" , icon: <FiMusic size={20}/>},
+    {id: 5 , title: "menu.location", value: "location" , icon: <FiMapPin size={20}/>},
+];
+
+const DropdownMenuItem = ({item}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <MenuItem
+            key={item.id}
+            sx={{
+                display: "flex",
+                gap: 1,
+                justifyContent: "start",
+                alignItems: "center",
+            }}
+            onClick={() => console.log(item.value)}
+        >
+
+            {item.icon}
+
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                fontWeight='bold'
+            >
+                {t(item.title)}
+            </Typography>
+
+        </MenuItem>
+    )
+}
+
+const DropdownMenu = ({anchorEl , setAnchorEl , list}) => {
+
+    return (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+        >
+
+            {
+                list.map(item =>
+                    <DropdownMenuItem
+                        key={item.id}
+                        item={item}
+                    />
+                )
+            }
+
+        </Menu>
+    )
+}
+
 const Attachment = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {t} = useTranslation();
 
     return (
         <>
@@ -21,131 +88,11 @@ const Attachment = () => {
                 <LuPaperclip size={20}/>
             </IconButton>
 
-            <Menu
+            <DropdownMenu
+                list={attachmentList}
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-            >
-
-                <MenuItem
-                    onClick={() => console.log("file")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiFile size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.file")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={() => console.log("image")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiImage size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.image")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={() => console.log("video")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiFilm size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.video")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={() => console.log("voice")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiMusic size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.voice")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    onClick={() => console.log("location")}
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                >
-
-                    <FiMapPin size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.location")}
-                    </Typography>
-
-                </MenuItem>
-
-            </Menu>
+                setAnchorEl={(data) => setAnchorEl(data)}
+            />
 
         </>
     )

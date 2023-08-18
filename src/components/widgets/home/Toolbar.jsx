@@ -8,14 +8,79 @@ import {
     Typography,
     MenuItem,
     Menu,
-    Box
 } from "@mui/material";
-import {FiMoreVertical, FiTrash, FiBellOff , FiPhone , FiVideo} from "react-icons/fi";
+import {FiMoreVertical, FiPhone, FiVideo, FiTrash2} from "react-icons/fi";
+
+const toolbarList = [
+    {id: 1, title: "menu.voiceCall", value: "voiceCall", icon: <FiPhone size={20}/>},
+    {id: 2, title: "menu.videoCall", value: "videoCall", icon: <FiVideo size={20}/>},
+    {id: 3, title: "menu.deleteAll", value: "deleteAll", icon: <FiTrash2 size={20}/>},
+];
+
+const DropdownMenuItem = ({item}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <MenuItem
+            key={item.id}
+            sx={{
+                display: "flex",
+                gap: 1,
+                justifyContent: "start",
+                alignItems: "center",
+                color: "ternary.main"
+            }}
+            onClick={() => console.log(item.value)}
+        >
+
+            {item.icon}
+
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                fontWeight='bold'
+            >
+                {t(item.title)}
+            </Typography>
+
+        </MenuItem>
+    )
+}
+
+const DropdownMenu = ({anchorEl , setAnchorEl , list}) => {
+
+    return (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+        >
+
+            {
+                list.map(item =>
+                    <DropdownMenuItem
+                        key={item.id}
+                        item={item}
+                    />
+                )
+            }
+
+        </Menu>
+    )
+}
 
 const MobileToolbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {t} = useTranslation();
 
     return (
         <>
@@ -27,109 +92,11 @@ const MobileToolbar = () => {
                 <FiMoreVertical size={20}/>
             </IconButton>
 
-            <Menu
+            <DropdownMenu
+                list={toolbarList}
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-            >
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                >
-
-                    <FiPhone size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.voiceCall")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                >
-
-                    <FiVideo size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.videoCall")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                >
-
-                    <FiBellOff size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.mute")}
-                    </Typography>
-
-                </MenuItem>
-
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                >
-
-                    <FiTrash size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.deleteAll")}
-                    </Typography>
-
-                </MenuItem>
-
-            </Menu>
+                setAnchorEl={(data) => setAnchorEl(data)}
+            />
 
         </>
     )
@@ -138,7 +105,6 @@ const MobileToolbar = () => {
 const DesktopToolbar = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {t} = useTranslation();
 
     return (
         <Stack
@@ -152,99 +118,33 @@ const DesktopToolbar = () => {
             }}
         >
 
-            <Box component="li">
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                >
-                    <FiPhone size={20}/>
-                </IconButton>
-
-            </Box>
-
-            <Box component="li">
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                >
-                    <FiVideo size={20}/>
-                </IconButton>
-
-            </Box>
-
-            <Box component="li">
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                    onClick={(e) => setAnchorEl(e.currentTarget)}
-                >
-                    <FiMoreVertical size={20}/>
-                </IconButton>
-
-                <Menu
-                    anchorEl={anchorEl}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    open={Boolean(anchorEl)}
-                    onClose={() => setAnchorEl(null)}
-                >
-
-                    <MenuItem
-                        sx={{
-                            display: "flex",
-                            gap: 1,
-                            justifyContent: "start",
-                            alignItems: "center",
-                            color: "ternary.main"
-                        }}
+            {
+                toolbarList.slice(0, 2).map(toolbarItem =>
+                    <IconButton
+                        key={toolbarItem.id}
+                        component="li"
+                        variant="text"
+                        color="ternary"
                     >
+                        {toolbarItem.icon}
+                    </IconButton>
+                )
+            }
 
-                        <FiBellOff size={20}/>
+            <IconButton
+                component="li"
+                variant="text"
+                color="ternary"
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+            >
+                <FiMoreVertical size={20}/>
+            </IconButton>
 
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            fontWeight='bold'
-                        >
-                            {t("menu.mute")}
-                        </Typography>
-
-                    </MenuItem>
-
-                    <MenuItem
-                        sx={{
-                            display: "flex",
-                            gap: 1,
-                            justifyContent: "start",
-                            alignItems: "center",
-                            color: "ternary.main"
-                        }}
-                    >
-
-                        <FiTrash size={20}/>
-
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            fontWeight='bold'
-                        >
-                            {t("menu.deleteAll")}
-                        </Typography>
-
-                    </MenuItem>
-
-                </Menu>
-
-            </Box>
+            <DropdownMenu
+                list={toolbarList.slice(-1)}
+                anchorEl={anchorEl}
+                setAnchorEl={(data) => setAnchorEl(data)}
+            />
 
         </Stack>
     )

@@ -10,7 +10,7 @@ import Appbar from "@/components/widgets/home/Appbar.jsx";
 import Header from "@/components/widgets/home/Header.jsx";
 import Contacts from "@/components/widgets/home/Contacts.jsx";
 import Footer from "@/components/widgets/home/Footer.jsx";
-import Messages from "@/components/widgets/home/Messages.jsx";
+import Chats from "@/components/widgets/home/Chats.jsx";
 import SearchBar from "@/components/widgets/home/Searchbar.jsx";
 import ActionButton from "@/components/widgets/home/ActionButton.jsx";
 import ScrollToBottom from "@/components/widgets/home/ScrollToBottom.jsx";
@@ -86,7 +86,7 @@ const Main = () => {
 
             <Header/>
 
-            <Messages/>
+            <Chats/>
 
             <ScrollToBottom/>
 

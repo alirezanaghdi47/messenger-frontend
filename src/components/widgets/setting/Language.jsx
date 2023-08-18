@@ -10,11 +10,78 @@ import {setLanguage} from "@/stores/slices/setting.js";
 // utils
 import {languageList} from "@/utils/constants.js";
 
-const Language = () => {
+const Title = ({title}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                gap: 2,
+                justifyContent: "start",
+                alignItems: 'center',
+                width: "100%",
+            }}
+        >
+
+            <Typography
+                variant="subtitle1"
+                color="textPrimary"
+                fontWeight='bold'
+            >
+                {t(title)}
+            </Typography>
+
+        </Box>
+    )
+}
+
+const Content = ({list}) => {
 
     const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+
+    return (
+        <Stack
+            component="ul"
+            direction={language === "fa" ? "row" : "row-reverse"}
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: 'center',
+                width: "100%",
+            }}
+        >
+
+            {
+                list.map(item =>
+                    <Button
+                        key={item.id}
+                        variant={item.value === language ? "contained" : "text"}
+                        color={item.value === language ? "primary" : "ternary"}
+                        startIcon={
+                            <LazyLoadImage
+                                src={item.flag}
+                                alt={item.value}
+                                width={24}
+                                height={16}
+                            />
+                        }
+                        onClick={() => dispatch(setLanguage(item.value))}
+                    >
+                        {t(item.title)}
+                    </Button>
+                )
+            }
+
+        </Stack>
+    )
+}
+
+const Language = () => {
 
     return (
         <Stack
@@ -28,60 +95,9 @@ const Language = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
+            <Title title="typography.language"/>
 
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.language")}
-                </Typography>
-
-            </Box>
-
-            <Stack
-                component="ul"
-                direction={language === "fa" ? "row" : "row-reverse"}
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                {
-                    languageList.map(languageItem =>
-                        <Button
-                            key={languageItem.id}
-                            variant={languageItem.value === language ? "contained" : "text"}
-                            color={languageItem.value === language ? "primary" : "ternary"}
-                            startIcon={
-                                <LazyLoadImage
-                                    src={languageItem.flag}
-                                    alt={languageItem.value}
-                                    width={24}
-                                    height={16}
-                                />
-                            }
-                            onClick={() => dispatch(setLanguage(languageItem.value))}
-                        >
-                            {t(languageItem.title)}
-                        </Button>
-                    )
-                }
-
-            </Stack>
+            <Content list={languageList}/>
 
         </Stack>
     )
