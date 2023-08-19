@@ -2,7 +2,7 @@
 import {useMemo, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {CacheProvider} from "@emotion/react";
-import {createTheme, ThemeProvider, responsiveFontSizes, alpha} from "@mui/material";
+import {createTheme, ThemeProvider, responsiveFontSizes} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {enUS, faIR} from "@mui/material/locale";
 import createCache from "@emotion/cache";

@@ -28,7 +28,13 @@
       "appearance": "ظاهر و شخصی سازی",
       "session": "تاریخچه ورود",
       "thisDevice": "دستگاه فعلی",
-      "otherDevices": "دستگاه های دیگر"
+      "otherDevices": "دستگاه های دیگر",
+      "copyRight": "این وب اپلیکیشن توسط علیرضا نقدی توسعه یافته است",
+      "signIn": "ورود",
+      "signUpQuestion": "اگر حساب کاربری ندارید",
+      "signUp": "عضویت",
+      "verifyCode": "اعتبارسنجی",
+      "timeRemaining": "زمان باقی مانده"
     },
     "select": {
       "dark": "تاریک",
@@ -41,6 +47,8 @@
       "firstName": "نام",
       "lastName": "نام خانوادگی",
       "userName": "نام کاربری",
+      "password": "رمز عبور",
+      "passwordRepeat": "تکرار رمز عبور",
       "phoneNumber": "شماره همراه",
       "biography": "بیوگرافی"
     },
@@ -74,7 +82,11 @@
       "persian": "فارسی",
       "english": "انگلیسی",
       "12h": "12 ساعته",
-      "24h": "24 ساعته"
+      "24h": "24 ساعته",
+      "signIn": "وارد شوید",
+      "signUp": "عضو شوید",
+      "verifyCode": "اعتبارسنجی کنید",
+      "restart": "بازنشانی"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",

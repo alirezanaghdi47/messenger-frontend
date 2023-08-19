@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
@@ -8,14 +8,11 @@ import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu
 import {FiPhone, FiVideo} from "react-icons/fi";
 
 // assets
-import avatar from "@/assets/images/avatar.png";
-import file from "@/assets/other/lorem-ipsum.pdf";
-import image from "@/assets/other/lorem-ipsum.jpg";
-import video from "@/assets/other/lorem-ipsum.mp4";
-import voice from "@/assets/other/lorem-ipsum.mp3";
-
-// stores
-import {setActiveChat} from "@/stores/slices/chat.js";
+import avatar from "../../../assets/images/avatar.png";
+import file from "../../../assets/other/lorem-ipsum.pdf";
+import image from "../../../assets/other/lorem-ipsum.jpg";
+import video from "../../../assets/other/lorem-ipsum.mp4";
+import voice from "../../../assets/other/lorem-ipsum.mp3";
 
 const contactList = [
     {_id: "1", type: "text", content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود."},
@@ -32,8 +29,8 @@ const contactList = [
 
 const ContactItem = ({item}) => {
 
-    const dispatch = useDispatch();
-    const {activeChat} = useSelector(state => state.chat);
+    const navigate = useNavigate();
+    const params = useParams();
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -41,7 +38,7 @@ const ContactItem = ({item}) => {
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => dispatch(setActiveChat(item))}
+            onClick={() => navigate(`/${item._id}`)}
         >
 
             <Stack
@@ -51,7 +48,7 @@ const ContactItem = ({item}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: activeChat?._id === item._id && "primary.main",
+                    bgcolor: params.chatId === item._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
@@ -93,7 +90,7 @@ const ContactItem = ({item}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         className="text-truncate"
                     >
@@ -108,7 +105,7 @@ const ContactItem = ({item}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
@@ -123,7 +120,7 @@ const ContactItem = ({item}) => {
 
                         <Typography
                             variant="caption"
-                            color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            color={params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                             sx={{
                                 width: "100%",
                                 overflow: "hidden",
@@ -143,7 +140,7 @@ const ContactItem = ({item}) => {
 
                     {/*<Typography*/}
                     {/*    variant="caption"*/}
-                    {/*    color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
+                    {/*    color={params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
                     {/*>*/}
                     {/*    ... {t("typography.isTyping")}*/}
                     {/*</Typography>*/}
@@ -158,13 +155,13 @@ const ContactItem = ({item}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                        color: params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color={activeChat?._id === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={params.chatId === item._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>

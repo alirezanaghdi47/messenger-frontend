@@ -1,29 +1,25 @@
 // libraries
-import {Container, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 
 const Secondary = ({children}) => {
 
     return (
-        <Container maxWidth="sm">
+        <Stack
+            direction="row"
+            sx={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                minHeight: "100dvh",
+            }}
+        >
 
-            <Stack
-                direction="column"
-                sx={{
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                    minHeight: "100dvh",
-                }}
-            >
+            {children}
 
-                {children}
-
-            </Stack>
-
-        </Container>
+        </Stack>
     )
 }
 

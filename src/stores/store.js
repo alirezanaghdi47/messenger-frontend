@@ -8,8 +8,8 @@ import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { createFilter } from "redux-persist-transform-filter";
 
 // stores
-import chatReducer from "@/stores/slices/chat.js";
-import settingReducer from "@/stores/slices/setting.js";
+import chatReducer from "./slices/chat.js";
+import settingReducer from "./slices/setting.js";
 
 const reducers = combineReducers({
     chat: chatReducer,
@@ -27,7 +27,7 @@ const persistConfig = {
     transforms: [
         settingSubsetFilter,
         encryptTransform({
-            secretKey: import.meta.env.VITE_REDUX_PERSIST_SECRET_KEY
+            secretKey: process.env.REACT_APP_REDUX_PERSIST_SECRET_KEY
         })
     ]
 };

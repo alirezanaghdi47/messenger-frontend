@@ -6,7 +6,7 @@ import {IconButton, Stack, Typography} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
 // assets
-import logo from "@/assets/images/logo.png";
+import logo from "../../../assets/images/logo.png";
 
 const Appbar = () => {
 

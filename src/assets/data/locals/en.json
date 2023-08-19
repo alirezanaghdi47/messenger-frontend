@@ -28,7 +28,13 @@
       "appearance": "Appearance",
       "session": "Sessions",
       "thisDevice": "Current device",
-      "otherDevices": "Other devices"
+      "otherDevices": "Other devices",
+      "copyRight": "This web app developed by Alireza Naghdi",
+      "signIn": "Sign in",
+      "signUpQuestion": "if don`t have any account",
+      "signUp": "Sign up",
+      "verifyCode": "Verify code",
+      "timeRemaining": "Remaining"
     },
     "select": {
       "dark": "Dark",
@@ -41,6 +47,8 @@
       "firstName": "First name",
       "lastName": "Last name",
       "userName": "User name",
+      "password": "Password",
+      "passwordRepeat": "Repeat Password",
       "phoneNumber": "Phone number",
       "biography": "Biography"
     },
@@ -74,7 +82,11 @@
       "persian": "Persian",
       "english": "English",
       "12h": "12 hour",
-      "24h": "24 hour"
+      "24h": "24 hour",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "verifyCode": "Verify code",
+      "restart": "Restart"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

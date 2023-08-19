@@ -1,9 +1,8 @@
 // libraries
 import {createSlice} from '@reduxjs/toolkit';
-import {backgroundList, colorList} from "@/utils/constants.js";
+import {backgroundList, colorList} from "../../utils/constants.js";
 
 const initialState = {
-    activeSetting: null,
     profile: {
         avatar: "",
         firstName: "",
@@ -34,12 +33,6 @@ export const setting = createSlice({
     name: 'setting',
     initialState,
     reducers: {
-        setActiveSetting: (state, action) => {
-            state.activeSetting = action.payload;
-        },
-        removeActiveSetting: (state) => {
-            state.activeSetting = initialState.activeSetting
-        },
         setDateFormat: (state, action) => {
             state.appearance.dateFormat = action.payload;
         },
@@ -65,8 +58,6 @@ export const setting = createSlice({
 })
 
 export const {
-    setActiveSetting,
-    removeActiveSetting,
     setDateFormat,
     setLanguage,
     setFontSize,

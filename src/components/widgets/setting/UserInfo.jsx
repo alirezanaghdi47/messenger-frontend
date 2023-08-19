@@ -6,7 +6,7 @@ import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
 // assets
-import avatar from "@/assets/images/avatar.png";
+import avatar from "../../../assets/images/avatar.png";
 
 const userInfoList = [
     {id: 1 ,title: "input.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},

@@ -1,13 +1,13 @@
 // assets
-import desktop1 from "@/assets/images/desktop-1.jpg";
-import desktop2 from "@/assets/images/desktop-2.png";
-import desktop3 from "@/assets/images/desktop-3.jpg";
-import desktop4 from "@/assets/images/desktop-4.jpg";
-import desktop5 from "@/assets/images/desktop-5.jpg";
-import fa from "@/assets/images/fa.png";
-import en from "@/assets/images/en.png";
+import desktop1 from "../assets/images/desktop-1.jpg";
+import desktop2 from "../assets/images/desktop-2.png";
+import desktop3 from "../assets/images/desktop-3.jpg";
+import desktop4 from "../assets/images/desktop-4.jpg";
+import desktop5 from "../assets/images/desktop-5.jpg";
+import fa from "../assets/images/fa.png";
+import en from "../assets/images/en.png";
 
-export const version = "0.4.1";
+export const version = "0.4.5";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},

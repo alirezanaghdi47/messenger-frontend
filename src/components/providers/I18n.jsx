@@ -5,8 +5,8 @@ import {I18nextProvider, initReactI18next} from "react-i18next";
 import i18n from "i18next";
 
 // assets
-import fa from "@/assets/data/locals/fa.json";
-import en from "@/assets/data/locals/en.json";
+import fa from "../../assets/data/locals/fa.json";
+import en from "../../assets/data/locals/en.json";
 
 const I18n = ({children}) => {
 
