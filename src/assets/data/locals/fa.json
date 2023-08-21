@@ -34,7 +34,8 @@
       "signUpQuestion": "اگر حساب کاربری ندارید",
       "signUp": "عضویت",
       "verifyCode": "اعتبارسنجی",
-      "timeRemaining": "زمان باقی مانده"
+      "timeRemaining": "زمان باقی مانده",
+      "chatHistory": "تاریخچه گفتگو ها"
     },
     "select": {
       "dark": "تاریک",

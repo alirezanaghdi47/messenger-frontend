@@ -58,7 +58,6 @@ const NumberInput = ({
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
-                sx={{textAlign: "center"}}
             />
 
             {

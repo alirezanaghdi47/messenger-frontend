@@ -1,32 +1,36 @@
 // libraries
-import {Stack} from "@mui/material";
+import {Stack , Container} from "@mui/material";
 
 // components
 import Header from "../../components/widgets/auth/verify/Header.jsx";
 import Form from "../../components/widgets/auth/verify/Form.jsx";
-import Timer from "../../components/widgets/auth/verify/Timer.jsx";
 
 const VerifyCode = () => {
 
     return (
-        <Stack
-            direction="column"
-            gap={4}
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-            }}
+        <Container
+            maxWidth='xs'
+            disableGutters
         >
 
-            <Header title="typography.verifyCode"/>
+            <Stack
+                direction="column"
+                gap={4}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                }}
+            >
 
-            <Timer/>
+                <Header title="typography.verifyCode"/>
 
-            <Form/>
+                <Form/>
 
-        </Stack>
+            </Stack>
+
+        </Container>
     )
 }
 

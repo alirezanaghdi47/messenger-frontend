@@ -1,5 +1,5 @@
 // libraries
-import {Stack} from "@mui/material";
+import {Stack, Container} from "@mui/material";
 
 // components
 import Header from "../../components/widgets/auth/signIn/Header.jsx";
@@ -9,24 +9,31 @@ import Redirect from "../../components/widgets/auth/signIn/Redirect.jsx";
 const SignIn = () => {
 
     return (
-        <Stack
-            direction="column"
-            gap={4}
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-            }}
+        <Container
+            maxWidth='xs'
+            disableGutters
         >
 
-            <Header title="typography.signIn"/>
+            <Stack
+                direction="column"
+                gap={4}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                }}
+            >
 
-            <Form/>
+                <Header title="typography.signIn"/>
 
-            <Redirect/>
+                <Form/>
 
-        </Stack>
+                <Redirect/>
+
+            </Stack>
+
+        </Container>
     )
 }
 

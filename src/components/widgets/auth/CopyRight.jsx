@@ -22,6 +22,8 @@ const CopyRight = () => {
                 variant="caption"
                 color="textPrimary"
                 fontWeight="bold"
+                textAlign="center"
+                lineHeight={1.5}
             >
                 {t("typography.copyRight")}
             </Typography>

@@ -1,10 +1,11 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {Button, Grid, Stack} from "@mui/material";
+import {Box, Button, Stack} from "@mui/material";
 
 // components
 import NumberInput from "../../../modules/NumberInput.jsx";
+import Timer from "./Timer";
 
 const Form = () => {
 
@@ -12,10 +13,7 @@ const Form = () => {
 
     const formik = useFormik({
         initialValues: {
-            code1: "",
-            code2: "",
-            code3: "",
-            code4: "",
+            code: "",
         },
         // validationSchema: ,
         onSubmit: async (data) => {
@@ -29,80 +27,21 @@ const Form = () => {
             gap={2}
             sx={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
             }}
         >
 
-            <Grid
-                container
-                spacing={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                }}
-            >
+            <Timer/>
 
-                <Grid
-                    item
-                    xs={3}
-                >
-
-                    <NumberInput
-                        name="code1"
-                        value={formik.values.code1}
-                        onChange={formik.handleChange}
-                        error={formik.errors.code1}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={3}
-                >
-
-                    <NumberInput
-                        name="code2"
-                        value={formik.values.code2}
-                        onChange={formik.handleChange}
-                        error={formik.errors.code2}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={3}
-                >
-
-                    <NumberInput
-                        name="code3"
-                        value={formik.values.code3}
-                        onChange={formik.handleChange}
-                        error={formik.errors.code3}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={3}
-                >
-
-                    <NumberInput
-                        name="code4"
-                        value={formik.values.code4}
-                        onChange={formik.handleChange}
-                        error={formik.errors.code4}
-                    />
-
-                </Grid>
-
-            </Grid>
+            <NumberInput
+                name="code"
+                value={formik.values.code}
+                onChange={formik.handleChange}
+                error={formik.errors.code}
+            />
 
             <Button
                 variant="contained"

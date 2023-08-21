@@ -11,7 +11,7 @@ const Timer = () => {
 
     const [count, {startCountdown, resetCountdown}] =
         useCountdown({
-            countStart: 5,
+            countStart: 120,
             intervalMs: 1000,
         });
 

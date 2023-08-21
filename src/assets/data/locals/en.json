@@ -34,7 +34,8 @@
       "signUpQuestion": "if don`t have any account",
       "signUp": "Sign up",
       "verifyCode": "Verify code",
-      "timeRemaining": "Remaining"
+      "timeRemaining": "Remaining",
+      "chatHistory": "Chat history"
     },
     "select": {
       "dark": "Dark",
