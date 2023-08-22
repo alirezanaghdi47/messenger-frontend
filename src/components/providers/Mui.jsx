@@ -125,11 +125,11 @@ const Mui = ({children}) => {
                 }
             },
             MuiTab: {
-                // defaultProps: {
-                //     disableRipple: true,
-                //     disableTouchRipple: true,
-                //     disableFocusRipple: true
-                // },
+                defaultProps: {
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                    disableFocusRipple: true
+                },
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
@@ -137,12 +137,12 @@ const Mui = ({children}) => {
                 },
             },
             MuiButton: {
-                // defaultProps: {
-                //     disableElevation: true,
-                //     disableRipple: true,
-                //     disableTouchRipple: true,
-                //     disableFocusRipple: true
-                // },
+                defaultProps: {
+                    disableElevation: true,
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                    disableFocusRipple: true
+                },
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
@@ -169,11 +169,11 @@ const Mui = ({children}) => {
                         })
                     }
                 ],
-                // defaultProps: {
-                //     disableRipple: true,
-                //     disableTouchRipple: true,
-                //     disableFocusRipple: true
-                // }
+                defaultProps: {
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                    disableFocusRipple: true
+                }
             },
             MuiChip: {
                 styleOverrides: {
@@ -235,11 +235,11 @@ const Mui = ({children}) => {
                 }
             },
             MuiSwitch: {
-                // defaultProps: {
-                //     disableRipple: false,
-                //     disableTouchRipple: false,
-                //     disableFocusRipple: false
-                // },
+                defaultProps: {
+                    disableRipple: false,
+                    disableTouchRipple: false,
+                    disableFocusRipple: false
+                },
                 styleOverrides: {
                     thumb: ({theme, ownerState}) => ({}),
                     track: ({theme, ownerState}) => ({
@@ -274,9 +274,9 @@ const Mui = ({children}) => {
                 }
             },
             MuiList: {
-                // defaultProps: {
-                //     disablePadding: true
-                // }
+                defaultProps: {
+                    disablePadding: true
+                }
             },
             MuiMenu: {
                 defaultProps: {

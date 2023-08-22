@@ -10,7 +10,15 @@ import video from "../../../../assets/other/lorem-ipsum.mp4";
 import voice from "../../../../assets/other/lorem-ipsum.mp3";
 
 // components
-import * as Message from "./Messages.jsx";
+import {
+    TextMessage,
+    VideoMessage,
+    VoiceMessage,
+    ImageMessage,
+    LogMessage,
+    FileMessage,
+    LocationMessage
+} from "./Messages.jsx";
 
 const chatList = [
     {id: 1, type: "text", content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود." , me: true},
@@ -69,13 +77,13 @@ const ChatItem = ({item}) => {
                 }}
             >
 
-                {item.type === "text" && <Message.TextMessage message={item}/>}
-                {item.type === "image" && <Message.ImageMessage message={item}/>}
-                {item.type === "file" && <Message.FileMessage message={item}/>}
-                {item.type === "voice" && <Message.VoiceMessage message={item}/>}
-                {item.type === "video" && <Message.VideoMessage message={item}/>}
-                {item.type === "location" && <Message.LocationMessage message={item}/>}
-                {item.type === "log" && <Message.LogMessage message={item}/>}
+                {item.type === "text" && <TextMessage message={item}/>}
+                {item.type === "image" && <ImageMessage message={item}/>}
+                {item.type === "file" && <FileMessage message={item}/>}
+                {item.type === "voice" && <VoiceMessage message={item}/>}
+                {item.type === "video" && <VideoMessage message={item}/>}
+                {item.type === "location" && <LocationMessage message={item}/>}
+                {item.type === "log" && <LogMessage message={item}/>}
 
             </Stack>
 

@@ -82,6 +82,8 @@ const ModalContent = () => {
 
 const ModalFooter = ({onClose}) => {
 
+    const {language} = useSelector(state => state.setting.appearance);
+
     return (
         <Stack
             direction='column'
@@ -106,6 +108,7 @@ const ModalFooter = ({onClose}) => {
                 direction="row"
                 gap={2}
                 sx={{
+                    direction: language === "en" ? "rtl" : "ltr",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",

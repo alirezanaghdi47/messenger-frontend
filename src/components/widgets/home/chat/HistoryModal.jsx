@@ -14,6 +14,8 @@ import voice from "../../../../assets/other/lorem-ipsum.mp3";
 import Filter from "./Filter";
 import History from "./History";
 import {useState} from "react";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import avatar from "../../../../assets/images/avatar.png";
 
 const fileList = [
     {id: 1, type: "file", content: file},
@@ -56,13 +58,54 @@ const ModalHeader = ({onClose}) => {
             }}
         >
 
-            <Typography
-                variant="subtitle2"
-                color="textPrimary"
-                fontWeight="bold"
+            <Stack
+                direction="row"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
             >
-                {t("typography.chatHistory")}
-            </Typography>
+
+                <LazyLoadImage
+                    src={avatar}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    style={{borderRadius: "50%"}}
+                />
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                    }}
+                >
+
+                    <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                        noWrap
+                    >
+                        علیرضا نقدی
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color="textPrimary"
+                        noWrap
+                    >
+                        Front End Developer
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
 
             <IconButton
                 variant="text"
@@ -99,6 +142,10 @@ const ModalContent = () => {
             />
 
             <History list={imageList}/>
+            {/*<History list={fileList}/>*/}
+            {/*<History list={voiceList}/>*/}
+            {/*<History list={videoList}/>*/}
+            {/*<History list={locationList}/>*/}
 
         </Stack>
     )
@@ -125,7 +172,7 @@ const HistoryModal = ({open, onClose}) => {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
+                    justifyContent: "start",
                     alignItems: "center",
                     width: isTablet ? "100%" : 640,
                     height: isTablet ? "100%" : "max-content",

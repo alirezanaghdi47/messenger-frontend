@@ -91,7 +91,7 @@ const ModalContent = () => {
                 >
 
                     <ReactPlayer
-                        url='https://hajifirouz3.cdn.asset.aparat.com/aparat-video/7260fdce8a177aa4bf0fb62543bedc4154220664-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6Ijc1YTU2ZmI0NGM3Yjg2MjdiY2JiNjkzNTBlZjNjM2QzIiwiZXhwIjoxNjkyNjQ5NTQ3LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.DTF1xUC3y4iFjBYN0JBzsHVWsJr7LxE4xVFH5nZqfBU'
+                        url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
                         width="100%"
                         height="100%"
                     />
@@ -100,8 +100,8 @@ const ModalContent = () => {
                         sx={{
                             position: 'absolute',
                             zIndex: 100,
-                            bottom: 8,
-                            left: 8,
+                            bottom: 0,
+                            left: 0,
                             borderRadius: 1,
                             boxShadow: 0,
                             padding: 1
@@ -109,7 +109,7 @@ const ModalContent = () => {
                     >
 
                         <ReactPlayer
-                            url='https://hajifirouz3.cdn.asset.aparat.com/aparat-video/7260fdce8a177aa4bf0fb62543bedc4154220664-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6Ijc1YTU2ZmI0NGM3Yjg2MjdiY2JiNjkzNTBlZjNjM2QzIiwiZXhwIjoxNjkyNjQ5NTQ3LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.DTF1xUC3y4iFjBYN0JBzsHVWsJr7LxE4xVFH5nZqfBU'
+                            url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
                             width="100%"
                             height={100}
                         />
@@ -125,6 +125,8 @@ const ModalContent = () => {
 }
 
 const ModalFooter = ({onClose}) => {
+
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <Stack
@@ -150,6 +152,7 @@ const ModalFooter = ({onClose}) => {
                 direction="row"
                 gap={2}
                 sx={{
+                    direction: language === "en" ? "rtl" : "ltr",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",

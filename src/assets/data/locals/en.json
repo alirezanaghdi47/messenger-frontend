@@ -29,12 +29,12 @@
       "session": "Sessions",
       "thisDevice": "Current device",
       "otherDevices": "Other devices",
-      "copyRight": "This web app developed by Alireza Naghdi",
+      "copyRight": "This web app is developed by Alireza Naghdi",
       "signIn": "Sign in",
       "signUpQuestion": "if don`t have any account",
       "signUp": "Sign up",
       "verifyCode": "Verify code",
-      "timeRemaining": "Remaining",
+      "timeRemaining": "Remaining time",
       "chatHistory": "Chat history"
     },
     "select": {

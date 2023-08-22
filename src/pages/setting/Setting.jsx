@@ -9,12 +9,14 @@ import Appbar from "../../components/widgets/setting/Appbar.jsx";
 import Version from "../../components/widgets/setting/Version.jsx";
 import Links from "../../components/widgets/setting/Links.jsx";
 import UserInfo from "../../components/widgets/setting/UserInfo.jsx";
+import {useSelector} from "react-redux";
 
 const pathList = ["/setting/profile", "/setting/appearance", "/setting/session"];
 
 const Setting = () => {
 
     const location = useLocation();
+    const {darkMode} = useSelector(state => state.profile.setting);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (

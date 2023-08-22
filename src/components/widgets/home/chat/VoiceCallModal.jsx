@@ -2,13 +2,7 @@
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Modal, Stack, Typography} from "@mui/material";
-import {
-    FiChevronLeft,
-    FiChevronRight,
-    FiMicOff,
-    FiMinimize,
-    FiPhoneOff,
-} from "react-icons/fi";
+import {FiMicOff, FiMinimize, FiPhoneOff} from "react-icons/fi";
 
 // assets
 import avatar from "../../../../assets/images/avatar.png";
@@ -108,21 +102,13 @@ const ModalFooter = ({onClose}) => {
                 direction="row"
                 gap={2}
                 sx={{
+                    direction: language === "en" ? "rtl" : "ltr",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
                 }}
             >
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                    size="large"
-                    onClick={onClose}
-                >
-                    {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
-                </IconButton>
 
                 <IconButton
                     variant="text"

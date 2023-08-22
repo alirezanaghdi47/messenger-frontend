@@ -24,7 +24,7 @@ export const TextMessage = ({message}) => {
         <Card
             sx={{
                 display: "flex",
-                gap: 2,
+                gap: 1,
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
@@ -102,7 +102,7 @@ export const ImageMessage = ({message}) => {
             sx={{
                 position: "relative",
                 display: "flex",
-                gap: 2,
+                gap: 1,
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
@@ -182,7 +182,7 @@ export const FileMessage = ({message}) => {
         <Card
             sx={{
                 display: "flex",
-                gap: 2,
+                gap: 1,
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
@@ -276,7 +276,7 @@ export const VoiceMessage = ({message}) => {
         <Card
             sx={{
                 display: "flex",
-                gap: 2,
+                gap: 1,
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
@@ -397,7 +397,7 @@ export const VideoMessage = ({message}) => {
                     sx={{
                         position: "absolute",
                         top: 8,
-                        right: 8,
+                        left: 8,
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -417,7 +417,7 @@ export const VideoMessage = ({message}) => {
                     sx={{
                         position: "absolute",
                         top: 8,
-                        left: 8,
+                        right: 8,
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -542,7 +542,7 @@ export const LogMessage = ({message}) => {
         <Card
             sx={{
                 display: "flex",
-                gap: 2,
+                gap: 1,
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "start",
@@ -636,9 +636,3 @@ export const LogMessage = ({message}) => {
         </Card>
     )
 }
-
-const Message = () => {
-    return null;
-}
-
-export default Message;

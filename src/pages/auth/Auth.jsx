@@ -57,11 +57,7 @@ const Auth = () => {
                             backgroundSize: "cover",
                             padding: 4
                         }}
-                    >
-
-                        image slider
-
-                    </Box>
+                    />
                 )
             }
 
