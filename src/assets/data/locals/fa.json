@@ -35,7 +35,8 @@
       "signUp": "عضویت",
       "verifyCode": "اعتبارسنجی",
       "timeRemaining": "زمان باقی مانده",
-      "chatHistory": "تاریخچه گفتگو ها"
+      "chatHistory": "تاریخچه گفتگو ها",
+      "createChat": "ایجاد پیام جدید"
     },
     "select": {
       "dark": "تاریک",
@@ -87,7 +88,10 @@
       "signIn": "وارد شوید",
       "signUp": "عضو شوید",
       "verifyCode": "اعتبارسنجی کنید",
-      "restart": "بازنشانی"
+      "restart": "بازنشانی",
+      "submit": "ثبت",
+      "cancel": "انصراف",
+      "send": "ارسال"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",

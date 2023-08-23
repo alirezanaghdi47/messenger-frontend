@@ -3,17 +3,17 @@ import {lazy, Suspense} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 // pages
-const Auth = lazy(() => import("../../pages/auth/Auth.jsx"));
-const SignIn = lazy(() => import("../../pages/auth/SignIn.jsx"));
-const SignUp = lazy(() => import("../../pages/auth/SignUp.jsx"));
-const VerifyCode = lazy(() => import("../../pages/auth/VerifyCode.jsx"));
-const Home = lazy(() => import("../../pages/home/Home.jsx"));
-const Chat = lazy(() => import("../../pages/home/Chat.jsx"));
-const Setting = lazy(() => import("../../pages/setting/Setting.jsx"));
-const Profile = lazy(() => import("../../pages/setting/Profile.jsx"));
-const Appearance = lazy(() => import("../../pages/setting/Appearance.jsx"));
-const Session = lazy(() => import("../../pages/setting/Session.jsx"));
-const NotFound = lazy(() => import("../../pages/home/NotFound.jsx"));
+const Auth = lazy(() => import("../../pages/Auth.jsx"));
+const SignIn = lazy(() => import("../../pages/SignIn.jsx"));
+const SignUp = lazy(() => import("../../pages/SignUp.jsx"));
+const VerifyCode = lazy(() => import("../../pages/VerifyCode.jsx"));
+const Home = lazy(() => import("../../pages/Home.jsx"));
+const Chat = lazy(() => import("../../pages/Chat.jsx"));
+const Setting = lazy(() => import("../../pages/Setting.jsx"));
+const Profile = lazy(() => import("../../pages/Profile.jsx"));
+const Appearance = lazy(() => import("../../pages/Appearance.jsx"));
+const Session = lazy(() => import("../../pages/Session.jsx"));
+const NotFound = lazy(() => import("../../pages/NotFound.jsx"));
 
 const Router = () => {
 

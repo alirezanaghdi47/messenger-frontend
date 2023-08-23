@@ -35,7 +35,8 @@
       "signUp": "Sign up",
       "verifyCode": "Verify code",
       "timeRemaining": "Remaining time",
-      "chatHistory": "Chat history"
+      "chatHistory": "Chat history",
+      "createChat": "Create chat"
     },
     "select": {
       "dark": "Dark",
@@ -87,7 +88,10 @@
       "signIn": "Sign in",
       "signUp": "Sign up",
       "verifyCode": "Verify code",
-      "restart": "Restart"
+      "restart": "Restart",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "send": "Send"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

@@ -6,6 +6,9 @@ import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle} from "react-icons/lu";
 
+// components
+import CreateChatModal from "./CreateChatModal";
+
 const ActionButton = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -22,7 +25,7 @@ const ActionButton = () => {
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 sx={{
                     position: 'absolute',
-                    zIndex: 150,
+                    zIndex: 25,
                     left: isDesktop ? "calc(100% - 60px)" : "calc(360px - 60px)",
                     bottom: 16
                 }}
@@ -45,13 +48,13 @@ const ActionButton = () => {
             >
 
                 <MenuItem
-                    onClick={() => console.log("add contact")}
                     sx={{
                         display: "flex",
                         gap: 1,
                         justifyContent: "start",
                         alignItems: "center",
                     }}
+                    onClick={() => console.log("add contact modal")}
                 >
 
                     <LuMessageCircle size={20}/>
@@ -67,6 +70,8 @@ const ActionButton = () => {
                 </MenuItem>
 
             </Menu>
+
+            {/*<CreateChatModal/>*/}
 
         </>
     )

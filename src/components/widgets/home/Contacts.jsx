@@ -34,11 +34,13 @@ const ContactItem = ({item}) => {
     const {t} = useTranslation();
     const theme = useTheme();
 
+    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/" : `/${item._id}`);
+
     return (
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => navigate(`/${item._id}`)}
+            onClick={() => _handleActiveItem(item)}
         >
 
             <Stack
