@@ -10,80 +10,11 @@ import {setBackground} from "../../../stores/slices/setting.js";
 // utils
 import {backgroundList} from "../../../utils/constants.js";
 
-const Title = ({title}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                gap: 2,
-                justifyContent: "start",
-                alignItems: 'center',
-                width: "100%",
-            }}
-        >
-
-            <Typography
-                variant="subtitle1"
-                color="textPrimary"
-                fontWeight='bold'
-            >
-                {t(title)}
-            </Typography>
-
-        </Box>
-    )
-}
-
-const Content = ({list}) => {
+const Background = () => {
 
     const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
-
-    return (
-        <Grid
-            component="ul"
-            container
-            spacing={2}
-            sx={{width: "100%"}}
-        >
-            {
-                list.map((item , index) =>
-                    <Grid
-                        key={item.id}
-                        component="li"
-                        item
-                        xs={6}
-                        sm={4}
-                        lg={3}
-                        sx={{
-                            cursor:"pointer",
-                            opacity: background === item.background ? 1: 0.5,
-                        }}
-                        onClick={() => dispatch(setBackground(index))}
-                    >
-                        <LazyLoadImage
-                            alt={item.id}
-                            src={item.background}
-                            width="100%"
-                            height="100%"
-                            effect="fade"
-                            style={{
-                                borderRadius: 8,
-                                objectFit: "cover"
-                            }}
-                        />
-                    </Grid>
-                )
-            }
-
-        </Grid>
-    )
-}
-
-const Background = () => {
+    const {t} = useTranslation();
 
     return (
         <Stack
@@ -97,9 +28,63 @@ const Background = () => {
             }}
         >
 
-            <Title title="typography.background"/>
+            <Box
+                sx={{
+                    display: "flex",
+                    gap: 2,
+                    justifyContent: "start",
+                    alignItems: 'center',
+                    width: "100%",
+                }}
+            >
 
-            <Content list={backgroundList}/>
+                <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    fontWeight='bold'
+                >
+                    {t("typography.background")}
+                </Typography>
+
+            </Box>
+
+            <Grid
+                component="ul"
+                container
+                spacing={2}
+                sx={{width: "100%"}}
+            >
+                {
+                    backgroundList.map((backgroundItem , index) =>
+                        <Grid
+                            key={backgroundItem.id}
+                            component="li"
+                            item
+                            xs={6}
+                            sm={4}
+                            lg={3}
+                            sx={{
+                                cursor:"pointer",
+                                opacity: background === backgroundItem.background ? 1: 0.5,
+                            }}
+                            onClick={() => dispatch(setBackground(index))}
+                        >
+                            <LazyLoadImage
+                                alt={backgroundItem.id}
+                                src={backgroundItem.background}
+                                width="100%"
+                                height="100%"
+                                effect="fade"
+                                style={{
+                                    borderRadius: 8,
+                                    objectFit: "cover"
+                                }}
+                            />
+                        </Grid>
+                    )
+                }
+
+            </Grid>
 
         </Stack>
     )

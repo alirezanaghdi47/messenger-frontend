@@ -6,7 +6,7 @@ import {Stack} from "@mui/material";
 // components
 import Primary from "../components/layouts/Primary.jsx";
 import Appbar from "../components/widgets/home/Appbar.jsx";
-import Contacts from "../components/widgets/home/Contacts.jsx";
+import Chats from "../components/widgets/home/Chats.jsx";
 import SearchBar from "../components/widgets/home/Searchbar.jsx";
 import ActionButton from "../components/widgets/home/ActionButton.jsx";
 
@@ -45,7 +45,7 @@ const Home = () => {
 
                         <SearchBar/>
 
-                        <Contacts/>
+                        <Chats/>
 
                         <ActionButton/>
 

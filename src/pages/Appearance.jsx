@@ -1,5 +1,4 @@
 // libraries
-import {useLocation} from "react-router-dom";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -9,10 +8,9 @@ import Personalization from "../components/widgets/appearance/Personalization.js
 
 const Appearance = () => {
 
-    const location = useLocation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    return location.pathname === "/setting/appearance" && (
+    return (
         <Stack
             component="main"
             direction="column"

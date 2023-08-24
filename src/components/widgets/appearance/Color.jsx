@@ -9,74 +9,11 @@ import {setColor} from "../../../stores/slices/setting.js";
 // utils
 import {colorList} from "../../../utils/constants.js";
 
-const Title = ({title}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                gap: 2,
-                justifyContent: "start",
-                alignItems: 'center',
-                width: "100%",
-            }}
-        >
-
-            <Typography
-                variant="subtitle1"
-                color="textPrimary"
-                fontWeight='bold'
-            >
-                {t(title)}
-            </Typography>
-
-        </Box>
-    )
-}
-
-const Content = ({list}) => {
+const Color = () => {
 
     const dispatch = useDispatch();
     const {darkMode , color} = useSelector(state => state.setting.appearance);
-
-    return (
-        <Stack
-            component="ul"
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                width: "100%"
-            }}
-        >
-
-            {
-                list.map((item, index) =>
-                    <Box
-                        key={item.id}
-                        component="li"
-                        sx={{
-                            opacity: color.dark === item.color.dark ? 1: 0.5,
-                            width: 40,
-                            height: 40,
-                            background: darkMode ? item.color.dark : item.color.light,
-                            borderRadius: "50%",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => dispatch(setColor(index))}
-                    />
-                )
-            }
-
-        </Stack>
-    )
-}
-
-const Color = () => {
+    const {t} = useTranslation();
 
     return (
         <Stack
@@ -90,9 +27,57 @@ const Color = () => {
             }}
         >
 
-            <Title title="typography.color"/>
+            <Box
+                sx={{
+                    display: "flex",
+                    gap: 2,
+                    justifyContent: "start",
+                    alignItems: 'center',
+                    width: "100%",
+                }}
+            >
 
-            <Content list={colorList}/>
+                <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    fontWeight='bold'
+                >
+                    {t("typography.color")}
+                </Typography>
+
+            </Box>
+
+            <Stack
+                component="ul"
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%"
+                }}
+            >
+
+                {
+                    colorList.map((colorItem, index) =>
+                        <Box
+                            key={colorItem.id}
+                            component="li"
+                            sx={{
+                                opacity: color.dark === colorItem.color.dark ? 1: 0.5,
+                                width: 40,
+                                height: 40,
+                                background: darkMode ? colorItem.color.dark : colorItem.color.light,
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => dispatch(setColor(index))}
+                        />
+                    )
+                }
+
+            </Stack>
 
         </Stack>
     )

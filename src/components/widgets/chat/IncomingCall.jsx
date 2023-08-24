@@ -1,8 +1,8 @@
 // libraries
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiMinimize, FiPhoneOff} from "react-icons/fi";
+import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiPhone, FiPhoneOff} from "react-icons/fi";
 
 // assets
 import avatar from "../../../assets/images/avatar.png";
@@ -52,25 +52,31 @@ const ModalHeader = ({onClose}) => {
 
 const ModalContent = () => {
 
-
     return (
-        <Stack
-            direction="column"
-            gap={2}
-            sx={{
-                position: "absolute",
-                zIndex: 50,
-                top: 0,
-                left: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-            }}
+        <Container
+            maxWidth="xl"
+            disableGutters
         >
 
-        </Stack>
+            <Stack
+                direction="column"
+                gap={2}
+                sx={{
+                    position: "absolute",
+                    zIndex: 50,
+                    top: 0,
+                    left: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+
+            </Stack>
+
+        </Container>
     )
 }
 
@@ -111,12 +117,11 @@ const ModalFooter = ({onClose}) => {
             >
 
                 <IconButton
-                    variant="text"
-                    color="ternary"
+                    variant="contained"
+                    color="success"
                     size="large"
-                    onClick={onClose}
                 >
-                    <FiMicOff size={20}/>
+                    <FiPhone size={20}/>
                 </IconButton>
 
                 <IconButton
@@ -127,21 +132,13 @@ const ModalFooter = ({onClose}) => {
                     <FiPhoneOff size={20}/>
                 </IconButton>
 
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                    size="large"
-                >
-                    <FiMinimize size={20}/>
-                </IconButton>
-
             </Stack>
 
         </Stack>
     )
 }
 
-const VoiceCallModal = ({open, onClose}) => {
+const IncomingCall = ({open, onClose}) => {
 
     const {background} = useSelector(state => state.setting.appearance);
 
@@ -150,9 +147,7 @@ const VoiceCallModal = ({open, onClose}) => {
             // open={open}
             open={true}
             // onClose={onClose}
-            onClose={() => {
-                return null
-            }}
+            onClose={() => {return null}}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -190,5 +185,5 @@ const VoiceCallModal = ({open, onClose}) => {
     )
 }
 
-export default VoiceCallModal;
+export default IncomingCall;
 

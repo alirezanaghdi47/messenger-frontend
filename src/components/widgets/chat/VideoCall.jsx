@@ -1,14 +1,16 @@
 // libraries
+import {useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
+import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Card, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiMinimize, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
+import {Card, Container, IconButton, MenuItem, Modal, Stack, Typography} from "@mui/material";
+import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideo, FiVideoOff} from "react-icons/fi";
 
 // components
 import avatar from "../../../assets/images/avatar.png";
 
-const ModalHeader = ({onClose}) => {
+const ModalHeader = () => {
 
     return (
         <Stack
@@ -164,7 +166,6 @@ const ModalFooter = ({onClose}) => {
                     variant="text"
                     color="ternary"
                     size="large"
-                    onClick={onClose}
                 >
                     <FiRefreshCw size={20}/>
                 </IconButton>
@@ -173,7 +174,6 @@ const ModalFooter = ({onClose}) => {
                     variant="text"
                     color="ternary"
                     size="large"
-                    onClick={onClose}
                 >
                     <FiMicOff size={20}/>
                 </IconButton>
@@ -182,7 +182,6 @@ const ModalFooter = ({onClose}) => {
                     variant="text"
                     color="ternary"
                     size="large"
-                    onClick={onClose}
                 >
                     <FiVideoOff size={20}/>
                 </IconButton>
@@ -191,16 +190,9 @@ const ModalFooter = ({onClose}) => {
                     variant="contained"
                     color="error"
                     size="large"
+                    onClick={onClose}
                 >
                     <FiPhoneOff size={20}/>
-                </IconButton>
-
-                <IconButton
-                    variant="text"
-                    color="ternary"
-                    size="large"
-                >
-                    <FiMinimize size={20}/>
                 </IconButton>
 
             </Stack>
@@ -209,18 +201,14 @@ const ModalFooter = ({onClose}) => {
     )
 }
 
-const VideoCallModal = ({open, onClose}) => {
+const VideoCallModal = ({isOpen, onClose}) => {
 
     const {background} = useSelector(state => state.setting.appearance);
 
     return (
         <Modal
-            // open={open}
-            open={true}
-            // onClose={onClose}
-            onClose={() => {
-                return null
-            }}
+            open={isOpen}
+            onClose={onClose}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -246,11 +234,11 @@ const VideoCallModal = ({open, onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 
-                <ModalFooter/>
+                <ModalFooter onClose={onClose}/>
 
             </Stack>
 
@@ -258,5 +246,68 @@ const VideoCallModal = ({open, onClose}) => {
     )
 }
 
-export default VideoCallModal;
+export const MobileVideoCall = () => {
 
+    const {t} = useTranslation();
+
+    const [showModal , setShowModal] = useState(false);
+
+    return (
+        <>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={() => setShowModal(true)}
+            >
+
+                <FiVideo size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.videoCall")}
+                </Typography>
+
+            </MenuItem>
+
+            <VideoCallModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+            />
+
+        </>
+    )
+}
+
+export const DesktopVideoCall = () => {
+
+    const [showModal , setShowModal] = useState(false);
+
+    return (
+        <>
+
+            <IconButton
+                component="li"
+                variant="text"
+                color="ternary"
+                onClick={() => setShowModal(true)}
+            >
+                <FiVideo size={20}/>
+            </IconButton>
+
+            <VideoCallModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+            />
+
+        </>
+    )
+}

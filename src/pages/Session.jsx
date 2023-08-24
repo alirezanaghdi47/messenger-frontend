@@ -1,5 +1,4 @@
 // libraries
-import {useLocation} from "react-router-dom";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -9,10 +8,9 @@ import Logs from "../components/widgets/session/Logs.jsx";
 
 const Session = () => {
 
-    const location = useLocation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    return location.pathname === "/setting/session" && (
+    return (
         <Stack
             component="main"
             direction="column"

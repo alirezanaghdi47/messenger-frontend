@@ -1,18 +1,15 @@
 // libraries
 import {useState} from "react";
-import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
+import {IconButton, Menu} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
-import {LuMessageCircle} from "react-icons/lu";
 
 // components
-import CreateChatModal from "./CreateChatModal";
+import CreateChat from "./CreateChat";
 
 const ActionButton = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const {t} = useTranslation();
     const isDesktop = useMediaQuery('(max-width: 992px)');
 
     return (
@@ -47,31 +44,9 @@ const ActionButton = () => {
                 onClose={() => setAnchorEl(null)}
             >
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                    }}
-                    onClick={() => console.log("add contact modal")}
-                >
-
-                    <LuMessageCircle size={20}/>
-
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.createChat")}
-                    </Typography>
-
-                </MenuItem>
+                <CreateChat/>
 
             </Menu>
-
-            {/*<CreateChatModal/>*/}
 
         </>
     )

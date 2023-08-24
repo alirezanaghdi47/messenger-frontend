@@ -9,34 +9,7 @@ import {setFontSize} from "../../../stores/slices/setting.js";
 // utils
 import {fontSizeList} from "../../../utils/constants.js";
 
-const Title = ({title}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                gap: 2,
-                justifyContent: "start",
-                alignItems: 'center',
-                width: "100%",
-            }}
-        >
-
-            <Typography
-                variant="subtitle1"
-                color="textPrimary"
-                fontWeight='bold'
-            >
-                {t(title)}
-            </Typography>
-
-        </Box>
-    )
-}
-
-const Content = ({list}) => {
+const FontSize = () => {
 
     const dispatch = useDispatch();
     const {fontSize} = useSelector(state => state.setting.appearance);
@@ -44,7 +17,37 @@ const Content = ({list}) => {
     const theme = useTheme();
 
     return (
-        <>
+        <Stack
+            direction="column"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "start",
+                width: "100%",
+            }}
+        >
+
+            <Box
+                sx={{
+                    display: "flex",
+                    gap: 2,
+                    justifyContent: "start",
+                    alignItems: 'center',
+                    width: "100%",
+                }}
+            >
+
+                <Typography
+                    variant="subtitle1"
+                    color="textPrimary"
+                    fontWeight='bold'
+                >
+                    {t("typography.fontSize")}
+                </Typography>
+
+            </Box>
+
             <Card
                 sx={{
                     display: "flex",
@@ -57,7 +60,7 @@ const Content = ({list}) => {
             >
 
                 <Typography
-                    variant={list.find(item => item.value === fontSize).size}
+                    variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
                     color={theme.palette.getContrastText(theme.palette.primary.main)}
                     fontWeight="bold"
                 >
@@ -76,27 +79,6 @@ const Content = ({list}) => {
                 onChange={(e, newValue) => dispatch(setFontSize(newValue))}
                 sx={{maxWidth: 300}}
             />
-        </>
-    )
-}
-
-const FontSize = () => {
-
-    return (
-        <Stack
-            direction="column"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "start",
-                width: "100%",
-            }}
-        >
-
-            <Title title="typography.fontSize"/>
-
-            <Content list={fontSizeList}/>
 
         </Stack>
     )

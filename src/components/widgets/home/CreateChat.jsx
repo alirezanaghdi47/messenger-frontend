@@ -1,14 +1,16 @@
 // libraries
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Modal, Stack, IconButton, Typography, Button} from "@mui/material";
+import {Modal, Stack, IconButton, Typography, Button, MenuItem} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
+import {LuMessageCircle} from "react-icons/lu";
 
 // components
 import SearchBar from "./Searchbar";
-import Users from "./Users";
+import Contacts from "./Contacts";
 
-const ModalHeader = () => {
+const ModalHeader = ({onClose}) => {
 
     const {t} = useTranslation();
 
@@ -36,6 +38,7 @@ const ModalHeader = () => {
             <IconButton
                 variant="text"
                 color="ternary"
+                onClick={onClose}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -61,13 +64,13 @@ const ModalContent = () => {
 
             <SearchBar/>
 
-            <Users/>
+            <Contacts/>
 
         </Stack>
     )
 }
 
-const ModalFooter = () => {
+const ModalFooter = ({onClose}) => {
 
     const {t} = useTranslation();
 
@@ -87,6 +90,7 @@ const ModalFooter = () => {
                 color="ternary"
                 variant="text"
                 startIcon={<FiX size={20}/>}
+                onClick={onClose}
             >
                 {t("button.cancel")}
             </Button>
@@ -95,6 +99,7 @@ const ModalFooter = () => {
                 color="primary"
                 variant="contained"
                 startIcon={<FiCheck size={20}/>}
+                onClick={onClose}
             >
                 {t("button.submit")}
             </Button>
@@ -103,14 +108,14 @@ const ModalFooter = () => {
     )
 }
 
-const CreateChatModal = () => {
+const CreateChatModal = ({isOpen , onClose}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={true}
-            onClose={() => {return null}}
+            open={isOpen}
+            onClose={onClose}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -135,11 +140,11 @@ const CreateChatModal = () => {
                 }}
             >
 
-                <ModalHeader/>
+                <ModalHeader onClose={onClose}/>
 
                 <ModalContent/>
 
-                <ModalFooter/>
+                <ModalFooter onClose={onClose}/>
 
             </Stack>
 
@@ -147,5 +152,44 @@ const CreateChatModal = () => {
     )
 }
 
-export default CreateChatModal;
+const CreateChat = () => {
 
+    const {t} = useTranslation();
+
+    const [showModal , setShowModal] = useState(false);
+
+    return (
+        <>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+                onClick={() => setShowModal(true)}
+            >
+
+                <LuMessageCircle size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.createChat")}
+                </Typography>
+
+            </MenuItem>
+
+            <CreateChatModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+            />
+
+        </>
+    )
+}
+
+export default CreateChat;

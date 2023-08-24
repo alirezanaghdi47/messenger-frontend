@@ -8,72 +8,13 @@ import {LuPaperclip} from "react-icons/lu";
 const attachmentList = [
     {id: 1 , title: "menu.file", value: "file" , icon: <FiFile size={20}/>},
     {id: 2 , title: "menu.image", value: "image" , icon: <FiImage size={20}/>},
-    {id: 3 , title: "menu.movie", value: "movie" , icon: <FiFilm size={20}/>},
-    {id: 4 , title: "menu.music", value: "music" , icon: <FiMusic size={20}/>},
+    {id: 3 , title: "menu.video", value: "video" , icon: <FiFilm size={20}/>},
     {id: 5 , title: "menu.location", value: "location" , icon: <FiMapPin size={20}/>},
 ];
 
-const DropdownMenuItem = ({item}) => {
+const Attachment = () => {
 
     const {t} = useTranslation();
-
-    return (
-        <MenuItem
-            key={item.id}
-            sx={{
-                display: "flex",
-                gap: 1,
-                justifyContent: "start",
-                alignItems: "center",
-            }}
-            onClick={() => console.log(item.value)}
-        >
-
-            {item.icon}
-
-            <Typography
-                variant="body2"
-                color="textSecondary"
-                fontWeight='bold'
-            >
-                {t(item.title)}
-            </Typography>
-
-        </MenuItem>
-    )
-}
-
-const DropdownMenu = ({anchorEl , setAnchorEl , list}) => {
-
-    return (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-            }}
-            transformOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-        >
-
-            {
-                list.map(item =>
-                    <DropdownMenuItem
-                        key={item.id}
-                        item={item}
-                    />
-                )
-            }
-
-        </Menu>
-    )
-}
-
-const Attachment = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -88,11 +29,48 @@ const Attachment = () => {
                 <LuPaperclip size={20}/>
             </IconButton>
 
-            <DropdownMenu
-                list={attachmentList}
+            <Menu
                 anchorEl={anchorEl}
-                setAnchorEl={(data) => setAnchorEl(data)}
-            />
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+            >
+
+                {
+                    attachmentList.map(attachmentItem =>
+                        <MenuItem
+                            key={attachmentItem.id}
+                            sx={{
+                                display: "flex",
+                                gap: 1,
+                                justifyContent: "start",
+                                alignItems: "center",
+                            }}
+                            onClick={() => console.log(attachmentItem.value)}
+                        >
+
+                            {attachmentItem.icon}
+
+                            <Typography
+                                variant="body2"
+                                color="textSecondary"
+                                fontWeight='bold'
+                            >
+                                {t(attachmentItem.title)}
+                            </Typography>
+
+                        </MenuItem>
+                    )
+                }
+
+            </Menu>
 
         </>
     )

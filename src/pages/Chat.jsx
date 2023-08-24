@@ -7,7 +7,7 @@ import {Stack} from "@mui/material";
 // components
 import Header from "../components/widgets/chat/Header.jsx";
 import Footer from "../components/widgets/chat/Footer.jsx";
-import Chats from "../components/widgets/chat/Chats.jsx";
+import Messages from "../components/widgets/chat/Messages.jsx";
 import ScrollToBottom from "../components/widgets/chat/ScrollToBottom.jsx";
 
 const Chat = () => {
@@ -39,7 +39,7 @@ const Chat = () => {
 
             <Header/>
 
-            <Chats/>
+            <Messages/>
 
             <ScrollToBottom/>
 

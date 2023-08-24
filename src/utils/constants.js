@@ -7,7 +7,7 @@ import desktop5 from "../assets/images/desktop-5.jpg";
 import fa from "../assets/images/fa.png";
 import en from "../assets/images/en.png";
 
-export const version = "0.5.0";
+export const version = "0.5.5";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},

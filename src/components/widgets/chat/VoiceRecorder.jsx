@@ -1,32 +1,31 @@
 // libraries
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Modal, Stack, IconButton, Typography, useTheme, alpha, Container, Card, Button} from "@mui/material";
-import {FiCheck, FiPlay, FiSend, FiX} from "react-icons/fi";
-import {LuPlay} from "react-icons/lu";
+import {Stack, IconButton, Typography, Button} from "@mui/material";
+import {FiSend, FiX} from "react-icons/fi";
+import {LuMic} from "react-icons/lu";
 
-const VoiceModal = () => {
+const VoiceRecorderModal = ({isOpen , onClose}) => {
 
     const {t} = useTranslation();
-    const theme = useTheme();
 
-    return (
+    return isOpen && (
         <Stack
             direction="row"
             gap={2}
             sx={{
                 position: "absolute",
-                bottom: 70,
+                bottom: 80,
                 left: 0,
                 zIndex: 50,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
-                height: 80,
+                height: 60,
                 bgcolor: "background.paper",
                 borderRadius: 0,
-                boxShadow: 3,
+                boxShadow: 1,
                 padding: 2,
             }}
         >
@@ -35,6 +34,7 @@ const VoiceModal = () => {
                 variant="text"
                 color="primary"
                 startIcon={<FiSend size={20}/>}
+                onClick={onClose}
             >
                 {t("button.send")}
             </Button>
@@ -51,6 +51,7 @@ const VoiceModal = () => {
                 variant="text"
                 color="error"
                 startIcon={<FiX size={20}/>}
+                onClick={onClose}
             >
                 {t("button.cancel")}
             </Button>
@@ -59,5 +60,29 @@ const VoiceModal = () => {
     )
 }
 
-export default VoiceModal;
+const VoiceRecorder = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    return (
+        <>
+
+            <IconButton
+                varinat="text"
+                color="ternary"
+                onClick={() => setShowModal(true)}
+            >
+                <LuMic size={20}/>
+            </IconButton>
+
+            <VoiceRecorderModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+            />
+
+        </>
+    )
+}
+
+export default VoiceRecorder;
 

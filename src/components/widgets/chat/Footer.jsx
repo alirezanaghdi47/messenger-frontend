@@ -2,12 +2,12 @@
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {IconButton, Stack} from "@mui/material";
-import {LuMic, LuSend} from "react-icons/lu";
+import {LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "../../modules/TextInput.jsx";
 import Attachment from "./Attachment.jsx";
-import Emoji from "./Emoji.jsx";
+import VoiceRecorder from "./VoiceRecorder";
 
 const Footer = () => {
 
@@ -28,7 +28,10 @@ const Footer = () => {
             direction="row"
             gap={1}
             sx={{
+                position: "absolute",
                 zIndex: 100,
+                bottom: 0,
+                left: 0,
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -40,19 +43,13 @@ const Footer = () => {
             }}
         >
 
-            <IconButton
-                varinat="text"
-                color="ternary"
-            >
-                <LuMic size={20}/>
-            </IconButton>
+            <VoiceRecorder/>
 
             <Attachment/>
 
             <TextInput
                 name="message"
                 placeholder={t("input.message")}
-                startIcon={<Emoji/>}
                 endIcon={
                     <IconButton
                         varinat="text"
