@@ -4,6 +4,8 @@ import {FiChevronDown} from "react-icons/fi";
 
 const ScrollToBottom = () => {
 
+    const _handleScrollToBottom = () => {}
+
     return (
         <IconButton
             variant="contained"
@@ -16,6 +18,7 @@ const ScrollToBottom = () => {
                 bottom: 88,
                 boxShadow: 3
             }}
+            onClick={_handleScrollToBottom}
         >
             <FiChevronDown size={20}/>
         </IconButton>

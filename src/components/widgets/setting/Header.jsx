@@ -13,6 +13,10 @@ const Header = ({title}) => {
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
+    const _handleBack = () => {
+        navigate("/setting");
+    }
+
     return isTablet && (
         <Stack
             direction="row"
@@ -32,7 +36,7 @@ const Header = ({title}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={() => navigate("/setting")}
+                onClick={_handleBack}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>

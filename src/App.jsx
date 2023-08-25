@@ -5,6 +5,7 @@ import ContextMenu from "./components/helpers/ContextMenu.jsx";
 
 // styles
 import "./styles/global.scss";
+import 'simplebar-react/dist/simplebar.min.css';
 
 const App = () => {
 

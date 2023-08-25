@@ -1,10 +1,8 @@
 // libraries
-import {useState} from "react";
 import {useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, MenuItem, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiPhone, FiPhoneOff} from "react-icons/fi";
+import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiPhone, FiPhoneOff} from "react-icons/fi";
 
 // assets
 import avatar from "../../../assets/images/avatar.png";
@@ -55,23 +53,30 @@ const ModalHeader = () => {
 const ModalContent = () => {
 
     return (
-        <Stack
-            direction="column"
-            gap={2}
-            sx={{
-                position: "absolute",
-                zIndex: 50,
-                top: 0,
-                left: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-            }}
+        <Container
+            maxWidth="xl"
+            disableGutters
         >
 
-        </Stack>
+            <Stack
+                direction="column"
+                gap={2}
+                sx={{
+                    position: "absolute",
+                    zIndex: 50,
+                    top: 0,
+                    left: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+
+            </Stack>
+
+        </Container>
     )
 }
 
@@ -112,11 +117,11 @@ const ModalFooter = ({onClose}) => {
             >
 
                 <IconButton
-                    variant="text"
-                    color="ternary"
+                    variant="contained"
+                    color="success"
                     size="large"
                 >
-                    <FiMicOff size={20}/>
+                    <FiPhone size={20}/>
                 </IconButton>
 
                 <IconButton
@@ -134,7 +139,7 @@ const ModalFooter = ({onClose}) => {
     )
 }
 
-const VoiceCallModal = ({isOpen, onClose}) => {
+const IncomingCallModal = ({isOpen, onClose}) => {
 
     const {background} = useSelector(state => state.setting.appearance);
 
@@ -167,7 +172,7 @@ const VoiceCallModal = ({isOpen, onClose}) => {
                 }}
             >
 
-                <ModalHeader/>
+                <ModalHeader />
 
                 <ModalContent/>
 
@@ -179,68 +184,5 @@ const VoiceCallModal = ({isOpen, onClose}) => {
     )
 }
 
-export const MobileVoiceCall = () => {
+export default IncomingCallModal;
 
-    const {t} = useTranslation();
-
-    const [showModal , setShowModal] = useState(false);
-
-    return (
-        <>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "ternary.main"
-                }}
-                onClick={() => setShowModal(true)}
-            >
-
-                <FiPhone size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    fontWeight='bold'
-                >
-                    {t("menu.voiceCall")}
-                </Typography>
-
-            </MenuItem>
-
-            <VoiceCallModal
-                isOpen={showModal}
-                onClose={() => setShowModal(false)}
-            />
-
-        </>
-    )
-}
-
-export const DesktopVoiceCall = () => {
-
-    const [showModal , setShowModal] = useState(false);
-
-    return (
-        <>
-
-            <IconButton
-                component="li"
-                variant="text"
-                color="ternary"
-                onClick={() => setShowModal(true)}
-            >
-                <FiPhone size={20}/>
-            </IconButton>
-
-            <VoiceCallModal
-                isOpen={showModal}
-                onClose={() => setShowModal(false)}
-            />
-
-        </>
-    )
-}

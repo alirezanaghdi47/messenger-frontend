@@ -1,12 +1,14 @@
 // libraries
 import {useTranslation} from "react-i18next";
+import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
+import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack, Typography} from "@mui/material";
 
 // assets
 import avatar from "../../../assets/images/avatar.png";
 
-const userList = [
+const contactList = [
     {_id: "1"},
     {_id: "2"},
     {_id: "3"},
@@ -17,91 +19,99 @@ const userList = [
 const Contacts = () => {
 
     const {t} = useTranslation();
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Stack
-            component="ul"
-            direction="column"
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
+        <SimpleBar
+            style={{
                 width: "100%",
-                height: "100%",
-                overflowY: "auto",
+                height: isTablet ? "calc(100dvh - 200px)" : 480
             }}
-            className="remove-scrollbar"
         >
 
-            {
-                userList.map(userItem =>
-                    <Box
-                        key={userItem._id}
-                        component="li"
-                        sx={{width: "100%"}}
-                    >
+            <Stack
+                component="ul"
+                direction="column"
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
 
-                        <Stack
-                            direction="row"
-                            gap={1}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "start",
-                                alignItems: "center",
-                                width: "100%",
-                                borderRadius: 1,
-                                padding: 1.5,
-                                textDecoration: 'none',
-                                cursor: "pointer",
-                            }}
+                {
+                    contactList.map(contactItem =>
+                        <Box
+                            key={contactItem._id}
+                            component="li"
+                            sx={{width: "100%"}}
                         >
 
-                            <LazyLoadImage
-                                src={avatar}
-                                alt="avatar"
-                                width={40}
-                                height={40}
-                                style={{borderRadius: "50%"}}
-                            />
-
                             <Stack
-                                direction="column"
-                                gap={0.5}
+                                direction="row"
+                                gap={1}
                                 sx={{
                                     display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "start"
+                                    justifyContent: "start",
+                                    alignItems: "center",
+                                    width: "100%",
+                                    borderRadius: 1,
+                                    padding: 1.5,
+                                    textDecoration: 'none',
+                                    cursor: "pointer",
                                 }}
                             >
 
-                                <Typography
-                                    variant="subtitle2"
-                                    color="textPrimary"
-                                    fontWeight='bold'
-                                    noWrap
-                                >
-                                    علیرضا نقدی
-                                </Typography>
+                                <LazyLoadImage
+                                    src={avatar}
+                                    alt="avatar"
+                                    width={40}
+                                    height={40}
+                                    style={{borderRadius: "50%"}}
+                                />
 
-                                <Typography
-                                    variant="caption"
-                                    color="textSecondary"
-                                    noWrap
+                                <Stack
+                                    direction="column"
+                                    gap={0.5}
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "start"
+                                    }}
                                 >
-                                    {t("typography.lastSeen")}
-                                    &nbsp;
-                                    11:11
-                                </Typography>
+
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="textPrimary"
+                                        fontWeight='bold'
+                                        noWrap
+                                    >
+                                        علیرضا نقدی
+                                    </Typography>
+
+                                    <Typography
+                                        variant="caption"
+                                        color="textSecondary"
+                                        noWrap
+                                    >
+                                        {t("typography.lastSeen")}
+                                        &nbsp;
+                                        11:11
+                                    </Typography>
+
+                                </Stack>
 
                             </Stack>
 
-                        </Stack>
+                        </Box>
+                    )
+                }
 
-                    </Box>
-                )
-            }
+            </Stack>
 
-        </Stack>
+        </SimpleBar>
     )
 }
 

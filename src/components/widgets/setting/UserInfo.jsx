@@ -14,7 +14,7 @@ const userInfoList = [
     {id: 3 ,title: "input.biography", value: "Front End Developer" , icon: <FiInfo size={20}/>},
 ];
 
-const UserInfoPreview = () => {
+const UserDetail = () => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
@@ -80,60 +80,9 @@ const UserInfoPreview = () => {
     )
 }
 
-const UserInfoItem = ({item}) => {
+const UserLinks = () => {
 
     const {t} = useTranslation();
-
-    return (
-        <Stack
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                width: "100%",
-                color: "ternary.main"
-            }}
-        >
-
-            {item.icon}
-
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "start",
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    {item.value}
-                </Typography>
-
-                <Typography
-                    variant="caption"
-                    color="textSecondary"
-                    noWrap
-                >
-                    {t(item.title)}
-                </Typography>
-
-            </Stack>
-
-        </Stack>
-    )
-}
-
-const UserInfoList = ({list}) => {
 
     return (
         <Stack
@@ -148,11 +97,53 @@ const UserInfoList = ({list}) => {
         >
 
             {
-                list.map(item =>
-                    <UserInfoItem
-                        key={item.id}
-                        item={item}
-                    />
+                userInfoList.map(userInfoItem =>
+                    <Stack
+                        key={userInfoItem.id}
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "start",
+                            alignItems: "center",
+                            width: "100%",
+                            color: "ternary.main"
+                        }}
+                    >
+
+                        {userInfoItem.icon}
+
+                        <Stack
+                            direction="column"
+                            gap={1}
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "start",
+                                width: "100%",
+                            }}
+                        >
+
+                            <Typography
+                                variant="subtitle2"
+                                color="textPrimary"
+                                fontWeight='bold'
+                                noWrap
+                            >
+                                {userInfoItem.value}
+                            </Typography>
+
+                            <Typography
+                                variant="caption"
+                                color="textSecondary"
+                                noWrap
+                            >
+                                {t(userInfoItem.title)}
+                            </Typography>
+
+                        </Stack>
+
+                    </Stack>
                 )
             }
 
@@ -174,9 +165,9 @@ const UserInfo = () => {
             }}
         >
 
-            <UserInfoPreview/>
+            <UserDetail/>
 
-            <UserInfoList list={userInfoList}/>
+            <UserLinks/>
 
         </Stack>
     )

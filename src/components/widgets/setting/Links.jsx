@@ -10,50 +10,18 @@ const linkList = [
     {id: 3, title: "menu.session", value: "session", icon: <LuMonitor size={20}/>},
 ];
 
-const LinkItem = ({item}) => {
+const Links = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
     const {t} = useTranslation();
     const theme = useTheme();
 
-    return(
-        <Stack
-            component="li"
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                width: "100%",
-                bgcolor: location.pathname === "/setting/" + item.value && "primary.main",
-                color: location.pathname === "/setting/" + item.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
-                borderRadius: 1,
-                padding: 1.5,
-                cursor: "pointer"
-            }}
-            onClick={() => navigate(`/setting/${item.value}`)}
-        >
+    const _handleActiveLink = (value) => {
+        navigate(`/setting/${value}`);
+    }
 
-            {item.icon}
-
-            <Typography
-                variant="subtitle2"
-                color={location.pathname === "/setting/" + item.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                fontWeight='bold'
-                noWrap
-            >
-                {t(item.title)}
-            </Typography>
-
-        </Stack>
-    )
-}
-
-const LinkList = ({list}) => {
-
-    return(
+    return (
         <Stack
             component="ul"
             direction="column"
@@ -66,22 +34,42 @@ const LinkList = ({list}) => {
         >
 
             {
-                list.map(item =>
-                    <LinkItem
-                        key={item.id}
-                        item={item}
-                    />
+                linkList.map(linkItem =>
+                    <Stack
+                        key={linkItem.id}
+                        component="li"
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "start",
+                            alignItems: "center",
+                            width: "100%",
+                            bgcolor: location.pathname === "/setting/" + linkItem.value && "primary.main",
+                            color: location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
+                            borderRadius: 1,
+                            padding: 1.5,
+                            cursor: "pointer"
+                        }}
+                        onClick={() => _handleActiveLink(linkItem.value)}
+                    >
+
+                        {linkItem.icon}
+
+                        <Typography
+                            variant="subtitle2"
+                            color={location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                            fontWeight='bold'
+                            noWrap
+                        >
+                            {t(linkItem.title)}
+                        </Typography>
+
+                    </Stack>
                 )
             }
 
         </Stack>
-    )
-}
-
-const Links = () => {
-
-    return (
-        <LinkList list={linkList}/>
     )
 }
 

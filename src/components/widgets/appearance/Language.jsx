@@ -16,6 +16,10 @@ const Language = () => {
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
+    const _handleActiveLanguage = (value) => {
+        dispatch(setLanguage(value));
+    }
+
     return (
         <Stack
             direction="column"
@@ -74,7 +78,7 @@ const Language = () => {
                                     height={16}
                                 />
                             }
-                            onClick={() => dispatch(setLanguage(languageItem.value))}
+                            onClick={() => _handleActiveLanguage(languageItem.value)}
                         >
                             {t(languageItem.title)}
                         </Button>

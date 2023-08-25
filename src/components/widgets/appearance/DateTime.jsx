@@ -15,6 +15,10 @@ const DateTime = () => {
     const {dateFormat} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
+    const _handleActiveDateTime = (value) => {
+        dispatch(setDateFormat(value));
+    }
+
     return (
         <Stack
             direction="column"
@@ -65,7 +69,7 @@ const DateTime = () => {
                             key={dateTimeItem.id}
                             variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
                             color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
-                            onClick={() => dispatch(setDateFormat(dateTimeItem.value))}
+                            onClick={() => _handleActiveDateTime(dateTimeItem.value)}
                         >
                             {t(dateTimeItem.title)}
                         </Button>

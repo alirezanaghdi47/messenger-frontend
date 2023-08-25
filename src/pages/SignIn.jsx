@@ -2,9 +2,9 @@
 import {Stack, Container} from "@mui/material";
 
 // components
-import Header from "../components/widgets/signIn/Header.jsx";
-import Form from "../components/widgets/signIn/Form.jsx";
-import Redirect from "../components/widgets/signIn/Redirect.jsx";
+import Header from "../components/widgets/auth/Header.jsx";
+import SignInForm from "../components/widgets/signIn/SignInForm.jsx";
+import VerifyCodeForm from "../components/widgets/signIn/VerifyCodeForm";
 
 const SignIn = () => {
 
@@ -27,9 +27,9 @@ const SignIn = () => {
 
                 <Header title="typography.signIn"/>
 
-                <Form/>
+                <SignInForm/>
 
-                <Redirect/>
+                {/*<VerifyCodeForm/>*/}
 
             </Stack>
 

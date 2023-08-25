@@ -8,7 +8,7 @@ import Primary from "../components/layouts/Primary.jsx";
 import Appbar from "../components/widgets/home/Appbar.jsx";
 import Chats from "../components/widgets/home/Chats.jsx";
 import SearchBar from "../components/widgets/home/Searchbar.jsx";
-import ActionButton from "../components/widgets/home/ActionButton.jsx";
+import AddChat from "../components/widgets/home/AddChat.jsx";
 
 const Home = () => {
 
@@ -47,7 +47,7 @@ const Home = () => {
 
                         <Chats/>
 
-                        <ActionButton/>
+                        <AddChat/>
 
                     </Stack>
                 )

@@ -13,6 +13,10 @@ const Appbar = () => {
     const navigate = useNavigate();
     const {t} = useTranslation();
 
+    const _handleRedirect = () => {
+        navigate("/setting");
+    }
+
     return (
         <Stack
             component="nav"
@@ -67,7 +71,7 @@ const Appbar = () => {
                 <IconButton
                     variant="text"
                     color="ternary"
-                    onClick={() => navigate("/setting")}
+                    onClick={_handleRedirect}
                 >
                     <FiSettings size={20}/>
                 </IconButton>

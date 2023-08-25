@@ -1,10 +1,8 @@
 // libraries
-import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Modal, Stack, IconButton, Typography, Button, MenuItem} from "@mui/material";
+import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
-import {LuMessageCircle} from "react-icons/lu";
 
 // components
 import SearchBar from "./Searchbar";
@@ -108,7 +106,7 @@ const ModalFooter = ({onClose}) => {
     )
 }
 
-const CreateChatModal = ({isOpen , onClose}) => {
+const AddChatModal = ({isOpen , onClose}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -152,44 +150,4 @@ const CreateChatModal = ({isOpen , onClose}) => {
     )
 }
 
-const CreateChat = () => {
-
-    const {t} = useTranslation();
-
-    const [showModal , setShowModal] = useState(false);
-
-    return (
-        <>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                }}
-                onClick={() => setShowModal(true)}
-            >
-
-                <LuMessageCircle size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    fontWeight='bold'
-                >
-                    {t("menu.createChat")}
-                </Typography>
-
-            </MenuItem>
-
-            <CreateChatModal
-                isOpen={showModal}
-                onClose={() => setShowModal(false)}
-            />
-
-        </>
-    )
-}
-
-export default CreateChat;
+export default AddChatModal;

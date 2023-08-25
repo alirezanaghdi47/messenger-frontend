@@ -1,13 +1,13 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {Box, Button, Stack} from "@mui/material";
+import {Button, Stack} from "@mui/material";
 
 // components
 import NumberInput from "../../modules/NumberInput.jsx";
 import Timer from "./Timer";
 
-const Form = () => {
+const VerifyCodeForm = () => {
 
     const {t} = useTranslation();
 
@@ -56,4 +56,4 @@ const Form = () => {
     )
 }
 
-export default Form;
+export default VerifyCodeForm;

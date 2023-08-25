@@ -15,6 +15,10 @@ const Color = () => {
     const {darkMode , color} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
+    const _handleActiveColor = (index) => {
+        dispatch(setColor(index));
+    }
+
     return (
         <Stack
             direction="column"
@@ -72,7 +76,7 @@ const Color = () => {
                                 borderRadius: "50%",
                                 cursor: "pointer",
                             }}
-                            onClick={() => dispatch(setColor(index))}
+                            onClick={() => _handleActiveColor(index)}
                         />
                     )
                 }

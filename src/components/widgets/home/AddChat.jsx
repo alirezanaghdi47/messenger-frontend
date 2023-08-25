@@ -1,16 +1,20 @@
 // libraries
 import {useState} from "react";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton, Menu} from "@mui/material";
+import {IconButton} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
 
 // components
-import CreateChat from "./CreateChat";
+import AddChatDropdown from "./AddChatDropdown";
 
-const ActionButton = () => {
+const AddChat = () => {
+
+    const isDesktop = useMediaQuery('(max-width: 992px)');
 
     const [anchorEl, setAnchorEl] = useState(null);
-    const isDesktop = useMediaQuery('(max-width: 992px)');
+
+    const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
+    const _handleHideDropdown = (e) => setAnchorEl(null);
 
     return (
         <>
@@ -19,7 +23,7 @@ const ActionButton = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={(e) => setAnchorEl(e.currentTarget)}
+                onClick={_handleShowDropdown}
                 sx={{
                     position: 'absolute',
                     zIndex: 25,
@@ -30,27 +34,15 @@ const ActionButton = () => {
                 <FiPlus size={20}/>
             </IconButton>
 
-            <Menu
+            <AddChatDropdown
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-            >
-
-                <CreateChat/>
-
-            </Menu>
+                isOpen={Boolean(anchorEl)}
+                onClose={_handleHideDropdown}
+            />
 
         </>
     )
 }
 
-export default ActionButton;
+export default AddChat;
 

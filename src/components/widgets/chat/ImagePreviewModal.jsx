@@ -1,17 +1,11 @@
 // libraries
-import {useState} from "react";
-import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {alpha, Box, Card, Chip, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
-import {BiCheckDouble} from "react-icons/bi";
+import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // assets
-import avatar from "../../../../assets/images/avatar.png";
-import background from "../../../../assets/images/desktop-2.png";
-
-// utils
-import {convertByte} from "../../../../utils/functions";
+import avatar from "../../../assets/images/avatar.png";
+import background from "../../../assets/images/desktop-2.png";
 
 const ModalHeader = ({onClose}) => {
 
@@ -96,7 +90,7 @@ const ModalContent = () => {
             disableGutters
         >
 
-            <Card
+            <Box
                 sx={{
                     position: 'absolute',
                     zIndex: 50,
@@ -106,8 +100,6 @@ const ModalContent = () => {
                     width: "calc(100% - 32px)",
                     maxWidth: 992,
                     height: "max-content",
-                    borderRadius: 1,
-                    padding: 1
                 }}
             >
 
@@ -119,13 +111,13 @@ const ModalContent = () => {
                     style={{borderRadius: 8}}
                 />
 
-            </Card>
+            </Box>
 
         </Container>
     )
 }
 
-const ImageModal = ({isOpen , onClose}) => {
+const ImagePreviewModal = ({isOpen , onClose}) => {
 
     const theme = useTheme();
 
@@ -167,98 +159,4 @@ const ImageModal = ({isOpen , onClose}) => {
     )
 }
 
-const ImageMessage = ({message}) => {
-
-    const {fontSize} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
-
-    const [showModal , setShowModal] = useState(false);
-
-    return (
-        <>
-
-            <Card
-                sx={{
-                    position: "relative",
-                    display: "flex",
-                    gap: 1,
-                    flexDirection: 'column',
-                    justifyContent: "center",
-                    alignItems: "start",
-                    bgcolor: message.me ? "primary.light" : "background.default",
-                    padding: 1.5,
-                    cursor: "pointer"
-                }}
-                onClick={() => setShowModal(true)}
-            >
-
-                <Box sx={{position: "relative"}}>
-
-                    <LazyLoadImage
-                        src={message.content}
-                        alt="image"
-                        width="100%"
-                        height="100%"
-                        style={{
-                            maxWidth: 300,
-                            borderRadius: 8,
-                        }}
-                    />
-
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 8,
-                            right: 8,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <Chip
-                            variant="caption"
-                            color={message.me ? "primary" : "secondary"}
-                            size="small"
-                            label={convertByte(300000)}
-                        />
-
-                    </Box>
-
-                </Box>
-
-                <Stack
-                    direction="row"
-                    gap={0.5}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        width: "100%",
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                    }}
-                >
-
-                    <BiCheckDouble size={20}/>
-
-                    <Typography
-                        variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        11:11 | 1400/1/1
-                    </Typography>
-
-                </Stack>
-
-            </Card>
-
-            <ImageModal
-                isOpen={showModal}
-                onClose={() => setShowModal(false)}
-            />
-
-        </>
-    )
-}
-
-export default ImageMessage;
+export default ImagePreviewModal;

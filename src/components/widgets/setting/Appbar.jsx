@@ -9,6 +9,10 @@ const Appbar = () => {
     const navigate = useNavigate();
     const {language , darkMode} = useSelector(state => state.setting.appearance);
 
+    const _handleBack = () => {
+        navigate("/");
+    }
+
     return (
         <Stack
             direction="row"
@@ -30,7 +34,7 @@ const Appbar = () => {
             <IconButton
                 variant="text"
                 color={darkMode ? "ternary" : "secondary"}
-                onClick={() => navigate("/")}
+                onClick={_handleBack}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>

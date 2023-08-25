@@ -6,7 +6,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 const Auth = lazy(() => import("../../pages/Auth.jsx"));
 const SignIn = lazy(() => import("../../pages/SignIn.jsx"));
 const SignUp = lazy(() => import("../../pages/SignUp.jsx"));
-const VerifyCode = lazy(() => import("../../pages/VerifyCode.jsx"));
 const Home = lazy(() => import("../../pages/Home.jsx"));
 const Chat = lazy(() => import("../../pages/Chat.jsx"));
 const Setting = lazy(() => import("../../pages/Setting.jsx"));
@@ -29,8 +28,6 @@ const Router = () => {
                         <Route path="/auth/sign-in" element={<SignIn/>}/>
 
                         <Route path="/auth/sign-up" element={<SignUp/>}/>
-
-                        <Route path="/auth/verify-code" element={<VerifyCode/>}/>
 
                     </Route>
 

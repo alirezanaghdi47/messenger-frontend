@@ -16,6 +16,10 @@ const Theme = () => {
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
+    const _handleActiveTheme = (value) => {
+        dispatch(setTheme(value));
+    }
+
     return (
         <Stack
             direction="column"
@@ -67,7 +71,7 @@ const Theme = () => {
                                 cursor:"pointer",
                                 opacity: darkMode === themeItem.value ? 1: 0.5,
                             }}
-                            onClick={() => dispatch(setTheme(themeItem.value))}
+                            onClick={() => _handleActiveTheme(themeItem.value)}
                         >
                             <LazyLoadImage
                                 src={themeItem.background}

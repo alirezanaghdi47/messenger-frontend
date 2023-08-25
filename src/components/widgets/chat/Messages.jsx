@@ -1,223 +1,693 @@
 // libraries
 import {useState} from "react";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, Menu, MenuItem, Stack, Typography} from "@mui/material";
-import {FiDownload, FiMoreVertical, FiTrash2} from "react-icons/fi";
+import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
+import {FaPlay} from "react-icons/fa";
+import {BiCheckDouble} from "react-icons/bi";
+import {FiPhone, FiVideo} from "react-icons/fi";
 
 // assets
-import avatar from "../../../assets/images/avatar.png";
 import image from "../../../assets/other/lorem-ipsum.jpg";
-import file from "../../../assets/other/lorem-ipsum.pdf";
-import video from "../../../assets/other/lorem-ipsum.mp4";
-import voice from "../../../assets/other/lorem-ipsum.mp3";
 
 // components
-import TextMessage from "./messages/TextMessage";
-import FileMessage from "./messages/FileMessage";
-import ImageMessage from "./messages/ImageMessage";
-import MusicMessage from "./messages/MusicMessage";
-import VideoMessage from "./messages/VideoMessage";
-import LocationMessage from "./messages/LocationMessage";
-import LogMessage from "./messages/LogMessage";
+import ImagePreviewModal from "./ImagePreviewModal";
+import MusicPlayerModal from "./MusicPlayerModal";
+import VideoPlayerModal from "./VideoPlayerModal";
 
-const chatList = [
-    {
-        id: 1,
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: true
-    },
-    {
-        id: 2,
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: false
-    },
-    {id: 3, type: "image", content: image, me: true},
-    {id: 4, type: "image", content: image, me: false},
-    {id: 5, type: "file", content: file, me: true},
-    {id: 6, type: "file", content: file, me: false},
-    {id: 7, type: "video", content: video, me: true},
-    {id: 8, type: "video", content: video, me: false},
-    {id: 9, type: "voice", content: voice, me: false},
-    {id: 10, type: "voice", content: voice, me: true},
-    {id: 11, type: "location", content: [35, 51], me: true},
-    {id: 12, type: "location", content: [35, 51], me: false},
-    {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
-    {id: 14, type: "log", content: {time: 90 * 1000, status: "voiceCall"}, me: false},
-    {id: 15, type: "log", content: {time: 50 * 1000, status: "voiceCall"}, me: false},
-    {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
-];
+// utils
+import {fontSizeList} from "../../../utils/constants";
+import {convertByte, convertTimestamp} from "../../../utils/functions";
 
-const ChatMenu = ({item}) => {
+export const TextMessage = ({message}) => {
 
+    const {fontSize} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+    const theme = useTheme();
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+        >
+
+            {/*<Stack*/}
+            {/*    direction="row"*/}
+            {/*    gap={0.5}*/}
+            {/*    sx={{*/}
+            {/*        display: "flex",*/}
+            {/*        justifyContent: "start",*/}
+            {/*        alignItems: "center",*/}
+            {/*        width: "100%",*/}
+            {/*        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"*/}
+            {/*    }}*/}
+            {/*>*/}
+
+            {/*    <FiCornerUpRight size={20}/>*/}
+
+            {/*    <Typography*/}
+            {/*        variant="body2"*/}
+            {/*        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
+            {/*        fontWeight="bold"*/}
+            {/*    >*/}
+            {/*        {t("typography.forwarded")} &nbsp;     علیرضا نقدی*/}
+            {/*    </Typography>*/}
+
+            {/*</Stack>*/}
+
+            <Typography
+                variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                lineHeight={2}
+            >
+                {message.content}
+            </Typography>
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const FileMessage = ({message}) => {
+
+    const theme = useTheme();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+        >
+
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <LazyLoadImage
+                    src={image}
+                    alt="image"
+                    width={50}
+                    height={50}
+                    style={{borderRadius: 8}}
+                />
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.primary"
+                    }}
+                >
+
+                    <Typography
+                        variant="subtitle2"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        نام فایل
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        {convertByte(300000)}
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const ImageMessage = ({message}) => {
+
+    const theme = useTheme();
+
+    const [showModal , setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
 
     return (
         <>
 
-            <IconButton
-                varinat="text"
-                color="secondary"
-                onClick={(e) => setAnchorEl(e.currentTarget)}
-            >
-                <FiMoreVertical size={20}/>
-            </IconButton>
-
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: "top",
-                    horizontal: item.me ? "left" : "right",
+            <Card
+                sx={{
+                    position: "relative",
+                    display: "flex",
+                    gap: 1,
+                    flexDirection: 'column',
+                    justifyContent: "center",
+                    alignItems: "start",
+                    bgcolor: message.me ? "primary.light" : "background.default",
+                    padding: 1.5,
+                    cursor: "pointer"
                 }}
-                transformOrigin={{
-                    vertical: 'center',
-                    horizontal: item.me ? "right" : "left",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
+                onClick={_handleShowModal}
             >
 
-                <MenuItem
+                <Box sx={{position: "relative"}}>
+
+                    <LazyLoadImage
+                        src={message.content}
+                        alt="image"
+                        width="100%"
+                        height="100%"
+                        style={{
+                            maxWidth: 300,
+                            borderRadius: 8,
+                        }}
+                    />
+
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+
+                        <Chip
+                            variant="caption"
+                            color={message.me ? "primary" : "secondary"}
+                            size="small"
+                            label={convertByte(300000)}
+                        />
+
+                    </Box>
+
+                </Box>
+
+                <Stack
+                    direction="row"
+                    gap={0.5}
                     sx={{
                         display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
+                        justifyContent: "end",
                         alignItems: "center",
+                        width: "100%",
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
-                    <FiTrash2 size={20}/>
+                    <BiCheckDouble size={20}/>
 
                     <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
-                        {t("menu.deleteChat")}
+                        11:11 | 1400/1/1
                     </Typography>
 
-                </MenuItem>
+                </Stack>
 
-                {
-                    ["video" , "voice" , "image" , "file"].includes(item.type) && (
-                        <MenuItem
-                            sx={{
-                                display: "flex",
-                                gap: 1,
-                                justifyContent: "start",
-                                alignItems: "center",
-                            }}
-                        >
+            </Card>
 
-                            <FiDownload size={20}/>
-
-                            <Typography
-                                variant="body2"
-                                color="textSecondary"
-                                fontWeight='bold'
-                            >
-                                {t("menu.download")}
-                            </Typography>
-
-                        </MenuItem>
-                    )
-                }
-
-            </Menu>
+            <ImagePreviewModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
 
         </>
     )
 }
 
-const Messages = () => {
+export const MusicMessage = ({message}) => {
+
+    const {language} = useSelector(state => state.setting.appearance);
+    const theme = useTheme();
+
+    const [showModal , setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
 
     return (
-        <Stack
-            component="ul"
-            direction="column"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "start",
-                width: "100%",
-                height: "100%",
-                padding: 4,
-                overflowY: "auto",
-            }}
-            className="remove-scrollbar"
-        >
+        <>
 
-            {
-                chatList.map(chatItem =>
+            <Card
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    flexDirection: 'column',
+                    justifyContent: "center",
+                    alignItems: "start",
+                    bgcolor: message.me ? "primary.light" : "background.default",
+                    padding: 1.5,
+                }}
+            >
+
+                <Stack
+                    direction="row"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                        width: "100%"
+                    }}
+                >
+
+                    <IconButton
+                        variant="contained"
+                        color={message.me ? "primary" : "secondary"}
+                        size="large"
+                        sx={{order: language === "fa" ? 2 : 1}}
+                        onClick={_handleShowModal}
+                    >
+                        <FaPlay size={20}/>
+                    </IconButton>
+
                     <Stack
-                        component="li"
-                        direction="row"
+                        direction="column"
                         gap={1}
                         sx={{
+                            order: language === "fa" ? 1 : 2,
                             display: "flex",
-                            justifyContent: chatItem.me ? "start" : "end",
-                            alignItems: "end",
-                            width: '100%',
+                            justifyContent: "center",
+                            alignItems: language === "fa" ? "end" : "start",
+                            width: 150,
                         }}
                     >
 
-                        <Stack
-                            direction="column"
-                            gap={1}
-                            sx={{
-                                order: chatItem.me ? 1 : 2,
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "start",
-                                height: "100%",
-                            }}
+                        <Typography
+                            variant="caption"
+                            color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         >
+                            00:10 / 00:00
+                        </Typography>
 
-                            <ChatMenu item={chatItem}/>
-
-                            <LazyLoadImage
-                                src={avatar}
-                                alt="avatar"
-                                width={30}
-                                height={30}
-                                style={{borderRadius: "50%"}}
-                            />
-
-                        </Stack>
-
-                        <Stack
-                            direction="column"
-                            gap={1}
-                            sx={{
-                                order: chatItem.me ? 2 : 1,
-                                display: "flex",
-                                justifyContent: "start",
-                                alignItems: "start",
-                                width: "max-content",
-                            }}
+                        <Typography
+                            variant="caption"
+                            color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         >
-
-                            {chatItem.type === "text" && <TextMessage message={chatItem}/>}
-                            {chatItem.type === "image" && <ImageMessage message={chatItem}/>}
-                            {chatItem.type === "file" && <FileMessage message={chatItem}/>}
-                            {chatItem.type === "voice" && <MusicMessage message={chatItem}/>}
-                            {chatItem.type === "video" && <VideoMessage message={chatItem}/>}
-                            {chatItem.type === "location" && <LocationMessage message={chatItem}/>}
-                            {chatItem.type === "log" && <LogMessage message={chatItem}/>}
-
-                        </Stack>
+                            {convertByte(300000)}
+                        </Typography>
 
                     </Stack>
-                )
-            }
 
-        </Stack>
+                </Stack>
+
+                <Stack
+                    direction="row"
+                    gap={0.5}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                        width: "100%",
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    }}
+                >
+
+                    <BiCheckDouble size={20}/>
+
+                    <Typography
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    >
+                        11:11 | 1400/1/1
+                    </Typography>
+
+                </Stack>
+
+            </Card>
+
+            <MusicPlayerModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
+
+        </>
     )
 }
 
-export default Messages;
+export const VideoMessage = ({message}) => {
+
+    const theme = useTheme();
+
+    const [showModal , setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
+
+    return (
+        <>
+
+            <Card
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    flexDirection: 'column',
+                    justifyContent: "center",
+                    alignItems: "start",
+                    bgcolor: message.me ? "primary.light" : "background.default",
+                    padding: 1.5,
+                    cursor: "pointer"
+                }}
+                onClick={_handleShowModal}
+            >
+
+                <Box sx={{position: "relative"}}>
+
+                    <LazyLoadImage
+                        src={image}
+                        alt="image"
+                        width="100%"
+                        height="100%"
+                        style={{
+                            maxWidth: 300,
+                            borderRadius: 8,
+                        }}
+                    />
+
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            left: 8,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+
+                        <Chip
+                            variant="caption"
+                            color={message.me ? "primary" : "secondary"}
+                            label="11:11"
+                            size="small"
+                        />
+
+                    </Box>
+
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+
+                        <Chip
+                            variant="caption"
+                            color={message.me ? "primary" : "secondary"}
+                            size="small"
+                            label={convertByte(300000)}
+                        />
+
+                    </Box>
+
+                    <IconButton
+                        variant="contained"
+                        color={message.me ? "primary" : "secondary"}
+                        size="large"
+                        sx={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50% , -50%)",
+                        }}
+                    >
+                        <FaPlay size={20}/>
+                    </IconButton>
+
+                </Box>
+
+                <Stack
+                    direction="row"
+                    gap={0.5}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                        width: "100%",
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    }}
+                >
+
+                    <BiCheckDouble size={20}/>
+
+                    <Typography
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    >
+                        11:11 | 1400/1/1
+                    </Typography>
+
+                </Stack>
+
+            </Card>
+
+            <VideoPlayerModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
+
+        </>
+    )
+}
+
+export const LogMessage = ({message}) => {
+
+    const {fontSize} = useSelector(state => state.setting.appearance);
+    const {t} = useTranslation();
+    const theme = useTheme();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.main" : "background.paper",
+                padding: 1,
+            }}
+        >
+
+            <Stack
+                direction="row"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center"
+                }}
+            >
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: 32,
+                        height: 32,
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
+                        borderRadius: 1
+                    }}
+                >
+
+                    {(message.content.status === "voiceCall") && <FiPhone size={20}/>}
+                    {(message.content.status === "videoCall") && <FiVideo size={20}/>}
+
+                </Box>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                    }}
+                >
+
+                    <Typography
+                        variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        {t(`typography.${message.content.status}`)}
+                    </Typography>
+
+                    {
+                        message.content.time > 0 && (
+                            <Typography
+                                variant="caption"
+                                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                            >
+                                {convertTimestamp(message.content.time)}
+                            </Typography>
+                        )
+                    }
+
+                </Stack>
+
+            </Stack>
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const LocationMessage = ({message}) => {
+
+    const theme = useTheme();
+
+    const _handleShowDetail = () =>  {
+        window.location.href = `https://www.google.com/maps/search/${message.content[0]},${message.content[1]}`;
+    }
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1,
+                cursor: "pointer"
+            }}
+            onClick={() => _handleShowDetail()}
+        >
+
+            <LazyLoadImage
+                src={image}
+                alt="image"
+                width="100%"
+                height="100%"
+                style={{
+                    maxWidth: 300,
+                    borderRadius: 8,
+                }}
+            />
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}

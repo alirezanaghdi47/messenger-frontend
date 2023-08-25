@@ -156,7 +156,7 @@ const Mui = ({children}) => {
                         style: ({theme, ownerState}) => ({
                             background: theme.palette[ownerState.color].main,
                             color: theme.palette.getContrastText(theme.palette[ownerState.color].main),
-                            "&:hover":{
+                            "&:hover": {
                                 background: theme.palette[ownerState.color].main,
                             }
                         })
@@ -303,14 +303,9 @@ const Mui = ({children}) => {
                         minHeight: "unset",
                         fontSize: theme.typography.body2.fontSize,
                         fontWeight: "bold",
-                        color: theme.palette.getContrastText(theme.palette.secondary.main),
                         borderRadius: theme.shape.borderRadius,
-                        "&.Mui-selected": {
-                            background: `${theme.palette.primary.main} !important`,
-                            color: `${theme.palette.getContrastText(theme.palette.primary.main)} !important`,
-                            "&:hover": {
-                                background: theme.palette.primary.main,
-                            }
+                        "&:hover": {
+                            background: "transparent"
                         }
                     })
                 }

@@ -2,8 +2,8 @@
 import {Stack , Container} from "@mui/material";
 
 // components
-import Header from "../components/widgets/signUp/Header.jsx";
-import Form from "../components/widgets/signUp/Form.jsx";
+import Header from "../components/widgets/auth/Header.jsx";
+import SignUpForm from "../components/widgets/signUp/SignUpForm.jsx";
 
 const SignUp = () => {
 
@@ -26,7 +26,7 @@ const SignUp = () => {
 
                 <Header title="typography.signUp"/>
 
-                <Form/>
+                <SignUpForm/>
 
             </Stack>
 

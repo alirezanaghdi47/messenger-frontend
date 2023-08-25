@@ -1,13 +1,14 @@
 // libraries
+import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {Button, Stack} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {FiKey, FiUser} from "react-icons/fi";
 
 // components
 import TextInput from "../../modules/TextInput.jsx";
 
-const Form = () => {
+const SignInForm = () => {
 
     const {t} = useTranslation();
 
@@ -61,8 +62,38 @@ const Form = () => {
                 {t("button.signIn")}
             </Button>
 
+            <Stack
+                direction="row"
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                }}
+            >
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight="bold"
+                    sx={{marginRight: 1}}
+                >
+                    {t("typography.signUpQuestion")}
+                </Typography>
+
+                <Button
+                    component={Link}
+                    variant="text"
+                    color="primary"
+                    to="/auth/sign-up"
+                >
+                    {t("button.signUp")}
+                </Button>
+
+            </Stack>
+
         </Stack>
     )
 }
 
-export default Form;
+export default SignInForm;

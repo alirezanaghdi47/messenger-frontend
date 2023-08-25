@@ -15,6 +15,10 @@ const Header = () => {
     const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
+    const _handleBack = () => {
+        navigate("/")
+    }
+
     return (
         <Stack
             direction="row"
@@ -40,7 +44,7 @@ const Header = () => {
                     <IconButton
                         variant="text"
                         color="ternary"
-                        onClick={() => navigate("/")}
+                        onClick={_handleBack}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
                     </IconButton>

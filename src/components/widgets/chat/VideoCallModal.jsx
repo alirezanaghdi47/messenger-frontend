@@ -1,13 +1,16 @@
 // libraries
+import {useState} from "react";
 import {useSelector} from "react-redux";
+import ReactPlayer from 'react-player';
+import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiPhone, FiPhoneOff} from "react-icons/fi";
+import {Box, Container, IconButton, MenuItem, Modal, Stack, Typography} from "@mui/material";
+import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideo, FiVideoOff} from "react-icons/fi";
 
-// assets
+// components
 import avatar from "../../../assets/images/avatar.png";
 
-const ModalHeader = ({onClose}) => {
+const ModalHeader = () => {
 
     return (
         <Stack
@@ -74,6 +77,43 @@ const ModalContent = () => {
                 }}
             >
 
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        zIndex: 50,
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50% , -50%)",
+                        width: "calc(100% - 32px)",
+                        maxWidth: 992,
+                    }}
+                >
+
+                    <ReactPlayer
+                        url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
+                        width="100%"
+                        height="100%"
+                    />
+
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            zIndex: 100,
+                            bottom: 0,
+                            left: 0,
+                        }}
+                    >
+
+                        <ReactPlayer
+                            url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
+                            width="100%"
+                            height={100}
+                        />
+
+                    </Box>
+
+                </Box>
+
             </Stack>
 
         </Container>
@@ -117,17 +157,34 @@ const ModalFooter = ({onClose}) => {
             >
 
                 <IconButton
-                    variant="contained"
-                    color="success"
+                    variant="text"
+                    color="ternary"
                     size="large"
                 >
-                    <FiPhone size={20}/>
+                    <FiRefreshCw size={20}/>
+                </IconButton>
+
+                <IconButton
+                    variant="text"
+                    color="ternary"
+                    size="large"
+                >
+                    <FiMicOff size={20}/>
+                </IconButton>
+
+                <IconButton
+                    variant="text"
+                    color="ternary"
+                    size="large"
+                >
+                    <FiVideoOff size={20}/>
                 </IconButton>
 
                 <IconButton
                     variant="contained"
                     color="error"
                     size="large"
+                    onClick={onClose}
                 >
                     <FiPhoneOff size={20}/>
                 </IconButton>
@@ -138,16 +195,14 @@ const ModalFooter = ({onClose}) => {
     )
 }
 
-const IncomingCall = ({open, onClose}) => {
+const VideoCallModal = ({isOpen, onClose}) => {
 
     const {background} = useSelector(state => state.setting.appearance);
 
     return (
         <Modal
-            // open={open}
-            open={true}
-            // onClose={onClose}
-            onClose={() => {return null}}
+            open={isOpen}
+            onClose={onClose}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -173,11 +228,11 @@ const IncomingCall = ({open, onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 
-                <ModalFooter/>
+                <ModalFooter onClose={onClose}/>
 
             </Stack>
 
@@ -185,5 +240,4 @@ const IncomingCall = ({open, onClose}) => {
     )
 }
 
-export default IncomingCall;
-
+export default VideoCallModal;

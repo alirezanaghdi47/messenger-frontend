@@ -1,19 +1,17 @@
 // libraries
 import {useSelector} from "react-redux";
-import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Grid, Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
-import {BiCheckDouble} from "react-icons/bi";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Box, Card, Chip, Grid, IconButton, Stack, Typography} from "@mui/material";
 import {FaPlay} from "react-icons/fa";
+import {BiCheckDouble} from "react-icons/bi";
 
 // assets
 import image from "../../../assets/other/lorem-ipsum.jpg";
 
 // utils
-import {convertByte} from "../../../utils/functions.js";
+import {convertByte} from "../../../utils/functions";
 
-export const ImageLog = ({message}) => {
-
-    const {fontSize} = useSelector(state => state.setting.appearance);
+export const ImageLog = ({log}) => {
 
     return (
         <Grid
@@ -44,7 +42,7 @@ export const ImageLog = ({message}) => {
                 <Box sx={{position: "relative"}}>
 
                     <LazyLoadImage
-                        src={message.content}
+                        src={log.content}
                         alt="image"
                         width="100%"
                         height="100%"
@@ -102,9 +100,7 @@ export const ImageLog = ({message}) => {
     )
 }
 
-export const FileLog = ({message}) => {
-
-    const {fontSize} = useSelector(state => state.setting.appearance);
+export const FileLog = ({log}) => {
 
     return (
         <Grid
@@ -209,9 +205,9 @@ export const FileLog = ({message}) => {
     )
 }
 
-export const VoiceLog = ({message}) => {
+export const VoiceLog = ({log}) => {
 
-    const {fontSize, language} = useSelector(state => state.setting.appearance);
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <Grid
@@ -243,7 +239,7 @@ export const VoiceLog = ({message}) => {
                     gap={2}
                     sx={{
                         display: "flex",
-                        justifyContent: "end",
+                        justifyContent: language === "fa" ? "end" : "start",
                         alignItems: "center",
                         width: "100%"
                     }}
@@ -317,9 +313,7 @@ export const VoiceLog = ({message}) => {
     )
 }
 
-export const VideoLog = ({message}) => {
-
-    const {fontSize} = useSelector(state => state.setting.appearance);
+export const VideoLog = ({log}) => {
 
     return (
         <Grid
@@ -441,9 +435,7 @@ export const VideoLog = ({message}) => {
     )
 }
 
-export const LocationLog = ({message}) => {
-
-    const {fontSize} = useSelector(state => state.setting.appearance);
+export const LocationLog = ({log}) => {
 
     return (
         <Grid
@@ -506,3 +498,4 @@ export const LocationLog = ({message}) => {
         </Grid>
     )
 }
+

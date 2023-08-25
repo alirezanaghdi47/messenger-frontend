@@ -1,27 +1,12 @@
 // libraries
-import {useTranslation} from "react-i18next";
-import {useFormik} from "formik";
-import {IconButton, Stack} from "@mui/material";
-import {LuSend} from "react-icons/lu";
+import {Stack} from "@mui/material";
 
 // components
-import TextInput from "../../modules/TextInput.jsx";
 import Attachment from "./Attachment.jsx";
 import VoiceRecorder from "./VoiceRecorder";
+import MessageForm from "./MessageForm";
 
 const Footer = () => {
-
-    const {t} = useTranslation();
-
-    const formik = useFormik({
-        initialValues: {
-            message: "",
-        },
-        // validationSchema: ,
-        onSubmit: async (data) => {
-            console.log(data)
-        }
-    });
 
     return (
         <Stack
@@ -47,22 +32,7 @@ const Footer = () => {
 
             <Attachment/>
 
-            <TextInput
-                name="message"
-                placeholder={t("input.message")}
-                endIcon={
-                    <IconButton
-                        varinat="text"
-                        color="ternary"
-                        onClick={formik.handleSubmit}
-                    >
-                        <LuSend size={20}/>
-                    </IconButton>
-                }
-                value={formik.values.message}
-                onChange={formik.handleChange}
-                error={formik.errors.message}
-            />
+            <MessageForm/>
 
         </Stack>
     )

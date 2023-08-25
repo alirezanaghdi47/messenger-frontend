@@ -3,7 +3,7 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Header from "../components/widgets/appearance/Header.jsx";
+import Header from "../components/widgets/setting/Header.jsx";
 import Personalization from "../components/widgets/appearance/Personalization.jsx";
 
 const Appearance = () => {

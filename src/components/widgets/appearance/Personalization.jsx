@@ -1,4 +1,6 @@
 // libraries
+import SimpleBar from "simplebar-react";
+import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
@@ -11,34 +13,43 @@ import Theme from "./Theme.jsx";
 
 const Personalization = () => {
 
+    const isTablet = useMediaQuery('(max-width: 768px)');
+
     return (
-        <Stack
-            direction="column"
-            gap={4}
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "start",
+        <SimpleBar
+            style={{
                 width: "100%",
-                padding: 2,
-                overflowY: "auto",
+                height: isTablet ? "calc(100dvh - 80px)" : "100%"
             }}
-            className="remove-scrollbar"
         >
 
-            <Language/>
+            <Stack
+                direction="column"
+                gap={4}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    width: "100%",
+                    padding: 4,
+                }}
+            >
 
-            <DateTime/>
+                <Language/>
 
-            <FontSize/>
+                <DateTime/>
 
-            <Color/>
+                <FontSize/>
 
-            <Background/>
+                <Color/>
 
-            <Theme/>
+                <Background/>
 
-        </Stack>
+                <Theme/>
+
+            </Stack>
+
+        </SimpleBar>
     )
 }
 

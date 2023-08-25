@@ -16,6 +16,10 @@ const Background = () => {
     const {background} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
+    const _handleActiveBackground = (index) => {
+        dispatch(setBackground(index));
+    }
+
     return (
         <Stack
             direction="column"
@@ -67,7 +71,7 @@ const Background = () => {
                                 cursor:"pointer",
                                 opacity: background === backgroundItem.background ? 1: 0.5,
                             }}
-                            onClick={() => dispatch(setBackground(index))}
+                            onClick={() => _handleActiveBackground(index)}
                         >
                             <LazyLoadImage
                                 alt={backgroundItem.id}

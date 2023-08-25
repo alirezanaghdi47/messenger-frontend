@@ -16,6 +16,10 @@ const FontSize = () => {
     const {t} = useTranslation();
     const theme = useTheme();
 
+    const _handleActiveFontSize = (value) => {
+        dispatch(setFontSize(value))
+    }
+
     return (
         <Stack
             direction="column"
@@ -76,7 +80,7 @@ const FontSize = () => {
                 marks
                 min={12}
                 max={20}
-                onChange={(e, newValue) => dispatch(setFontSize(newValue))}
+                onChange={(e, newValue) => _handleActiveFontSize(newValue)}
                 sx={{maxWidth: 300}}
             />
 
