@@ -7,6 +7,7 @@ import {FiCheck, FiX} from "react-icons/fi";
 // components
 import SearchBar from "./Searchbar";
 import Contacts from "./Contacts";
+import Empty from "../../partials/Empty";
 
 const ModalHeader = ({onClose}) => {
 
@@ -63,6 +64,8 @@ const ModalContent = () => {
             <SearchBar/>
 
             <Contacts/>
+
+            {/*<Empty/>*/}
 
         </Stack>
     )

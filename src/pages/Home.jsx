@@ -9,6 +9,7 @@ import Appbar from "../components/widgets/home/Appbar.jsx";
 import Chats from "../components/widgets/home/Chats.jsx";
 import SearchBar from "../components/widgets/home/Searchbar.jsx";
 import AddChat from "../components/widgets/home/AddChat.jsx";
+import Empty from "../components/partials/Empty";
 
 const Home = () => {
 
@@ -26,12 +27,12 @@ const Home = () => {
                         gap={2}
                         sx={{
                             position: 'absolute',
-                            zIndex: 200,
+                            zIndex: 300,
                             top: 0,
                             left: 0,
                             bottom: 0,
                             display: "flex",
-                            justifyContent: "space-between",
+                            justifyContent: "start",
                             alignItems: "center",
                             width: isTablet ? "100%" : 360,
                             height: "100dvh",
@@ -46,6 +47,8 @@ const Home = () => {
                         <SearchBar/>
 
                         <Chats/>
+
+                        {/*<Empty/>*/}
 
                         <AddChat/>
 

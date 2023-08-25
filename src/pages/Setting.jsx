@@ -28,7 +28,7 @@ const Setting = () => {
                         gap={2}
                         sx={{
                             position: 'absolute',
-                            zIndex: 200,
+                            zIndex: 300,
                             top: 0,
                             left: 0,
                             bottom: 0,

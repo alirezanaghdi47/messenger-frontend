@@ -1,5 +1,4 @@
 // libraries
-import ReactPlayer from "react-player";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
 import {FiX} from "react-icons/fi";

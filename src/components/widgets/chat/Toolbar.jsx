@@ -14,6 +14,7 @@ import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 // components
 import VoiceCallModal from "./VoiceCallModal";
 import VideoCallModal from "./VideoCallModal";
+import IncomingCallModal from "../home/IncomingCallModal";
 
 const MobileToolbar = ({
                            anchorEl,
@@ -232,11 +233,20 @@ const Toolbar = () => {
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [showIncomingCallModal, setShowIncomingCallModal] = useState(false);
     const [showVoiceCallModal, setShowVoiceCallModal] = useState(false);
     const [showVideoCallModal, setShowVideoCallModal] = useState(false);
 
     const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
     const _handleHideDropdown = (e) => setAnchorEl(null);
+    const _handleShowIncomingCallModal = () => {
+        setShowIncomingCallModal(true);
+        _handleHideDropdown();
+    }
+    const _handleHideIncomingCallModal = () => {
+        setShowIncomingCallModal(false);
+        _handleHideDropdown();
+    }
     const _handleShowVoiceCallModal = () => {
         setShowVoiceCallModal(true);
         _handleHideDropdown();
@@ -285,6 +295,11 @@ const Toolbar = () => {
             <VideoCallModal
                 isOpen={showVideoCallModal}
                 onClose={_handleHideVideoCallModal}
+            />
+
+            <IncomingCallModal
+                isOpen={showIncomingCallModal}
+                onClose={_handleHideIncomingCallModal}
             />
 
         </>

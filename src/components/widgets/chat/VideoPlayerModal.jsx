@@ -1,5 +1,4 @@
 // libraries
-import ReactPlayer from "react-player";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
 import {FiX} from "react-icons/fi";
@@ -97,16 +96,15 @@ const ModalContent = () => {
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50% , -50%)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     width: "calc(100% - 32px)",
                     maxWidth: 992,
                 }}
             >
 
-                <ReactPlayer
-                    url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
-                    width="100%"
-                    height="100%"
-                />
+                video player
 
             </Box>
 
@@ -114,7 +112,7 @@ const ModalContent = () => {
     )
 }
 
-const VideoPlayerModal = ({isOpen , onClose}) => {
+const VideoPlayerModal = ({isOpen, onClose}) => {
 
     const theme = useTheme();
 

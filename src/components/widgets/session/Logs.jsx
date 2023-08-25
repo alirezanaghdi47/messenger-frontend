@@ -44,7 +44,7 @@ const Logs = () => {
 
             <Stack
                 direction="column"
-                gap={4}
+                gap={2}
                 sx={{
                     display: "flex",
                     justifyContent: "start",
@@ -65,7 +65,7 @@ const Logs = () => {
 
                 <Stack
                     direction="column"
-                    gap={4}
+                    gap={2}
                     sx={{
                         display: "flex",
                         justifyContent: "center",

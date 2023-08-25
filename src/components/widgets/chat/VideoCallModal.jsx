@@ -1,11 +1,8 @@
 // libraries
-import {useState} from "react";
 import {useSelector} from "react-redux";
-import ReactPlayer from 'react-player';
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Container, IconButton, MenuItem, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideo, FiVideoOff} from "react-icons/fi";
+import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
 
 // components
 import avatar from "../../../assets/images/avatar.png";
@@ -84,33 +81,31 @@ const ModalContent = () => {
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50% , -50%)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                         width: "calc(100% - 32px)",
                         maxWidth: 992,
                     }}
                 >
 
-                    <ReactPlayer
-                        url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
-                        width="100%"
-                        height="100%"
-                    />
+                    video player
 
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            zIndex: 100,
-                            bottom: 0,
-                            left: 0,
-                        }}
-                    >
+                    {/*<Box*/}
+                    {/*    sx={{*/}
+                    {/*        position: 'absolute',*/}
+                    {/*        zIndex: 100,*/}
+                    {/*        bottom: 0,*/}
+                    {/*        left: 0,*/}
+                    {/*        display: "flex",*/}
+                    {/*        justifyContent: "center",*/}
+                    {/*        alignItems: "center",*/}
+                    {/*    }}*/}
+                    {/*>*/}
 
-                        <ReactPlayer
-                            url='https://hajifirouz2.cdn.asset.aparat.com/aparat-video/8c46df8e952644285549b8b912df4ad554231257-720p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImIyNTY0ODEzODE4ZWEzMGFkNTgxNTIyMzdhM2M2ZTIwIiwiZXhwIjoxNjkyNzM2NDg2LCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.poea6DPKTfMWXB9qe7dKVOHJ2xmF_-vMJYjvWIkYcMg'
-                            width="100%"
-                            height={100}
-                        />
+                    {/*    video player*/}
 
-                    </Box>
+                    {/*</Box>*/}
 
                 </Box>
 

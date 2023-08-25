@@ -1,0 +1,49 @@
+// libraries
+import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Box, Typography} from "@mui/material";
+
+// assets
+import noDataLight from "../../assets/images/no-data-light.svg";
+import noDataDark from "../../assets/images/no-data-dark.svg";
+
+const Empty = () => {
+
+    const {darkMode} = useSelector(state => state.setting.appearance);
+    const {t} = useTranslation();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                gap: 2,
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                padding: 4
+            }}
+        >
+
+            <LazyLoadImage
+                src={darkMode ? noDataDark : noDataLight}
+                alt="empty"
+                width="100%"
+                style={{maxWidth: 100}}
+            />
+
+            <Typography
+                variant="subtitle1"
+                color='textSecondary'
+                fontWeight='bold'
+            >
+                {t("typography.empty")}
+            </Typography>
+
+        </Box>
+    )
+}
+
+export default Empty;
