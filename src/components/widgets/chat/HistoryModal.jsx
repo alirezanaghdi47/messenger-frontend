@@ -5,9 +5,6 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 // components
 import Filter from "./Filter";
 import History from "./History";
@@ -38,7 +35,7 @@ const ModalHeader = ({onClose}) => {
             >
 
                 <LazyLoadImage
-                    src={avatar}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
                     width={40}
                     height={40}

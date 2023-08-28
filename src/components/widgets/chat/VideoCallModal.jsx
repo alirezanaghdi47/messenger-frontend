@@ -5,7 +5,9 @@ import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/materia
 import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
 
 // components
-import avatar from "../../../assets/images/avatar.png";
+import VideoPlayer from "../../modules/VideoPlayer";
+import MusicPlayer from "../../modules/MusicPlayer";
+import ReactPlayer from "react-player";
 
 const ModalHeader = () => {
 
@@ -30,7 +32,7 @@ const ModalHeader = () => {
         >
 
             <LazyLoadImage
-                src={avatar}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
                 width={40}
                 height={40}
@@ -89,23 +91,34 @@ const ModalContent = () => {
                     }}
                 >
 
-                    video player
+                    <ReactPlayer
+                        url="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"
+                        width="100%"
+                        height="100%"
+                        playing={true}
+                    />
 
-                    {/*<Box*/}
-                    {/*    sx={{*/}
-                    {/*        position: 'absolute',*/}
-                    {/*        zIndex: 100,*/}
-                    {/*        bottom: 0,*/}
-                    {/*        left: 0,*/}
-                    {/*        display: "flex",*/}
-                    {/*        justifyContent: "center",*/}
-                    {/*        alignItems: "center",*/}
-                    {/*    }}*/}
-                    {/*>*/}
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            zIndex: 100,
+                            bottom: 16,
+                            left: 16,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: 200,
+                        }}
+                    >
 
-                    {/*    video player*/}
+                        <ReactPlayer
+                            url="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"
+                            width="100%"
+                            height="100%"
+                            playing={true}
+                        />
 
-                    {/*</Box>*/}
+                    </Box>
 
                 </Box>
 

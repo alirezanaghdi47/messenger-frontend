@@ -2,9 +2,7 @@
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
 import {FiX} from "react-icons/fi";
-
-// assets
-import avatar from "../../../assets/images/avatar.png";
+import VideoPlayer from "../../modules/VideoPlayer";
 
 const ModalHeader = ({onClose}) => {
 
@@ -31,7 +29,7 @@ const ModalHeader = ({onClose}) => {
             >
 
                 <LazyLoadImage
-                    src={avatar}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
                     width={40}
                     height={40}
@@ -104,7 +102,7 @@ const ModalContent = () => {
                 }}
             >
 
-                video player
+                <VideoPlayer src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"/>
 
             </Box>
 

@@ -3,10 +3,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-import background from "../../../assets/images/desktop-2.png";
-
 const ModalHeader = ({onClose}) => {
 
     return (
@@ -32,7 +28,7 @@ const ModalHeader = ({onClose}) => {
             >
 
                 <LazyLoadImage
-                    src={avatar}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
                     width={40}
                     height={40}
@@ -104,7 +100,7 @@ const ModalContent = () => {
             >
 
                 <LazyLoadImage
-                    src={background}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg"
                     alt="background"
                     width="100%"
                     height="100%"

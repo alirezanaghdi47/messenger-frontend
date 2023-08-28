@@ -1,13 +1,8 @@
 // libraries
-import {useState} from "react";
 import {useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, MenuItem, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiPhone, FiPhoneOff} from "react-icons/fi";
-
-// assets
-import avatar from "../../../assets/images/avatar.png";
+import {IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
 
@@ -32,7 +27,7 @@ const ModalHeader = () => {
         >
 
             <LazyLoadImage
-                src={avatar}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
                 width={40}
                 height={40}

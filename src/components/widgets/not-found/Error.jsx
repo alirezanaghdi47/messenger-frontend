@@ -5,10 +5,6 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Button, Stack, Typography} from "@mui/material";
 
-// assets
-import notFoundDark from "../../../assets/images/not-found-dark.svg";
-import notFoundLight from "../../../assets/images/not-found-light.svg";
-
 const Error = () => {
 
     const navigate = useNavigate();
@@ -28,7 +24,7 @@ const Error = () => {
         >
 
             <LazyLoadImage
-                src={darkMode ? notFoundDark : notFoundLight}
+                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-light.svg"}
                 alt="select-chat"
                 width={300}
             />

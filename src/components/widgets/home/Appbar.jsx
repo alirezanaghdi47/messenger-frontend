@@ -5,9 +5,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Stack, Typography} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
-// assets
-import logo from "../../../assets/images/logo.png";
-
 const Appbar = () => {
 
     const navigate = useNavigate();
@@ -42,7 +39,7 @@ const Appbar = () => {
             >
 
                 <LazyLoadImage
-                    src={logo}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo.png"
                     alt="logo"
                     width={40}
                     height={40}

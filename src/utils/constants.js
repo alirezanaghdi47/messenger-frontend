@@ -1,13 +1,5 @@
-// assets
-import desktop1 from "../assets/images/desktop-1.jpg";
-import desktop2 from "../assets/images/desktop-2.png";
-import desktop3 from "../assets/images/desktop-3.jpg";
-import desktop4 from "../assets/images/desktop-4.jpg";
-import desktop5 from "../assets/images/desktop-5.jpg";
-import fa from "../assets/images/fa.png";
-import en from "../assets/images/en.png";
 
-export const version = "0.6.5";
+export const version = "0.7.0";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},
@@ -15,13 +7,13 @@ export const dateTimeList = [
 ];
 
 export const languageList = [
-    {id: 1, title: "button.persian", value: "fa", flag: fa},
-    {id: 2, title: "button.english", value: "en", flag: en},
+    {id: 1, title: "button.persian", value: "fa", flag: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/fa.png"},
+    {id: 2, title: "button.english", value: "en", flag: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/en.png"},
 ];
 
 export const themeList = [
-    {id: 1, title: "select.light", value: false, background: desktop1},
-    {id: 2, title: "select.dark", value: true, background: desktop2},
+    {id: 1, title: "select.light", value: false, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg"},
+    {id: 2, title: "select.dark", value: true, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"},
 ];
 
 export const fontSizeList = [
@@ -40,9 +32,9 @@ export const colorList = [
 ];
 
 export const backgroundList = [
-    {id: 1, background: desktop1},
-    {id: 2, background: desktop2},
-    {id: 3, background: desktop3},
-    {id: 4, background: desktop4},
-    {id: 5, background: desktop5},
+    {id: 1, background: 'https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg'},
+    {id: 2, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"},
+    {id: 3, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-3.jpg"},
+    {id: 4, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-4.jpg"},
+    {id: 5, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-5.jpg"},
 ];

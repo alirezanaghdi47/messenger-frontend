@@ -4,9 +4,6 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
 
-// assets
-import logo from "../../../assets/images/logo.png";
-
 const Appbar = () => {
 
     const {t} = useTranslation();
@@ -27,7 +24,7 @@ const Appbar = () => {
         >
 
             <LazyLoadImage
-                src={logo}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo.png"
                 alt="logo"
                 width={40}
                 height={40}

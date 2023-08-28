@@ -4,9 +4,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiPhone, FiPhoneOff} from "react-icons/fi";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 const ModalHeader = () => {
 
     return (
@@ -30,7 +27,7 @@ const ModalHeader = () => {
         >
 
             <LazyLoadImage
-                src={avatar}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
                 width={40}
                 height={40}

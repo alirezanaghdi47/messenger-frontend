@@ -3,24 +3,18 @@ import SimpleBar from "simplebar-react";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Grid} from "@mui/material";
 
-// assets
-import file from "../../../assets/other/lorem-ipsum.pdf";
-import image from "../../../assets/other/lorem-ipsum.jpg";
-import video from "../../../assets/other/lorem-ipsum.mp4";
-import voice from "../../../assets/other/lorem-ipsum.mp3";
-
 // components
 import {FileLog, ImageLog, LocationLog, VideoLog, VoiceLog} from "./Logs";
 
 const logList = [
-    {id: 1, type: "file", content: file},
-    {id: 2, type: "file", content: file},
-    {id: 3, type: "image", content: image, me: true},
-    {id: 4, type: "image", content: image, me: false},
-    {id: 5, type: "video", content: video, me: true},
-    {id: 6, type: "video", content: video, me: false},
-    {id: 7, type: "voice", content: voice, me: false},
-    {id: 8, type: "voice", content: voice, me: true},
+    {id: 1, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
+    {id: 2, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
+    {id: 3, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"},
+    {id: 4, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"},
+    {id: 5, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"},
+    {id: 6, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"},
+    {id: 7, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
+    {id: 8, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
     {id: 9, type: "location", content: [35, 51], me: true},
     {id: 10, type: "location", content: [35, 51], me: false},
 ];

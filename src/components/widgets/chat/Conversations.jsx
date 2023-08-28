@@ -3,15 +3,7 @@ import {useState} from "react";
 import {useSelector} from "react-redux";
 import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, Stack} from "@mui/material";
-import {FiMoreVertical} from "react-icons/fi";
-
-// assets
-import avatar from "../../../assets/images/avatar.png";
-import image from "../../../assets/other/lorem-ipsum.jpg";
-import file from "../../../assets/other/lorem-ipsum.pdf";
-import video from "../../../assets/other/lorem-ipsum.mp4";
-import voice from "../../../assets/other/lorem-ipsum.mp3";
+import {Stack} from "@mui/material";
 
 // components
 import {
@@ -37,14 +29,14 @@ const conversationList = [
         content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
         me: false
     },
-    {id: 3, type: "image", content: image, me: true},
-    {id: 4, type: "image", content: image, me: false},
-    {id: 5, type: "file", content: file, me: true},
-    {id: 6, type: "file", content: file, me: false},
-    {id: 7, type: "video", content: video, me: true},
-    {id: 8, type: "video", content: video, me: false},
-    {id: 9, type: "voice", content: voice, me: false},
-    {id: 10, type: "voice", content: voice, me: true},
+    {id: 3, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg", me: true},
+    {id: 4, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg", me: false},
+    {id: 5, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: true},
+    {id: 6, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: false},
+    {id: 7, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp", me: true},
+    {id: 8, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp", me: false},
+    {id: 9, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3", me: false},
+    {id: 10, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3", me: true},
     {id: 11, type: "location", content: [35, 51], me: true},
     {id: 12, type: "location", content: [35, 51], me: false},
     {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
@@ -115,7 +107,7 @@ const Conversations = () => {
                             >
 
                                 <LazyLoadImage
-                                    src={avatar}
+                                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                                     alt="avatar"
                                     width={30}
                                     height={30}

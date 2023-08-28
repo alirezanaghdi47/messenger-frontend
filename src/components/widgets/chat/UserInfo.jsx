@@ -4,9 +4,6 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 // components
 import HistoryModal from "./HistoryModal";
 
@@ -36,7 +33,7 @@ const UserInfo = () => {
             >
 
                 <LazyLoadImage
-                    src={avatar}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
                     width={40}
                     height={40}

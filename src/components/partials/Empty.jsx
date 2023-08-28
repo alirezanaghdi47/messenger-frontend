@@ -4,10 +4,6 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Typography} from "@mui/material";
 
-// assets
-import noDataLight from "../../assets/images/no-data-light.svg";
-import noDataDark from "../../assets/images/no-data-dark.svg";
-
 const Empty = () => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
@@ -28,7 +24,7 @@ const Empty = () => {
         >
 
             <LazyLoadImage
-                src={darkMode ? noDataDark : noDataLight}
+                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/no-data-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/no-data-light.svg"}
                 alt="empty"
                 width="100%"
                 style={{maxWidth: 100}}

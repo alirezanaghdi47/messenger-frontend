@@ -6,9 +6,6 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Chip, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 const logList = [
     {
         id: 1,
@@ -128,7 +125,7 @@ const Logs = () => {
                                     >
 
                                         <LazyLoadImage
-                                            src={avatar}
+                                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                                             alt="browser"
                                             width={20}
                                             height={20}
@@ -155,7 +152,7 @@ const Logs = () => {
                                     >
 
                                         <LazyLoadImage
-                                            src={avatar}
+                                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                                             alt="browser"
                                             width={20}
                                             height={20}

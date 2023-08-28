@@ -5,9 +5,6 @@ import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack, Typography} from "@mui/material";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 const contactList = [
     {_id: "1"},
     {_id: "2"},
@@ -65,7 +62,7 @@ const Contacts = () => {
                             >
 
                                 <LazyLoadImage
-                                    src={avatar}
+                                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                                     alt="avatar"
                                     width={40}
                                     height={40}

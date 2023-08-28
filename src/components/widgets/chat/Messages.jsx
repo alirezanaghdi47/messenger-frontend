@@ -8,9 +8,6 @@ import {FaPlay} from "react-icons/fa";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// assets
-import image from "../../../assets/other/lorem-ipsum.jpg";
-
 // components
 import ImagePreviewModal from "./ImagePreviewModal";
 import MusicPlayerModal from "./MusicPlayerModal";
@@ -128,7 +125,7 @@ export const FileMessage = ({message}) => {
             >
 
                 <LazyLoadImage
-                    src={image}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
                     width={50}
                     height={50}
@@ -426,7 +423,7 @@ export const VideoMessage = ({message}) => {
                 <Box sx={{position: "relative"}}>
 
                     <LazyLoadImage
-                        src={image}
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                         alt="image"
                         width="100%"
                         height="100%"
@@ -655,7 +652,7 @@ export const LocationMessage = ({message}) => {
         >
 
             <LazyLoadImage
-                src={image}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                 alt="image"
                 width="100%"
                 height="100%"

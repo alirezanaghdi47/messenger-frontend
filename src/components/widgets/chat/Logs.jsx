@@ -5,9 +5,6 @@ import {Box, Card, Chip, Grid, IconButton, Stack, Typography} from "@mui/materia
 import {FaPlay} from "react-icons/fa";
 import {BiCheckDouble} from "react-icons/bi";
 
-// assets
-import image from "../../../assets/other/lorem-ipsum.jpg";
-
 // utils
 import {convertByte} from "../../../utils/functions";
 
@@ -140,7 +137,7 @@ export const FileLog = ({log}) => {
                 >
 
                     <LazyLoadImage
-                        src={image}
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                         alt="image"
                         width={50}
                         height={50}
@@ -343,7 +340,7 @@ export const VideoLog = ({log}) => {
                 <Box sx={{position: "relative"}}>
 
                     <LazyLoadImage
-                        src={image}
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                         alt="image"
                         width="100%"
                         height="100%"
@@ -463,7 +460,7 @@ export const LocationLog = ({log}) => {
             >
 
                 <LazyLoadImage
-                    src={image}
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
                     width="100%"
                     height="100%"
@@ -496,6 +493,6 @@ export const LocationLog = ({log}) => {
             </Card>
 
         </Grid>
-    )
+    );
 }
 

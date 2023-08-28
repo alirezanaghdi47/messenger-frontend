@@ -5,9 +5,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-
 const userInfoList = [
     {id: 1 ,title: "input.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},
     {id: 2 ,title: "input.phoneNumber", value: "09195610753" , icon: <FiPhone size={20}/>},
@@ -30,7 +27,7 @@ const UserDetail = () => {
         >
 
             <LazyLoadImage
-                src={avatar}
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
                 style={{
                     width: "100%",

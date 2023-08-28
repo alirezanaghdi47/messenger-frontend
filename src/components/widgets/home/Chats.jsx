@@ -8,23 +8,16 @@ import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// assets
-import avatar from "../../../assets/images/avatar.png";
-import file from "../../../assets/other/lorem-ipsum.pdf";
-import image from "../../../assets/other/lorem-ipsum.jpg";
-import video from "../../../assets/other/lorem-ipsum.mp4";
-import voice from "../../../assets/other/lorem-ipsum.mp3";
-
 const chatList = [
     {
         _id: "1",
         type: "text",
         content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود."
     },
-    {_id: "2", type: "image", content: image},
-    {_id: "3", type: "file", content: file},
-    {_id: "4", type: "video", content: video},
-    {_id: "5", type: "voice", content: voice},
+    {_id: "2", type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
+    {_id: "3", type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"},
+    {_id: "4", type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"},
+    {_id: "5", type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
     {_id: "6", type: "location", content: [35, 51]},
     {_id: "7", type: "log", status: "voiceCall"},
     {_id: "8", type: "log", status: "videoCall"},
@@ -95,7 +88,7 @@ const Chats = () => {
                                 >
 
                                     <LazyLoadImage
-                                        src={avatar}
+                                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                                         alt="avatar"
                                         width={40}
                                         height={40}
