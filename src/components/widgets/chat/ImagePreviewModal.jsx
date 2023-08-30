@@ -1,6 +1,6 @@
 // libraries
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 const ModalHeader = ({onClose}) => {
@@ -95,7 +95,7 @@ const ModalContent = () => {
                     transform: "translate(-50% , -50%)",
                     width: "calc(100% - 32px)",
                     maxWidth: 992,
-                    height: "max-content",
+                    boxShadow: 2
                 }}
             >
 
@@ -114,8 +114,6 @@ const ModalContent = () => {
 }
 
 const ImagePreviewModal = ({isOpen , onClose}) => {
-
-    const theme = useTheme();
 
     return (
         <Modal
@@ -138,7 +136,7 @@ const ImagePreviewModal = ({isOpen , onClose}) => {
                     alignItems: "center",
                     width: "100%",
                     height: "100%",
-                    bgcolor: alpha(theme.palette.background.paper, 0.9),
+                    bgcolor: "background.paper",
                     borderRadius: 0,
                     boxShadow: 1,
                     padding: 2,

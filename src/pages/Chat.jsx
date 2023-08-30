@@ -1,4 +1,5 @@
 // libraries
+import {useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
@@ -16,6 +17,8 @@ const Chat = () => {
     const params = useParams();
     const {background} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
+
+    const listRef = useRef(null);
 
     return params.chatId && (
         <Stack
@@ -40,11 +43,11 @@ const Chat = () => {
 
             <Header/>
 
-            <Conversations/>
+            <Conversations ref={listRef}/>
 
             {/*<Empty/>*/}
 
-            <ScrollToBottom/>
+            <ScrollToBottom ref={listRef}/>
 
             <Footer/>
 

@@ -1,10 +1,13 @@
 // libraries
+import {forwardRef} from "react";
 import {IconButton} from "@mui/material";
 import {FiChevronDown} from "react-icons/fi";
 
-const ScrollToBottom = () => {
+const ScrollToBottom = forwardRef((props, ref) => {
 
-    const _handleScrollToBottom = () => {}
+    const _handleScrollToBottom = () => {
+        ref?.current?.lastElementChild.scrollIntoView({behavior: "smooth"});
+    }
 
     return (
         <IconButton
@@ -23,7 +26,7 @@ const ScrollToBottom = () => {
             <FiChevronDown size={20}/>
         </IconButton>
     )
-}
+});
 
 export default ScrollToBottom;
 

@@ -1,16 +1,17 @@
 // libraries
 import {useRef, useState} from "react";
+import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from "rc-slider";
 import {Box, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {FiVolume2} from "react-icons/fi";
-import {LuPause, LuPlay} from "react-icons/lu";
+import {FaPause, FaPlay, FaVolumeHigh} from "react-icons/fa6";
 
 // utils
 import {formatDuration} from "../../utils/functions";
 
 const VideoPlayer = ({src, width, height}) => {
 
+    const {language, darkMode} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     const playerRef = useRef(null);
@@ -47,7 +48,13 @@ const VideoPlayer = ({src, width, height}) => {
     const _handleEnded = () => setPlaying(true);
 
     return (
-        <Box sx={{position: "relative"}}>
+        <Box
+            sx={{
+                position: "relative",
+                boxShadow: 2,
+                borderRadius: 1,
+            }}
+        >
 
             <ReactPlayer
                 url={src}
@@ -66,6 +73,7 @@ const VideoPlayer = ({src, width, height}) => {
 
             <Box
                 sx={{
+                    direction: language === "en" ? "rtl" : "ltr",
                     position: "absolute",
                     bottom: 0,
                     display: "flex",
@@ -116,25 +124,26 @@ const VideoPlayer = ({src, width, height}) => {
                                 value={volume}
                                 onChange={_handleVolumeChange}
                                 style={{
-                                    width: 4,
+                                    width: 8,
                                     height: 100,
                                     padding: 0
                                 }}
                                 trackStyle={{
                                     left: 0,
+                                    width: 8,
                                     background: theme.palette.primary.main,
                                 }}
                                 handleStyle={{
-                                    width: 16,
-                                    height: 16,
+                                    width: 20,
+                                    height: 20,
                                     background: theme.palette.primary.main,
                                     opacity: 1,
                                     border: "none",
                                     boxShadow: "none",
-                                    marginRight: -5,
+                                    marginRight: -6,
                                 }}
                                 railStyle={{
-                                    width: 4,
+                                    width: 8,
                                     background: theme.palette.background.paper
                                 }}
                             />
@@ -143,10 +152,10 @@ const VideoPlayer = ({src, width, height}) => {
 
                         <IconButton
                             variant="text"
-                            color="secondary"
+                            color={darkMode ? "ternary" : "secondary"}
                             onClick={_handleToggleVolume}
                         >
-                            <FiVolume2 size={24}/>
+                            <FaVolumeHigh size={24}/>
                         </IconButton>
 
                     </Stack>
@@ -162,7 +171,7 @@ const VideoPlayer = ({src, width, height}) => {
 
                         <Typography
                             variant="caption"
-                            color="secondary"
+                            color={darkMode ? "ternary" : "secondary"}
                             fontWeight="bold"
                         >
                             {formatDuration(duration)}
@@ -170,7 +179,7 @@ const VideoPlayer = ({src, width, height}) => {
 
                         <Typography
                             variant="caption"
-                            color="secondary"
+                            color={darkMode ? "ternary" : "secondary"}
                             fontWeight="bold"
                         >
                             /
@@ -178,7 +187,7 @@ const VideoPlayer = ({src, width, height}) => {
 
                         <Typography
                             variant="caption"
-                            color="secondary"
+                            color={darkMode ? "ternary" : "secondary"}
                             fontWeight="bold"
                         >
                             {formatDuration(duration * played)}
@@ -196,15 +205,16 @@ const VideoPlayer = ({src, width, height}) => {
                         onAfterChange={_handleSeekMouseUp}
                         style={{
                             width: "100%",
-                            height: 4,
+                            height: 8,
                             padding: 0
                         }}
                         trackStyle={{
                             background: theme.palette.primary.main,
+                            height: 8,
                         }}
                         handleStyle={{
-                            width: 16,
-                            height: 16,
+                            width: 20,
+                            height: 20,
                             background: theme.palette.primary.main,
                             opacity: 1,
                             border: "none",
@@ -212,18 +222,18 @@ const VideoPlayer = ({src, width, height}) => {
                             marginTop: -6,
                         }}
                         railStyle={{
-                            height: 4,
+                            height: 8,
                             background: theme.palette.background.paper
                         }}
                     />
 
                     <IconButton
                         variant="text"
-                        color="secondary"
+                        color={darkMode ? "ternary" : "secondary"}
                         size="large"
                         onClick={_handleTogglePlaying}
                     >
-                        {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
+                        {(!playing || played === 0) ? <FaPlay size={24}/> : <FaPause size={24}/>}
                     </IconButton>
 
                 </Stack>

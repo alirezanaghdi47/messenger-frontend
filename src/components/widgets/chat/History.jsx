@@ -4,7 +4,7 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Grid} from "@mui/material";
 
 // components
-import {FileLog, ImageLog, LocationLog, VideoLog, VoiceLog} from "./Logs";
+import {FileLog, ImageLog, LocationLog, MusicLog, VideoLog} from "./Logs";
 
 const logList = [
     {id: 1, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
@@ -36,7 +36,7 @@ const History = ({filter}) => {
                 container
                 rowSpacing={2}
                 columnSpacing={isMobile ? 0 : 2}
-                sx={{width: "100%"}}
+                sx={{width: "100%" , padding: 1}}
             >
 
                 {
@@ -45,7 +45,7 @@ const History = ({filter}) => {
                                                                                              log={logItem}/>;
                         if (logItem.type === "file" && filter === "file") return <FileLog key={logItem.id}
                                                                                           log={logItem}/>
-                        if (logItem.type === "voice" && filter === "voice") return <VoiceLog key={logItem.id}
+                        if (logItem.type === "voice" && filter === "voice") return <MusicLog key={logItem.id}
                                                                                              log={logItem}/>
                         if (logItem.type === "video" && filter === "video") return <VideoLog key={logItem.id}
                                                                                              log={logItem}/>

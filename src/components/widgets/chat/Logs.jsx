@@ -1,14 +1,92 @@
 // libraries
+import {useState} from "react";
 import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Card, Chip, Grid, IconButton, Stack, Typography} from "@mui/material";
+import {Box, Card, Chip, Grid, IconButton, Menu, MenuItem, Stack, Typography} from "@mui/material";
 import {FaPlay} from "react-icons/fa";
 import {BiCheckDouble} from "react-icons/bi";
+import {LuDownload, LuTrash2} from "react-icons/lu";
+
+// components
+import {useContextMenu} from "../../hooks/useContextMenu";
+import ImagePreviewModal from "./ImagePreviewModal";
+import MusicPlayerModal from "./MusicPlayerModal";
+import VideoPlayerModal from "./VideoPlayerModal";
 
 // utils
 import {convertByte} from "../../../utils/functions";
 
+const LogMenu = ({contextMenu, isOpen, onClose}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Menu
+            open={isOpen}
+            onClose={onClose}
+            anchorReference="anchorPosition"
+            anchorPosition={
+                isOpen
+                    ? {top: contextMenu.mouseY, left: contextMenu.mouseX}
+                    : undefined
+            }
+        >
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+            >
+
+                <LuTrash2 size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.delete")}
+                </Typography>
+
+            </MenuItem>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+            >
+
+                <LuDownload size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.download")}
+                </Typography>
+
+            </MenuItem>
+
+        </Menu>
+    )
+}
+
 export const ImageLog = ({log}) => {
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
 
     return (
         <Grid
@@ -34,9 +112,22 @@ export const ImageLog = ({log}) => {
                     width: "100%",
                     padding: 1.5,
                 }}
+                onContextMenu={_handleShowMenu}
             >
 
-                <Box sx={{position: "relative"}}>
+                <LogMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
+
+                <Box
+                    sx={{
+                        position: "relative",
+                        cursor: "pointer"
+                    }}
+                    onClick={_handleShowModal}
+                >
 
                     <LazyLoadImage
                         src={log.content}
@@ -93,11 +184,18 @@ export const ImageLog = ({log}) => {
 
             </Card>
 
+            <ImagePreviewModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
+
         </Grid>
     )
 }
 
 export const FileLog = ({log}) => {
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
 
     return (
         <Grid
@@ -122,7 +220,14 @@ export const FileLog = ({log}) => {
                     width: "100%",
                     padding: 1.5,
                 }}
+                onContextMenu={_handleShowMenu}
             >
+
+                <LogMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <Stack
                     direction="row"
@@ -202,9 +307,16 @@ export const FileLog = ({log}) => {
     )
 }
 
-export const VoiceLog = ({log}) => {
+export const MusicLog = ({log}) => {
 
     const {language} = useSelector(state => state.setting.appearance);
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
 
     return (
         <Grid
@@ -229,7 +341,14 @@ export const VoiceLog = ({log}) => {
                     width: "100%",
                     padding: 1.5,
                 }}
+                onContextMenu={_handleShowMenu}
             >
+
+                <LogMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <Stack
                     direction="row"
@@ -247,6 +366,7 @@ export const VoiceLog = ({log}) => {
                         color="secondary"
                         size="large"
                         sx={{order: language === "fa" ? 2 : 1}}
+                        onClick={_handleShowModal}
                     >
                         <FaPlay size={20}/>
                     </IconButton>
@@ -306,11 +426,23 @@ export const VoiceLog = ({log}) => {
 
             </Card>
 
+            <MusicPlayerModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
+
         </Grid>
     )
 }
 
 export const VideoLog = ({log}) => {
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
+
+    const _handleShowModal = () => setShowModal(true);
+    const _handleHideModal = () => setShowModal(false);
 
     return (
         <Grid
@@ -335,7 +467,14 @@ export const VideoLog = ({log}) => {
                     width: "100%",
                     padding: 1.5,
                 }}
+                onContextMenu={_handleShowMenu}
             >
+
+                <LogMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <Box sx={{position: "relative"}}>
 
@@ -397,6 +536,7 @@ export const VideoLog = ({log}) => {
                             left: "50%",
                             transform: "translate(-50% , -50%)",
                         }}
+                        onClick={_handleShowModal}
                     >
                         <FaPlay size={20}/>
                     </IconButton>
@@ -428,11 +568,22 @@ export const VideoLog = ({log}) => {
 
             </Card>
 
+            <VideoPlayerModal
+                isOpen={showModal}
+                onClose={_handleHideModal}
+            />
+
         </Grid>
     )
 }
 
 export const LocationLog = ({log}) => {
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const _handleShowDetail = () => {
+        window.location.href = `https://www.google.com/maps/search/${log.content[0]},${log.content[1]}`;
+    }
 
     return (
         <Grid
@@ -457,14 +608,25 @@ export const LocationLog = ({log}) => {
                     width: "100%",
                     padding: 1,
                 }}
+                onContextMenu={_handleShowMenu}
             >
+
+                <LogMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <LazyLoadImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
                     width="100%"
                     height="100%"
-                    style={{borderRadius: 8}}
+                    style={{
+                        borderRadius: 8,
+                        cursor: "pointer"
+                    }}
+                    onClick={_handleShowDetail}
                 />
 
                 <Stack

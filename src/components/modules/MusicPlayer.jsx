@@ -1,10 +1,11 @@
 // libraries
 import {useRef, useState} from "react";
+import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from 'rc-slider';
-import {Box, IconButton, Stack, Typography, Popper, useTheme} from "@mui/material";
-import {FiVolume2} from "react-icons/fi";
-import {LuPause, LuPlay} from "react-icons/lu";
+import {Container, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {FaPause, FaPlay, FaVolumeHigh} from "react-icons/fa6";
+import {FaCog} from "react-icons/fa";
 
 // styles
 import 'rc-slider/assets/index.css';
@@ -14,12 +15,12 @@ import {formatDuration} from "../../utils/functions";
 
 const MusicPlayer = ({src}) => {
 
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
     const playerRef = useRef(null);
 
     const [anchorEl, setAnchorEl] = useState(null);
-
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
     const [seeking, setSeeking] = useState(false);
@@ -27,7 +28,9 @@ const MusicPlayer = ({src}) => {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
 
-    const _handleToggleVolume = (e) => setAnchorEl(anchorEl ? null : e.currentTarget);
+    const _handleToggleVolume = (e) => {
+        setAnchorEl(anchorEl ? null : e.currentTarget)
+    }
 
     const _handleVolumeChange = (value) => {
         setVolume(value);
@@ -50,85 +53,77 @@ const MusicPlayer = ({src}) => {
     const _handleEnded = () => setPlaying(true);
 
     return (
-        <>
+        <Container maxWidth="xs">
 
             <Stack
-                direction="row"
-                gap={2}
+                direction="column"
                 sx={{
+                    direction: language === "en" ? "rtl" : "ltr",
                     display: "flex",
                     justifyContent: 'center',
                     alignItems: "center",
-                    width: "100%",
+                    bgcolor: "background.default",
+                    borderRadius: 1,
+                    boxShadow: 2,
+                    padding: 2,
                 }}
             >
 
                 <Stack
-                    direction="column"
+                    direction="row"
                     gap={2}
                     sx={{
                         display: "flex",
                         justifyContent: 'center',
                         alignItems: "center",
+                        width: "100%",
+                        padding: 1
                     }}
                 >
 
-                    <Popper
-                        open={Boolean(anchorEl)}
-                        anchorEl={anchorEl}
-                        placement="top"
-                        sx={{zIndex: 1500}}
-                    >
-
-                        <Slider
-                            min={0}
-                            max={1}
-                            step={0.01}
-                            vertical={true}
-                            value={volume}
-                            onChange={_handleVolumeChange}
-                            style={{
-                                width: 4,
-                                height: 100,
-                                padding: 0
-                            }}
-                            trackStyle={{
-                                left: 0,
-                                background: theme.palette.primary.main,
-                            }}
-                            handleStyle={{
-                                width: 16,
-                                height: 16,
-                                background: theme.palette.primary.main,
-                                opacity: 1,
-                                border: "none",
-                                boxShadow: "none",
-                                marginRight: -5,
-                            }}
-                            railStyle={{
-                                width: 4,
-                                background: theme.palette.background.paper
-                            }}
-                        />
-
-                    </Popper>
-
-                    <IconButton
-                        variant="text"
-                        color="ternary"
-                        onClick={_handleToggleVolume}
-                    >
-                        <FiVolume2 size={24}/>
-                    </IconButton>
+                    <Slider
+                        min={0}
+                        max={0.999999}
+                        step={0.0000000000000001}
+                        value={played}
+                        onBeforeChange={_handleSeekMouseDown}
+                        onChange={_handleSeekChange}
+                        onAfterChange={_handleSeekMouseUp}
+                        style={{
+                            width: "100%",
+                            height: 8,
+                            padding: 0
+                        }}
+                        trackStyle={{
+                            height: 8,
+                            background: theme.palette.primary.main,
+                        }}
+                        handleStyle={{
+                            width: 20,
+                            height: 20,
+                            background: theme.palette.primary.main,
+                            opacity: 1,
+                            border: "none",
+                            boxShadow: "none",
+                            marginTop: -6,
+                        }}
+                        railStyle={{
+                            height: 8,
+                            background: theme.palette.background.paper
+                        }}
+                    />
 
                 </Stack>
 
-                <Box
+                <Stack
+                    direction="row"
+                    gap={2}
                     sx={{
                         display: "flex",
-                        gap: 1,
-                        justifyContent: 'start',
+                        justifyContent: 'space-between',
                         alignItems: "center",
+                        width: "100%",
+                        padding: 1
                     }}
                 >
 
@@ -145,58 +140,89 @@ const MusicPlayer = ({src}) => {
                         color="textPrimary"
                         fontWeight="bold"
                     >
-                        /
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="textPrimary"
-                        fontWeight="bold"
-                    >
                         {formatDuration(duration * played)}
                     </Typography>
 
-                </Box>
+                </Stack>
 
-                <Slider
-                    min={0}
-                    max={0.999999}
-                    step={0.0000000000000001}
-                    value={played}
-                    onBeforeChange={_handleSeekMouseDown}
-                    onChange={_handleSeekChange}
-                    onAfterChange={_handleSeekMouseUp}
-                    style={{
-                        width: 200,
-                        height: 4,
-                        padding: 0
+                <Stack
+                    direction="row"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: 'space-between',
+                        alignItems: "center",
+                        width: "100%",
                     }}
-                    trackStyle={{
-                        background: theme.palette.primary.main,
-                    }}
-                    handleStyle={{
-                        width: 16,
-                        height: 16,
-                        background: theme.palette.primary.main,
-                        opacity: 1,
-                        border: "none",
-                        boxShadow: "none",
-                        marginTop: -6,
-                    }}
-                    railStyle={{
-                        height: 4,
-                        background: theme.palette.background.paper
-                    }}
-                />
-
-                <IconButton
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    onClick={_handleTogglePlaying}
                 >
-                    {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
-                </IconButton>
+
+                    <IconButton
+                        variant="text"
+                        color="ternary"
+                        size="large"
+                    >
+                        <FaCog size={24}/>
+                    </IconButton>
+
+                    <IconButton
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        onClick={_handleTogglePlaying}
+                    >
+                        {(!playing || played === 0) ? <FaPlay size={24}/> : <FaPause size={24}/>}
+                    </IconButton>
+
+                    <Popper
+                        open={Boolean(anchorEl)}
+                        placement="right"
+                        anchorEl={anchorEl}
+                        sx={{zIndex: 1500}}
+                    >
+
+                        <Slider
+                            min={0}
+                            max={1}
+                            step={0.01}
+                            value={volume}
+                            onChange={_handleVolumeChange}
+                            style={{
+                                width: 60,
+                                height: 8,
+                                padding: 0
+                            }}
+                            trackStyle={{
+                                left: 0,
+                                height: 8,
+                                background: theme.palette.primary.main,
+                            }}
+                            handleStyle={{
+                                width: 20,
+                                height: 20,
+                                background: theme.palette.primary.main,
+                                opacity: 1,
+                                border: "none",
+                                boxShadow: "none",
+                                marginTop: -6,
+                            }}
+                            railStyle={{
+                                height: 8,
+                                background: theme.palette.background.paper
+                            }}
+                        />
+
+                    </Popper>
+
+                    <IconButton
+                        variant="text"
+                        color="ternary"
+                        size="large"
+                        onClick={_handleToggleVolume}
+                    >
+                        <FaVolumeHigh size={24}/>
+                    </IconButton>
+
+                </Stack>
 
             </Stack>
 
@@ -216,7 +242,7 @@ const MusicPlayer = ({src}) => {
                 style={{display: "none"}}
             />
 
-        </>
+        </Container>
     )
 
 }

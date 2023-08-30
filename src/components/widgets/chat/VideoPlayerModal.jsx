@@ -1,6 +1,6 @@
 // libraries
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {alpha, Box, Container, IconButton, Modal, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 import VideoPlayer from "../../modules/VideoPlayer";
 
@@ -112,8 +112,6 @@ const ModalContent = () => {
 
 const VideoPlayerModal = ({isOpen, onClose}) => {
 
-    const theme = useTheme();
-
     return (
         <Modal
             open={isOpen}
@@ -135,7 +133,7 @@ const VideoPlayerModal = ({isOpen, onClose}) => {
                     alignItems: "center",
                     width: "100%",
                     height: "100%",
-                    bgcolor: alpha(theme.palette.background.paper, 0.9),
+                    bgcolor: "background.paper",
                     borderRadius: 0,
                     boxShadow: 1,
                     padding: 2,

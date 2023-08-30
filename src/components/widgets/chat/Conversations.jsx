@@ -1,5 +1,5 @@
 // libraries
-import {useState} from "react";
+import {forwardRef, useState} from "react";
 import {useSelector} from "react-redux";
 import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -45,7 +45,7 @@ const conversationList = [
     {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
 ];
 
-const Conversations = () => {
+const Conversations = forwardRef((props , ref) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
 
@@ -64,9 +64,9 @@ const Conversations = () => {
         >
 
             <Stack
+                ref={ref}
                 component="ul"
                 direction="column"
-                id="messages"
                 gap={2}
                 sx={{
                     position: "relative",
@@ -80,7 +80,7 @@ const Conversations = () => {
             >
 
                 {
-                    conversationList.map((conversationItem, index) =>
+                    conversationList.map((conversationItem) =>
                         <Stack
                             key={conversationItem.id}
                             component="li"
@@ -146,6 +146,6 @@ const Conversations = () => {
 
         </SimpleBar>
     )
-}
+});
 
 export default Conversations;

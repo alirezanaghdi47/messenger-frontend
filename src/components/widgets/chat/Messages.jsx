@@ -3,12 +3,14 @@ import {useState} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Chip, IconButton, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
 import {FaPlay} from "react-icons/fa";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
+import {LuDownload, LuTrash2} from "react-icons/lu";
 
 // components
+import {useContextMenu} from "../../hooks/useContextMenu";
 import ImagePreviewModal from "./ImagePreviewModal";
 import MusicPlayerModal from "./MusicPlayerModal";
 import VideoPlayerModal from "./VideoPlayerModal";
@@ -17,11 +19,74 @@ import VideoPlayerModal from "./VideoPlayerModal";
 import {fontSizeList} from "../../../utils/constants";
 import {convertByte, convertTimestamp} from "../../../utils/functions";
 
+const MessageMenu = ({contextMenu, isOpen, onClose}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Menu
+            open={isOpen}
+            onClose={onClose}
+            anchorReference="anchorPosition"
+            anchorPosition={
+                isOpen
+                    ? {top: contextMenu.mouseY, left: contextMenu.mouseX}
+                    : undefined
+            }
+        >
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+            >
+
+                <LuTrash2 size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.delete")}
+                </Typography>
+
+            </MenuItem>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+            >
+
+                <LuDownload size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.download")}
+                </Typography>
+
+            </MenuItem>
+
+        </Menu>
+    )
+}
+
 export const TextMessage = ({message}) => {
 
     const {fontSize} = useSelector(state => state.setting.appearance);
-    const {t} = useTranslation();
     const theme = useTheme();
+
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
 
     return (
         <Card
@@ -34,7 +99,14 @@ export const TextMessage = ({message}) => {
                 bgcolor: message.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
+            onContextMenu={_handleShowMenu}
         >
+
+            <MessageMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideMenu}
+            />
 
             {/*<Stack*/}
             {/*    direction="row"*/}
@@ -99,6 +171,8 @@ export const FileMessage = ({message}) => {
 
     const theme = useTheme();
 
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
     return (
         <Card
             sx={{
@@ -110,7 +184,14 @@ export const FileMessage = ({message}) => {
                 bgcolor: message.me ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
+            onContextMenu={_handleShowMenu}
         >
+
+            <MessageMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideMenu}
+            />
 
             <Stack
                 direction="row"
@@ -192,7 +273,9 @@ export const ImageMessage = ({message}) => {
 
     const theme = useTheme();
 
-    const [showModal , setShowModal] = useState(false);
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
 
     const _handleShowModal = () => setShowModal(true);
     const _handleHideModal = () => setShowModal(false);
@@ -210,12 +293,23 @@ export const ImageMessage = ({message}) => {
                     alignItems: "start",
                     bgcolor: message.me ? "primary.light" : "background.default",
                     padding: 1.5,
-                    cursor: "pointer"
                 }}
-                onClick={_handleShowModal}
+                onContextMenu={_handleShowMenu}
             >
 
-                <Box sx={{position: "relative"}}>
+                <MessageMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
+
+                <Box
+                    sx={{
+                        position: "relative",
+                        cursor: "pointer"
+                    }}
+                    onClick={_handleShowModal}
+                >
 
                     <LazyLoadImage
                         src={message.content}
@@ -289,7 +383,9 @@ export const MusicMessage = ({message}) => {
     const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
 
-    const [showModal , setShowModal] = useState(false);
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
 
     const _handleShowModal = () => setShowModal(true);
     const _handleHideModal = () => setShowModal(false);
@@ -307,7 +403,14 @@ export const MusicMessage = ({message}) => {
                     bgcolor: message.me ? "primary.light" : "background.default",
                     padding: 1.5,
                 }}
+                onContextMenu={_handleShowMenu}
             >
+
+                <MessageMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <Stack
                     direction="row"
@@ -398,7 +501,9 @@ export const VideoMessage = ({message}) => {
 
     const theme = useTheme();
 
-    const [showModal , setShowModal] = useState(false);
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const [showModal, setShowModal] = useState(false);
 
     const _handleShowModal = () => setShowModal(true);
     const _handleHideModal = () => setShowModal(false);
@@ -415,10 +520,15 @@ export const VideoMessage = ({message}) => {
                     alignItems: "start",
                     bgcolor: message.me ? "primary.light" : "background.default",
                     padding: 1.5,
-                    cursor: "pointer"
                 }}
-                onClick={_handleShowModal}
+                onContextMenu={_handleShowMenu}
             >
+
+                <MessageMenu
+                    contextMenu={contextMenu}
+                    isOpen={contextMenu !== null}
+                    onClose={_handleHideMenu}
+                />
 
                 <Box sx={{position: "relative"}}>
 
@@ -483,6 +593,7 @@ export const VideoMessage = ({message}) => {
                             left: "50%",
                             transform: "translate(-50% , -50%)",
                         }}
+                        onClick={_handleShowModal}
                     >
                         <FaPlay size={20}/>
                     </IconButton>
@@ -529,6 +640,8 @@ export const LogMessage = ({message}) => {
     const {t} = useTranslation();
     const theme = useTheme();
 
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
     return (
         <Card
             sx={{
@@ -540,7 +653,14 @@ export const LogMessage = ({message}) => {
                 bgcolor: message.me ? "primary.main" : "background.paper",
                 padding: 1,
             }}
+            onContextMenu={_handleShowMenu}
         >
+
+            <MessageMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideMenu}
+            />
 
             <Stack
                 direction="row"
@@ -632,7 +752,9 @@ export const LocationMessage = ({message}) => {
 
     const theme = useTheme();
 
-    const _handleShowDetail = () =>  {
+    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+
+    const _handleShowDetail = () => {
         window.location.href = `https://www.google.com/maps/search/${message.content[0]},${message.content[1]}`;
     }
 
@@ -646,10 +768,15 @@ export const LocationMessage = ({message}) => {
                 alignItems: "start",
                 bgcolor: message.me ? "primary.light" : "background.default",
                 padding: 1,
-                cursor: "pointer"
             }}
-            onClick={() => _handleShowDetail()}
+            onContextMenu={_handleShowMenu}
         >
+
+            <MessageMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideMenu}
+            />
 
             <LazyLoadImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
@@ -659,7 +786,9 @@ export const LocationMessage = ({message}) => {
                 style={{
                     maxWidth: 300,
                     borderRadius: 8,
+                    cursor: "pointer"
                 }}
+                onClick={_handleShowDetail}
             />
 
             <Stack
