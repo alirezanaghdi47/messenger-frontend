@@ -8,7 +8,7 @@ const filterList = [
     {id: 1, title: "menu.file", value: "file", icon: <FiFile size={20}/>},
     {id: 2, title: "menu.image", value: "image", icon: <FiImage size={20}/>},
     {id: 3, title: "menu.video", value: "video", icon: <FiFilm size={20}/>},
-    {id: 4, title: "menu.voice", value: "voice", icon: <FiMusic size={20}/>},
+    {id: 4, title: "menu.music", value: "music", icon: <FiMusic size={20}/>},
     {id: 5, title: "menu.location", value: "location", icon: <FiMapPin size={20}/>},
 ];
 

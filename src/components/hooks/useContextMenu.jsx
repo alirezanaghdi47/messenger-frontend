@@ -7,7 +7,7 @@ export const useContextMenu = () => {
 
     const handleContextMenu = (e) => e.preventDefault();
 
-    const _handleShowMenu = (e) => {
+    const _handleShowContextMenu = (e) => {
         e.preventDefault();
         setContextMenu(
             contextMenu === null
@@ -19,7 +19,7 @@ export const useContextMenu = () => {
         );
     };
 
-    const _handleHideMenu = () => setContextMenu(null);
+    const _handleHideContextMenu = () => setContextMenu(null);
 
     useEffect(() => {
         const appElement = document.getElementById('root');
@@ -27,7 +27,7 @@ export const useContextMenu = () => {
         return () => appElement.removeEventListener('contextmenu', handleContextMenu);
     }, []);
 
-    return {contextMenu , _handleShowMenu, _handleHideMenu};
+    return {contextMenu , _handleShowContextMenu, _handleHideContextMenu};
 
 }
 

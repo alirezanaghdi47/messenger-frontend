@@ -1,21 +1,20 @@
 // libraries
-import {useState} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Card, Chip, Grid, IconButton, Menu, MenuItem, Stack, Typography} from "@mui/material";
-import {FaPlay} from "react-icons/fa";
 import {BiCheckDouble} from "react-icons/bi";
-import {LuDownload, LuTrash2} from "react-icons/lu";
+import {LuDownload, LuTrash2, LuPlay} from "react-icons/lu";
 
 // components
-import {useContextMenu} from "../../hooks/useContextMenu";
-import ImagePreviewModal from "./ImagePreviewModal";
-import MusicPlayerModal from "./MusicPlayerModal";
-import VideoPlayerModal from "./VideoPlayerModal";
+import {useContextMenu} from "components/hooks/useContextMenu";
+import {useModal} from "components/hooks/useModal";
+import ImagePreviewModal from "components/widgets/chat/ImagePreviewModal";
+import MusicPlayerModal from "components/widgets/chat/MusicPlayerModal";
+import VideoPlayerModal from "components/widgets/chat/VideoPlayerModal";
 
 // utils
-import {convertByte} from "../../../utils/functions";
+import {convertByte} from "utils/functions";
 
 const LogMenu = ({contextMenu, isOpen, onClose}) => {
 
@@ -81,12 +80,8 @@ const LogMenu = ({contextMenu, isOpen, onClose}) => {
 
 export const ImageLog = ({log}) => {
 
-    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
-
-    const [showModal, setShowModal] = useState(false);
-
-    const _handleShowModal = () => setShowModal(true);
-    const _handleHideModal = () => setShowModal(false);
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
 
     return (
         <Grid
@@ -110,15 +105,17 @@ export const ImageLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
+                    bgcolor: "background.default",
                     padding: 1.5,
                 }}
-                onContextMenu={_handleShowMenu}
+                elevation={0}
+                onContextMenu={_handleShowContextMenu}
             >
 
                 <LogMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
-                    onClose={_handleHideMenu}
+                    onClose={_handleHideContextMenu}
                 />
 
                 <Box
@@ -185,7 +182,7 @@ export const ImageLog = ({log}) => {
             </Card>
 
             <ImagePreviewModal
-                isOpen={showModal}
+                isOpen={isOpenModal}
                 onClose={_handleHideModal}
             />
 
@@ -195,7 +192,7 @@ export const ImageLog = ({log}) => {
 
 export const FileLog = ({log}) => {
 
-    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     return (
         <Grid
@@ -218,15 +215,17 @@ export const FileLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
+                    bgcolor: "background.default",
                     padding: 1.5,
                 }}
-                onContextMenu={_handleShowMenu}
+                elevation={0}
+                onContextMenu={_handleShowContextMenu}
             >
 
                 <LogMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
-                    onClose={_handleHideMenu}
+                    onClose={_handleHideContextMenu}
                 />
 
                 <Stack
@@ -311,12 +310,8 @@ export const MusicLog = ({log}) => {
 
     const {language} = useSelector(state => state.setting.appearance);
 
-    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
-
-    const [showModal, setShowModal] = useState(false);
-
-    const _handleShowModal = () => setShowModal(true);
-    const _handleHideModal = () => setShowModal(false);
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
 
     return (
         <Grid
@@ -339,15 +334,17 @@ export const MusicLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
+                    bgcolor: "background.default",
                     padding: 1.5,
                 }}
-                onContextMenu={_handleShowMenu}
+                elevation={0}
+                onContextMenu={_handleShowContextMenu}
             >
 
                 <LogMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
-                    onClose={_handleHideMenu}
+                    onClose={_handleHideContextMenu}
                 />
 
                 <Stack
@@ -368,7 +365,7 @@ export const MusicLog = ({log}) => {
                         sx={{order: language === "fa" ? 2 : 1}}
                         onClick={_handleShowModal}
                     >
-                        <FaPlay size={20}/>
+                        <LuPlay size={20}/>
                     </IconButton>
 
                     <Stack
@@ -427,7 +424,7 @@ export const MusicLog = ({log}) => {
             </Card>
 
             <MusicPlayerModal
-                isOpen={showModal}
+                isOpen={isOpenModal}
                 onClose={_handleHideModal}
             />
 
@@ -437,12 +434,8 @@ export const MusicLog = ({log}) => {
 
 export const VideoLog = ({log}) => {
 
-    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
-
-    const [showModal, setShowModal] = useState(false);
-
-    const _handleShowModal = () => setShowModal(true);
-    const _handleHideModal = () => setShowModal(false);
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
 
     return (
         <Grid
@@ -465,15 +458,17 @@ export const VideoLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
+                    bgcolor: "background.default",
                     padding: 1.5,
                 }}
-                onContextMenu={_handleShowMenu}
+                elevation={0}
+                onContextMenu={_handleShowContextMenu}
             >
 
                 <LogMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
-                    onClose={_handleHideMenu}
+                    onClose={_handleHideContextMenu}
                 />
 
                 <Box sx={{position: "relative"}}>
@@ -538,7 +533,7 @@ export const VideoLog = ({log}) => {
                         }}
                         onClick={_handleShowModal}
                     >
-                        <FaPlay size={20}/>
+                        <LuPlay size={20}/>
                     </IconButton>
 
                 </Box>
@@ -569,7 +564,7 @@ export const VideoLog = ({log}) => {
             </Card>
 
             <VideoPlayerModal
-                isOpen={showModal}
+                isOpen={isOpenModal}
                 onClose={_handleHideModal}
             />
 
@@ -579,7 +574,7 @@ export const VideoLog = ({log}) => {
 
 export const LocationLog = ({log}) => {
 
-    const {contextMenu, _handleShowMenu, _handleHideMenu} = useContextMenu();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     const _handleShowDetail = () => {
         window.location.href = `https://www.google.com/maps/search/${log.content[0]},${log.content[1]}`;
@@ -606,15 +601,17 @@ export const LocationLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
+                    bgcolor: "background.default",
                     padding: 1,
                 }}
-                onContextMenu={_handleShowMenu}
+                elevation={0}
+                onContextMenu={_handleShowContextMenu}
             >
 
                 <LogMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
-                    onClose={_handleHideMenu}
+                    onClose={_handleHideContextMenu}
                 />
 
                 <LazyLoadImage

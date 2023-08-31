@@ -2,8 +2,8 @@
 import {Stack , Container} from "@mui/material";
 
 // components
-import Header from "../components/widgets/auth/Header.jsx";
-import SignUpForm from "../components/widgets/signUp/SignUpForm.jsx";
+import Header from "components/widgets/auth/Header.jsx";
+import SignUpForm from "components/widgets/signUp/SignUpForm.jsx";
 
 const SignUp = () => {
 

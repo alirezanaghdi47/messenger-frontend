@@ -2,23 +2,56 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Grid, Stack, Typography} from "@mui/material";
+import {Grid, Stack} from "@mui/material";
+
+// components
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setBackground} from "../../../stores/slices/setting.js";
+import {setBackground} from "stores/slices/setting.js";
 
 // utils
-import {backgroundList} from "../../../utils/constants.js";
+import {backgroundList} from "utils/constants.js";
 
-const Background = () => {
+const BackgroundItem = ({backgroundItem , index}) => {
 
     const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
-    const _handleActiveBackground = (index) => {
-        dispatch(setBackground(index));
-    }
+    const _handleActiveBackground = (index) => dispatch(setBackground(index));
+
+    return (
+        <Grid
+            component="li"
+            item
+            xs={6}
+            sm={4}
+            lg={3}
+            sx={{
+                cursor:"pointer",
+                opacity: background === backgroundItem.background ? 1: 0.5,
+            }}
+            onClick={() => _handleActiveBackground(index)}
+        >
+
+            <LazyLoadImage
+                alt={backgroundItem.id}
+                src={backgroundItem.background}
+                width="100%"
+                height="100%"
+                effect="fade"
+                style={{
+                    borderRadius: 8,
+                    objectFit: "cover"
+                }}
+            />
+
+        </Grid>
+    )
+}
+
+const Background = () => {
 
     return (
         <Stack
@@ -32,25 +65,7 @@ const Background = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.background")}
-                </Typography>
-
-            </Box>
+            <Header title="typography.background"/>
 
             <Grid
                 component="ul"
@@ -60,31 +75,11 @@ const Background = () => {
             >
                 {
                     backgroundList.map((backgroundItem , index) =>
-                        <Grid
+                        <BackgroundItem
                             key={backgroundItem.id}
-                            component="li"
-                            item
-                            xs={6}
-                            sm={4}
-                            lg={3}
-                            sx={{
-                                cursor:"pointer",
-                                opacity: background === backgroundItem.background ? 1: 0.5,
-                            }}
-                            onClick={() => _handleActiveBackground(index)}
-                        >
-                            <LazyLoadImage
-                                alt={backgroundItem.id}
-                                src={backgroundItem.background}
-                                width="100%"
-                                height="100%"
-                                effect="fade"
-                                style={{
-                                    borderRadius: 8,
-                                    objectFit: "cover"
-                                }}
-                            />
-                        </Grid>
+                            backgroundItem={backgroundItem}
+                            index={index}
+                        />
                     )
                 }
 

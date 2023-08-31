@@ -1,23 +1,37 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Button, Stack} from "@mui/material";
+
+// components
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setDateFormat} from "../../../stores/slices/setting.js";
+import {setDateFormat} from "stores/slices/setting.js";
 
 // utils
-import {dateTimeList} from "../../../utils/constants.js";
+import {dateTimeList} from "utils/constants.js";
 
-const DateTime = () => {
+const DateTimeItem = ({dateTimeItem}) => {
 
     const dispatch = useDispatch();
     const {dateFormat} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
-    const _handleActiveDateTime = (value) => {
-        dispatch(setDateFormat(value));
-    }
+    const _handleActiveDateTime = (value) => dispatch(setDateFormat(value));
+
+    return (
+        <Button
+            variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
+            color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
+            onClick={() => _handleActiveDateTime(dateTimeItem.value)}
+        >
+            {t(dateTimeItem.title)}
+        </Button>
+    )
+}
+
+const DateTime = () => {
 
     return (
         <Stack
@@ -31,25 +45,7 @@ const DateTime = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.dateTime")}
-                </Typography>
-
-            </Box>
+            <Header title="typography.dateTime"/>
 
             <Stack
                 component="ul"
@@ -65,14 +61,10 @@ const DateTime = () => {
 
                 {
                     dateTimeList.map(dateTimeItem =>
-                        <Button
+                        <DateTimeItem
                             key={dateTimeItem.id}
-                            variant={dateTimeItem.value === dateFormat ? "contained" : "text"}
-                            color={dateTimeItem.value === dateFormat ? "primary" : "ternary"}
-                            onClick={() => _handleActiveDateTime(dateTimeItem.value)}
-                        >
-                            {t(dateTimeItem.title)}
-                        </Button>
+                            dateTimeItem={dateTimeItem}
+                        />
                     )
                 }
 

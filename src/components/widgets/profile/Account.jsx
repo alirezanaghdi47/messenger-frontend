@@ -6,11 +6,11 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Grid} from "@mui/material";
 
 // components
-import TextInput from "../../modules/TextInput.jsx";
-import AvatarInput from "../../modules/AvatarInput.jsx";
+import TextInput from "components/modules/TextInput.jsx";
+import AvatarInput from "components/modules/AvatarInput.jsx";
 
 // utils
-import {editProfileSchema} from "../../../utils/validations.js";
+import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 

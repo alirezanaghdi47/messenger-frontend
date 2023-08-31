@@ -3,8 +3,8 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Header from "../components/widgets/setting/Header.jsx";
-import Logs from "../components/widgets/session/Logs.jsx";
+import Header from "components/widgets/setting/Header.jsx";
+import Logs from "components/widgets/session/Logs.jsx";
 
 const Session = () => {
 

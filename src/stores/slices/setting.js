@@ -1,6 +1,8 @@
 // libraries
 import {createSlice} from '@reduxjs/toolkit';
-import {backgroundList, colorList} from "../../utils/constants.js";
+
+// utils
+import {backgroundList, colorList} from "utils/constants.js";
 
 const initialState = {
     profile: {

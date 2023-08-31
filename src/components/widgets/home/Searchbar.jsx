@@ -5,7 +5,7 @@ import {IconButton} from "@mui/material";
 import {FiSearch} from "react-icons/fi";
 
 // components
-import TextInput from "../../modules/TextInput.jsx";
+import TextInput from "components/modules/TextInput.jsx";
 
 const SearchBar = () => {
 

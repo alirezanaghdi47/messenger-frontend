@@ -8,8 +8,8 @@ import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { createFilter } from "redux-persist-transform-filter";
 
 // stores
-import chatReducer from "./slices/chat.js";
-import settingReducer from "./slices/setting.js";
+import chatReducer from "stores/slices/chat.js";
+import settingReducer from "stores/slices/setting.js";
 
 const reducers = combineReducers({
     chat: chatReducer,

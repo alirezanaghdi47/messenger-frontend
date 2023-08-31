@@ -1,17 +1,14 @@
 // libraries
-import {useState} from "react";
 import {IconButton} from "@mui/material";
 import {LuMic} from "react-icons/lu";
 
 // components
-import VoiceRecorderModal from "./VoiceRecorderModal";
+import {useModal} from "components/hooks/useModal";
+import VoiceRecorderModal from "components/widgets/chat/VoiceRecorderModal";
 
 const VoiceRecorder = () => {
 
-    const [showModal, setShowModal] = useState(false);
-
-    const _handleShowModal = () => setShowModal(true);
-    const _handleHideModal = () => setShowModal(false);
+    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
 
     return (
         <>
@@ -25,7 +22,7 @@ const VoiceRecorder = () => {
             </IconButton>
 
             <VoiceRecorderModal
-                isOpen={showModal}
+                isOpen={isOpenModal}
                 onClose={_handleHideModal}
             />
 

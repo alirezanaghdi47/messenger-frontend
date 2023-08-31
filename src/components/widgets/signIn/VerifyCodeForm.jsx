@@ -4,8 +4,8 @@ import {useFormik} from "formik";
 import {Button, Stack} from "@mui/material";
 
 // components
-import NumberInput from "../../modules/NumberInput.jsx";
-import Timer from "./Timer";
+import NumberInput from "components/modules/NumberInput.jsx";
+import Timer from "components/widgets/signIn/Timer";
 
 const VerifyCodeForm = () => {
 

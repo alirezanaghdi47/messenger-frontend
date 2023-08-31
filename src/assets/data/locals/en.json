@@ -69,6 +69,7 @@
       "file": "File",
       "image": "Image",
       "voice": "Voice",
+      "music": "Music",
       "video": "Video",
       "location": "Location",
       "delete": "Delete",

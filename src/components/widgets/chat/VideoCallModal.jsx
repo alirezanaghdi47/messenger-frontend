@@ -1,13 +1,9 @@
 // libraries
 import {useSelector} from "react-redux";
+import ReactPlayer from "react-player";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
-
-// components
-import VideoPlayer from "../../modules/VideoPlayer";
-import MusicPlayer from "../../modules/MusicPlayer";
-import ReactPlayer from "react-player";
 
 const ModalHeader = () => {
 
@@ -25,7 +21,7 @@ const ModalHeader = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -146,7 +142,7 @@ const ModalFooter = ({onClose}) => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -205,8 +201,6 @@ const ModalFooter = ({onClose}) => {
 
 const VideoCallModal = ({isOpen, onClose}) => {
 
-    const {background} = useSelector(state => state.setting.appearance);
-
     return (
         <Modal
             open={isOpen}
@@ -230,9 +224,6 @@ const VideoCallModal = ({isOpen, onClose}) => {
                     width: "100%",
                     height: "100%",
                     bgcolor: "background.paper",
-                    backgroundImage: `url(${background})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: "cover",
                 }}
             >
 

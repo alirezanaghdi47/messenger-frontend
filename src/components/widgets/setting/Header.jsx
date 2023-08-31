@@ -28,7 +28,9 @@ const Header = ({title}) => {
                 width: "100%",
                 height: 80,
                 bgcolor: "background.paper",
-                boxShadow: 1,
+                borderBottomWidth: 1,
+                borderBottomStyle: "solid",
+                borderBottomColor: "secondary.main",
                 padding: 2
             }}
         >

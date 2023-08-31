@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 
 // utils
-import {version} from "../../../utils/constants.js";
+import {version} from "utils/constants.js";
 
 const Version = () => {
 

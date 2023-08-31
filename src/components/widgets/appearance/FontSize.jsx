@@ -1,13 +1,16 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Box, Card, Slider, Stack, Typography, useTheme} from "@mui/material";
+import {Card, Slider, Stack, Typography, useTheme} from "@mui/material";
+
+// components
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setFontSize} from "../../../stores/slices/setting.js";
+import {setFontSize} from "stores/slices/setting.js";
 
 // utils
-import {fontSizeList} from "../../../utils/constants.js";
+import {fontSizeList} from "utils/constants.js";
 
 const FontSize = () => {
 
@@ -32,25 +35,7 @@ const FontSize = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.fontSize")}
-                </Typography>
-
-            </Box>
+            <Header title="typography.fontSize"/>
 
             <Card
                 sx={{

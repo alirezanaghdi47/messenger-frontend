@@ -5,7 +5,7 @@ import {IconButton} from "@mui/material";
 import {LuSend} from "react-icons/lu";
 
 // components
-import TextInput from "../../modules/TextInput";
+import TextInput from "components/modules/TextInput";
 
 const MessageForm = () => {
 

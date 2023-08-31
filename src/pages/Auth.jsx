@@ -5,9 +5,9 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack} from "@mui/material";
 
 // components
-import Secondary from "../components/layouts/Secondary.jsx";
-import Appbar from "../components/widgets/auth/Appbar.jsx";
-import CopyRight from "../components/widgets/auth/CopyRight.jsx";
+import Secondary from "components/layouts/Secondary.jsx";
+import Appbar from "components/widgets/auth/Appbar.jsx";
+import CopyRight from "components/widgets/auth/CopyRight.jsx";
 
 const Auth = () => {
 

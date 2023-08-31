@@ -1,5 +1,4 @@
 // libraries
-import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {
@@ -12,15 +11,17 @@ import {
 import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 
 // components
-import VoiceCallModal from "./VoiceCallModal";
-import VideoCallModal from "./VideoCallModal";
-import IncomingCallModal from "../home/IncomingCallModal";
+import {useDropdownMenu} from "components/hooks/useDropdownMenu";
+import {useModal} from "components/hooks/useModal";
+import VoiceCallModal from "components/widgets/chat/VoiceCallModal";
+import VideoCallModal from "components/widgets/chat/VideoCallModal";
+import IncomingCallModal from "components/widgets/home/IncomingCallModal";
 
 const MobileToolbar = ({
                            anchorEl,
-                           isOpenDropdown,
-                           onCloseDropdown,
-                           onOpenDropdown,
+                           isOpenDropdownMenu,
+                           onCloseDropdownMenu,
+                           onOpenDropdownMenu,
                            onOpenVideoCall,
                            onOpenVoiceCall
                        }) => {
@@ -61,7 +62,7 @@ const MobileToolbar = ({
                 component="li"
                 variant="text"
                 color="ternary"
-                onClick={onOpenDropdown}
+                onClick={onOpenDropdownMenu}
             >
                 <FiMoreVertical size={20}/>
             </IconButton>
@@ -76,8 +77,8 @@ const MobileToolbar = ({
                     vertical: 'top',
                     horizontal: 'left',
                 }}
-                open={isOpenDropdown}
-                onClose={onCloseDropdown}
+                open={isOpenDropdownMenu}
+                onClose={onCloseDropdownMenu}
             >
 
                 <MenuItem
@@ -97,7 +98,7 @@ const MobileToolbar = ({
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.deleteContact")}
+                        {t("menu.delete")}
                     </Typography>
 
                 </MenuItem>
@@ -110,9 +111,9 @@ const MobileToolbar = ({
 
 const DesktopToolbar = ({
                             anchorEl,
-                            isOpenDropdown,
-                            onCloseDropdown,
-                            onOpenDropdown,
+                            isOpenDropdownMenu,
+                            onCloseDropdownMenu,
+                            onOpenDropdownMenu,
                             onOpenVideoCall,
                             onOpenVoiceCall
                         }) => {
@@ -135,7 +136,7 @@ const DesktopToolbar = ({
                 component="li"
                 variant="text"
                 color="ternary"
-                onClick={onOpenDropdown}
+                onClick={onOpenDropdownMenu}
             >
                 <FiMoreVertical size={20}/>
             </IconButton>
@@ -150,8 +151,8 @@ const DesktopToolbar = ({
                     vertical: 'top',
                     horizontal: 'left',
                 }}
-                open={isOpenDropdown}
-                onClose={onCloseDropdown}
+                open={isOpenDropdownMenu}
+                onClose={onCloseDropdownMenu}
             >
 
                 <MenuItem
@@ -217,7 +218,7 @@ const DesktopToolbar = ({
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.deleteContact")}
+                        {t("menu.delete")}
                     </Typography>
 
                 </MenuItem>
@@ -232,37 +233,10 @@ const Toolbar = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [showIncomingCallModal, setShowIncomingCallModal] = useState(false);
-    const [showVoiceCallModal, setShowVoiceCallModal] = useState(false);
-    const [showVideoCallModal, setShowVideoCallModal] = useState(false);
-
-    const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
-    const _handleHideDropdown = (e) => setAnchorEl(null);
-    const _handleShowIncomingCallModal = () => {
-        setShowIncomingCallModal(true);
-        _handleHideDropdown();
-    }
-    const _handleHideIncomingCallModal = () => {
-        setShowIncomingCallModal(false);
-        _handleHideDropdown();
-    }
-    const _handleShowVoiceCallModal = () => {
-        setShowVoiceCallModal(true);
-        _handleHideDropdown();
-    }
-    const _handleHideVoiceCallModal = () => {
-        setShowVoiceCallModal(false);
-        _handleHideDropdown();
-    }
-    const _handleShowVideoCallModal = () => {
-        setShowVideoCallModal(true);
-        _handleHideDropdown();
-    }
-    const _handleHideVideoCallModal = () => {
-        setShowVideoCallModal(false);
-        _handleHideDropdown();
-    }
+    const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
+    const {isOpenModal: isOpenIncomingCallModal , _handleShowModal: _handleShowIncomingCallModal , _handleHideModal: _handleHideIncomingCallModal} = useModal();
+    const {isOpenModal: isOpenVoiceCallModal , _handleShowModal: _handleShowVoiceCallModal , _handleHideModal: _handleHideVoiceCallModal} = useModal();
+    const {isOpenModal: isOpenVideoCallModal , _handleShowModal: _handleShowVideoCallModal , _handleHideModal: _handleHideVideoCallModal} = useModal();
 
     return (
         <>
@@ -271,34 +245,34 @@ const Toolbar = () => {
                 isTablet ?
                     <DesktopToolbar
                         anchorEl={anchorEl}
-                        isOpenDropdown={Boolean(anchorEl)}
-                        onOpenDropdown={_handleShowDropdown}
-                        onCloseDropdown={_handleHideDropdown}
+                        isOpenDropdownMenu={isOpenDropdownMenu}
+                        onOpenDropdownMenu={_handleShowDropdownMenu}
+                        onCloseDropdownMenu={_handleHideDropdownMenu}
                         onOpenVoiceCall={_handleShowVoiceCallModal}
                         onOpenVideoCall={_handleShowVideoCallModal}
                     /> :
                     <MobileToolbar
                         anchorEl={anchorEl}
-                        isOpenDropdown={Boolean(anchorEl)}
-                        onOpenDropdown={_handleShowDropdown}
-                        onCloseDropdown={_handleHideDropdown}
+                        isOpenDropdownMenu={isOpenDropdownMenu}
+                        onOpenDropdownMenu={_handleShowDropdownMenu}
+                        onCloseDropdownMenu={_handleHideDropdownMenu}
                         onOpenVoiceCall={_handleShowVoiceCallModal}
                         onOpenVideoCall={_handleShowVideoCallModal}
                     />
             }
 
             <VoiceCallModal
-                isOpen={showVoiceCallModal}
+                isOpen={isOpenVoiceCallModal}
                 onClose={_handleHideVoiceCallModal}
             />
 
             <VideoCallModal
-                isOpen={showVideoCallModal}
+                isOpen={isOpenVideoCallModal}
                 onClose={_handleHideVideoCallModal}
             />
 
             <IncomingCallModal
-                isOpen={showIncomingCallModal}
+                isOpen={isOpenIncomingCallModal}
                 onClose={_handleHideIncomingCallModal}
             />
 

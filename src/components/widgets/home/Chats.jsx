@@ -9,7 +9,7 @@ import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText, LuTrash2} from "reac
 import {FiPhone, FiVideo} from "react-icons/fi";
 
 // components
-import {useContextMenu} from "../../hooks/useContextMenu";
+import {useContextMenu} from "components/hooks/useContextMenu";
 
 const chatList = [
     {
@@ -74,23 +74,22 @@ const ChatItem = ({chatItem}) => {
     const {t} = useTranslation();
     const theme = useTheme();
 
-    const {contextMenu , _handleShowMenu , _handleHideMenu} = useContextMenu();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/" : `/${item._id}`);
 
     return (
         <Box
-            key={chatItem._id}
             component="li"
             sx={{width: "100%"}}
             onClick={() => _handleActiveItem(chatItem)}
-            onContextMenu={_handleShowMenu}
+            onContextMenu={_handleShowContextMenu}
         >
 
             <ChatMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
-                onClose={_handleHideMenu}
+                onClose={_handleHideContextMenu}
             />
 
             <Stack

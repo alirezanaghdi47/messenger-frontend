@@ -6,9 +6,9 @@ import {IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
-import Filter from "./Filter";
-import History from "./History";
-import Empty from "../../partials/Empty";
+import Filter from "components/widgets/chat/Filter";
+import History from "components/widgets/chat/History";
+import Empty from "components/partials/Empty";
 
 const ModalHeader = ({onClose}) => {
 

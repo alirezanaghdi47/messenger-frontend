@@ -1,5 +1,6 @@
 // libraries
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
@@ -84,18 +85,16 @@ const ModalContent = () => {
         <Container
             maxWidth="xl"
             disableGutters
+            sx={{
+                marginTop: "auto",
+                marginBottom: "auto",
+            }}
         >
 
             <Box
                 sx={{
-                    position: 'absolute',
-                    zIndex: 50,
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50% , -50%)",
-                    width: "calc(100% - 32px)",
+                    width: "100%",
                     maxWidth: 992,
-                    boxShadow: 2
                 }}
             >
 
@@ -113,7 +112,9 @@ const ModalContent = () => {
     )
 }
 
-const ImagePreviewModal = ({isOpen , onClose}) => {
+const ImagePreviewModal = ({isOpen, onClose}) => {
+
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
@@ -134,11 +135,10 @@ const ImagePreviewModal = ({isOpen , onClose}) => {
                     flexDirection: "column",
                     justifyContent: "start",
                     alignItems: "center",
-                    width: "100%",
-                    height: "100%",
+                    width: isTablet ? "100%" : 500,
+                    height: isTablet ? "100%" : "max-content",
                     bgcolor: "background.paper",
-                    borderRadius: 0,
-                    boxShadow: 1,
+                    borderRadius: isTablet ? 0 : 1,
                     padding: 2,
                 }}
             >

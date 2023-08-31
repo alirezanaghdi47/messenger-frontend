@@ -23,7 +23,6 @@ const VoiceRecorderModal = ({isOpen , onClose}) => {
                 height: 80,
                 bgcolor: "background.paper",
                 borderRadius: 0,
-                boxShadow: 1,
                 padding: 2,
             }}
         >

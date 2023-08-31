@@ -26,6 +26,139 @@ const logList = [
     },
 ];
 
+const LogItem = ({logItem}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Stack
+            key={logItem.id}
+            direction="row"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "start",
+                width: "100%",
+            }}
+        >
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: 48,
+                    height: 48,
+                    bgcolor: "secondary.main",
+                    color: "ternary.main",
+                    borderRadius: 1,
+                }}
+            >
+                {
+                    logItem.platform === "mobile" ?
+                        <LuSmartphone size={24}/> :
+                        <LuMonitor size={24}/>
+                }
+            </Box>
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "start",
+                }}
+            >
+
+                <Stack
+                    direction="row"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <LazyLoadImage
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="browser"
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                    >
+                        {logItem.browser}
+                    </Typography>
+
+                </Stack>
+
+                <Stack
+                    direction="row"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <LazyLoadImage
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="browser"
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
+                    />
+
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                    >
+                        {logItem.city} , {logItem.country}
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "end",
+                    marginLeft: "auto"
+                }}
+            >
+
+                <Chip
+                    color="success"
+                    variant="filled"
+                    size='small'
+                    label={t("typography.isOnline")}
+                />
+
+                <Typography
+                    variant="caption"
+                    color="textPrimary"
+                >
+                    {logItem.createDate}
+                </Typography>
+
+            </Stack>
+
+        </Stack>
+    )
+}
+
 const Logs = () => {
 
     const {t} = useTranslation();
@@ -62,7 +195,7 @@ const Logs = () => {
 
                 <Stack
                     direction="column"
-                    gap={2}
+                    gap={4}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
@@ -73,131 +206,10 @@ const Logs = () => {
 
                     {
                         logList.map(logItem =>
-                            <Stack
+                            <LogItem
                                 key={logItem.id}
-                                direction="row"
-                                gap={2}
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "start",
-                                    alignItems: "start",
-                                    width: "100%",
-                                }}
-                            >
-
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        width: 48,
-                                        height: 48,
-                                        bgcolor: "secondary.main",
-                                        color: "ternary.main",
-                                        borderRadius: 1,
-                                    }}
-                                >
-                                    {
-                                        logItem.platform === "mobile" ?
-                                            <LuSmartphone size={24}/> :
-                                            <LuMonitor size={24}/>
-                                    }
-                                </Box>
-
-                                <Stack
-                                    direction="column"
-                                    gap={1}
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "start",
-                                    }}
-                                >
-
-                                    <Stack
-                                        direction="row"
-                                        gap={1}
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "start",
-                                            alignItems: "center",
-                                        }}
-                                    >
-
-                                        <LazyLoadImage
-                                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                                            alt="browser"
-                                            width={20}
-                                            height={20}
-                                            style={{borderRadius: "50%"}}
-                                        />
-
-                                        <Typography
-                                            variant="body2"
-                                            color="textPrimary"
-                                        >
-                                            {logItem.browser}
-                                        </Typography>
-
-                                    </Stack>
-
-                                    <Stack
-                                        direction="row"
-                                        gap={1}
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "start",
-                                            alignItems: "center",
-                                        }}
-                                    >
-
-                                        <LazyLoadImage
-                                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                                            alt="browser"
-                                            width={20}
-                                            height={20}
-                                            style={{borderRadius: "50%"}}
-                                        />
-
-                                        <Typography
-                                            variant="body2"
-                                            color="textPrimary"
-                                        >
-                                            {logItem.city} , {logItem.country}
-                                        </Typography>
-
-                                    </Stack>
-
-                                </Stack>
-
-                                <Stack
-                                    direction="column"
-                                    gap={1}
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "end",
-                                        marginLeft: "auto"
-                                    }}
-                                >
-
-                                    <Chip
-                                        color="success"
-                                        variant="filled"
-                                        size='small'
-                                        label={t("typography.isOnline")}
-                                    />
-
-                                    <Typography
-                                        variant="caption"
-                                        color="textPrimary"
-                                    >
-                                        {logItem.createDate}
-                                    </Typography>
-
-                                </Stack>
-
-                            </Stack>
+                                logItem={logItem}
+                            />
                         )
                     }
 

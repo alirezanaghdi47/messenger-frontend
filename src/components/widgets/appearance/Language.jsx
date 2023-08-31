@@ -2,23 +2,45 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Button, Stack} from "@mui/material";
+
+// components
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setLanguage} from "../../../stores/slices/setting.js";
+import {setLanguage} from "stores/slices/setting.js";
 
 // utils
-import {languageList} from "../../../utils/constants.js";
+import {languageList} from "utils/constants.js";
 
-const Language = () => {
+const LanguageItem = ({languageItem}) => {
 
     const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
-    const _handleActiveLanguage = (value) => {
-        dispatch(setLanguage(value));
-    }
+    const _handleActiveLanguage = (value) => dispatch(setLanguage(value));
+
+    return (
+        <Button
+            variant={languageItem.value === language ? "contained" : "text"}
+            color={languageItem.value === language ? "primary" : "ternary"}
+            startIcon={
+                <LazyLoadImage
+                    src={languageItem.flag}
+                    alt={languageItem.value}
+                    width={24}
+                    height={16}
+                />
+            }
+            onClick={() => _handleActiveLanguage(languageItem.value)}
+        >
+            {t(languageItem.title)}
+        </Button>
+    )
+}
+
+const Language = () => {
 
     return (
         <Stack
@@ -32,25 +54,7 @@ const Language = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.language")}
-                </Typography>
-
-            </Box>
+            <Header title="typography.language"/>
 
             <Stack
                 component="ul"
@@ -66,22 +70,10 @@ const Language = () => {
 
                 {
                     languageList.map(languageItem =>
-                        <Button
+                        <LanguageItem
                             key={languageItem.id}
-                            variant={languageItem.value === language ? "contained" : "text"}
-                            color={languageItem.value === language ? "primary" : "ternary"}
-                            startIcon={
-                                <LazyLoadImage
-                                    src={languageItem.flag}
-                                    alt={languageItem.value}
-                                    width={24}
-                                    height={16}
-                                />
-                            }
-                            onClick={() => _handleActiveLanguage(languageItem.value)}
-                        >
-                            {t(languageItem.title)}
-                        </Button>
+                            languageItem={languageItem}
+                        />
                     )
                 }
 

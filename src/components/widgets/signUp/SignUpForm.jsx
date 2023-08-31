@@ -6,8 +6,8 @@ import {Button, Stack, Typography} from "@mui/material";
 import {FiKey, FiPhone, FiUser} from "react-icons/fi";
 
 // components
-import TextInput from "../../modules/TextInput.jsx";
-import PasswordInput from "../../modules/PasswordInput.jsx";
+import TextInput from "components/modules/TextInput.jsx";
+import PasswordInput from "components/modules/PasswordInput.jsx";
 
 const SignUpForm = () => {
 

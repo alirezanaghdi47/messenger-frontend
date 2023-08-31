@@ -4,12 +4,12 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Primary from "../components/layouts/Primary.jsx";
-import Appbar from "../components/widgets/home/Appbar.jsx";
-import Chats from "../components/widgets/home/Chats.jsx";
-import SearchBar from "../components/widgets/home/Searchbar.jsx";
-import AddChat from "../components/widgets/home/AddChat.jsx";
-import Empty from "../components/partials/Empty";
+import Primary from "components/layouts/Primary.jsx";
+import Appbar from "components/widgets/home/Appbar.jsx";
+import Chats from "components/widgets/home/Chats.jsx";
+import SearchBar from "components/widgets/home/Searchbar.jsx";
+import AddChat from "components/widgets/home/AddChat.jsx";
+import Empty from "components/partials/Empty";
 
 const Home = () => {
 
@@ -37,7 +37,9 @@ const Home = () => {
                             width: isTablet ? "100%" : 360,
                             height: "100dvh",
                             bgcolor: "background.paper",
-                            boxShadow: 1,
+                            borderRightWidth: 1,
+                            borderRightStyle: "solid",
+                            borderRightColor: "secondary.main",
                             padding: 2
                         }}
                     >

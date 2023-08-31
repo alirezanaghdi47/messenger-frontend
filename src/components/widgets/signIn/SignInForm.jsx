@@ -6,7 +6,8 @@ import {Button, Stack, Typography} from "@mui/material";
 import {FiKey, FiUser} from "react-icons/fi";
 
 // components
-import TextInput from "../../modules/TextInput.jsx";
+import TextInput from "components/modules/TextInput.jsx";
+import PasswordInput from "components/modules/PasswordInput.jsx";
 
 const SignInForm = () => {
 
@@ -44,7 +45,7 @@ const SignInForm = () => {
                 error={formik.errors.userName}
             />
 
-            <TextInput
+            <PasswordInput
                 name="password"
                 placeholder={t("input.password")}
                 startIcon={<FiKey size={20}/>}

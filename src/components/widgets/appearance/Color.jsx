@@ -1,23 +1,40 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Stack} from "@mui/material";
+
+// components
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setColor} from "../../../stores/slices/setting.js";
+import {setColor} from "stores/slices/setting.js";
 
 // utils
-import {colorList} from "../../../utils/constants.js";
+import {colorList} from "utils/constants.js";
 
-const Color = () => {
+const ColorItem = ({colorItem , index}) => {
 
     const dispatch = useDispatch();
     const {darkMode , color} = useSelector(state => state.setting.appearance);
-    const {t} = useTranslation();
 
-    const _handleActiveColor = (index) => {
-        dispatch(setColor(index));
-    }
+    const _handleActiveColor = (index) => dispatch(setColor(index));
+
+    return (
+        <Box
+            component="li"
+            sx={{
+                opacity: color.dark === colorItem.color.dark ? 1: 0.5,
+                width: 40,
+                height: 40,
+                background: darkMode ? colorItem.color.dark : colorItem.color.light,
+                borderRadius: "50%",
+                cursor: "pointer",
+            }}
+            onClick={() => _handleActiveColor(index)}
+        />
+    )
+}
+
+const Color = () => {
 
     return (
         <Stack
@@ -31,25 +48,7 @@ const Color = () => {
             }}
         >
 
-            <Box
-                sx={{
-                    display: "flex",
-                    gap: 2,
-                    justifyContent: "start",
-                    alignItems: 'center',
-                    width: "100%",
-                }}
-            >
-
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                >
-                    {t("typography.color")}
-                </Typography>
-
-            </Box>
+            <Header title="typography.color"/>
 
             <Stack
                 component="ul"
@@ -65,19 +64,11 @@ const Color = () => {
 
                 {
                     colorList.map((colorItem, index) =>
-                        <Box
-                            key={colorItem.id}
-                            component="li"
-                            sx={{
-                                opacity: color.dark === colorItem.color.dark ? 1: 0.5,
-                                width: 40,
-                                height: 40,
-                                background: darkMode ? colorItem.color.dark : colorItem.color.light,
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                            }}
-                            onClick={() => _handleActiveColor(index)}
-                        />
+                       <ColorItem
+                           key={colorItem.id}
+                           colorItem={colorItem}
+                           index={index}
+                       />
                     )
                 }
 

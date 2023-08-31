@@ -6,8 +6,8 @@ import {IconButton, Stack} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import UserInfo from "./UserInfo.jsx";
-import Toolbar from "./Toolbar.jsx";
+import UserInfo from "components/widgets/chat/UserInfo.jsx";
+import Toolbar from "components/widgets/chat/Toolbar.jsx";
 
 const Header = () => {
 
@@ -34,7 +34,6 @@ const Header = () => {
                 width: "100%",
                 height: 80,
                 bgcolor: "background.paper",
-                boxShadow: 1,
                 padding: 2
             }}
         >

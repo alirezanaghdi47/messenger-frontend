@@ -5,7 +5,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
 
 // components
-import HistoryModal from "./HistoryModal";
+import HistoryModal from "components/widgets/chat/HistoryModal";
 
 const UserInfo = () => {
 

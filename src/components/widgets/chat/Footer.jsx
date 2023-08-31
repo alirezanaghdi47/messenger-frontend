@@ -2,9 +2,9 @@
 import {Stack} from "@mui/material";
 
 // components
-import Attachment from "./Attachment.jsx";
-import VoiceRecorder from "./VoiceRecorder";
-import MessageForm from "./MessageForm";
+import Attachment from "components/widgets/chat/Attachment.jsx";
+import VoiceRecorder from "components/widgets/chat/VoiceRecorder";
+import MessageForm from "components/widgets/chat/MessageForm";
 
 const Footer = () => {
 
@@ -23,7 +23,6 @@ const Footer = () => {
                 width: "100%",
                 height: 80,
                 bgcolor: "background.paper",
-                boxShadow: 1,
                 padding: 2
             }}
         >

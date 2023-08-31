@@ -6,11 +6,11 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Header from "../components/widgets/chat/Header.jsx";
-import Footer from "../components/widgets/chat/Footer.jsx";
-import Conversations from "../components/widgets/chat/Conversations.jsx";
-import ScrollToBottom from "../components/widgets/chat/ScrollToBottom.jsx";
-import Empty from "../components/partials/Empty";
+import Header from "components/widgets/chat/Header.jsx";
+import Footer from "components/widgets/chat/Footer.jsx";
+import Conversations from "components/widgets/chat/Conversations.jsx";
+import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
+import Empty from "components/partials/Empty";
 
 const Chat = () => {
 
@@ -47,7 +47,7 @@ const Chat = () => {
 
             {/*<Empty/>*/}
 
-            <ScrollToBottom ref={listRef}/>
+            {/*<ScrollToBottom ref={listRef}/>*/}
 
             <Footer/>
 

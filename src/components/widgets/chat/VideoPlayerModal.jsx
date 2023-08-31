@@ -1,8 +1,11 @@
 // libraries
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
-import VideoPlayer from "../../modules/VideoPlayer";
+
+// components
+import VideoPlayer from "components/modules/VideoPlayer";
 
 const ModalHeader = ({onClose}) => {
 
@@ -85,19 +88,18 @@ const ModalContent = () => {
         <Container
             maxWidth="xl"
             disableGutters
+            sx={{
+                marginTop: "auto",
+                marginBottom: "auto",
+            }}
         >
 
             <Box
                 sx={{
-                    position: 'absolute',
-                    zIndex: 50,
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50% , -50%)",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "calc(100% - 32px)",
+                    width: "100%",
                     maxWidth: 992,
                 }}
             >
@@ -111,6 +113,8 @@ const ModalContent = () => {
 }
 
 const VideoPlayerModal = ({isOpen, onClose}) => {
+
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
@@ -131,11 +135,10 @@ const VideoPlayerModal = ({isOpen, onClose}) => {
                     flexDirection: "column",
                     justifyContent: "start",
                     alignItems: "center",
-                    width: "100%",
-                    height: "100%",
+                    width: isTablet ? "100%" : "max-content",
+                    height: isTablet ? "100%" : "max-content",
                     bgcolor: "background.paper",
-                    borderRadius: 0,
-                    boxShadow: 1,
+                    borderRadius: isTablet ? 0 : 1,
                     padding: 2,
                 }}
             >

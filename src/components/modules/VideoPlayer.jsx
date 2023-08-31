@@ -4,12 +4,12 @@ import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from "rc-slider";
 import {Box, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {FaPause, FaPlay, FaVolumeHigh} from "react-icons/fa6";
+import {LuPlay , LuPause , LuVolume2} from "react-icons/lu";
 
 // utils
-import {formatDuration} from "../../utils/functions";
+import {formatDuration} from "utils/functions";
 
-const VideoPlayer = ({src, width, height}) => {
+const VideoPlayer = ({src}) => {
 
     const {language, darkMode} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
@@ -18,7 +18,7 @@ const VideoPlayer = ({src, width, height}) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const [playing, setPlaying] = useState(true);
+    const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
     const [seeking, setSeeking] = useState(false);
     const [played, setPlayed] = useState(0);
@@ -51,7 +51,7 @@ const VideoPlayer = ({src, width, height}) => {
         <Box
             sx={{
                 position: "relative",
-                boxShadow: 2,
+                width: "100%",
                 borderRadius: 1,
             }}
         >
@@ -59,8 +59,8 @@ const VideoPlayer = ({src, width, height}) => {
             <ReactPlayer
                 url={src}
                 ref={playerRef}
-                width={width}
-                height={height}
+                width="100%"
+                height="100%"
                 playing={playing}
                 volume={volume}
                 muted={muted}
@@ -155,7 +155,7 @@ const VideoPlayer = ({src, width, height}) => {
                             color={darkMode ? "ternary" : "secondary"}
                             onClick={_handleToggleVolume}
                         >
-                            <FaVolumeHigh size={24}/>
+                            <LuVolume2 size={24}/>
                         </IconButton>
 
                     </Stack>
@@ -233,7 +233,7 @@ const VideoPlayer = ({src, width, height}) => {
                         size="large"
                         onClick={_handleTogglePlaying}
                     >
-                        {(!playing || played === 0) ? <FaPlay size={24}/> : <FaPause size={24}/>}
+                        {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
                     </IconButton>
 
                 </Stack>

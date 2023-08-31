@@ -3,15 +3,14 @@ import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from 'rc-slider';
-import {Container, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {FaPause, FaPlay, FaVolumeHigh} from "react-icons/fa6";
-import {FaCog} from "react-icons/fa";
+import {IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {LuPlay , LuPause , LuVolume2 , LuSettings} from "react-icons/lu";
 
 // styles
 import 'rc-slider/assets/index.css';
 
 // utils
-import {formatDuration} from "../../utils/functions";
+import {formatDuration} from "utils/functions";
 
 const MusicPlayer = ({src}) => {
 
@@ -53,8 +52,7 @@ const MusicPlayer = ({src}) => {
     const _handleEnded = () => setPlaying(true);
 
     return (
-        <Container maxWidth="xs">
-
+        <>
             <Stack
                 direction="column"
                 sx={{
@@ -62,10 +60,7 @@ const MusicPlayer = ({src}) => {
                     display: "flex",
                     justifyContent: 'center',
                     alignItems: "center",
-                    bgcolor: "background.default",
-                    borderRadius: 1,
-                    boxShadow: 2,
-                    padding: 2,
+                    width: "100%",
                 }}
             >
 
@@ -109,7 +104,7 @@ const MusicPlayer = ({src}) => {
                         }}
                         railStyle={{
                             height: 8,
-                            background: theme.palette.background.paper
+                            background: theme.palette.background.default
                         }}
                     />
 
@@ -161,7 +156,7 @@ const MusicPlayer = ({src}) => {
                         color="ternary"
                         size="large"
                     >
-                        <FaCog size={24}/>
+                        <LuSettings size={24}/>
                     </IconButton>
 
                     <IconButton
@@ -170,7 +165,7 @@ const MusicPlayer = ({src}) => {
                         size="large"
                         onClick={_handleTogglePlaying}
                     >
-                        {(!playing || played === 0) ? <FaPlay size={24}/> : <FaPause size={24}/>}
+                        {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
                     </IconButton>
 
                     <Popper
@@ -207,7 +202,7 @@ const MusicPlayer = ({src}) => {
                             }}
                             railStyle={{
                                 height: 8,
-                                background: theme.palette.background.paper
+                                background: theme.palette.background.default
                             }}
                         />
 
@@ -219,7 +214,7 @@ const MusicPlayer = ({src}) => {
                         size="large"
                         onClick={_handleToggleVolume}
                     >
-                        <FaVolumeHigh size={24}/>
+                        <LuVolume2 size={24}/>
                     </IconButton>
 
                 </Stack>
@@ -241,8 +236,7 @@ const MusicPlayer = ({src}) => {
                 onDuration={(duration) => _handleDuration(duration)}
                 style={{display: "none"}}
             />
-
-        </Container>
+        </>
     )
 
 }

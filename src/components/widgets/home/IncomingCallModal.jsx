@@ -20,7 +20,7 @@ const ModalHeader = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -95,7 +95,7 @@ const ModalFooter = ({onClose}) => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -138,8 +138,6 @@ const ModalFooter = ({onClose}) => {
 
 const IncomingCallModal = ({isOpen, onClose}) => {
 
-    const {background} = useSelector(state => state.setting.appearance);
-
     return (
         <Modal
             open={isOpen}
@@ -163,9 +161,6 @@ const IncomingCallModal = ({isOpen, onClose}) => {
                     width: "100%",
                     height: "100%",
                     bgcolor: "background.paper",
-                    backgroundImage: `url(${background})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: "cover",
                 }}
             >
 

@@ -1,20 +1,77 @@
 // libraries
-import {useState} from "react";
+import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton} from "@mui/material";
+import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
+import {LuMessageCircle} from "react-icons/lu";
 
 // components
-import AddChatDropdown from "./AddChatDropdown";
+import {useModal} from "components/hooks/useModal";
+import {useDropdownMenu} from "components/hooks/useDropdownMenu";
+import AddChatModal from "./AddChatModal";
+
+const AddChatMenu = ({anchorEl ,isOpen , onClose}) => {
+
+    const {t} = useTranslation();
+
+    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
+
+    return (
+        <>
+
+            <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={isOpen}
+                onClose={onClose}
+            >
+
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                    onClick={_handleShowModal}
+                >
+
+                    <LuMessageCircle size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.createChat")}
+                    </Typography>
+
+                </MenuItem>
+
+            </Menu>
+
+            <AddChatModal
+                isOpen={isOpenModal}
+                onClose={_handleHideModal}
+            />
+
+        </>
+    )
+}
+
 
 const AddChat = () => {
 
     const isDesktop = useMediaQuery('(max-width: 992px)');
 
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
-    const _handleHideDropdown = (e) => setAnchorEl(null);
+    const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (
         <>
@@ -23,7 +80,7 @@ const AddChat = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                onClick={_handleShowDropdown}
+                onClick={_handleShowDropdownMenu}
                 sx={{
                     position: 'absolute',
                     zIndex: 25,
@@ -34,10 +91,10 @@ const AddChat = () => {
                 <FiPlus size={20}/>
             </IconButton>
 
-            <AddChatDropdown
+            <AddChatMenu
                 anchorEl={anchorEl}
-                isOpen={Boolean(anchorEl)}
-                onClose={_handleHideDropdown}
+                isOpen={isOpenDropdownMenu}
+                onClose={_handleHideDropdownMenu}
             />
 
         </>

@@ -4,20 +4,34 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Grid} from "@mui/material";
 
 // components
-import {FileLog, ImageLog, LocationLog, MusicLog, VideoLog} from "./Logs";
+import {FileLog, ImageLog, LocationLog, MusicLog, VideoLog} from "components/widgets/chat/Logs";
 
-const logList = [
+const historyList = [
     {id: 1, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
     {id: 2, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
     {id: 3, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"},
     {id: 4, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"},
     {id: 5, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"},
     {id: 6, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"},
-    {id: 7, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
-    {id: 8, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
+    {id: 7, type: "music", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
+    {id: 8, type: "music", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"},
     {id: 9, type: "location", content: [35, 51], me: true},
     {id: 10, type: "location", content: [35, 51], me: false},
 ];
+
+const HistoryItem = ({historyItem , filter}) => {
+
+    return (
+        <>
+            {historyItem.type === "image" && filter === "image" && <ImageLog log={historyItem}/>}
+            {historyItem.type === "file" && filter === "file" && <FileLog log={historyItem}/>}
+            {historyItem.type === "music" && filter === "music" && <MusicLog log={historyItem}/>}
+            {historyItem.type === "video" && filter === "video" && <VideoLog log={historyItem}/>}
+            {historyItem.type === "location" && filter === "location" && <LocationLog log={historyItem}/>}
+        </>
+    )
+}
+
 const History = ({filter}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
@@ -40,18 +54,13 @@ const History = ({filter}) => {
             >
 
                 {
-                    logList.map(logItem => {
-                        if (logItem.type === "image" && filter === "image") return <ImageLog key={logItem.id}
-                                                                                             log={logItem}/>;
-                        if (logItem.type === "file" && filter === "file") return <FileLog key={logItem.id}
-                                                                                          log={logItem}/>
-                        if (logItem.type === "voice" && filter === "voice") return <MusicLog key={logItem.id}
-                                                                                             log={logItem}/>
-                        if (logItem.type === "video" && filter === "video") return <VideoLog key={logItem.id}
-                                                                                             log={logItem}/>
-                        if (logItem.type === "location" && filter === "location") return <LocationLog
-                            key={logItem.id} log={logItem}/>
-                    })
+                    historyList.filter(item => item.type === filter).map(historyItem =>
+                        <HistoryItem
+                            key={historyItem.id}
+                            historyItem={historyItem}
+                            filter={filter}
+                        />
+                    )
                 }
 
             </Grid>

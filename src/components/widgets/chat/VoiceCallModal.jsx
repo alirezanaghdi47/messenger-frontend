@@ -1,7 +1,7 @@
 // libraries
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, Modal, Stack, Typography} from "@mui/material";
+import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
@@ -20,7 +20,7 @@ const ModalHeader = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -50,23 +50,54 @@ const ModalHeader = () => {
 const ModalContent = () => {
 
     return (
-        <Stack
-            direction="column"
-            gap={2}
-            sx={{
-                position: "absolute",
-                zIndex: 50,
-                top: 0,
-                left: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-            }}
+        <Container
+            maxWidth="xl"
+            disableGutters
         >
 
-        </Stack>
+            <Stack
+                direction="column"
+                gap={2}
+                sx={{
+                    position: "absolute",
+                    zIndex: 50,
+                    top: 150,
+                    left: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "calc(100dvh - 280px)",
+                }}
+            >
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "calc(100% - 32px)",
+                        height: "calc(100% - 32px)",
+                        maxWidth: 992,
+                    }}
+                >
+
+                    <LazyLoadImage
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="avatar"
+                        width="100%"
+                        height="100%"
+                        style={{
+                            borderRadius: 8,
+                            objectFit: "cover"
+                        }}
+                    />
+
+                </Box>
+
+            </Stack>
+
+        </Container>
     )
 }
 
@@ -88,7 +119,7 @@ const ModalFooter = ({onClose}) => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "max-content",
-                bgcolor: 'background.paper',
+                bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
@@ -131,8 +162,6 @@ const ModalFooter = ({onClose}) => {
 
 const VoiceCallModal = ({isOpen, onClose}) => {
 
-    const {background} = useSelector(state => state.setting.appearance);
-
     return (
         <Modal
             open={isOpen}
@@ -156,9 +185,6 @@ const VoiceCallModal = ({isOpen, onClose}) => {
                     width: "100%",
                     height: "100%",
                     bgcolor: "background.paper",
-                    backgroundImage: `url(${background})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: "cover",
                 }}
             >
 

@@ -4,11 +4,11 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Primary from "../components/layouts/Primary.jsx";
-import Appbar from "../components/widgets/setting/Appbar.jsx";
-import Version from "../components/widgets/setting/Version.jsx";
-import Links from "../components/widgets/setting/Links.jsx";
-import UserInfo from "../components/widgets/setting/UserInfo.jsx";
+import Primary from "components/layouts/Primary.jsx";
+import Appbar from "components/widgets/setting/Appbar.jsx";
+import Version from "components/widgets/setting/Version.jsx";
+import Links from "components/widgets/setting/Links.jsx";
+import UserInfo from "components/widgets/setting/UserInfo.jsx";
 
 const pathList = ["/setting/profile", "/setting/appearance", "/setting/session"];
 
@@ -39,7 +39,9 @@ const Setting = () => {
                             minHeight: "100dvh",
                             height: "100%",
                             bgcolor: "background.paper",
-                            boxShadow: 1,
+                            borderRightWidth: 1,
+                            borderRightStyle: "solid",
+                            borderRightColor: "secondary.main",
                             padding: 2
                         }}
                     >

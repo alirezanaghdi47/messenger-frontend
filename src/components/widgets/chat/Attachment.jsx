@@ -1,17 +1,82 @@
 // libraries
-import {useState} from "react";
-import {IconButton} from "@mui/material";
+import {useTranslation} from "react-i18next"
+import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {LuPaperclip} from "react-icons/lu";
+import {FiFile, FiFilm, FiImage, FiMapPin} from "react-icons/fi";
 
 // components
-import AttachmentDropdown from "./AttachmentDropdown";
+import {useDropdownMenu} from "components/hooks/useDropdownMenu";
+
+const attachmentList = [
+    {id: 1, title: "menu.file", value: "file", icon: <FiFile size={20}/>},
+    {id: 2, title: "menu.image", value: "image", icon: <FiImage size={20}/>},
+    {id: 3, title: "menu.video", value: "video", icon: <FiFilm size={20}/>},
+    {id: 5, title: "menu.location", value: "location", icon: <FiMapPin size={20}/>},
+];
+
+const AttachmentMenuItem = ({attachmentMenuItem}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <MenuItem
+            sx={{
+                display: "flex",
+                gap: 1,
+                justifyContent: "start",
+                alignItems: "center",
+                color: "ternary.main"
+            }}
+            onClick={() => console.log(attachmentMenuItem.value)}
+        >
+
+            {attachmentMenuItem.icon}
+
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                fontWeight='bold'
+            >
+                {t(attachmentMenuItem.title)}
+            </Typography>
+
+        </MenuItem>
+    )
+}
+
+const AttachmentMenu = ({anchorEl, isOpen, onClose}) => {
+
+    return (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            open={isOpen}
+            onClose={onClose}
+        >
+
+            {
+                attachmentList.map(attachmentItem =>
+                    <AttachmentMenuItem
+                        key={attachmentItem.id}
+                        attachmentMenuItem={attachmentItem}
+                    />
+                )
+            }
+
+        </Menu>
+    )
+}
 
 const Attachment = () => {
 
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
-    const _handleHideDropdown = (e) => setAnchorEl(null);
+    const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (
         <>
@@ -19,15 +84,15 @@ const Attachment = () => {
             <IconButton
                 varinat="text"
                 color="ternary"
-                onClick={_handleShowDropdown}
+                onClick={_handleShowDropdownMenu}
             >
                 <LuPaperclip size={20}/>
             </IconButton>
 
-            <AttachmentDropdown
+            <AttachmentMenu
                 anchorEl={anchorEl}
-                isOpen={Boolean(anchorEl)}
-                onClose={_handleHideDropdown}
+                isOpen={isOpenDropdownMenu}
+                onClose={_handleHideDropdownMenu}
             />
 
         </>

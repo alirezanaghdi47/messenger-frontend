@@ -4,12 +4,12 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Language from "./Language.jsx";
-import DateTime from "./DateTime.jsx";
-import FontSize from "./FontSize.jsx";
-import Color from "./Color.jsx";
-import Background from "./Background.jsx";
-import Theme from "./Theme.jsx";
+import Language from "components/widgets/appearance/Language.jsx";
+import DateTime from "components/widgets/appearance/DateTime.jsx";
+import FontSize from "components/widgets/appearance/FontSize.jsx";
+import Color from "components/widgets/appearance/Color.jsx";
+import Background from "components/widgets/appearance/Background.jsx";
+import Theme from "components/widgets/appearance/Theme.jsx";
 
 const Personalization = () => {
 

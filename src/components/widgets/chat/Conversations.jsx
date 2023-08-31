@@ -1,5 +1,5 @@
 // libraries
-import {forwardRef, useState} from "react";
+import {forwardRef} from "react";
 import {useSelector} from "react-redux";
 import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -14,7 +14,7 @@ import {
     VideoMessage,
     ImageMessage,
     MusicMessage
-} from "./Messages";
+} from "components/widgets/chat/Messages";
 
 const conversationList = [
     {
@@ -45,14 +45,72 @@ const conversationList = [
     {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
 ];
 
-const Conversations = forwardRef((props , ref) => {
+const ConversationItem = ({conversationItem}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    return (
+        <Stack
+            component="li"
+            direction="row"
+            gap={1}
+            sx={{
+                display: "flex",
+                justifyContent: conversationItem.me ? "start" : "end",
+                alignItems: "end",
+                width: '100%',
+            }}
+        >
 
-    const _handleShowDropdown = (e) => setAnchorEl(e.currentTarget);
-    const _handleHideDropdown = (e) => setAnchorEl(null);
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    order: conversationItem.me ? 1 : 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "start",
+                    height: "100%",
+                }}
+            >
+
+                <LazyLoadImage
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
+                    width={30}
+                    height={30}
+                    style={{borderRadius: "50%"}}
+                />
+
+            </Stack>
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    order: conversationItem.me ? 2 : 1,
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    width: "max-content",
+                }}
+            >
+
+                {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
+                {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
+                {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
+                {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
+                {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
+                {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
+                {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
+
+            </Stack>
+
+        </Stack>
+    )
+}
+
+const Conversations = forwardRef((props , ref) => {
 
     return (
         <SimpleBar
@@ -81,64 +139,10 @@ const Conversations = forwardRef((props , ref) => {
 
                 {
                     conversationList.map((conversationItem) =>
-                        <Stack
+                        <ConversationItem
                             key={conversationItem.id}
-                            component="li"
-                            direction="row"
-                            gap={1}
-                            sx={{
-                                display: "flex",
-                                justifyContent: conversationItem.me ? "start" : "end",
-                                alignItems: "end",
-                                width: '100%',
-                            }}
-                        >
-
-                            <Stack
-                                direction="column"
-                                gap={1}
-                                sx={{
-                                    order: conversationItem.me ? 1 : 2,
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "start",
-                                    height: "100%",
-                                }}
-                            >
-
-                                <LazyLoadImage
-                                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                                    alt="avatar"
-                                    width={30}
-                                    height={30}
-                                    style={{borderRadius: "50%"}}
-                                />
-
-                            </Stack>
-
-                            <Stack
-                                direction="column"
-                                gap={1}
-                                sx={{
-                                    order: conversationItem.me ? 2 : 1,
-                                    display: "flex",
-                                    justifyContent: "start",
-                                    alignItems: "start",
-                                    width: "max-content",
-                                }}
-                            >
-
-                                {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
-                                {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
-                                {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
-                                {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
-                                {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
-                                {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
-                                {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
-
-                            </Stack>
-
-                        </Stack>
+                            conversationItem={conversationItem}
+                        />
                     )
                 }
 
