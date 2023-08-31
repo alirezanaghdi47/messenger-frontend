@@ -1,5 +1,6 @@
 // libraries
 import {Outlet, useLocation} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
@@ -12,13 +13,14 @@ import Links from "components/widgets/setting/Links.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
 
 // utils
-import {slideInRightVariants} from "utils/constants";
+import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const pathList = ["/setting/profile", "/setting/appearance", "/setting/session"];
 
 const Setting = () => {
 
     const location = useLocation();
+    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -28,7 +30,7 @@ const Setting = () => {
                 ((!pathList.includes(location.pathname) && isTablet) || !isTablet) && (
                     <Stack
                         component={motion.div}
-                        variants={slideInRightVariants}
+                        variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"

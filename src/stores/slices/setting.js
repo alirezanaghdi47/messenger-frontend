@@ -44,13 +44,10 @@ export const setting = createSlice({
             state.appearance.fontSize = action.payload;
         },
         setColor: (state, action) => {
-            state.appearance.color = {
-                light: colorList[action.payload].color.light,
-                dark: colorList[action.payload].color.dark,
-            };
+            state.appearance.color = action.payload;
         },
         setBackground: (state, action) => {
-            state.appearance.background = backgroundList[action.payload].background;
+            state.appearance.background = action.payload;
         },
         setTheme: (state, action) => {
             state.appearance.darkMode = action.payload;

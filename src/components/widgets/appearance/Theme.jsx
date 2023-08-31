@@ -1,8 +1,8 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Grid, Stack} from "@mui/material";
+import {Box, Grid, Stack} from "@mui/material";
+import {FiCheck} from "react-icons/fi";
 
 // components
 import Header from "components/widgets/appearance/Header";
@@ -17,7 +17,6 @@ const ThemeItem = ({themeItem}) => {
 
     const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.setting.appearance);
-    const {t} = useTranslation();
 
     const _handleActiveTheme = (value) => dispatch(setTheme(value));
 
@@ -28,20 +27,55 @@ const ThemeItem = ({themeItem}) => {
             xs={6}
             sm={4}
             lg={3}
-            sx={{
-                cursor: "pointer",
-                opacity: darkMode === themeItem.value ? 1 : 0.5,
-            }}
+            sx={{cursor: "pointer"}}
             onClick={() => _handleActiveTheme(themeItem.value)}
         >
 
-            <LazyLoadImage
-                src={themeItem.background}
-                alt={t(themeItem.title)}
-                width="100%"
-                height="100%"
-                style={{borderRadius: 8}}
-            />
+            <Box
+                sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%"
+                }}
+            >
+
+                <LazyLoadImage
+                    alt={themeItem.id}
+                    src={themeItem.background}
+                    width="100%"
+                    height="100%"
+                    effect="fade"
+                    style={{
+                        borderRadius: 8,
+                        objectFit: "cover"
+                    }}
+                />
+
+                {
+                    themeItem.value === darkMode ? (
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50% , -50%)",
+                                zIndex: 50,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: 32,
+                                height: 32,
+                                bgcolor: "primary.main",
+                                color: "secondary.main",
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <FiCheck size={24}/>
+                        </Box>
+                    ) : null
+                }
+
+            </Box>
 
         </Grid>
     )

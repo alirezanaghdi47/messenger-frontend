@@ -11,11 +11,11 @@ import Appbar from "components/widgets/auth/Appbar.jsx";
 import CopyRight from "components/widgets/auth/CopyRight.jsx";
 
 // utils
-import {slideInRightVariants} from "utils/constants";
+import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const Auth = () => {
 
-    const {background} = useSelector(state => state.setting.appearance);
+    const {background , language} = useSelector(state => state.setting.appearance);
     const isDesktop = useMediaQuery('(max-width: 992px)');
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -24,7 +24,7 @@ const Auth = () => {
 
             <Stack
                 component={motion.div}
-                variants={slideInRightVariants}
+                variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"

@@ -14,12 +14,12 @@ import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
 import Empty from "components/partials/Empty";
 
 // utils
-import {slideInRightVariants} from "utils/constants";
+import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const Chat = () => {
 
     const params = useParams();
-    const {background} = useSelector(state => state.setting.appearance);
+    const {background , language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     const listRef = useRef(null);
@@ -27,7 +27,7 @@ const Chat = () => {
     return params.chatId && (
         <Stack
             component={motion.div}
-            variants={slideInRightVariants}
+            variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
             initial="initial"
             animate="animate"
             exit="exit"

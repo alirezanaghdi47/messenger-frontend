@@ -1,5 +1,6 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
@@ -13,11 +14,12 @@ import AddChat from "components/widgets/chats/AddChat.jsx";
 import Empty from "components/partials/Empty";
 
 // utils
-import {slideInRightVariants} from "utils/constants";
+import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const Chats = () => {
 
     const params = useParams();
+    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -27,7 +29,7 @@ const Chats = () => {
                 ((!params.chatId && isTablet) || !isTablet) && (
                     <Stack
                         component={motion.div}
-                        variants={slideInRightVariants}
+                        variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"

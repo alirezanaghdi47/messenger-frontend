@@ -1,4 +1,5 @@
 // libraries
+import {useSelector} from "react-redux";
 import {motion} from "framer-motion";
 import {Stack , Container} from "@mui/material";
 
@@ -7,14 +8,16 @@ import Header from "components/widgets/auth/Header.jsx";
 import SignUpForm from "components/widgets/signUp/SignUpForm.jsx";
 
 // utils
-import {slideInRightVariants} from "utils/constants";
+import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const SignUp = () => {
+
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <Container
             component={motion.div}
-            variants={slideInRightVariants}
+            variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
             initial="initial"
             animate="animate"
             exit="exit"

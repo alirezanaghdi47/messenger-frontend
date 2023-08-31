@@ -1,6 +1,7 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Stack} from "@mui/material";
+import {FiCheck} from "react-icons/fi";
 
 // components
 import Header from "components/widgets/appearance/Header";
@@ -11,26 +12,52 @@ import {setColor} from "stores/slices/setting.js";
 // utils
 import {colorList} from "utils/constants.js";
 
-const ColorItem = ({colorItem , index}) => {
+const ColorItem = ({colorItem}) => {
 
     const dispatch = useDispatch();
-    const {darkMode , color} = useSelector(state => state.setting.appearance);
+    const {darkMode, color} = useSelector(state => state.setting.appearance);
 
-    const _handleActiveColor = (index) => dispatch(setColor(index));
+    const _handleActiveColor = (color) => dispatch(setColor(color));
 
     return (
         <Box
             component="li"
             sx={{
-                opacity: color.dark === colorItem.color.dark ? 1: 0.5,
+                position: "relative",
                 width: 40,
                 height: 40,
                 background: darkMode ? colorItem.color.dark : colorItem.color.light,
                 borderRadius: "50%",
                 cursor: "pointer",
             }}
-            onClick={() => _handleActiveColor(index)}
-        />
+            onClick={() => _handleActiveColor(colorItem.color)}
+        >
+
+            {
+                colorItem.color.dark === color.dark ? (
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50% , -50%)",
+                            zIndex: 50,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: 32,
+                            height: 32,
+                            bgcolor: "background.paper",
+                            color: "primary.main",
+                            borderRadius: "50%"
+                        }}
+                    >
+                        <FiCheck size={24}/>
+                    </Box>
+                ) : null
+            }
+
+        </Box>
     )
 }
 
@@ -63,12 +90,11 @@ const Color = () => {
             >
 
                 {
-                    colorList.map((colorItem, index) =>
-                       <ColorItem
-                           key={colorItem.id}
-                           colorItem={colorItem}
-                           index={index}
-                       />
+                    colorList.map(colorItem =>
+                        <ColorItem
+                            key={colorItem.id}
+                            colorItem={colorItem}
+                        />
                     )
                 }
 

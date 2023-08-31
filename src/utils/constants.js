@@ -1,5 +1,5 @@
 
-export const version = "0.7.8";
+export const version = "0.7.9";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},
@@ -43,4 +43,10 @@ export const slideInRightVariants = {
     initial: {opacity: 0, x: 10 , transition: {duration: 0.3}},
     animate: {opacity: 1, x: 0 , transition: {duration: 0.3}},
     exit: {opacity: 0, x: -10 , transition: {duration: 0.3}},
+}
+
+export const slideInLeftVariants = {
+    initial: {opacity: 0, x: -10 , transition: {duration: 0.3}},
+    animate: {opacity: 1, x: 0 , transition: {duration: 0.3}},
+    exit: {opacity: 0, x: 10 , transition: {duration: 0.3}},
 }

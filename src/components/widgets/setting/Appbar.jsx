@@ -9,9 +9,7 @@ const Appbar = () => {
     const navigate = useNavigate();
     const {language , darkMode} = useSelector(state => state.setting.appearance);
 
-    const _handleBack = () => {
-        navigate("/");
-    }
+    const _handleBack = () => navigate("/chat");
 
     return (
         <Stack

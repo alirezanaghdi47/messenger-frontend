@@ -1,8 +1,8 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Grid, Stack} from "@mui/material";
+import {Box, Grid, Stack} from "@mui/material";
+import {FiCheck} from "react-icons/fi";
 
 // components
 import Header from "components/widgets/appearance/Header";
@@ -13,13 +13,12 @@ import {setBackground} from "stores/slices/setting.js";
 // utils
 import {backgroundList} from "utils/constants.js";
 
-const BackgroundItem = ({backgroundItem , index}) => {
+const BackgroundItem = ({backgroundItem}) => {
 
     const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
-    const {t} = useTranslation();
 
-    const _handleActiveBackground = (index) => dispatch(setBackground(index));
+    const _handleActiveBackground = (background) => dispatch(setBackground(background));
 
     return (
         <Grid
@@ -28,24 +27,55 @@ const BackgroundItem = ({backgroundItem , index}) => {
             xs={6}
             sm={4}
             lg={3}
-            sx={{
-                cursor:"pointer",
-                opacity: background === backgroundItem.background ? 1: 0.5,
-            }}
-            onClick={() => _handleActiveBackground(index)}
+            sx={{cursor: "pointer"}}
+            onClick={() => _handleActiveBackground(backgroundItem.background)}
         >
 
-            <LazyLoadImage
-                alt={backgroundItem.id}
-                src={backgroundItem.background}
-                width="100%"
-                height="100%"
-                effect="fade"
-                style={{
-                    borderRadius: 8,
-                    objectFit: "cover"
+            <Box
+                sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%"
                 }}
-            />
+            >
+
+                <LazyLoadImage
+                    alt={backgroundItem.id}
+                    src={backgroundItem.background}
+                    width="100%"
+                    height="100%"
+                    effect="fade"
+                    style={{
+                        borderRadius: 8,
+                        objectFit: "cover"
+                    }}
+                />
+
+                {
+                    backgroundItem.background === background ? (
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50% , -50%)",
+                                zIndex: 50,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: 32,
+                                height: 32,
+                                bgcolor: "primary.main",
+                                color: "secondary.main",
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <FiCheck size={24}/>
+                        </Box>
+                    ) : null
+                }
+
+            </Box>
 
         </Grid>
     )
@@ -74,11 +104,10 @@ const Background = () => {
                 sx={{width: "100%"}}
             >
                 {
-                    backgroundList.map((backgroundItem , index) =>
+                    backgroundList.map(backgroundItem =>
                         <BackgroundItem
                             key={backgroundItem.id}
                             backgroundItem={backgroundItem}
-                            index={index}
                         />
                     )
                 }

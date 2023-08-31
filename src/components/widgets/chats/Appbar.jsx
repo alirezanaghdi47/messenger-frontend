@@ -1,20 +1,15 @@
 // libraries
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Stack, Typography} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
 const Appbar = () => {
 
     const navigate = useNavigate();
-    const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
-    const _handleRedirect = () => {
-        navigate("/setting");
-    }
+    const _handleRedirect = () => navigate("/setting");
 
     return (
         <Stack
@@ -40,15 +35,8 @@ const Appbar = () => {
                 }}
             >
 
-                <LazyLoadImage
-                    src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo-dark.png" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo-light.png"}
-                    alt="logo"
-                    width={24}
-                    height={24}
-                />
-
                 <Typography
-                    variant="subtitle2"
+                    variant="subtitle1"
                     color="textPrimary"
                     fontWeight="bold"
                 >

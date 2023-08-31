@@ -75,7 +75,7 @@ const VideoPlayer = ({src}) => {
                 sx={{
                     direction: language === "en" ? "rtl" : "ltr",
                     position: "absolute",
-                    bottom: 0,
+                    bottom: 8,
                     display: "flex",
                     justifyContent: 'center',
                     alignItems: "end",
@@ -141,6 +141,7 @@ const VideoPlayer = ({src}) => {
                                     border: "none",
                                     boxShadow: "none",
                                     marginRight: -6,
+                                    marginLeft: -6,
                                 }}
                                 railStyle={{
                                     width: 8,
