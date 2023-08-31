@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next";
 import {Button, Stack, Typography} from "@mui/material";
 import {FiSend, FiX} from "react-icons/fi";
 
-const VoiceRecorderModal = ({isOpen , onClose}) => {
+const VoiceRecorderPopup = ({isOpen , onClose}) => {
 
     const {t} = useTranslation();
 
@@ -57,4 +57,4 @@ const VoiceRecorderModal = ({isOpen , onClose}) => {
     )
 }
 
-export default VoiceRecorderModal;
+export default VoiceRecorderPopup;

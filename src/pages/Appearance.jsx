@@ -1,4 +1,5 @@
 // libraries
+import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -6,13 +7,20 @@ import {Stack} from "@mui/material";
 import Header from "components/widgets/setting/Header.jsx";
 import Personalization from "components/widgets/appearance/Personalization.jsx";
 
+// utils
+import {slideInRightVariants} from "utils/constants";
+
 const Appearance = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Stack
-            component="main"
+            component={motion.div}
+            variants={slideInRightVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             direction="column"
             sx={{
                 position: 'absolute',

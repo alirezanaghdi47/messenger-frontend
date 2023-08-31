@@ -42,6 +42,8 @@ const LanguageItem = ({languageItem}) => {
 
 const Language = () => {
 
+    const {language} = useSelector(state => state.setting.appearance);
+
     return (
         <Stack
             direction="column"

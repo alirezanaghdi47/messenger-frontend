@@ -15,7 +15,7 @@ import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 import {useModal} from "components/hooks/useModal";
 import VoiceCallModal from "components/widgets/chat/VoiceCallModal";
 import VideoCallModal from "components/widgets/chat/VideoCallModal";
-import IncomingCallModal from "components/widgets/home/IncomingCallModal";
+import IncomingCallModal from "components/widgets/chats/IncomingCallModal";
 
 const MobileToolbar = ({
                            anchorEl,

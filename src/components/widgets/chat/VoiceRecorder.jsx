@@ -4,7 +4,7 @@ import {LuMic} from "react-icons/lu";
 
 // components
 import {useModal} from "components/hooks/useModal";
-import VoiceRecorderModal from "components/widgets/chat/VoiceRecorderModal";
+import VoiceRecorderPopup from "components/widgets/chat/VoiceRecorderPopup";
 
 const VoiceRecorder = () => {
 
@@ -21,7 +21,7 @@ const VoiceRecorder = () => {
                 <LuMic size={20}/>
             </IconButton>
 
-            <VoiceRecorderModal
+            <VoiceRecorderPopup
                 isOpen={isOpenModal}
                 onClose={_handleHideModal}
             />

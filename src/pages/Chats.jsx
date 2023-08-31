@@ -1,31 +1,30 @@
 // libraries
-import {Outlet, useLocation} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
 import Primary from "components/layouts/Primary.jsx";
-import Appbar from "components/widgets/setting/Appbar.jsx";
-import Version from "components/widgets/setting/Version.jsx";
-import Links from "components/widgets/setting/Links.jsx";
-import UserInfo from "components/widgets/setting/UserInfo.jsx";
+import Appbar from "components/widgets/chats/Appbar.jsx";
+import Conversations from "components/widgets/chats/Conversations.jsx";
+import SearchBar from "components/widgets/chats/Searchbar.jsx";
+import AddChat from "components/widgets/chats/AddChat.jsx";
+import Empty from "components/partials/Empty";
 
 // utils
 import {slideInRightVariants} from "utils/constants";
 
-const pathList = ["/setting/profile", "/setting/appearance", "/setting/session"];
+const Chats = () => {
 
-const Setting = () => {
-
-    const location = useLocation();
+    const params = useParams();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Primary>
 
             {
-                ((!pathList.includes(location.pathname) && isTablet) || !isTablet) && (
+                ((!params.chatId && isTablet) || !isTablet) && (
                     <Stack
                         component={motion.div}
                         variants={slideInRightVariants}
@@ -41,11 +40,10 @@ const Setting = () => {
                             left: 0,
                             bottom: 0,
                             display: "flex",
-                            justifyContent: "space-between",
+                            justifyContent: "start",
                             alignItems: "center",
                             width: isTablet ? "100%" : 360,
-                            minHeight: "100dvh",
-                            height: "100%",
+                            height: "100dvh",
                             bgcolor: "background.paper",
                             borderRightWidth: 1,
                             borderRightStyle: "solid",
@@ -56,11 +54,13 @@ const Setting = () => {
 
                         <Appbar/>
 
-                        <UserInfo/>
+                        <SearchBar/>
 
-                        <Links/>
+                        <Conversations/>
 
-                        <Version/>
+                        {/*<Empty/>*/}
+
+                        <AddChat/>
 
                     </Stack>
                 )
@@ -72,4 +72,4 @@ const Setting = () => {
     )
 }
 
-export default Setting;
+export default Chats;

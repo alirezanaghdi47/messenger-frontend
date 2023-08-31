@@ -11,7 +11,7 @@ import {FiPhone, FiVideo} from "react-icons/fi";
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
 
-const chatList = [
+const conversationList = [
     {
         _id: "1",
         type: "text",
@@ -26,7 +26,7 @@ const chatList = [
     {_id: "8", type: "log", status: "videoCall"},
 ];
 
-const ChatMenu = ({contextMenu, isOpen, onClose}) => {
+const ConversationMenu = ({contextMenu, isOpen, onClose}) => {
 
     const {t} = useTranslation();
 
@@ -67,7 +67,7 @@ const ChatMenu = ({contextMenu, isOpen, onClose}) => {
     )
 }
 
-const ChatItem = ({chatItem}) => {
+const ConversationItem = ({conversationItem}) => {
 
     const navigate = useNavigate();
     const params = useParams();
@@ -76,17 +76,17 @@ const ChatItem = ({chatItem}) => {
 
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
-    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/" : `/${item._id}`);
+    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/chat" : `/chat/${item._id}`);
 
     return (
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => _handleActiveItem(chatItem)}
+            onClick={() => _handleActiveItem(conversationItem)}
             onContextMenu={_handleShowContextMenu}
         >
 
-            <ChatMenu
+            <ConversationMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -99,7 +99,7 @@ const ChatItem = ({chatItem}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: params.chatId === chatItem._id && "primary.main",
+                    bgcolor: params.chatId === conversationItem._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
@@ -141,7 +141,7 @@ const ChatItem = ({chatItem}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         className="text-truncate"
                     >
@@ -156,42 +156,42 @@ const ChatItem = ({chatItem}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
-                        {chatItem.type === "text" && <LuText size={16}/>}
-                        {chatItem.type === "image" && <LuImage size={16}/>}
-                        {chatItem.type === "video" && <LuFilm size={16}/>}
-                        {chatItem.type === "voice" && <LuMusic size={16}/>}
-                        {chatItem.type === "file" && <LuFile size={16}/>}
-                        {chatItem.type === "location" && <LuMapPin size={16}/>}
-                        {chatItem.type === "log" && chatItem.status === "voiceCall" && <FiPhone size={16}/>}
-                        {chatItem.type === "log" && chatItem.status === "videoCall" && <FiVideo size={16}/>}
+                        {conversationItem.type === "text" && <LuText size={16}/>}
+                        {conversationItem.type === "image" && <LuImage size={16}/>}
+                        {conversationItem.type === "video" && <LuFilm size={16}/>}
+                        {conversationItem.type === "voice" && <LuMusic size={16}/>}
+                        {conversationItem.type === "file" && <LuFile size={16}/>}
+                        {conversationItem.type === "location" && <LuMapPin size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" && <FiPhone size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "videoCall" && <FiVideo size={16}/>}
 
                         <Typography
                             variant="caption"
-                            color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                             sx={{
                                 width: "100%",
                                 overflow: "hidden",
                             }}
                         >
-                            {chatItem.type === "text" && t("typography.text")}
-                            {chatItem.type === "image" && t("typography.image")}
-                            {chatItem.type === "video" && t("typography.video")}
-                            {chatItem.type === "voice" && t("typography.voice")}
-                            {chatItem.type === "file" && t("typography.file")}
-                            {chatItem.type === "location" && t("typography.location")}
-                            {chatItem.type === "log" && chatItem.status === "voiceCall" && t("typography.voiceCall")}
-                            {chatItem.type === "log" && chatItem.status === "videoCall" && t("typography.videoCall")}
+                            {conversationItem.type === "text" && t("typography.text")}
+                            {conversationItem.type === "image" && t("typography.image")}
+                            {conversationItem.type === "video" && t("typography.video")}
+                            {conversationItem.type === "voice" && t("typography.voice")}
+                            {conversationItem.type === "file" && t("typography.file")}
+                            {conversationItem.type === "location" && t("typography.location")}
+                            {conversationItem.type === "log" && conversationItem.status === "voiceCall" && t("typography.voiceCall")}
+                            {conversationItem.type === "log" && conversationItem.status === "videoCall" && t("typography.videoCall")}
                         </Typography>
 
                     </Stack>
 
                     {/*<Typography*/}
                     {/*    variant="caption"*/}
-                    {/*    color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
+                    {/*    color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
                     {/*>*/}
                     {/*    ... {t("typography.isTyping")}*/}
                     {/*</Typography>*/}
@@ -206,13 +206,13 @@ const ChatItem = ({chatItem}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                        color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>
@@ -234,7 +234,7 @@ const ChatItem = ({chatItem}) => {
     )
 }
 
-const Chats = () => {
+const Conversations = () => {
 
     return (
         <SimpleBar
@@ -257,10 +257,10 @@ const Chats = () => {
             >
 
                 {
-                    chatList.map(chatItem =>
-                        <ChatItem
-                            key={chatItem._id}
-                            chatItem={chatItem}
+                    conversationList.map(conversationItem =>
+                        <ConversationItem
+                            key={conversationItem._id}
+                            conversationItem={conversationItem}
                         />
                     )
                 }
@@ -271,5 +271,5 @@ const Chats = () => {
     )
 }
 
-export default Chats;
+export default Conversations;
 

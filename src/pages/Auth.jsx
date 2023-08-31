@@ -1,6 +1,7 @@
 // libraries
 import {Outlet} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack} from "@mui/material";
 
@@ -8,6 +9,9 @@ import {Box, Stack} from "@mui/material";
 import Secondary from "components/layouts/Secondary.jsx";
 import Appbar from "components/widgets/auth/Appbar.jsx";
 import CopyRight from "components/widgets/auth/CopyRight.jsx";
+
+// utils
+import {slideInRightVariants} from "utils/constants";
 
 const Auth = () => {
 
@@ -19,7 +23,11 @@ const Auth = () => {
         <Secondary>
 
             <Stack
-                component="main"
+                component={motion.div}
+                variants={slideInRightVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
                 direction="column"
                 gap={2}
                 sx={{

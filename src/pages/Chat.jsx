@@ -2,6 +2,7 @@
 import {useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -11,6 +12,9 @@ import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
 import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
 import Empty from "components/partials/Empty";
+
+// utils
+import {slideInRightVariants} from "utils/constants";
 
 const Chat = () => {
 
@@ -22,7 +26,11 @@ const Chat = () => {
 
     return params.chatId && (
         <Stack
-            component="main"
+            component={motion.div}
+            variants={slideInRightVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             direction="column"
             sx={{
                 position: 'absolute',

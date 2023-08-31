@@ -5,8 +5,8 @@ import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
 
 // components
-import SearchBar from "components/widgets/home/Searchbar";
-import Contacts from "components/widgets/home/Contacts";
+import SearchBar from "components/widgets/chats/Searchbar";
+import Contacts from "components/widgets/chats/Contacts";
 import Empty from "components/partials/Empty";
 
 const ModalHeader = ({onClose}) => {
