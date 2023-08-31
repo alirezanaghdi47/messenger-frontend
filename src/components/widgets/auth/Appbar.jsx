@@ -1,11 +1,13 @@
 // libraries
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
 
 const Appbar = () => {
 
+    const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     
     return(
@@ -24,10 +26,10 @@ const Appbar = () => {
         >
 
             <LazyLoadImage
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo.png"
+                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo-dark.png" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/logo-light.png"}
                 alt="logo"
-                width={40}
-                height={40}
+                width={24}
+                height={24}
             />
 
             <Typography
