@@ -26,6 +26,10 @@ const Mui = ({children}) => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
     }, [language]);
 
+    useEffect(() => {
+        document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
+    }, [darkMode]);
+
     const addonTheme = createTheme({
         direction: language === "fa" ? "rtl" : "ltr",
         breakpoints: {
@@ -88,7 +92,7 @@ const Mui = ({children}) => {
             Array(20).fill("none")
         ],
         typography: {
-            fontFamily: "Vazirmatn , sans-serif",
+            fontFamily: language === "fa" ? "Vazirmatn FD , sans-serif" : "Vazirmatn , sans-serif",
             caption: {
                 lineHeight: 1
             }

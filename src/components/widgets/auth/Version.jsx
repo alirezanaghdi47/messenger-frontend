@@ -2,34 +2,36 @@
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 
-const CopyRight = () => {
+// utils
+import {version} from "utils/constants.js";
+
+const Version = () => {
 
     const {t} = useTranslation();
-    
-    return(
+
+    return (
         <Stack
-            direction="row"
+            direction="column"
             gap={1}
             sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: 'center',
+                alignItems: "center",
                 width: "100%",
             }}
         >
 
             <Typography
-                variant="caption"
-                color="textPrimary"
+                variant="body2"
+                color="textSecondary"
                 fontWeight="bold"
-                textAlign="center"
-                lineHeight={1.5}
             >
-                {t("typography.copyRight")}
+                {t("typography.version")} {version}
             </Typography>
 
         </Stack>
     )
 }
 
-export default CopyRight;
+export default Version;
+

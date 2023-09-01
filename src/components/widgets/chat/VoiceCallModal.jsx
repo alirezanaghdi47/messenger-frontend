@@ -1,15 +1,15 @@
 // libraries
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiMicOff, FiPhoneOff} from "react-icons/fi";
+import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiArrowRight, FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
 
     return (
         <Stack
-            direction="column"
-            gap={1}
+            direction="row"
+            gap={4}
             sx={{
                 position: "absolute",
                 zIndex: 100,
@@ -19,29 +19,92 @@ const ModalHeader = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width: "max-content",
                 bgcolor: 'background.default',
                 borderRadius: 1,
                 padding: 2,
             }}
         >
 
-            <LazyLoadImage
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                alt="avatar"
-                width={40}
-                height={40}
-                style={{borderRadius: "50%"}}
-            />
-
-            <Typography
-                variant="subtitle2"
-                color="textPrimary"
-                fontWeight='bold'
-                noWrap
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
-                علیرضا نقدی
-            </Typography>
+
+                <LazyLoadImage
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    style={{borderRadius: "50%"}}
+                />
+
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    fontWeight='bold'
+                    noWrap
+                >
+                    سهیل نادری
+                </Typography>
+
+            </Stack>
+
+            <Stack
+                direction="column"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+
+                <FiArrowRight size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color="textPrimary"
+                    fontWeight='bold'
+                    noWrap
+                >
+                    11:11
+                </Typography>
+
+            </Stack>
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+
+                <LazyLoadImage
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    style={{borderRadius: "50%"}}
+                />
+
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    fontWeight='bold'
+                    noWrap
+                >
+                    علیرضا نقدی
+                </Typography>
+
+            </Stack>
 
         </Stack>
     )
@@ -71,29 +134,6 @@ const ModalContent = () => {
                 }}
             >
 
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "calc(100% - 32px)",
-                        height: "calc(100% - 32px)",
-                        maxWidth: 992,
-                    }}
-                >
-
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="avatar"
-                        width="100%"
-                        height="100%"
-                        style={{
-                            borderRadius: 8,
-                            objectFit: "cover"
-                        }}
-                    />
-
-                </Box>
 
             </Stack>
 
@@ -162,6 +202,8 @@ const ModalFooter = ({onClose}) => {
 
 const VoiceCallModal = ({isOpen, onClose}) => {
 
+    const {background} = useSelector(state => state.setting.appearance);
+
     return (
         <Modal
             open={isOpen}
@@ -185,6 +227,9 @@ const VoiceCallModal = ({isOpen, onClose}) => {
                     width: "100%",
                     height: "100%",
                     bgcolor: "background.paper",
+                    backgroundImage: `url(${background})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: "cover",
                 }}
             >
 

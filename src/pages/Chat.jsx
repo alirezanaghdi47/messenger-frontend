@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack} from "@mui/material";
+import {alpha, Stack, useTheme} from "@mui/material";
 
 // components
 import Header from "components/widgets/chat/Header.jsx";
@@ -21,6 +21,7 @@ const Chat = () => {
     const params = useParams();
     const {background , language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
+    const theme = useTheme();
 
     const listRef = useRef(null);
 
@@ -46,6 +47,16 @@ const Chat = () => {
                 backgroundImage: `url(${background})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
+                "&::after":{
+                    content: "''",
+                    position: "absolute",
+                    zIndex: -1,
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: alpha(theme.palette.background.default , 0.5)
+                }
             }}
         >
 

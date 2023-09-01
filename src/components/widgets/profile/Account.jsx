@@ -1,9 +1,11 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import SimpleBar from "simplebar-react";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Grid} from "@mui/material";
+import {Button, Grid, Stack} from "@mui/material";
+import {FiCheck, FiX} from "react-icons/fi";
 
 // components
 import TextInput from "components/modules/TextInput.jsx";
@@ -14,6 +16,7 @@ import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 
+    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -132,6 +135,42 @@ const Account = () => {
                         error={formik.errors.biography}
                         touched={formik.touched.biography}
                     />
+
+                </Grid>
+
+                <Grid
+                    item
+                    xs={12}
+                >
+
+                    <Stack
+                        direction="row"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "start",
+                            alignItems: "center",
+                            width: "100%",
+                        }}
+                    >
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<FiCheck size={20}/>}
+                        >
+                            {t("button.submit")}
+                        </Button>
+
+                        <Button
+                            variant="text"
+                            color="ternary"
+                            startIcon={<FiX size={20}/>}
+                        >
+                            {t("button.cancel")}
+                        </Button>
+
+                    </Stack>
 
                 </Grid>
 

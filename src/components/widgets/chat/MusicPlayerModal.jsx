@@ -114,7 +114,7 @@ const ModalContent = () => {
 
 const MusicPlayerModal = ({isOpen , onClose}) => {
 
-    const isTablet = useMediaQuery('(max-width: 768px)');
+    const isTablet = useMediaQuery('(max-width: 576px)');
 
     return (
         <Modal

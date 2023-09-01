@@ -1,4 +1,5 @@
 // libraries
+import {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {
@@ -237,6 +238,10 @@ const Toolbar = () => {
     const {isOpenModal: isOpenIncomingCallModal , _handleShowModal: _handleShowIncomingCallModal , _handleHideModal: _handleHideIncomingCallModal} = useModal();
     const {isOpenModal: isOpenVoiceCallModal , _handleShowModal: _handleShowVoiceCallModal , _handleHideModal: _handleHideVoiceCallModal} = useModal();
     const {isOpenModal: isOpenVideoCallModal , _handleShowModal: _handleShowVideoCallModal , _handleHideModal: _handleHideVideoCallModal} = useModal();
+
+    // useEffect(() => {
+    //     _handleShowIncomingCallModal();
+    // }, []);
 
     return (
         <>

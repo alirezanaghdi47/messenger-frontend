@@ -105,7 +105,7 @@ export const ImageLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
-                    bgcolor: "background.default",
+                    bgcolor: "secondary.main",
                     padding: 1.5,
                 }}
                 elevation={0}
@@ -215,7 +215,7 @@ export const FileLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
-                    bgcolor: "background.default",
+                    bgcolor: "secondary.main",
                     padding: 1.5,
                 }}
                 elevation={0}
@@ -334,7 +334,7 @@ export const MusicLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
-                    bgcolor: "background.default",
+                    bgcolor: "secondary.main",
                     padding: 1.5,
                 }}
                 elevation={0}
@@ -458,7 +458,7 @@ export const VideoLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
-                    bgcolor: "background.default",
+                    bgcolor: "secondary.main",
                     padding: 1.5,
                 }}
                 elevation={0}
@@ -601,7 +601,7 @@ export const LocationLog = ({log}) => {
                     justifyContent: "center",
                     alignItems: "start",
                     width: "100%",
-                    bgcolor: "background.default",
+                    bgcolor: "secondary.main",
                     padding: 1,
                 }}
                 elevation={0}

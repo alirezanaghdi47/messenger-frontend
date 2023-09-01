@@ -104,7 +104,7 @@ const MusicPlayer = ({src}) => {
                         }}
                         railStyle={{
                             height: 8,
-                            background: theme.palette.background.default
+                            background: theme.palette.secondary.main
                         }}
                     />
 
@@ -202,7 +202,7 @@ const MusicPlayer = ({src}) => {
                             }}
                             railStyle={{
                                 height: 8,
-                                background: theme.palette.background.default
+                                background: theme.palette.secondary.main
                             }}
                         />
 

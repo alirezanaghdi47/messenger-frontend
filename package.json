@@ -2,7 +2,7 @@
   "name": "messenger-frontend",
   "private": true,
   "author": "alireza naghdi",
-  "version": "0.7.9",
+  "version": "0.8.0",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -30,6 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-full-screen": "^1.1.1",
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
     "react-i18next": "^13.2.0",
@@ -49,6 +50,7 @@
     "stylis-plugin-rtl": "^2.1.1",
     "swiper": "^10.1.0",
     "usehooks-ts": "^2.9.1",
+    "vazirmatn": "^33.0.3",
     "yup": "^1.2.0"
   },
   "devDependencies": {

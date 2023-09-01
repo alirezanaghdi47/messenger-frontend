@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, IconButton, Stack, Typography} from "@mui/material";
-import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
+import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 
 const Header = ({title}) => {
 
@@ -13,9 +13,7 @@ const Header = ({title}) => {
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    const _handleBack = () => {
-        navigate("/setting");
-    }
+    const _handleBack = () => navigate("/setting");
 
     return isTablet && (
         <Stack
@@ -26,7 +24,6 @@ const Header = ({title}) => {
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
-                height: 80,
                 bgcolor: "background.paper",
                 borderBottomWidth: 1,
                 borderBottomStyle: "solid",
@@ -48,7 +45,6 @@ const Header = ({title}) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: "100%"
                 }}
             >
 
@@ -61,6 +57,13 @@ const Header = ({title}) => {
                 </Typography>
 
             </Box>
+
+            <IconButton
+                variant="text"
+                color="ternary"
+            >
+                <FiLogOut size={20}/>
+            </IconButton>
 
         </Stack>
     )
