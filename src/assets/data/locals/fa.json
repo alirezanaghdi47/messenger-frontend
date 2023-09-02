@@ -37,7 +37,9 @@
       "verifyCode": "اعتبارسنجی",
       "timeRemaining": "زمان باقی مانده",
       "chatHistory": "تاریخچه گفتگو ها",
-      "createChat": "ایجاد پیام جدید"
+      "createChat": "ایجاد پیام جدید",
+      "createStory": "ایجاد داستان جدید",
+      "forwardChat": "هدایت پیام به"
     },
     "select": {
       "dark": "تاریک",
@@ -73,10 +75,13 @@
       "location": "موقعیت",
       "delete": "حذف",
       "download": "دانلود",
+      "forward": "هدایت",
+      "reply": "پاسخ به",
       "searchChat": "جستجوی گفتگو ها",
       "videoCall": "تماس تصویری",
       "voiceCall": "تماس صوتی",
       "createChat": "ایجاد گفتگو جدید",
+      "createStory": "ایجاد داستان جدید",
       "profile": "حساب کاربری",
       "chat": "گفتگو",
       "session": "تاریخچه ورود",

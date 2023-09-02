@@ -38,6 +38,7 @@ const LogMenu = ({contextMenu, isOpen, onClose}) => {
                     gap: 1,
                     justifyContent: "start",
                     alignItems: "center",
+                    color: "error.main"
                 }}
             >
 
@@ -45,7 +46,7 @@ const LogMenu = ({contextMenu, isOpen, onClose}) => {
 
                 <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="error"
                     fontWeight='bold'
                 >
                     {t("menu.delete")}
@@ -121,9 +122,12 @@ export const ImageLog = ({log}) => {
                 <Box
                     sx={{
                         position: "relative",
-                        cursor: "pointer"
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%"
                     }}
-                    onClick={_handleShowModal}
                 >
 
                     <LazyLoadImage
@@ -132,6 +136,7 @@ export const ImageLog = ({log}) => {
                         width="100%"
                         height="100%"
                         style={{borderRadius: 8}}
+                        onClick={_handleShowModal}
                     />
 
                     <Box
@@ -160,6 +165,7 @@ export const ImageLog = ({log}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -168,14 +174,14 @@ export const ImageLog = ({log}) => {
                     }}
                 >
 
-                    <BiCheckDouble size={20}/>
-
                     <Typography
                         variant="caption"
                         color="textSecondary"
                     >
                         11:11 | 1400/1/1
                     </Typography>
+
+                    <BiCheckDouble size={20}/>
 
                 </Stack>
 
@@ -281,6 +287,7 @@ export const FileLog = ({log}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -402,6 +409,7 @@ export const MusicLog = ({log}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -471,7 +479,16 @@ export const VideoLog = ({log}) => {
                     onClose={_handleHideContextMenu}
                 />
 
-                <Box sx={{position: "relative"}}>
+                <Box
+                    sx={{
+                        position: "relative",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%"
+                    }}
+                >
 
                     <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
@@ -542,6 +559,7 @@ export const VideoLog = ({log}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -602,7 +620,7 @@ export const LocationLog = ({log}) => {
                     alignItems: "start",
                     width: "100%",
                     bgcolor: "secondary.main",
-                    padding: 1,
+                    padding: 1.5,
                 }}
                 elevation={0}
                 onContextMenu={_handleShowContextMenu}
@@ -630,6 +648,7 @@ export const LocationLog = ({log}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",

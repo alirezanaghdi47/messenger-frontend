@@ -37,7 +37,9 @@
       "verifyCode": "Verify code",
       "timeRemaining": "Remaining time",
       "chatHistory": "Chat history",
-      "createChat": "Create chat"
+      "createChat": "Create chat",
+      "createStory": "Create new story",
+      "forwardChat": "Forward chat"
     },
     "select": {
       "dark": "Dark",
@@ -73,10 +75,13 @@
       "location": "Location",
       "delete": "Delete",
       "download": "Download",
+      "forward": "Forward",
+      "reply": "Reply",
       "searchChat": "Search chats",
       "videoCall": "Video call",
       "voiceCall": "Voice call",
       "createChat": "Create new chat",
+      "createStory": "Create new story",
       "profile": "Profile",
       "chat": "Chat",
       "session": "Sessions",

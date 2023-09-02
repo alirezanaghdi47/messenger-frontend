@@ -88,7 +88,7 @@ const MobileToolbar = ({
                         gap: 1,
                         justifyContent: "start",
                         alignItems: "center",
-                        color: "ternary.main"
+                        color: "error.main"
                     }}
                 >
 
@@ -96,7 +96,7 @@ const MobileToolbar = ({
 
                     <Typography
                         variant="body2"
-                        color="textSecondary"
+                        color="error"
                         fontWeight='bold'
                     >
                         {t("menu.delete")}
@@ -208,7 +208,7 @@ const DesktopToolbar = ({
                         gap: 1,
                         justifyContent: "start",
                         alignItems: "center",
-                        color: "ternary.main"
+                        color: "error.main"
                     }}
                 >
 
@@ -216,7 +216,7 @@ const DesktopToolbar = ({
 
                     <Typography
                         variant="body2"
-                        color="textSecondary"
+                        color="error"
                         fontWeight='bold'
                     >
                         {t("menu.delete")}

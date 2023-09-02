@@ -10,6 +10,9 @@ import {alpha, Stack, useTheme} from "@mui/material";
 import Header from "components/widgets/chat/Header.jsx";
 import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
+import ForwardMessagePopup from "../components/widgets/chat/ForwardMessagePopup";
+import ReplyMessagePopup from "../components/widgets/chat/ReplyMessagePopup";
+import ForwardChatModal from "../components/widgets/chat/ForwardChatModal";
 import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
 import Empty from "components/partials/Empty";
 
@@ -67,6 +70,12 @@ const Chat = () => {
             {/*<Empty/>*/}
 
             {/*<ScrollToBottom ref={listRef}/>*/}
+
+            {/*<ForwardChatModal/>*/}
+
+            {/*<ForwardMessagePopup/>*/}
+
+            {/*<ReplyMessagePopup/>*/}
 
             <Footer/>
 

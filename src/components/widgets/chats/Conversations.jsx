@@ -48,6 +48,7 @@ const ConversationMenu = ({contextMenu, isOpen, onClose}) => {
                     gap: 1,
                     justifyContent: "start",
                     alignItems: "center",
+                    color: "error.main"
                 }}
             >
 
@@ -55,7 +56,7 @@ const ConversationMenu = ({contextMenu, isOpen, onClose}) => {
 
                 <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="error"
                     fontWeight='bold'
                 >
                     {t("menu.delete")}
@@ -240,7 +241,7 @@ const Conversations = () => {
         <SimpleBar
             style={{
                 width: "100%",
-                height: "calc(100dvh - 148px)",
+                height: "calc(100dvh - 200px)",
             }}
         >
 

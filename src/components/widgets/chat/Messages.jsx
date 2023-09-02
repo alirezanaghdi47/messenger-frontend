@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Card, Chip, IconButton, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
-import {FiPhone, FiVideo} from "react-icons/fi";
+import {FiCornerUpLeft, FiCornerUpRight, FiPhone, FiVideo} from "react-icons/fi";
 import {LuDownload, LuTrash2, LuPlay} from "react-icons/lu";
 
 // components
@@ -43,14 +43,14 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
                 }}
             >
 
-                <LuTrash2 size={20}/>
+                <LuDownload size={20}/>
 
                 <Typography
                     variant="body2"
                     color="textSecondary"
                     fontWeight='bold'
                 >
-                    {t("menu.delete")}
+                    {t("menu.download")}
                 </Typography>
 
             </MenuItem>
@@ -64,14 +64,57 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
                 }}
             >
 
-                <LuDownload size={20}/>
+                <FiCornerUpRight size={20}/>
 
                 <Typography
                     variant="body2"
                     color="textSecondary"
                     fontWeight='bold'
                 >
-                    {t("menu.download")}
+                    {t("menu.forward")}
+                </Typography>
+
+            </MenuItem>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                }}
+            >
+
+                <FiCornerUpLeft size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.reply")}
+                </Typography>
+
+            </MenuItem>
+
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "error.main"
+                }}
+            >
+
+                <LuTrash2 size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="error"
+                    fontWeight='bold'
+                >
+                    {t("menu.delete")}
                 </Typography>
 
             </MenuItem>
@@ -144,6 +187,7 @@ export const TextMessage = ({message}) => {
                 direction="row"
                 gap={0.5}
                 sx={{
+                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
@@ -247,6 +291,7 @@ export const FileMessage = ({message}) => {
                 direction="row"
                 gap={0.5}
                 sx={{
+                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
@@ -275,7 +320,7 @@ export const ImageMessage = ({message}) => {
     const theme = useTheme();
 
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
+    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
 
     return (
         <>
@@ -304,9 +349,12 @@ export const ImageMessage = ({message}) => {
                 <Box
                     sx={{
                         position: "relative",
-                        cursor: "pointer"
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%"
                     }}
-                    onClick={_handleShowModal}
                 >
 
                     <LazyLoadImage
@@ -317,7 +365,9 @@ export const ImageMessage = ({message}) => {
                         style={{
                             maxWidth: 300,
                             borderRadius: 8,
+                            cursor: "pointer"
                         }}
+                        onClick={_handleShowModal}
                     />
 
                     <Box
@@ -346,6 +396,7 @@ export const ImageMessage = ({message}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -382,7 +433,7 @@ export const MusicMessage = ({message}) => {
     const theme = useTheme();
 
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
+    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
 
     return (
         <>
@@ -462,6 +513,7 @@ export const MusicMessage = ({message}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -497,7 +549,7 @@ export const VideoMessage = ({message}) => {
     const theme = useTheme();
 
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal , _handleShowModal , _handleHideModal} = useModal();
+    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
 
     return (
         <>
@@ -522,7 +574,16 @@ export const VideoMessage = ({message}) => {
                     onClose={_handleHideContextMenu}
                 />
 
-                <Box sx={{position: "relative"}}>
+                <Box
+                    sx={{
+                        position: "relative",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%"
+                    }}
+                >
 
                     <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
@@ -596,6 +657,7 @@ export const VideoMessage = ({message}) => {
                     direction="row"
                     gap={0.5}
                     sx={{
+                        direction: "rtl",
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
@@ -718,6 +780,7 @@ export const LogMessage = ({message}) => {
                 direction="row"
                 gap={0.5}
                 sx={{
+                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
@@ -760,7 +823,7 @@ export const LocationMessage = ({message}) => {
                 justifyContent: "center",
                 alignItems: "start",
                 bgcolor: message.me ? "primary.light" : "background.default",
-                padding: 1,
+                padding: 1.5,
             }}
             elevation={0}
             onContextMenu={_handleShowContextMenu}
@@ -789,6 +852,7 @@ export const LocationMessage = ({message}) => {
                 direction="row"
                 gap={0.5}
                 sx={{
+                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",

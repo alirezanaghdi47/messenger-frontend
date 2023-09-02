@@ -3,18 +3,29 @@ import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
-import {LuMessageCircle} from "react-icons/lu";
+import {LuMessageCircle, LuTarget} from "react-icons/lu";
 
 // components
 import {useModal} from "components/hooks/useModal";
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
-import AddChatModal from "./AddChatModal";
+import AddChatModal from "components/widgets/chats/AddChatModal";
+import AddStoryModal from "components/widgets/chats/AddStoryModal";
 
-const AddChatMenu = ({anchorEl ,isOpen , onClose}) => {
+const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 
     const {t} = useTranslation();
 
-    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
+    const {
+        isOpenModal: addChatIsOpenModal,
+        _handleShowModal: _handleShowAddChatModal,
+        _handleHideModal: _handleHideAddChatModal
+    } = useModal();
+
+    const {
+        isOpenModal: addStoryIsOpenModal,
+        _handleShowModal: _handleShowAddStoryModal,
+        _handleHideModal: _handleHideAddStoryModal
+    } = useModal();
 
     return (
         <>
@@ -40,7 +51,7 @@ const AddChatMenu = ({anchorEl ,isOpen , onClose}) => {
                         justifyContent: "start",
                         alignItems: "center",
                     }}
-                    onClick={_handleShowModal}
+                    onClick={_handleShowAddChatModal}
                 >
 
                     <LuMessageCircle size={20}/>
@@ -55,11 +66,38 @@ const AddChatMenu = ({anchorEl ,isOpen , onClose}) => {
 
                 </MenuItem>
 
+                <MenuItem
+                    sx={{
+                        display: "flex",
+                        gap: 1,
+                        justifyContent: "start",
+                        alignItems: "center",
+                    }}
+                    onClick={_handleShowAddStoryModal}
+                >
+
+                    <LuTarget size={20}/>
+
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        fontWeight='bold'
+                    >
+                        {t("menu.createStory")}
+                    </Typography>
+
+                </MenuItem>
+
             </Menu>
 
             <AddChatModal
-                isOpen={isOpenModal}
-                onClose={_handleHideModal}
+                isOpen={addChatIsOpenModal}
+                onClose={_handleHideAddChatModal}
+            />
+
+            <AddStoryModal
+                isOpen={addStoryIsOpenModal}
+                onClose={_handleHideAddStoryModal}
             />
 
         </>
@@ -67,7 +105,7 @@ const AddChatMenu = ({anchorEl ,isOpen , onClose}) => {
 }
 
 
-const AddChat = () => {
+const ActionButton = () => {
 
     const isDesktop = useMediaQuery('(max-width: 992px)');
 
@@ -91,7 +129,7 @@ const AddChat = () => {
                 <FiPlus size={20}/>
             </IconButton>
 
-            <AddChatMenu
+            <ActionButtonMenu
                 anchorEl={anchorEl}
                 isOpen={isOpenDropdownMenu}
                 onClose={_handleHideDropdownMenu}
@@ -101,5 +139,5 @@ const AddChat = () => {
     )
 }
 
-export default AddChat;
+export default ActionButton;
 

@@ -10,7 +10,8 @@ import Primary from "components/layouts/Primary.jsx";
 import Appbar from "components/widgets/chats/Appbar.jsx";
 import Conversations from "components/widgets/chats/Conversations.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
-import AddChat from "components/widgets/chats/AddChat.jsx";
+import ActionButton from "components/widgets/chats/ActionButton.jsx";
+import Story from "../components/widgets/chats/Story";
 import Empty from "components/partials/Empty";
 
 // utils
@@ -56,13 +57,15 @@ const Chats = () => {
 
                         <Appbar/>
 
+                        <Story/>
+
                         <SearchBar/>
 
                         <Conversations/>
 
                         {/*<Empty/>*/}
 
-                        <AddChat/>
+                        <ActionButton/>
 
                     </Stack>
                 )

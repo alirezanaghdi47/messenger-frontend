@@ -1,15 +1,17 @@
 // libraries
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiArrowRight, FiMicOff, FiPhoneOff} from "react-icons/fi";
+import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
+
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <Stack
             direction="row"
-            gap={4}
+            gap={1}
             sx={{
                 position: "absolute",
                 zIndex: 100,
@@ -25,23 +27,23 @@ const ModalHeader = () => {
             }}
         >
 
+            <LazyLoadImage
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                alt="avatar"
+                width={40}
+                height={40}
+                style={{borderRadius: "50%"}}
+            />
+
             <Stack
                 direction="column"
                 gap={1}
                 sx={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "start",
                 }}
             >
-
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
 
                 <Typography
                     variant="subtitle2"
@@ -52,56 +54,13 @@ const ModalHeader = () => {
                     سهیل نادری
                 </Typography>
 
-            </Stack>
-
-            <Stack
-                direction="column"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-
-                <FiArrowRight size={20}/>
-
                 <Typography
                     variant="caption"
                     color="textPrimary"
                     fontWeight='bold'
                     noWrap
                 >
-                    11:11
-                </Typography>
-
-            </Stack>
-
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
-
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    علیرضا نقدی
+                    01:00
                 </Typography>
 
             </Stack>
