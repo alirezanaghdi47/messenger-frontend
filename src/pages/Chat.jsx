@@ -2,7 +2,6 @@
 import {useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme} from "@mui/material";
 
@@ -16,13 +15,10 @@ import ForwardChatModal from "../components/widgets/chat/ForwardChatModal";
 import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
 import Empty from "components/partials/Empty";
 
-// utils
-import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
-
 const Chat = () => {
 
     const params = useParams();
-    const {background , language} = useSelector(state => state.setting.appearance);
+    const {background} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
@@ -30,11 +26,7 @@ const Chat = () => {
 
     return params.chatId && (
         <Stack
-            component={motion.div}
-            variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            component="main"
             direction="column"
             sx={{
                 position: 'absolute',

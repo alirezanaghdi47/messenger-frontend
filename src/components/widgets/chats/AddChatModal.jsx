@@ -84,23 +84,22 @@ const ModalFooter = ({onClose}) => {
                 justifyContent: "end",
                 alignItems: "center",
                 width: "100%",
+                marginTop: "auto"
             }}
         >
 
             <Button
-                color="ternary"
                 variant="text"
+                color="ternary"
                 startIcon={<FiX size={20}/>}
-                onClick={onClose}
             >
                 {t("button.cancel")}
             </Button>
 
             <Button
-                color="primary"
                 variant="contained"
+                color="primary"
                 startIcon={<FiCheck size={20}/>}
-                onClick={onClose}
             >
                 {t("button.submit")}
             </Button>

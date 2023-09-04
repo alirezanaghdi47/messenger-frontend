@@ -1,7 +1,5 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
@@ -11,16 +9,11 @@ import Appbar from "components/widgets/chats/Appbar.jsx";
 import Conversations from "components/widgets/chats/Conversations.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
-import Story from "../components/widgets/chats/Story";
 import Empty from "components/partials/Empty";
-
-// utils
-import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
 
 const Chats = () => {
 
     const params = useParams();
-    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -29,11 +22,7 @@ const Chats = () => {
             {
                 ((!params.chatId && isTablet) || !isTablet) && (
                     <Stack
-                        component={motion.div}
-                        variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
+                        component="main"
                         direction="column"
                         gap={2}
                         sx={{
@@ -56,8 +45,6 @@ const Chats = () => {
                     >
 
                         <Appbar/>
-
-                        <Story/>
 
                         <SearchBar/>
 

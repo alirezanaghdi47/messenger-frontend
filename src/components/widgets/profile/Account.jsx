@@ -148,19 +148,11 @@ const Account = () => {
                         gap={2}
                         sx={{
                             display: "flex",
-                            justifyContent: "start",
+                            justifyContent: "end",
                             alignItems: "center",
                             width: "100%",
                         }}
                     >
-
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<FiCheck size={20}/>}
-                        >
-                            {t("button.submit")}
-                        </Button>
 
                         <Button
                             variant="text"
@@ -168,6 +160,14 @@ const Account = () => {
                             startIcon={<FiX size={20}/>}
                         >
                             {t("button.cancel")}
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<FiCheck size={20}/>}
+                        >
+                            {t("button.submit")}
                         </Button>
 
                     </Stack>

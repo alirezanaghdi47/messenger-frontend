@@ -3,13 +3,13 @@ import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
-import {LuMessageCircle, LuTarget} from "react-icons/lu";
+import {LuMessageCircle, LuUsers} from "react-icons/lu";
 
 // components
 import {useModal} from "components/hooks/useModal";
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 import AddChatModal from "components/widgets/chats/AddChatModal";
-import AddStoryModal from "components/widgets/chats/AddStoryModal";
+import AddGroupModal from "./AddGroupModal";
 
 const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 
@@ -22,9 +22,9 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
     } = useModal();
 
     const {
-        isOpenModal: addStoryIsOpenModal,
-        _handleShowModal: _handleShowAddStoryModal,
-        _handleHideModal: _handleHideAddStoryModal
+        isOpenModal: addGroupIsOpenModal,
+        _handleShowModal: _handleShowAddGroupModal,
+        _handleHideModal: _handleHideAddGroupModal
     } = useModal();
 
     return (
@@ -73,17 +73,17 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         justifyContent: "start",
                         alignItems: "center",
                     }}
-                    onClick={_handleShowAddStoryModal}
+                    onClick={_handleShowAddGroupModal}
                 >
 
-                    <LuTarget size={20}/>
+                    <LuUsers size={20}/>
 
                     <Typography
                         variant="body2"
                         color="textSecondary"
                         fontWeight='bold'
                     >
-                        {t("menu.createStory")}
+                        {t("menu.createGroup")}
                     </Typography>
 
                 </MenuItem>
@@ -95,9 +95,9 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                 onClose={_handleHideAddChatModal}
             />
 
-            <AddStoryModal
-                isOpen={addStoryIsOpenModal}
-                onClose={_handleHideAddStoryModal}
+            <AddGroupModal
+                isOpen={addGroupIsOpenModal}
+                onClose={_handleHideAddGroupModal}
             />
 
         </>

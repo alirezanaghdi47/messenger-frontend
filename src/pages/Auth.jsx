@@ -1,7 +1,6 @@
 // libraries
 import {Outlet} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {motion} from "framer-motion";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack} from "@mui/material";
 
@@ -10,12 +9,9 @@ import Secondary from "components/layouts/Secondary.jsx";
 import Appbar from "components/widgets/auth/Appbar.jsx";
 import Version from "components/widgets/auth/Version";
 
-// utils
-import {slideInRightVariants , slideInLeftVariants} from "utils/constants";
-
 const Auth = () => {
 
-    const {background , language} = useSelector(state => state.setting.appearance);
+    const {background} = useSelector(state => state.setting.appearance);
     const isDesktop = useMediaQuery('(max-width: 992px)');
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -23,11 +19,7 @@ const Auth = () => {
         <Secondary>
 
             <Stack
-                component={motion.div}
-                variants={language === "fa" ? slideInRightVariants : slideInLeftVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
+                component="main"
                 direction="column"
                 gap={2}
                 sx={{

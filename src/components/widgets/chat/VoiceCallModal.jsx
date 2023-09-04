@@ -1,16 +1,14 @@
 // libraries
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
 
-    const {language} = useSelector(state => state.setting.appearance);
-
     return (
         <Stack
-            direction="row"
+            direction="column"
             gap={1}
             sx={{
                 position: "absolute",
@@ -35,35 +33,23 @@ const ModalHeader = () => {
                 style={{borderRadius: "50%"}}
             />
 
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "start",
-                }}
+            <Typography
+                variant="subtitle2"
+                color="textPrimary"
+                fontWeight='bold'
+                noWrap
             >
+                سهیل نادری
+            </Typography>
 
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    سهیل نادری
-                </Typography>
-
-                <Typography
-                    variant="caption"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    01:00
-                </Typography>
-
-            </Stack>
+            <Typography
+                variant="caption"
+                color="textPrimary"
+                fontWeight='bold'
+                noWrap
+            >
+                01:00
+            </Typography>
 
         </Stack>
     )

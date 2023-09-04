@@ -1,13 +1,12 @@
 // libraries
 import {lazy, Suspense} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {AnimatePresence} from "framer-motion";
 
 // pages
 const Home = lazy(() => import("pages/Home.jsx"));
 const Auth = lazy(() => import("pages/Auth.jsx"));
 const SignIn = lazy(() => import("pages/SignIn.jsx"));
-const SignUp = lazy(() => import("pages/SignUp.jsx"));
+// const SignUp = lazy(() => import("pages/SignUp.jsx"));
 const Chats = lazy(() => import("pages/Chats.jsx"));
 const Chat = lazy(() => import("pages/Chat.jsx"));
 const Setting = lazy(() => import("pages/Setting.jsx"));
@@ -23,41 +22,37 @@ const Router = () => {
 
             <Suspense fallback={false}>
 
-                <AnimatePresence mode="wait">
+                <Routes>
 
-                    <Routes>
+                    <Route path="/" element={<Home/>}/>
 
-                        <Route path="/" element={<Home/>}/>
+                    <Route path="/auth" element={<Auth/>}>
 
-                        <Route path="/auth" element={<Auth/>}>
+                        <Route path="/auth/sign-in" element={<SignIn/>}/>
 
-                            <Route path="/auth/sign-in" element={<SignIn/>}/>
+                        {/*<Route path="/auth/sign-up" element={<SignUp/>}/>*/}
 
-                            <Route path="/auth/sign-up" element={<SignUp/>}/>
+                    </Route>
 
-                        </Route>
+                    <Route path="/chat" element={<Chats/>}>
 
-                        <Route path="/chat" element={<Chats/>}>
+                        <Route path="/chat/:chatId" element={<Chat/>}/>
 
-                            <Route path="/chat/:chatId" element={<Chat/>}/>
+                    </Route>
 
-                        </Route>
+                    <Route path="/setting" element={<Setting/>}>
 
-                        <Route path="/setting" element={<Setting/>}>
+                        <Route path="/setting/profile" element={<Profile/>}/>
 
-                            <Route path="/setting/profile" element={<Profile/>}/>
+                        <Route path="/setting/appearance" element={<Appearance/>}/>
 
-                            <Route path="/setting/appearance" element={<Appearance/>}/>
+                        <Route path="/setting/session" element={<Session/>}/>
 
-                            <Route path="/setting/session" element={<Session/>}/>
+                    </Route>
 
-                        </Route>
+                    <Route path="/*" element={<NotFound/>}/>
 
-                        <Route path="/*" element={<NotFound/>}/>
-
-                    </Routes>
-
-                </AnimatePresence>
+                </Routes>
 
             </Suspense>
 

@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from "rc-slider";
 import {FullScreen, useFullScreenHandle} from "react-full-screen";
-import {Box, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Collapse, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {LuPlay, LuPause, LuVolume2, LuMaximize, LuMinimize, LuVolumeX} from "react-icons/lu";
 
 // utils
@@ -14,12 +14,11 @@ const VideoPlayer = ({src}) => {
 
     const {language, darkMode} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
-
     const fullScreenHandle = useFullScreenHandle();
 
     const playerRef = useRef(null);
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [showVolume, setShowVolume] = useState(false);
 
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
@@ -29,12 +28,7 @@ const VideoPlayer = ({src}) => {
     const [volume, setVolume] = useState(1);
 
     const _handleToggleFullscreen = () => fullScreenHandle.active ? fullScreenHandle.exit() : fullScreenHandle.enter();
-
-    const _handleToggleVolume = () => {
-        setVolume(0);
-        setMuted(true);
-    }
-
+    const _handleToggleVolume = () => setShowVolume(!showVolume);
     const _handleVolumeChange = (value) => {
         setVolume(value);
         setMuted(false);
@@ -110,16 +104,16 @@ const VideoPlayer = ({src}) => {
                         onAfterChange={_handleSeekMouseUp}
                         style={{
                             width: "100%",
-                            height: 8,
+                            height: 4,
                             padding: 0
                         }}
                         trackStyle={{
                             background: theme.palette.primary.main,
-                            height: 8,
+                            height: 4,
                         }}
                         handleStyle={{
-                            width: 20,
-                            height: 20,
+                            width: 16,
+                            height: 16,
                             background: theme.palette.primary.main,
                             opacity: 1,
                             border: "none",
@@ -127,7 +121,7 @@ const VideoPlayer = ({src}) => {
                             marginTop: -6,
                         }}
                         railStyle={{
-                            height: 8,
+                            height: 4,
                             background: theme.palette.secondary.main
                         }}
                     />
@@ -158,72 +152,19 @@ const VideoPlayer = ({src}) => {
                                 color={darkMode ? "ternary" : "secondary"}
                                 onClick={_handleToggleFullscreen}
                             >
-                                {fullScreenHandle.active ? <LuMinimize size={24}/> : <LuMaximize size={24}/>}
+                                {fullScreenHandle.active ? <LuMinimize size={20}/> : <LuMaximize size={20}/>}
                             </IconButton>
 
                         </Stack>
 
                         <Stack
                             direction="row"
-                            gap={2}
                             sx={{
                                 display: "flex",
                                 justifyContent: 'center',
                                 alignItems: "center",
                             }}
                         >
-
-                            <Stack
-                                direction="row"
-                                gap={2}
-                                sx={{
-                                    position: "relative",
-                                    display: "flex",
-                                    justifyContent: 'center',
-                                    alignItems: "center",
-                                }}
-                            >
-
-                                <Slider
-                                    min={0}
-                                    max={1}
-                                    step={0.01}
-                                    value={volume}
-                                    onChange={_handleVolumeChange}
-                                    style={{
-                                        width: 100,
-                                        height: 8,
-                                        padding: 0
-                                    }}
-                                    trackStyle={{
-                                        left: 0,
-                                        height: 8,
-                                        background: theme.palette.primary.main,
-                                    }}
-                                    handleStyle={{
-                                        width: 20,
-                                        height: 20,
-                                        background: theme.palette.primary.main,
-                                        opacity: 1,
-                                        border: "none",
-                                        boxShadow: "none",
-                                        marginTop: -6,
-                                    }}
-                                    railStyle={{
-                                        height: 8,
-                                        background: theme.palette.secondary.main
-                                    }}
-                                />
-
-                                <IconButton
-                                    variant="text"
-                                    color={darkMode ? "ternary" : "secondary"}
-                                    onClick={_handleToggleVolume}
-                                >
-                                    {volume === 0 || muted ? <LuVolumeX size={24}/> : <LuVolume2 size={24}/>}
-                                </IconButton>
-
-                            </Stack>
 
                             <Box
                                 sx={{
@@ -260,13 +201,62 @@ const VideoPlayer = ({src}) => {
 
                             </Box>
 
+                            <Collapse
+                                in={showVolume}
+                                orientation="horizontal"
+                                sx={{
+                                    marginLeft: 2,
+                                    marginBottom: 0.5
+                                }}
+                            >
+
+                                <Slider
+                                    min={0}
+                                    max={1}
+                                    step={0.01}
+                                    value={volume}
+                                    onChange={_handleVolumeChange}
+                                    style={{
+                                        width: 40,
+                                        height: 4,
+                                        padding: 0
+                                    }}
+                                    trackStyle={{
+                                        left: 0,
+                                        height: 4,
+                                        background: theme.palette.primary.main,
+                                    }}
+                                    handleStyle={{
+                                        width: 16,
+                                        height: 16,
+                                        background: theme.palette.primary.main,
+                                        opacity: 1,
+                                        border: "none",
+                                        boxShadow: "none",
+                                        marginTop: -6,
+                                    }}
+                                    railStyle={{
+                                        height: 4,
+                                        background: theme.palette.secondary.main
+                                    }}
+                                />
+
+                            </Collapse>
+
                             <IconButton
                                 variant="text"
                                 color={darkMode ? "ternary" : "secondary"}
-                                size="large"
+                                onClick={_handleToggleVolume}
+                            >
+                                {volume === 0 ? <LuVolumeX size={20}/> : <LuVolume2 size={20}/>}
+                            </IconButton>
+
+                            <IconButton
+                                variant="text"
+                                color={darkMode ? "ternary" : "secondary"}
                                 onClick={_handleTogglePlaying}
                             >
-                                {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
+                                {(!playing || played === 0) ? <LuPlay size={20}/> : <LuPause size={20}/>}
                             </IconButton>
 
                         </Stack>

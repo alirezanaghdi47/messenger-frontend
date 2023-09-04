@@ -241,7 +241,7 @@ const Conversations = () => {
         <SimpleBar
             style={{
                 width: "100%",
-                height: "calc(100dvh - 200px)",
+                height: "calc(100dvh - 140px)",
             }}
         >
 

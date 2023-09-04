@@ -38,15 +38,3 @@ export const backgroundList = [
     {id: 4, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-4.jpg"},
     {id: 5, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-5.jpg"},
 ];
-
-export const slideInRightVariants = {
-    initial: {opacity: 0, x: 10 , transition: {duration: 0.3}},
-    animate: {opacity: 1, x: 0 , transition: {duration: 0.3}},
-    exit: {opacity: 0, x: -10 , transition: {duration: 0.3}},
-}
-
-export const slideInLeftVariants = {
-    initial: {opacity: 0, x: -10 , transition: {duration: 0.3}},
-    animate: {opacity: 1, x: 0 , transition: {duration: 0.3}},
-    exit: {opacity: 0, x: 10 , transition: {duration: 0.3}},
-}

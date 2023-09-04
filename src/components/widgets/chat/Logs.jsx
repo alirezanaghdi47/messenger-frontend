@@ -135,7 +135,7 @@ export const ImageLog = ({log}) => {
                         alt="image"
                         width="100%"
                         height="100%"
-                        style={{borderRadius: 8}}
+                        style={{borderRadius: 8 , cursor: "pointer"}}
                         onClick={_handleShowModal}
                     />
 

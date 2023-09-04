@@ -86,16 +86,16 @@ const MusicPlayer = ({src}) => {
                         onAfterChange={_handleSeekMouseUp}
                         style={{
                             width: "100%",
-                            height: 8,
+                            height: 4,
                             padding: 0
                         }}
                         trackStyle={{
-                            height: 8,
+                            height: 4,
                             background: theme.palette.primary.main,
                         }}
                         handleStyle={{
-                            width: 20,
-                            height: 20,
+                            width: 16,
+                            height: 16,
                             background: theme.palette.primary.main,
                             opacity: 1,
                             border: "none",
@@ -103,7 +103,7 @@ const MusicPlayer = ({src}) => {
                             marginTop: -6,
                         }}
                         railStyle={{
-                            height: 8,
+                            height: 4,
                             background: theme.palette.secondary.main
                         }}
                     />
@@ -154,9 +154,8 @@ const MusicPlayer = ({src}) => {
                     <IconButton
                         variant="text"
                         color="ternary"
-                        size="large"
                     >
-                        <LuSettings size={24}/>
+                        <LuSettings size={20}/>
                     </IconButton>
 
                     <IconButton
@@ -165,7 +164,7 @@ const MusicPlayer = ({src}) => {
                         size="large"
                         onClick={_handleTogglePlaying}
                     >
-                        {(!playing || played === 0) ? <LuPlay size={24}/> : <LuPause size={24}/>}
+                        {(!playing || played === 0) ? <LuPlay size={20}/> : <LuPause size={20}/>}
                     </IconButton>
 
                     <Popper
@@ -182,18 +181,18 @@ const MusicPlayer = ({src}) => {
                             value={volume}
                             onChange={_handleVolumeChange}
                             style={{
-                                width: 60,
-                                height: 8,
+                                width: 40,
+                                height: 4,
                                 padding: 0
                             }}
                             trackStyle={{
                                 left: 0,
-                                height: 8,
+                                height: 4,
                                 background: theme.palette.primary.main,
                             }}
                             handleStyle={{
-                                width: 20,
-                                height: 20,
+                                width: 16,
+                                height: 16,
                                 background: theme.palette.primary.main,
                                 opacity: 1,
                                 border: "none",
@@ -201,7 +200,7 @@ const MusicPlayer = ({src}) => {
                                 marginTop: -6,
                             }}
                             railStyle={{
-                                height: 8,
+                                height: 4,
                                 background: theme.palette.secondary.main
                             }}
                         />
@@ -211,10 +210,9 @@ const MusicPlayer = ({src}) => {
                     <IconButton
                         variant="text"
                         color="ternary"
-                        size="large"
                         onClick={_handleToggleVolume}
                     >
-                        <LuVolume2 size={24}/>
+                        <LuVolume2 size={20}/>
                     </IconButton>
 
                 </Stack>
