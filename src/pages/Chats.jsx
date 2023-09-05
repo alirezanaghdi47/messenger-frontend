@@ -26,7 +26,7 @@ const Chats = () => {
                         direction="column"
                         gap={2}
                         sx={{
-                            position: 'absolute',
+                            position: 'sticky',
                             zIndex: 300,
                             top: 0,
                             left: 0,

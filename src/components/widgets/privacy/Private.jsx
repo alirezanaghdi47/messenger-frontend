@@ -4,14 +4,10 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Stack} from "@mui/material";
 
 // components
-import Language from "components/widgets/appearance/Language.jsx";
-import DateTime from "components/widgets/appearance/DateTime.jsx";
-import FontSize from "components/widgets/appearance/FontSize.jsx";
-import Color from "components/widgets/appearance/Color.jsx";
-import Background from "components/widgets/appearance/Background.jsx";
-import Theme from "components/widgets/appearance/Theme.jsx";
+import Personal from "components/widgets/privacy/Personal";
+import Secure from "components/widgets/privacy/Secure";
 
-const Personalization = () => {
+const Private = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -35,17 +31,9 @@ const Personalization = () => {
                 }}
             >
 
-                <Language/>
+                <Personal/>
 
-                <DateTime/>
-
-                <FontSize/>
-
-                <Color/>
-
-                <Background/>
-
-                <Theme/>
+                <Secure/>
 
             </Stack>
 
@@ -53,4 +41,4 @@ const Personalization = () => {
     )
 }
 
-export default Personalization;
+export default Private;

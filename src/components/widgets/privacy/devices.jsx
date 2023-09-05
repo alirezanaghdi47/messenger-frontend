@@ -6,7 +6,7 @@ import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Chip, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
 
-const logList = [
+const deviceList = [
     {
         id: 1,
         platform: "desktop",
@@ -26,13 +26,12 @@ const logList = [
     },
 ];
 
-const LogItem = ({logItem}) => {
+const DeviceItem = ({deviceItem}) => {
 
     const {t} = useTranslation();
 
     return (
         <Stack
-            key={logItem.id}
             direction="row"
             gap={2}
             sx={{
@@ -56,7 +55,7 @@ const LogItem = ({logItem}) => {
                 }}
             >
                 {
-                    logItem.platform === "mobile" ?
+                    deviceItem.platform === "mobile" ?
                         <LuSmartphone size={24}/> :
                         <LuMonitor size={24}/>
                 }
@@ -94,7 +93,7 @@ const LogItem = ({logItem}) => {
                         variant="body2"
                         color="textPrimary"
                     >
-                        {logItem.browser}
+                        {deviceItem.browser}
                     </Typography>
 
                 </Stack>
@@ -121,7 +120,7 @@ const LogItem = ({logItem}) => {
                         variant="body2"
                         color="textPrimary"
                     >
-                        {logItem.city} , {logItem.country}
+                        {deviceItem.city} , {deviceItem.country}
                     </Typography>
 
                 </Stack>
@@ -150,7 +149,7 @@ const LogItem = ({logItem}) => {
                     variant="caption"
                     color="textPrimary"
                 >
-                    {logItem.createDate}
+                    {deviceItem.createDate}
                 </Typography>
 
             </Stack>
@@ -159,7 +158,7 @@ const LogItem = ({logItem}) => {
     )
 }
 
-const Logs = () => {
+const Devices = () => {
 
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
@@ -174,46 +173,23 @@ const Logs = () => {
 
             <Stack
                 direction="column"
-                gap={2}
+                gap={4}
                 sx={{
                     display: "flex",
-                    justifyContent: "start",
-                    alignItems: "start",
-                    width: "100%",
-                    padding: 4,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%"
                 }}
             >
 
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    sx={{marginTop: 2}}
-                >
-                    {t("typography.devices")}
-                </Typography>
-
-                <Stack
-                    direction="column"
-                    gap={4}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100%"
-                    }}
-                >
-
-                    {
-                        logList.map(logItem =>
-                            <LogItem
-                                key={logItem.id}
-                                logItem={logItem}
-                            />
-                        )
-                    }
-
-                </Stack>
+                {
+                    deviceList.map(deviceItem =>
+                        <DeviceItem
+                            key={deviceItem.id}
+                            deviceItem={deviceItem}
+                        />
+                    )
+                }
 
             </Stack>
 
@@ -221,5 +197,5 @@ const Logs = () => {
     )
 }
 
-export default Logs;
+export default Devices;
 

@@ -4,9 +4,9 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Logs from "components/widgets/session/Logs.jsx";
+import Notice from "components/widgets/notification/Notice";
 
-const Session = () => {
+const Notification = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -28,12 +28,12 @@ const Session = () => {
             }}
         >
 
-            <Header title="typography.session"/>
+            <Header title="typography.notification"/>
 
-            <Logs/>
+            <Notice/>
 
         </Stack>
     )
 }
 
-export default Session;
+export default Notification;

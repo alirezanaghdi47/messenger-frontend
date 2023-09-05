@@ -9,6 +9,7 @@ import {LuPlay, LuPause, LuVolume2, LuMaximize, LuMinimize, LuVolumeX} from "rea
 
 // utils
 import {formatDuration} from "utils/functions";
+import {PiNumberOneBold, PiNumberTwoBold} from "react-icons/pi";
 
 const VideoPlayer = ({src}) => {
 
@@ -26,7 +27,11 @@ const VideoPlayer = ({src}) => {
     const [played, setPlayed] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
+    const [playbackRate, setPlaybackRate] = useState(1);
 
+    const _handlePlaybackRateChange = () => {
+        setPlaybackRate(playbackRate === 1 ? 2 : 1);
+    }
     const _handleToggleFullscreen = () => fullScreenHandle.active ? fullScreenHandle.exit() : fullScreenHandle.enter();
     const _handleToggleVolume = () => setShowVolume(!showVolume);
     const _handleVolumeChange = (value) => {
@@ -68,6 +73,7 @@ const VideoPlayer = ({src}) => {
                     playing={playing}
                     volume={volume}
                     muted={muted}
+                    playbackRate={playbackRate}
                     onPlay={() => setPlaying(true)}
                     onPause={() => setPlaying(false)}
                     onEnded={_handleEnded}
@@ -138,11 +144,10 @@ const VideoPlayer = ({src}) => {
                     >
 
                         <Stack
-                            direction="column"
-                            gap={2}
+                            direction="row"
                             sx={{
                                 display: "flex",
-                                justifyContent: 'center',
+                                justifyContent: 'end',
                                 alignItems: "center",
                             }}
                         >
@@ -155,13 +160,22 @@ const VideoPlayer = ({src}) => {
                                 {fullScreenHandle.active ? <LuMinimize size={20}/> : <LuMaximize size={20}/>}
                             </IconButton>
 
+                            <IconButton
+                                variant="text"
+                                color="secondary"
+                                onClick={_handlePlaybackRateChange}
+                            >
+                                {playbackRate === 1 && <PiNumberOneBold size={16}/>}
+                                {playbackRate === 2 && <PiNumberTwoBold size={16}/>}
+                            </IconButton>
+
                         </Stack>
 
                         <Stack
                             direction="row"
                             sx={{
                                 display: "flex",
-                                justifyContent: 'center',
+                                justifyContent: 'start',
                                 alignItems: "center",
                             }}
                         >

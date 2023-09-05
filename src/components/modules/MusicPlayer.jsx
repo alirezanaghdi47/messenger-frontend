@@ -3,14 +3,15 @@ import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from 'rc-slider';
-import {IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {LuPlay , LuPause , LuVolume2 , LuSettings} from "react-icons/lu";
+import {Button, Chip, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {LuPlay, LuPause, LuVolume2, LuSettings} from "react-icons/lu";
 
 // styles
 import 'rc-slider/assets/index.css';
 
 // utils
 import {formatDuration} from "utils/functions";
+import {PiNumberOneBold, PiNumberOneLight, PiNumberTwoBold} from "react-icons/pi";
 
 const MusicPlayer = ({src}) => {
 
@@ -26,6 +27,11 @@ const MusicPlayer = ({src}) => {
     const [played, setPlayed] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
+    const [playbackRate, setPlaybackRate] = useState(1);
+
+    const _handlePlaybackRateChange = () => {
+        setPlaybackRate(playbackRate === 1 ? 2 : 1);
+    }
 
     const _handleToggleVolume = (e) => {
         setAnchorEl(anchorEl ? null : e.currentTarget)
@@ -154,8 +160,10 @@ const MusicPlayer = ({src}) => {
                     <IconButton
                         variant="text"
                         color="ternary"
+                        onClick={_handlePlaybackRateChange}
                     >
-                        <LuSettings size={20}/>
+                        {playbackRate === 1 && <PiNumberOneBold size={16}/>}
+                        {playbackRate === 2 && <PiNumberTwoBold size={16}/>}
                     </IconButton>
 
                     <IconButton
@@ -227,6 +235,7 @@ const MusicPlayer = ({src}) => {
                 playing={playing}
                 volume={volume}
                 muted={muted}
+                playbackRate={playbackRate}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
                 onEnded={_handleEnded}

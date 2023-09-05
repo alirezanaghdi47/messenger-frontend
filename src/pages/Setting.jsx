@@ -10,7 +10,12 @@ import Version from "components/widgets/setting/Version.jsx";
 import Links from "components/widgets/setting/Links.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
 
-const pathList = ["/setting/profile", "/setting/appearance", "/setting/session"];
+const pathList = [
+    "/setting/profile",
+    "/setting/appearance",
+    "/setting/privacy",
+    "/setting/notification"
+];
 
 const Setting = () => {
 
@@ -25,9 +30,9 @@ const Setting = () => {
                     <Stack
                         component="main"
                         direction="column"
-                        gap={2}
+                        gap={4}
                         sx={{
-                            position: 'absolute',
+                            position: 'sticky',
                             zIndex: 300,
                             top: 0,
                             left: 0,

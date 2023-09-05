@@ -9,7 +9,7 @@ import {
     MenuItem,
     Menu,
 } from "@mui/material";
-import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
+import {FiLogOut, FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 
 // components
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
@@ -103,6 +103,28 @@ const MobileToolbar = ({
                     </Typography>
 
                 </MenuItem>
+
+                {/*<MenuItem*/}
+                {/*    sx={{*/}
+                {/*        display: "flex",*/}
+                {/*        gap: 1,*/}
+                {/*        justifyContent: "start",*/}
+                {/*        alignItems: "center",*/}
+                {/*        color: "error.main"*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                {/*    <FiLogOut size={20}/>*/}
+
+                {/*    <Typography*/}
+                {/*        variant="body2"*/}
+                {/*        color="error"*/}
+                {/*        fontWeight='bold'*/}
+                {/*    >*/}
+                {/*        {t("menu.leave")}*/}
+                {/*    </Typography>*/}
+
+                {/*</MenuItem>*/}
 
             </Menu>
 
@@ -223,6 +245,28 @@ const DesktopToolbar = ({
                     </Typography>
 
                 </MenuItem>
+
+                {/*<MenuItem*/}
+                {/*    sx={{*/}
+                {/*        display: "flex",*/}
+                {/*        gap: 1,*/}
+                {/*        justifyContent: "start",*/}
+                {/*        alignItems: "center",*/}
+                {/*        color: "error.main"*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                {/*    <FiLogOut size={20}/>*/}
+
+                {/*    <Typography*/}
+                {/*        variant="body2"*/}
+                {/*        color="error"*/}
+                {/*        fontWeight='bold'*/}
+                {/*    >*/}
+                {/*        {t("menu.leave")}*/}
+                {/*    </Typography>*/}
+
+                {/*</MenuItem>*/}
 
             </Menu>
 

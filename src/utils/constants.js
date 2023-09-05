@@ -1,5 +1,5 @@
 
-export const version = "0.8.2";
+export const version = "0.8.3";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},

@@ -2,7 +2,7 @@
   "name": "messenger-frontend",
   "private": true,
   "author": "alireza naghdi",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

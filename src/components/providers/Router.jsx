@@ -12,7 +12,8 @@ const Chat = lazy(() => import("pages/Chat.jsx"));
 const Setting = lazy(() => import("pages/Setting.jsx"));
 const Profile = lazy(() => import("pages/Profile.jsx"));
 const Appearance = lazy(() => import("pages/Appearance.jsx"));
-const Session = lazy(() => import("pages/Session.jsx"));
+const Notification = lazy(() => import("pages/Notification.jsx"));
+const Privacy = lazy(() => import("pages/Privacy.jsx"));
 const NotFound = lazy(() => import("pages/NotFound.jsx"));
 
 const Router = () => {
@@ -46,7 +47,9 @@ const Router = () => {
 
                         <Route path="/setting/appearance" element={<Appearance/>}/>
 
-                        <Route path="/setting/session" element={<Session/>}/>
+                        <Route path="/setting/notification" element={<Notification/>}/>
+
+                        <Route path="/setting/privacy" element={<Privacy/>}/>
 
                     </Route>
 

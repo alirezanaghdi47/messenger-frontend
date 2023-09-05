@@ -5,7 +5,7 @@ import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Badge, Box, Chip, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
-import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText, LuTrash2} from "react-icons/lu";
+import {LuFile, LuFilm, LuImage, LuLogOut, LuMapPin, LuMusic, LuText, LuTrash2} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
 // components
@@ -63,6 +63,28 @@ const ConversationMenu = ({contextMenu, isOpen, onClose}) => {
                 </Typography>
 
             </MenuItem>
+
+            {/*<MenuItem*/}
+            {/*    sx={{*/}
+            {/*        display: "flex",*/}
+            {/*        gap: 1,*/}
+            {/*        justifyContent: "start",*/}
+            {/*        alignItems: "center",*/}
+            {/*        color: "error.main"*/}
+            {/*    }}*/}
+            {/*>*/}
+
+            {/*    <LuLogOut size={20}/>*/}
+
+            {/*    <Typography*/}
+            {/*        variant="body2"*/}
+            {/*        color="error"*/}
+            {/*        fontWeight='bold'*/}
+            {/*    >*/}
+            {/*        {t("menu.leave")}*/}
+            {/*    </Typography>*/}
+
+            {/*</MenuItem>*/}
 
         </Menu>
     )

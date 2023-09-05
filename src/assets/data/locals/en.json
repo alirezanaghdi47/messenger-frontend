@@ -28,7 +28,11 @@
       "forwarded": "Forwarded from",
       "profile": "Profile",
       "appearance": "Appearance",
-      "session": "Sessions",
+      "notification": "Notification",
+      "privacy": "Privacy",
+      "blockedUsers": "Blocked users",
+      "security": "Security",
+      "entryLock": "Entry lock",
       "devices": "Devices",
       "signIn": "Sign in",
       "signUpQuestion": "if don`t have any account",
@@ -56,7 +60,12 @@
       "password": "Password",
       "passwordRepeat": "Repeat Password",
       "phoneNumber": "Phone number",
-      "biography": "Biography"
+      "biography": "Biography",
+      "showStatus": "Show status",
+      "privateChat": "Private chat",
+      "groupChat": "Group chat",
+      "voiceCall": "Voice call",
+      "videoCall": "Video call"
     },
     "list": {
       "chat": "Chat",
@@ -76,6 +85,7 @@
       "video": "Video",
       "location": "Location",
       "delete": "Delete",
+      "leave": "Leave",
       "download": "Download",
       "forward": "Forward",
       "reply": "Reply",
@@ -86,9 +96,9 @@
       "createGroup": "Create new group",
       "createStory": "Create new story",
       "profile": "Profile",
-      "chat": "Chat",
-      "session": "Sessions",
-      "appearance": "Appearance"
+      "appearance": "Appearance",
+      "notification": "Notification",
+      "privacy": "Privacy"
     },
     "button": {
       "persian": "Persian",
@@ -103,7 +113,12 @@
       "next": "Next",
       "prev": "Prev",
       "cancel": "Cancel",
-      "send": "Send"
+      "send": "Send",
+      "noBody": "No body",
+      "all": "All",
+      "enable": "Enable",
+      "disable": "Disable",
+      "device": "Device"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

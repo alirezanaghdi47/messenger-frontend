@@ -140,6 +140,12 @@ const Mui = ({children}) => {
                     }),
                 },
             },
+            MuiButtonBase:{
+              defaultProps:{
+                  disableRipple: true,
+                  disableTouchRipple: true,
+              }
+            },
             MuiButton: {
                 defaultProps: {
                     disableElevation: true,
@@ -184,7 +190,7 @@ const Mui = ({children}) => {
                     root: ({theme, ownerState}) => ({
                         borderRadius: theme.shape.borderRadius,
                     })
-                }
+                },
             },
             MuiFormLabel: {
                 styleOverrides: {

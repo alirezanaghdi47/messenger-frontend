@@ -28,7 +28,11 @@
       "forwarded": "هدایت شده از",
       "profile": "حساب کاربری",
       "appearance": "ظاهر و شخصی سازی",
-      "session": "تاریخچه ورود",
+      "notification": "صدا و اعلانات",
+      "privacy": "حریم خصوصی",
+      "blockedUsers": "کاربران مسدود شده",
+      "security": "امنیت",
+      "entryLock": "قفل ورودی",
       "devices": "دستگاه ها",
       "signIn": "ورود",
       "signUpQuestion": "اگر حساب کاربری ندارید",
@@ -39,7 +43,6 @@
       "chatHistory": "تاریخچه گفتگو ها",
       "createChat": "ایجاد پیام جدید",
       "createGroup": "ایجاد گروه جدید",
-      "createStory": "ایجاد داستان جدید",
       "forwardChat": "هدایت پیام به"
     },
     "select": {
@@ -56,7 +59,12 @@
       "password": "رمز عبور",
       "passwordRepeat": "تکرار رمز عبور",
       "phoneNumber": "شماره همراه",
-      "biography": "بیوگرافی"
+      "biography": "بیوگرافی",
+      "showStatus": "مشاهده وضعیت",
+      "privateChat": "گفتگو شخصی",
+      "groupChat": "گفتگو گروهی",
+      "voiceCall": "تماس صوتی",
+      "videoCall": "تماس تصویری"
     },
     "list": {
       "chat": "گفتگو",
@@ -76,6 +84,7 @@
       "music": "موسیقی",
       "location": "موقعیت",
       "delete": "حذف",
+      "leave": "ترک گروه",
       "download": "دانلود",
       "forward": "هدایت",
       "reply": "پاسخ به",
@@ -84,11 +93,10 @@
       "voiceCall": "تماس صوتی",
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید",
-      "createStory": "ایجاد داستان جدید",
       "profile": "حساب کاربری",
-      "chat": "گفتگو",
-      "session": "تاریخچه ورود",
-      "appearance": "ظاهر و شخصی سازی"
+      "appearance": "ظاهر و شخصی سازی",
+      "notification": "صدا و اعلانات",
+      "privacy": "امنیت و حریم خصوصی"
     },
     "button": {
       "persian": "فارسی",
@@ -103,7 +111,12 @@
       "next": "بعدی",
       "prev": "قبلی",
       "cancel": "انصراف",
-      "send": "ارسال"
+      "send": "ارسال",
+      "noBody": "هیچ کس",
+      "all": "همه",
+      "enable": "فعال",
+      "disable": "غیر فعال",
+      "device": "دستگاه"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",
