@@ -13,8 +13,8 @@ import UserInfo from "components/widgets/setting/UserInfo.jsx";
 const pathList = [
     "/setting/profile",
     "/setting/appearance",
-    "/setting/privacy",
-    "/setting/notification"
+    "/setting/security-privacy",
+    "/setting/sound-notification"
 ];
 
 const Setting = () => {

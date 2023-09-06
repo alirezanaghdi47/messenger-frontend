@@ -7,8 +7,8 @@ import {LuBell, LuPalette, LuShield, LuUser} from "react-icons/lu";
 const linkList = [
     {id: 1, title: "menu.profile", value: "profile", icon: <LuUser size={20}/>},
     {id: 2, title: "menu.appearance", value: "appearance", icon: <LuPalette size={20}/>},
-    {id: 3, title: "menu.privacy", value: "privacy", icon: <LuShield size={20}/>},
-    {id: 4, title: "menu.notification", value: "notification", icon: <LuBell size={20}/>},
+    {id: 3, title: "menu.securityPrivacy", value: "security-privacy", icon: <LuShield size={20}/>},
+    {id: 4, title: "menu.soundNotification", value: "sound-notification", icon: <LuBell size={20}/>},
 ];
 
 const LinkItem = ({linkItem}) => {

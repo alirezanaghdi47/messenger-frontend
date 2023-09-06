@@ -18,7 +18,6 @@ const initialState = {
         expireDate: "",
     },
     appearance: {
-        dateFormat: "24h",
         language: "fa",
         darkMode: false,
         fontSize: 14,
@@ -34,9 +33,6 @@ export const setting = createSlice({
     name: 'setting',
     initialState,
     reducers: {
-        setDateFormat: (state, action) => {
-            state.appearance.dateFormat = action.payload;
-        },
         setLanguage: (state, action) => {
             state.appearance.language = action.payload;
         },
@@ -56,7 +52,6 @@ export const setting = createSlice({
 })
 
 export const {
-    setDateFormat,
     setLanguage,
     setFontSize,
     setColor,

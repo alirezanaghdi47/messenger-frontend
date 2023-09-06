@@ -4,9 +4,9 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Notice from "components/widgets/notification/Notice";
+import Private from "components/widgets/privacy/Private";
 
-const Notification = () => {
+const SecurityPrivacy = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -28,12 +28,12 @@ const Notification = () => {
             }}
         >
 
-            <Header title="typography.notification"/>
+            <Header title="typography.securityPrivacy"/>
 
-            <Notice/>
+            <Private/>
 
         </Stack>
     )
 }
 
-export default Notification;
+export default SecurityPrivacy;

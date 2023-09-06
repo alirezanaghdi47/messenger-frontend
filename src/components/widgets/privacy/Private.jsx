@@ -31,9 +31,9 @@ const Private = () => {
                 }}
             >
 
-                <Personal/>
-
                 <Secure/>
+
+                <Personal/>
 
             </Stack>
 

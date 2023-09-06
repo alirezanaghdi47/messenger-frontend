@@ -28,7 +28,9 @@
       "forwarded": "Forwarded from",
       "profile": "Profile",
       "appearance": "Appearance",
+      "soundNotification": "Sound & notification",
       "notification": "Notification",
+      "securityPrivacy": "Security & privacy",
       "privacy": "Privacy",
       "blockedUsers": "Blocked users",
       "security": "Security",
@@ -84,6 +86,7 @@
       "music": "Music",
       "video": "Video",
       "location": "Location",
+      "member": "Member",
       "delete": "Delete",
       "leave": "Leave",
       "download": "Download",
@@ -97,8 +100,8 @@
       "createStory": "Create new story",
       "profile": "Profile",
       "appearance": "Appearance",
-      "notification": "Notification",
-      "privacy": "Privacy"
+      "soundNotification": "Sound & notification",
+      "securityPrivacy": "Security & privacy"
     },
     "button": {
       "persian": "Persian",

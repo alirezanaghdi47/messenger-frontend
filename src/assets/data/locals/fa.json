@@ -28,7 +28,9 @@
       "forwarded": "هدایت شده از",
       "profile": "حساب کاربری",
       "appearance": "ظاهر و شخصی سازی",
-      "notification": "صدا و اعلانات",
+      "soundNotification": "صدا و اعلانات",
+      "notification": "اعلانات",
+      "securityPrivacy": "امنیت و حریم خصوصی",
       "privacy": "حریم خصوصی",
       "blockedUsers": "کاربران مسدود شده",
       "security": "امنیت",
@@ -83,6 +85,7 @@
       "voice": "صدا",
       "music": "موسیقی",
       "location": "موقعیت",
+      "member": "عضو",
       "delete": "حذف",
       "leave": "ترک گروه",
       "download": "دانلود",
@@ -95,8 +98,8 @@
       "createGroup": "ایجاد گروه جدید",
       "profile": "حساب کاربری",
       "appearance": "ظاهر و شخصی سازی",
-      "notification": "صدا و اعلانات",
-      "privacy": "امنیت و حریم خصوصی"
+      "soundNotification": "صدا و اعلانات",
+      "securityPrivacy": "امنیت و حریم خصوصی"
     },
     "button": {
       "persian": "فارسی",

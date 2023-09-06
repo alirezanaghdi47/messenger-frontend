@@ -244,18 +244,15 @@ const Mui = ({children}) => {
                     }
                 }
             },
-            MuiSwitch: {
-                defaultProps: {
-                    disableRipple: false,
-                    disableTouchRipple: false,
-                    disableFocusRipple: false
-                },
-                styleOverrides: {
-                    thumb: ({theme, ownerState}) => ({}),
-                    track: ({theme, ownerState}) => ({
-                        background: theme.palette.ternary.main
-                    }),
-                }
+            MuiTouchRipple:{
+              styleOverrides:{
+                  root: ({theme, ownerState}) => ({
+                    display: "none",
+                      "&:hover":{
+                          display: "none",
+                      }
+                  }),
+              }
             },
             MuiSlider: {
                 styleOverrides: {

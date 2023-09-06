@@ -65,6 +65,28 @@ const Personal = () => {
                     }}
                 >
 
+                    <SwitchBox
+                        label={t("input.showStatus")}
+                        name="status"
+                        value={formik.values.status}
+                        onChange={formik.handleChange}
+                        error={formik.errors.status}
+                        touched={formik.touched.status}
+                    />
+
+                </Stack>
+
+                <Stack
+                    direction="row"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%"
+                    }}
+                >
+
                     <Typography
                         variant="subtitle2"
                         fontWeight="bold"
@@ -81,28 +103,6 @@ const Personal = () => {
                     >
                         {t("button.all")}
                     </Button>
-
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: "100%"
-                    }}
-                >
-
-                    <SwitchBox
-                        label={t("input.showStatus")}
-                        name="status"
-                        value={formik.values.status}
-                        onChange={formik.handleChange}
-                        error={formik.errors.status}
-                        touched={formik.touched.status}
-                    />
 
                 </Stack>
 

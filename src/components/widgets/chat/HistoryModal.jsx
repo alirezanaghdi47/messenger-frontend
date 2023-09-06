@@ -8,6 +8,7 @@ import {FiX} from "react-icons/fi";
 // components
 import Filter from "components/widgets/chat/Filter";
 import History from "components/widgets/chat/History";
+import Contacts from "components/widgets/chat/Contacts";
 import Empty from "components/partials/Empty";
 
 const ModalHeader = ({onClose}) => {
@@ -109,7 +110,13 @@ const ModalContent = () => {
                 onChange={_handleActiveFilter}
             />
 
-            <History filter={filter}/>
+            {
+                filter !== "member" ? (
+                    <History filter={filter}/>
+                ) : (
+                    <Contacts/>
+                )
+            }
 
             {/*<Empty/>*/}
 

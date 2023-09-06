@@ -3,15 +3,15 @@ import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from 'rc-slider';
-import {Button, Chip, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {LuPlay, LuPause, LuVolume2, LuSettings} from "react-icons/lu";
+import {Button, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {LuPlay, LuPause, LuVolume2} from "react-icons/lu";
+import {FiX} from "react-icons/fi";
 
 // styles
 import 'rc-slider/assets/index.css';
 
 // utils
 import {formatDuration} from "utils/functions";
-import {PiNumberOneBold, PiNumberOneLight, PiNumberTwoBold} from "react-icons/pi";
 
 const MusicPlayer = ({src}) => {
 
@@ -30,7 +30,9 @@ const MusicPlayer = ({src}) => {
     const [playbackRate, setPlaybackRate] = useState(1);
 
     const _handlePlaybackRateChange = () => {
-        setPlaybackRate(playbackRate === 1 ? 2 : 1);
+        if (playbackRate === 1) setPlaybackRate(1.5);
+        if (playbackRate === 1.5) setPlaybackRate(2);
+        if (playbackRate === 2) setPlaybackRate(1);
     }
 
     const _handleToggleVolume = (e) => {
@@ -157,14 +159,15 @@ const MusicPlayer = ({src}) => {
                     }}
                 >
 
-                    <IconButton
+                    <Button
                         variant="text"
                         color="ternary"
+                        size="small"
                         onClick={_handlePlaybackRateChange}
                     >
-                        {playbackRate === 1 && <PiNumberOneBold size={16}/>}
-                        {playbackRate === 2 && <PiNumberTwoBold size={16}/>}
-                    </IconButton>
+                        {playbackRate}
+                        <FiX size={16} style={{marginRight: 4}}/>
+                    </Button>
 
                     <IconButton
                         variant="contained"

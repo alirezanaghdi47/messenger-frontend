@@ -34,6 +34,11 @@ const Filter = ({filter , onChange}) => {
                 sx={{width: "100%"}}
             >
 
+                <Tab
+                    label={`2 ${t("menu.member")}`}
+                    value="member"
+                />
+
                 {
                     filterList.map(filterItem =>
                         <Tab

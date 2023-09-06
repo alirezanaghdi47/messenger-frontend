@@ -40,6 +40,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
                     gap: 1,
                     justifyContent: "start",
                     alignItems: "center",
+                    color: 'ternary.main'
                 }}
             >
 
@@ -47,7 +48,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
 
                 <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="ternary"
                     fontWeight='bold'
                 >
                     {t("menu.download")}
@@ -61,6 +62,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
                     gap: 1,
                     justifyContent: "start",
                     alignItems: "center",
+                    color: 'ternary.main'
                 }}
             >
 
@@ -68,7 +70,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
 
                 <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="ternary"
                     fontWeight='bold'
                 >
                     {t("menu.forward")}
@@ -82,6 +84,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
                     gap: 1,
                     justifyContent: "start",
                     alignItems: "center",
+                    color: 'ternary.main'
                 }}
             >
 
@@ -89,7 +92,7 @@ const MessageMenu = ({contextMenu, isOpen, onClose}) => {
 
                 <Typography
                     variant="body2"
-                    color="textSecondary"
+                    color="ternary"
                     fontWeight='bold'
                 >
                     {t("menu.reply")}
