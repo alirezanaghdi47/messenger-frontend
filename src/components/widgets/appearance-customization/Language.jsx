@@ -5,7 +5,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Button, Stack} from "@mui/material";
 
 // components
-import Header from "components/widgets/appearance/Header";
+import Header from "components/widgets/appearance-customization/Header";
 
 // stores
 import {setLanguage} from "stores/slices/setting.js";

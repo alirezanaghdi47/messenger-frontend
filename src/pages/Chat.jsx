@@ -24,7 +24,7 @@ const Chat = () => {
 
     const listRef = useRef(null);
 
-    return params.chatId && (
+    return params.chatId ? (
         <Stack
             component="main"
             direction="column"
@@ -72,7 +72,7 @@ const Chat = () => {
             <Footer/>
 
         </Stack>
-    )
+    ) : null
 }
 
 export default Chat;

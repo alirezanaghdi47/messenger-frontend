@@ -27,7 +27,7 @@
       "version": "نسخه",
       "forwarded": "هدایت شده از",
       "profile": "حساب کاربری",
-      "appearance": "ظاهر و شخصی سازی",
+      "appearanceCustomization": "ظاهر و شخصی سازی",
       "soundNotification": "صدا و اعلانات",
       "notification": "اعلانات",
       "securityPrivacy": "امنیت و حریم خصوصی",
@@ -97,7 +97,7 @@
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید",
       "profile": "حساب کاربری",
-      "appearance": "ظاهر و شخصی سازی",
+      "appearanceCustomization": "ظاهر و شخصی سازی",
       "soundNotification": "صدا و اعلانات",
       "securityPrivacy": "امنیت و حریم خصوصی"
     },

@@ -1,6 +1,5 @@
 // libraries
 import {forwardRef} from "react";
-import {useSelector} from "react-redux";
 import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack} from "@mui/material";
@@ -46,8 +45,6 @@ const conversationList = [
 ];
 
 const ConversationItem = ({conversationItem}) => {
-
-    const {darkMode} = useSelector(state => state.setting.appearance);
 
     return (
         <Stack

@@ -27,7 +27,7 @@
       "version": "Version",
       "forwarded": "Forwarded from",
       "profile": "Profile",
-      "appearance": "Appearance",
+      "appearanceCustomization": "Appearance & customization",
       "soundNotification": "Sound & notification",
       "notification": "Notification",
       "securityPrivacy": "Security & privacy",
@@ -99,7 +99,7 @@
       "createGroup": "Create new group",
       "createStory": "Create new story",
       "profile": "Profile",
-      "appearance": "Appearance",
+      "appearanceCustomization": "Appearance & customization",
       "soundNotification": "Sound & notification",
       "securityPrivacy": "Security & privacy"
     },

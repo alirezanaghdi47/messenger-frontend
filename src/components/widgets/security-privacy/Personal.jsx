@@ -1,4 +1,5 @@
 // libraries
+import {lazy} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
@@ -6,10 +7,10 @@ import {Button, Stack, Typography} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import Header from "components/widgets/privacy/Header";
-import BlockedUsersModal from "components/widgets/privacy/BlockedUsersModal";
 import {useModal} from "components/hooks/useModal";
+import Header from "components/widgets/security-privacy/Header";
 import SwitchBox from "components/modules/SwitchBox";
+const BlockedUsersModal = lazy(() => import("components/widgets/security-privacy/BlockedUsersModal"));
 
 const Personal = () => {
 

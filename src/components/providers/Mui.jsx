@@ -92,7 +92,7 @@ const Mui = ({children}) => {
             Array(20).fill("none")
         ],
         typography: {
-            fontFamily: language === "fa" ? "Vazirmatn FD , sans-serif" : "Vazirmatn , sans-serif",
+            fontFamily: language === "fa" ? "Vazir FD , sans-serif" : "Vazirmatn , sans-serif",
             caption: {
                 lineHeight: 1
             }

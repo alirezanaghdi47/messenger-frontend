@@ -1,83 +1,21 @@
 // libraries
+import {lazy} from "react";
 import {useSelector} from "react-redux";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Card, Chip, Grid, IconButton, Menu, MenuItem, Stack, Typography} from "@mui/material";
+import {Box, Card, Chip, Grid, IconButton, Stack, Typography} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
-import {LuDownload, LuTrash2, LuPlay} from "react-icons/lu";
-
-// components
-import {useContextMenu} from "components/hooks/useContextMenu";
-import {useModal} from "components/hooks/useModal";
-import ImagePreviewModal from "components/widgets/chat/ImagePreviewModal";
-import MusicPlayerModal from "components/widgets/chat/MusicPlayerModal";
-import VideoPlayerModal from "components/widgets/chat/VideoPlayerModal";
+import {LuPlay} from "react-icons/lu";
 
 // utils
 import {convertByte} from "utils/functions";
 
-const LogMenu = ({contextMenu, isOpen, onClose}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Menu
-            open={isOpen}
-            onClose={onClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-                isOpen
-                    ? {top: contextMenu.mouseY, left: contextMenu.mouseX}
-                    : undefined
-            }
-        >
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "error.main"
-                }}
-            >
-
-                <LuTrash2 size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="error"
-                    fontWeight='bold'
-                >
-                    {t("menu.delete")}
-                </Typography>
-
-            </MenuItem>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                }}
-            >
-
-                <LuDownload size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    fontWeight='bold'
-                >
-                    {t("menu.download")}
-                </Typography>
-
-            </MenuItem>
-
-        </Menu>
-    )
-}
+// components
+import {useContextMenu} from "components/hooks/useContextMenu";
+import {useModal} from "components/hooks/useModal";
+const ImagePreviewModal = lazy(() => import("components/widgets/chat/ImagePreviewModal"));
+const MusicPlayerModal = lazy(() => import("components/widgets/chat/MusicPlayerModal"));
+const VideoPlayerModal = lazy(() => import("components/widgets/chat/VideoPlayerModal"));
+const LogDropdownMenu = lazy(() => import("components/widgets/chat/LogDropdownMenu"));
 
 export const ImageLog = ({log}) => {
 
@@ -113,7 +51,7 @@ export const ImageLog = ({log}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <LogMenu
+                <LogDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -228,7 +166,7 @@ export const FileLog = ({log}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <LogMenu
+                <LogDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -348,7 +286,7 @@ export const MusicLog = ({log}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <LogMenu
+                <LogDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -473,7 +411,7 @@ export const VideoLog = ({log}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <LogMenu
+                <LogDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -626,7 +564,7 @@ export const LocationLog = ({log}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <LogMenu
+                <LogDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}

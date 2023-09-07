@@ -1,11 +1,11 @@
 // libraries
-import {useState} from "react";
+import {lazy, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack, Typography} from "@mui/material";
 
 // components
-import HistoryModal from "components/widgets/chat/HistoryModal";
+const HistoryModal = lazy(() => import("components/widgets/chat/HistoryModal"));
 
 const UserInfo = () => {
 

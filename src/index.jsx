@@ -1,5 +1,5 @@
 // libraries
-import {StrictMode} from "react";
+import {Fragment} from "react";
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 
@@ -9,7 +9,7 @@ import I18n from "components/providers/I18n.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
-    <StrictMode>
+    <Fragment>
 
         <Redux>
 
@@ -21,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         </Redux>
 
-    </StrictMode>
+    </Fragment>
 );

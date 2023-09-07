@@ -1,15 +1,17 @@
 // libraries
+import {lazy} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Badge, Box, Chip, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
-import {LuFile, LuFilm, LuImage, LuLogOut, LuMapPin, LuMusic, LuText, LuTrash2} from "react-icons/lu";
+import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText, LuTrash2} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
+const ConversationDropdownMenu = lazy(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
 const conversationList = [
     {
@@ -25,70 +27,6 @@ const conversationList = [
     {_id: "7", type: "log", status: "voiceCall"},
     {_id: "8", type: "log", status: "videoCall"},
 ];
-
-const ConversationMenu = ({contextMenu, isOpen, onClose}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Menu
-            open={isOpen}
-            onClose={onClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-                isOpen
-                    ? {top: contextMenu.mouseY, left: contextMenu.mouseX}
-                    : undefined
-            }
-        >
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "error.main"
-                }}
-            >
-
-                <LuTrash2 size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="error"
-                    fontWeight='bold'
-                >
-                    {t("menu.delete")}
-                </Typography>
-
-            </MenuItem>
-
-            {/*<MenuItem*/}
-            {/*    sx={{*/}
-            {/*        display: "flex",*/}
-            {/*        gap: 1,*/}
-            {/*        justifyContent: "start",*/}
-            {/*        alignItems: "center",*/}
-            {/*        color: "error.main"*/}
-            {/*    }}*/}
-            {/*>*/}
-
-            {/*    <LuLogOut size={20}/>*/}
-
-            {/*    <Typography*/}
-            {/*        variant="body2"*/}
-            {/*        color="error"*/}
-            {/*        fontWeight='bold'*/}
-            {/*    >*/}
-            {/*        {t("menu.leave")}*/}
-            {/*    </Typography>*/}
-
-            {/*</MenuItem>*/}
-
-        </Menu>
-    )
-}
 
 const ConversationItem = ({conversationItem}) => {
 
@@ -109,7 +47,7 @@ const ConversationItem = ({conversationItem}) => {
             onContextMenu={_handleShowContextMenu}
         >
 
-            <ConversationMenu
+            <ConversationDropdownMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}

@@ -5,7 +5,7 @@ import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
 
 // components
-import Devices from "components/widgets/privacy/Devices";
+import Devices from "components/widgets/security-privacy/Devices";
 
 const ModalHeader = ({onClose}) => {
 

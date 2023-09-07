@@ -1,130 +1,24 @@
 // libraries
+import {lazy} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Card, Chip, IconButton, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
-import {FiCornerUpLeft, FiCornerUpRight, FiPhone, FiVideo} from "react-icons/fi";
-import {LuDownload, LuTrash2, LuPlay} from "react-icons/lu";
-
-// components
-import {useContextMenu} from "components/hooks/useContextMenu";
-import {useModal} from "components/hooks/useModal";
-import ImagePreviewModal from "components/widgets/chat/ImagePreviewModal";
-import MusicPlayerModal from "components/widgets/chat/MusicPlayerModal";
-import VideoPlayerModal from "components/widgets/chat/VideoPlayerModal";
+import {FiPhone, FiVideo} from "react-icons/fi";
+import {LuPlay} from "react-icons/lu";
 
 // utils
 import {fontSizeList} from "utils/constants";
 import {convertByte, convertTimestamp} from "utils/functions";
 
-const MessageMenu = ({contextMenu, isOpen, onClose}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Menu
-            open={isOpen}
-            onClose={onClose}
-            anchorReference="anchorPosition"
-            anchorPosition={
-                isOpen
-                    ? {top: contextMenu.mouseY, left: contextMenu.mouseX}
-                    : undefined
-            }
-        >
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: 'ternary.main'
-                }}
-            >
-
-                <LuDownload size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="ternary"
-                    fontWeight='bold'
-                >
-                    {t("menu.download")}
-                </Typography>
-
-            </MenuItem>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: 'ternary.main'
-                }}
-            >
-
-                <FiCornerUpRight size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="ternary"
-                    fontWeight='bold'
-                >
-                    {t("menu.forward")}
-                </Typography>
-
-            </MenuItem>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: 'ternary.main'
-                }}
-            >
-
-                <FiCornerUpLeft size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="ternary"
-                    fontWeight='bold'
-                >
-                    {t("menu.reply")}
-                </Typography>
-
-            </MenuItem>
-
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "error.main"
-                }}
-            >
-
-                <LuTrash2 size={20}/>
-
-                <Typography
-                    variant="body2"
-                    color="error"
-                    fontWeight='bold'
-                >
-                    {t("menu.delete")}
-                </Typography>
-
-            </MenuItem>
-
-        </Menu>
-    )
-}
+// components
+import {useContextMenu} from "components/hooks/useContextMenu";
+import {useModal} from "components/hooks/useModal";
+const ImagePreviewModal = lazy(() => import("components/widgets/chat/ImagePreviewModal"));
+const MusicPlayerModal = lazy(() => import("components/widgets/chat/MusicPlayerModal"));
+const VideoPlayerModal = lazy(() => import("components/widgets/chat/VideoPlayerModal"));
+const MessageDropdownMenu = lazy(() => import("components/widgets/chat/MessageDropdownMenu"));
 
 export const TextMessage = ({message}) => {
 
@@ -148,7 +42,7 @@ export const TextMessage = ({message}) => {
             onContextMenu={_handleShowContextMenu}
         >
 
-            <MessageMenu
+            <MessageDropdownMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -235,7 +129,7 @@ export const FileMessage = ({message}) => {
             onContextMenu={_handleShowContextMenu}
         >
 
-            <MessageMenu
+            <MessageDropdownMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -343,7 +237,7 @@ export const ImageMessage = ({message}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <MessageMenu
+                <MessageDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -455,7 +349,7 @@ export const MusicMessage = ({message}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <MessageMenu
+                <MessageDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -571,7 +465,7 @@ export const VideoMessage = ({message}) => {
                 onContextMenu={_handleShowContextMenu}
             >
 
-                <MessageMenu
+                <MessageDropdownMenu
                     contextMenu={contextMenu}
                     isOpen={contextMenu !== null}
                     onClose={_handleHideContextMenu}
@@ -714,7 +608,7 @@ export const LogMessage = ({message}) => {
             onContextMenu={_handleShowContextMenu}
         >
 
-            <MessageMenu
+            <MessageDropdownMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -832,7 +726,7 @@ export const LocationMessage = ({message}) => {
             onContextMenu={_handleShowContextMenu}
         >
 
-            <MessageMenu
+            <MessageDropdownMenu
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}

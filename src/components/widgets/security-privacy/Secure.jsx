@@ -1,14 +1,15 @@
 // libraries
+import {lazy} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Button, Stack, Typography} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import Header from "components/widgets/privacy/Header";
-import EntryLockModal from "components/widgets/privacy/EntryLockModal";
 import {useModal} from "components/hooks/useModal";
-import SessionsModal from "./SessionsModal";
+import Header from "components/widgets/security-privacy/Header";
+const EntryLockModal = lazy(() => import("components/widgets/security-privacy/EntryLockModal"));
+const SessionsModal = lazy(() => import("components/widgets/security-privacy/SessionsModal"));
 
 const Secure = () => {
 

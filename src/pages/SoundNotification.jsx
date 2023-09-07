@@ -4,7 +4,7 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Notice from "components/widgets/notification/Notice";
+import Notice from "components/widgets/sound-notification/Notice";
 
 const SoundNotification = () => {
 

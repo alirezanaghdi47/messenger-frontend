@@ -1,13 +1,12 @@
 // libraries
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import SimpleBar from "simplebar-react";
 import {useFormik} from "formik";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack, Typography} from "@mui/material";
+import {Stack} from "@mui/material";
 
 // components
-import Header from "components/widgets/notification/Header";
+import Header from "components/widgets/sound-notification/Header";
 import SwitchBox from "components/modules/SwitchBox";
 
 const Notice = () => {

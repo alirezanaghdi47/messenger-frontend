@@ -4,7 +4,7 @@ import {Box, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
 // components
-import Header from "components/widgets/appearance/Header";
+import Header from "components/widgets/appearance-customization/Header";
 
 // stores
 import {setColor} from "stores/slices/setting.js";

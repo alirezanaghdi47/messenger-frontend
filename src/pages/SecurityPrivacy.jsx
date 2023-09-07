@@ -4,7 +4,7 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Private from "components/widgets/privacy/Private";
+import Private from "components/widgets/security-privacy/Private";
 
 const SecurityPrivacy = () => {
 

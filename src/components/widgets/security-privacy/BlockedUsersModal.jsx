@@ -1,12 +1,12 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiCheck, FiX} from "react-icons/fi";
+import {IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiX} from "react-icons/fi";
 
 // components
-import SearchBar from "components/widgets/privacy/Searchbar";
-import Contacts from "components/widgets/privacy/Contacts";
+import SearchBar from "components/widgets/security-privacy/Searchbar";
+import Contacts from "components/widgets/security-privacy/Contacts";
 import Empty from "components/partials/Empty";
 
 const ModalHeader = ({onClose}) => {

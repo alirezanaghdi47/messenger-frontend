@@ -1,5 +1,4 @@
 // libraries
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import SimpleBar from "simplebar-react";
@@ -16,7 +15,6 @@ import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 
-    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 

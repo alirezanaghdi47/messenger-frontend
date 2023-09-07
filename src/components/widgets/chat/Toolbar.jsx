@@ -1,5 +1,5 @@
 // libraries
-import {useEffect} from "react";
+import {lazy} from "react";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {
@@ -9,14 +9,14 @@ import {
     MenuItem,
     Menu,
 } from "@mui/material";
-import {FiLogOut, FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
+import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 
 // components
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 import {useModal} from "components/hooks/useModal";
-import VoiceCallModal from "components/widgets/chat/VoiceCallModal";
-import VideoCallModal from "components/widgets/chat/VideoCallModal";
-import IncomingCallModal from "components/widgets/chats/IncomingCallModal";
+const VoiceCallModal = lazy(() => import("components/widgets/chat/VoiceCallModal"));
+const VideoCallModal = lazy(() => import("components/widgets/chat/VideoCallModal"));
+const IncomingCallModal = lazy(() => import("components/widgets/chats/IncomingCallModal"));
 
 const MobileToolbar = ({
                            anchorEl,

@@ -1,16 +1,16 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiCheck, FiChevronLeft, FiChevronRight, FiX} from "react-icons/fi";
 
 // components
+import {useSegment} from "components/hooks/useSegment";
 import SearchBar from "components/widgets/chats/Searchbar";
 import Contacts from "components/widgets/chats/Contacts";
-import Empty from "components/partials/Empty";
 import Form from "components/widgets/chats/Form";
-import {useSegment} from "../../hooks/useSegment";
-import {useSelector} from "react-redux";
+import Empty from "components/partials/Empty";
 
 const ModalHeader = ({onClose}) => {
 
