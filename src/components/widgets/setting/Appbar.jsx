@@ -7,7 +7,7 @@ import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 const Appbar = () => {
 
     const navigate = useNavigate();
-    const {language , darkMode} = useSelector(state => state.setting.appearance);
+    const {language} = useSelector(state => state.setting.appearance);
 
     const _handleBack = () => navigate("/chat");
 
@@ -31,7 +31,7 @@ const Appbar = () => {
 
             <IconButton
                 variant="text"
-                color={darkMode ? "ternary" : "secondary"}
+                color="light"
                 onClick={_handleBack}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
@@ -39,7 +39,7 @@ const Appbar = () => {
 
             <IconButton
                 variant="text"
-                color={darkMode ? "ternary" : "secondary"}
+                color="light"
                 onClick={() => console.log("logout")}
             >
                 {<FiLogOut size={20}/>}

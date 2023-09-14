@@ -156,7 +156,7 @@ const VideoPlayer = ({src}) => {
 
                             <IconButton
                                 variant="text"
-                                color={darkMode ? "ternary" : "secondary"}
+                                color="light"
                                 onClick={_handleToggleFullscreen}
                             >
                                 {fullScreenHandle.active ? <LuMinimize size={20}/> : <LuMaximize size={20}/>}
@@ -164,7 +164,7 @@ const VideoPlayer = ({src}) => {
 
                             <Button
                                 variant="text"
-                                color="secondary"
+                                color="light"
                                 size="small"
                                 onClick={_handlePlaybackRateChange}
                             >
@@ -194,7 +194,7 @@ const VideoPlayer = ({src}) => {
 
                                 <Typography
                                     variant="caption"
-                                    color={darkMode ? "ternary" : "secondary"}
+                                    color="#e2e8f0"
                                     fontWeight="bold"
                                 >
                                     {formatDuration(duration)}
@@ -202,7 +202,7 @@ const VideoPlayer = ({src}) => {
 
                                 <Typography
                                     variant="caption"
-                                    color={darkMode ? "ternary" : "secondary"}
+                                    color="#e2e8f0"
                                     fontWeight="bold"
                                 >
                                     /
@@ -210,7 +210,7 @@ const VideoPlayer = ({src}) => {
 
                                 <Typography
                                     variant="caption"
-                                    color={darkMode ? "ternary" : "secondary"}
+                                    color="#e2e8f0"
                                     fontWeight="bold"
                                 >
                                     {formatDuration(duration * played)}
@@ -262,7 +262,7 @@ const VideoPlayer = ({src}) => {
 
                             <IconButton
                                 variant="text"
-                                color={darkMode ? "ternary" : "secondary"}
+                                color="light"
                                 onClick={_handleToggleVolume}
                             >
                                 {volume === 0 ? <LuVolumeX size={20}/> : <LuVolume2 size={20}/>}
@@ -270,7 +270,7 @@ const VideoPlayer = ({src}) => {
 
                             <IconButton
                                 variant="text"
-                                color={darkMode ? "ternary" : "secondary"}
+                                color="light"
                                 onClick={_handleTogglePlaying}
                             >
                                 {(!playing || played === 0) ? <LuPlay size={20}/> : <LuPause size={20}/>}

@@ -11,7 +11,9 @@ export const useDropdownMenu = () => {
 
     const _handleHideDropdownMenu = () => setAnchorEl(null);
 
-    return {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu};
+    const _handleToggleDropdownMenu = (e) => isOpenDropdownMenu ? _handleHideDropdownMenu(): _handleShowDropdownMenu(e);
+
+    return {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu , _handleToggleDropdownMenu};
 
 }
 

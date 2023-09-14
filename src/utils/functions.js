@@ -49,3 +49,10 @@ export const formatDuration = (seconds) => {
     }
     return `${mm}:${ss}`
 }
+
+export const convertCodePointToEmoji = (codePoint) => {
+    let sym = codePoint.split(" ");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    return String.fromCodePoint(...codesArray);
+}

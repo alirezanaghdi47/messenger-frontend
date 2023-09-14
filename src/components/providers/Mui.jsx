@@ -2,7 +2,7 @@
 import {useMemo, useEffect} from "react";
 import {useSelector} from "react-redux";
 import {CacheProvider} from "@emotion/react";
-import {createTheme, ThemeProvider, responsiveFontSizes} from "@mui/material";
+import {createTheme, ThemeProvider, responsiveFontSizes, useMediaQuery} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import {enUS, faIR} from "@mui/material/locale";
 import createCache from "@emotion/cache";
@@ -21,14 +21,27 @@ const emptyCache = createCache({
 const Mui = ({children}) => {
 
     const {language, darkMode, color} = useSelector(state => state.setting.appearance);
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
     useEffect(() => {
         document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
     }, [language]);
 
     useEffect(() => {
-        document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
-    }, [darkMode]);
+        if (darkMode === "auto") {
+            document.body.setAttribute("data-theme", prefersDarkMode ? "dark" : "light");
+        } else {
+            document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
+        }
+    }, [darkMode, prefersDarkMode]);
+
+    const mode = useMemo(() => {
+        if (darkMode === "auto") {
+            return prefersDarkMode ? "dark" : "light";
+        } else {
+            return darkMode ? "dark" : "light";
+        }
+    } , [darkMode, prefersDarkMode]);
 
     const addonTheme = createTheme({
         direction: language === "fa" ? "rtl" : "ltr",
@@ -43,27 +56,27 @@ const Mui = ({children}) => {
             }
         },
         palette: {
-            mode: darkMode ? "dark" : "light",
+            mode: mode,
             common: {
-                black: darkMode ? "#f1f5f9" : "#1e293b",
-                white: darkMode ? "#1e293b" : "#f1f5f9"
+                black: mode === "dark" ? "#f1f5f9" : "#1e293b",
+                white: mode === "dark" ? "#1e293b" : "#f1f5f9"
             },
             text: {
-                primary: darkMode ? "#f1f5f9" : "#1e293b",
-                secondary: darkMode ? "#f8fafc" : "#334155",
+                primary: mode === "dark" ? "#f1f5f9" : "#1e293b",
+                secondary: mode === "dark" ? "#f8fafc" : "#334155",
             },
             background: {
-                paper: darkMode ? "#334155" : "#f8fafc",
-                default: darkMode ? "#1e293b" : "#f1f5f9",
+                paper: mode === "dark" ? "#334155" : "#f8fafc",
+                default: mode === "dark" ? "#1e293b" : "#f1f5f9",
             },
             primary: {
-                main: darkMode ? color.dark : color.light,
+                main: mode === "dark" ? color.dark : color.light,
             },
             secondary: {
-                main: darkMode ? "#475569" : "#e2e8f0"
+                main: mode === "dark" ? "#475569" : "#e2e8f0"
             },
             ternary: {
-                main: darkMode ? "#e2e8f0" : "#475569"
+                main: mode === "dark" ? "#e2e8f0" : "#475569"
             },
             error: {
                 main: "#DB4437",
@@ -77,7 +90,13 @@ const Mui = ({children}) => {
             success: {
                 main: "#0F9D58"
             },
-            contrastThreshold: darkMode ? 3 : 2,
+            light:{
+                main: "#e2e8f0"
+            },
+            dark:{
+                main: "#475569"
+            },
+            contrastThreshold: mode === "dark" ? 3 : 2,
             tonalOffset: 0.1,
         },
         shape: {
@@ -140,11 +159,11 @@ const Mui = ({children}) => {
                     }),
                 },
             },
-            MuiButtonBase:{
-              defaultProps:{
-                  disableRipple: true,
-                  disableTouchRipple: true,
-              }
+            MuiButtonBase: {
+                defaultProps: {
+                    disableRipple: true,
+                    disableTouchRipple: true,
+                }
             },
             MuiButton: {
                 defaultProps: {
@@ -244,15 +263,15 @@ const Mui = ({children}) => {
                     }
                 }
             },
-            MuiTouchRipple:{
-              styleOverrides:{
-                  root: ({theme, ownerState}) => ({
-                    display: "none",
-                      "&:hover":{
-                          display: "none",
-                      }
-                  }),
-              }
+            MuiTouchRipple: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        display: "none",
+                        "&:hover": {
+                            display: "none",
+                        }
+                    }),
+                }
             },
             MuiSlider: {
                 styleOverrides: {
@@ -335,7 +354,7 @@ const Mui = ({children}) => {
         }
     }, language === "fa" ? faIR : enUS);
 
-    const customizedTheme = useMemo(() => responsiveFontSizes(addonTheme), [language, darkMode, color]);
+    const customizedTheme = useMemo(() => responsiveFontSizes(addonTheme), [language, darkMode, prefersDarkMode, color]);
 
     return (
         <CacheProvider value={language === "fa" ? cacheRtl : emptyCache}>
