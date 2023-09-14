@@ -1,8 +1,8 @@
 // libraries
-import {lazy} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import Loadable from '@loadable/component';
+import LazyLoad from 'react-lazy-load';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
@@ -15,10 +15,10 @@ import {convertByte, convertTimestamp} from "utils/functions";
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
 import {useModal} from "components/hooks/useModal";
-const ImagePreviewModal = lazy(() => import("components/widgets/chat/ImagePreviewModal"));
-const MusicPlayerModal = lazy(() => import("components/widgets/chat/MusicPlayerModal"));
-const VideoPlayerModal = lazy(() => import("components/widgets/chat/VideoPlayerModal"));
-const MessageDropdownMenu = lazy(() => import("components/widgets/chat/MessageDropdownMenu"));
+const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
+const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
+const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
+const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/MessageDropdownMenu"));
 
 export const TextMessage = ({message}) => {
 
@@ -147,13 +147,19 @@ export const FileMessage = ({message}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                    alt="image"
+                <LazyLoad
                     width={50}
                     height={50}
-                    style={{borderRadius: 8}}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                        alt="image"
+                        width={50}
+                        height={50}
+                        style={{borderRadius: 8}}
+                    />
+                </LazyLoad>
 
                 <Stack
                     direction="column"
@@ -254,18 +260,24 @@ export const ImageMessage = ({message}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src={message.content}
-                        alt="image"
+                    <LazyLoad
                         width="100%"
                         height="100%"
-                        style={{
-                            maxWidth: 300,
-                            borderRadius: 8,
-                            cursor: "pointer"
-                        }}
-                        onClick={_handleShowModal}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src={message.content}
+                            alt="image"
+                            width="100%"
+                            height="100%"
+                            style={{
+                                maxWidth: 300,
+                                borderRadius: 8,
+                                cursor: "pointer"
+                            }}
+                            onClick={_handleShowModal}
+                        />
+                    </LazyLoad>
 
                     <Box
                         sx={{
@@ -482,16 +494,22 @@ export const VideoMessage = ({message}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                        alt="image"
+                    <LazyLoad
                         width="100%"
                         height="100%"
-                        style={{
-                            maxWidth: 300,
-                            borderRadius: 8,
-                        }}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                            alt="image"
+                            width="100%"
+                            height="100%"
+                            style={{
+                                maxWidth: 300,
+                                borderRadius: 8,
+                            }}
+                        />
+                    </LazyLoad>
 
                     <Box
                         sx={{
@@ -732,18 +750,24 @@ export const LocationMessage = ({message}) => {
                 onClose={_handleHideContextMenu}
             />
 
-            <LazyLoadImage
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                alt="image"
+            <LazyLoad
                 width="100%"
                 height="100%"
-                style={{
-                    maxWidth: 300,
-                    borderRadius: 8,
-                    cursor: "pointer"
-                }}
-                onClick={_handleShowDetail}
-            />
+                threshold={0.5}
+            >
+                <img
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                    alt="image"
+                    width="100%"
+                    height="100%"
+                    style={{
+                        maxWidth: 300,
+                        borderRadius: 8,
+                        cursor: "pointer"
+                    }}
+                    onClick={_handleShowDetail}
+                />
+            </LazyLoad>
 
             <Stack
                 direction="row"

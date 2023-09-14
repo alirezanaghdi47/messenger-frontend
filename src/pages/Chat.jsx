@@ -2,6 +2,7 @@
 import {useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
+import Loadable from "@loadable/component";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme} from "@mui/material";
 
@@ -9,11 +10,11 @@ import {alpha, Stack, useTheme} from "@mui/material";
 import Header from "components/widgets/chat/Header.jsx";
 import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
-import ForwardMessagePopup from "../components/widgets/chat/ForwardMessagePopup";
-import ReplyMessagePopup from "../components/widgets/chat/ReplyMessagePopup";
-import ForwardChatModal from "../components/widgets/chat/ForwardChatModal";
-import ScrollToBottom from "components/widgets/chat/ScrollToBottom.jsx";
-import Empty from "components/partials/Empty";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+const ForwardMessagePopup = Loadable(() => import("components/widgets/chat/ForwardMessagePopup"));
+const ReplyMessagePopup = Loadable(() => import("components/widgets/chat/ReplyMessagePopup"));
+const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardChatModal"));
+const ScrollToBottom = Loadable(() => import("components/widgets/chat/ScrollToBottom"));
 
 const Chat = () => {
 
@@ -24,7 +25,7 @@ const Chat = () => {
 
     const listRef = useRef(null);
 
-    return params.chatId ? (
+    return params.chatId && (
         <Stack
             component="main"
             direction="column"
@@ -42,7 +43,7 @@ const Chat = () => {
                 backgroundImage: `url(${background})`,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
-                "&::after":{
+                "&::after": {
                     content: "''",
                     position: "absolute",
                     zIndex: -1,
@@ -50,7 +51,7 @@ const Chat = () => {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    background: alpha(theme.palette.background.default , 0.5)
+                    background: alpha(theme.palette.background.default, 0.5)
                 }
             }}
         >
@@ -59,7 +60,7 @@ const Chat = () => {
 
             <Conversations ref={listRef}/>
 
-            {/*<Empty/>*/}
+            {/*<EmptyPlaceholder/>*/}
 
             {/*<ScrollToBottom ref={listRef}/>*/}
 
@@ -72,7 +73,7 @@ const Chat = () => {
             <Footer/>
 
         </Stack>
-    ) : null
+    )
 }
 
 export default Chat;

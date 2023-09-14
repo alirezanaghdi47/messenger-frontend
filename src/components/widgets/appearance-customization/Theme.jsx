@@ -1,6 +1,6 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from 'react-lazy-load';
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
@@ -39,17 +39,21 @@ const ThemeItem = ({themeItem}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    alt={themeItem.id}
-                    src={themeItem.background}
+                <LazyLoad
                     width="100%"
-                    height="100%"
-                    effect="fade"
-                    style={{
-                        borderRadius: 8,
-                        objectFit: "cover"
-                    }}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src={themeItem.background}
+                        alt={themeItem.id}
+                        width="100%"
+                        height="100%"
+                        style={{
+                            borderRadius: 8,
+                            objectFit: "cover"
+                        }}
+                    />
+                </LazyLoad>
 
                 {
                     themeItem.value === darkMode ? (

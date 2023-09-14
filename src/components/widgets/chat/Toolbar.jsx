@@ -1,6 +1,6 @@
 // libraries
-import {lazy} from "react";
 import {useTranslation} from "react-i18next";
+import Loadable from '@loadable/component';
 import {useMediaQuery} from "@react-hooks-library/core";
 import {
     IconButton,
@@ -14,9 +14,9 @@ import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 // components
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 import {useModal} from "components/hooks/useModal";
-const VoiceCallModal = lazy(() => import("components/widgets/chat/VoiceCallModal"));
-const VideoCallModal = lazy(() => import("components/widgets/chat/VideoCallModal"));
-const IncomingCallModal = lazy(() => import("components/widgets/chats/IncomingCallModal"));
+const VoiceCallModal = Loadable(() => import("components/widgets/chat/VoiceCallModal"));
+const VideoCallModal = Loadable(() => import("components/widgets/chat/VideoCallModal"));
+const IncomingCallModal = Loadable(() => import("components/widgets/chats/IncomingCallModal"));
 
 const MobileToolbar = ({
                            anchorEl,

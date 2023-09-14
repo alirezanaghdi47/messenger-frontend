@@ -1,12 +1,13 @@
 // libraries
-import {lazy, useRef} from "react";
+import {useRef} from "react";
+import Loadable from '@loadable/component';
 import {useClickOutside} from "@react-hooks-library/core";
 import {Box, IconButton} from "@mui/material";
 import {LuSmile} from "react-icons/lu";
 
 // components
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
-const EmojiDropdownMenu = lazy(() => import("components/widgets/chat/EmojiDropdownMenu"));
+const EmojiDropdownMenu = Loadable(() => import("components/widgets/chat/EmojiDropdownMenu"));
 
 const EmojiPicker = ({message , setMessage}) => {
 

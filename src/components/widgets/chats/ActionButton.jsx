@@ -1,6 +1,6 @@
 // libraries
-import {lazy} from "react";
 import {useTranslation} from "react-i18next";
+import Loadable from '@loadable/component';
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
@@ -9,8 +9,8 @@ import {LuMessageCircle, LuUsers} from "react-icons/lu";
 // components
 import {useModal} from "components/hooks/useModal";
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
-const AddChatModal = lazy(() => import("components/widgets/chats/AddChatModal"));
-const AddGroupModal = lazy(() => import("components/widgets/chats/AddGroupModal"));
+const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
+const AddGroupModal = Loadable(() => import("components/widgets/chats/AddGroupModal"));
 
 const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 

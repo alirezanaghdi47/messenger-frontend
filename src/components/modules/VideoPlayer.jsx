@@ -13,7 +13,7 @@ import {formatDuration} from "utils/functions";
 
 const VideoPlayer = ({src}) => {
 
-    const {language, darkMode} = useSelector(state => state.setting.appearance);
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const fullScreenHandle = useFullScreenHandle();
 

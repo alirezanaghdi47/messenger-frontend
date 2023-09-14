@@ -1,7 +1,7 @@
 // libraries
-import {lazy} from "react";
 import {useSelector} from "react-redux";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import Loadable from '@loadable/component';
+import LazyLoad from 'react-lazy-load';
 import {Box, Card, Chip, Grid, IconButton, Stack, Typography} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {LuPlay} from "react-icons/lu";
@@ -12,10 +12,10 @@ import {convertByte} from "utils/functions";
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
 import {useModal} from "components/hooks/useModal";
-const ImagePreviewModal = lazy(() => import("components/widgets/chat/ImagePreviewModal"));
-const MusicPlayerModal = lazy(() => import("components/widgets/chat/MusicPlayerModal"));
-const VideoPlayerModal = lazy(() => import("components/widgets/chat/VideoPlayerModal"));
-const LogDropdownMenu = lazy(() => import("components/widgets/chat/LogDropdownMenu"));
+const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
+const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
+const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
+const LogDropdownMenu = Loadable(() => import("components/widgets/chat/LogDropdownMenu"));
 
 export const ImageLog = ({log}) => {
 
@@ -68,14 +68,20 @@ export const ImageLog = ({log}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src={log.content}
-                        alt="image"
+                    <LazyLoad
                         width="100%"
                         height="100%"
-                        style={{borderRadius: 8 , cursor: "pointer"}}
-                        onClick={_handleShowModal}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src={log.content}
+                            alt="image"
+                            width="100%"
+                            height="100%"
+                            style={{borderRadius: 8 , cursor: "pointer"}}
+                            onClick={_handleShowModal}
+                        />
+                    </LazyLoad>
 
                     <Box
                         sx={{
@@ -184,13 +190,19 @@ export const FileLog = ({log}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                        alt="image"
+                    <LazyLoad
                         width={50}
                         height={50}
-                        style={{borderRadius: 8}}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                            alt="image"
+                            width={50}
+                            height={50}
+                            style={{borderRadius: 8}}
+                        />
+                    </LazyLoad>
 
                     <Stack
                         direction="column"
@@ -428,13 +440,19 @@ export const VideoLog = ({log}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                        alt="image"
+                    <LazyLoad
                         width="100%"
                         height="100%"
-                        style={{borderRadius: 8}}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                            alt="image"
+                            width="100%"
+                            height="100%"
+                            style={{borderRadius: 8}}
+                        />
+                    </LazyLoad>
 
                     <Box
                         sx={{
@@ -570,17 +588,23 @@ export const LocationLog = ({log}) => {
                     onClose={_handleHideContextMenu}
                 />
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                    alt="image"
+                <LazyLoad
                     width="100%"
                     height="100%"
-                    style={{
-                        borderRadius: 8,
-                        cursor: "pointer"
-                    }}
-                    onClick={_handleShowDetail}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                        alt="image"
+                        width="100%"
+                        height="100%"
+                        style={{
+                            borderRadius: 8,
+                            cursor: "pointer"
+                        }}
+                        onClick={_handleShowDetail}
+                    />
+                </LazyLoad>
 
                 <Stack
                     direction="row"

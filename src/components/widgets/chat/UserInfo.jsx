@@ -1,11 +1,12 @@
 // libraries
-import {lazy, useState} from "react";
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import Loadable from '@loadable/component';
+import LazyLoad from 'react-lazy-load';
 import {Stack, Typography} from "@mui/material";
 
 // components
-const HistoryModal = lazy(() => import("components/widgets/chat/HistoryModal"));
+const HistoryModal = Loadable(() => import("components/widgets/chat/HistoryModal"));
 
 const UserInfo = () => {
 
@@ -32,13 +33,19 @@ const UserInfo = () => {
                 onClick={_handleShowModal}
             >
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
+                <LazyLoad
                     width={40}
                     height={40}
-                    style={{borderRadius: "50%"}}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="avatar"
+                        width={40}
+                        height={40}
+                        style={{borderRadius: "50%"}}
+                    />
+                </LazyLoad>
 
                 <Stack
                     direction="column"

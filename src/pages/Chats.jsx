@@ -9,7 +9,8 @@ import Appbar from "components/widgets/chats/Appbar.jsx";
 import Conversations from "components/widgets/chats/Conversations.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
-import Empty from "components/partials/Empty";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import Empty from "components/widgets/chat/Empty";
 
 const Chats = () => {
 
@@ -50,13 +51,15 @@ const Chats = () => {
 
                         <Conversations/>
 
-                        {/*<Empty/>*/}
+                        {/*<EmptyPlaceholder/>*/}
 
                         <ActionButton/>
 
                     </Stack>
                 )
             }
+
+            {!params.chatId && !isTablet && <Empty/>}
 
             <Outlet/>
 

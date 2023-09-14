@@ -1,12 +1,12 @@
 // libraries
-import {lazy} from "react";
+import Loadable from '@loadable/component';
 import {IconButton} from "@mui/material";
 import {LuPaperclip} from "react-icons/lu";
 
 // components
 import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 
-const AttachmentDropdownMenu = lazy(() => import("components/widgets/chat/AttachmentDropdownMenu"));
+const AttachmentDropdownMenu = Loadable(() => import("components/widgets/chat/AttachmentDropdownMenu"));
 
 const Attachment = () => {
 

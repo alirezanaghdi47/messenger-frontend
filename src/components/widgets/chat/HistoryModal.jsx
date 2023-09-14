@@ -1,6 +1,6 @@
 // libraries
 import {useState} from "react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from 'react-lazy-load';
 import {useMediaQuery} from "@react-hooks-library/core";
 import {IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
@@ -9,7 +9,7 @@ import {FiX} from "react-icons/fi";
 import Filter from "components/widgets/chat/Filter";
 import History from "components/widgets/chat/History";
 import Contacts from "components/widgets/chat/Contacts";
-import Empty from "components/partials/Empty";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 const ModalHeader = ({onClose}) => {
 
@@ -35,13 +35,19 @@ const ModalHeader = ({onClose}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
+                <LazyLoad
                     width={40}
                     height={40}
-                    style={{borderRadius: "50%"}}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="avatar"
+                        width={40}
+                        height={40}
+                        style={{borderRadius: "50%"}}
+                    />
+                </LazyLoad>
 
                 <Stack
                     direction="column"
@@ -118,7 +124,7 @@ const ModalContent = () => {
                 )
             }
 
-            {/*<Empty/>*/}
+            {/*<EmptyPlaceholder/>*/}
 
         </Stack>
     )

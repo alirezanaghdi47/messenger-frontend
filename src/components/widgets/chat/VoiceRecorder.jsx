@@ -1,11 +1,11 @@
 // libraries
-import {lazy} from "react";
+import Loadable from '@loadable/component';
 import {IconButton} from "@mui/material";
 import {LuMic} from "react-icons/lu";
 
 // components
 import {useModal} from "components/hooks/useModal";
-const VoiceRecorderPopup = lazy(() => import("components/widgets/chat/VoiceRecorderPopup"));
+const VoiceRecorderPopup = Loadable(() => import("components/widgets/chat/VoiceRecorderPopup"));
 
 const VoiceRecorder = () => {
 

@@ -1,8 +1,8 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
-import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiCheck, FiX} from "react-icons/fi";
+import {IconButton, Modal, Stack, Typography} from "@mui/material";
+import {FiX} from "react-icons/fi";
 
 // components
 import Devices from "components/widgets/security-privacy/Devices";

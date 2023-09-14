@@ -33,8 +33,8 @@ const EmojiDropdownMenu = ({anchorEl, isOpen, onClose , message , setMessage}) =
             >
 
                 <EmojiKeyboard
-                    width={240}
-                    height={210}
+                    width={230}
+                    height={250}
                     theme={darkMode ? "dark" : "light"}
                     searchLabel={t("input.search")}
                     searchDisabled={true}

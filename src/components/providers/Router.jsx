@@ -1,60 +1,57 @@
 // libraries
-import {Suspense} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Loadable from '@loadable/component';
 
 // pages
-import Home from "pages/Home";
-import Auth from "pages/Auth";
-import SignIn from "pages/SignIn";
-import SignUp from "pages/SignUp";
-import Chats from "pages/Chats";
-import Chat from "pages/Chat";
-import Setting from "pages/Setting";
-import Profile from "pages/Profile";
-import AppearanceCustomization from "pages/AppearanceCustomization";
-import SecurityPrivacy from "pages/SecurityPrivacy";
-import NotFound from "pages/NotFound";
+const Home = Loadable(() => import('pages/Home'));
+const Auth = Loadable(() => import('pages/Auth'));
+const SignIn = Loadable(() => import('pages/SignIn'));
+const SignUp = Loadable(() => import('pages/SignUp'));
+const Chats = Loadable(() => import('pages/Chats'));
+const Chat = Loadable(() => import('pages/Chat'));
+const Setting = Loadable(() => import('pages/Setting'));
+const Profile = Loadable(() => import('pages/Profile'));
+const AppearanceCustomization = Loadable(() => import('pages/AppearanceCustomization'));
+const SecurityPrivacy = Loadable(() => import('pages/SecurityPrivacy'));
+const NotFound = Loadable(() => import('pages/NotFound'));
 
 const Router = () => {
 
     return (
         <BrowserRouter>
 
-            <Suspense fallback={false}>
+            <Routes>
 
-                <Routes>
+                <Route path="/" element={<Home/>}/>
 
-                    <Route path="/" element={<Home/>}/>
+                <Route path="/auth" element={<Auth/>}>
 
-                    <Route path="/auth" element={<Auth/>}>
+                    <Route path="/auth/sign-in" element={<SignIn/>}/>
 
-                        <Route path="/auth/sign-in" element={<SignIn/>}/>
+                    <Route path="/auth/sign-up" element={<SignUp/>}/>
 
-                        <Route path="/auth/sign-up" element={<SignUp/>}/>
+                </Route>
 
-                    </Route>
+                <Route path="/chat" element={<Chats/>}>
 
-                    <Route path="/chat" element={<Chats/>}>
+                    <Route path="/chat/:chatId" element={<Chat/>}/>
 
-                        <Route path="/chat/:chatId" element={<Chat/>}/>
+                </Route>
 
-                    </Route>
+                <Route path="/setting" element={<Setting/>}>
 
-                    <Route path="/setting" element={<Setting/>}>
+                    <Route path="/setting/profile" element={<Profile/>}/>
 
-                        <Route path="/setting/profile" element={<Profile/>}/>
+                    <Route path="/setting/appearance-customization" element={<AppearanceCustomization/>}/>
 
-                        <Route path="/setting/appearance-customization" element={<AppearanceCustomization/>}/>
+                    <Route path="/setting/security-privacy" element={<SecurityPrivacy/>}/>
 
-                        <Route path="/setting/security-privacy" element={<SecurityPrivacy/>}/>
+                </Route>
 
-                    </Route>
+                <Route path="/*" element={<NotFound/>}/>
 
-                    <Route path="/*" element={<NotFound/>}/>
+            </Routes>
 
-                </Routes>
-
-            </Suspense>
 
         </BrowserRouter>
     )

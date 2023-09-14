@@ -1,7 +1,7 @@
 // libraries
 import {forwardRef} from "react";
 import SimpleBar from "simplebar-react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from 'react-lazy-load';
 import {Stack} from "@mui/material";
 
 // components
@@ -71,13 +71,19 @@ const ConversationItem = ({conversationItem}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
+                <LazyLoad
                     width={30}
                     height={30}
-                    style={{borderRadius: "50%"}}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="avatar"
+                        width={30}
+                        height={30}
+                        style={{borderRadius: "50%"}}
+                    />
+                </LazyLoad>
 
             </Stack>
 

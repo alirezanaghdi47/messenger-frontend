@@ -1,6 +1,6 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from 'react-lazy-load';
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
@@ -39,17 +39,21 @@ const BackgroundItem = ({backgroundItem}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    alt={backgroundItem.id}
-                    src={backgroundItem.background}
+                <LazyLoad
                     width="100%"
-                    height="100%"
-                    effect="fade"
-                    style={{
-                        borderRadius: 8,
-                        objectFit: "cover"
-                    }}
-                />
+                    threshold={0.5}
+                >
+                    <img
+                        src={backgroundItem.background}
+                        alt={backgroundItem.id}
+                        width="100%"
+                        height="100%"
+                        style={{
+                            borderRadius: 8,
+                            objectFit: "cover"
+                        }}
+                    />
+                </LazyLoad>
 
                 {
                     backgroundItem.background === background ? (

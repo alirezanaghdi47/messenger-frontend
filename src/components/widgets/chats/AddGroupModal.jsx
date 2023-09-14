@@ -10,7 +10,7 @@ import {useSegment} from "components/hooks/useSegment";
 import SearchBar from "components/widgets/chats/Searchbar";
 import Contacts from "components/widgets/chats/Contacts";
 import Form from "components/widgets/chats/Form";
-import Empty from "components/partials/Empty";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 const ModalHeader = ({onClose}) => {
 
@@ -79,7 +79,7 @@ const ModalContent = ({segment}) => {
                 )
             }
 
-            {/*<Empty/>*/}
+            {/*<EmptyPlaceholder/>*/}
 
         </Stack>
     )

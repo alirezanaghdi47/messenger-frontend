@@ -1,6 +1,6 @@
 // libraries
 import {useSelector} from "react-redux";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from 'react-lazy-load';
 import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiArrowRight, FiPhone, FiPhoneOff} from "react-icons/fi";
 
@@ -8,8 +8,8 @@ const ModalHeader = () => {
 
     return (
         <Stack
-            direction="row"
-            gap={4}
+            direction="column"
+            gap={1}
             sx={{
                 position: "absolute",
                 zIndex: 100,
@@ -25,77 +25,37 @@ const ModalHeader = () => {
             }}
         >
 
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
+            <LazyLoad
+                width={40}
+                height={40}
+                threshold={0.5}
             >
-
-                <LazyLoadImage
+                <img
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
                     width={40}
                     height={40}
                     style={{borderRadius: "50%"}}
                 />
+            </LazyLoad>
 
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    سهیل نادری
-                </Typography>
-
-            </Stack>
-
-            <Stack
-                direction="column"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
+            <Typography
+                variant="subtitle2"
+                color="textPrimary"
+                fontWeight='bold'
+                noWrap
             >
+                سهیل نادری
+            </Typography>
 
-                <FiArrowRight size={20}/>
-
-            </Stack>
-
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
+            <Typography
+                variant="caption"
+                color="textPrimary"
+                fontWeight='bold'
+                noWrap
             >
-
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
-
-                <Typography
-                    variant="subtitle2"
-                    color="textPrimary"
-                    fontWeight='bold'
-                    noWrap
-                >
-                    علیرضا نقدی
-                </Typography>
-
-            </Stack>
+                01:00
+            </Typography>
 
         </Stack>
     )

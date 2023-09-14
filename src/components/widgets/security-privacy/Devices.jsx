@@ -1,7 +1,7 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import SimpleBar from "simplebar-react";
-import {LazyLoadImage} from "react-lazy-load-image-component";
+import LazyLoad from "react-lazy-load";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Chip, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
@@ -81,13 +81,19 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="browser"
+                    <LazyLoad
                         width={20}
                         height={20}
-                        style={{borderRadius: "50%"}}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                            alt="browser"
+                            width={20}
+                            height={20}
+                            style={{borderRadius: "50%"}}
+                        />
+                    </LazyLoad>
 
                     <Typography
                         variant="body2"
@@ -108,13 +114,19 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="browser"
+                    <LazyLoad
                         width={20}
                         height={20}
-                        style={{borderRadius: "50%"}}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                            alt="browser"
+                            width={20}
+                            height={20}
+                            style={{borderRadius: "50%"}}
+                        />
+                    </LazyLoad>
 
                     <Typography
                         variant="body2"

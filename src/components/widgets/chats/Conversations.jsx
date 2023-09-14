@@ -1,17 +1,18 @@
 // libraries
-import {lazy} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import Loadable from '@loadable/component';
 import SimpleBar from "simplebar-react";
-import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {Badge, Box, Chip, Menu, MenuItem, Stack, Typography, useTheme} from "@mui/material";
+import LazyLoad from 'react-lazy-load';
+import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
-import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText, LuTrash2} from "react-icons/lu";
+import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
-const ConversationDropdownMenu = lazy(() => import("components/widgets/chats/ConversationDropdownMenu"));
+
+const ConversationDropdownMenu = Loadable(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
 const conversationList = [
     {
@@ -79,13 +80,19 @@ const ConversationItem = ({conversationItem}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="avatar"
+                    <LazyLoad
                         width={40}
                         height={40}
-                        style={{borderRadius: "50%"}}
-                    />
+                        threshold={0.5}
+                    >
+                        <img
+                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                            alt="avatar"
+                            width={40}
+                            height={40}
+                            style={{borderRadius: "50%"}}
+                        />
+                    </LazyLoad>
 
                 </Badge>
 
