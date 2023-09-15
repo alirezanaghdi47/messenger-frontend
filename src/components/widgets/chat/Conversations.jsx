@@ -1,7 +1,8 @@
 // libraries
-import {forwardRef} from "react";
-import SimpleBar from "simplebar-react";
-import LazyLoad from 'react-lazy-load';
+import {useCallback, useEffect, useLayoutEffect, useRef} from "react";
+import {useSelector} from "react-redux";
+import {VariableSizeList as List} from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import {Stack} from "@mui/material";
 
 // components
@@ -28,14 +29,54 @@ const conversationList = [
         content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
         me: false
     },
-    {id: 3, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg", me: true},
-    {id: 4, type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg", me: false},
-    {id: 5, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: true},
-    {id: 6, type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: false},
-    {id: 7, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp", me: true},
-    {id: 8, type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp", me: false},
-    {id: 9, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3", me: false},
-    {id: 10, type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3", me: true},
+    {
+        id: 3,
+        type: "image",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
+        me: true
+    },
+    {
+        id: 4,
+        type: "image",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
+        me: false
+    },
+    {
+        id: 5,
+        type: "file",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
+        me: true
+    },
+    {
+        id: 6,
+        type: "file",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
+        me: false
+    },
+    {
+        id: 7,
+        type: "video",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        me: true
+    },
+    {
+        id: 8,
+        type: "video",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        me: false
+    },
+    {
+        id: 9,
+        type: "voice",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        me: false
+    },
+    {
+        id: 10,
+        type: "voice",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        me: true
+    },
     {id: 11, type: "location", content: [35, 51], me: true},
     {id: 12, type: "location", content: [35, 51], me: false},
     {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
@@ -44,10 +85,17 @@ const conversationList = [
     {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
 ];
 
-const ConversationItem = ({conversationItem}) => {
+const ConversationItem = ({conversationItem, index, setSize}) => {
+
+    const rowRef = useRef();
+
+    useEffect(() => {
+        setSize(index, rowRef.current.getBoundingClientRect().height);
+    }, [setSize, index]);
 
     return (
         <Stack
+            ref={rowRef}
             component="li"
             direction="row"
             gap={1}
@@ -71,19 +119,13 @@ const ConversationItem = ({conversationItem}) => {
                 }}
             >
 
-                <LazyLoad
+                <img
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
                     width={30}
                     height={30}
-                    threshold={0.5}
-                >
-                    <img
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="avatar"
-                        width={30}
-                        height={30}
-                        style={{borderRadius: "50%"}}
-                    />
-                </LazyLoad>
+                    style={{borderRadius: "50%"}}
+                />
 
             </Stack>
 
@@ -113,46 +155,74 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = forwardRef((props , ref) => {
+const Conversations = () => {
+
+    const listRef = useRef();
+    const sizeMap = useRef({});
+    const {language} = useSelector(state => state.setting.appearance);
+
+    const setSize = useCallback((index, size) => {
+        sizeMap.current = {...sizeMap.current, [index]: size};
+        listRef.current.resetAfterIndex(index);
+    }, []);
+
+    const getSize = index => sizeMap.current[index] + 32 || 200 + 32;
+
+    useLayoutEffect(() => {
+        setTimeout(() => {
+            listRef?.current?.scrollToItem(conversationList.length);
+        }, 100);
+    }, []);
 
     return (
-        <SimpleBar
+        <AutoSizer
             style={{
+                position: "sticky",
+                top: 80,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "center",
                 width: "100%",
                 height: "calc(100dvh - 160px)",
-                top: 80,
             }}
         >
-
-            <Stack
-                ref={ref}
-                component="ul"
-                direction="column"
-                gap={2}
-                sx={{
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "start",
-                    width: "100%",
-                    height: "100%",
-                    padding: 4,
-                }}
-            >
-
-                {
-                    conversationList.map((conversationItem) =>
-                        <ConversationItem
-                            key={conversationItem.id}
-                            conversationItem={conversationItem}
-                        />
-                    )
-                }
-
-            </Stack>
-
-        </SimpleBar>
+            {
+                ({height, width}) => (
+                    <List
+                        ref={listRef}
+                        direction={language === "fa" ? "rtl" : "ltr"}
+                        width={width}
+                        height={height}
+                        itemCount={conversationList.length}
+                        itemSize={getSize}
+                        className="remove-scrollbar"
+                    >
+                        {
+                            ({index, style}) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        padding: '0 16px',
+                                        ...style,
+                                    }}
+                                >
+                                    <ConversationItem
+                                        index={index}
+                                        conversationItem={conversationList[index]}
+                                        setSize={setSize}
+                                    />
+                                </div>
+                            )
+                        }
+                    </List>
+                )
+            }
+        </AutoSizer>
     )
-});
+}
 
 export default Conversations;

@@ -1,5 +1,6 @@
 // libraries
-import {Outlet} from "react-router-dom";
+import {useLayoutEffect} from "react";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack} from "@mui/material";
@@ -11,9 +12,15 @@ import Version from "components/widgets/auth/Version";
 
 const Auth = () => {
 
+    const location = useLocation();
+    const navigate = useNavigate();
     const {background} = useSelector(state => state.setting.appearance);
     const isDesktop = useMediaQuery('(max-width: 992px)');
     const isTablet = useMediaQuery('(max-width: 768px)');
+
+    useLayoutEffect(() => {
+        if (location.pathname === "/auth") navigate("/auth/sign-in");
+    }, []);
 
     return (
         <Secondary>

@@ -1,24 +1,23 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import LazyLoad from 'react-lazy-load';
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
 // components
-import Header from "components/widgets/appearance-customization/Header";
+import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setTheme} from "stores/slices/setting.js";
+import {setBackground} from "stores/slices/setting.js";
 
 // utils
-import {themeList} from "utils/constants.js";
+import {backgroundList} from "utils/constants.js";
 
-const ThemeItem = ({themeItem}) => {
+const BackgroundItem = ({backgroundItem}) => {
 
     const dispatch = useDispatch();
-    const {darkMode} = useSelector(state => state.setting.appearance);
+    const {background} = useSelector(state => state.setting.appearance);
 
-    const _handleActiveTheme = (value) => dispatch(setTheme(value));
+    const _handleActiveBackground = (background) => dispatch(setBackground(background));
 
     return (
         <Grid
@@ -28,7 +27,7 @@ const ThemeItem = ({themeItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => _handleActiveTheme(themeItem.value)}
+            onClick={() => _handleActiveBackground(backgroundItem.background)}
         >
 
             <Box
@@ -39,24 +38,19 @@ const ThemeItem = ({themeItem}) => {
                 }}
             >
 
-                <LazyLoad
+                <img
+                    src={backgroundItem.background}
+                    alt={backgroundItem.id}
                     width="100%"
-                    threshold={0.5}
-                >
-                    <img
-                        src={themeItem.background}
-                        alt={themeItem.id}
-                        width="100%"
-                        height="100%"
-                        style={{
-                            borderRadius: 8,
-                            objectFit: "cover"
-                        }}
-                    />
-                </LazyLoad>
+                    height="100%"
+                    style={{
+                        borderRadius: 8,
+                        objectFit: "cover"
+                    }}
+                />
 
                 {
-                    themeItem.value === darkMode ? (
+                    backgroundItem.background === background ? (
                         <Box
                             sx={{
                                 position: "absolute",
@@ -85,7 +79,7 @@ const ThemeItem = ({themeItem}) => {
     )
 }
 
-const Theme = () => {
+const Background = () => {
 
     return (
         <Stack
@@ -99,7 +93,7 @@ const Theme = () => {
             }}
         >
 
-            <Header title="typography.theme"/>
+            <Header title="typography.background"/>
 
             <Grid
                 component="ul"
@@ -108,10 +102,10 @@ const Theme = () => {
                 sx={{width: "100%"}}
             >
                 {
-                    themeList.map(themeItem =>
-                        <ThemeItem
-                            key={themeItem.id}
-                            themeItem={themeItem}
+                    backgroundList.map(backgroundItem =>
+                        <BackgroundItem
+                            key={backgroundItem.id}
+                            backgroundItem={backgroundItem}
                         />
                     )
                 }
@@ -122,5 +116,5 @@ const Theme = () => {
     )
 }
 
-export default Theme;
+export default Background;
 

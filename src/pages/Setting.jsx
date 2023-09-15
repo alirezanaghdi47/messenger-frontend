@@ -13,8 +13,8 @@ import Empty from "components/widgets/setting/Empty";
 
 const pathList = [
     "/setting/profile",
-    "/setting/appearance-customization",
-    "/setting/security-privacy",
+    "/setting/appearance",
+    "/setting/privacy",
     "/setting/sound-notification"
 ];
 

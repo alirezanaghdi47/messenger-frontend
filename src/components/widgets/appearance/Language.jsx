@@ -1,11 +1,10 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import LazyLoad from 'react-lazy-load';
 import {Button, Stack} from "@mui/material";
 
 // components
-import Header from "components/widgets/appearance-customization/Header";
+import Header from "components/widgets/appearance/Header";
 
 // stores
 import {setLanguage} from "stores/slices/setting.js";
@@ -26,18 +25,12 @@ const LanguageItem = ({languageItem}) => {
             variant={languageItem.value === language ? "contained" : "text"}
             color={languageItem.value === language ? "primary" : "ternary"}
             startIcon={
-                <LazyLoad
+                <img
+                    src={languageItem.flag}
+                    alt={languageItem.value}
                     width={24}
                     height={16}
-                    threshold={0.5}
-                >
-                    <img
-                        src={languageItem.flag}
-                        alt={languageItem.value}
-                        width={24}
-                        height={16}
-                    />
-                </LazyLoad>
+                />
             }
             onClick={() => _handleActiveLanguage(languageItem.value)}
         >

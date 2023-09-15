@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {Card, Slider, Stack, Typography, useTheme} from "@mui/material";
 
 // components
-import Header from "components/widgets/appearance-customization/Header";
+import Header from "components/widgets/appearance/Header";
 
 // stores
 import {setFontSize} from "stores/slices/setting.js";

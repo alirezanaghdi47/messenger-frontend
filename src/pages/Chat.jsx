@@ -1,5 +1,4 @@
 // libraries
-import {useRef} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Loadable from "@loadable/component";
@@ -14,7 +13,6 @@ import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 const ForwardMessagePopup = Loadable(() => import("components/widgets/chat/ForwardMessagePopup"));
 const ReplyMessagePopup = Loadable(() => import("components/widgets/chat/ReplyMessagePopup"));
 const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardChatModal"));
-const ScrollToBottom = Loadable(() => import("components/widgets/chat/ScrollToBottom"));
 
 const Chat = () => {
 
@@ -22,8 +20,6 @@ const Chat = () => {
     const {background} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
-
-    const listRef = useRef(null);
 
     return params.chatId && (
         <Stack
@@ -58,11 +54,9 @@ const Chat = () => {
 
             <Header/>
 
-            <Conversations ref={listRef}/>
+            <Conversations/>
 
             {/*<EmptyPlaceholder/>*/}
-
-            {/*<ScrollToBottom ref={listRef}/>*/}
 
             {/*<ForwardChatModal/>*/}
 

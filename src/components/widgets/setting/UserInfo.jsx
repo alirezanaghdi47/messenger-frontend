@@ -1,6 +1,5 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import LazyLoad from "react-lazy-load";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
@@ -22,22 +21,16 @@ const UserDetail = () => {
             }}
         >
 
-            <LazyLoad
+            <img
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                alt="avatar"
                 width="100%"
                 height="100%"
-                threshold={0.5}
-            >
-                <img
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width="100%"
-                    height="100%"
-                    style={{
-                        objectFit: "cover",
-                        objectPosition: "center",
-                    }}
-                />
-            </LazyLoad>
+                style={{
+                    objectFit: "cover",
+                    objectPosition: "center",
+                }}
+            />
 
         </Box>
     )

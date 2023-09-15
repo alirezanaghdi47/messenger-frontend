@@ -5,9 +5,7 @@ import {IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
-import SearchBar from "components/widgets/security-privacy/Searchbar";
-import Contacts from "components/widgets/security-privacy/Contacts";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import Devices from "components/widgets/privacy/Devices";
 
 const ModalHeader = ({onClose}) => {
 
@@ -31,7 +29,7 @@ const ModalHeader = ({onClose}) => {
                 fontWeight='bold'
                 noWrap
             >
-                {t("typography.blockedUsers")}
+                {t("typography.devices")}
             </Typography>
 
             <IconButton
@@ -61,17 +59,13 @@ const ModalContent = () => {
             }}
         >
 
-            <SearchBar/>
-
-            <Contacts/>
-
-            {/*<EmptyPlaceholder/>*/}
+           <Devices/>
 
         </Stack>
     )
 }
 
-const BlockedUsersModal = ({isOpen , onClose}) => {
+const SessionsModal = ({isOpen , onClose}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -113,4 +107,4 @@ const BlockedUsersModal = ({isOpen , onClose}) => {
     )
 }
 
-export default BlockedUsersModal;
+export default SessionsModal;

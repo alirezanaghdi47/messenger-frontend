@@ -1,7 +1,6 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import LazyLoad from "react-lazy-load";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Typography} from "@mui/material";
 
@@ -30,17 +29,12 @@ const Empty = () => {
             }}
         >
 
-            <LazyLoad
+            <img
+                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/chats-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/chats-light.svg"}
+                alt="empty"
                 width="100%"
-                threshold={0.5}
-            >
-                <img
-                    src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/chats-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/chats-light.svg"}
-                    alt="empty"
-                    width="100%"
-                    style={{maxWidth: 300}}
-                />
-            </LazyLoad>
+                style={{maxWidth: 300}}
+            />
 
             <Typography
                 variant="subtitle1"

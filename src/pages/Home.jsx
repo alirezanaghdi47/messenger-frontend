@@ -1,20 +1,17 @@
 // libraries
 import {useLayoutEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Home = () => {
 
+    const location = useLocation()
     const navigate = useNavigate();
 
     useLayoutEffect(() => {
-        navigate("/chat");
+        if (location.pathname === "/") navigate("/chat");
     }, []);
 
-    return (
-        <>
-
-        </>
-    )
+    return null;
 }
 
 export default Home;

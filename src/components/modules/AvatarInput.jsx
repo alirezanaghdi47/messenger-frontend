@@ -1,7 +1,6 @@
 // libraries
 import {useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
-import LazyLoad from 'react-lazy-load';
 import {Box, FormControl, Typography} from "@mui/material";
 import {FiCamera} from "react-icons/fi";
 
@@ -76,19 +75,13 @@ const AvatarInput = ({
 
                 {
                     (file?.preview || preview) ? (
-                        <LazyLoad
+                        <img
+                            src={file?.preview ? file?.preview : preview}
+                            alt="avatar"
                             width="100%"
                             height="100%"
-                            threshold={0.5}
-                        >
-                            <img
-                                src={file?.preview ? file?.preview : preview}
-                                alt="avatar"
-                                width="100%"
-                                height="100%"
-                                style={{borderRadius: 8}}
-                            />
-                        </LazyLoad>
+                            style={{borderRadius: 8}}
+                        />
                     ) : (
                         <FiCamera size={32}/>
                     )

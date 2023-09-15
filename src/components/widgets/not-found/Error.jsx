@@ -2,7 +2,6 @@
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import LazyLoad from "react-lazy-load";
 import {Button, Stack, Typography} from "@mui/material";
 
 const Error = () => {
@@ -23,16 +22,11 @@ const Error = () => {
             }}
         >
 
-            <LazyLoad
+            <img
+                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-light.svg"}
+                alt="select-chat"
                 width={300}
-                threshold={0.5}
-            >
-                <img
-                    src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-light.svg"}
-                    alt="select-chat"
-                    width={300}
-                />
-            </LazyLoad>
+            />
 
             <Typography
                 variant="h6"

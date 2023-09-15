@@ -1,6 +1,6 @@
 import i18n from "i18next";
 
-export const convertTimestamp = (ms) => {
+export const formattedMilisecond = (ms) => {
 
     const minuteTime = Number(Math.floor(ms / 60000));
     const secondTime = Number(((ms % 60000) / 1000).toFixed(0));
@@ -22,7 +22,7 @@ export const convertTimestamp = (ms) => {
 
 }
 
-export const convertByte = (byte) => {
+export const formattedByte = (byte) => {
 
     let i = -1;
     const enByteUnits = ['kB', 'MB', 'GB'];
@@ -39,8 +39,8 @@ export const convertByte = (byte) => {
 
 }
 
-export const formatDuration = (seconds) => {
-    const date = new Date(seconds * 1000)
+export const formattedSecond = (second) => {
+    const date = new Date(second * 1000)
     const hh = date.getUTCHours()
     const mm = date.getUTCMinutes()
     const ss = ('0' + date.getUTCSeconds()).slice(-2)
@@ -48,11 +48,4 @@ export const formatDuration = (seconds) => {
         return `${hh}:${('0' + mm).slice(-2)}:${ss}`
     }
     return `${mm}:${ss}`
-}
-
-export const convertCodePointToEmoji = (codePoint) => {
-    let sym = codePoint.split(" ");
-    let codesArray = [];
-    sym.forEach((el) => codesArray.push("0x" + el));
-    return String.fromCodePoint(...codesArray);
 }

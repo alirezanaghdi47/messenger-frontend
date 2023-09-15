@@ -4,9 +4,9 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Customize from "components/widgets/appearance-customization/Customize.jsx";
+import Customize from "components/widgets/appearance/Customize.jsx";
 
-const AppearanceCustomization = () => {
+const Appearance = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -28,7 +28,7 @@ const AppearanceCustomization = () => {
             }}
         >
 
-            <Header title="typography.appearanceCustomization"/>
+            <Header title="typography.appearance"/>
 
             <Customize/>
 
@@ -36,5 +36,5 @@ const AppearanceCustomization = () => {
     )
 }
 
-export default AppearanceCustomization;
+export default Appearance;
 

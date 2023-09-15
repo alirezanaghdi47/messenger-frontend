@@ -1,7 +1,6 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import SimpleBar from "simplebar-react";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Button, Grid, Stack} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
@@ -33,148 +32,142 @@ const Account = () => {
     });
 
     return (
-        <SimpleBar
-            style={{
+        <Grid
+            container
+            rowSpacing={4}
+            sx={{
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : "100%"
+                height: isTablet ? "calc(100dvh - 80px)" : "100%",
+                padding: 4,
+                overflowY: "scroll"
             }}
+            className="remove-scrollbar"
         >
 
             <Grid
-                container
-                rowSpacing={4}
-                sx={{
-                    width: "100%",
-                    padding: 4,
-                }}
+                item
+                xs={12}
             >
 
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <AvatarInput
-                        label={t("input.avatar")}
-                        name="avatar"
-                        // preview={session?.user?.avatar}
-                        value={formik.values.avatar}
-                        onChange={(value) => formik.setFieldValue("avatar", value)}
-                        onBlur={() => formik.setFieldTouched("avatar")}
-                        touched={formik.touched.avatar}
-                        error={formik.errors.avatar}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <TextInput
-                        label={t("input.name")}
-                        name="name"
-                        value={formik.values.name}
-                        onChange={formik.handleChange}
-                        onBlur={() => formik.setFieldTouched("name")}
-                        error={formik.errors.name}
-                        touched={formik.touched.name}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <TextInput
-                        label={t("input.userName")}
-                        name="userName"
-                        value={formik.values.userName}
-                        onChange={formik.handleChange}
-                        onBlur={() => formik.setFieldTouched("userName")}
-                        error={formik.errors.userName}
-                        touched={formik.touched.userName}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <TextInput
-                        label={t("input.phoneNumber")}
-                        name="phoneNumber"
-                        value={formik.values.phoneNumber}
-                        onChange={formik.handleChange}
-                        onBlur={() => formik.setFieldTouched("phoneNumber")}
-                        error={formik.errors.phoneNumber}
-                        touched={formik.touched.phoneNumber}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <TextInput
-                        label={t("input.biography")}
-                        name="biography"
-                        rows={6}
-                        value={formik.values.biography}
-                        onChange={formik.handleChange}
-                        onBlur={() => formik.setFieldTouched("biography")}
-                        error={formik.errors.biography}
-                        touched={formik.touched.biography}
-                    />
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                >
-
-                    <Stack
-                        direction="row"
-                        gap={2}
-                        sx={{
-                            display: "flex",
-                            justifyContent: "end",
-                            alignItems: "center",
-                            width: "100%",
-                        }}
-                    >
-
-                        <Button
-                            variant="text"
-                            color="ternary"
-                            startIcon={<FiX size={20}/>}
-                        >
-                            {t("button.cancel")}
-                        </Button>
-
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<FiCheck size={20}/>}
-                        >
-                            {t("button.submit")}
-                        </Button>
-
-                    </Stack>
-
-                </Grid>
+                <AvatarInput
+                    label={t("input.avatar")}
+                    name="avatar"
+                    // preview={session?.user?.avatar}
+                    value={formik.values.avatar}
+                    onChange={(value) => formik.setFieldValue("avatar", value)}
+                    onBlur={() => formik.setFieldTouched("avatar")}
+                    touched={formik.touched.avatar}
+                    error={formik.errors.avatar}
+                />
 
             </Grid>
 
-        </SimpleBar>
+            <Grid
+                item
+                xs={12}
+            >
+
+                <TextInput
+                    label={t("input.name")}
+                    name="name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("name")}
+                    error={formik.errors.name}
+                    touched={formik.touched.name}
+                />
+
+            </Grid>
+
+            <Grid
+                item
+                xs={12}
+            >
+
+                <TextInput
+                    label={t("input.userName")}
+                    name="userName"
+                    value={formik.values.userName}
+                    onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("userName")}
+                    error={formik.errors.userName}
+                    touched={formik.touched.userName}
+                />
+
+            </Grid>
+
+            <Grid
+                item
+                xs={12}
+            >
+
+                <TextInput
+                    label={t("input.phoneNumber")}
+                    name="phoneNumber"
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("phoneNumber")}
+                    error={formik.errors.phoneNumber}
+                    touched={formik.touched.phoneNumber}
+                />
+
+            </Grid>
+
+            <Grid
+                item
+                xs={12}
+            >
+
+                <TextInput
+                    label={t("input.biography")}
+                    name="biography"
+                    rows={6}
+                    value={formik.values.biography}
+                    onChange={formik.handleChange}
+                    onBlur={() => formik.setFieldTouched("biography")}
+                    error={formik.errors.biography}
+                    touched={formik.touched.biography}
+                />
+
+            </Grid>
+
+            <Grid
+                item
+                xs={12}
+            >
+
+                <Stack
+                    direction="row"
+                    gap={2}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                        alignItems: "center",
+                        width: "100%",
+                    }}
+                >
+
+                    <Button
+                        variant="text"
+                        color="ternary"
+                        startIcon={<FiX size={20}/>}
+                    >
+                        {t("button.cancel")}
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<FiCheck size={20}/>}
+                    >
+                        {t("button.submit")}
+                    </Button>
+
+                </Stack>
+
+            </Grid>
+
+        </Grid>
     )
 }
 

@@ -1,7 +1,9 @@
 // libraries
+import {useCallback, useEffect, useRef} from "react";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import SimpleBar from "simplebar-react";
-import LazyLoad from "react-lazy-load";
+import {VariableSizeList as List} from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Chip, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
@@ -26,12 +28,19 @@ const deviceList = [
     },
 ];
 
-const DeviceItem = ({deviceItem}) => {
+const DeviceItem = ({deviceItem , index , setSize}) => {
 
     const {t} = useTranslation();
 
+    const rowRef = useRef();
+
+    useEffect(() => {
+        setSize(index, rowRef.current.getBoundingClientRect().height);
+    }, [setSize, index]);
+
     return (
         <Stack
+            ref={rowRef}
             direction="row"
             gap={2}
             sx={{
@@ -81,19 +90,13 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <LazyLoad
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="browser"
                         width={20}
                         height={20}
-                        threshold={0.5}
-                    >
-                        <img
-                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                            alt="browser"
-                            width={20}
-                            height={20}
-                            style={{borderRadius: "50%"}}
-                        />
-                    </LazyLoad>
+                        style={{borderRadius: "50%"}}
+                    />
 
                     <Typography
                         variant="body2"
@@ -114,19 +117,13 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <LazyLoad
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="browser"
                         width={20}
                         height={20}
-                        threshold={0.5}
-                    >
-                        <img
-                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                            alt="browser"
-                            width={20}
-                            height={20}
-                            style={{borderRadius: "50%"}}
-                        />
-                    </LazyLoad>
+                        style={{borderRadius: "50%"}}
+                    />
 
                     <Typography
                         variant="body2"
@@ -172,40 +169,63 @@ const DeviceItem = ({deviceItem}) => {
 
 const Devices = () => {
 
-    const {t} = useTranslation();
+    const listRef = useRef();
+    const sizeMap = useRef({});
+    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
+    const setSize = useCallback((index, size) => {
+        sizeMap.current = {...sizeMap.current, [index]: size};
+        listRef.current.resetAfterIndex(index);
+    }, []);
+
+    const getSize = index => sizeMap.current[index] + 32 || 100 + 32;
+
     return (
-        <SimpleBar
+        <AutoSizer
             style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "center",
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : "100%"
+                height: isTablet ? "calc(100dvh - 80px)" : 480
             }}
         >
-
-            <Stack
-                direction="column"
-                gap={4}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%"
-                }}
-            >
-
-                {
-                    deviceList.map(deviceItem =>
-                        <DeviceItem
-                            key={deviceItem.id}
-                            deviceItem={deviceItem}
-                        />
-                    )
-                }
-
-            </Stack>
-
-        </SimpleBar>
+            {
+                ({height, width}) => (
+                    <List
+                        ref={listRef}
+                        direction={language === "fa" ? "rtl" : "ltr"}
+                        width={width}
+                        height={height}
+                        itemCount={deviceList.length}
+                        itemSize={getSize}
+                        className="remove-scrollbar"
+                    >
+                        {
+                            ({index, style}) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        ...style,
+                                    }}
+                                >
+                                    <DeviceItem
+                                        index={index}
+                                        deviceItem={deviceList[index]}
+                                        setSize={setSize}
+                                    />
+                                </div>
+                            )
+                        }
+                    </List>
+                )
+            }
+        </AutoSizer>
     )
 }
 

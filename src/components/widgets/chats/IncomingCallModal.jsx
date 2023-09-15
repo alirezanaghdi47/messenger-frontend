@@ -1,8 +1,7 @@
 // libraries
 import {useSelector} from "react-redux";
-import LazyLoad from 'react-lazy-load';
 import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
-import {FiArrowRight, FiPhone, FiPhoneOff} from "react-icons/fi";
+import {FiPhone, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
 
@@ -25,19 +24,13 @@ const ModalHeader = () => {
             }}
         >
 
-            <LazyLoad
+            <img
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                alt="avatar"
                 width={40}
                 height={40}
-                threshold={0.5}
-            >
-                <img
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
-            </LazyLoad>
+                style={{borderRadius: "50%"}}
+            />
 
             <Typography
                 variant="subtitle2"

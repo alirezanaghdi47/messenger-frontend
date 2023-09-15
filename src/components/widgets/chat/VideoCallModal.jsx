@@ -1,7 +1,6 @@
 // libraries
 import {useSelector} from "react-redux";
 import ReactPlayer from "react-player";
-import LazyLoad from 'react-lazy-load';
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
@@ -27,19 +26,13 @@ const ModalHeader = () => {
             }}
         >
 
-            <LazyLoad
+            <img
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                alt="avatar"
                 width={40}
                 height={40}
-                threshold={0.5}
-            >
-                <img
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
-            </LazyLoad>
+                style={{borderRadius: "50%"}}
+            />
 
             <Typography
                 variant="subtitle2"

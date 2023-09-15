@@ -1,7 +1,9 @@
 // libraries
+import {useCallback, useEffect, useRef} from "react";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import SimpleBar from "simplebar-react";
-import LazyLoad from 'react-lazy-load';
+import {VariableSizeList as List} from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack, Typography} from "@mui/material";
 
@@ -13,12 +15,18 @@ const contactList = [
     {_id: "5"},
 ];
 
-const ContactItem = ({contactItem}) => {
+const ContactItem = ({contactItem, index, setSize}) => {
 
+    const rowRef = useRef();
     const {t} = useTranslation();
+
+    useEffect(() => {
+        setSize(index, rowRef.current.getBoundingClientRect().height);
+    }, [setSize, index]);
 
     return (
         <Box
+            ref={rowRef}
             component="li"
             sx={{width: "100%"}}
         >
@@ -38,19 +46,13 @@ const ContactItem = ({contactItem}) => {
                 }}
             >
 
-                <LazyLoad
+                <img
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
                     width={40}
                     height={40}
-                    threshold={0.5}
-                >
-                    <img
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="avatar"
-                        width={40}
-                        height={40}
-                        style={{borderRadius: "50%"}}
-                    />
-                </LazyLoad>
+                    style={{borderRadius: "50%"}}
+                />
 
                 <Stack
                     direction="column"
@@ -91,40 +93,64 @@ const ContactItem = ({contactItem}) => {
 
 const Contacts = () => {
 
+    const listRef = useRef();
+    const sizeMap = useRef({});
+    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
+    const setSize = useCallback((index, size) => {
+        sizeMap.current = {...sizeMap.current, [index]: size};
+        listRef.current.resetAfterIndex(index);
+    }, []);
+
+    const getSize = index => sizeMap.current[index] || 100;
+
     return (
-        <SimpleBar
+        <AutoSizer
             style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "center",
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 200px)" : 480
+                height: isTablet ? "calc(100dvh - 200px)" : 480,
             }}
         >
 
-            <Stack
-                component="ul"
-                direction="column"
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                }}
-            >
-
-                {
-                    contactList.map(contactItem =>
-                        <ContactItem
-                            key={contactItem._id}
-                            contactItem={contactItem}
-                        />
-                    )
-                }
-
-            </Stack>
-
-        </SimpleBar>
+            {
+                ({height, width}) => (
+                    <List
+                        ref={listRef}
+                        direction={language === "fa" ? "rtl" : "ltr"}
+                        width={width}
+                        height={height}
+                        itemCount={contactList.length}
+                        itemSize={getSize}
+                        className="remove-scrollbar"
+                    >
+                        {
+                            ({index, style}) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        ...style,
+                                    }}
+                                >
+                                    <ContactItem
+                                        index={index}
+                                        contactItem={contactList[index]}
+                                        setSize={setSize}
+                                    />
+                                </div>
+                            )
+                        }
+                    </List>
+                )
+            }
+        </AutoSizer>
     )
 }
 

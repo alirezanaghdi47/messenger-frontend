@@ -1,4 +1,8 @@
 // other
+* {
+  scroll-behavior: smooth;
+}
+
 .remove-scrollbar {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
@@ -30,19 +34,6 @@ input[type=number] {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-}
-
-// react-simplebar
-body[data-theme="dark"] {
-  .simplebar-scrollbar::before {
-    background: #f1f5f9 !important;
-  }
-}
-
-body[data-theme="light"] {
-  .simplebar-scrollbar::before {
-    background: #1e293b !important;
-  }
 }
 
 // react-emoji
@@ -87,18 +78,5 @@ body[data-theme="dark"] {
   p {
     display: none !important;
     margin: 0 !important;
-  }
-}
-
-// react-lazy-load
-.LazyLoad {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  opacity: 0 !important;
-  transition: all ease-in-out 0.3s !important;
-
-  &.is-visible {
-    opacity: 1 !important;
   }
 }

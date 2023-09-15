@@ -2,7 +2,6 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import LazyLoad from 'react-lazy-load';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
@@ -10,11 +9,12 @@ import {LuPlay} from "react-icons/lu";
 
 // utils
 import {fontSizeList} from "utils/constants";
-import {convertByte, convertTimestamp} from "utils/functions";
+import {formattedByte, formattedMilisecond} from "utils/functions";
 
 // components
 import {useContextMenu} from "components/hooks/useContextMenu";
 import {useModal} from "components/hooks/useModal";
+
 const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
 const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
 const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
@@ -147,19 +147,13 @@ export const FileMessage = ({message}) => {
                 }}
             >
 
-                <LazyLoad
+                <img
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                    alt="image"
                     width={50}
                     height={50}
-                    threshold={0.5}
-                >
-                    <img
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                        alt="image"
-                        width={50}
-                        height={50}
-                        style={{borderRadius: 8}}
-                    />
-                </LazyLoad>
+                    style={{borderRadius: 8}}
+                />
 
                 <Stack
                     direction="column"
@@ -183,7 +177,7 @@ export const FileMessage = ({message}) => {
                         variant="caption"
                         color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        {convertByte(300000)}
+                        {formattedByte(300000)}
                     </Typography>
 
                 </Stack>
@@ -260,24 +254,19 @@ export const ImageMessage = ({message}) => {
                     }}
                 >
 
-                    <LazyLoad
+                    <img
+                        src={message.content}
+                        alt="image"
                         width="100%"
                         height="100%"
-                        threshold={0.5}
-                    >
-                        <img
-                            src={message.content}
-                            alt="image"
-                            width="100%"
-                            height="100%"
-                            style={{
-                                maxWidth: 300,
-                                borderRadius: 8,
-                                cursor: "pointer"
-                            }}
-                            onClick={_handleShowModal}
-                        />
-                    </LazyLoad>
+                        style={{
+                            maxWidth: 300,
+                            minHeight: 200,
+                            borderRadius: 8,
+                            cursor: "pointer"
+                        }}
+                        onClick={_handleShowModal}
+                    />
 
                     <Box
                         sx={{
@@ -294,7 +283,7 @@ export const ImageMessage = ({message}) => {
                             variant="caption"
                             color={message.me ? "primary" : "secondary"}
                             size="small"
-                            label={convertByte(300000)}
+                            label={formattedByte(300000)}
                         />
 
                     </Box>
@@ -411,7 +400,7 @@ export const MusicMessage = ({message}) => {
                             variant="caption"
                             color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         >
-                            {convertByte(300000)}
+                            {formattedByte(300000)}
                         </Typography>
 
                     </Stack>
@@ -494,22 +483,17 @@ export const VideoMessage = ({message}) => {
                     }}
                 >
 
-                    <LazyLoad
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                        alt="image"
                         width="100%"
                         height="100%"
-                        threshold={0.5}
-                    >
-                        <img
-                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                            alt="image"
-                            width="100%"
-                            height="100%"
-                            style={{
-                                maxWidth: 300,
-                                borderRadius: 8,
-                            }}
-                        />
-                    </LazyLoad>
+                        style={{
+                            maxWidth: 300,
+                            minHeight: 200,
+                            borderRadius: 8,
+                        }}
+                    />
 
                     <Box
                         sx={{
@@ -546,7 +530,7 @@ export const VideoMessage = ({message}) => {
                             variant="caption"
                             color={message.me ? "primary" : "secondary"}
                             size="small"
-                            label={convertByte(300000)}
+                            label={formattedByte(300000)}
                         />
 
                     </Box>
@@ -682,7 +666,7 @@ export const LogMessage = ({message}) => {
                                 variant="caption"
                                 color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                             >
-                                {convertTimestamp(message.content.time)}
+                                {formattedMilisecond(message.content.time)}
                             </Typography>
                         )
                     }
@@ -750,24 +734,19 @@ export const LocationMessage = ({message}) => {
                 onClose={_handleHideContextMenu}
             />
 
-            <LazyLoad
+            <img
+                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                alt="image"
                 width="100%"
                 height="100%"
-                threshold={0.5}
-            >
-                <img
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                    alt="image"
-                    width="100%"
-                    height="100%"
-                    style={{
-                        maxWidth: 300,
-                        borderRadius: 8,
-                        cursor: "pointer"
-                    }}
-                    onClick={_handleShowDetail}
-                />
-            </LazyLoad>
+                style={{
+                    maxWidth: 300,
+                    minHeight: 200,
+                    borderRadius: 8,
+                    cursor: "pointer"
+                }}
+                onClick={_handleShowDetail}
+            />
 
             <Stack
                 direction="row"

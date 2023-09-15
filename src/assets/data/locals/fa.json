@@ -27,11 +27,8 @@
       "version": "نسخه",
       "forwarded": "هدایت شده از",
       "profile": "حساب کاربری",
-      "appearanceCustomization": "ظاهر و شخصی سازی",
-      "soundNotification": "صدا و اعلانات",
-      "notification": "اعلانات",
-      "securityPrivacy": "امنیت و حریم خصوصی",
-      "privacy": "حریم خصوصی",
+      "appearance": "ظاهر",
+      "privacy": "حریم شخصی",
       "blockedUsers": "کاربران مسدود شده",
       "security": "امنیت",
       "entryLock": "قفل ورودی",
@@ -98,9 +95,8 @@
       "createChat": "ایجاد گفتگو جدید",
       "createGroup": "ایجاد گروه جدید",
       "profile": "حساب کاربری",
-      "appearanceCustomization": "ظاهر و شخصی سازی",
-      "soundNotification": "صدا و اعلانات",
-      "securityPrivacy": "امنیت و حریم خصوصی"
+      "appearance": "ظاهر",
+      "privacy": "حریم شخصی"
     },
     "button": {
       "persian": "فارسی",

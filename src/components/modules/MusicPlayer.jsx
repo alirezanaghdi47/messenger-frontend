@@ -11,7 +11,7 @@ import {FiX} from "react-icons/fi";
 import 'rc-slider/assets/index.css';
 
 // utils
-import {formatDuration} from "utils/functions";
+import {formattedSecond} from "utils/functions";
 
 const MusicPlayer = ({src}) => {
 
@@ -135,7 +135,7 @@ const MusicPlayer = ({src}) => {
                         color="textPrimary"
                         fontWeight="bold"
                     >
-                        {formatDuration(duration)}
+                        {formattedSecond(duration)}
                     </Typography>
 
                     <Typography
@@ -143,7 +143,7 @@ const MusicPlayer = ({src}) => {
                         color="textPrimary"
                         fontWeight="bold"
                     >
-                        {formatDuration(duration * played)}
+                        {formattedSecond(duration * played)}
                     </Typography>
 
                 </Stack>

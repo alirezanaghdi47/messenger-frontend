@@ -9,7 +9,7 @@ import {LuPlay, LuPause, LuVolume2, LuMaximize, LuMinimize, LuVolumeX} from "rea
 import {FiX} from "react-icons/fi";
 
 // utils
-import {formatDuration} from "utils/functions";
+import {formattedSecond} from "utils/functions";
 
 const VideoPlayer = ({src}) => {
 
@@ -197,7 +197,7 @@ const VideoPlayer = ({src}) => {
                                     color="#e2e8f0"
                                     fontWeight="bold"
                                 >
-                                    {formatDuration(duration)}
+                                    {formattedSecond(duration)}
                                 </Typography>
 
                                 <Typography
@@ -213,7 +213,7 @@ const VideoPlayer = ({src}) => {
                                     color="#e2e8f0"
                                     fontWeight="bold"
                                 >
-                                    {formatDuration(duration * played)}
+                                    {formattedSecond(duration * played)}
                                 </Typography>
 
                             </Box>

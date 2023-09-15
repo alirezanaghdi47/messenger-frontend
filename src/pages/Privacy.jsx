@@ -4,9 +4,9 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Private from "components/widgets/security-privacy/Private";
+import Security from "components/widgets/privacy/Security";
 
-const SecurityPrivacy = () => {
+const Privacy = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -28,12 +28,12 @@ const SecurityPrivacy = () => {
             }}
         >
 
-            <Header title="typography.securityPrivacy"/>
+            <Header title="typography.privacy"/>
 
-            <Private/>
+            <Security/>
 
         </Stack>
     )
 }
 
-export default SecurityPrivacy;
+export default Privacy;

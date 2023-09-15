@@ -1,9 +1,11 @@
 // libraries
+import {useCallback, useEffect, useRef} from "react";
 import {useNavigate, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import SimpleBar from "simplebar-react";
-import LazyLoad from 'react-lazy-load';
+import {VariableSizeList as List} from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
@@ -29,19 +31,24 @@ const conversationList = [
     {_id: "8", type: "log", status: "videoCall"},
 ];
 
-const ConversationItem = ({conversationItem}) => {
+const ConversationItem = ({conversationItem, index, setSize}) => {
 
+    const rowRef = useRef();
     const navigate = useNavigate();
     const params = useParams();
     const {t} = useTranslation();
     const theme = useTheme();
-
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/chat" : `/chat/${item._id}`);
 
+    useEffect(() => {
+        setSize(index, rowRef.current.getBoundingClientRect().height);
+    }, [setSize, index]);
+
     return (
         <Box
+            ref={rowRef}
             component="li"
             sx={{width: "100%"}}
             onClick={() => _handleActiveItem(conversationItem)}
@@ -80,19 +87,13 @@ const ConversationItem = ({conversationItem}) => {
                     }}
                 >
 
-                    <LazyLoad
+                    <img
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        alt="avatar"
                         width={40}
                         height={40}
-                        threshold={0.5}
-                    >
-                        <img
-                            src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                            alt="avatar"
-                            width={40}
-                            height={40}
-                            style={{borderRadius: "50%"}}
-                        />
-                    </LazyLoad>
+                        style={{borderRadius: "50%"}}
+                    />
 
                 </Badge>
 
@@ -134,8 +135,10 @@ const ConversationItem = ({conversationItem}) => {
                         {conversationItem.type === "voice" && <LuMusic size={16}/>}
                         {conversationItem.type === "file" && <LuFile size={16}/>}
                         {conversationItem.type === "location" && <LuMapPin size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" && <FiPhone size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "videoCall" && <FiVideo size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" &&
+                            <FiPhone size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "videoCall" &&
+                            <FiVideo size={16}/>}
 
                         <Typography
                             variant="caption"
@@ -204,38 +207,62 @@ const ConversationItem = ({conversationItem}) => {
 
 const Conversations = () => {
 
+    const listRef = useRef();
+    const sizeMap = useRef({});
+    const {language} = useSelector(state => state.setting.appearance);
+
+    const setSize = useCallback((index, size) => {
+        sizeMap.current = {...sizeMap.current, [index]: size};
+        listRef.current.resetAfterIndex(index);
+    }, []);
+
+    const getSize = index => sizeMap.current[index] || 100;
+
     return (
-        <SimpleBar
+        <AutoSizer
             style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "start",
+                alignItems: "center",
                 width: "100%",
                 height: "calc(100dvh - 140px)",
             }}
         >
-
-            <Stack
-                component="ul"
-                direction="column"
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                }}
-            >
-
-                {
-                    conversationList.map(conversationItem =>
-                        <ConversationItem
-                            key={conversationItem._id}
-                            conversationItem={conversationItem}
-                        />
-                    )
-                }
-
-            </Stack>
-
-        </SimpleBar>
+            {
+                ({height, width}) => (
+                    <List
+                        ref={listRef}
+                        direction={language === "fa" ? "rtl" : "ltr"}
+                        width={width}
+                        height={height}
+                        itemCount={conversationList.length}
+                        itemSize={getSize}
+                        className="remove-scrollbar"
+                    >
+                        {
+                            ({index, style}) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        ...style,
+                                    }}
+                                >
+                                    <ConversationItem
+                                        index={index}
+                                        conversationItem={conversationList[index]}
+                                        setSize={setSize}
+                                    />
+                                </div>
+                            )
+                        }
+                    </List>
+                )
+            }
+        </AutoSizer>
     )
 }
 
