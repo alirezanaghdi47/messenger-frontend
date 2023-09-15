@@ -47,7 +47,8 @@
       "createGroup": "Create Group",
       "createStory": "Create new story",
       "forwardChat": "Forward chat",
-      "select": "Select an item"
+      "select": "Select an item",
+      "orientation": "Rotate your device"
     },
     "select": {
       "dark": "Dark",

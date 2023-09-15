@@ -1,9 +1,18 @@
 // libraries
 import {Stack} from "@mui/material";
+import {useOrientation} from "@uidotdev/usehooks";
+
+// components
+import Orientation from "components/partials/Orientation";
 
 const Secondary = ({children}) => {
 
-    return (
+    const {angle, type} = useOrientation();
+
+    const isOriented = angle === 90 && type === "landscape-primary";
+
+    return !isOriented ? (
+
         <Stack
             direction="row"
             sx={{
@@ -16,11 +25,10 @@ const Secondary = ({children}) => {
                 minHeight: "100dvh",
             }}
         >
-
             {children}
-
         </Stack>
-    )
+
+    ) : <Orientation/>
 }
 
 export default Secondary;

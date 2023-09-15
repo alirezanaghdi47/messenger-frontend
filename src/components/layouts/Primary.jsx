@@ -1,9 +1,18 @@
 // libraries
 import {Container, Stack} from "@mui/material";
+import {useOrientation} from "@uidotdev/usehooks";
+
+// components
+import Orientation from "components/partials/Orientation";
 
 const Primary = ({children}) => {
 
-    return (
+    const {angle , type} = useOrientation();
+
+    const isOriented = angle === 90 && type === "landscape-primary";
+
+    return !isOriented ? (
+
         <Container
             maxWidth="xl"
             disableGutters
@@ -21,13 +30,12 @@ const Primary = ({children}) => {
                     minHeight: "100dvh",
                 }}
             >
-
                 {children}
-
             </Stack>
 
         </Container>
-    )
+
+    ) : <Orientation/>
 }
 
 export default Primary;
