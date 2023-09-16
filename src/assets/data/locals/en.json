@@ -101,9 +101,8 @@
       "createGroup": "Create new group",
       "createStory": "Create new story",
       "profile": "Profile",
-      "appearanceCustomization": "Appearance & customization",
-      "soundNotification": "Sound & notification",
-      "securityPrivacy": "Security & privacy"
+      "appearance": "Appearance",
+      "privacy": "Privacy"
     },
     "button": {
       "persian": "Persian",
