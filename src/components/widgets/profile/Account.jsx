@@ -20,10 +20,9 @@ const Account = () => {
     const formik = useFormik({
         initialValues: {
             avatar: {},
-            name: "",
             userName: "",
             phoneNumber: "",
-            birthDay: "",
+            biography: ""
         },
         validationSchema: editProfileSchema,
         onSubmit: async (data) => {
@@ -37,7 +36,7 @@ const Account = () => {
             rowSpacing={4}
             sx={{
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : "100%",
+                height: isTablet ? "calc(100dvh - 80px)" : "max-content",
                 padding: 4,
                 overflowY: "scroll"
             }}
@@ -58,23 +57,6 @@ const Account = () => {
                     onBlur={() => formik.setFieldTouched("avatar")}
                     touched={formik.touched.avatar}
                     error={formik.errors.avatar}
-                />
-
-            </Grid>
-
-            <Grid
-                item
-                xs={12}
-            >
-
-                <TextInput
-                    label={t("input.name")}
-                    name="name"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                    onBlur={() => formik.setFieldTouched("name")}
-                    error={formik.errors.name}
-                    touched={formik.touched.name}
                 />
 
             </Grid>

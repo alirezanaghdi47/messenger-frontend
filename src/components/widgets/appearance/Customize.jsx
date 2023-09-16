@@ -23,7 +23,7 @@ const Customize = () => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : "100%",
+                height: isTablet ? "calc(100dvh - 80px)" : "max-content",
                 padding: 4,
                 overflowY:"scroll"
             }}

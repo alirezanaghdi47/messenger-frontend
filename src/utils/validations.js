@@ -16,8 +16,6 @@ export const editProfileSchema = Yup.object().shape({
         }
     }),
     userName: Yup.string().max(20, i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
-    firstName: Yup.string().max(20, i18n.t("error.firstNameMaxLength")).required(i18n.t("error.firstNameRequired")),
-    lastName: Yup.string().max(20, i18n.t("error.lastNameMaxLength")).required(i18n.t("error.lastNameRequired")),
     phoneNumber: Yup.string().matches(/^(\+98|0)?9\d{9}$/g, i18n.t("error.phoneNumberFormat")).required(i18n.t("error.phoneNumberRequired")),
     biography: Yup.string().max(50, i18n.t("error.biographyMaxLength"))
 });
