@@ -1,8 +1,11 @@
 // libraries
-import {useLocation, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Stack, Typography, useTheme} from "@mui/material";
 import {LuPalette, LuShield, LuUser} from "react-icons/lu";
+
+// stores
+import {setPage} from "stores/slices/app";
 
 const linkList = [
     {id: 1, title: "menu.profile", value: "profile", icon: <LuUser size={20}/>},
@@ -12,12 +15,12 @@ const linkList = [
 
 const LinkItem = ({linkItem}) => {
 
-    const navigate = useNavigate();
-    const location = useLocation();
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    const dispatch = useDispatch();
+    const {page} = useSelector(state => state.app);
     const {t} = useTranslation();
     const theme = useTheme();
-
-    const _handleActiveLink = (value) => navigate(`/setting/${value}`);
 
     return (
         <Stack
@@ -29,20 +32,20 @@ const LinkItem = ({linkItem}) => {
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
-                bgcolor: location.pathname === "/setting/" + linkItem.value && "primary.main",
-                color: location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
+                bgcolor: page.active === linkItem.value && "primary.main",
+                color: page.active === linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
                 borderRadius: 1,
                 padding: 1.5,
                 cursor: "pointer"
             }}
-            onClick={() => _handleActiveLink(linkItem.value)}
+            onClick={() => dispatch(setPage({active: linkItem.value}))}
         >
 
             {linkItem.icon}
 
             <Typography
                 variant="subtitle2"
-                color={location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                color={page.active === linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                 fontWeight='bold'
                 noWrap
             >

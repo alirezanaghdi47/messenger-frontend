@@ -1,39 +1,36 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "@react-hooks-library/core";
+import {AsyncImage} from "loadable-image";
 import {Box, Typography} from "@mui/material";
 
 const Empty = () => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
-    const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Box
             sx={{
-                position: "fixed",
-                zIndex: 0,
-                top: 0,
-                left: isTablet ? 0 : 360,
-                bottom: 0,
                 display: "flex",
                 gap: 2,
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                width: isTablet ? "100%" : "calc(100% - 360px)",
-                height: "100dvh",
+                width: "100%",
+                height: "100%",
                 padding: 4
             }}
         >
 
-            <img
+            <AsyncImage
                 src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/setting-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/setting-light.svg"}
                 alt="empty"
-                width="100%"
-                style={{maxWidth: 300}}
+                style={{
+                    width: "100%",
+                    maxWidth: 240,
+                    aspectRatio: 3 / 2
+                }}
             />
 
             <Typography

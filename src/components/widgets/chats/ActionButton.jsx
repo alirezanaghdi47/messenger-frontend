@@ -6,9 +6,11 @@ import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle, LuUsers} from "react-icons/lu";
 
+// hooks
+import {useModal} from "hooks/useModal";
+import {useDropdownMenu} from "hooks/useDropdownMenu";
+
 // components
-import {useModal} from "components/hooks/useModal";
-import {useDropdownMenu} from "components/hooks/useDropdownMenu";
 const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
 const AddGroupModal = Loadable(() => import("components/widgets/chats/AddGroupModal"));
 
@@ -109,7 +111,6 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 const ActionButton = () => {
 
     const isDesktop = useMediaQuery('(max-width: 992px)');
-
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (

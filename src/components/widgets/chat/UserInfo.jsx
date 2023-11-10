@@ -1,6 +1,7 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {Stack, Typography} from "@mui/material";
+import {AsyncImage} from "loadable-image";
+import {Box, Stack, Typography} from "@mui/material";
 
 const UserInfo = () => {
 
@@ -18,12 +19,15 @@ const UserInfo = () => {
             }}
         >
 
-            <img
+            <AsyncImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
-                width={40}
-                height={40}
-                style={{borderRadius: "50%"}}
+                style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                }}
+                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
             />
 
             <Stack

@@ -97,59 +97,23 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
         <Stack
             ref={rowRef}
             component="li"
-            direction="row"
+            direction="column"
             gap={1}
             sx={{
                 display: "flex",
-                justifyContent: conversationItem.me ? "start" : "end",
-                alignItems: "end",
+                justifyContent: "center",
+                alignItems: conversationItem.me ? "start" : "end",
                 width: '100%',
             }}
         >
 
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    order: conversationItem.me ? 1 : 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "start",
-                    height: "100%",
-                }}
-            >
-
-                <img
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                    alt="avatar"
-                    width={30}
-                    height={30}
-                    style={{borderRadius: "50%"}}
-                />
-
-            </Stack>
-
-            <Stack
-                direction="column"
-                gap={1}
-                sx={{
-                    order: conversationItem.me ? 2 : 1,
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "start",
-                    width: "max-content",
-                }}
-            >
-
-                {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
-                {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
-                {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
-                {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
-                {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
-                {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
-                {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
-
-            </Stack>
+            {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
+            {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
+            {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
+            {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
+            {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
+            {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
+            {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
 
         </Stack>
     )

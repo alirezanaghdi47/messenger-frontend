@@ -1,9 +1,9 @@
 // libraries
 import {useCallback, useEffect, useRef} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
+import {AsyncImage} from "loadable-image";
 import {VariableSizeList as List} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
@@ -11,8 +11,11 @@ import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// components
-import {useContextMenu} from "components/hooks/useContextMenu";
+// hooks
+import {useContextMenu} from "hooks/useContextMenu";
+
+// stores
+import {setPage} from "stores/slices/app";
 
 const ConversationDropdownMenu = Loadable(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
@@ -33,14 +36,12 @@ const conversationList = [
 
 const ConversationItem = ({conversationItem, index, setSize}) => {
 
+    const dispatch = useDispatch();
+    const {page} = useSelector(state => state.app);
     const rowRef = useRef();
-    const navigate = useNavigate();
-    const params = useParams();
     const {t} = useTranslation();
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-
-    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/chat" : `/chat/${item._id}`);
 
     useEffect(() => {
         setSize(index, rowRef.current.getBoundingClientRect().height);
@@ -51,7 +52,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
             ref={rowRef}
             component="li"
             sx={{width: "100%"}}
-            onClick={() => _handleActiveItem(conversationItem)}
+            onClick={() => dispatch(setPage({active: "chat" , data: conversationItem._id}))}
             onContextMenu={_handleShowContextMenu}
         >
 
@@ -68,7 +69,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: params.chatId === conversationItem._id && "primary.main",
+                    bgcolor: page.data === conversationItem._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
@@ -87,12 +88,15 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                     }}
                 >
 
-                    <img
+                    <AsyncImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="avatar"
-                        width={40}
-                        height={40}
-                        style={{borderRadius: "50%"}}
+                        style={{
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50%",
+                        }}
+                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                     />
 
                 </Badge>
@@ -110,7 +114,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         className="text-truncate"
                     >
@@ -125,7 +129,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
@@ -142,7 +146,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 
                         <Typography
                             variant="caption"
-                            color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                             sx={{
                                 width: "100%",
                                 overflow: "hidden",
@@ -177,13 +181,13 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                        color: page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>

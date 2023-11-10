@@ -4,7 +4,7 @@ import {IconButton} from "@mui/material";
 import {LuMic} from "react-icons/lu";
 
 // components
-import {useModal} from "components/hooks/useModal";
+import {useModal} from "hooks/useModal";
 const VoiceRecorderPopup = Loadable(() => import("components/widgets/chat/VoiceRecorderPopup"));
 
 const VoiceRecorder = () => {

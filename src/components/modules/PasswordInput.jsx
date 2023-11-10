@@ -1,5 +1,6 @@
 // libraries
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 import {InputAdornment, FormControl, Typography, TextField, IconButton} from "@mui/material";
 import {FiEye, FiEyeOff} from "react-icons/fi";
 
@@ -17,6 +18,7 @@ const PasswordInput = ({
                            disabled = false
                        }) => {
 
+    const {t} = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -82,7 +84,7 @@ const PasswordInput = ({
                         color="error"
                         sx={{marginTop: 1}}
                     >
-                        {error}
+                        {t(error)}
                     </Typography>
                 )
             }

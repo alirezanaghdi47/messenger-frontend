@@ -1,15 +1,15 @@
 // libraries
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {IconButton, Stack} from "@mui/material";
 import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 
+// stores
+import {setPage} from "stores/slices/app";
+
 const Appbar = () => {
 
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
-
-    const _handleBack = () => navigate("/chat");
 
     return (
         <Stack
@@ -32,7 +32,7 @@ const Appbar = () => {
             <IconButton
                 variant="text"
                 color="light"
-                onClick={_handleBack}
+                onClick={() => dispatch(setPage({active: "chats"}))}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>

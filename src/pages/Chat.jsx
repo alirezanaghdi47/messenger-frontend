@@ -1,9 +1,11 @@
 // libraries
-import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Loadable from "@loadable/component";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme} from "@mui/material";
+
+// layouts
+import Primary from "layouts/Primary";
 
 // components
 import Header from "components/widgets/chat/Header.jsx";
@@ -16,57 +18,60 @@ const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardC
 
 const Chat = () => {
 
-    const params = useParams();
     const {background} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
-    return params.chatId && (
-        <Stack
-            component="main"
-            direction="column"
-            sx={{
-                position: 'absolute',
-                zIndex: 200,
-                top: 0,
-                bottom: 0,
-                left: isTablet ? 0 : 360,
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                width: isTablet ? "100%" : "calc(100% - 360px)",
-                height: "100dvh",
-                backgroundImage: `url(${background})`,
-                backgroundPosition: 'center',
-                backgroundSize: "cover",
-                "&::after": {
-                    content: "''",
-                    position: "absolute",
-                    zIndex: -1,
+    return (
+        <Primary>
+
+            <Stack
+                component="main"
+                direction="column"
+                sx={{
+                    position: 'absolute',
+                    zIndex: 200,
                     top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: alpha(theme.palette.background.default, 0.5)
-                }
-            }}
-        >
+                    bottom: 0,
+                    left: isTablet ? 0 : 360,
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: isTablet ? "100%" : "calc(100% - 360px)",
+                    height: "100dvh",
+                    backgroundImage: `url(${background})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: "cover",
+                    "&::after": {
+                        content: "''",
+                        position: "absolute",
+                        zIndex: -1,
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: alpha(theme.palette.background.default, 0.5)
+                    }
+                }}
+            >
 
-            <Header/>
+                <Header/>
 
-            <Conversations/>
+                <Conversations/>
 
-            {/*<EmptyPlaceholder/>*/}
+                {/*<EmptyPlaceholder/>*/}
 
-            {/*<ForwardChatModal/>*/}
+                {/*<ForwardChatModal/>*/}
 
-            {/*<ForwardMessagePopup/>*/}
+                {/*<ForwardMessagePopup/>*/}
 
-            {/*<ReplyMessagePopup/>*/}
+                {/*<ReplyMessagePopup/>*/}
 
-            <Footer/>
+                <Footer/>
 
-        </Stack>
+            </Stack>
+
+        </Primary>
     )
 }
 

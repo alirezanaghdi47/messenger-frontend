@@ -1,15 +1,11 @@
 // libraries
-import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 
 const Appbar = () => {
 
-    const navigate = useNavigate();
     const {t} = useTranslation();
 
-    const _handleBack = () => navigate("/chat");
-    
     return(
         <Stack
             direction="row"
@@ -21,7 +17,7 @@ const Appbar = () => {
                 textDecoration: "none",
                 cursor: "pointer"
             }}
-            onClick={_handleBack}
+            // onClick={() => navigate("/chat")}
         >
 
             <Typography

@@ -1,30 +1,36 @@
 // libraries
-import {useLayoutEffect} from "react";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {useOrientation} from "@uidotdev/usehooks";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack} from "@mui/material";
 
 // components
-import Secondary from "components/layouts/Secondary.jsx";
-import Appbar from "components/widgets/auth/Appbar.jsx";
-import Version from "components/widgets/auth/Version";
+import Orientation from "components/partials/Orientation";
+import Appbar from "../components/widgets/auth/Appbar";
+import Version from "../components/widgets/auth/Version";
 
-const Auth = () => {
+const Ternary = ({children}) => {
 
-    const location = useLocation();
-    const navigate = useNavigate();
+    const {angle, type} = useOrientation();
     const {background} = useSelector(state => state.setting.appearance);
     const isDesktop = useMediaQuery('(max-width: 992px)');
     const isTablet = useMediaQuery('(max-width: 768px)');
+    const isOriented = angle === 90 && type === "landscape-primary";
 
-    useLayoutEffect(() => {
-        if (location.pathname === "/auth") navigate("/auth/sign-in");
-    }, []);
+    return !isOriented ? (
 
-    return (
-        <Secondary>
-
+        <Stack
+            direction="row"
+            sx={{
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100%",
+                minHeight: "100dvh",
+            }}
+        >
             <Stack
                 component="main"
                 direction="column"
@@ -43,7 +49,7 @@ const Auth = () => {
 
                 <Appbar/>
 
-                <Outlet/>
+                {children}
 
                 <Version/>
 
@@ -68,8 +74,11 @@ const Auth = () => {
                 )
             }
 
-        </Secondary>
-    )
+        </Stack>
+
+    ) : <Orientation/>
+
 }
 
-export default Auth;
+export default Ternary;
+

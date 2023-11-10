@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import {VariableSizeList as List} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import {useMediaQuery} from "@react-hooks-library/core";
+import {AsyncImage} from "loadable-image";
 import {Box, Chip, Stack, Typography} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
 
@@ -90,12 +91,15 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
                     }}
                 >
 
-                    <img
+                    <AsyncImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="browser"
-                        width={20}
-                        height={20}
-                        style={{borderRadius: "50%"}}
+                        style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                        }}
+                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                     />
 
                     <Typography
@@ -117,12 +121,15 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
                     }}
                 >
 
-                    <img
+                    <AsyncImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="browser"
-                        width={20}
-                        height={20}
-                        style={{borderRadius: "50%"}}
+                        style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                        }}
+                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                     />
 
                     <Typography

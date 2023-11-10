@@ -1,4 +1,5 @@
 // libraries
+import {useTranslation} from "react-i18next";
 import {InputAdornment, FormControl, Typography, TextField} from "@mui/material";
 
 const NumberInput = ({
@@ -15,6 +16,8 @@ const NumberInput = ({
                        onBlur,
                        disabled = false
                    }) => {
+
+    const {t} = useTranslation();
 
     return (
         <FormControl
@@ -68,7 +71,7 @@ const NumberInput = ({
                         color="error"
                         sx={{marginTop: 1}}
                     >
-                        {error}
+                        {t(error)}
                     </Typography>
                 )
             }

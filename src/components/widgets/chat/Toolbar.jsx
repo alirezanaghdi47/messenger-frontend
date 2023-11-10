@@ -12,8 +12,8 @@ import {
 import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 
 // components
-import {useDropdownMenu} from "components/hooks/useDropdownMenu";
-import {useModal} from "components/hooks/useModal";
+import {useDropdownMenu} from "hooks/useDropdownMenu";
+import {useModal} from "hooks/useModal";
 const VoiceCallModal = Loadable(() => import("components/widgets/chat/VoiceCallModal"));
 const VideoCallModal = Loadable(() => import("components/widgets/chat/VideoCallModal"));
 const IncomingCallModal = Loadable(() => import("components/widgets/chats/IncomingCallModal"));

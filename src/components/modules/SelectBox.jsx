@@ -89,7 +89,7 @@ const SelectBox = ({
                         color="error"
                         sx={{marginTop: 1}}
                     >
-                        {error}
+                        {t(error)}
                     </Typography>
                 )
             }

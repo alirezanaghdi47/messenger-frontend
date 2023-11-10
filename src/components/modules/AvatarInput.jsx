@@ -1,6 +1,8 @@
 // libraries
 import {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 import {useDropzone} from "react-dropzone";
+import {AsyncImage} from "loadable-image";
 import {Box, FormControl, Typography} from "@mui/material";
 import {FiCamera} from "react-icons/fi";
 
@@ -15,6 +17,7 @@ const AvatarInput = ({
                          onBlur,
                      }) => {
 
+    const {t} = useTranslation();
     const [file, setFile] = useState({});
 
     const {getRootProps, getInputProps} = useDropzone({
@@ -75,12 +78,15 @@ const AvatarInput = ({
 
                 {
                     (file?.preview || preview) ? (
-                        <img
+                        <AsyncImage
                             src={file?.preview ? file?.preview : preview}
                             alt="avatar"
-                            width="100%"
-                            height="100%"
-                            style={{borderRadius: 8}}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                aspectRatio: 1,
+                                borderRadius: 8,
+                            }}
                         />
                     ) : (
                         <FiCamera size={32}/>
@@ -97,7 +103,7 @@ const AvatarInput = ({
                         fontWeight="bold"
                         sx={{marginTop: 1}}
                     >
-                        {error}
+                        {t(error)}
                     </Typography>
                 )
             }

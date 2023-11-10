@@ -6,7 +6,7 @@ import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiCheck, FiChevronLeft, FiChevronRight, FiX} from "react-icons/fi";
 
 // components
-import {useSegment} from "components/hooks/useSegment";
+import {useSegment} from "hooks/useSegment";
 import SearchBar from "components/widgets/chats/Searchbar";
 import Contacts from "components/widgets/chats/Contacts";
 import Form from "components/widgets/chats/Form";

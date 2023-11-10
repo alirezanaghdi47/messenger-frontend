@@ -5,10 +5,12 @@ import localStorage from "redux-persist/es/storage";
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 // stores
+import appReducer from "stores/slices/app.js";
 import chatReducer from "stores/slices/chat.js";
 import settingReducer from "stores/slices/setting.js";
 
 const reducers = combineReducers({
+    app: appReducer,
     chat: chatReducer,
     setting: settingReducer,
 });

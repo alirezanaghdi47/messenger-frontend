@@ -2,6 +2,7 @@
 import {Stack, Container} from "@mui/material";
 
 // components
+import Ternary from "layouts/Ternary";
 import Header from "components/widgets/auth/Header.jsx";
 import SignInForm from "components/widgets/signIn/SignInForm.jsx";
 import VerifyCodeForm from "components/widgets/signIn/VerifyCodeForm";
@@ -9,32 +10,36 @@ import VerifyCodeForm from "components/widgets/signIn/VerifyCodeForm";
 const SignIn = () => {
 
     return (
-        <Container
-            component="main"
-            maxWidth='xs'
-            disableGutters
-        >
+        <Ternary>
 
-            <Stack
-                direction="column"
-                gap={4}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                }}
+            <Container
+                component="main"
+                maxWidth='xs'
+                disableGutters
             >
 
-                <Header title="typography.signIn"/>
+                <Stack
+                    direction="column"
+                    gap={4}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                    }}
+                >
 
-                <SignInForm/>
+                    <Header title="typography.signIn"/>
 
-                {/*<VerifyCodeForm/>*/}
+                    <SignInForm/>
 
-            </Stack>
+                    {/*<VerifyCodeForm/>*/}
 
-        </Container>
+                </Stack>
+
+            </Container>
+
+        </Ternary>
     )
 }
 

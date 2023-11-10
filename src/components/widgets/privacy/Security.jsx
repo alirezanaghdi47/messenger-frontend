@@ -8,7 +8,7 @@ import {Button, Stack, Typography} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import {useModal} from "components/hooks/useModal";
+import {useModal} from "hooks/useModal";
 import SwitchBox from "components/modules/SwitchBox";
 
 const EntryLockModal = Loadable(() => import("components/widgets/privacy/EntryLockModal"));

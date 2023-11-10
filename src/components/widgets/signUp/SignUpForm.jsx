@@ -1,5 +1,4 @@
 // libraries
-import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {Button, Stack, Typography} from "@mui/material";
@@ -8,9 +7,12 @@ import {FiKey, FiPhone, FiUser} from "react-icons/fi";
 // components
 import TextInput from "components/modules/TextInput.jsx";
 import PasswordInput from "components/modules/PasswordInput.jsx";
+import {setPage} from "../../../stores/slices/app";
+import {useDispatch} from "react-redux";
 
 const SignUpForm = () => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     const formik = useFormik({
@@ -103,10 +105,11 @@ const SignUpForm = () => {
                 </Typography>
 
                 <Button
-                    component={Link}
+                    // component={Link}
                     variant="text"
                     color="primary"
-                    to="/auth/sign-in"
+                    // to="/auth/sign-in"
+                    onClick={() => dispatch(setPage({active: "sign-in"}))}
                 >
                     {t("button.signIn")}
                 </Button>

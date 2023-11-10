@@ -1,4 +1,5 @@
 // libraries
+import {useTranslation} from "react-i18next";
 import {FormControl, FormControlLabel, Typography, styled} from "@mui/material";
 import {Switch, switchClasses} from '@mui/base/Switch';
 
@@ -75,6 +76,7 @@ const SwitchBox = ({
                        variant = "outlined"
                    }) => {
 
+    const {t} = useTranslation();
     const inputProps = {slotProps: {input: {name: name}}};
 
     return (
@@ -105,7 +107,7 @@ const SwitchBox = ({
                         fontWeight="bold"
                         style={{marginTop: 8}}
                     >
-                        {error}
+                        {t(error)}
                     </Typography>
                 )
             }

@@ -1,5 +1,6 @@
 // libraries
 import {useMediaQuery} from "@react-hooks-library/core";
+import {AsyncImage} from "loadable-image";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
@@ -27,12 +28,14 @@ const ModalHeader = ({onClose}) => {
                 }}
             >
 
-                <img
+                <AsyncImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                    }}
                 />
 
                 <Stack
@@ -97,12 +100,16 @@ const ModalContent = () => {
                 }}
             >
 
-                <img
+                <AsyncImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg"
                     alt="background"
-                    width="100%"
-                    height="100%"
-                    style={{borderRadius: 8}}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        aspectRatio: 3 / 2,
+                        borderRadius: 8,
+                    }}
+                    loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                 />
 
             </Box>

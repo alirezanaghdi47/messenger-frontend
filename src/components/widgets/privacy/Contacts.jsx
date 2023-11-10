@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {VariableSizeList as List} from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import {AsyncImage} from "loadable-image";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, Stack, Typography} from "@mui/material";
 
@@ -46,12 +47,15 @@ const ContactItem = ({contactItem , index , setSize}) => {
                 }}
             >
 
-                <img
+                <AsyncImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
+                    style={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                    }}
+                    loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                 />
 
                 <Stack

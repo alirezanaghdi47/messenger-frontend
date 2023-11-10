@@ -1,5 +1,5 @@
 // components
-import Ternary from "components/layouts/Ternary.jsx";
+import Ternary from "layouts/Ternary.jsx";
 import Error from "components/widgets/not-found/Error";
 
 const NotFound = () => {

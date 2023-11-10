@@ -2,6 +2,7 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
+import {AsyncImage} from 'loadable-image';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
@@ -12,8 +13,8 @@ import {fontSizeList} from "utils/constants";
 import {formattedByte, formattedMilisecond} from "utils/functions";
 
 // components
-import {useContextMenu} from "components/hooks/useContextMenu";
-import {useModal} from "components/hooks/useModal";
+import {useContextMenu} from "hooks/useContextMenu";
+import {useModal} from "hooks/useModal";
 
 const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
 const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
@@ -142,17 +143,22 @@ export const FileMessage = ({message}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    width: "100%",
+                    width: "max-content",
                     color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <img
+                <AsyncImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
-                    width={50}
-                    height={50}
-                    style={{borderRadius: 8}}
+                    style={{
+                        width: 60,
+                        height: 60,
+                        aspectRatio: 1,
+                        borderRadius: 8,
+                        cursor: "pointer"
+                    }}
+                    loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                 />
 
                 <Stack
@@ -250,21 +256,22 @@ export const ImageMessage = ({message}) => {
                         justifyContent: "center",
                         alignItems: "center",
                         width: "100%",
-                        height: "100%"
+                        height: "100%",
                     }}
                 >
 
-                    <img
+                    <AsyncImage
                         src={message.content}
-                        alt="image"
-                        width="100%"
-                        height="100%"
+                        alt={message.id}
                         style={{
-                            maxWidth: 300,
-                            minHeight: 200,
+                            width: "100%",
+                            minWidth: 300,
+                            height: "100%",
+                            aspectRatio: 3 / 2,
                             borderRadius: 8,
                             cursor: "pointer"
                         }}
+                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                         onClick={_handleShowModal}
                     />
 
@@ -479,20 +486,23 @@ export const VideoMessage = ({message}) => {
                         justifyContent: "center",
                         alignItems: "center",
                         width: "100%",
-                        height: "100%"
+                        maxWidth: 300,
+                        height: "100%",
+                        maxHeight: 200,
                     }}
                 >
 
-                    <img
+                    <AsyncImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                         alt="image"
-                        width="100%"
-                        height="100%"
                         style={{
-                            maxWidth: 300,
-                            minHeight: 200,
+                            width: "100%",
+                            minWidth: 300,
+                            height: "100%",
+                            aspectRatio: 3 / 2,
                             borderRadius: 8,
                         }}
+                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                     />
 
                     <Box
@@ -734,17 +744,18 @@ export const LocationMessage = ({message}) => {
                 onClose={_handleHideContextMenu}
             />
 
-            <img
+            <AsyncImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                 alt="image"
-                width="100%"
-                height="100%"
                 style={{
-                    maxWidth: 300,
-                    minHeight: 200,
+                    width: "100%",
+                    minWidth: 300,
+                    height: "100%",
+                    aspectRatio: 3 / 2,
                     borderRadius: 8,
                     cursor: "pointer"
                 }}
+                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                 onClick={_handleShowDetail}
             />
 

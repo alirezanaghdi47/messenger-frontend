@@ -1,37 +1,42 @@
 // libraries
-import {Stack , Container} from "@mui/material";
+import {Stack, Container} from "@mui/material";
 
 // components
+import Ternary from "layouts/Ternary";
 import Header from "components/widgets/auth/Header.jsx";
 import SignUpForm from "components/widgets/signUp/SignUpForm.jsx";
 
 const SignUp = () => {
 
     return (
-        <Container
-            component="main"
-            maxWidth='xs'
-            disableGutters
-        >
+        <Ternary>
 
-            <Stack
-                direction="column"
-                gap={4}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                }}
+            <Container
+                component="main"
+                maxWidth='xs'
+                disableGutters
             >
 
-                <Header title="typography.signUp"/>
+                <Stack
+                    direction="column"
+                    gap={4}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                    }}
+                >
 
-                <SignUpForm/>
+                    <Header title="typography.signUp"/>
 
-            </Stack>
+                    <SignUpForm/>
 
-        </Container>
+                </Stack>
+
+            </Container>
+
+        </Ternary>
     )
 }
 

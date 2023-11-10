@@ -29,13 +29,6 @@ input[type=number] {
   display: block !important;
 }
 
-// react-fullscreen
-.fullscreen {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
 // react-emoji
 body[data-theme="light"] {
   .sc-beyTiQ {
@@ -79,4 +72,25 @@ body[data-theme="dark"] {
     display: none !important;
     margin: 0 !important;
   }
+}
+
+// react-transition-group
+.fade-in{
+
+  &-enter{
+    @apply opacity-0 scale-90;
+  }
+
+  &-enter-active{
+    @apply opacity-100 scale-100 transform transition-all duration-300 ease-out-expo;
+  }
+
+  &-exit{
+    @apply opacity-100 scale-100;
+  }
+
+  &-exit-active{
+    @apply opacity-0 scale-90 transform transition-all duration-300 ease-out-expo;
+  }
+
 }

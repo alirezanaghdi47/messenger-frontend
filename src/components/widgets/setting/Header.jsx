@@ -1,19 +1,19 @@
 // libraries
-import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "@react-hooks-library/core";
 import {Box, IconButton, Stack, Typography} from "@mui/material";
 import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 
+// stores
+import {setPage} from "stores/slices/app";
+
 const Header = ({title}) => {
 
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
-
-    const _handleBack = () => navigate("/setting");
 
     return isTablet && (
         <Stack
@@ -35,7 +35,7 @@ const Header = ({title}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={_handleBack}
+                onClick={() => dispatch(setPage({active: "setting"}))}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>

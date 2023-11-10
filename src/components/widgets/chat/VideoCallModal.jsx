@@ -2,6 +2,7 @@
 import {useSelector} from "react-redux";
 import ReactPlayer from "react-player";
 import {useMediaQuery} from "@react-hooks-library/core";
+import {AsyncImage} from "loadable-image";
 import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
 
@@ -26,12 +27,15 @@ const ModalHeader = () => {
             }}
         >
 
-            <img
+            <AsyncImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
-                width={40}
-                height={40}
-                style={{borderRadius: "50%"}}
+                style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                }}
+                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
             />
 
             <Typography

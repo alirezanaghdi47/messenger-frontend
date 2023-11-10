@@ -4,7 +4,7 @@ import {IconButton} from "@mui/material";
 import {LuPaperclip} from "react-icons/lu";
 
 // components
-import {useDropdownMenu} from "components/hooks/useDropdownMenu";
+import {useDropdownMenu} from "hooks/useDropdownMenu";
 
 const AttachmentDropdownMenu = Loadable(() => import("components/widgets/chat/AttachmentDropdownMenu"));
 
