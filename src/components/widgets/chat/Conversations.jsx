@@ -1,9 +1,7 @@
 // libraries
-import {useCallback, useEffect, useLayoutEffect, useRef} from "react";
-import {useSelector} from "react-redux";
-import {VariableSizeList as List} from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
-import {Stack} from "@mui/material";
+import {useLayoutEffect, useRef} from "react";
+import {Virtuoso} from 'react-virtuoso';
+import {Box, Stack} from "@mui/material";
 
 // components
 import {
@@ -85,35 +83,65 @@ const conversationList = [
     {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
 ];
 
-const ConversationItem = ({conversationItem, index, setSize}) => {
-
-    const rowRef = useRef();
-
-    useEffect(() => {
-        setSize(index, rowRef.current.getBoundingClientRect().height);
-    }, [setSize, index]);
+const ConversationItem = ({conversationItem}) => {
 
     return (
         <Stack
-            ref={rowRef}
             component="li"
-            direction="column"
+            direction="row"
             gap={1}
             sx={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: conversationItem.me ? "start" : "end",
+                justifyContent: conversationItem.me ? "start" : "end",
+                alignItems: "end",
                 width: '100%',
+                padding: 2
             }}
         >
 
-            {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
-            {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
-            {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
-            {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
-            {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
-            {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
-            {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    order: conversationItem.me ? 1 : 2,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "start",
+                    height: "100%",
+                }}
+            >
+
+                <img
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    alt="avatar"
+                    width={30}
+                    height={30}
+                    style={{borderRadius: "50%"}}
+                />
+
+            </Stack>
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    order: conversationItem.me ? 2 : 1,
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "start",
+                    width: "max-content",
+                }}
+            >
+
+                {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
+                {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
+                {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
+                {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
+                {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
+                {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
+                {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
+
+            </Stack>
 
         </Stack>
     )
@@ -122,70 +150,43 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 const Conversations = () => {
 
     const listRef = useRef();
-    const sizeMap = useRef({});
-    const {language} = useSelector(state => state.setting.appearance);
-
-    const setSize = useCallback((index, size) => {
-        sizeMap.current = {...sizeMap.current, [index]: size};
-        listRef.current.resetAfterIndex(index);
-    }, []);
-
-    const getSize = index => sizeMap.current[index] + 32 || 200 + 32;
 
     useLayoutEffect(() => {
-        setTimeout(() => {
-            listRef?.current?.scrollToItem(conversationList.length);
-        }, 100);
+        listRef?.current?.scrollToIndex({
+            index: conversationList.length,
+            behavior: "smooth",
+            align: "end"
+        });
     }, []);
 
     return (
-        <AutoSizer
-            style={{
+        <Box
+            sx={{
                 position: "sticky",
                 top: 80,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "start",
-                alignItems: "center",
                 width: "100%",
                 height: "calc(100dvh - 160px)",
             }}
         >
-            {
-                ({height, width}) => (
-                    <List
-                        ref={listRef}
-                        direction={language === "fa" ? "rtl" : "ltr"}
-                        width={width}
-                        height={height}
-                        itemCount={conversationList.length}
-                        itemSize={getSize}
-                        className="remove-scrollbar"
-                    >
-                        {
-                            ({index, style}) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        padding: '0 16px',
-                                        ...style,
-                                    }}
-                                >
-                                    <ConversationItem
-                                        index={index}
-                                        conversationItem={conversationList[index]}
-                                        setSize={setSize}
-                                    />
-                                </div>
-                            )
-                        }
-                    </List>
-                )
-            }
-        </AutoSizer>
+
+            <Virtuoso
+                ref={listRef}
+                data={conversationList}
+                totalCount={conversationList.length}
+                itemContent={(index , conversationItem) => (
+                    <ConversationItem
+                        key={index}
+                        conversationItem={conversationItem}
+                    />
+                )}
+                style={{
+                    width: "100%",
+                    height: "calc(100dvh - 160px)",
+                    overflow: "scroll"
+                }}
+            />
+
+        </Box>
     )
 }
 

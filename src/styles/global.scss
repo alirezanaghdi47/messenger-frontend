@@ -29,6 +29,13 @@ input[type=number] {
   display: block !important;
 }
 
+// react-fullscreen
+.fullscreen {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 // react-emoji
 body[data-theme="light"] {
   .sc-beyTiQ {
@@ -74,23 +81,35 @@ body[data-theme="dark"] {
   }
 }
 
-// react-transition-group
-.fade-in{
 
-  &-enter{
-    @apply opacity-0 scale-90;
-  }
 
-  &-enter-active{
-    @apply opacity-100 scale-100 transform transition-all duration-300 ease-out-expo;
-  }
 
-  &-exit{
-    @apply opacity-100 scale-100;
-  }
 
-  &-exit-active{
-    @apply opacity-0 scale-90 transform transition-all duration-300 ease-out-expo;
-  }
 
+
+
+
+.slide-enter,
+.slide-exit {
+  transition: transform 1000ms ease-out;
+}
+
+.slide-enter {
+  transform: translateX(100%);
+}
+
+.slide-enter.slide-enter-active {
+  transform: translateX(0%);
+}
+
+.slide-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateX(0%);
+}
+
+.slide-exit-active {
+  transform: translateX(-100%);
 }

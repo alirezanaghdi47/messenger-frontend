@@ -1,8 +1,7 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Button, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {Button, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiCheck, FiChevronLeft, FiChevronRight, FiX} from "react-icons/fi";
 
 // components

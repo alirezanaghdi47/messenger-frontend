@@ -1,7 +1,6 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {AsyncImage} from "loadable-image";
 import {Button, Stack} from "@mui/material";
 
 // components
@@ -26,14 +25,11 @@ const LanguageItem = ({languageItem}) => {
             variant={languageItem.value === language ? "contained" : "text"}
             color={languageItem.value === language ? "primary" : "ternary"}
             startIcon={
-                <AsyncImage
+                <img
                     src={languageItem.flag}
                     alt={languageItem.value}
-                    style={{
-                        width: 20,
-                        height: 20,
-                        borderRadius: "50%",
-                    }}
+                    width={24}
+                    height={16}
                 />
             }
             onClick={() => _handleActiveLanguage(languageItem.value)}

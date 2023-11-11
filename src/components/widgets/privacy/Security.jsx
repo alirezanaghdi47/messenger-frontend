@@ -3,8 +3,7 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from "@loadable/component";
 import {useFormik} from "formik";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Button, Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components

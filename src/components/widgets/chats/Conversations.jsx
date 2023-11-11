@@ -1,21 +1,15 @@
 // libraries
-import {useCallback, useEffect, useRef} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import {AsyncImage} from "loadable-image";
-import {VariableSizeList as List} from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
+import {Virtuoso} from "react-virtuoso";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// hooks
+// components
 import {useContextMenu} from "hooks/useContextMenu";
-
-// stores
-import {setPage} from "stores/slices/app";
 
 const ConversationDropdownMenu = Loadable(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
@@ -34,25 +28,21 @@ const conversationList = [
     {_id: "8", type: "log", status: "videoCall"},
 ];
 
-const ConversationItem = ({conversationItem, index, setSize}) => {
+const ConversationItem = ({conversationItem}) => {
 
-    const dispatch = useDispatch();
-    const {page} = useSelector(state => state.app);
-    const rowRef = useRef();
+    const navigate = useNavigate();
+    const params = useParams();
     const {t} = useTranslation();
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
-    useEffect(() => {
-        setSize(index, rowRef.current.getBoundingClientRect().height);
-    }, [setSize, index]);
+    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/chat" : `/chat/${item._id}`);
 
     return (
         <Box
-            ref={rowRef}
             component="li"
             sx={{width: "100%"}}
-            onClick={() => dispatch(setPage({active: "chat" , data: conversationItem._id}))}
+            onClick={() => _handleActiveItem(conversationItem)}
             onContextMenu={_handleShowContextMenu}
         >
 
@@ -69,7 +59,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    bgcolor: page.data === conversationItem._id && "primary.main",
+                    bgcolor: params.chatId === conversationItem._id && "primary.main",
                     width: "100%",
                     borderRadius: 1,
                     padding: 1.5,
@@ -88,15 +78,12 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                     }}
                 >
 
-                    <AsyncImage
+                    <img
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="avatar"
-                        style={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: "50%",
-                        }}
-                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                        width={40}
+                        height={40}
+                        style={{borderRadius: "50%"}}
                     />
 
                 </Badge>
@@ -114,7 +101,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         className="text-truncate"
                     >
@@ -129,7 +116,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                             justifyContent: "start",
                             alignItems: "center",
                             width: "100%",
-                            color: page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                            color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                         }}
                     >
 
@@ -146,7 +133,7 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 
                         <Typography
                             variant="caption"
-                            color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                            color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                             sx={{
                                 width: "100%",
                                 overflow: "hidden",
@@ -181,13 +168,13 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
                         justifyContent: "center",
                         alignItems: "end",
                         width: 50,
-                        color: page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                        color: params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
                     <Typography
                         variant="caption"
-                        color={page.data === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={params.chatId === conversationItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                     >
                         11:11
                     </Typography>
@@ -211,19 +198,16 @@ const ConversationItem = ({conversationItem, index, setSize}) => {
 
 const Conversations = () => {
 
-    const listRef = useRef();
-    const sizeMap = useRef({});
-    const {language} = useSelector(state => state.setting.appearance);
-
-    const setSize = useCallback((index, size) => {
-        sizeMap.current = {...sizeMap.current, [index]: size};
-        listRef.current.resetAfterIndex(index);
-    }, []);
-
-    const getSize = index => sizeMap.current[index] || 100;
-
     return (
-        <AutoSizer
+        <Virtuoso
+            data={conversationList}
+            totalCount={conversationList.length}
+            itemContent={(index , conversationItem) => (
+                <ConversationItem
+                    key={index}
+                    conversationItem={conversationItem}
+                />
+            )}
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -232,41 +216,7 @@ const Conversations = () => {
                 width: "100%",
                 height: "calc(100dvh - 140px)",
             }}
-        >
-            {
-                ({height, width}) => (
-                    <List
-                        ref={listRef}
-                        direction={language === "fa" ? "rtl" : "ltr"}
-                        width={width}
-                        height={height}
-                        itemCount={conversationList.length}
-                        itemSize={getSize}
-                        className="remove-scrollbar"
-                    >
-                        {
-                            ({index, style}) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        ...style,
-                                    }}
-                                >
-                                    <ConversationItem
-                                        index={index}
-                                        conversationItem={conversationList[index]}
-                                        setSize={setSize}
-                                    />
-                                </div>
-                            )
-                        }
-                    </List>
-                )
-            }
-        </AutoSizer>
+        />
     )
 }
 

@@ -1,7 +1,6 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Box, Tab, Tabs} from "@mui/material";
+import {Box, Tab, Tabs , useMediaQuery} from "@mui/material";
 import {FiFile, FiFilm, FiImage, FiMapPin, FiMusic} from "react-icons/fi";
 
 const filterList = [

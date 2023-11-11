@@ -1,6 +1,5 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {AsyncImage} from "loadable-image";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
@@ -22,14 +21,15 @@ const UserDetail = () => {
             }}
         >
 
-            <AsyncImage
+            <img
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
+                width="100%"
+                height="100%"
                 style={{
-                    width: "100%",
-                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
                 }}
-                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
             />
 
         </Box>

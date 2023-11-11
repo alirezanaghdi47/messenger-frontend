@@ -1,8 +1,7 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Button, Grid, Stack} from "@mui/material";
+import {Button, Grid, Stack , useMediaQuery} from "@mui/material";
 import {FiCheck, FiX} from "react-icons/fi";
 
 // components

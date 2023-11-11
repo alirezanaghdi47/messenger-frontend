@@ -2,7 +2,7 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import {AsyncImage} from 'loadable-image';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
@@ -143,22 +143,19 @@ export const FileMessage = ({message}) => {
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "center",
-                    width: "max-content",
+                    width: "100%",
                     color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <AsyncImage
+                <LazyLoadImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
-                    style={{
-                        width: 60,
-                        height: 60,
-                        aspectRatio: 1,
-                        borderRadius: 8,
-                        cursor: "pointer"
-                    }}
-                    loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                    effect="blur"
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                    width={50}
+                    height={50}
+                    style={{borderRadius: 8}}
                 />
 
                 <Stack
@@ -256,24 +253,28 @@ export const ImageMessage = ({message}) => {
                         justifyContent: "center",
                         alignItems: "center",
                         width: "100%",
-                        height: "100%",
+                        height: "100%"
                     }}
                 >
 
-                    <AsyncImage
-                        src={message.content}
-                        alt={message.id}
-                        style={{
-                            width: "100%",
-                            minWidth: 300,
-                            height: "100%",
-                            aspectRatio: 3 / 2,
-                            borderRadius: 8,
-                            cursor: "pointer"
-                        }}
-                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                    <Box
+                        style={{cursor: "pointer"}}
                         onClick={_handleShowModal}
-                    />
+                    >
+
+                        <LazyLoadImage
+                            src={message.content}
+                            alt="image"
+                            effect="blur"
+                            placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                            width={300}
+                            style={{
+                                aspectRatio: 3 / 2,
+                                borderRadius: 8,
+                            }}
+                        />
+
+                    </Box>
 
                     <Box
                         sx={{
@@ -486,23 +487,20 @@ export const VideoMessage = ({message}) => {
                         justifyContent: "center",
                         alignItems: "center",
                         width: "100%",
-                        maxWidth: 300,
-                        height: "100%",
-                        maxHeight: 200,
+                        height: "100%"
                     }}
                 >
 
-                    <AsyncImage
+                    <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                         alt="image"
+                        effect="blur"
+                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                        width={300}
                         style={{
-                            width: "100%",
-                            minWidth: 300,
-                            height: "100%",
                             aspectRatio: 3 / 2,
                             borderRadius: 8,
                         }}
-                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
                     />
 
                     <Box
@@ -744,20 +742,24 @@ export const LocationMessage = ({message}) => {
                 onClose={_handleHideContextMenu}
             />
 
-            <AsyncImage
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
-                alt="image"
-                style={{
-                    width: "100%",
-                    minWidth: 300,
-                    height: "100%",
-                    aspectRatio: 3 / 2,
-                    borderRadius: 8,
-                    cursor: "pointer"
-                }}
-                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+            <Box
+                style={{cursor: "pointer"}}
                 onClick={_handleShowDetail}
-            />
+            >
+
+                <LazyLoadImage
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                    alt="image"
+                    effect="blur"
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                    width={300}
+                    style={{
+                        aspectRatio: 3 / 2,
+                        borderRadius: 8,
+                    }}
+                />
+
+            </Box>
 
             <Stack
                 direction="row"

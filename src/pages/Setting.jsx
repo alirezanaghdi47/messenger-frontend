@@ -1,40 +1,72 @@
 // libraries
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack} from "@mui/material";
+import {Outlet, useLocation} from "react-router-dom";
+import {Fade, Stack , useMediaQuery} from "@mui/material";
 
 // components
-import Secondary from "layouts/Secondary";
-import Empty from "components/widgets/setting/Empty";
+import Primary from "layouts/Primary.jsx";
+import Appbar from "components/widgets/setting/Appbar.jsx";
+import Version from "components/widgets/setting/Version.jsx";
+import Links from "components/widgets/setting/Links.jsx";
+import UserInfo from "components/widgets/setting/UserInfo.jsx";
+
+const pathList = [
+    "/setting/profile",
+    "/setting/appearance",
+    "/setting/privacy",
+];
 
 const Setting = () => {
 
+    const location = useLocation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Secondary>
+        <Primary>
 
-            <Stack
-                component="main"
-                direction="column"
-                sx={{
-                    position: 'absolute',
-                    zIndex: 200,
-                    top: 0,
-                    bottom: 0,
-                    left: isTablet ? 0 : 360,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: isTablet ? "100%" : "calc(100% - 360px)",
-                    height: "100dvh",
-                }}
+            <Fade
+                in={(!pathList.includes(location.pathname) && isTablet) || !isTablet}
+                style={{transitionDelay: '300ms'}}
             >
 
-                <Empty/>
+                <Stack
+                    component="main"
+                    direction="column"
+                    gap={4}
+                    sx={{
+                        position: 'sticky',
+                        zIndex: 300,
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: isTablet ? "100%" : 360,
+                        minHeight: "100dvh",
+                        height: "100%",
+                        bgcolor: "background.paper",
+                        borderRightWidth: 1,
+                        borderRightStyle: "solid",
+                        borderRightColor: "secondary.main",
+                        padding: 2
+                    }}
+                >
 
-            </Stack>
+                    <Appbar/>
 
-        </Secondary>
+                    <UserInfo/>
+
+                    <Links/>
+
+                    <Version/>
+
+                </Stack>
+
+            </Fade>
+
+            <Outlet/>
+
+        </Primary>
     )
 }
 

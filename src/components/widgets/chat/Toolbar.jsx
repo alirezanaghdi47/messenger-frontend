@@ -1,13 +1,13 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import {useMediaQuery} from "@react-hooks-library/core";
 import {
     IconButton,
     Stack,
     Typography,
     MenuItem,
     Menu,
+    useMediaQuery
 } from "@mui/material";
 import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 

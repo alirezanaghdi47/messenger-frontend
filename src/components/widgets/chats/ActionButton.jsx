@@ -1,16 +1,13 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton, Menu, MenuItem, Typography} from "@mui/material";
+import {IconButton, Menu, MenuItem, Typography , useMediaQuery} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle, LuUsers} from "react-icons/lu";
 
-// hooks
+// components
 import {useModal} from "hooks/useModal";
 import {useDropdownMenu} from "hooks/useDropdownMenu";
-
-// components
 const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
 const AddGroupModal = Loadable(() => import("components/widgets/chats/AddGroupModal"));
 
@@ -111,6 +108,7 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 const ActionButton = () => {
 
     const isDesktop = useMediaQuery('(max-width: 992px)');
+
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (

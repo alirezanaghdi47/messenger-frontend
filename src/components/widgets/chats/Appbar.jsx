@@ -1,16 +1,15 @@
 // libraries
-import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {IconButton, Stack, Typography} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
-// stores
-import {setPage} from "stores/slices/app";
-
 const Appbar = () => {
 
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {t} = useTranslation();
+
+    const _handleRedirect = () => navigate("/setting");
 
     return (
         <Stack
@@ -59,7 +58,7 @@ const Appbar = () => {
                 <IconButton
                     variant="text"
                     color="ternary"
-                    onClick={() => dispatch(setPage({active: "setting"}))}
+                    onClick={_handleRedirect}
                 >
                     <FiSettings size={20}/>
                 </IconButton>

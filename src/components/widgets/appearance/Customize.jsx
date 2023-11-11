@@ -1,6 +1,5 @@
 // libraries
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Stack} from "@mui/material";
+import {Stack , useMediaQuery} from "@mui/material";
 
 // components
 import Language from "components/widgets/appearance/Language.jsx";

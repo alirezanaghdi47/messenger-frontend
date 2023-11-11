@@ -11,7 +11,6 @@ import {setTheme} from "stores/slices/setting.js";
 
 // utils
 import {themeList} from "utils/constants.js";
-import {AsyncImage} from "loadable-image";
 
 const ThemeItem = ({themeItem}) => {
 
@@ -39,14 +38,14 @@ const ThemeItem = ({themeItem}) => {
                 }}
             >
 
-                <AsyncImage
+                <img
                     src={themeItem.background}
                     alt={themeItem.id}
+                    width="100%"
+                    height="100%"
                     style={{
-                        width: "100%",
-                        height: "100%",
-                        aspectRatio: 3/2,
                         borderRadius: 8,
+                        objectFit: "cover"
                     }}
                 />
 

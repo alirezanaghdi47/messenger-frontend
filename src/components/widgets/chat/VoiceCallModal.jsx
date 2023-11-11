@@ -1,7 +1,6 @@
 // libraries
 import {useSelector} from "react-redux";
-import {AsyncImage} from "loadable-image";
-import {Box, Container, IconButton, Modal, Stack, Typography} from "@mui/material";
+import {Container, IconButton, Modal, Stack, Typography} from "@mui/material";
 import {FiMicOff, FiPhoneOff} from "react-icons/fi";
 
 const ModalHeader = () => {
@@ -25,15 +24,12 @@ const ModalHeader = () => {
             }}
         >
 
-            <AsyncImage
+            <img
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
-                style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                }}
-                loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                width={40}
+                height={40}
+                style={{borderRadius: "50%"}}
             />
 
             <Typography
@@ -81,6 +77,7 @@ const ModalContent = () => {
                     height: "calc(100dvh - 280px)",
                 }}
             >
+
 
             </Stack>
 

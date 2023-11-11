@@ -1,12 +1,7 @@
 // libraries
-import {useCallback, useEffect, useRef} from "react";
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {AsyncImage} from "loadable-image";
-import {VariableSizeList as List} from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {Box, Stack, Typography} from "@mui/material";
+import {Virtuoso} from "react-virtuoso";
+import {Box, Stack, Typography , useMediaQuery} from "@mui/material";
 
 const contactList = [
     {_id: "1"},
@@ -16,18 +11,12 @@ const contactList = [
     {_id: "5"},
 ];
 
-const ContactItem = ({contactItem , index , setSize}) => {
+const ContactItem = ({contactItem}) => {
 
-    const rowRef = useRef();
     const {t} = useTranslation();
-
-    useEffect(() => {
-        setSize(index, rowRef.current.getBoundingClientRect().height);
-    }, [setSize, index]);
 
     return (
         <Box
-            ref={rowRef}
             component="li"
             sx={{width: "100%"}}
         >
@@ -47,15 +36,12 @@ const ContactItem = ({contactItem , index , setSize}) => {
                 }}
             >
 
-                <AsyncImage
+                <img
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
-                    style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: "50%",
-                    }}
-                    loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                    width={40}
+                    height={40}
+                    style={{borderRadius: "50%"}}
                 />
 
                 <Stack
@@ -97,20 +83,18 @@ const ContactItem = ({contactItem , index , setSize}) => {
 
 const Contacts = () => {
 
-    const listRef = useRef();
-    const sizeMap = useRef({});
-    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    const setSize = useCallback((index, size) => {
-        sizeMap.current = {...sizeMap.current, [index]: size};
-        listRef.current.resetAfterIndex(index);
-    }, []);
-
-    const getSize = index => sizeMap.current[index] || 100;
-
     return (
-        <AutoSizer
+        <Virtuoso
+            data={contactList}
+            totalCount={contactList.length}
+            itemContent={(index , contactItem) => (
+                <ContactItem
+                    key={index}
+                    contactItem={contactItem}
+                />
+            )}
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -119,41 +103,7 @@ const Contacts = () => {
                 width: "100%",
                 height: isTablet ? "calc(100dvh - 200px)" : 480,
             }}
-        >
-            {
-                ({height, width}) => (
-                    <List
-                        ref={listRef}
-                        direction={language === "fa" ? "rtl" : "ltr"}
-                        width={width}
-                        height={height}
-                        itemCount={contactList.length}
-                        itemSize={getSize}
-                        className="remove-scrollbar"
-                    >
-                        {
-                            ({index, style}) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        ...style,
-                                    }}
-                                >
-                                    <ContactItem
-                                        index={index}
-                                        contactItem={contactList[index]}
-                                        setSize={setSize}
-                                    />
-                                </div>
-                            )
-                        }
-                    </List>
-                )
-            }
-        </AutoSizer>
+        />
     )
 }
 

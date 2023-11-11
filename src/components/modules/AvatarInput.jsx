@@ -2,7 +2,6 @@
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useDropzone} from "react-dropzone";
-import {AsyncImage} from "loadable-image";
 import {Box, FormControl, Typography} from "@mui/material";
 import {FiCamera} from "react-icons/fi";
 
@@ -78,7 +77,7 @@ const AvatarInput = ({
 
                 {
                     (file?.preview || preview) ? (
-                        <AsyncImage
+                        <img
                             src={file?.preview ? file?.preview : preview}
                             alt="avatar"
                             style={{

@@ -1,7 +1,6 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {IconButton, Modal, Stack, Typography} from "@mui/material";
+import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components

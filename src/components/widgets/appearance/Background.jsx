@@ -1,6 +1,5 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import {AsyncImage} from "loadable-image";
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
@@ -39,14 +38,14 @@ const BackgroundItem = ({backgroundItem}) => {
                 }}
             >
 
-                <AsyncImage
+                <img
                     src={backgroundItem.background}
                     alt={backgroundItem.id}
+                    width="100%"
+                    height="100%"
                     style={{
-                        width: "100%",
-                        height: "100%",
-                        aspectRatio: 3/2,
                         borderRadius: 8,
+                        objectFit: "cover"
                     }}
                 />
 

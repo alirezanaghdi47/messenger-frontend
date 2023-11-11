@@ -126,8 +126,6 @@
       "userNameMaxLength": "تعداد کاراکتر های نام کاربری باید کمتر از 20 باشد",
       "nameRequired": "نام الزامی است",
       "nameMaxLength": "تعداد کاراکتر های نام باید کمتر از 20 باشد",
-      "groupNameRequired": "نام گروه الزامی است",
-      "groupNameMaxLength": "تعداد کاراکتر های نام گروه باید کمتر از 20 باشد",
       "firstNameRequired": "نام الزامی است",
       "firstNameMaxLength": "تعداد کاراکتر های نام باید کمتر از 20 باشد",
       "lastNameRequired": "نام خانوادگی الزامی است",

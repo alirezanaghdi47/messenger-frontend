@@ -1,12 +1,7 @@
 // libraries
-import {useCallback, useEffect, useRef} from "react";
-import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {VariableSizeList as List} from "react-window";
-import AutoSizer from "react-virtualized-auto-sizer";
-import {useMediaQuery} from "@react-hooks-library/core";
-import {AsyncImage} from "loadable-image";
-import {Box, Chip, Stack, Typography} from "@mui/material";
+import {Virtuoso} from "react-virtuoso";
+import {Box, Chip, Stack, Typography , useMediaQuery} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
 
 const deviceList = [
@@ -29,19 +24,12 @@ const deviceList = [
     },
 ];
 
-const DeviceItem = ({deviceItem , index , setSize}) => {
+const DeviceItem = ({deviceItem}) => {
 
     const {t} = useTranslation();
 
-    const rowRef = useRef();
-
-    useEffect(() => {
-        setSize(index, rowRef.current.getBoundingClientRect().height);
-    }, [setSize, index]);
-
     return (
         <Stack
-            ref={rowRef}
             direction="row"
             gap={2}
             sx={{
@@ -49,6 +37,7 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
+                padding: 2,
             }}
         >
 
@@ -91,15 +80,12 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
                     }}
                 >
 
-                    <AsyncImage
+                    <img
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="browser"
-                        style={{
-                            width: 20,
-                            height: 20,
-                            borderRadius: "50%",
-                        }}
-                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
                     />
 
                     <Typography
@@ -121,15 +107,12 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
                     }}
                 >
 
-                    <AsyncImage
+                    <img
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="browser"
-                        style={{
-                            width: 20,
-                            height: 20,
-                            borderRadius: "50%",
-                        }}
-                        loader={<Box sx={{ bgcolor: "ternary.main" }}/>}
+                        width={20}
+                        height={20}
+                        style={{borderRadius: "50%"}}
                     />
 
                     <Typography
@@ -176,20 +159,18 @@ const DeviceItem = ({deviceItem , index , setSize}) => {
 
 const Devices = () => {
 
-    const listRef = useRef();
-    const sizeMap = useRef({});
-    const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
-    const setSize = useCallback((index, size) => {
-        sizeMap.current = {...sizeMap.current, [index]: size};
-        listRef.current.resetAfterIndex(index);
-    }, []);
-
-    const getSize = index => sizeMap.current[index] + 32 || 100 + 32;
-
     return (
-        <AutoSizer
+        <Virtuoso
+            data={deviceList}
+            totalCount={deviceList.length}
+            itemContent={(index , deviceItem) => (
+                <DeviceItem
+                    key={index}
+                    deviceItem={deviceItem}
+                />
+            )}
             style={{
                 display: "flex",
                 flexDirection: "column",
@@ -198,41 +179,7 @@ const Devices = () => {
                 width: "100%",
                 height: isTablet ? "calc(100dvh - 80px)" : 480
             }}
-        >
-            {
-                ({height, width}) => (
-                    <List
-                        ref={listRef}
-                        direction={language === "fa" ? "rtl" : "ltr"}
-                        width={width}
-                        height={height}
-                        itemCount={deviceList.length}
-                        itemSize={getSize}
-                        className="remove-scrollbar"
-                    >
-                        {
-                            ({index, style}) => (
-                                <div
-                                    key={index}
-                                    style={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        ...style,
-                                    }}
-                                >
-                                    <DeviceItem
-                                        index={index}
-                                        deviceItem={deviceList[index]}
-                                        setSize={setSize}
-                                    />
-                                </div>
-                            )
-                        }
-                    </List>
-                )
-            }
-        </AutoSizer>
+        />
     )
 }
 

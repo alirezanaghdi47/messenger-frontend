@@ -1,8 +1,10 @@
 // libraries
-import {useSelector} from "react-redux";
+import {Route, Routes, useLocation} from "react-router-dom";
 import Loadable from '@loadable/component';
 
 // pages
+const Home = Loadable(() => import('pages/Home'));
+const Auth = Loadable(() => import('pages/Auth'));
 const SignIn = Loadable(() => import('pages/SignIn'));
 const SignUp = Loadable(() => import('pages/SignUp'));
 const Chats = Loadable(() => import('pages/Chats'));
@@ -15,33 +17,41 @@ const NotFound = Loadable(() => import('pages/NotFound'));
 
 const Router = () => {
 
-    const {page} = useSelector(state => state.app);
+    const location = useLocation();
 
-    const renderActivePage = (page) => {
-        switch (page){
-            case "chats":
-                return <Chats/>
-            case "chat":
-                return <Chat/>
-            case "profile":
-                return <Profile/>
-            case "appearance":
-                return <Appearance/>
-            case "privacy":
-                return <Privacy/>
-            case "setting":
-                return <Setting/>
-            case "sign-in":
-                return <SignIn/>
-            case "sign-up":
-                return <SignUp/>
-            default:
-                return <NotFound/>
-        }
-    }
+    return (
+        <Routes>
 
-    return renderActivePage(page.active);
+            <Route path="/" element={<Home/>}/>
 
+            <Route path="/auth" element={<Auth/>}>
+
+                <Route path="/auth/sign-in" element={<SignIn/>}/>
+
+                <Route path="/auth/sign-up" element={<SignUp/>}/>
+
+            </Route>
+
+            <Route path="/chat" element={<Chats/>}>
+
+                <Route path="/chat/:chatId" element={<Chat/>}/>
+
+            </Route>
+
+            <Route path="/setting" element={<Setting/>}>
+
+                <Route path="/setting/profile" element={<Profile/>}/>
+
+                <Route path="/setting/appearance" element={<Appearance/>}/>
+
+                <Route path="/setting/privacy" element={<Privacy/>}/>
+
+            </Route>
+
+            <Route path="/*" element={<NotFound/>}/>
+
+        </Routes>
+    )
 }
 
 export default Router;
