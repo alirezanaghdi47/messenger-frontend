@@ -1,8 +1,12 @@
 // libraries
 import {useSelector} from "react-redux";
 import ReactPlayer from "react-player";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ModalHeader = () => {
 
@@ -25,11 +29,14 @@ const ModalHeader = () => {
             }}
         >
 
-            <img
+            <LazyLoadImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
+                visibleByDefault
                 width={40}
                 height={40}
+                placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                effect='blur'
                 style={{borderRadius: "50%"}}
             />
 

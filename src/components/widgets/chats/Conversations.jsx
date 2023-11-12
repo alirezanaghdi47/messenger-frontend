@@ -3,6 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {Virtuoso} from "react-virtuoso";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
@@ -10,6 +11,9 @@ import {FiPhone, FiVideo} from "react-icons/fi";
 
 // components
 import {useContextMenu} from "hooks/useContextMenu";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ConversationDropdownMenu = Loadable(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
@@ -78,11 +82,14 @@ const ConversationItem = ({conversationItem}) => {
                     }}
                 >
 
-                    <img
+                    <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                         alt="avatar"
+                        visibleByDefault
                         width={40}
                         height={40}
+                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                        effect='blur'
                         style={{borderRadius: "50%"}}
                     />
 
@@ -126,10 +133,8 @@ const ConversationItem = ({conversationItem}) => {
                         {conversationItem.type === "voice" && <LuMusic size={16}/>}
                         {conversationItem.type === "file" && <LuFile size={16}/>}
                         {conversationItem.type === "location" && <LuMapPin size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" &&
-                            <FiPhone size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "videoCall" &&
-                            <FiVideo size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" && <FiPhone size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "videoCall" && <FiVideo size={16}/>}
 
                         <Typography
                             variant="caption"

@@ -1,6 +1,6 @@
 // libraries
 import {Outlet, useLocation} from "react-router-dom";
-import {Fade, Stack , useMediaQuery} from "@mui/material";
+import {Stack , useMediaQuery} from "@mui/material";
 
 // components
 import Primary from "layouts/Primary.jsx";
@@ -23,46 +23,43 @@ const Setting = () => {
     return (
         <Primary>
 
-            <Fade
-                in={(!pathList.includes(location.pathname) && isTablet) || !isTablet}
-                style={{transitionDelay: '300ms'}}
-            >
+            {
+                ((!pathList.includes(location.pathname) && isTablet) || !isTablet) && (
+                    <Stack
+                        component="main"
+                        direction="column"
+                        gap={4}
+                        sx={{
+                            position: 'sticky',
+                            zIndex: 300,
+                            top: 0,
+                            left: 0,
+                            bottom: 0,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: isTablet ? "100%" : 360,
+                            minHeight: "100dvh",
+                            height: "100%",
+                            bgcolor: "background.paper",
+                            borderRightWidth: 1,
+                            borderRightStyle: "solid",
+                            borderRightColor: "secondary.main",
+                            padding: 2
+                        }}
+                    >
 
-                <Stack
-                    component="main"
-                    direction="column"
-                    gap={4}
-                    sx={{
-                        position: 'sticky',
-                        zIndex: 300,
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width: isTablet ? "100%" : 360,
-                        minHeight: "100dvh",
-                        height: "100%",
-                        bgcolor: "background.paper",
-                        borderRightWidth: 1,
-                        borderRightStyle: "solid",
-                        borderRightColor: "secondary.main",
-                        padding: 2
-                    }}
-                >
+                        <Appbar/>
 
-                    <Appbar/>
+                        <UserInfo/>
 
-                    <UserInfo/>
+                        <Links/>
 
-                    <Links/>
+                        <Version/>
 
-                    <Version/>
-
-                </Stack>
-
-            </Fade>
+                    </Stack>
+                )
+            }
 
             <Outlet/>
 

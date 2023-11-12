@@ -1,6 +1,8 @@
 // libraries
-import {useLayoutEffect, useRef} from "react";
+// import {useLayoutEffect, useRef} from "react";
 import {Virtuoso} from 'react-virtuoso';
+import SimpleBar from "simplebar-react";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack} from "@mui/material";
 
 // components
@@ -13,6 +15,11 @@ import {
     ImageMessage,
     MusicMessage
 } from "components/widgets/chat/Messages";
+
+// styles
+import "simplebar-react/dist/simplebar.min.css";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import {forwardRef} from "react";
 
 const conversationList = [
     {
@@ -36,7 +43,7 @@ const conversationList = [
     {
         id: 4,
         type: "image",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg",
         me: false
     },
     {
@@ -111,9 +118,12 @@ const ConversationItem = ({conversationItem}) => {
                 }}
             >
 
-                <img
+                <LazyLoadImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                     alt="avatar"
+                    visibleByDefault
+                    effect="blur"
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     width={30}
                     height={30}
                     style={{borderRadius: "50%"}}
@@ -149,44 +159,34 @@ const ConversationItem = ({conversationItem}) => {
 
 const Conversations = () => {
 
-    const listRef = useRef();
-
-    useLayoutEffect(() => {
-        listRef?.current?.scrollToIndex({
-            index: conversationList.length,
-            behavior: "smooth",
-            align: "end"
-        });
-    }, []);
+    // const listRef = useRef();
+    //
+    // useLayoutEffect(() => {
+    //     listRef?.current?.scrollToIndex({
+    //         index: conversationList.length,
+    //         behavior: "auto",
+    //         align: "end"
+    //     });
+    // }, []);
 
     return (
-        <Box
-            sx={{
+        <Virtuoso
+            // ref={listRef}
+            data={conversationList}
+            totalCount={conversationList.length}
+            itemContent={(index, conversationItem) => (
+                <ConversationItem
+                    key={index}
+                    conversationItem={conversationItem}
+                />
+            )}
+            style={{
                 position: "sticky",
                 top: 80,
                 width: "100%",
                 height: "calc(100dvh - 160px)",
             }}
-        >
-
-            <Virtuoso
-                ref={listRef}
-                data={conversationList}
-                totalCount={conversationList.length}
-                itemContent={(index , conversationItem) => (
-                    <ConversationItem
-                        key={index}
-                        conversationItem={conversationItem}
-                    />
-                )}
-                style={{
-                    width: "100%",
-                    height: "calc(100dvh - 160px)",
-                    overflow: "scroll"
-                }}
-            />
-
-        </Box>
+        />
     )
 }
 

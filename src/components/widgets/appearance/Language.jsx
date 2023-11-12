@@ -1,6 +1,7 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Button, Stack} from "@mui/material";
 
 // components
@@ -8,6 +9,9 @@ import Header from "components/widgets/appearance/Header";
 
 // stores
 import {setLanguage} from "stores/slices/setting.js";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 // utils
 import {languageList} from "utils/constants.js";
@@ -25,11 +29,14 @@ const LanguageItem = ({languageItem}) => {
             variant={languageItem.value === language ? "contained" : "text"}
             color={languageItem.value === language ? "primary" : "ternary"}
             startIcon={
-                <img
+                <LazyLoadImage
                     src={languageItem.flag}
                     alt={languageItem.value}
+                    visibleByDefault
                     width={24}
                     height={16}
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                    effect='blur'
                 />
             }
             onClick={() => _handleActiveLanguage(languageItem.value)}

@@ -1,8 +1,12 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {Virtuoso} from "react-virtuoso";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Chip, Stack, Typography , useMediaQuery} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const deviceList = [
     {
@@ -37,7 +41,7 @@ const DeviceItem = ({deviceItem}) => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                padding: 2,
+                paddingBottom: 2
             }}
         >
 
@@ -80,11 +84,14 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <img
+                    <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="browser"
+                        alt="avatar"
+                        visibleByDefault
                         width={20}
                         height={20}
+                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                        effect='blur'
                         style={{borderRadius: "50%"}}
                     />
 
@@ -107,11 +114,14 @@ const DeviceItem = ({deviceItem}) => {
                     }}
                 >
 
-                    <img
+                    <LazyLoadImage
                         src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
-                        alt="browser"
+                        alt="avatar"
+                        visibleByDefault
                         width={20}
                         height={20}
+                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                        effect='blur'
                         style={{borderRadius: "50%"}}
                     />
 

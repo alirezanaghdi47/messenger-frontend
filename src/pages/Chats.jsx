@@ -1,6 +1,6 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
-import {Fade , useMediaQuery, Stack} from "@mui/material";
+import {useMediaQuery, Stack} from "@mui/material";
 
 // components
 import Primary from "layouts/Primary.jsx";
@@ -18,44 +18,44 @@ const Chats = () => {
     return (
         <Primary>
 
-            <Fade in={(!params.chatId && isTablet) || !isTablet}>
+            {
+                ((!params.chatId && isTablet) || !isTablet) && (
+                    <Stack
+                        component="main"
+                        direction="column"
+                        gap={2}
+                        sx={{
+                            position: 'sticky',
+                            zIndex: 300,
+                            top: 0,
+                            left: 0,
+                            bottom: 0,
+                            display: "flex",
+                            justifyContent: "start",
+                            alignItems: "center",
+                            width: isTablet ? "100%" : 360,
+                            height: "100dvh",
+                            bgcolor: "background.paper",
+                            borderRightWidth: 1,
+                            borderRightStyle: "solid",
+                            borderRightColor: "secondary.main",
+                            padding: 2
+                        }}
+                    >
 
-                <Stack
-                    component="main"
-                    direction="column"
-                    gap={2}
-                    sx={{
-                        position: 'sticky',
-                        zIndex: 300,
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        display: "flex",
-                        justifyContent: "start",
-                        alignItems: "center",
-                        width: isTablet ? "100%" : 360,
-                        height: "100dvh",
-                        bgcolor: "background.paper",
-                        borderRightWidth: 1,
-                        borderRightStyle: "solid",
-                        borderRightColor: "secondary.main",
-                        padding: 2
-                    }}
-                >
+                        <Appbar/>
 
-                    <Appbar/>
+                        <SearchBar/>
 
-                    <SearchBar/>
+                        <Conversations/>
 
-                    <Conversations/>
+                        {/*<EmptyPlaceholder/>*/}
 
-                    {/*<EmptyPlaceholder/>*/}
+                        <ActionButton/>
 
-                    <ActionButton/>
-
-                </Stack>
-
-            </Fade>
+                    </Stack>
+                )
+            }
 
             <Outlet/>
 

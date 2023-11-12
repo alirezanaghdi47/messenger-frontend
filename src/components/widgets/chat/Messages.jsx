@@ -16,6 +16,9 @@ import {formattedByte, formattedMilisecond} from "utils/functions";
 import {useContextMenu} from "hooks/useContextMenu";
 import {useModal} from "hooks/useModal";
 
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
 const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
 const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
@@ -151,6 +154,7 @@ export const FileMessage = ({message}) => {
                 <LazyLoadImage
                     src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
                     alt="image"
+                    visibleByDefault
                     effect="blur"
                     placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     width={50}
@@ -265,9 +269,10 @@ export const ImageMessage = ({message}) => {
                         <LazyLoadImage
                             src={message.content}
                             alt="image"
+                            visibleByDefault
                             effect="blur"
                             placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
-                            width={300}
+                            width={250}
                             style={{
                                 aspectRatio: 3 / 2,
                                 borderRadius: 8,
@@ -492,11 +497,12 @@ export const VideoMessage = ({message}) => {
                 >
 
                     <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"
                         alt="image"
+                        visibleByDefault
                         effect="blur"
                         placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
-                        width={300}
+                        width={250}
                         style={{
                             aspectRatio: 3 / 2,
                             borderRadius: 8,
@@ -748,11 +754,12 @@ export const LocationMessage = ({message}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-3.jpg"
                     alt="image"
+                    visibleByDefault
                     effect="blur"
                     placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
-                    width={300}
+                    width={250}
                     style={{
                         aspectRatio: 3 / 2,
                         borderRadius: 8,

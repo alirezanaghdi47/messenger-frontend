@@ -1,7 +1,11 @@
 // libraries
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const userInfoList = [
     {id: 1 ,title: "input.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},
@@ -21,11 +25,14 @@ const UserDetail = () => {
             }}
         >
 
-            <img
+            <LazyLoadImage
                 src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
                 alt="avatar"
+                visibleByDefault
                 width="100%"
                 height="100%"
+                placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                effect='blur'
                 style={{
                     objectFit: "cover",
                     objectPosition: "center",
