@@ -1,13 +1,18 @@
 // libraries
 import {useNavigate} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-import {IconButton, Stack, Typography} from "@mui/material";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {IconButton, Stack} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
+
+// assets
+import logo from "assets/images/logo.png";
+
+// styles
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Appbar = () => {
 
     const navigate = useNavigate();
-    const {t} = useTranslation();
 
     const _handleRedirect = () => navigate("/setting");
 
@@ -35,13 +40,15 @@ const Appbar = () => {
                 }}
             >
 
-                <Typography
-                    variant="subtitle1"
-                    color="textPrimary"
-                    fontWeight="bold"
-                >
-                    {t("domain")}
-                </Typography>
+                <LazyLoadImage
+                    src={logo}
+                    alt="logo"
+                    visibleByDefault
+                    width={40}
+                    height={40}
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                    effect='blur'
+                />
 
             </Stack>
 

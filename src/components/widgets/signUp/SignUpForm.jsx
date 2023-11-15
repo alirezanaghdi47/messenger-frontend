@@ -9,6 +9,9 @@ import {FiKey, FiPhone, FiUser} from "react-icons/fi";
 import TextInput from "components/modules/TextInput.jsx";
 import PasswordInput from "components/modules/PasswordInput.jsx";
 
+// utils
+import {signUpSchema} from "utils/validations";
+
 const SignUpForm = () => {
 
     const {t} = useTranslation();
@@ -20,7 +23,7 @@ const SignUpForm = () => {
             password: "",
             passwordRepeat: "",
         },
-        // validationSchema: ,
+        validationSchema: signUpSchema,
         onSubmit: async (data) => {
             console.log(data)
         }
@@ -45,6 +48,7 @@ const SignUpForm = () => {
                 value={formik.values.userName}
                 onChange={formik.handleChange}
                 error={formik.errors.userName}
+                touched={formik.touched.userName}
             />
 
             <TextInput
@@ -54,6 +58,7 @@ const SignUpForm = () => {
                 value={formik.values.phoneNumber}
                 onChange={formik.handleChange}
                 error={formik.errors.phoneNumber}
+                touched={formik.touched.phoneNumber}
             />
 
             <PasswordInput
@@ -63,6 +68,7 @@ const SignUpForm = () => {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={formik.errors.password}
+                touched={formik.touched.password}
             />
 
             <PasswordInput
@@ -72,6 +78,7 @@ const SignUpForm = () => {
                 value={formik.values.passwordRepeat}
                 onChange={formik.handleChange}
                 error={formik.errors.passwordRepeat}
+                touched={formik.touched.passwordRepeat}
             />
 
             <Button
@@ -79,6 +86,7 @@ const SignUpForm = () => {
                 color="primary"
                 size="large"
                 fullWidth
+                onClick={formik.handleSubmit}
             >
                 {t("button.signUp")}
             </Button>

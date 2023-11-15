@@ -34,14 +34,15 @@ const VerifyCodeForm = () => {
             }}
         >
 
-            <Timer/>
-
             <NumberInput
                 name="code"
+                label={t("input.verifyCode")}
                 value={formik.values.code}
                 onChange={formik.handleChange}
                 error={formik.errors.code}
             />
+
+            <Timer/>
 
             <Button
                 variant="contained"

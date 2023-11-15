@@ -9,6 +9,9 @@ import {FiKey, FiUser} from "react-icons/fi";
 import TextInput from "components/modules/TextInput.jsx";
 import PasswordInput from "components/modules/PasswordInput.jsx";
 
+// utils
+import {signInSchema} from "utils/validations";
+
 const SignInForm = () => {
 
     const {t} = useTranslation();
@@ -18,7 +21,7 @@ const SignInForm = () => {
             userName: "",
             password: "",
         },
-        // validationSchema: ,
+        validationSchema: signInSchema,
         onSubmit: async (data) => {
             console.log(data)
         }
@@ -43,6 +46,7 @@ const SignInForm = () => {
                 value={formik.values.userName}
                 onChange={formik.handleChange}
                 error={formik.errors.userName}
+                touched={formik.touched.userName}
             />
 
             <PasswordInput
@@ -52,6 +56,7 @@ const SignInForm = () => {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 error={formik.errors.password}
+                touched={formik.touched.password}
             />
 
             <Button
@@ -59,6 +64,7 @@ const SignInForm = () => {
                 color="primary"
                 size="large"
                 fullWidth
+                onClick={() => formik.handleSubmit()}
             >
                 {t("button.signIn")}
             </Button>

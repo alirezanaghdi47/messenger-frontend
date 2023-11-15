@@ -9,7 +9,7 @@ import Header from "components/widgets/chat/Header.jsx";
 import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
-const ForwardMessagePopup = Loadable(() => import("components/widgets/chat/ForwardMessagePopup"));
+import DeleteMessagePopup from "../components/widgets/chat/DeleteMessagePopup";
 const ReplyMessagePopup = Loadable(() => import("components/widgets/chat/ReplyMessagePopup"));
 const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardChatModal"));
 
@@ -57,9 +57,9 @@ const Chat = () => {
 
             {/*<EmptyPlaceholder/>*/}
 
-            {/*<ForwardChatModal/>*/}
+            {/*<ForwardChatModal isOpen={true}/>*/}
 
-            {/*<ForwardMessagePopup/>*/}
+            {/*<DeleteMessagePopup/>*/}
 
             {/*<ReplyMessagePopup/>*/}
 

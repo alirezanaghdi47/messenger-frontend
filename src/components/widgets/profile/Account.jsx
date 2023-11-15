@@ -107,6 +107,7 @@ const Account = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<FiCheck size={20}/>}
+                    onClick={formik.handleSubmit}
                 >
                     {t("button.submit")}
                 </Button>

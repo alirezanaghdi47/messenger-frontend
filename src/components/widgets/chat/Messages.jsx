@@ -12,7 +12,7 @@ import {LuPlay} from "react-icons/lu";
 import {fontSizeList} from "utils/constants";
 import {formattedByte, formattedMilisecond} from "utils/functions";
 
-// components
+// hooks
 import {useContextMenu} from "hooks/useContextMenu";
 import {useModal} from "hooks/useModal";
 
@@ -406,7 +406,7 @@ export const MusicMessage = ({message}) => {
                             variant="caption"
                             color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         >
-                            00:10 / 00:00
+                            00:10
                         </Typography>
 
                         <Typography

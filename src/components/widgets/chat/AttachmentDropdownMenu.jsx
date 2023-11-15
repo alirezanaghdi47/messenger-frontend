@@ -1,46 +1,71 @@
 // libraries
+import {useRef} from "react";
 import {useTranslation} from "react-i18next"
 import {Menu, MenuItem, Typography} from "@mui/material";
+import toast from "react-hot-toast";
 import {FiFile, FiFilm, FiImage, FiMapPin} from "react-icons/fi";
 
-const attachmentList = [
-    {id: 1, title: "menu.file", value: "file", icon: <FiFile size={20}/>},
-    {id: 2, title: "menu.image", value: "image", icon: <FiImage size={20}/>},
-    {id: 3, title: "menu.video", value: "video", icon: <FiFilm size={20}/>},
-    {id: 5, title: "menu.location", value: "location", icon: <FiMapPin size={20}/>},
-];
-
-const AttachmentDropdownMenuItem = ({attachmentItem}) => {
+const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const {t} = useTranslation();
 
-    return (
-        <MenuItem
-            sx={{
-                display: "flex",
-                gap: 1,
-                justifyContent: "start",
-                alignItems: "center",
-                color: "ternary.main"
-            }}
-            onClick={() => console.log(attachmentItem.value)}
-        >
+    const fileRef = useRef(null);
+    const imageRef = useRef(null);
+    const videoRef = useRef(null);
 
-            {attachmentItem.icon}
+    const _handleSendFile = async (e) => {
 
-            <Typography
-                variant="body2"
-                color="textSecondary"
-                fontWeight='bold'
-            >
-                {t(attachmentItem.title)}
-            </Typography>
+        const file = await e.target.files[0];
 
-        </MenuItem>
-    )
-}
+        if (file.size > 50 * 1_024_000){
+            toast.error(t("error.fileMaxSize"));
+        } else {
+            console.log(file);
+        }
 
-const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
+        fileRef.current.value = null;
+
+    }
+
+    const _handleSendImage = async (e) => {
+
+        const file = await e.target.files[0];
+
+        if (file.size > 5 * 1_024_000){
+            toast.error(t("error.imageMaxSize"));
+        } else {
+            console.log(file);
+        }
+
+        imageRef.current.value = null;
+
+    }
+
+    const _handleSendVideo = async (e) => {
+
+        const file = await e.target.files[0];
+
+        if (file.size > 10 * 1_024_000){
+            toast.error(t("error.videoMaxSize"));
+        } else {
+            console.log(file);
+        }
+
+        videoRef.current.value = null;
+
+    }
+
+    const _handleSendLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((res) => {
+                console.log(res.coords.latitude , res.coords.longitude);
+            } , (err) => {
+                toast.error(t("error.geoLocationFailed"));
+            });
+        } else {
+            toast.error(t("error.geoLocationNotSupport"));
+        }
+    }
 
     return (
         <Menu
@@ -57,14 +82,125 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
             onClose={onClose}
         >
 
-            {
-                attachmentList.map(attachmentItem =>
-                    <AttachmentDropdownMenuItem
-                        key={attachmentItem.id}
-                        attachmentItem={attachmentItem}
-                    />
-                )
-            }
+            {/* file */}
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={() => fileRef.current.click()}
+            >
+
+                <input
+                    ref={fileRef}
+                    type="file"
+                    accept="application/pdf"
+                    onChange={_handleSendFile}
+                    style={{display: "none"}}
+                />
+
+                <FiFile size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.file")}
+                </Typography>
+
+            </MenuItem>
+
+            {/* image */}
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={() => imageRef.current.click()}
+            >
+
+                <input
+                    ref={imageRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={_handleSendImage}
+                    style={{display: "none"}}
+                />
+
+                <FiImage size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.image")}
+                </Typography>
+
+            </MenuItem>
+
+            {/* video */}
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={() => videoRef.current.click()}
+            >
+
+                <input
+                    ref={videoRef}
+                    type="file"
+                    accept="video/*"
+                    onChange={_handleSendVideo}
+                    style={{display: "none"}}
+                />
+                
+                <FiFilm size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.video")}
+                </Typography>
+
+            </MenuItem>
+
+            {/* location */}
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={_handleSendLocation}
+            >
+
+                <FiMapPin size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.location")}
+                </Typography>
+
+            </MenuItem>
 
         </Menu>
     )

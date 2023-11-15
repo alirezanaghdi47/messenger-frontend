@@ -7,7 +7,6 @@
       "exampleMessage": "سلام چطوری ؟",
       "color": "رنگ",
       "background": "پس زمینه",
-      "dateTime": "تاریخ و زمان",
       "theme": "قالب",
       "lastSeen": "آخرین بازدید",
       "isOnline": "بر خط",
@@ -39,12 +38,14 @@
       "signInQuestion": "اگر حساب کاربری دارید",
       "verifyCode": "اعتبارسنجی",
       "timeRemaining": "زمان باقی مانده",
-      "chatHistory": "تاریخچه گفتگو ها",
       "createChat": "ایجاد پیام جدید",
-      "createGroup": "ایجاد گروه جدید",
       "forwardChat": "هدایت پیام به",
       "select": "یکی را انتخاب کنید",
-      "orientation": "دستگاه خود را بچرخانید"
+      "deleteTitle": "حذف",
+      "deleteContent": "آیا این مورد حذف شود ؟",
+      "item": "مورد",
+      "selected": "انتخاب شده",
+      "preventOrientation": "لطفا دستگاه خود را در حالت عمودی قرار دهید"
     },
     "select": {
       "dark": "تاریک",
@@ -54,8 +55,6 @@
       "search": "جستجو کنید ...",
       "message": "متن پیام",
       "avatar": "آواتار",
-      "name": "نام و نام خانوادگی",
-      "groupName": "نام گروه",
       "userName": "نام کاربری",
       "password": "رمز عبور",
       "passwordRepeat": "تکرار رمز عبور",
@@ -63,9 +62,9 @@
       "biography": "بیوگرافی",
       "showStatus": "مشاهده وضعیت",
       "privateChat": "گفتگو شخصی",
-      "groupChat": "گفتگو گروهی",
       "voiceCall": "تماس صوتی",
-      "videoCall": "تماس تصویری"
+      "videoCall": "تماس تصویری",
+      "verifyCode": "کد اعتبار سنجی"
     },
     "list": {
       "chat": "گفتگو",
@@ -86,6 +85,7 @@
       "location": "موقعیت",
       "member": "عضو",
       "delete": "حذف",
+      "select": "انتخاب کردن",
       "leave": "ترک گروه",
       "download": "دانلود",
       "forward": "هدایت",
@@ -93,8 +93,6 @@
       "searchChat": "جستجوی گفتگو ها",
       "videoCall": "تماس تصویری",
       "voiceCall": "تماس صوتی",
-      "createChat": "ایجاد گفتگو جدید",
-      "createGroup": "ایجاد گروه جدید",
       "profile": "حساب کاربری",
       "appearance": "ظاهر",
       "privacy": "حریم شخصی"
@@ -117,22 +115,29 @@
       "all": "همه",
       "enable": "فعال",
       "disable": "غیر فعال",
-      "device": "دستگاه"
+      "device": "دستگاه",
+      "delete": "حذف"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",
       "avatarType": "فرمت های مورد قبول برای آواتار عبارت اند از png , jpg , jpeg",
       "userNameRequired": "نام کاربری الزامی است",
       "userNameMaxLength": "تعداد کاراکتر های نام کاربری باید کمتر از 20 باشد",
-      "nameRequired": "نام الزامی است",
-      "nameMaxLength": "تعداد کاراکتر های نام باید کمتر از 20 باشد",
-      "firstNameRequired": "نام الزامی است",
-      "firstNameMaxLength": "تعداد کاراکتر های نام باید کمتر از 20 باشد",
-      "lastNameRequired": "نام خانوادگی الزامی است",
-      "lastNameMaxLength": "تعداد کاراکتر های نام خانوادگی کاربری باید کمتر از 20 باشد",
       "phoneNumberRequired": "شماره همراه الزامی است",
       "phoneNumberFormat": "فرمت شماره همراه اشتباه است",
-      "biographyMaxLength": "تعداد کاراکتر های بیوگرافی باید کمتر از 50 باشد"
+      "biographyMaxLength": "تعداد کاراکتر های بیوگرافی باید کمتر از 50 باشد",
+      "emailRequired": "ایمیل الزامی است",
+      "emailFormat": "فرمت ایمیل نادرست است",
+      "passwordRequired": "رمز عبور الزامی است",
+      "passwordFormat": "رمز عبور باید حداقل 8 کاراکتر به همراه حروف بزرگ و کوچک و عدد و علائم باشد",
+      "passwordRepeatRequired": "تکرار رمز عبور الزامی است",
+      "passwordRepeatFormat": "تکرار رمز عبور باید حداقل 8 کاراکتر به همراه حروف بزرگ و کوچک و عدد و علائم باشد",
+      "passwordRepeatEqual": "رمز عبور با تکرار آن یکسان نیست",
+      "geoLocationNotSupport": "موقعیت مکانی پشتیبانی نمیشود",
+      "geoLocationFailed": "دریافت موقعیت مکانی با مشکل مواجه شده است",
+      "fileMaxSize": "حداکثر حجم فایل ارسالی باید 50 مگابایت باشد",
+      "ImageMaxSize": "حداکثر حجم عکس ارسالی باید 5 مگابایت باشد",
+      "videoMaxSize": "حداکثر حجم ویدیو ارسالی باید 10 مگابایت باشد"
     }
   }
 }

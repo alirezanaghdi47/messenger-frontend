@@ -102,7 +102,7 @@ const ModalContent = () => {
                 }}
             >
 
-                <MusicPlayer src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"/>
+                <MusicPlayer src="https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3"/>
 
             </Box>
 

@@ -1,8 +1,9 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {Virtuoso} from "react-virtuoso";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import {Box, Stack, Typography , useMediaQuery} from "@mui/material";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Box, IconButton, Stack, Typography, useMediaQuery} from "@mui/material";
+import {LuTrash2} from "react-icons/lu";
 
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -82,6 +83,25 @@ const ContactItem = ({contactItem}) => {
 
                 </Stack>
 
+                <Stack
+                    direction="column"
+                    gap={0.5}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "end",
+                        marginLeft: "auto"
+                    }}
+                >
+
+                    <IconButton
+                        color="error"
+                    >
+                        <LuTrash2 size={20}/>
+                    </IconButton>
+
+                </Stack>
+
             </Stack>
 
         </Box>
@@ -96,7 +116,7 @@ const Contacts = () => {
         <Virtuoso
             data={contactList}
             totalCount={contactList.length}
-            itemContent={(index , contactItem) => (
+            itemContent={(index, contactItem) => (
                 <ContactItem
                     key={index}
                     contactItem={contactItem}

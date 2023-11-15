@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
 import App from './App.jsx';
 
-// components
+// providers
 import Redux from "providers/Redux.jsx";
 import I18n from "providers/I18n.jsx";
 

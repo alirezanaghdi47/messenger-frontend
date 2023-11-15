@@ -1,9 +1,8 @@
 // libraries
-// import {useLayoutEffect, useRef} from "react";
+import {useRef} from "react";
 import {Virtuoso} from 'react-virtuoso';
-import SimpleBar from "simplebar-react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Stack} from "@mui/material";
+import {Stack} from "@mui/material";
 
 // components
 import {
@@ -17,9 +16,7 @@ import {
 } from "components/widgets/chat/Messages";
 
 // styles
-import "simplebar-react/dist/simplebar.min.css";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import {forwardRef} from "react";
 
 const conversationList = [
     {

@@ -7,6 +7,9 @@ import {Box, Button, IconButton, Stack, Typography, useTheme} from "@mui/materia
 import {LuPlay, LuPause, LuVolume2, LuVolumeX} from "react-icons/lu";
 import {FiX} from "react-icons/fi";
 
+// styles
+import 'rc-slider/assets/index.css';
+
 // utils
 import {formattedSecond} from "utils/functions";
 
