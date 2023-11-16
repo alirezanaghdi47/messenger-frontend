@@ -1,8 +1,10 @@
 // libraries
-import {forwardRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {useSelector} from "react-redux";
 import {Virtuoso} from 'react-virtuoso';
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Stack} from "@mui/material";
+import {IconButton, Stack} from "@mui/material";
+import {LuChevronDown} from "react-icons/lu";
 
 // components
 import {
@@ -18,74 +20,8 @@ import {
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const conversationList = [
-    {
-        id: 1,
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: true
-    },
-    {
-        id: 2,
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: false
-    },
-    {
-        id: 3,
-        type: "image",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
-        me: true
-    },
-    {
-        id: 4,
-        type: "image",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg",
-        me: false
-    },
-    {
-        id: 5,
-        type: "file",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
-        me: true
-    },
-    {
-        id: 6,
-        type: "file",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
-        me: false
-    },
-    {
-        id: 7,
-        type: "video",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
-        me: true
-    },
-    {
-        id: 8,
-        type: "video",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
-        me: false
-    },
-    {
-        id: 9,
-        type: "voice",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
-        me: false
-    },
-    {
-        id: 10,
-        type: "voice",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
-        me: true
-    },
-    {id: 11, type: "location", content: [35.9624 , 53.1234], me: true},
-    {id: 12, type: "location", content: [35.9624 , 53.1234], me: false},
-    {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
-    {id: 14, type: "log", content: {time: 90 * 1000, status: "voiceCall"}, me: false},
-    {id: 15, type: "log", content: {time: 50 * 1000, status: "voiceCall"}, me: false},
-    {id: 16, type: "log", content: {time: 0, status: "videoCall"}, me: true},
-];
+// utils
+import {generateConversations} from "utils/functions";
 
 const ConversationItem = ({conversationItem}) => {
 
@@ -154,28 +90,81 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = forwardRef((props, ref) => {
+const Conversations = () => {
+
+    const {darkMode} = useSelector(state => state.setting.appearance);
+    const listRef = useRef();
+
+    const [showButton, setShowButton] = useState(false);
+
+    const START_INDEX = 10000;
+    const INITIAL_ITEM_COUNT = 20;
+
+    const [firstItemIndex, setFirstItemIndex] = useState(START_INDEX);
+    const [conversations, setConversations] = useState(() => generateConversations(INITIAL_ITEM_COUNT, START_INDEX));
+
+    const prependItems = useCallback(() => {
+        const itemsToPrepend = 10;
+        const nextFirstItemIndex = firstItemIndex - itemsToPrepend;
+
+        setTimeout(() => {
+            setFirstItemIndex(() => nextFirstItemIndex);
+            setConversations(() => [...generateConversations(itemsToPrepend, nextFirstItemIndex), ...conversations]);
+        }, 500);
+
+        return false;
+    }, [firstItemIndex, conversations , setConversations]);
 
     return (
-        <Virtuoso
-            ref={ref}
-            data={conversationList}
-            totalCount={conversationList.length}
-            itemContent={(index, conversationItem) => (
-                <ConversationItem
-                    key={index}
-                    conversationItem={conversationItem}
-                />
-            )}
-            className="custom-scrollbar"
-            style={{
-                position: "sticky",
-                top: 80,
-                width: "100%",
-                height: "calc(100dvh - 160px)",
-            }}
-        />
+        <>
+
+            <Virtuoso
+                ref={listRef}
+                firstItemIndex={firstItemIndex}
+                initialTopMostItemIndex={INITIAL_ITEM_COUNT - 1}
+                data={conversations}
+                startReached={prependItems}
+                itemContent={(index, conversationItem) => (
+                    <ConversationItem
+                        key={index}
+                        conversationItem={conversationItem}
+                    />
+                )}
+                followOutput="auto"
+                atBottomStateChange={(bottom) => {
+                    setShowButton(!bottom);
+                }}
+                className="custom-scrollbar"
+                style={{
+                    position: "sticky",
+                    top: 80,
+                    width: "100%",
+                    height: "calc(100dvh - 160px)",
+                }}
+            />
+
+            {
+                showButton && (
+                    <IconButton
+                        variant="contained"
+                        color={darkMode ? "dark" : "light"}
+                        size="large"
+                        sx={{
+                            position: 'absolute',
+                            zIndex: 25,
+                            left: 16,
+                            bottom: 96,
+                            boxShadow: 3
+                        }}
+                        onClick={() => listRef.current.scrollToIndex({index: conversations.length - 1, behavior: 'smooth'})}
+                    >
+                        <LuChevronDown size={20}/>
+                    </IconButton>
+                )
+            }
+
+        </>
     )
-})
+}
 
 export default Conversations;
