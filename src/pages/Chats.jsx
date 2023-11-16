@@ -9,6 +9,7 @@ import Conversations from "components/widgets/chats/Conversations.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import Empty from "components/widgets/chats/Empty";
 
 const Chats = () => {
 
@@ -57,7 +58,13 @@ const Chats = () => {
                 )
             }
 
-            <Outlet/>
+            {
+                params.chatId ? (
+                    <Outlet/>
+                ) : (
+                    <Empty/>
+                )
+            }
 
         </Primary>
     )

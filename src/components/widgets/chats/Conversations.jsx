@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {Virtuoso} from "react-virtuoso";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
@@ -30,6 +30,30 @@ const conversationList = [
     {_id: "6", type: "location", content: [35, 51]},
     {_id: "7", type: "log", status: "voiceCall"},
     {_id: "8", type: "log", status: "videoCall"},
+    {
+        _id: "9",
+        type: "text",
+        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود."
+    },
+    {_id: "10", type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf"},
+    {
+        _id: "11",
+        type: "image",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+    },
+    {
+        _id: "12",
+        type: "video",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp"
+    },
+    {
+        _id: "13",
+        type: "voice",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3"
+    },
+    {_id: "14", type: "location", content: [35, 51]},
+    {_id: "15", type: "log", status: "voiceCall"},
+    {_id: "16", type: "log", status: "videoCall"},
 ];
 
 const ConversationItem = ({conversationItem}) => {
@@ -133,8 +157,10 @@ const ConversationItem = ({conversationItem}) => {
                         {conversationItem.type === "voice" && <LuMusic size={16}/>}
                         {conversationItem.type === "file" && <LuFile size={16}/>}
                         {conversationItem.type === "location" && <LuMapPin size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" && <FiPhone size={16}/>}
-                        {conversationItem.type === "log" && conversationItem.status === "videoCall" && <FiVideo size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "voiceCall" &&
+                            <FiPhone size={16}/>}
+                        {conversationItem.type === "log" && conversationItem.status === "videoCall" &&
+                            <FiVideo size={16}/>}
 
                         <Typography
                             variant="caption"
@@ -207,12 +233,13 @@ const Conversations = () => {
         <Virtuoso
             data={conversationList}
             totalCount={conversationList.length}
-            itemContent={(index , conversationItem) => (
+            itemContent={(index, conversationItem) => (
                 <ConversationItem
                     key={index}
                     conversationItem={conversationItem}
                 />
             )}
+            className="custom-scrollbar"
             style={{
                 display: "flex",
                 flexDirection: "column",

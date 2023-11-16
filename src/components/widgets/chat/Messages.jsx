@@ -6,7 +6,7 @@ import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
-import {LuPlay} from "react-icons/lu";
+import {LuMapPin, LuPlay} from "react-icons/lu";
 
 // utils
 import {fontSizeList} from "utils/constants";
@@ -675,12 +675,19 @@ export const LogMessage = ({message}) => {
                     </Typography>
 
                     {
-                        message.content.time > 0 && (
+                        message.content.time > 0 ? (
                             <Typography
                                 variant="caption"
                                 color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                             >
                                 {formattedMilisecond(message.content.time)}
+                            </Typography>
+                        ) : (
+                            <Typography
+                                variant="caption"
+                                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                            >
+                                {t("typography.rejected")}
                             </Typography>
                         )
                     }
@@ -720,7 +727,7 @@ export const LogMessage = ({message}) => {
 export const LocationMessage = ({message}) => {
 
     const theme = useTheme();
-
+    const {language} = useSelector(state => state.setting.appearance);
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     const _handleShowDetail = () => {
@@ -748,25 +755,64 @@ export const LocationMessage = ({message}) => {
                 onClose={_handleHideContextMenu}
             />
 
-            <Box
-                style={{cursor: "pointer"}}
-                onClick={_handleShowDetail}
+            <Stack
+                direction="row"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center"
+                }}
             >
 
-                <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-3.jpg"
-                    alt="image"
-                    visibleByDefault
-                    effect="blur"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
-                    width={250}
-                    style={{
-                        aspectRatio: 3 / 2,
-                        borderRadius: 8,
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: 32,
+                        height: 32,
+                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
+                        borderRadius: 1
                     }}
-                />
+                >
 
-            </Box>
+                    <LuMapPin size={20}/>
+
+                </Box>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                        cursor: "pointer"
+                    }}
+                    onClick={_handleShowDetail}
+                >
+
+                    <Typography
+                        variant="body2"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        iran , tehran
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        sx={{
+                            direction: language === "fa" ? "rtl" : "ltr"
+                        }}
+                    >
+                        35.9624 , 53.1234
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
 
             <Stack
                 direction="row"

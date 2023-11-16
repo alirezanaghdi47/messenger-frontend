@@ -43,9 +43,9 @@
       "select": "یکی را انتخاب کنید",
       "deleteTitle": "حذف",
       "deleteContent": "آیا این مورد حذف شود ؟",
-      "item": "مورد",
-      "selected": "انتخاب شده",
-      "preventOrientation": "لطفا دستگاه خود را در حالت عمودی قرار دهید"
+      "preventOrientation": "لطفا دستگاه خود را در حالت عمودی قرار دهید",
+      "comingSoon": "بزودی",
+      "rejected": "رد شده"
     },
     "select": {
       "dark": "تاریک",
@@ -95,7 +95,9 @@
       "voiceCall": "تماس صوتی",
       "profile": "حساب کاربری",
       "appearance": "ظاهر",
-      "privacy": "حریم شخصی"
+      "privacy": "حریم شخصی",
+      "createChat": "ایجاد گفتگوی جدید",
+      "createGroup": "ایجاد گروه جدید"
     },
     "button": {
       "persian": "فارسی",
@@ -116,7 +118,8 @@
       "enable": "فعال",
       "disable": "غیر فعال",
       "device": "دستگاه",
-      "delete": "حذف"
+      "delete": "حذف",
+      "record": "ضبط"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",

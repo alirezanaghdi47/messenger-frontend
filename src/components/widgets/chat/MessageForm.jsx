@@ -1,8 +1,9 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
+import {toast} from "react-hot-toast";
 import {IconButton} from "@mui/material";
-import {LuSend} from "react-icons/lu";
+import {LuSend, LuSmile} from "react-icons/lu";
 
 // components
 import TextInput from "components/modules/TextInput";
@@ -25,6 +26,15 @@ const MessageForm = () => {
         <TextInput
             name="message"
             placeholder={t("input.message")}
+            startIcon={
+                <IconButton
+                    varinat="text"
+                    color="ternary"
+                    onClick={() => toast.success(t("typography.comingSoon"))}
+                >
+                    <LuSmile size={20}/>
+                </IconButton>
+            }
             endIcon={
                 <IconButton
                     varinat="text"

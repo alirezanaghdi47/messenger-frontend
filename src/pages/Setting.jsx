@@ -8,6 +8,7 @@ import Appbar from "components/widgets/setting/Appbar.jsx";
 import Version from "components/widgets/setting/Version.jsx";
 import Links from "components/widgets/setting/Links.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
+import Empty from "components/widgets/setting/Empty";
 
 const pathList = [
     "/setting/profile",
@@ -61,7 +62,13 @@ const Setting = () => {
                 )
             }
 
-            <Outlet/>
+            {
+                pathList.includes(location.pathname) ? (
+                    <Outlet/>
+                ) : (
+                    <Empty/>
+                )
+            }
 
         </Primary>
     )

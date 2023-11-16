@@ -1,11 +1,26 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Button, Stack, Typography} from "@mui/material";
+import {useAudioRecorder} from "react-audio-voice-recorder";
+import {Box, Button, IconButton, Stack, Typography} from "@mui/material";
 import {FiSend, FiX} from "react-icons/fi";
+import {FaCircle} from "react-icons/fa6";
 
-const VoiceRecorderPopup = ({isOpen , onClose}) => {
+// utils
+import {formattedSecond} from "utils/functions";
 
+const VoiceRecorderPopup = ({isOpen, onClose}) => {
+
+    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+
+    const {
+        startRecording,
+        stopRecording,
+        isRecording,
+        recordingTime,
+        recordingBlob,
+    } = useAudioRecorder();
 
     return isOpen && (
         <Stack
@@ -27,31 +42,81 @@ const VoiceRecorderPopup = ({isOpen , onClose}) => {
             }}
         >
 
-            <Button
-                variant="text"
+            <IconButton
                 color="error"
-                startIcon={<FiX size={20}/>}
-                onClick={onClose}
+                onClick={() => {
+                    stopRecording();
+                    onClose();
+                }}
             >
-                {t("button.cancel")}
-            </Button>
+                <FiX size={20}/>
+            </IconButton>
 
-            <Typography
-                variant="body2"
-                color="textPrimary"
-                fontWeight="bold"
+            <Stack
+                direction="row"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
             >
-                11:11
-            </Typography>
 
-            <Button
-                variant="text"
+                {
+                    isRecording ? (
+                        <Box
+                            sx={{
+                                direction: language === "fa" ? "rtl" : "ltr",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap:1,
+                            }}
+                        >
+
+                            <Box
+                                sx={{
+                                    width: 12,
+                                    height: 12,
+                                    bgcolor: "error.main",
+                                    borderRadius: "50%"
+                                }}
+                            />
+
+                            <Typography
+                                variant="body2"
+                                color="textPrimary"
+                                fontWeight="bold"
+                            >
+                                {formattedSecond(recordingTime)}
+                            </Typography>
+
+                        </Box>
+                    ) : (
+                        <Button
+                            variant="text"
+                            color="ternary"
+                            startIcon={<FaCircle size={16}/>}
+                            onClick={startRecording}
+                        >
+                            {t("button.record")}
+                        </Button>
+                    )
+                }
+
+            </Stack>
+
+            <IconButton
                 color="primary"
-                startIcon={<FiSend size={20}/>}
-                onClick={onClose}
+                onClick={() => {
+                    stopRecording();
+                    setTimeout(() => {
+                        console.log(recordingBlob);
+                    } , 1000)
+                }}
             >
-                {t("button.send")}
-            </Button>
+                <FiSend size={20}/>
+            </IconButton>
 
         </Stack>
     )

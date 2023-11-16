@@ -80,6 +80,11 @@ const VideoPlayer = ({src}) => {
                 onEnded={_handleEnded}
                 onProgress={(state) => _handleProgress(state)}
                 onDuration={(duration) => _handleDuration(duration)}
+                style={{
+                    width: "100%",
+                    maxWidth: 640,
+                    aspectRatio: 16 / 9,
+                }}
             />
 
             <Stack

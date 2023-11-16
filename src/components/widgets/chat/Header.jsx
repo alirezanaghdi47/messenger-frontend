@@ -3,10 +3,10 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {IconButton, Stack , useMediaQuery} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
-import {LuTrash2} from "react-icons/lu";
 
 // components
 import UserInfo from "components/widgets/chat/UserInfo.jsx";
+import Toolbar from "components/widgets/chat/Toolbar.jsx";
 
 const Header = () => {
 
@@ -51,16 +51,7 @@ const Header = () => {
 
             <UserInfo/>
 
-            {
-                isTablet && (
-                    <IconButton
-                        variant="text"
-                        color="error"
-                    >
-                        <LuTrash2 size={20}/>
-                    </IconButton>
-                )
-            }
+            <Toolbar/>
 
         </Stack>
     )

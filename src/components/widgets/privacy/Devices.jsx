@@ -181,6 +181,7 @@ const Devices = () => {
                     deviceItem={deviceItem}
                 />
             )}
+            className="custom-scrollbar"
             style={{
                 display: "flex",
                 flexDirection: "column",

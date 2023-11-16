@@ -57,11 +57,12 @@ const Security = () => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : "max-content",
+                height: isTablet ? "calc(100dvh - 70px)" : "max-content",
+                minHeight: isTablet ? "calc(100dvh - 70px)" : "100dvh",
                 padding: 4,
                 overflowY: "scroll",
             }}
-            className="remove-scrollbar"
+            className="custom-scrollbar"
         >
 
             <Stack

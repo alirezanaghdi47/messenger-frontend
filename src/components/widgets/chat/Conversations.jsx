@@ -1,5 +1,5 @@
 // libraries
-import {useRef} from "react";
+import {forwardRef} from "react";
 import {Virtuoso} from 'react-virtuoso';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack} from "@mui/material";
@@ -79,8 +79,8 @@ const conversationList = [
         content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
         me: true
     },
-    {id: 11, type: "location", content: [35, 51], me: true},
-    {id: 12, type: "location", content: [35, 51], me: false},
+    {id: 11, type: "location", content: [35.9624 , 53.1234], me: true},
+    {id: 12, type: "location", content: [35.9624 , 53.1234], me: false},
     {id: 13, type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
     {id: 14, type: "log", content: {time: 90 * 1000, status: "voiceCall"}, me: false},
     {id: 15, type: "log", content: {time: 50 * 1000, status: "voiceCall"}, me: false},
@@ -154,21 +154,11 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = () => {
-
-    // const listRef = useRef();
-    //
-    // useLayoutEffect(() => {
-    //     listRef?.current?.scrollToIndex({
-    //         index: conversationList.length,
-    //         behavior: "auto",
-    //         align: "end"
-    //     });
-    // }, []);
+const Conversations = forwardRef((props, ref) => {
 
     return (
         <Virtuoso
-            // ref={listRef}
+            ref={ref}
             data={conversationList}
             totalCount={conversationList.length}
             itemContent={(index, conversationItem) => (
@@ -177,6 +167,7 @@ const Conversations = () => {
                     conversationItem={conversationItem}
                 />
             )}
+            className="custom-scrollbar"
             style={{
                 position: "sticky",
                 top: 80,
@@ -185,6 +176,6 @@ const Conversations = () => {
             }}
         />
     )
-}
+})
 
 export default Conversations;

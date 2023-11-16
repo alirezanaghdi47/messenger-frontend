@@ -102,6 +102,7 @@ const Contacts = () => {
                     contactItem={contactItem}
                 />
             )}
+            className="custom-scrollbar"
             style={{
                 display: "flex",
                 flexDirection: "column",

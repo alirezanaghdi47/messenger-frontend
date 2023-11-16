@@ -3,11 +3,10 @@ import {useTranslation} from "react-i18next";
 import {
     Stack,
     Modal,
-    Container,
-    useMediaQuery, IconButton, Button, Typography, Box
+    Button,
+    Typography,
+    Box
 } from "@mui/material";
-import {useSelector} from "react-redux";
-import {FiMicOff, FiPhoneOff, FiRefreshCw, FiVideoOff} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 const ModalContent = () => {
@@ -96,12 +95,14 @@ const ModalFooter = ({onClose}) => {
 
 const DeleteDialog = ({isOpen, onClose}) => {
 
-    const isTablet = useMediaQuery('(max-width: 576px)');
-
     return (
         <Modal
             open={isOpen}
             onClose={onClose}
+            onContextMenuCapture={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -114,12 +115,12 @@ const DeleteDialog = ({isOpen, onClose}) => {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "start",
+                    justifyContent: "center",
                     alignItems: "center",
-                    width: isTablet ? "100%" : 250,
-                    height: isTablet ? "100%" : "max-content",
+                    width: 250,
+                    height: "max-content",
                     bgcolor: "background.paper",
-                    borderRadius: isTablet ? 0 : 1,
+                    borderRadius: 1,
                     padding: 2,
                 }}
             >
