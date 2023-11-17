@@ -13,7 +13,6 @@ export const languageList = [
 export const themeList = [
     {id: 1, title: "select.light", value: false, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/light-mode.jpg"},
     {id: 2, title: "select.dark", value: true, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/dark-mode.jpg"},
-    {id: 3, title: "select.auto", value: "auto", background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/auto-mode.png"},
 ];
 
 export const fontSizeList = [

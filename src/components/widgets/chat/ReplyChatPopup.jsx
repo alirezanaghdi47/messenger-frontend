@@ -1,7 +1,7 @@
 // libraries
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Stack, Typography, IconButton} from "@mui/material";
+import {Stack, Typography, IconButton, Fade} from "@mui/material";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo, FiX, FiCornerUpLeft} from "react-icons/fi";
 
@@ -91,28 +91,38 @@ const ReplyMessageItem = ({replyMessageItem}) => {
 
 const ReplyChatPopup = () => {
 
+    const {popup} = useSelector(state => state.app);
+
     return (
-        <Stack
-            sx={{
-                position: "absolute",
-                bottom: 80,
-                zIndex: 100,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: 60,
-                bgcolor: "background.paper",
-                borderBottomWidth: 1,
-                borderBottomStyle: "solid",
-                borderBottomColor: "secondary.main",
-                padding: 2
-            }}
+        <Fade
+            in={Boolean(popup?.isOpen && popup?.type === "replyChat")}
+            mountOnEnter
+            unmountOnExit
         >
 
-            <ReplyMessageItem replyMessageItem={replyMessageList[0]}/>
+            <Stack
+                sx={{
+                    position: "absolute",
+                    bottom: 80,
+                    zIndex: 100,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: 60,
+                    bgcolor: "background.paper",
+                    borderBottomWidth: 1,
+                    borderBottomStyle: "solid",
+                    borderBottomColor: "secondary.main",
+                    padding: 2
+                }}
+            >
 
-        </Stack>
+                <ReplyMessageItem replyMessageItem={replyMessageList[0]}/>
+
+            </Stack>
+
+        </Fade>
     )
 }
 

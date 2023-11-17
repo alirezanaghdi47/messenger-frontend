@@ -45,7 +45,10 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         justifyContent: "start",
                         alignItems: "center",
                     }}
-                    onClick={() => dispatch(showModal({type: 'createChat'}))}
+                    onClick={() => {
+                        onClose();
+                        dispatch(showModal({type: 'createChat'}));
+                    }}
                 >
 
                     <LuMessageCircle size={20}/>
@@ -67,7 +70,10 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         justifyContent: "start",
                         alignItems: "center",
                     }}
-                    onClick={() => toast.success(t("typography.comingSoon"))}
+                    onClick={() => {
+                        onClose();
+                        toast.success(t("typography.comingSoon"));
+                    }}
                 >
 
                     <LuUsers size={20}/>
@@ -98,7 +104,6 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 const ActionButton = () => {
 
     const isDesktop = useMediaQuery('(max-width: 992px)');
-
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (
