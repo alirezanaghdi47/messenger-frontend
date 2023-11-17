@@ -26,6 +26,12 @@ const initialState = {
             dark: colorList[0].color.dark,
         },
         background: backgroundList[0].background,
+    },
+    privacy:{
+        devices: [],
+        blockedUsers: [],
+        isActive: false,
+        entryLock: false,
     }
 }
 

@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
@@ -6,8 +7,12 @@ import {FiX} from "react-icons/fi";
 // components
 import Devices from "components/widgets/privacy/Devices";
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
 
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -34,7 +39,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -64,14 +69,16 @@ const ModalContent = () => {
     )
 }
 
-const SessionsModal = ({isOpen , onClose}) => {
+const DevicesModal = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "devices")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -96,7 +103,7 @@ const SessionsModal = ({isOpen , onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 
@@ -106,4 +113,4 @@ const SessionsModal = ({isOpen , onClose}) => {
     )
 }
 
-export default SessionsModal;
+export default DevicesModal;

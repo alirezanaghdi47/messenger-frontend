@@ -26,6 +26,12 @@ const AvatarInput = ({
             }));
             onChange(acceptedFiles[0]);
         },
+        maxFiles: 1,
+        accept: {
+            'image/png': [],
+            'image/jpg': [],
+            'image/jpeg': [],
+        }
     });
 
     useEffect(() => {

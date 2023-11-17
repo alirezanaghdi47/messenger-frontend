@@ -1,11 +1,17 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
 import MusicPlayer from "components/modules/MusicPlayer";
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
+
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
 
     return (
         <Stack
@@ -71,7 +77,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -110,14 +116,16 @@ const ModalContent = () => {
     )
 }
 
-const MusicPlayerModal = ({isOpen , onClose}) => {
+const MusicPlayerModal = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 576px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "musicPlayer")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -141,7 +149,7 @@ const MusicPlayerModal = ({isOpen , onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 

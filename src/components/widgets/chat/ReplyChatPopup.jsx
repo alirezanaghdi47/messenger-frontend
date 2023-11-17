@@ -1,8 +1,12 @@
 // libraries
+import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Stack, Typography, IconButton} from "@mui/material";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo, FiX, FiCornerUpLeft} from "react-icons/fi";
+
+// stores
+import {hidePopup} from "stores/slices/app";
 
 const replyMessageList = [
     {_id: "1", type: "text", content: "لورم ایپسوم"},
@@ -17,6 +21,7 @@ const replyMessageList = [
 
 const ReplyMessageItem = ({replyMessageItem}) => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -34,6 +39,7 @@ const ReplyMessageItem = ({replyMessageItem}) => {
             <IconButton
                 variant="text"
                 color="error"
+                onClick={() => dispatch(hidePopup())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -83,7 +89,7 @@ const ReplyMessageItem = ({replyMessageItem}) => {
     )
 }
 
-const ReplyMessagePopup = () => {
+const ReplyChatPopup = () => {
 
     return (
         <Stack
@@ -110,5 +116,5 @@ const ReplyMessagePopup = () => {
     )
 }
 
-export default ReplyMessagePopup;
+export default ReplyChatPopup;
 

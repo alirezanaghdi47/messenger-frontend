@@ -1,6 +1,5 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {Virtuoso} from "react-virtuoso";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Chip, Stack, Typography , useMediaQuery} from "@mui/material";
 import {LuMonitor, LuSmartphone} from "react-icons/lu";
@@ -41,7 +40,6 @@ const DeviceItem = ({deviceItem}) => {
                 justifyContent: "start",
                 alignItems: "start",
                 width: "100%",
-                paddingBottom: 2
             }}
         >
 
@@ -172,25 +170,31 @@ const Devices = () => {
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Virtuoso
-            data={deviceList}
-            totalCount={deviceList.length}
-            itemContent={(index , deviceItem) => (
-                <DeviceItem
-                    key={index}
-                    deviceItem={deviceItem}
-                />
-            )}
+        <Stack
+            component="ul"
+            direction="column"
+            gap={2}
             className="custom-scrollbar"
-            style={{
+            sx={{
                 display: "flex",
-                flexDirection: "column",
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
-                height: isTablet ? "calc(100dvh - 80px)" : 480
+                height: isTablet ? "calc(100dvh - 80px)" : 480,
+                overflowY: "scroll"
             }}
-        />
+        >
+
+            {
+                deviceList.map(deviceItem =>
+                    <DeviceItem
+                        key={deviceItem?.id}
+                        deviceItem={deviceItem}
+                    />
+                )
+            }
+
+        </Stack>
     )
 }
 

@@ -1,3 +1,4 @@
+// libraries
 import i18n from "i18next";
 
 export const formattedMilisecond = (ms) => {
@@ -48,61 +49,4 @@ export const formattedSecond = (second) => {
         return `${hh}:${('0' + mm).slice(-2)}:${ss}`
     }
     return `${mm}:${ss}`
-}
-
-
-const conversationList = [
-    {
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: true
-    },
-    {
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: false
-    },
-    {type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg", me: true},
-    {type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg", me: false},
-    {type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: true},
-    {type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: false},
-    {type: "video", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp", me: true},
-    {
-        type: "video",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
-        me: false
-    },
-    {
-        type: "voice",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
-        me: false
-    },
-    {type: "voice", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3", me: true},
-    {type: "location", content: [35.9624, 53.1234], me: true},
-    {type: "location", content: [35.9624, 53.1234], me: false},
-    {type: "log", content: {time: 60 * 1000, status: "videoCall"}, me: true},
-    {type: "log", content: {time: 90 * 1000, status: "voiceCall"}, me: false},
-    {type: "log", content: {time: 50 * 1000, status: "voiceCall"}, me: false},
-    {type: "log", content: {time: 0, status: "videoCall"}, me: true},
-];
-
-////////////////////////////////////////////////////////////////////////
-const generated = [];
-
-export function conversation(index = 0) {
-    return conversationList[Math.floor(Math.random() * conversationList.length)]
-}
-
-
-export const getConversation = (index) => {
-    console.log(generated)
-    if (!generated[index]) {
-        generated[index] = conversation(index)
-    }
-
-    return generated[index]
-}
-
-export function generateConversations(length, startIndex = 0) {
-    return Array.from({length}).map((_, i) => getConversation(i + startIndex))
 }

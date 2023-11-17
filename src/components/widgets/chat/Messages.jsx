@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
@@ -14,14 +15,13 @@ import {formattedByte, formattedMilisecond} from "utils/functions";
 
 // hooks
 import {useContextMenu} from "hooks/useContextMenu";
-import {useModal} from "hooks/useModal";
+
+// stores
+import {showModal} from "stores/slices/app";
 
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
-const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
-const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
 const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/MessageDropdownMenu"));
 
 export const TextMessage = ({message}) => {
@@ -221,283 +221,50 @@ export const FileMessage = ({message}) => {
 
 export const ImageMessage = ({message}) => {
 
+    const dispatch = useDispatch();
     const theme = useTheme();
-
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
 
     return (
-        <>
+        <Card
+            sx={{
+                position: "relative",
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+            elevation={0}
+            onContextMenu={_handleShowContextMenu}
+        >
 
-            <Card
+            <MessageDropdownMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideContextMenu}
+            />
+
+            <Box
                 sx={{
                     position: "relative",
                     display: "flex",
-                    gap: 1,
-                    flexDirection: 'column',
                     justifyContent: "center",
-                    alignItems: "start",
-                    bgcolor: message.me ? "primary.light" : "background.default",
-                    padding: 1.5,
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%"
                 }}
-                elevation={0}
-                onContextMenu={_handleShowContextMenu}
             >
-
-                <MessageDropdownMenu
-                    contextMenu={contextMenu}
-                    isOpen={contextMenu !== null}
-                    onClose={_handleHideContextMenu}
-                />
 
                 <Box
-                    sx={{
-                        position: "relative",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100%",
-                        height: "100%"
-                    }}
-                >
-
-                    <Box
-                        style={{cursor: "pointer"}}
-                        onClick={_handleShowModal}
-                    >
-
-                        <LazyLoadImage
-                            src={message.content}
-                            alt="image"
-                            visibleByDefault
-                            effect="blur"
-                            placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
-                            width={250}
-                            style={{
-                                aspectRatio: 3 / 2,
-                                borderRadius: 8,
-                            }}
-                        />
-
-                    </Box>
-
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 8,
-                            right: 8,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <Chip
-                            variant="caption"
-                            color={message.me ? "primary" : "secondary"}
-                            size="small"
-                            label={formattedByte(300000)}
-                        />
-
-                    </Box>
-
-                </Box>
-
-                <Stack
-                    direction="row"
-                    gap={0.5}
-                    sx={{
-                        direction: "rtl",
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        width: "100%",
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                    }}
-                >
-
-                    <BiCheckDouble size={20}/>
-
-                    <Typography
-                        variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        11:11 | 1400/1/1
-                    </Typography>
-
-                </Stack>
-
-            </Card>
-
-            <ImagePreviewModal
-                isOpen={isOpenModal}
-                onClose={_handleHideModal}
-            />
-
-        </>
-    )
-}
-
-export const MusicMessage = ({message}) => {
-
-    const {language} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
-
-    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
-
-    return (
-        <>
-
-            <Card
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    flexDirection: 'column',
-                    justifyContent: "center",
-                    alignItems: "start",
-                    bgcolor: message.me ? "primary.light" : "background.default",
-                    padding: 1.5,
-                }}
-                elevation={0}
-                onContextMenu={_handleShowContextMenu}
-            >
-
-                <MessageDropdownMenu
-                    contextMenu={contextMenu}
-                    isOpen={contextMenu !== null}
-                    onClose={_handleHideContextMenu}
-                />
-
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "start",
-                        alignItems: "center",
-                        width: "100%"
-                    }}
-                >
-
-                    <IconButton
-                        variant="contained"
-                        color={message.me ? "primary" : "secondary"}
-                        size="large"
-                        sx={{order: language === "fa" ? 2 : 1}}
-                        onClick={_handleShowModal}
-                    >
-                        <LuPlay size={20}/>
-                    </IconButton>
-
-                    <Stack
-                        direction="column"
-                        gap={1}
-                        sx={{
-                            order: language === "fa" ? 1 : 2,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: language === "fa" ? "end" : "start",
-                            width: 150,
-                        }}
-                    >
-
-                        <Typography
-                            variant="caption"
-                            color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        >
-                            00:10
-                        </Typography>
-
-                        <Typography
-                            variant="caption"
-                            color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        >
-                            {formattedByte(300000)}
-                        </Typography>
-
-                    </Stack>
-
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    gap={0.5}
-                    sx={{
-                        direction: "rtl",
-                        display: "flex",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        width: "100%",
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                    }}
-                >
-
-                    <BiCheckDouble size={20}/>
-
-                    <Typography
-                        variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        11:11 | 1400/1/1
-                    </Typography>
-
-                </Stack>
-
-            </Card>
-
-            <MusicPlayerModal
-                isOpen={isOpenModal}
-                onClose={_handleHideModal}
-            />
-
-        </>
-    )
-}
-
-export const VideoMessage = ({message}) => {
-
-    const theme = useTheme();
-
-    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
-    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
-
-    return (
-        <>
-
-            <Card
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    flexDirection: 'column',
-                    justifyContent: "center",
-                    alignItems: "start",
-                    bgcolor: message.me ? "primary.light" : "background.default",
-                    padding: 1.5,
-                }}
-                elevation={0}
-                onContextMenu={_handleShowContextMenu}
-            >
-
-                <MessageDropdownMenu
-                    contextMenu={contextMenu}
-                    isOpen={contextMenu !== null}
-                    onClose={_handleHideContextMenu}
-                />
-
-                <Box
-                    sx={{
-                        position: "relative",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "100%",
-                        height: "100%"
-                    }}
+                    style={{cursor: "pointer"}}
+                    onClick={() => dispatch(showModal({type: "imagePreview"}))}
                 >
 
                     <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"
+                        src={message.content}
                         alt="image"
                         visibleByDefault
                         effect="blur"
@@ -509,95 +276,298 @@ export const VideoMessage = ({message}) => {
                         }}
                     />
 
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 8,
-                            left: 8,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <Chip
-                            variant="caption"
-                            color={message.me ? "primary" : "secondary"}
-                            label="11:11"
-                            size="small"
-                        />
-
-                    </Box>
-
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 8,
-                            right: 8,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                        }}
-                    >
-
-                        <Chip
-                            variant="caption"
-                            color={message.me ? "primary" : "secondary"}
-                            size="small"
-                            label={formattedByte(300000)}
-                        />
-
-                    </Box>
-
-                    <IconButton
-                        variant="contained"
-                        color={message.me ? "primary" : "secondary"}
-                        size="large"
-                        sx={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50% , -50%)",
-                        }}
-                        onClick={_handleShowModal}
-                    >
-                        <LuPlay size={20}/>
-                    </IconButton>
-
                 </Box>
 
-                <Stack
-                    direction="row"
-                    gap={0.5}
+                <Box
                     sx={{
-                        direction: "rtl",
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
                         display: "flex",
-                        justifyContent: "end",
+                        justifyContent: "center",
                         alignItems: "center",
-                        width: "100%",
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
 
-                    <BiCheckDouble size={20}/>
+                    <Chip
+                        variant="caption"
+                        color={message.me ? "primary" : "secondary"}
+                        size="small"
+                        label={formattedByte(300000)}
+                    />
+
+                </Box>
+
+            </Box>
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    direction: "rtl",
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const MusicMessage = ({message}) => {
+
+    const dispatch = useDispatch();
+    const {language} = useSelector(state => state.setting.appearance);
+    const theme = useTheme();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+            elevation={0}
+            onContextMenu={_handleShowContextMenu}
+        >
+
+            <MessageDropdownMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideContextMenu}
+            />
+
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%"
+                }}
+            >
+
+                <IconButton
+                    variant="contained"
+                    color={message.me ? "primary" : "secondary"}
+                    size="large"
+                    sx={{order: language === "fa" ? 2 : 1}}
+                    onClick={() => dispatch(showModal({type: "musicPlayer"}))}
+                >
+                    <LuPlay size={20}/>
+                </IconButton>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        order: language === "fa" ? 1 : 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: language === "fa" ? "end" : "start",
+                        width: 150,
+                    }}
+                >
 
                     <Typography
                         variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        11:11 | 1400/1/1
+                        00:10
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        {formattedByte(300000)}
                     </Typography>
 
                 </Stack>
 
-            </Card>
+            </Stack>
 
-            <VideoPlayerModal
-                isOpen={isOpenModal}
-                onClose={_handleHideModal}
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    direction: "rtl",
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const VideoMessage = ({message}) => {
+
+    const dispatch = useDispatch();
+    const theme = useTheme();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 1,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: message.me ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+            elevation={0}
+            onContextMenu={_handleShowContextMenu}
+        >
+
+            <MessageDropdownMenu
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideContextMenu}
             />
 
-        </>
+            <Box
+                sx={{
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%"
+                }}
+            >
+
+                <LazyLoadImage
+                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"
+                    alt="image"
+                    visibleByDefault
+                    effect="blur"
+                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
+                    width={250}
+                    style={{
+                        aspectRatio: 3 / 2,
+                        borderRadius: 8,
+                    }}
+                />
+
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        left: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Chip
+                        variant="caption"
+                        color={message.me ? "primary" : "secondary"}
+                        label="11:11"
+                        size="small"
+                    />
+
+                </Box>
+
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+
+                    <Chip
+                        variant="caption"
+                        color={message.me ? "primary" : "secondary"}
+                        size="small"
+                        label={formattedByte(300000)}
+                    />
+
+                </Box>
+
+                <IconButton
+                    variant="contained"
+                    color={message.me ? "primary" : "secondary"}
+                    size="large"
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50% , -50%)",
+                    }}
+                    onClick={() => dispatch(showModal({type: "videoPlayer"}))}
+                >
+                    <LuPlay size={20}/>
+                </IconButton>
+
+            </Box>
+
+            <Stack
+                direction="row"
+                gap={0.5}
+                sx={{
+                    direction: "rtl",
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <BiCheckDouble size={20}/>
+
+                <Typography
+                    variant="caption"
+                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                >
+                    11:11 | 1400/1/1
+                </Typography>
+
+            </Stack>
+
+        </Card>
     )
 }
 
@@ -606,7 +576,6 @@ export const LogMessage = ({message}) => {
     const {fontSize} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const theme = useTheme();
-
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     return (

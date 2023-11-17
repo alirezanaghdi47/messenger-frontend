@@ -1,15 +1,20 @@
 // libraries
+import {useSelector , useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
 import SearchBar from "components/widgets/privacy/Searchbar";
-import Contacts from "components/widgets/privacy/Contacts";
+import Users from "components/widgets/privacy/Users";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
 
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -36,7 +41,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -62,7 +67,7 @@ const ModalContent = () => {
 
             <SearchBar/>
 
-            <Contacts/>
+            <Users/>
 
             {/*<EmptyPlaceholder/>*/}
 
@@ -70,14 +75,16 @@ const ModalContent = () => {
     )
 }
 
-const BlockedUsersModal = ({isOpen , onClose}) => {
+const BlockedUsersModal = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "blockedUsers")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -102,7 +109,7 @@ const BlockedUsersModal = ({isOpen , onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 

@@ -1,28 +1,38 @@
 // libraries
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {Virtuoso} from "react-virtuoso";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Stack, Typography , useMediaQuery} from "@mui/material";
+
+// stores
+import {hideModal} from "stores/slices/app";
 
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const contactList = [
-    {_id: "1"},
-    {_id: "2"},
-    {_id: "3"},
-    {_id: "4"},
-    {_id: "5"},
+    {_id: "101"},
+    {_id: "102"},
+    {_id: "103"},
+    {_id: "104"},
+    {_id: "105"},
 ];
 
 const ContactItem = ({contactItem}) => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {t} = useTranslation();
 
     return (
         <Box
             component="li"
             sx={{width: "100%"}}
+            onClick={() => {
+                dispatch(hideModal());
+                navigate(`/chat/${contactItem?._id}`);
+            }}
         >
 
             <Stack
@@ -34,7 +44,6 @@ const ContactItem = ({contactItem}) => {
                     alignItems: "center",
                     width: "100%",
                     borderRadius: 1,
-                    paddingBottom: 2,
                     textDecoration: 'none',
                     cursor: "pointer",
                 }}
@@ -93,25 +102,31 @@ const Contacts = () => {
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Virtuoso
-            data={contactList}
-            totalCount={contactList.length}
-            itemContent={(index , contactItem) => (
-                <ContactItem
-                    key={index}
-                    contactItem={contactItem}
-                />
-            )}
+        <Stack
+            component="ul"
+            direction="column"
+            gap={2}
             className="custom-scrollbar"
-            style={{
+            sx={{
                 display: "flex",
-                flexDirection: "column",
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
                 height: isTablet ? "calc(100dvh - 200px)" : 480,
+                overflowY: "scroll"
             }}
-        />
+        >
+
+            {
+                contactList.map(contactItem =>
+                    <ContactItem
+                        key={contactItem?._id}
+                        contactItem={contactItem}
+                    />
+                )
+            }
+
+        </Stack>
     )
 }
 

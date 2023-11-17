@@ -1,5 +1,5 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from "@loadable/component";
 import {useFormik} from "formik";
@@ -7,36 +7,22 @@ import {Button, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import {useModal} from "hooks/useModal";
 import SwitchBox from "components/modules/SwitchBox";
 
+// stores
+import {showModal} from "stores/slices/app";
+
 const EntryLockModal = Loadable(() => import("components/widgets/privacy/EntryLockModal"));
-const SessionsModal = Loadable(() => import("components/widgets/privacy/SessionsModal"));
+const DevicesModal = Loadable(() => import("components/widgets/privacy/DevicesModal"));
 const BlockedUsersModal = Loadable(() => import("components/widgets/privacy/BlockedUsersModal"));
 
 const Security = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
-
-    const {
-        isOpenModal: isOpenEntryLockModal,
-        _handleShowModal: _handleShowEntryLockModal,
-        _handleHideModal: _handleHideEntryLockModal
-    } = useModal();
-
-    const {
-        isOpenModal: isOpenSessionsModal,
-        _handleShowModal: _handleShowSessionsModal,
-        _handleHideModal: _handleHideSessionsModal
-    } = useModal();
-
-    const {
-        isOpenModal: isOpenBlockedUserModal,
-        _handleShowModal: _handleShowBlockedUserModal,
-        _handleHideModal: _handleHideBlockedUserModal
-    } = useModal();
 
     const formik = useFormik({
         initialValues: {
@@ -88,7 +74,7 @@ const Security = () => {
                     variant="text"
                     color="ternary"
                     endIcon={language === "fa" ? <FiChevronLeft size={20}/> : <FiChevronRight size={20}/>}
-                    onClick={_handleShowSessionsModal}
+                    onClick={() => dispatch(showModal({type: "devices"}))}
                 >
                     3 {t("button.device")}
                 </Button>
@@ -118,7 +104,7 @@ const Security = () => {
                     variant="text"
                     color="ternary"
                     endIcon={language === "fa" ? <FiChevronLeft size={20}/> : <FiChevronRight size={20}/>}
-                    onClick={_handleShowBlockedUserModal}
+                    onClick={() => dispatch(showModal({type: "blockedUsers"}))}
                 >
                     {t("button.all")}
                 </Button>
@@ -170,27 +156,30 @@ const Security = () => {
                     variant="text"
                     color="ternary"
                     endIcon={language === "fa" ? <FiChevronLeft size={20}/> : <FiChevronRight size={20}/>}
-                    onClick={_handleShowEntryLockModal}
+                    onClick={() => dispatch(showModal({type: "entryLock"}))}
                 >
                     {t("button.disable")}
                 </Button>
 
             </Stack>
 
-            <EntryLockModal
-                isOpen={isOpenEntryLockModal}
-                onClose={_handleHideEntryLockModal}
-            />
+            {
+                Boolean(modal?.isOpen && modal?.type === "devices") && (
+                    <DevicesModal/>
+                )
+            }
 
-            <SessionsModal
-                isOpen={isOpenSessionsModal}
-                onClose={_handleHideSessionsModal}
-            />
+            {
+                Boolean(modal?.isOpen && modal?.type === "blockedUsers") && (
+                    <BlockedUsersModal/>
+                )
+            }
 
-            <BlockedUsersModal
-                isOpen={isOpenBlockedUserModal}
-                onClose={_handleHideBlockedUserModal}
-            />
+            {
+                Boolean(modal?.isOpen && modal?.type === "entryLock") && (
+                    <EntryLockModal/>
+                )
+            }
 
         </Stack>
     )

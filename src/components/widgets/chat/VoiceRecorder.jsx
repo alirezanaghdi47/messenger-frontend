@@ -1,33 +1,21 @@
 // libraries
-import Loadable from '@loadable/component';
+import {useTranslation} from "react-i18next";
+import {toast} from "react-hot-toast";
 import {IconButton} from "@mui/material";
 import {LuMic} from "react-icons/lu";
 
-// components
-import {useModal} from "hooks/useModal";
-const VoiceRecorderPopup = Loadable(() => import("components/widgets/chat/VoiceRecorderPopup"));
-
 const VoiceRecorder = () => {
 
-    const {isOpenModal, _handleShowModal, _handleHideModal} = useModal();
+    const {t} = useTranslation();
 
     return (
-        <>
-
-            <IconButton
-                varinat="text"
-                color="ternary"
-                onClick={_handleShowModal}
-            >
-                <LuMic size={20}/>
-            </IconButton>
-
-            <VoiceRecorderPopup
-                isOpen={isOpenModal}
-                onClose={_handleHideModal}
-            />
-
-        </>
+        <IconButton
+            varinat="text"
+            color="ternary"
+            onClick={() => toast.success(t("typography.comingSoon"))}
+        >
+            <LuMic size={20}/>
+        </IconButton>
     )
 }
 

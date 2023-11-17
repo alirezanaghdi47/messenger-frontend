@@ -3,7 +3,7 @@ import {useRef} from "react";
 import {useTranslation} from "react-i18next"
 import {Menu, MenuItem, Typography} from "@mui/material";
 import toast from "react-hot-toast";
-import {FiFile, FiFilm, FiImage, FiMapPin} from "react-icons/fi";
+import {FiFile, FiFilm, FiImage, FiMapPin, FiMusic} from "react-icons/fi";
 
 const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
@@ -12,6 +12,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const fileRef = useRef(null);
     const imageRef = useRef(null);
     const videoRef = useRef(null);
+    const musicRef = useRef(null);
 
     const _handleSendFile = async (e) => {
 
@@ -52,6 +53,20 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         }
 
         videoRef.current.value = null;
+
+    }
+
+    const _handleSendMusic = async (e) => {
+
+        const file = await e.target.files[0];
+
+        if (file.size > 5 * 1_024_000){
+            toast.error(t("error.videoMaxSize"));
+        } else {
+            console.log(file);
+        }
+
+        musicRef.current.value = null;
 
     }
 
@@ -174,6 +189,38 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                     fontWeight='bold'
                 >
                     {t("menu.video")}
+                </Typography>
+
+            </MenuItem>
+
+            {/* music */}
+            <MenuItem
+                sx={{
+                    display: "flex",
+                    gap: 1,
+                    justifyContent: "start",
+                    alignItems: "center",
+                    color: "ternary.main"
+                }}
+                onClick={() => musicRef.current.click()}
+            >
+
+                <input
+                    ref={musicRef}
+                    type="file"
+                    accept="audio/*"
+                    onChange={_handleSendMusic}
+                    style={{display: "none"}}
+                />
+
+                <FiMusic size={20}/>
+
+                <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    fontWeight='bold'
+                >
+                    {t("menu.music")}
                 </Typography>
 
             </MenuItem>

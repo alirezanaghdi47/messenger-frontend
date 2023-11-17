@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
@@ -6,7 +7,12 @@ import {FiX} from "react-icons/fi";
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
+
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
 
     return (
         <Stack
@@ -75,7 +81,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -120,14 +126,16 @@ const ModalContent = () => {
     )
 }
 
-const ImagePreviewModal = ({isOpen, onClose}) => {
+const ImagePreviewModal = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "imagePreview")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -151,7 +159,7 @@ const ImagePreviewModal = ({isOpen, onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
 

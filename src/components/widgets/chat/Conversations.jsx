@@ -1,10 +1,7 @@
 // libraries
-import {useCallback, useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {Virtuoso} from 'react-virtuoso';
+import {forwardRef, useLayoutEffect} from "react";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {IconButton, Stack} from "@mui/material";
-import {LuChevronDown} from "react-icons/lu";
+import {Stack} from "@mui/material";
 
 // components
 import {
@@ -20,8 +17,100 @@ import {
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-// utils
-import {generateConversations} from "utils/functions";
+const conversationList = [
+    {
+        _id: "1",
+        type: "text",
+        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
+        me: true
+    },
+    {
+        _id: "2",
+        type: "text",
+        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
+        me: false
+    },
+    {
+        _id: "3",
+        type: "image",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
+        me: true
+    },
+    {
+        _id: "4",
+        type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg", me: false
+    },
+    {
+        _id: "5",
+        type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: true
+    },
+    {
+        _id: "6",
+        type: "file",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
+        me: false
+    },
+    {
+        _id: "7",
+        type: "video",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        me: true
+    },
+    {
+        _id: "8",
+        type: "video",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        me: false
+    },
+    {
+        _id: "9",
+        type: "music",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        me: false
+    },
+    {
+        _id: "10",
+        type: "music",
+        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        me: true
+    },
+    {
+        _id: "11",
+        type: "location",
+        content: [35.9624, 53.1234],
+        me: true
+    },
+    {
+        _id: "12",
+        type: "location",
+        content: [35.9624, 53.1234],
+        me: false
+    },
+    {
+        _id: "13",
+        type: "log",
+        content: {time: 60 * 1000, status: "videoCall"},
+        me: true
+    },
+    {
+        _id: "14",
+        type: "log",
+        content: {time: 90 * 1000, status: "voiceCall"},
+        me: false
+    },
+    {
+        _id: "15",
+        type: "log",
+        content: {time: 50 * 1000, status: "voiceCall"},
+        me: false
+    },
+    {
+        _id: "16",
+        type: "log",
+        content: {time: 0, status: "videoCall"},
+        me: true
+    },
+];
 
 const ConversationItem = ({conversationItem}) => {
 
@@ -35,7 +124,6 @@ const ConversationItem = ({conversationItem}) => {
                 justifyContent: conversationItem.me ? "start" : "end",
                 alignItems: "end",
                 width: '100%',
-                padding: 2
             }}
         >
 
@@ -79,7 +167,7 @@ const ConversationItem = ({conversationItem}) => {
                 {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
                 {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
                 {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
-                {conversationItem.type === "voice" && <MusicMessage message={conversationItem}/>}
+                {conversationItem.type === "music" && <MusicMessage message={conversationItem}/>}
                 {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
                 {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
                 {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
@@ -90,81 +178,44 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = () => {
+const Conversations = forwardRef((props, ref) => {
 
-    const {darkMode} = useSelector(state => state.setting.appearance);
-    const listRef = useRef();
-
-    const [showButton, setShowButton] = useState(false);
-
-    const START_INDEX = 10000;
-    const INITIAL_ITEM_COUNT = 20;
-
-    const [firstItemIndex, setFirstItemIndex] = useState(START_INDEX);
-    const [conversations, setConversations] = useState(() => generateConversations(INITIAL_ITEM_COUNT, START_INDEX));
-
-    const prependItems = useCallback(() => {
-        const itemsToPrepend = 10;
-        const nextFirstItemIndex = firstItemIndex - itemsToPrepend;
-
-        setTimeout(() => {
-            setFirstItemIndex(() => nextFirstItemIndex);
-            setConversations(() => [...generateConversations(itemsToPrepend, nextFirstItemIndex), ...conversations]);
-        }, 500);
-
-        return false;
-    }, [firstItemIndex, conversations , setConversations]);
+    useLayoutEffect(() => {
+        ref?.current?.scrollTo({top: ref?.current?.scrollHeight});
+    }, []);
 
     return (
-        <>
-
-            <Virtuoso
-                ref={listRef}
-                firstItemIndex={firstItemIndex}
-                initialTopMostItemIndex={INITIAL_ITEM_COUNT - 1}
-                data={conversations}
-                startReached={prependItems}
-                itemContent={(index, conversationItem) => (
-                    <ConversationItem
-                        key={index}
-                        conversationItem={conversationItem}
-                    />
-                )}
-                followOutput="auto"
-                atBottomStateChange={(bottom) => {
-                    setShowButton(!bottom);
-                }}
-                className="custom-scrollbar"
-                style={{
-                    position: "sticky",
-                    top: 80,
-                    width: "100%",
-                    height: "calc(100dvh - 160px)",
-                }}
-            />
+        <Stack
+            id="messages"
+            ref={ref}
+            component="ul"
+            direction="column"
+            gap={2}
+            className="custom-scrollbar"
+            sx={{
+                position: "absolute",
+                top: 80,
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "start",
+                width: "100%",
+                height: "calc(100dvh - 160px)",
+                padding: 2,
+                overflowY: "scroll"
+            }}
+        >
 
             {
-                showButton && (
-                    <IconButton
-                        variant="contained"
-                        color={darkMode ? "dark" : "light"}
-                        size="large"
-                        sx={{
-                            position: 'absolute',
-                            zIndex: 25,
-                            left: 16,
-                            bottom: 96,
-                            boxShadow: 3
-                        }}
-                        onClick={() => listRef.current.scrollToIndex({index: conversations.length - 1, behavior: 'smooth'})}
-                    >
-                        <LuChevronDown size={20}/>
-                    </IconButton>
+                conversationList.map(conversationItem =>
+                    <ConversationItem
+                        key={conversationItem?._id}
+                        conversationItem={conversationItem}
+                    />
                 )
             }
 
-        </>
+        </Stack>
     )
-}
+})
 
 export default Conversations;

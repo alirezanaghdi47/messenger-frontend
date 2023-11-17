@@ -1,5 +1,6 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {useMediaQuery, Stack} from "@mui/material";
 
 // components
@@ -14,6 +15,7 @@ import Empty from "components/widgets/chats/Empty";
 const Chats = () => {
 
     const params = useParams();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (

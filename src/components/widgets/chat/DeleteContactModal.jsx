@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {
     Stack,
@@ -8,6 +9,9 @@ import {
     Box
 } from "@mui/material";
 import {LuTrash2} from "react-icons/lu";
+
+// stores
+import {hideModal} from "stores/slices/app";
 
 const ModalContent = () => {
 
@@ -57,8 +61,9 @@ const ModalContent = () => {
     )
 }
 
-const ModalFooter = ({onClose}) => {
+const ModalFooter = () => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -76,7 +81,7 @@ const ModalFooter = ({onClose}) => {
             <Button
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 {t("button.cancel")}
             </Button>
@@ -84,7 +89,7 @@ const ModalFooter = ({onClose}) => {
             <Button
                 variant="contained"
                 color="error"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 {t("button.delete")}
             </Button>
@@ -93,12 +98,15 @@ const ModalFooter = ({onClose}) => {
     )
 }
 
-const DeleteDialog = ({isOpen, onClose}) => {
+const DeleteChatModal = () => {
+
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "deleteContact")}
+            onClose={() => dispatch(hideModal())}
             onContextMenuCapture={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -127,7 +135,7 @@ const DeleteDialog = ({isOpen, onClose}) => {
 
                 <ModalContent/>
 
-                <ModalFooter onClose={onClose}/>
+                <ModalFooter/>
 
             </Stack>
 
@@ -135,5 +143,5 @@ const DeleteDialog = ({isOpen, onClose}) => {
     )
 }
 
-export default DeleteDialog;
+export default DeleteChatModal;
 

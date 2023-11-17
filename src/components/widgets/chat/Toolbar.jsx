@@ -1,4 +1,5 @@
 // libraries
+import {useSelector , useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-hot-toast";
 import {
@@ -14,13 +15,17 @@ import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 // components
 import {useDropdownMenu} from "hooks/useDropdownMenu";
 
-const MobileToolbar = ({
+// stores
+import {showModal} from "stores/slices/app";
+
+const DesktopToolbar = ({
                            anchorEl,
                            isOpenDropdownMenu,
                            onCloseDropdownMenu,
                            onOpenDropdownMenu,
                        }) => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -39,7 +44,10 @@ const MobileToolbar = ({
                 component="li"
                 variant="text"
                 color="ternary"
-                onClick={() => toast.success(t("typography.comingSoon"))}
+                onClick={() => {
+                    onCloseDropdownMenu();
+                    toast.success(t("typography.comingSoon"));
+                }}
             >
                 <FiPhone size={20}/>
             </IconButton>
@@ -48,7 +56,10 @@ const MobileToolbar = ({
                 component="li"
                 variant="text"
                 color="ternary"
-                onClick={() => toast.success(t("typography.comingSoon"))}
+                onClick={() => {
+                    onCloseDropdownMenu();
+                    toast.success(t("typography.comingSoon"));
+                }}
             >
                 <FiVideo size={20}/>
             </IconButton>
@@ -84,6 +95,10 @@ const MobileToolbar = ({
                         alignItems: "center",
                         color: "error.main"
                     }}
+                    onClick={() => {
+                        onCloseDropdownMenu();
+                        dispatch(showModal({type: "deleteChat"}));
+                    }}
                 >
 
                     <FiTrash2 size={20}/>
@@ -98,41 +113,20 @@ const MobileToolbar = ({
 
                 </MenuItem>
 
-                {/*<MenuItem*/}
-                {/*    sx={{*/}
-                {/*        display: "flex",*/}
-                {/*        gap: 1,*/}
-                {/*        justifyContent: "start",*/}
-                {/*        alignItems: "center",*/}
-                {/*        color: "error.main"*/}
-                {/*    }}*/}
-                {/*>*/}
-
-                {/*    <FiLogOut size={20}/>*/}
-
-                {/*    <Typography*/}
-                {/*        variant="body2"*/}
-                {/*        color="error"*/}
-                {/*        fontWeight='bold'*/}
-                {/*    >*/}
-                {/*        {t("menu.leave")}*/}
-                {/*    </Typography>*/}
-
-                {/*</MenuItem>*/}
-
             </Menu>
 
         </Stack>
     )
 }
 
-const DesktopToolbar = ({
+const MobileToolbar = ({
                             anchorEl,
                             isOpenDropdownMenu,
                             onCloseDropdownMenu,
                             onOpenDropdownMenu,
                         }) => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -178,7 +172,10 @@ const DesktopToolbar = ({
                         alignItems: "center",
                         color: "ternary.main"
                     }}
-                    onClick={() => toast.success(t("typography.comingSoon"))}
+                    onClick={() => {
+                        onCloseDropdownMenu();
+                        toast.success(t("typography.comingSoon"));
+                    }}
                 >
 
                     <FiPhone size={20}/>
@@ -201,7 +198,10 @@ const DesktopToolbar = ({
                         alignItems: "center",
                         color: "ternary.main"
                     }}
-                    onClick={() => toast.success(t("typography.comingSoon"))}
+                    onClick={() => {
+                        onCloseDropdownMenu();
+                        toast.success(t("typography.comingSoon"));
+                    }}
                 >
 
                     <FiVideo size={20}/>
@@ -224,6 +224,10 @@ const DesktopToolbar = ({
                         alignItems: "center",
                         color: "error.main"
                     }}
+                    onClick={() => {
+                        onCloseDropdownMenu();
+                        dispatch(showModal({type: "deleteContact"}));
+                    }}
                 >
 
                     <FiTrash2 size={20}/>
@@ -238,28 +242,6 @@ const DesktopToolbar = ({
 
                 </MenuItem>
 
-                {/*<MenuItem*/}
-                {/*    sx={{*/}
-                {/*        display: "flex",*/}
-                {/*        gap: 1,*/}
-                {/*        justifyContent: "start",*/}
-                {/*        alignItems: "center",*/}
-                {/*        color: "error.main"*/}
-                {/*    }}*/}
-                {/*>*/}
-
-                {/*    <FiLogOut size={20}/>*/}
-
-                {/*    <Typography*/}
-                {/*        variant="body2"*/}
-                {/*        color="error"*/}
-                {/*        fontWeight='bold'*/}
-                {/*    >*/}
-                {/*        {t("menu.leave")}*/}
-                {/*    </Typography>*/}
-
-                {/*</MenuItem>*/}
-
             </Menu>
 
         </Stack>
@@ -268,7 +250,7 @@ const DesktopToolbar = ({
 
 const Toolbar = () => {
 
-    const isTablet = useMediaQuery('(max-width: 768px)');
+    const isTablet = useMediaQuery('(min-width: 768px)');
 
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 

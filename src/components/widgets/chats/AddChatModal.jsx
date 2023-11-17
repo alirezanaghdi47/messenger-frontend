@@ -1,15 +1,20 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Button, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
-import {FiCheck, FiX} from "react-icons/fi";
+import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
+import {FiX} from "react-icons/fi";
 
 // components
 import SearchBar from "components/widgets/chats/Searchbar";
 import Contacts from "components/widgets/chats/Contacts";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
 
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -36,7 +41,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -70,51 +75,16 @@ const ModalContent = () => {
     )
 }
 
-const ModalFooter = ({onClose}) => {
+const AddChatModal = () => {
 
-    const {t} = useTranslation();
-
-    return (
-        <Stack
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-                width: "100%",
-                marginTop: "auto"
-            }}
-        >
-
-            <Button
-                variant="text"
-                color="ternary"
-                startIcon={<FiX size={20}/>}
-            >
-                {t("button.cancel")}
-            </Button>
-
-            <Button
-                variant="contained"
-                color="primary"
-                startIcon={<FiCheck size={20}/>}
-            >
-                {t("button.submit")}
-            </Button>
-
-        </Stack>
-    )
-}
-
-const AddChatModal = ({isOpen , onClose}) => {
-
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "createChat")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -139,11 +109,9 @@ const AddChatModal = ({isOpen , onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
-
-                <ModalFooter onClose={onClose}/>
 
             </Stack>
 

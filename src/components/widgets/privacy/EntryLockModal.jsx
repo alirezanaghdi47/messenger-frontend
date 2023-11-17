@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {Button, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
@@ -7,8 +8,15 @@ import {FiCheck, FiX} from "react-icons/fi";
 // components
 import PasswordInput from "components/modules/PasswordInput";
 
-const ModalHeader = ({onClose}) => {
+// stores
+import {hideModal} from "stores/slices/app";
 
+// utils
+import {addEntryLockSchema} from "utils/validations";
+
+const ModalHeader = () => {
+
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     return (
@@ -35,7 +43,7 @@ const ModalHeader = ({onClose}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={onClose}
+                onClick={() => dispatch(hideModal())}
             >
                 <FiX size={20}/>
             </IconButton>
@@ -46,6 +54,7 @@ const ModalHeader = ({onClose}) => {
 
 const ModalContent = () => {
 
+    const dispatch = useDispatch();
     const {t} = useTranslation();
 
     const formik = useFormik({
@@ -53,8 +62,10 @@ const ModalContent = () => {
             password: "",
             passwordRepeat: "",
         },
+        validationSchema: addEntryLockSchema,
         onSubmit: async (data) => {
-            console.log(data)
+            console.log(data);
+            dispatch(hideModal());
         }
     });
 
@@ -91,55 +102,52 @@ const ModalContent = () => {
                 touched={formik.touched.passwordRepeat}
             />
 
-        </Stack>
-    )
-}
-
-const ModalFooter = ({onClose}) => {
-
-    const {t} = useTranslation();
-
-    return (
-        <Stack
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-                width: "100%",
-                marginTop: "auto"
-            }}
-        >
-
-            <Button
-                variant="text"
-                color="ternary"
-                startIcon={<FiX size={20}/>}
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    marginTop: "auto"
+                }}
             >
-                {t("button.cancel")}
-            </Button>
 
-            <Button
-                variant="contained"
-                color="primary"
-                startIcon={<FiCheck size={20}/>}
-            >
-                {t("button.submit")}
-            </Button>
+                <Button
+                    variant="text"
+                    color="ternary"
+                    startIcon={<FiX size={20}/>}
+                    onClick={() => dispatch(hideModal())}
+                >
+                    {t("button.cancel")}
+                </Button>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<FiCheck size={20}/>}
+                    onClick={formik.handleSubmit}
+                >
+                    {t("button.submit")}
+                </Button>
+
+            </Stack>
 
         </Stack>
     )
 }
 
-const EntryLock = ({isOpen, onClose}) => {
+const EntryLock = () => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
         <Modal
-            open={isOpen}
-            onClose={onClose}
+            open={Boolean(modal?.isOpen && modal?.type === "entryLock")}
+            onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -164,11 +172,9 @@ const EntryLock = ({isOpen, onClose}) => {
                 }}
             >
 
-                <ModalHeader onClose={onClose}/>
+                <ModalHeader/>
 
                 <ModalContent/>
-
-                <ModalFooter onClose={onClose}/>
 
             </Stack>
 

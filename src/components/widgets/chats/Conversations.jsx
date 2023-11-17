@@ -1,21 +1,14 @@
 // libraries
 import {useNavigate, useParams} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import Loadable from '@loadable/component';
-import {Virtuoso} from "react-virtuoso";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// components
-import {useContextMenu} from "hooks/useContextMenu";
-
 // styles
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
-const ConversationDropdownMenu = Loadable(() => import("components/widgets/chats/ConversationDropdownMenu"));
 
 const conversationList = [
     {
@@ -62,23 +55,15 @@ const ConversationItem = ({conversationItem}) => {
     const params = useParams();
     const {t} = useTranslation();
     const theme = useTheme();
-    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
-    const _handleActiveItem = (item) => navigate(params.chatId === item._id ? "/chat" : `/chat/${item._id}`);
+    const _handleActiveItem = (item) => navigate(`/chat/${item._id}`);
 
     return (
         <Box
             component="li"
             sx={{width: "100%"}}
             onClick={() => _handleActiveItem(conversationItem)}
-            onContextMenu={_handleShowContextMenu}
         >
-
-            <ConversationDropdownMenu
-                contextMenu={contextMenu}
-                isOpen={contextMenu !== null}
-                onClose={_handleHideContextMenu}
-            />
 
             <Stack
                 direction="row"
@@ -230,25 +215,30 @@ const ConversationItem = ({conversationItem}) => {
 const Conversations = () => {
 
     return (
-        <Virtuoso
-            data={conversationList}
-            totalCount={conversationList.length}
-            itemContent={(index, conversationItem) => (
-                <ConversationItem
-                    key={index}
-                    conversationItem={conversationItem}
-                />
-            )}
+        <Stack
+            component="ul"
+            direction="column"
             className="custom-scrollbar"
-            style={{
+            sx={{
                 display: "flex",
-                flexDirection: "column",
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
                 height: "calc(100dvh - 140px)",
+                overflowY: "scroll"
             }}
-        />
+        >
+
+            {
+                conversationList.map(conversationItem =>
+                    <ConversationItem
+                        key={conversationItem?._id}
+                        conversationItem={conversationItem}
+                    />
+                )
+            }
+
+        </Stack>
     )
 }
 

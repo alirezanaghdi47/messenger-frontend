@@ -1,4 +1,5 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {toast} from "react-hot-toast";
@@ -7,21 +8,18 @@ import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle, LuUsers} from "react-icons/lu";
 
 // hooks
-import {useModal} from "hooks/useModal";
 import {useDropdownMenu} from "hooks/useDropdownMenu";
 
-// components
+// utils
+import {showModal} from "stores/slices/app";
+
 const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
 
 const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
     const {t} = useTranslation();
-
-    const {
-        isOpenModal: addChatIsOpenModal,
-        _handleShowModal: _handleShowAddChatModal,
-        _handleHideModal: _handleHideAddChatModal
-    } = useModal();
 
     return (
         <>
@@ -47,7 +45,7 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         justifyContent: "start",
                         alignItems: "center",
                     }}
-                    onClick={_handleShowAddChatModal}
+                    onClick={() => dispatch(showModal({type: 'createChat'}))}
                 >
 
                     <LuMessageCircle size={20}/>
@@ -86,10 +84,11 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 
             </Menu>
 
-            <AddChatModal
-                isOpen={addChatIsOpenModal}
-                onClose={_handleHideAddChatModal}
-            />
+            {
+                Boolean(modal?.isOpen && modal?.type === "createChat") && (
+                    <AddChatModal/>
+                )
+            }
 
         </>
     )
