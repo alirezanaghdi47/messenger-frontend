@@ -9,6 +9,7 @@ import Router from "providers/Router.jsx";
 
 // styles
 import "styles/global.scss";
+import "styles/vazirmatn.css";
 
 const App = () => {
 
@@ -23,7 +24,7 @@ const App = () => {
                 containerStyle={{
                     fontSize: theme.typography.body2.fontSize,
                     fontWeight: "bold",
-                    fontFamily: language === "fa" ? "Vazir FD" : "Vazirmatn"
+                    fontFamily: language === "fa" ? "Vazirmatn FD" : "Vazirmatn"
                 }}
                 toastOptions={{
                     duration: 1500,

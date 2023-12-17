@@ -111,10 +111,7 @@ const Mui = ({children}) => {
             Array(20).fill("none")
         ],
         typography: {
-            fontFamily: language === "fa" ? "Vazir FD , sans-serif" : "Vazirmatn , sans-serif",
-            caption: {
-                lineHeight: 1
-            }
+            fontFamily: language === "fa" ? "Vazirmatn FD , sans-serif" : "Vazirmatn , sans-serif",
         },
         components: {
             MuiCssBaseline: {
@@ -139,6 +136,13 @@ const Mui = ({children}) => {
                     }
                 }
             },
+            MuiTypography:{
+              styleOverrides:{
+                  root: ({theme, ownerState}) => ({
+                      lineHeight: "100%"
+                  }),
+              }
+            },
             MuiTabs: {
                 styleOverrides: {
                     indicator: ({theme, ownerState}) => ({
@@ -156,6 +160,7 @@ const Mui = ({children}) => {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
+                        lineHeight: "100%"
                     }),
                 },
             },
@@ -175,6 +180,7 @@ const Mui = ({children}) => {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({
                         fontWeight: "bold",
+                        lineHeight: "100%"
                     }),
                 },
             },

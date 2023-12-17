@@ -27,7 +27,7 @@ const Customize = () => {
                 padding: 4,
                 overflowY:"scroll"
             }}
-            className="custom-scrollbar"
+            className="remove-scrollbar"
         >
 
             <Language/>

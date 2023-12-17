@@ -18,10 +18,10 @@ const Empty = () => {
                 left: isTablet ? 0 : 360,
                 bottom: 0,
                 display: "flex",
-                gap: 2,
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                gap: 2,
                 width: isTablet ? "100%" : "calc(100% - 360px)",
                 height: "100dvh",
                 padding: 4
@@ -29,7 +29,7 @@ const Empty = () => {
         >
 
             <img
-                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/setting-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/setting-light.svg"}
+                src={darkMode ? "/images/setting-dark.svg" : "/images/setting-light.svg"}
                 alt="empty"
                 width="100%"
                 style={{maxWidth: 300}}

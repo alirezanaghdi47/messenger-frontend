@@ -4,12 +4,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Stack} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
-// assets
-import logo from "assets/images/logo.png";
-
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const Appbar = () => {
 
     const navigate = useNavigate();
@@ -41,12 +35,11 @@ const Appbar = () => {
             >
 
                 <LazyLoadImage
-                    src={logo}
+                    src="/images/logo.png"
                     alt="logo"
                     visibleByDefault
                     width={40}
                     height={40}
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                 />
 

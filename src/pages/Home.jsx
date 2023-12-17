@@ -1,17 +1,56 @@
 // libraries
-import {useLayoutEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Stack} from "@mui/material";
+
+// components
+import Header from "components/widgets/home/Header";
+import Intro from "components/widgets/home/Intro";
+import Form from "components/widgets/home/Form";
+
+// layouts
+import Secondary from "layouts/Secondary";
+
+// hooks
+import {useSegment} from "hooks/useSegment";
 
 const Home = () => {
 
-    const location = useLocation()
-    const navigate = useNavigate();
+    const {segment , _handleNextSegment} = useSegment();
 
-    useLayoutEffect(() => {
-        if (location.pathname === "/") navigate("/chat");
-    }, []);
+    return (
+        <Secondary>
 
-    return null;
+            <Stack
+                component="main"
+                direction="column"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                }}
+            >
+
+                <Header/>
+
+                {
+                    segment.active === 0 && (
+                        <Intro
+                            onNext={_handleNextSegment}
+                        />
+                    )
+                }
+
+                {
+                    segment.active === 1 && (
+                        <Form/>
+                    )
+                }
+
+            </Stack>
+
+        </Secondary>
+    );
 }
 
 export default Home;

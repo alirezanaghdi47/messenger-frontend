@@ -4,9 +4,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 // stores
 import {hideModal} from "stores/slices/app";
 
@@ -37,12 +34,11 @@ const ModalHeader = () => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    src="/images/avatar.jpg"
                     alt="avatar"
                     visibleByDefault
                     width={40}
                     height={40}
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                     style={{borderRadius: "50%"}}
                 />
@@ -110,12 +106,11 @@ const ModalContent = () => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg"
+                    src="/images/desktop-1.jpg"
                     alt="background"
                     visibleByDefault
                     width="100%"
                     height="100%"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                     style={{borderRadius: 8}}
                 />

@@ -4,13 +4,9 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const userInfoList = [
     {id: 1 ,title: "input.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},
-    {id: 2 ,title: "input.phoneNumber", value: "09195610753" , icon: <FiPhone size={20}/>},
-    {id: 3 ,title: "input.biography", value: "Front End Developer" , icon: <FiInfo size={20}/>},
+    {id: 2 ,title: "input.biography", value: "Front End Developer" , icon: <FiInfo size={20}/>},
 ];
 
 const UserDetail = () => {
@@ -26,12 +22,11 @@ const UserDetail = () => {
         >
 
             <LazyLoadImage
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                src="/images/avatar.jpg"
                 alt="avatar"
                 visibleByDefault
                 width="100%"
                 height="100%"
-                placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                 effect='blur'
                 style={{
                     objectFit: "cover",

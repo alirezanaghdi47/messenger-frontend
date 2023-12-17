@@ -3,12 +3,14 @@ import {Outlet, useLocation} from "react-router-dom";
 import {Stack , useMediaQuery} from "@mui/material";
 
 // components
-import Primary from "layouts/Primary.jsx";
 import Appbar from "components/widgets/setting/Appbar.jsx";
 import Version from "components/widgets/setting/Version.jsx";
 import Links from "components/widgets/setting/Links.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
 import Empty from "components/widgets/setting/Empty";
+
+// layouts
+import Primary from "layouts/Primary.jsx";
 
 const pathList = [
     "/setting/profile",

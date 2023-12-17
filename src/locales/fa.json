@@ -32,12 +32,7 @@
       "security": "امنیت",
       "entryLock": "قفل ورودی",
       "devices": "دستگاه ها",
-      "signIn": "ورود",
-      "signUpQuestion": "اگر حساب کاربری ندارید",
-      "signUp": "عضویت",
-      "signInQuestion": "اگر حساب کاربری دارید",
-      "verifyCode": "اعتبارسنجی",
-      "timeRemaining": "زمان باقی مانده",
+      "signIn": "ورود با",
       "createChat": "ایجاد پیام جدید",
       "forwardChat": "هدایت پیام به",
       "select": "یکی را انتخاب کنید",
@@ -45,7 +40,12 @@
       "deleteContent": "آیا این مورد حذف شود ؟",
       "preventOrientation": "لطفا دستگاه خود را در حالت عمودی قرار دهید",
       "comingSoon": "بزودی",
-      "rejected": "رد شده"
+      "rejected": "رد شده",
+      "copyRight": "1402-1403",
+      "fastTitle": "سریع",
+      "fastMessage": "پیام های خود را با سرعت نور ارسال کنید",
+      "secureTitle": "ایمن",
+      "secureMessage": "حفظ حریم خصوصی شما جزو اهداف ماست"
     },
     "select": {
       "dark": "تاریک",
@@ -102,11 +102,8 @@
     "button": {
       "persian": "فارسی",
       "english": "انگلیسی",
-      "12h": "12 ساعته",
-      "24h": "24 ساعته",
+      "back": "بازگشت",
       "signIn": "وارد شوید",
-      "signUp": "عضو شوید",
-      "verifyCode": "اعتبارسنجی کنید",
       "restart": "بازنشانی",
       "submit": "ثبت",
       "next": "بعدی",
@@ -119,7 +116,9 @@
       "disable": "غیر فعال",
       "device": "دستگاه",
       "delete": "حذف",
-      "record": "ضبط"
+      "record": "ضبط",
+      "google": "ورود با گوگل",
+      "linkedin": "ورود با لینکدین"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",

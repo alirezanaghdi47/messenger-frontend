@@ -14,9 +14,6 @@ import {
     MusicMessage
 } from "components/widgets/chat/Messages";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const conversationList = [
     {
         _id: "1",
@@ -33,45 +30,49 @@ const conversationList = [
     {
         _id: "3",
         type: "image",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg",
+        content: "/images/desktop-1.jpg",
         me: true
     },
     {
         _id: "4",
-        type: "image", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg", me: false
+        type: "image",
+        content: "/images/desktop-1.jpg",
+        me: false
     },
     {
         _id: "5",
-        type: "file", content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf", me: true
+        type: "file",
+        content: "/data/lorem-ipsum.pdf",
+        me: true
     },
     {
         _id: "6",
         type: "file",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.pdf",
+        content: "/data/lorem-ipsum.pdf",
         me: false
     },
     {
         _id: "7",
         type: "video",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        content: "/data/lorem-ipsum.3gp",
         me: true
     },
     {
         _id: "8",
         type: "video",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.3gp",
+        content: "/data/lorem-ipsum.3gp",
         me: false
     },
     {
         _id: "9",
         type: "music",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        content: "/data/lorem-ipsum.mp3",
         me: false
     },
     {
         _id: "10",
         type: "music",
-        content: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.mp3",
+        content: "/data/lorem-ipsum.mp3",
         me: true
     },
     {
@@ -140,11 +141,10 @@ const ConversationItem = ({conversationItem}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    src="/images/avatar.jpg"
                     alt="avatar"
                     visibleByDefault
                     effect="blur"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     width={30}
                     height={30}
                     style={{borderRadius: "50%"}}

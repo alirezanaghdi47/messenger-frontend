@@ -1,12 +1,9 @@
 // libraries
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Loadable from '@loadable/component';
 
 // pages
 const Home = Loadable(() => import('pages/Home'));
-const Auth = Loadable(() => import('pages/Auth'));
-const SignIn = Loadable(() => import('pages/SignIn'));
-const SignUp = Loadable(() => import('pages/SignUp'));
 const Chats = Loadable(() => import('pages/Chats'));
 const Chat = Loadable(() => import('pages/Chat'));
 const Setting = Loadable(() => import('pages/Setting'));
@@ -17,20 +14,10 @@ const NotFound = Loadable(() => import('pages/NotFound'));
 
 const Router = () => {
 
-    const location = useLocation();
-
     return (
         <Routes>
 
             <Route path="/" element={<Home/>}/>
-
-            <Route path="/auth" element={<Auth/>}>
-
-                <Route path="/auth/sign-in" element={<SignIn/>}/>
-
-                <Route path="/auth/sign-up" element={<SignUp/>}/>
-
-            </Route>
 
             <Route path="/chat" element={<Chats/>}>
 

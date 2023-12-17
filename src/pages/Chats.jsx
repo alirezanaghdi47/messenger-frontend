@@ -4,13 +4,15 @@ import {useSelector} from "react-redux";
 import {useMediaQuery, Stack} from "@mui/material";
 
 // components
-import Primary from "layouts/Primary.jsx";
 import Appbar from "components/widgets/chats/Appbar.jsx";
 import Conversations from "components/widgets/chats/Conversations.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 import Empty from "components/widgets/chats/Empty";
+
+// layouts
+import Primary from "layouts/Primary.jsx";
 
 const Chats = () => {
 

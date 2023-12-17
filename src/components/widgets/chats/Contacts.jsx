@@ -8,9 +8,6 @@ import {Box, Stack, Typography , useMediaQuery} from "@mui/material";
 // stores
 import {hideModal} from "stores/slices/app";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const contactList = [
     {_id: "101"},
     {_id: "102"},
@@ -50,12 +47,11 @@ const ContactItem = ({contactItem}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    src="/images/avatar.jpg"
                     alt="avatar"
                     visibleByDefault
                     width={40}
                     height={40}
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                     style={{borderRadius: "50%"}}
                 />

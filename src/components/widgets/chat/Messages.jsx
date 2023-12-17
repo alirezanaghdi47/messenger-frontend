@@ -19,9 +19,6 @@ import {useContextMenu} from "hooks/useContextMenu";
 // stores
 import {showModal} from "stores/slices/app";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/MessageDropdownMenu"));
 
 export const TextMessage = ({message}) => {
@@ -152,11 +149,10 @@ export const FileMessage = ({message}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/lorem-ipsum.jpg"
+                    src="/images/placeholder.jpg"
                     alt="image"
                     visibleByDefault
                     effect="blur"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     width={50}
                     height={50}
                     style={{borderRadius: 8}}
@@ -268,7 +264,6 @@ export const ImageMessage = ({message}) => {
                         alt="image"
                         visibleByDefault
                         effect="blur"
-                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                         width={250}
                         style={{
                             aspectRatio: 3 / 2,
@@ -474,11 +469,10 @@ export const VideoMessage = ({message}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"
+                    src="/images/desktop-2.jpg"
                     alt="image"
                     visibleByDefault
                     effect="blur"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     width={250}
                     style={{
                         aspectRatio: 3 / 2,

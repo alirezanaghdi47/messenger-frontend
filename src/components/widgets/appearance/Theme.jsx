@@ -10,9 +10,6 @@ import Header from "components/widgets/appearance/Header";
 // stores
 import {setTheme} from "stores/slices/setting.js";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 // utils
 import {themeList} from "utils/constants.js";
 
@@ -48,7 +45,6 @@ const ThemeItem = ({themeItem}) => {
                     visibleByDefault
                     width="100%"
                     height="100%"
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                     style={{
                         borderRadius: 8,

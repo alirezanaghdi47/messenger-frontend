@@ -2,12 +2,15 @@
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Button, Stack, Typography} from "@mui/material";
+import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
+
 
 const Error = () => {
 
     const navigate = useNavigate();
-    const {darkMode} = useSelector(state => state.profile.setting);
+    const {darkMode , language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
     return (
@@ -22,14 +25,17 @@ const Error = () => {
             }}
         >
 
-            <img
-                src={darkMode ? "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-dark.svg" : "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/not-found-light.svg"}
+            <LazyLoadImage
+                src={darkMode ? "/images/not-found-dark.svg" : "/images/not-found-light.svg"}
                 alt="select-chat"
-                width={300}
+                visibleByDefault
+                effect="blur"
+                width="100%"
+                style={{maxWidth: 300}}
             />
 
             <Typography
-                variant="h6"
+                variant="subtitle1"
                 color="textPrimary"
                 fontWeight="bold"
             >
@@ -39,6 +45,7 @@ const Error = () => {
             <Button
                 variant="contained"
                 color="primary"
+                endIcon={language === "fa" ? <LuChevronLeft size={20}/> : <LuChevronRight size={20}/>}
                 onClick={() => navigate(-1)}
             >
                 {t("button.back")}

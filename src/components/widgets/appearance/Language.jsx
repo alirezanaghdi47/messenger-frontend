@@ -10,9 +10,6 @@ import Header from "components/widgets/appearance/Header";
 // stores
 import {setLanguage} from "stores/slices/setting.js";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 // utils
 import {languageList} from "utils/constants.js";
 
@@ -35,7 +32,6 @@ const LanguageItem = ({languageItem}) => {
                     visibleByDefault
                     width={24}
                     height={16}
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                 />
             }

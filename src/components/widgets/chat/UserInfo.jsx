@@ -19,7 +19,7 @@ const UserInfo = () => {
         >
 
             <img
-                src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                src="/images/avatar.jpg"
                 alt="avatar"
                 width={40}
                 height={40}

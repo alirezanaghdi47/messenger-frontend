@@ -4,9 +4,6 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, IconButton, Stack, Typography, useMediaQuery} from "@mui/material";
 import {LuTrash2} from "react-icons/lu";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const contactList = [
     {_id: "1"},
     {_id: "2"},
@@ -40,12 +37,11 @@ const ContactItem = ({contactItem}) => {
             >
 
                 <LazyLoadImage
-                    src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                    src="/images/avatar.jpg"
                     alt="avatar"
                     visibleByDefault
                     width={40}
                     height={40}
-                    placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                     effect='blur'
                     style={{borderRadius: "50%"}}
                 />

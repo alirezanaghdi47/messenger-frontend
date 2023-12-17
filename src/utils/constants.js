@@ -1,4 +1,4 @@
-export const version = "0.9.3";
+export const version = "0.9.4";
 
 export const dateTimeList = [
     {id: 1, title: "button.12h", value: "12h"},
@@ -6,13 +6,13 @@ export const dateTimeList = [
 ];
 
 export const languageList = [
-    {id: 1, title: "button.persian", value: "fa", flag: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/fa.png"},
-    {id: 2, title: "button.english", value: "en", flag: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/en.png"},
+    {id: 1, title: "button.persian", value: "fa", flag: "/images/fa.png"},
+    {id: 2, title: "button.english", value: "en", flag: "/images/en.png"},
 ];
 
 export const themeList = [
-    {id: 1, title: "select.light", value: false, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/light-mode.jpg"},
-    {id: 2, title: "select.dark", value: true, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/dark-mode.jpg"},
+    {id: 1, title: "select.light", value: false, background: "/images/light-mode.jpg"},
+    {id: 2, title: "select.dark", value: true, background: "/images/dark-mode.jpg"},
 ];
 
 export const fontSizeList = [
@@ -31,9 +31,9 @@ export const colorList = [
 ];
 
 export const backgroundList = [
-    {id: 1, background: 'https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-1.jpg'},
-    {id: 2, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-2.jpg"},
-    {id: 3, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-3.jpg"},
-    {id: 4, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-4.jpg"},
-    {id: 5, background: "https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/desktop-5.jpg"},
+    {id: 1, background: '/images/desktop-1.jpg'},
+    {id: 2, background: "/images/desktop-2.jpg"},
+    {id: 3, background: "/images/desktop-3.jpg"},
+    {id: 4, background: "/images/desktop-4.jpg"},
+    {id: 5, background: "/images/desktop-5.jpg"},
 ];

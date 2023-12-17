@@ -7,9 +7,7 @@ import {backgroundList, colorList} from "utils/constants.js";
 const initialState = {
     profile: {
         avatar: "",
-        name: "",
         userName: "",
-        phoneNumber: "",
         biography: "",
         lastSeen: "",
         isOnline: false,

@@ -20,7 +20,6 @@ const Account = () => {
         initialValues: {
             avatar: {},
             userName: "",
-            phoneNumber: "",
             biography: ""
         },
         validationSchema: editProfileSchema,
@@ -40,7 +39,7 @@ const Account = () => {
                 padding: 4,
                 overflowY: "scroll"
             }}
-            className="custom-scrollbar"
+            className="remove-scrollbar"
         >
 
             <AvatarInput
@@ -62,16 +61,6 @@ const Account = () => {
                 onBlur={() => formik.setFieldTouched("userName")}
                 error={formik.errors.userName}
                 touched={formik.touched.userName}
-            />
-
-            <TextInput
-                label={t("input.phoneNumber")}
-                name="phoneNumber"
-                value={formik.values.phoneNumber}
-                onChange={formik.handleChange}
-                onBlur={() => formik.setFieldTouched("phoneNumber")}
-                error={formik.errors.phoneNumber}
-                touched={formik.touched.phoneNumber}
             />
 
             <TextInput

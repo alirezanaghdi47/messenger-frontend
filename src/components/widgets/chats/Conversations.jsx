@@ -7,9 +7,6 @@ import {BiCheck, BiCheckDouble} from "react-icons/bi";
 import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu";
 import {FiPhone, FiVideo} from "react-icons/fi";
 
-// styles
-import 'react-lazy-load-image-component/src/effects/blur.css';
-
 const conversationList = [
     {
         _id: "1",
@@ -92,12 +89,11 @@ const ConversationItem = ({conversationItem}) => {
                 >
 
                     <LazyLoadImage
-                        src="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/avatar.png"
+                        src="/images/avatar.jpg"
                         alt="avatar"
                         visibleByDefault
                         width={40}
                         height={40}
-                        placeholderSrc="https://messenger-alirezanaghdi.s3.ir-thr-at1.arvanstorage.ir/placeholder.jpg"
                         effect='blur'
                         style={{borderRadius: "50%"}}
                     />

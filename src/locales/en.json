@@ -32,12 +32,7 @@
       "security": "Security",
       "entryLock": "Entry lock",
       "devices": "Devices",
-      "signIn": "Sign in",
-      "signUpQuestion": "if don`t have any account",
-      "signUp": "Sign up",
-      "signInQuestion": "if have an account",
-      "verifyCode": "Verify code",
-      "timeRemaining": "Remaining time",
+      "signIn": "Sign in with",
       "createChat": "Create chat",
       "forwardChat": "Forward chat",
       "select": "Select an item",
@@ -45,7 +40,12 @@
       "deleteContent": "Do you want to delete this ?",
       "preventOrientation": "Please rotate your device to portrait mode",
       "comingSoon": "Coming soon",
-      "rejected": "Rejected"
+      "rejected": "Rejected",
+      "copyRight": "2023 - 2024",
+      "fastTitle": "Fast",
+      "fastMessage": "Send your messages at the speed of light",
+      "secureTitle": "Secure",
+      "secureMessage": "Protecting your privacy is one of our goals"
     },
     "select": {
       "dark": "Dark",
@@ -103,11 +103,8 @@
     "button": {
       "persian": "Persian",
       "english": "English",
-      "12h": "12 hour",
-      "24h": "24 hour",
+      "back": "Back",
       "signIn": "Sign in",
-      "signUp": "Sign up",
-      "verifyCode": "Verify code",
       "restart": "Restart",
       "submit": "Submit",
       "next": "Next",
@@ -119,7 +116,9 @@
       "enable": "Enable",
       "disable": "Disable",
       "device": "Device",
-      "delete": "Delete"
+      "delete": "Delete",
+      "google": "Sign In With Google",
+      "linkedin": "Sign In With Linkedin"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",
