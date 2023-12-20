@@ -12,6 +12,9 @@ import Conversations from "components/widgets/chat/Conversations.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 import ActionButton from "components/widgets/chat/ActionButton";
 
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
 const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
 const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
 const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
@@ -116,4 +119,4 @@ const Chat = () => {
     )
 }
 
-export default Chat;
+export default PrivateRouteHoc(Chat);

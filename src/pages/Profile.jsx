@@ -5,7 +5,10 @@ import {Stack , useMediaQuery} from "@mui/material";
 import Header from "components/widgets/setting/Header.jsx";
 import Account from "components/widgets/profile/Account.jsx";
 
-const Session = () => {
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
+const Profile = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -35,4 +38,4 @@ const Session = () => {
     )
 }
 
-export default Session;
+export default PrivateRouteHoc(Profile);

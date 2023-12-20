@@ -5,6 +5,9 @@ import {Stack , useMediaQuery} from "@mui/material";
 import Header from "components/widgets/setting/Header.jsx";
 import Security from "components/widgets/privacy/Security";
 
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
 const Privacy = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
@@ -35,4 +38,4 @@ const Privacy = () => {
     )
 }
 
-export default Privacy;
+export default PrivateRouteHoc(Privacy);

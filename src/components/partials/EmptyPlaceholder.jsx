@@ -33,7 +33,7 @@ const EmptyPlaceholder = () => {
             />
 
             <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 color='textSecondary'
                 fontWeight='bold'
             >

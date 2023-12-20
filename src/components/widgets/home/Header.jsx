@@ -8,7 +8,6 @@ const Header = () => {
         <Stack
             direction="row"
             sx={{
-                zIndex: 100,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

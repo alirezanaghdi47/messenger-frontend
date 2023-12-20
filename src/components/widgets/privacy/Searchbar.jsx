@@ -15,9 +15,8 @@ const SearchBar = () => {
         initialValues: {
             search: "",
         },
-        // validationSchema: ,
-        onSubmit: async (data) => {
-            console.log(data)
+        onSubmit: async (result) => {
+            console.log(result)
         }
     });
 

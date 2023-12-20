@@ -7,7 +7,7 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setColor} from "stores/slices/setting.js";
+import {editColor} from "stores/slices/setting.js";
 
 // utils
 import {colorList} from "utils/constants.js";
@@ -16,8 +16,6 @@ const ColorItem = ({colorItem}) => {
 
     const dispatch = useDispatch();
     const {darkMode, color} = useSelector(state => state.setting.appearance);
-
-    const _handleActiveColor = (color) => dispatch(setColor(color));
 
     return (
         <Box
@@ -30,7 +28,7 @@ const ColorItem = ({colorItem}) => {
                 borderRadius: "50%",
                 cursor: "pointer",
             }}
-            onClick={() => _handleActiveColor(colorItem.color)}
+            onClick={() => dispatch(editColor({color: colorItem.color}))}
         >
 
             {

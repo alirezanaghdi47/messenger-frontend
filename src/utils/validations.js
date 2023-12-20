@@ -2,20 +2,20 @@ import * as Yup from "yup";
 import i18n from "i18next";
 
 export const editProfileSchema = Yup.object().shape({
-    avatar: Yup.mixed().nullable().test("fileSize", i18n.t("error.avatarSize"), (value) => {
-        if (Object.keys(value).length === 0) {
+    avatar: Yup.mixed().nullable().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
+        if (value === null) {
             return true;
         } else {
             return value.size <= 5 * 1_024_000;
         }
     }).test("fileType", i18n.t("error.avatarType"), (value) => {
-        if (Object.keys(value).length === 0) {
+        if (value === null) {
             return true;
         } else {
-            return ['image/png', 'image/jpeg', 'image/jpg'].includes(value.type);
+            return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
         }
     }),
-    userName: Yup.string().max(20, i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
+    userName: Yup.string().min(8, i18n.t("error.userNameMinLength")).max(20, i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
     biography: Yup.string().max(50, i18n.t("error.biographyMaxLength"))
 });
 

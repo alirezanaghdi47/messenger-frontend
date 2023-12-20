@@ -8,7 +8,7 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setTheme} from "stores/slices/setting.js";
+import {editTheme} from "stores/slices/setting.js";
 
 // utils
 import {themeList} from "utils/constants.js";
@@ -18,8 +18,6 @@ const ThemeItem = ({themeItem}) => {
     const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.setting.appearance);
 
-    const _handleActiveTheme = (value) => dispatch(setTheme(value));
-
     return (
         <Grid
             component="li"
@@ -28,7 +26,7 @@ const ThemeItem = ({themeItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => _handleActiveTheme(themeItem.value)}
+            onClick={() => dispatch(editTheme({darkMode: themeItem.value}))}
         >
 
             <Box

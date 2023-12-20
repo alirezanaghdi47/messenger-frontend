@@ -1,7 +1,7 @@
 // libraries
 import {useTranslation} from "react-i18next";
-import {Button, Stack, Typography} from "@mui/material";
-import {FaGoogle, FaLinkedinIn} from "react-icons/fa6";
+import {Button, Stack} from "@mui/material";
+import {FaGoogle} from "react-icons/fa6";
 
 const Form = () => {
 
@@ -9,8 +9,7 @@ const Form = () => {
 
     return (
         <Stack
-            direction="column"
-            gap={2}
+            direction="row"
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -19,43 +18,14 @@ const Form = () => {
             }}
         >
 
-            <Typography
-                variant="h6"
-                color="textPrimary"
-                fontWeight='bold'
+            <Button
+                variant="contained"
+                color="error"
+                startIcon={<FaGoogle size={20}/>}
+                onClick={() => window.open("http://localhost:4000/api/auth/google" , "_self")}
             >
-                {t("typography.signIn")}
-            </Typography>
-
-            <Stack
-                direction="column"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-
-                <Button
-                    variant="contained"
-                    color="error"
-                    startIcon={<FaGoogle size={20}/>}
-                    fullWidth
-                >
-                    {t("button.google")}
-                </Button>
-
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<FaLinkedinIn size={20}/>}
-                    fullWidth
-                >
-                    {t("button.linkedin")}
-                </Button>
-
-            </Stack>
+                {t("button.google")}
+            </Button>
 
         </Stack>
     )

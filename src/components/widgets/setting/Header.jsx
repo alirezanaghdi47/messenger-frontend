@@ -1,18 +1,20 @@
 // libraries
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Box, IconButton, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 
+// stores
+import {logout} from "stores/slices/auth";
+
 const Header = ({title}) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
-
-    const _handleBack = () => navigate("/setting");
 
     return isTablet && (
         <Stack
@@ -34,7 +36,7 @@ const Header = ({title}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={_handleBack}
+                onClick={() => navigate("/setting")}
             >
                 {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
             </IconButton>
@@ -60,6 +62,10 @@ const Header = ({title}) => {
             <IconButton
                 variant="text"
                 color="ternary"
+                onClick={() => {
+                    dispatch(logout());
+                    window.open("http://localhost:4000/api/auth/logout" , "_self");
+                }}
             >
                 <FiLogOut size={20}/>
             </IconButton>

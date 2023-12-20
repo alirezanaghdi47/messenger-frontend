@@ -5,6 +5,9 @@ import {Stack , useMediaQuery} from "@mui/material";
 import Header from "components/widgets/setting/Header.jsx";
 import Customize from "components/widgets/appearance/Customize.jsx";
 
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
 const Appearance = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
@@ -35,5 +38,5 @@ const Appearance = () => {
     )
 }
 
-export default Appearance;
+export default PrivateRouteHoc(Appearance);
 

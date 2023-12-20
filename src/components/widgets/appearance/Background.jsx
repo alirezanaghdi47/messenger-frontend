@@ -8,7 +8,7 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setBackground} from "stores/slices/setting.js";
+import {editBackground} from "stores/slices/setting.js";
 
 // utils
 import {backgroundList} from "utils/constants.js";
@@ -18,8 +18,6 @@ const BackgroundItem = ({backgroundItem}) => {
     const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
 
-    const _handleActiveBackground = (background) => dispatch(setBackground(background));
-
     return (
         <Grid
             component="li"
@@ -28,7 +26,7 @@ const BackgroundItem = ({backgroundItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => _handleActiveBackground(backgroundItem.background)}
+            onClick={() => dispatch(editBackground({background: backgroundItem.background}))}
         >
 
             <Box

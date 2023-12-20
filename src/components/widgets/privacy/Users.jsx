@@ -1,7 +1,7 @@
 // libraries
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, IconButton, Stack, Typography, useMediaQuery} from "@mui/material";
+import {Box, IconButton, Stack, Typography, useMediaQuery , useTheme} from "@mui/material";
 import {LuTrash2} from "react-icons/lu";
 
 const contactList = [
@@ -15,11 +15,19 @@ const contactList = [
 const ContactItem = ({contactItem}) => {
 
     const {t} = useTranslation();
+    const theme = useTheme();
 
     return (
         <Box
             component="li"
-            sx={{width: "100%"}}
+            sx={{
+                width: "100%",
+                borderBottom: `1px solid ${theme.palette.secondary.main}`,
+                paddingY: 2,
+                "&:last-of-type":{
+                    borderBottom: "none"
+                }
+            }}
         >
 
             <Stack
@@ -102,7 +110,7 @@ const ContactItem = ({contactItem}) => {
     )
 }
 
-const Users = () => {
+const Users = ({blockUsers}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -110,7 +118,6 @@ const Users = () => {
         <Stack
             component="ul"
             direction="column"
-            gap={2}
             className="custom-scrollbar"
             sx={{
                 display: "flex",

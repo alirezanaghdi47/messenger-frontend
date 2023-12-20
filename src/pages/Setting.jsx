@@ -9,6 +9,9 @@ import Links from "components/widgets/setting/Links.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
 import Empty from "components/widgets/setting/Empty";
 
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
 // layouts
 import Primary from "layouts/Primary.jsx";
 
@@ -76,4 +79,4 @@ const Setting = () => {
     )
 }
 
-export default Setting;
+export default PrivateRouteHoc(Setting);

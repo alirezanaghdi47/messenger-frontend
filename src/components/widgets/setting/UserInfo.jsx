@@ -1,28 +1,27 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
-import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
-
-const userInfoList = [
-    {id: 1 ,title: "input.userName", value: "alirezanaghdi47" , icon: <FiUser size={20}/>},
-    {id: 2 ,title: "input.biography", value: "Front End Developer" , icon: <FiInfo size={20}/>},
-];
+import {FiInfo, FiUser} from "react-icons/fi";
 
 const UserDetail = () => {
+
+    const {avatar} = useSelector(state => state.setting.profile);
 
     return (
         <Box
             sx={{
                 position: "relative",
                 width: "calc(100% + 32px)",
-                height: 250,
+                height: 360,
+                bgcolor: "secondary.main",
                 marginTop: -2,
             }}
         >
 
             <LazyLoadImage
-                src="/images/avatar.jpg"
+                src={avatar}
                 alt="avatar"
                 visibleByDefault
                 width="100%"
@@ -40,6 +39,7 @@ const UserDetail = () => {
 
 const UserLinks = () => {
 
+    const {userName, biography} = useSelector(state => state.setting.profile);
     const {t} = useTranslation();
 
     return (
@@ -54,10 +54,55 @@ const UserLinks = () => {
             }}
         >
 
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    color: "ternary.main"
+                }}
+            >
+
+                <FiUser size={20}/>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                        width: "100%",
+                    }}
+                >
+
+                    <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                        noWrap
+                    >
+                        {userName}
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color="textSecondary"
+                        noWrap
+                    >
+                        {t("input.userName")}
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
+
             {
-                userInfoList.map(userInfoItem =>
+                biography && (
                     <Stack
-                        key={userInfoItem.id}
                         direction="row"
                         gap={2}
                         sx={{
@@ -69,7 +114,7 @@ const UserLinks = () => {
                         }}
                     >
 
-                        {userInfoItem.icon}
+                        <FiInfo size={20}/>
 
                         <Stack
                             direction="column"
@@ -88,7 +133,7 @@ const UserLinks = () => {
                                 fontWeight='bold'
                                 noWrap
                             >
-                                {userInfoItem.value}
+                                {biography}
                             </Typography>
 
                             <Typography
@@ -96,7 +141,7 @@ const UserLinks = () => {
                                 color="textSecondary"
                                 noWrap
                             >
-                                {t(userInfoItem.title)}
+                                {t("input.biography")}
                             </Typography>
 
                         </Stack>

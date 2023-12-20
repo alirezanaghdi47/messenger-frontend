@@ -1,14 +1,17 @@
 // libraries
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
+import {IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
-import Devices from "components/widgets/privacy/Devices";
+import LoginHistory from "components/widgets/privacy/LoginHistory";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // stores
 import {hideModal} from "stores/slices/app";
+import {getAllLoginHistory} from "stores/slices/setting";
 
 const ModalHeader = () => {
 
@@ -50,6 +53,8 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
+    const {loginHistories} = useSelector(state => state.setting.privacy);
+
     return (
         <Stack
             direction="column"
@@ -63,21 +68,31 @@ const ModalContent = () => {
             }}
         >
 
-           <Devices/>
+            {
+                loginHistories.length > 0 ? (
+                    <LoginHistory loginHistories={loginHistories}/>
+                ) : (
+                    <EmptyPlaceholder/>
+                )
+            }
 
         </Stack>
     )
 }
 
-const DevicesModal = () => {
+const LoginHistoriesModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
+    useEffect(() => {
+        dispatch(getAllLoginHistory());
+    }, []);
+
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "devices")}
+            open={Boolean(modal?.isOpen && modal?.type === "loginHistories")}
             onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
@@ -88,7 +103,6 @@ const DevicesModal = () => {
 
             <Stack
                 direction="column"
-                gap={2}
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -113,4 +127,4 @@ const DevicesModal = () => {
     )
 }
 
-export default DevicesModal;
+export default LoginHistoriesModal;

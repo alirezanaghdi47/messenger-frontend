@@ -17,8 +17,6 @@ const LinkItem = ({linkItem}) => {
     const {t} = useTranslation();
     const theme = useTheme();
 
-    const _handleActiveLink = (value) => navigate(`/setting/${value}`);
-
     return (
         <Stack
             component="li"
@@ -35,7 +33,7 @@ const LinkItem = ({linkItem}) => {
                 padding: 1.5,
                 cursor: "pointer"
             }}
-            onClick={() => _handleActiveLink(linkItem.value)}
+            onClick={() => navigate(`/setting/${linkItem.value}`)}
         >
 
             {linkItem.icon}

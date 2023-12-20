@@ -1,30 +1,37 @@
 // libraries
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {Button, Stack , useMediaQuery} from "@mui/material";
-import {FiCheck, FiX} from "react-icons/fi";
+import {Button, Stack, useMediaQuery} from "@mui/material";
+import {FiCheck} from "react-icons/fi";
 
 // components
 import TextInput from "components/modules/TextInput.jsx";
 import AvatarInput from "components/modules/AvatarInput.jsx";
+
+// stores
+import {editProfile} from "stores/slices/setting";
 
 // utils
 import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 
+    const dispatch = useDispatch();
+    const {avatar, userName, biography} = useSelector(state => state.setting.profile);
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            avatar: {},
-            userName: "",
-            biography: ""
+            avatar: null,
+            userName: userName ? userName : "",
+            biography: biography ? biography : ""
         },
         validationSchema: editProfileSchema,
-        onSubmit: async (data) => {
-            console.log(data)
+        onSubmit: async (result) => {
+            dispatch(editProfile({...result , preview: avatar}));
         }
     });
 
@@ -45,7 +52,7 @@ const Account = () => {
             <AvatarInput
                 label={t("input.avatar")}
                 name="avatar"
-                // preview={session?.user?.avatar}
+                preview={avatar}
                 value={formik.values.avatar}
                 onChange={(value) => formik.setFieldValue("avatar", value)}
                 onBlur={() => formik.setFieldTouched("avatar")}
@@ -84,14 +91,6 @@ const Account = () => {
                     width: "100%",
                 }}
             >
-
-                <Button
-                    variant="text"
-                    color="ternary"
-                    startIcon={<FiX size={20}/>}
-                >
-                    {t("button.cancel")}
-                </Button>
 
                 <Button
                     variant="contained"

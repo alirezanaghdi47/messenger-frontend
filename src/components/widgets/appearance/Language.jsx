@@ -8,7 +8,7 @@ import {Button, Stack} from "@mui/material";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setLanguage} from "stores/slices/setting.js";
+import {editLanguage} from "stores/slices/setting.js";
 
 // utils
 import {languageList} from "utils/constants.js";
@@ -18,8 +18,6 @@ const LanguageItem = ({languageItem}) => {
     const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
-
-    const _handleActiveLanguage = (value) => dispatch(setLanguage(value));
 
     return (
         <Button
@@ -35,7 +33,7 @@ const LanguageItem = ({languageItem}) => {
                     effect='blur'
                 />
             }
-            onClick={() => _handleActiveLanguage(languageItem.value)}
+            onClick={() => dispatch(editLanguage({language: languageItem.value}))}
         >
             {t(languageItem.title)}
         </Button>

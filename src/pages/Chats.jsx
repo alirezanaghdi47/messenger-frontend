@@ -11,6 +11,9 @@ import ActionButton from "components/widgets/chats/ActionButton.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 import Empty from "components/widgets/chats/Empty";
 
+// hocs
+import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
 // layouts
 import Primary from "layouts/Primary.jsx";
 
@@ -74,4 +77,4 @@ const Chats = () => {
     )
 }
 
-export default Chats;
+export default PrivateRouteHoc(Chats);

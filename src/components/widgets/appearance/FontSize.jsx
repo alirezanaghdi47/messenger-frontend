@@ -7,7 +7,7 @@ import {Card, Slider, Stack, Typography, useTheme} from "@mui/material";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {setFontSize} from "stores/slices/setting.js";
+import {editFontSize} from "stores/slices/setting.js";
 
 // utils
 import {fontSizeList} from "utils/constants.js";
@@ -18,10 +18,6 @@ const FontSize = () => {
     const {fontSize} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const theme = useTheme();
-
-    const _handleActiveFontSize = (value) => {
-        dispatch(setFontSize(value))
-    }
 
     return (
         <Stack
@@ -65,7 +61,7 @@ const FontSize = () => {
                 marks
                 min={12}
                 max={20}
-                onChange={(e, newValue) => _handleActiveFontSize(newValue)}
+                onChange={(e, newValue) => dispatch(editFontSize({fontSize: newValue}))}
                 sx={{maxWidth: 300}}
             />
 

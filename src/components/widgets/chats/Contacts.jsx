@@ -3,7 +3,7 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import {Box, Stack, Typography , useMediaQuery} from "@mui/material";
+import {Box, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 // stores
 import {hideModal} from "stores/slices/app";
@@ -21,11 +21,19 @@ const ContactItem = ({contactItem}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
+    const theme = useTheme();
 
     return (
         <Box
             component="li"
-            sx={{width: "100%"}}
+            sx={{
+                width: "100%",
+                borderBottom: `1px solid ${theme.palette.secondary.main}`,
+                paddingY: 2,
+                "&:last-of-type":{
+                    borderBottom: "none"
+                }
+            }}
             onClick={() => {
                 dispatch(hideModal());
                 navigate(`/chat/${contactItem?._id}`);
@@ -101,7 +109,6 @@ const Contacts = () => {
         <Stack
             component="ul"
             direction="column"
-            gap={2}
             className="custom-scrollbar"
             sx={{
                 display: "flex",

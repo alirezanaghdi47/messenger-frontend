@@ -1,4 +1,5 @@
 // libraries
+import {useEffect} from "react";
 import {useSelector , useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
@@ -11,6 +12,7 @@ import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // stores
 import {hideModal} from "stores/slices/app";
+import {getAllBlockUser} from "stores/slices/setting";
 
 const ModalHeader = () => {
 
@@ -52,10 +54,11 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
+    const {blockUsers} = useSelector(state => state.setting.privacy);
+
     return (
         <Stack
             direction="column"
-            gap={2}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -67,9 +70,13 @@ const ModalContent = () => {
 
             <SearchBar/>
 
-            <Users/>
-
-            {/*<EmptyPlaceholder/>*/}
+            {
+                blockUsers.length > 0 ? (
+                    <Users blockUsers={blockUsers}/>
+                ) : (
+                    <EmptyPlaceholder/>
+                )
+            }
 
         </Stack>
     )
@@ -80,6 +87,10 @@ const BlockedUsersModal = () => {
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
     const isTablet = useMediaQuery('(max-width: 768px)');
+
+    useEffect(() => {
+        dispatch(getAllBlockUser());
+    }, []);
 
     return (
         <Modal
