@@ -111,20 +111,3 @@ export const editThemeService = async (data) => {
         };
     }
 }
-
-export const editVisibilityService = async (data) => {
-    try {
-        const token = await store.getState().auth.token;
-
-        const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editVisibility" , data , {
-            headers:{token}
-        });
-
-        return response.data;
-    } catch (err) {
-        return {
-            message: err?.response?.data?.message,
-            status: err?.response?.data?.status,
-        };
-    }
-}

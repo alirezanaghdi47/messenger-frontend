@@ -9,10 +9,7 @@ import {
     editLanguageService,
     editProfileService,
     editThemeService,
-    editVisibilityService,
 } from "services/userService";
-import {getAllBlockUserService} from "services/blockService";
-import {getAllLoginHistoryService} from "services/historyService";
 
 // utils
 import {backgroundList, colorList} from "utils/constants.js";
@@ -77,36 +74,6 @@ export const editBackground = createAsyncThunk('setting/editBackground', async (
     }
 );
 
-export const editVisibility = createAsyncThunk('setting/editVisibility', async (arg, thunkAPI) => {
-        try {
-            const response = await editVisibilityService(arg);
-            return response.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue(err.message);
-        }
-    }
-);
-
-export const getAllLoginHistory = createAsyncThunk('setting/getAllLoginHistory', async (arg, thunkAPI) => {
-        try {
-            const response = await getAllLoginHistoryService();
-            return response.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue(err.message);
-        }
-    }
-);
-
-export const getAllBlockUser = createAsyncThunk('setting/getAllBlockUser', async (arg, thunkAPI) => {
-        try {
-            const response = await getAllBlockUserService();
-            return response.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue(err.message);
-        }
-    }
-);
-
 const initialState = {
     profile: {
         avatar: "",
@@ -122,11 +89,6 @@ const initialState = {
             dark: colorList[0].color.dark,
         },
         background: backgroundList[0].background,
-    },
-    privacy: {
-        loginHistories: [],
-        blockUsers: [],
-        isVisible: true,
     },
 }
 
@@ -145,7 +107,6 @@ export const setting = createSlice({
             state.appearance.color.light = action.payload.color.light;
             state.appearance.color.dark = action.payload.color.dark;
             state.appearance.background = action.payload.background;
-            state.privacy.isVisible = action.payload.isVisible;
         },
         unSetUser: () => initialState,
         setLanguage: (state, action) => {
@@ -184,15 +145,6 @@ export const setting = createSlice({
         });
         builder.addCase(editBackground.fulfilled, (state, action) => {
             state.appearance.background = action.payload;
-        });
-        builder.addCase(editVisibility.fulfilled, (state, action) => {
-            state.privacy.isVisible = action.payload;
-        });
-        builder.addCase(getAllLoginHistory.fulfilled, (state, action) => {
-            state.privacy.loginHistories = action.payload;
-        });
-        builder.addCase(getAllBlockUser.fulfilled, (state, action) => {
-            state.privacy.blockUsers = action.payload;
         });
     }
 })

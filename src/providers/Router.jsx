@@ -9,7 +9,6 @@ const Chat = Loadable(() => import('pages/Chat'));
 const Setting = Loadable(() => import('pages/Setting'));
 const Profile = Loadable(() => import('pages/Profile'));
 const Appearance = Loadable(() => import('pages/Appearance'));
-const Privacy = Loadable(() => import('pages/Privacy'));
 const NotFound = Loadable(() => import('pages/NotFound'));
 
 const Router = () => {
@@ -30,8 +29,6 @@ const Router = () => {
                 <Route path="/setting/profile" element={<Profile/>}/>
 
                 <Route path="/setting/appearance" element={<Appearance/>}/>
-
-                <Route path="/setting/privacy" element={<Privacy/>}/>
 
             </Route>
 

@@ -27,11 +27,6 @@
       "forwarded": "Forwarded from",
       "profile": "Profile",
       "appearance": "Appearance",
-      "privacy": "Privacy",
-      "blockedUsers": "Blocked users",
-      "security": "Security",
-      "devices": "Devices",
-      "thisDevice": "This device",
       "signIn": "Sign in with",
       "createChat": "Create chat",
       "forwardChat": "Forward chat",
@@ -56,16 +51,10 @@
       "message": "Message",
       "avatar": "Avatar",
       "userName": "User name",
-      "email": "Email",
-      "password": "Password",
-      "passwordRepeat": "Repeat Password",
-      "phoneNumber": "Phone number",
       "biography": "Biography",
-      "showStatus": "Show status",
       "privateChat": "Private chat",
       "voiceCall": "Voice call",
-      "videoCall": "Video call",
-      "verifyCode": "Verify code"
+      "videoCall": "Video call"
     },
     "list": {
       "chat": "Chat",
@@ -96,10 +85,8 @@
       "voiceCall": "Voice call",
       "profile": "Profile",
       "appearance": "Appearance",
-      "privacy": "Privacy",
       "createChat": "Create private chat",
-      "createGroup": "Create group chat",
-      "record": "Record"
+      "createGroup": "Create group chat"
     },
     "button": {
       "persian": "Persian",
@@ -114,7 +101,6 @@
       "send": "Send",
       "show": "Show",
       "delete": "Delete",
-      "record": "Record",
       "google": "Sign In With Google Account"
     },
     "error": {
@@ -123,16 +109,7 @@
       "userNameRequired": "UserName is required",
       "userNameMinLength": "UserName characters should be less than 8",
       "userNameMaxLength": "UserName characters should be less than 40",
-      "phoneNumberRequired": "PhoneNumber is required",
-      "phoneNumberFormat": "PhoneNumber format is wrong",
       "biographyMaxLength": "biography characters should be less than 200",
-      "emailRequired": "Email is required",
-      "emailFormat": "فرمت ایمیل نادرست است",
-      "passwordRequired": "Password is required",
-      "passwordFormat": "Password should be at least 8 character with one lowercase & uppercase & specific characters",
-      "passwordRepeatRequired": "PasswordRepeat is required",
-      "passwordRepeatFormat": "PasswordRepeat should be at least 8 character with one lowercase & uppercase & specific characters",
-      "passwordRepeatEqual": "PasswordRepeat is not the same as password",
       "geoLocationNotSupport": "GeoLocation not supported",
       "geoLocationFailed": "GeoLocation is failed",
       "fileMaxSize": "Maximum file size should be 50 MB",

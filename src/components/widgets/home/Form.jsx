@@ -22,7 +22,7 @@ const Form = () => {
                 variant="contained"
                 color="error"
                 startIcon={<FaGoogle size={20}/>}
-                onClick={() => window.open("http://localhost:4000/api/auth/google" , "_self")}
+                onClick={() => window.open(`${process.env.REACT_APP_API_URL}/api/auth/google` , "_self")}
             >
                 {t("button.google")}
             </Button>
