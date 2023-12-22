@@ -1,5 +1,5 @@
 // libraries
-import {useSelector , useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-hot-toast";
 import {
@@ -16,14 +16,15 @@ import {FiMoreVertical, FiPhone, FiTrash2, FiVideo} from "react-icons/fi";
 import {useDropdownMenu} from "hooks/useDropdownMenu";
 
 // stores
-import {showModal} from "stores/slices/app";
+import {showModal} from "stores/slices/appSlice";
 
 const DesktopToolbar = ({
-                           anchorEl,
-                           isOpenDropdownMenu,
-                           onCloseDropdownMenu,
-                           onOpenDropdownMenu,
-                       }) => {
+                            data,
+                            anchorEl,
+                            isOpenDropdownMenu,
+                            onCloseDropdownMenu,
+                            onOpenDropdownMenu,
+                        }) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -97,7 +98,7 @@ const DesktopToolbar = ({
                     }}
                     onClick={() => {
                         onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteChat"}));
+                        dispatch(showModal({type: "deleteContact", data: data}));
                     }}
                 >
 
@@ -120,11 +121,12 @@ const DesktopToolbar = ({
 }
 
 const MobileToolbar = ({
-                            anchorEl,
-                            isOpenDropdownMenu,
-                            onCloseDropdownMenu,
-                            onOpenDropdownMenu,
-                        }) => {
+                           data,
+                           anchorEl,
+                           isOpenDropdownMenu,
+                           onCloseDropdownMenu,
+                           onOpenDropdownMenu,
+                       }) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -226,7 +228,7 @@ const MobileToolbar = ({
                     }}
                     onClick={() => {
                         onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteContact"}));
+                        dispatch(showModal({type: "deleteContact", data: data}));
                     }}
                 >
 
@@ -248,10 +250,9 @@ const MobileToolbar = ({
     )
 }
 
-const Toolbar = () => {
+const Toolbar = ({data}) => {
 
     const isTablet = useMediaQuery('(min-width: 768px)');
-
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (
@@ -260,12 +261,14 @@ const Toolbar = () => {
             {
                 isTablet ?
                     <DesktopToolbar
+                        data={data}
                         anchorEl={anchorEl}
                         isOpenDropdownMenu={isOpenDropdownMenu}
                         onOpenDropdownMenu={_handleShowDropdownMenu}
                         onCloseDropdownMenu={_handleHideDropdownMenu}
                     /> :
                     <MobileToolbar
+                        data={data}
                         anchorEl={anchorEl}
                         isOpenDropdownMenu={isOpenDropdownMenu}
                         onOpenDropdownMenu={_handleShowDropdownMenu}

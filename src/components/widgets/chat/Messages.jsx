@@ -4,28 +4,30 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
+import {formatDistanceToNow} from "date-fns";
+import {enUS, faIR} from "date-fns/locale";
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
 import {LuMapPin, LuPlay} from "react-icons/lu";
 
+// hooks
+import {useContextMenu} from "hooks/useContextMenu";
+
 // utils
 import {fontSizeList} from "utils/constants";
 import {formattedByte, formattedMilisecond} from "utils/functions";
 
-// hooks
-import {useContextMenu} from "hooks/useContextMenu";
-
 // stores
-import {showModal} from "stores/slices/app";
+import {showModal} from "stores/slices/appSlice";
 
 const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/MessageDropdownMenu"));
 
 export const TextMessage = ({message}) => {
 
-    const {fontSize} = useSelector(state => state.setting.appearance);
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language , fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
-
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     return (
@@ -36,7 +38,7 @@ export const TextMessage = ({message}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -75,33 +77,37 @@ export const TextMessage = ({message}) => {
 
             <Typography
                 variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
-                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                 lineHeight={2}
             >
-                {message.content}
+                {message?.content}
             </Typography>
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 

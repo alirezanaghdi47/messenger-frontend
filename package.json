@@ -2,7 +2,7 @@
   "name": "messenger-frontend",
   "private": true,
   "author": "alireza naghdi",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -40,6 +40,7 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.2",
     "stylis": "^4.3.0",
     "stylis-plugin-rtl": "^2.1.1",
     "swiper": "^11.0.5",

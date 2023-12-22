@@ -1,9 +1,15 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {formatDistanceToNow} from "date-fns";
+import {faIR, enUS} from 'date-fns/locale';
 import {Stack, Typography} from "@mui/material";
 
-const UserInfo = () => {
+const UserInfo = ({data}) => {
 
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
     return (
@@ -18,9 +24,11 @@ const UserInfo = () => {
             }}
         >
 
-            <img
-                src="/images/avatar.jpg"
+            <LazyLoadImage
+                src={data.participantIds.find(item => item._id !== _id)?.avatar}
                 alt="avatar"
+                visibleByDefault
+                effect="blur"
                 width={40}
                 height={40}
                 style={{borderRadius: "50%"}}
@@ -28,7 +36,7 @@ const UserInfo = () => {
 
             <Stack
                 direction="column"
-                gap={0.5}
+                gap={1}
                 sx={{
                     display: "flex",
                     justifyContent: "center",
@@ -42,7 +50,7 @@ const UserInfo = () => {
                     fontWeight='bold'
                     noWrap
                 >
-                    علیرضا نقدی
+                    {data.participantIds.find(item => item._id !== _id)?.userName}
                 </Typography>
 
                 <Typography
@@ -52,7 +60,12 @@ const UserInfo = () => {
                 >
                     {t("typography.lastSeen")}
                     &nbsp;
-                    11:11
+                    {
+                        formatDistanceToNow(
+                            data.participantIds.find(item => item._id !== _id)?.lastSeen,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
 
             </Stack>

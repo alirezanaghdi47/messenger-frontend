@@ -6,7 +6,7 @@ import Attachment from "components/widgets/chat/Attachment.jsx";
 import VoiceRecorder from "components/widgets/chat/VoiceRecorder";
 import MessageForm from "components/widgets/chat/MessageForm";
 
-const Footer = () => {
+const Footer = ({data}) => {
 
     return (
         <Stack
@@ -23,6 +23,9 @@ const Footer = () => {
                 width: "100%",
                 height: 80,
                 bgcolor: "background.paper",
+                borderTopWidth: 1,
+                borderTopStyle: "solid",
+                borderTopColor: "secondary.main",
                 padding: 2
             }}
         >
@@ -31,7 +34,7 @@ const Footer = () => {
 
             <Attachment/>
 
-            <MessageForm/>
+            <MessageForm data={data}/>
 
         </Stack>
     )

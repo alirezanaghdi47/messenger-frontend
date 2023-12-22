@@ -1,22 +1,22 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Button, Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {editLanguage} from "stores/slices/setting.js";
+import {useEditLanguageMutation} from "stores/apis/settingApi";
 
 // utils
 import {languageList} from "utils/constants.js";
 
 const LanguageItem = ({languageItem}) => {
 
-    const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
+    const [editLanguage] = useEditLanguageMutation();
     const {t} = useTranslation();
 
     return (
@@ -33,7 +33,7 @@ const LanguageItem = ({languageItem}) => {
                     effect='blur'
                 />
             }
-            onClick={() => dispatch(editLanguage({language: languageItem.value}))}
+            onClick={() => editLanguage({language: languageItem.value})}
         >
             {t(languageItem.title)}
         </Button>

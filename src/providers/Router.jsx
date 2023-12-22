@@ -3,13 +3,13 @@ import {Route, Routes} from "react-router-dom";
 import Loadable from '@loadable/component';
 
 // pages
-const Home = Loadable(() => import('pages/Home'));
-const Chats = Loadable(() => import('pages/Chats'));
-const Chat = Loadable(() => import('pages/Chat'));
-const Setting = Loadable(() => import('pages/Setting'));
-const Profile = Loadable(() => import('pages/Profile'));
-const Appearance = Loadable(() => import('pages/Appearance'));
-const NotFound = Loadable(() => import('pages/NotFound'));
+const Home = Loadable(() => import('pages/HomePage'));
+const Chats = Loadable(() => import('pages/ChatsPage'));
+const Chat = Loadable(() => import('pages/ChatPage'));
+const Setting = Loadable(() => import('pages/SettingPage'));
+const Profile = Loadable(() => import('pages/ProfilePage'));
+const Appearance = Loadable(() => import('pages/AppearancePage'));
+const NotFound = Loadable(() => import('pages/NotFoundPage'));
 
 const Router = () => {
 

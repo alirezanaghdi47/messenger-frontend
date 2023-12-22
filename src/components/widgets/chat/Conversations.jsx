@@ -1,5 +1,6 @@
 // libraries
 import {forwardRef, useLayoutEffect} from "react";
+import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Stack} from "@mui/material";
 
@@ -8,112 +9,14 @@ import {
     FileMessage,
     TextMessage,
     LocationMessage,
-    LogMessage,
     VideoMessage,
     ImageMessage,
     MusicMessage
 } from "components/widgets/chat/Messages";
 
-const conversationList = [
-    {
-        _id: "1",
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: true
-    },
-    {
-        _id: "2",
-        type: "text",
-        content: "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی گفته می‌شود.",
-        me: false
-    },
-    {
-        _id: "3",
-        type: "image",
-        content: "/images/desktop-1.jpg",
-        me: true
-    },
-    {
-        _id: "4",
-        type: "image",
-        content: "/images/desktop-1.jpg",
-        me: false
-    },
-    {
-        _id: "5",
-        type: "file",
-        content: "/data/lorem-ipsum.pdf",
-        me: true
-    },
-    {
-        _id: "6",
-        type: "file",
-        content: "/data/lorem-ipsum.pdf",
-        me: false
-    },
-    {
-        _id: "7",
-        type: "video",
-        content: "/data/lorem-ipsum.3gp",
-        me: true
-    },
-    {
-        _id: "8",
-        type: "video",
-        content: "/data/lorem-ipsum.3gp",
-        me: false
-    },
-    {
-        _id: "9",
-        type: "music",
-        content: "/data/lorem-ipsum.mp3",
-        me: false
-    },
-    {
-        _id: "10",
-        type: "music",
-        content: "/data/lorem-ipsum.mp3",
-        me: true
-    },
-    {
-        _id: "11",
-        type: "location",
-        content: [35.9624, 53.1234],
-        me: true
-    },
-    {
-        _id: "12",
-        type: "location",
-        content: [35.9624, 53.1234],
-        me: false
-    },
-    {
-        _id: "13",
-        type: "log",
-        content: {time: 60 * 1000, status: "videoCall"},
-        me: true
-    },
-    {
-        _id: "14",
-        type: "log",
-        content: {time: 90 * 1000, status: "voiceCall"},
-        me: false
-    },
-    {
-        _id: "15",
-        type: "log",
-        content: {time: 50 * 1000, status: "voiceCall"},
-        me: false
-    },
-    {
-        _id: "16",
-        type: "log",
-        content: {time: 0, status: "videoCall"},
-        me: true
-    },
-];
-
 const ConversationItem = ({conversationItem}) => {
+
+    const {_id} = useSelector(state => state.setting.profile);
 
     return (
         <Stack
@@ -122,7 +25,7 @@ const ConversationItem = ({conversationItem}) => {
             gap={1}
             sx={{
                 display: "flex",
-                justifyContent: conversationItem.me ? "start" : "end",
+                justifyContent: conversationItem?.userId?._id === _id ? "start" : "end",
                 alignItems: "end",
                 width: '100%',
             }}
@@ -132,7 +35,7 @@ const ConversationItem = ({conversationItem}) => {
                 direction="column"
                 gap={1}
                 sx={{
-                    order: conversationItem.me ? 1 : 2,
+                    order: conversationItem?.userId?._id === _id ? 1 : 2,
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "start",
@@ -141,7 +44,7 @@ const ConversationItem = ({conversationItem}) => {
             >
 
                 <LazyLoadImage
-                    src="/images/avatar.jpg"
+                    src={conversationItem?.userId?.avatar}
                     alt="avatar"
                     visibleByDefault
                     effect="blur"
@@ -156,7 +59,7 @@ const ConversationItem = ({conversationItem}) => {
                 direction="column"
                 gap={1}
                 sx={{
-                    order: conversationItem.me ? 2 : 1,
+                    order: conversationItem?.userId?._id === _id ? 2 : 1,
                     display: "flex",
                     justifyContent: "start",
                     alignItems: "start",
@@ -164,13 +67,12 @@ const ConversationItem = ({conversationItem}) => {
                 }}
             >
 
-                {conversationItem.type === "text" && <TextMessage message={conversationItem}/>}
-                {conversationItem.type === "image" && <ImageMessage message={conversationItem}/>}
-                {conversationItem.type === "file" && <FileMessage message={conversationItem}/>}
-                {conversationItem.type === "music" && <MusicMessage message={conversationItem}/>}
-                {conversationItem.type === "video" && <VideoMessage message={conversationItem}/>}
-                {conversationItem.type === "location" && <LocationMessage message={conversationItem}/>}
-                {conversationItem.type === "log" && <LogMessage message={conversationItem}/>}
+                {conversationItem.type === 0 && <TextMessage message={conversationItem}/>}
+                {conversationItem.type === 1 && <FileMessage message={conversationItem}/>}
+                {conversationItem.type === 2 && <ImageMessage message={conversationItem}/>}
+                {conversationItem.type === 3 && <MusicMessage message={conversationItem}/>}
+                {conversationItem.type === 4 && <VideoMessage message={conversationItem}/>}
+                {conversationItem.type === 5 && <LocationMessage message={conversationItem}/>}
 
             </Stack>
 
@@ -178,7 +80,7 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = forwardRef((props, ref) => {
+const Conversations = forwardRef(({data , error , isLoading}, ref) => {
 
     useLayoutEffect(() => {
         ref?.current?.scrollTo({top: ref?.current?.scrollHeight});
@@ -206,7 +108,7 @@ const Conversations = forwardRef((props, ref) => {
         >
 
             {
-                conversationList.map(conversationItem =>
+                !isLoading && !error && data.map(conversationItem =>
                     <ConversationItem
                         key={conversationItem?._id}
                         conversationItem={conversationItem}

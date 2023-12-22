@@ -1,11 +1,10 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
 import {useMediaQuery, Stack} from "@mui/material";
 
 // components
 import Appbar from "components/widgets/chats/Appbar.jsx";
-import Conversations from "components/widgets/chats/Conversations.jsx";
+import Chats from "components/widgets/chats/Chats.jsx";
 import SearchBar from "components/widgets/chats/Searchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
@@ -15,16 +14,19 @@ import Empty from "components/widgets/chats/Empty";
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
 
 // layouts
-import Primary from "layouts/Primary.jsx";
+import PrimaryLayout from "layouts/PrimaryLayout.jsx";
 
-const Chats = () => {
+// stores
+import {useGetAllChatQuery} from "stores/apis/chatApi";
+
+const ChatsPage = () => {
 
     const params = useParams();
-    const {modal} = useSelector(state => state.app);
+    const {data, error, isLoading} = useGetAllChatQuery();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Primary>
+        <PrimaryLayout>
 
             {
                 ((!params.chatId && isTablet) || !isTablet) && (
@@ -55,9 +57,13 @@ const Chats = () => {
 
                         <SearchBar/>
 
-                        <Conversations/>
-
-                        {/*<EmptyPlaceholder/>*/}
+                        {
+                            !isLoading && !error && data.length > 0 ? (
+                                <Chats chats={data}/>
+                            ) : (
+                                <EmptyPlaceholder/>
+                            )
+                        }
 
                         <ActionButton/>
 
@@ -73,8 +79,8 @@ const Chats = () => {
                 )
             }
 
-        </Primary>
+        </PrimaryLayout>
     )
 }
 
-export default PrivateRouteHoc(Chats);
+export default PrivateRouteHoc(ChatsPage);

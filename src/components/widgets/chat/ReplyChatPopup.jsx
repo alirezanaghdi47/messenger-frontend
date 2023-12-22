@@ -6,7 +6,7 @@ import {LuFile, LuFilm, LuImage, LuMapPin, LuMusic, LuText} from "react-icons/lu
 import {FiPhone, FiVideo, FiX, FiCornerUpLeft} from "react-icons/fi";
 
 // stores
-import {hidePopup} from "stores/slices/app";
+import {hidePopup} from "stores/slices/appSlice";
 
 const replyMessageList = [
     {_id: "1", type: "text", content: "لورم ایپسوم"},

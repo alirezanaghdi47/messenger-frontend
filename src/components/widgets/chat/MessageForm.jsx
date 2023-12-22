@@ -8,24 +8,28 @@ import {LuSend, LuSmile} from "react-icons/lu";
 // components
 import TextInput from "components/modules/TextInput";
 
-const MessageForm = () => {
+// stores
+import {useAddTextMessageMutation} from "stores/apis/messageApi";
 
+const MessageForm = ({data}) => {
+
+    const [addTextMessage, response] = useAddTextMessageMutation();
     const {t} = useTranslation();
 
     const formik = useFormik({
         initialValues: {
-            message: "",
+            text: "",
         },
-        // validationSchema: ,
-        onSubmit: async (data) => {
-            console.log(data)
+        onSubmit: async (result, {resetForm}) => {
+            addTextMessage({text: result.text, chatId: data?._id});
+            resetForm();
         }
     });
 
     return (
         <TextInput
-            name="message"
-            placeholder={t("input.message")}
+            name="text"
+            placeholder={t("input.text")}
             startIcon={
                 <IconButton
                     varinat="text"
@@ -44,9 +48,9 @@ const MessageForm = () => {
                     <LuSend size={20}/>
                 </IconButton>
             }
-            value={formik.values.message}
+            value={formik.values.text}
             onChange={formik.handleChange}
-            error={formik.errors.message}
+            error={formik.errors.text}
         />
     )
 }

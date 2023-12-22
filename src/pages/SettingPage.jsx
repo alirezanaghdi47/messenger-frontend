@@ -13,7 +13,7 @@ import Empty from "components/widgets/setting/Empty";
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
 
 // layouts
-import Primary from "layouts/Primary.jsx";
+import PrimaryLayout from "layouts/PrimaryLayout.jsx";
 
 const pathList = [
     "/setting/profile",
@@ -21,13 +21,13 @@ const pathList = [
     "/setting/privacy",
 ];
 
-const Setting = () => {
+const SettingPage = () => {
 
     const location = useLocation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
-        <Primary>
+        <PrimaryLayout>
 
             {
                 ((!pathList.includes(location.pathname) && isTablet) || !isTablet) && (
@@ -75,8 +75,8 @@ const Setting = () => {
                 )
             }
 
-        </Primary>
+        </PrimaryLayout>
     )
 }
 
-export default PrivateRouteHoc(Setting);
+export default PrivateRouteHoc(SettingPage);

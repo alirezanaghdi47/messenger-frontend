@@ -32,11 +32,11 @@ const Empty = () => {
                 src={darkMode ? "/images/setting-dark.svg" : "/images/setting-light.svg"}
                 alt="empty"
                 width="100%"
-                style={{maxWidth: 300}}
+                style={{maxWidth: 240}}
             />
 
             <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 color='textSecondary'
                 fontWeight='bold'
             >

@@ -4,8 +4,8 @@ import {Navigate, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 // stores
-import {logout} from "stores/slices/auth";
-import {unSetUser} from "../stores/slices/setting";
+import {signOut} from "stores/slices/authSlice";
+import {unSetUser} from "../stores/slices/settingSlice";
 
 const PrivateRouteHoc = (WrappedComponent) => {
     const PrivateRouteHoc = (props) => {
@@ -21,7 +21,7 @@ const PrivateRouteHoc = (WrappedComponent) => {
             const interval = setInterval(() => setCounter(prevState => prevState + 1), 1 * 1000);
 
             if (token && expire < Math.floor(Date.now() / 1000)) {
-                dispatch(logout());
+                dispatch(signOut());
                 dispatch(unSetUser());
             }
 

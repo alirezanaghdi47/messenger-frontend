@@ -5,7 +5,7 @@ import {IconButton, Stack} from "@mui/material";
 import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 
 // stores
-import {logout} from "stores/slices/auth";
+import {signOut} from "stores/slices/authSlice";
 
 const Appbar = () => {
 
@@ -43,7 +43,7 @@ const Appbar = () => {
                 variant="text"
                 color="light"
                 onClick={() => {
-                    dispatch(logout());
+                    dispatch(signOut());
                     window.open("http://localhost:4000/api/auth/logout" , "_self");
                 }}
             >

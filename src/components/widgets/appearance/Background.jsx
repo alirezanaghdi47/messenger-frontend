@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
@@ -8,15 +8,15 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {editBackground} from "stores/slices/setting.js";
+import {useEditBackgroundMutation} from "stores/apis/settingApi";
 
 // utils
 import {backgroundList} from "utils/constants.js";
 
 const BackgroundItem = ({backgroundItem}) => {
 
-    const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
+    const [editBackground] = useEditBackgroundMutation();
 
     return (
         <Grid
@@ -26,7 +26,7 @@ const BackgroundItem = ({backgroundItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => dispatch(editBackground({background: backgroundItem.background}))}
+            onClick={() => editBackground({background: backgroundItem.background})}
         >
 
             <Box

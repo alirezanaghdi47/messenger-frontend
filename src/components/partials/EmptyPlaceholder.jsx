@@ -29,7 +29,7 @@ const EmptyPlaceholder = () => {
                 visibleByDefault
                 effect="blur"
                 width="100%"
-                style={{maxWidth: 150}}
+                style={{maxWidth: 120}}
             />
 
             <Typography

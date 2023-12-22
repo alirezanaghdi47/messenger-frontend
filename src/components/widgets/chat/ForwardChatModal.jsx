@@ -6,11 +6,11 @@ import {FiX} from "react-icons/fi";
 
 // components
 import SearchBar from "components/widgets/chats/Searchbar";
-import Contacts from "components/widgets/chats/Contacts";
+import Users from "components/widgets/chats/Users";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
 
 const ModalHeader = () => {
 
@@ -67,7 +67,7 @@ const ModalContent = () => {
 
             <SearchBar/>
 
-            <Contacts/>
+            <Users/>
 
             {/*<EmptyPlaceholder/>*/}
 

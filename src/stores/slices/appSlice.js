@@ -14,7 +14,7 @@ const initialState = {
     }
 }
 
-export const app = createSlice({
+export const appSlice = createSlice({
     name: 'app',
     initialState,
     reducers: {
@@ -46,6 +46,6 @@ export const {
     hideModal,
     showPopup,
     hidePopup
-} = app.actions;
+} = appSlice.actions;
 
-export default app.reducer;
+export default appSlice.reducer;

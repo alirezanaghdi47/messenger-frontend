@@ -5,7 +5,7 @@ import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} fr
 import {FiX} from "react-icons/fi";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
 
 const ModalHeader = () => {
 

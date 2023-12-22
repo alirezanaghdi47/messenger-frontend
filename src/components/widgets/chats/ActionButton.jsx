@@ -11,7 +11,7 @@ import {LuMessageCircle, LuUsers} from "react-icons/lu";
 import {useDropdownMenu} from "hooks/useDropdownMenu";
 
 // utils
-import {showModal} from "stores/slices/app";
+import {showModal} from "stores/slices/appSlice";
 
 const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
 

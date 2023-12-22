@@ -5,15 +5,18 @@ import {useOrientation} from "@uidotdev/usehooks";
 // components
 import Orientation from "components/partials/Orientation";
 
-const Secondary = ({children}) => {
+const PrimaryLayout = ({children}) => {
 
-    const {angle, type} = useOrientation();
+    const {angle , type} = useOrientation();
 
     const isOriented = angle === 90 && type === "landscape-primary";
 
     return !isOriented ? (
 
-        <Container maxWidth="sm">
+        <Container
+            maxWidth="xl"
+            disableGutters
+        >
 
             <Stack
                 direction="column"
@@ -21,7 +24,7 @@ const Secondary = ({children}) => {
                     position: "relative",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "start",
                     width: "100%",
                     height: "100%",
                     minHeight: "100dvh",
@@ -35,5 +38,5 @@ const Secondary = ({children}) => {
     ) : <Orientation/>
 }
 
-export default Secondary;
+export default PrimaryLayout;
 

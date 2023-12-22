@@ -12,6 +12,7 @@
       "isOnline": "Online",
       "notFound": "Page not found",
       "empty": "Data not found",
+      "noChat": "Chat not found",
       "minute": "Minute",
       "second": "Second",
       "text": "Text",
@@ -27,7 +28,6 @@
       "forwarded": "Forwarded from",
       "profile": "Profile",
       "appearance": "Appearance",
-      "signIn": "Sign in with",
       "createChat": "Create chat",
       "forwardChat": "Forward chat",
       "select": "Select an item",
@@ -48,7 +48,7 @@
     },
     "input": {
       "search": "Search ...",
-      "message": "Message",
+      "text": "Text Message",
       "avatar": "Avatar",
       "userName": "User name",
       "biography": "Biography",
@@ -92,7 +92,6 @@
       "persian": "Persian",
       "english": "English",
       "back": "Back",
-      "signIn": "Sign in",
       "restart": "Restart",
       "submit": "Submit",
       "next": "Next",
@@ -101,7 +100,7 @@
       "send": "Send",
       "show": "Show",
       "delete": "Delete",
-      "google": "Sign In With Google Account"
+      "google": "Continue with Google"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

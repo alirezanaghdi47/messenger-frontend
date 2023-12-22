@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {Card, Slider, Stack, Typography, useTheme} from "@mui/material";
 
@@ -7,15 +7,15 @@ import {Card, Slider, Stack, Typography, useTheme} from "@mui/material";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {editFontSize} from "stores/slices/setting.js";
+import {useEditFontSizeMutation} from "stores/apis/settingApi";
 
 // utils
 import {fontSizeList} from "utils/constants.js";
 
 const FontSize = () => {
 
-    const dispatch = useDispatch();
     const {fontSize} = useSelector(state => state.setting.appearance);
+    const [editFontSize] = useEditFontSizeMutation();
     const {t} = useTranslation();
     const theme = useTheme();
 
@@ -61,7 +61,7 @@ const FontSize = () => {
                 marks
                 min={12}
                 max={20}
-                onChange={(e, newValue) => dispatch(editFontSize({fontSize: newValue}))}
+                onChange={(e, newValue) => editFontSize({fontSize: newValue})}
                 sx={{maxWidth: 300}}
             />
 

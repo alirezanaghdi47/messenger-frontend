@@ -1,27 +1,34 @@
 // libraries
-import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import {Box, Stack, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {formatDistanceToNow} from "date-fns";
+import {enUS, faIR} from "date-fns/locale";
+import {Box, Stack , Badge, Typography, useMediaQuery, useTheme} from "@mui/material";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
+import {useAddChatMutation} from "stores/apis/chatApi";
 
-const contactList = [
-    {_id: "101"},
-    {_id: "102"},
-    {_id: "103"},
-    {_id: "104"},
-    {_id: "105"},
-];
+const UserItem = ({userItem}) => {
 
-const ContactItem = ({contactItem}) => {
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {language} = useSelector(state => state.setting.appearance);
+    const [addChat, response] = useAddChatMutation();
     const {t} = useTranslation();
     const theme = useTheme();
+
+    useEffect(() => {
+
+        if (response?.data?._id) {
+            dispatch(hideModal());
+            navigate(`/chat/${response?.data?._id}`);
+        }
+
+    }, [response]);
 
     return (
         <Box
@@ -30,14 +37,11 @@ const ContactItem = ({contactItem}) => {
                 width: "100%",
                 borderBottom: `1px solid ${theme.palette.secondary.main}`,
                 paddingY: 2,
-                "&:last-of-type":{
+                "&:last-of-type": {
                     borderBottom: "none"
                 }
             }}
-            onClick={() => {
-                dispatch(hideModal());
-                navigate(`/chat/${contactItem?._id}`);
-            }}
+            onClick={() => addChat(userItem?._id)}
         >
 
             <Stack
@@ -54,19 +58,31 @@ const ContactItem = ({contactItem}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src="/images/avatar.jpg"
-                    alt="avatar"
-                    visibleByDefault
-                    width={40}
-                    height={40}
-                    effect='blur'
-                    style={{borderRadius: "50%"}}
-                />
+                {/*<Badge*/}
+                {/*    color="success"*/}
+                {/*    variant="dot"*/}
+                {/*    overlap="circular"*/}
+                {/*    anchorOrigin={{*/}
+                {/*        vertical: 'bottom',*/}
+                {/*        horizontal: 'right',*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                    <LazyLoadImage
+                        src={userItem?.avatar}
+                        alt="avatar"
+                        visibleByDefault
+                        width={40}
+                        height={40}
+                        effect='blur'
+                        style={{borderRadius: "50%"}}
+                    />
+
+                {/*</Badge>*/}
 
                 <Stack
                     direction="column"
-                    gap={0.5}
+                    gap={1}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
@@ -80,7 +96,7 @@ const ContactItem = ({contactItem}) => {
                         fontWeight='bold'
                         noWrap
                     >
-                        علیرضا نقدی
+                        {userItem?.userName}
                     </Typography>
 
                     <Typography
@@ -90,7 +106,12 @@ const ContactItem = ({contactItem}) => {
                     >
                         {t("typography.lastSeen")}
                         &nbsp;
-                        11:11
+                        {
+                            formatDistanceToNow(
+                                userItem?.lastSeen,
+                                {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                            )
+                        }
                     </Typography>
 
                 </Stack>
@@ -101,7 +122,7 @@ const ContactItem = ({contactItem}) => {
     )
 }
 
-const Contacts = () => {
+const Users = ({users}) => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -121,10 +142,10 @@ const Contacts = () => {
         >
 
             {
-                contactList.map(contactItem =>
-                    <ContactItem
-                        key={contactItem?._id}
-                        contactItem={contactItem}
+                users.map(userItem =>
+                    <UserItem
+                        key={userItem?._id}
+                        userItem={userItem}
                     />
                 )
             }
@@ -133,5 +154,5 @@ const Contacts = () => {
     )
 }
 
-export default Contacts;
+export default Users;
 

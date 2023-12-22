@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
@@ -8,15 +8,15 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {editTheme} from "stores/slices/setting.js";
+import {useEditThemeMutation} from "stores/apis/settingApi";
 
 // utils
 import {themeList} from "utils/constants.js";
 
 const ThemeItem = ({themeItem}) => {
 
-    const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.setting.appearance);
+    const [editTheme] = useEditThemeMutation();
 
     return (
         <Grid
@@ -26,7 +26,7 @@ const ThemeItem = ({themeItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => dispatch(editTheme({darkMode: themeItem.value}))}
+            onClick={() => editTheme({darkMode: themeItem.value})}
         >
 
             <Box

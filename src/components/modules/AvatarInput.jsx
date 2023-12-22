@@ -69,7 +69,7 @@ const AvatarInput = ({
                     height: 100,
                     bgcolor: "secondary.main",
                     color: "ternary.main",
-                    borderRadius: 1,
+                    borderRadius: "50%",
                     cursor: "pointer",
                     padding: 1,
                     overflow: "hidden"
@@ -90,7 +90,7 @@ const AvatarInput = ({
                                 width: "100%",
                                 height: "100%",
                                 aspectRatio: 1,
-                                borderRadius: 8,
+                                borderRadius: "50%",
                             }}
                         />
                     ) : (

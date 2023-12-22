@@ -11,7 +11,7 @@ import {
 import {LuTrash2} from "react-icons/lu";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
 
 const ModalContent = () => {
 

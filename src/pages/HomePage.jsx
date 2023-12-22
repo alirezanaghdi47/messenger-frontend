@@ -12,13 +12,13 @@ import Slider from "components/widgets/home/Slider";
 import Form from "components/widgets/home/Form";
 
 // layouts
-import Secondary from "layouts/Secondary";
+import SecondaryLayout from "layouts/SecondaryLayout";
 
 // stores
-import {login} from "stores/slices/auth";
-import {setUser} from "stores/slices/setting";
+import {signIn} from "stores/slices/authSlice";
+import {setUser} from "stores/slices/settingSlice";
 
-const Home = () => {
+const HomePage = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const Home = () => {
     useEffect(() => {
 
         if (Cookies.get("token")) {
-            dispatch(login({token: Cookies.get("token"), expire: jwtDecode(Cookies.get("token"))?.exp}));
+            dispatch(signIn({token: Cookies.get("token"), expire: jwtDecode(Cookies.get("token"))?.exp}));
             dispatch(setUser(jwtDecode(Cookies.get("token"))?.user));
             Cookies.remove("token");
             navigate("/chat");
@@ -40,7 +40,7 @@ const Home = () => {
     }, []);
 
     return (
-        <Secondary>
+        <SecondaryLayout>
 
             <Stack
                 component="main"
@@ -62,8 +62,8 @@ const Home = () => {
 
             </Stack>
 
-        </Secondary>
+        </SecondaryLayout>
     );
 }
 
-export default Home;
+export default HomePage;

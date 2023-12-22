@@ -8,15 +8,11 @@ import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 import UserInfo from "components/widgets/chat/UserInfo.jsx";
 import Toolbar from "components/widgets/chat/Toolbar.jsx";
 
-const Header = () => {
+const Header = ({data}) => {
 
     const navigate = useNavigate();
     const {language} = useSelector(state => state.setting.appearance);
     const isTablet = useMediaQuery('(max-width: 768px)');
-
-    const _handleBack = () => {
-        navigate("/")
-    }
 
     return (
         <Stack
@@ -33,6 +29,9 @@ const Header = () => {
                 width: "100%",
                 height: 80,
                 bgcolor: "background.paper",
+                borderBottomWidth: 1,
+                borderBottomStyle: "solid",
+                borderBottomColor: "secondary.main",
                 padding: 2
             }}
         >
@@ -42,16 +41,16 @@ const Header = () => {
                     <IconButton
                         variant="text"
                         color="ternary"
-                        onClick={_handleBack}
+                        onClick={() => navigate("/")}
                     >
                         {language === "fa" ? <FiChevronRight size={20}/> : <FiChevronLeft size={20}/>}
                     </IconButton>
                 )
             }
 
-            <UserInfo/>
+            <UserInfo data={data}/>
 
-            <Toolbar/>
+            <Toolbar data={data}/>
 
         </Stack>
     )

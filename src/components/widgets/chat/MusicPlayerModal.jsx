@@ -7,7 +7,7 @@ import {FiX} from "react-icons/fi";
 import MusicPlayer from "components/modules/MusicPlayer";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
 
 const ModalHeader = () => {
 

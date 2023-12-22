@@ -1,9 +1,9 @@
 // libraries
 import {useRef} from "react";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Loadable from "@loadable/component";
-import {alpha, Stack, useTheme , useMediaQuery} from "@mui/material";
+import {alpha, Stack, useTheme, useMediaQuery} from "@mui/material";
 
 // components
 import Header from "components/widgets/chat/Header.jsx";
@@ -15,6 +15,10 @@ import ActionButton from "components/widgets/chat/ActionButton";
 // hocs
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
 
+// stores
+import {useGetChatQuery} from "stores/apis/chatApi";
+import {useGetAllMessageQuery} from "stores/apis/messageApi";
+
 const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
 const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
 const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
@@ -23,16 +27,18 @@ const ReplyChatPopup = Loadable(() => import("components/widgets/chat/ReplyChatP
 const DeleteChatModal = Loadable(() => import("components/widgets/chat/DeleteChatModal"));
 const DeleteContactModal = Loadable(() => import("components/widgets/chat/DeleteContactModal"));
 
-const Chat = () => {
+const ChatPage = () => {
 
+    const listRef = useRef(null);
     const params = useParams();
-    const {modal , popup} = useSelector(state => state.app);
+    const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
+    const {data: chat, error: chatError, isLoading: chatIsLoading} = useGetChatQuery(params.chatId);
+    const {data: messages, error: messagesError, isLoading: messagesIsLoading} = useGetAllMessageQuery(chat?._id , {skip: Boolean(chatError || !chat)});
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
-    const listRef = useRef(null);
 
-    return params.chatId && (
+    return !chatIsLoading && !chatError && chat ? (
         <Stack
             component="main"
             direction="column"
@@ -47,7 +53,8 @@ const Chat = () => {
                 alignItems: "center",
                 width: isTablet ? "100%" : "calc(100% - 360px)",
                 height: "100dvh",
-                backgroundImage: `url(${background})`,
+                backgroundImage: messages?.length > 0 ? `url(${background})` : "unset",
+                backgroundColor: messages?.length > 0 ? "transparent" : theme.palette.background.paper,
                 backgroundPosition: 'center',
                 backgroundSize: "cover",
                 "&::after": {
@@ -58,18 +65,31 @@ const Chat = () => {
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    background: alpha(theme.palette.background.default, 0.5)
+                    backgroundColor: alpha(theme.palette.background.default, 0.5)
                 }
             }}
         >
 
-            <Header/>
+            <Header data={chat}/>
 
-            <Conversations ref={listRef}/>
+            {
+                !messagesIsLoading && !messagesError && messages?.length > 0 ? (
+                    <Conversations
+                        ref={listRef}
+                        data={messages}
+                        error={messagesError}
+                        isLoading={messagesIsLoading}
+                    />
+                ) : (
+                    <EmptyPlaceholder/>
+                )
+            }
 
-            <ActionButton ref={listRef}/>
-
-            {/*<EmptyPlaceholder/>*/}
+            {
+                !messagesIsLoading && !messagesError && messages?.length > 20 && (
+                    <ActionButton ref={listRef}/>
+                )
+            }
 
             {
                 Boolean(modal?.isOpen && modal?.type === "imagePreview") && (
@@ -113,10 +133,12 @@ const Chat = () => {
                 )
             }
 
-            <Footer/>
+            <Footer data={chat}/>
 
         </Stack>
+    ) : (
+        <Navigate to="/chat"/>
     )
 }
 
-export default PrivateRouteHoc(Chat);
+export default PrivateRouteHoc(ChatPage);

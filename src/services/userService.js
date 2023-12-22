@@ -4,6 +4,42 @@ import axios from "axios";
 // stores
 import {store} from "stores/store";
 
+export const getAllUserService = async () => {
+    try {
+        const token = await store.getState().auth.token;
+
+        const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllUser" , {
+            headers:{token}
+        });
+
+        return response.data;
+    } catch (err) {
+        return {
+            message: err?.response?.data?.message,
+            status: err?.response?.data?.status,
+        };
+    }
+}
+
+export const getUserService = async (userId) => {
+    try {
+        const token = await store.getState().auth.token;
+
+        const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getUser" , {
+            headers:{
+                token, userId
+            }
+        });
+
+        return response.data;
+    } catch (err) {
+        return {
+            message: err?.response?.data?.message,
+            status: err?.response?.data?.status,
+        };
+    }
+}
+
 export const editProfileService = async (data) => {
     try {
         const token = await store.getState().auth.token;

@@ -1,4 +1,5 @@
 // libraries
+import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {
@@ -11,10 +12,14 @@ import {
 import {LuTrash2} from "react-icons/lu";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
+import {useDeleteChatMutation} from "stores/apis/chatApi";
 
-const ModalContent = () => {
+const ModalContent = ({data}) => {
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [deleteChat] = useDeleteChatMutation();
     const {t} = useTranslation();
 
     return (
@@ -57,42 +62,38 @@ const ModalContent = () => {
                 {t("typography.deleteContent")}
             </Typography>
 
-        </Stack>
-    )
-}
-
-const ModalFooter = () => {
-
-    const dispatch = useDispatch();
-    const {t} = useTranslation();
-
-    return (
-        <Stack
-            direction="row"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-                width: "100%",
-            }}
-        >
-
-            <Button
-                variant="text"
-                color="ternary"
-                onClick={() => dispatch(hideModal())}
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                }}
             >
-                {t("button.cancel")}
-            </Button>
 
-            <Button
-                variant="contained"
-                color="error"
-                onClick={() => dispatch(hideModal())}
-            >
-                {t("button.delete")}
-            </Button>
+                <Button
+                    variant="text"
+                    color="ternary"
+                    onClick={() => dispatch(hideModal())}
+                >
+                    {t("button.cancel")}
+                </Button>
+
+                <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                        deleteChat(data?._id);
+                        navigate("/chat");
+                        dispatch(hideModal());
+                    }}
+                >
+                    {t("button.delete")}
+                </Button>
+
+            </Stack>
 
         </Stack>
     )
@@ -133,9 +134,7 @@ const DeleteChatModal = () => {
                 }}
             >
 
-                <ModalContent/>
-
-                <ModalFooter/>
+                <ModalContent data={modal?.data}/>
 
             </Stack>
 

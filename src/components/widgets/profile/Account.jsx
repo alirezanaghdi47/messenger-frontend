@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {Button, Stack, useMediaQuery} from "@mui/material";
@@ -10,15 +10,15 @@ import TextInput from "components/modules/TextInput.jsx";
 import AvatarInput from "components/modules/AvatarInput.jsx";
 
 // stores
-import {editProfile} from "stores/slices/setting";
+import {useEditProfileMutation} from "stores/apis/settingApi";
 
 // utils
 import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 
-    const dispatch = useDispatch();
     const {avatar, userName, biography} = useSelector(state => state.setting.profile);
+    const [editProfile] = useEditProfileMutation();
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -31,7 +31,7 @@ const Account = () => {
         },
         validationSchema: editProfileSchema,
         onSubmit: async (result) => {
-            dispatch(editProfile({...result , preview: avatar}));
+            editProfile({...result , preview: avatar});
         }
     });
 

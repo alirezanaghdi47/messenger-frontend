@@ -6,21 +6,21 @@ const initialState = {
     expire: 0
 }
 
-export const auth = createSlice({
+export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login: (state , action) => {
+        signIn: (state , action) => {
             state.token = action.payload.token;
             state.expire = action.payload.expire;
         },
-        logout: () => initialState
+        signOut: () => initialState
     },
 })
 
 export const {
-    login,
-    logout,
-} = auth.actions;
+    signIn,
+    signOut,
+} = authSlice.actions;
 
-export default auth.reducer;
+export default authSlice.reducer;

@@ -3,12 +3,12 @@ import {Stack , useMediaQuery} from "@mui/material";
 
 // components
 import Header from "components/widgets/setting/Header.jsx";
-import Customize from "components/widgets/appearance/Customize.jsx";
+import Account from "components/widgets/profile/Account.jsx";
 
 // hocs
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
 
-const Appearance = () => {
+const ProfilePage = () => {
 
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -30,13 +30,12 @@ const Appearance = () => {
             }}
         >
 
-            <Header title="typography.appearance"/>
+            <Header title="typography.profile"/>
 
-            <Customize/>
+            <Account/>
 
         </Stack>
     )
 }
 
-export default PrivateRouteHoc(Appearance);
-
+export default PrivateRouteHoc(ProfilePage);

@@ -1,16 +1,17 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
+import {IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
 import SearchBar from "components/widgets/chats/Searchbar";
-import Contacts from "components/widgets/chats/Contacts";
+import Users from "components/widgets/chats/Users";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // stores
-import {hideModal} from "stores/slices/app";
+import {hideModal} from "stores/slices/appSlice";
+import {useGetAllUserQuery} from "stores/apis/chatApi";
 
 const ModalHeader = () => {
 
@@ -52,10 +53,11 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
+    const {data, error, isLoading} = useGetAllUserQuery();
+
     return (
         <Stack
             direction="column"
-            gap={2}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -67,9 +69,13 @@ const ModalContent = () => {
 
             <SearchBar/>
 
-            <Contacts/>
-
-            {/*<EmptyPlaceholder/>*/}
+            {
+                !isLoading && !error && data.length > 0 ? (
+                    <Users users={data}/>
+                ) : (
+                    <EmptyPlaceholder/>
+                )
+            }
 
         </Stack>
     )

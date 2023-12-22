@@ -6,7 +6,7 @@ import {FiCornerUpLeft, FiCornerUpRight} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 // stores
-import {showModal , showPopup} from "stores/slices/app";
+import {showModal , showPopup} from "stores/slices/appSlice";
 
 const MessageDropdownMenu = ({contextMenu, isOpen, onClose}) => {
 

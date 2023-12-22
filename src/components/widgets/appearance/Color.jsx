@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Box, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
@@ -7,15 +7,15 @@ import {FiCheck} from "react-icons/fi";
 import Header from "components/widgets/appearance/Header";
 
 // stores
-import {editColor} from "stores/slices/setting.js";
+import {useEditColorMutation} from "stores/apis/settingApi";
 
 // utils
 import {colorList} from "utils/constants.js";
 
 const ColorItem = ({colorItem}) => {
 
-    const dispatch = useDispatch();
     const {darkMode, color} = useSelector(state => state.setting.appearance);
+    const [editColor] = useEditColorMutation();
 
     return (
         <Box
@@ -28,7 +28,7 @@ const ColorItem = ({colorItem}) => {
                 borderRadius: "50%",
                 cursor: "pointer",
             }}
-            onClick={() => dispatch(editColor({color: colorItem.color}))}
+            onClick={() => editColor({color: colorItem.color})}
         >
 
             {

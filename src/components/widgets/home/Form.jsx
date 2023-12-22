@@ -1,10 +1,15 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {Button, Stack} from "@mui/material";
-import {FaGoogle} from "react-icons/fa6";
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Stack} from "@mui/material";
+
+// styles
+import {GoogleLoginButton} from "styles/global";
 
 const Form = () => {
 
+    const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
 
     return (
@@ -18,14 +23,23 @@ const Form = () => {
             }}
         >
 
-            <Button
-                variant="contained"
-                color="error"
-                startIcon={<FaGoogle size={20}/>}
-                onClick={() => window.open(`${process.env.REACT_APP_API_URL}/api/auth/google` , "_self")}
+            <GoogleLoginButton
+                theme={darkMode ? "dark" : "light"}
+                onClick={() => window.open(`${process.env.REACT_APP_API_URL}/api/auth/google`, "_self")}
             >
+
+                <LazyLoadImage
+                    src="/images/google.png"
+                    alt="avatar"
+                    visibleByDefault
+                    width={20}
+                    height={20}
+                    effect='blur'
+                />
+
                 {t("button.google")}
-            </Button>
+
+            </GoogleLoginButton>
 
         </Stack>
     )

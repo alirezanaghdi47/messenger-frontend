@@ -5,16 +5,20 @@ import localStorage from "redux-persist/es/storage";
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 // stores
-import authReducer from "stores/slices/auth.js";
-import appReducer from "stores/slices/app.js";
-import chatReducer from "stores/slices/chat.js";
-import settingReducer from "stores/slices/setting.js";
+import authReducer from "stores/slices/authSlice.js";
+import appReducer from "stores/slices/appSlice.js";
+import settingReducer from "stores/slices/settingSlice.js";
+import {chatApi} from "stores/apis/chatApi";
+import {settingApi} from "stores/apis/settingApi";
+import {messageApi} from "stores/apis/messageApi";
 
 const reducers = combineReducers({
     auth: authReducer,
     app: appReducer,
-    chat: chatReducer,
     setting: settingReducer,
+    [chatApi.reducerPath]: chatApi.reducer,
+    [messageApi.reducerPath]: messageApi.reducer,
+    [settingApi.reducerPath]: settingApi.reducer,
 });
 
 const persistConfig = {
@@ -31,6 +35,9 @@ export const store = configureStore({
     reducer: persistedReducer,
     devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false})
+        .concat(chatApi.middleware)
+        .concat(settingApi.middleware)
+        .concat(messageApi.middleware)
 });
 
 export const persistor = persistStore(store);
