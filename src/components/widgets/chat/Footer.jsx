@@ -6,7 +6,7 @@ import Attachment from "components/widgets/chat/Attachment.jsx";
 import VoiceRecorder from "components/widgets/chat/VoiceRecorder";
 import MessageForm from "components/widgets/chat/MessageForm";
 
-const Footer = ({data}) => {
+const Footer = () => {
 
     return (
         <Stack
@@ -34,7 +34,7 @@ const Footer = ({data}) => {
 
             <Attachment/>
 
-            <MessageForm data={data}/>
+            <MessageForm/>
 
         </Stack>
     )

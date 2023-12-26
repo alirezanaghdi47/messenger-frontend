@@ -2,7 +2,7 @@
   "name": "messenger-frontend",
   "private": true,
   "author": "alireza naghdi",
-  "version": "1.1.0",
+  "version": "1.1.5",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -21,6 +21,7 @@
     "@uidotdev/usehooks": "^2.2.0",
     "axios": "^1.6.2",
     "date-fns": "^3.0.1",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.3",
     "i18next": "^23.4.5",
     "i18next-browser-languagedetector": "^7.1.0",

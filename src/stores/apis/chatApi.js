@@ -1,9 +1,9 @@
 // libraries
 import {createApi} from '@reduxjs/toolkit/query/react';
+import axios from "axios";
 
-// services
-import {addChatService, getAllChatService, getChatService , deleteChatService} from "services/chatService";
-import {getAllUserService} from "services/userService";
+// stores
+import {setActiveChat, setChats, setUsers} from "stores/slices/chatSlice";
 
 // utils
 import {axiosBaseQuery} from "utils/functions";
@@ -13,13 +13,20 @@ export const chatApi = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_URL,
     }),
-    tagTypes: ["allUser" , "allChat" , "chat"],
+    tagTypes: ["allUser", "allChat", "chat"],
     endpoints: (builder) => ({
         getAllUser: builder.query({
-            queryFn: async () => {
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
-                    const response = await getAllUserService();
-                    return {data: response.data};
+                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllUser", {
+                        headers: {
+                            token: await getState().auth.token,
+                        }
+                    });
+
+                    await dispatch(setUsers(response.data.data));
+
+                    return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
@@ -27,10 +34,17 @@ export const chatApi = createApi({
             providesTags: ["allUser"]
         }),
         getAllChat: builder.query({
-            queryFn: async (arg, {signal , dispatch , getState}, extraOptions, baseQuery) => {
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
-                    const response = await getAllChatService();
-                    return {data: response.data};
+                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/chat/getAllChat", {
+                        headers: {
+                            token: await getState().auth.token,
+                        }
+                    });
+
+                    await dispatch(setChats(response.data.data));
+
+                    return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
@@ -38,10 +52,18 @@ export const chatApi = createApi({
             providesTags: ["allChat"]
         }),
         getChat: builder.query({
-            queryFn: async (arg, {signal , dispatch , getState}, extraOptions, baseQuery) => {
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
-                    const response = await getChatService(arg);
-                    return {data: response.data};
+                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/chat/getChat", {
+                        headers: {
+                            token: await getState().auth.token,
+                            chatId: arg
+                        }
+                    });
+
+                    await dispatch(setActiveChat(response.data.data));
+
+                    return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
@@ -49,21 +71,33 @@ export const chatApi = createApi({
             providesTags: ["chat"]
         }),
         addChat: builder.mutation({
-            queryFn: async (arg, {signal , dispatch , getState}, extraOptions, baseQuery) => {
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
-                    const response = await addChatService(arg);
-                    return {data: response.data};
+                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addChat", null, {
+                        headers: {
+                            token: await getState().auth.token,
+                            receiverId: arg
+                        }
+                    });
+
+                    return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["chat"],
+            invalidatesTags: ["chat", "allChat"],
         }),
         deleteChat: builder.mutation({
-            queryFn: async (arg, {signal , dispatch , getState}, extraOptions, baseQuery) => {
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
-                    const response = await deleteChatService(arg);
-                    return {data: response.data};
+                    const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/chat/deleteChat", {
+                        headers: {
+                            token: await getState().auth.token,
+                            chatId: arg
+                        }
+                    });
+
+                    return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
@@ -73,4 +107,10 @@ export const chatApi = createApi({
     }),
 })
 
-export const {useGetAllUserQuery, useGetAllChatQuery, useGetChatQuery, useAddChatMutation , useDeleteChatMutation} = chatApi;
+export const {
+    useGetAllUserQuery,
+    useGetAllChatQuery,
+    useGetChatQuery,
+    useAddChatMutation,
+    useDeleteChatMutation
+} = chatApi;

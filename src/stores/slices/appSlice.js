@@ -45,7 +45,7 @@ export const {
     showModal,
     hideModal,
     showPopup,
-    hidePopup
+    hidePopup,
 } = appSlice.actions;
 
 export default appSlice.reducer;

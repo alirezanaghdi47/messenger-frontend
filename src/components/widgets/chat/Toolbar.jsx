@@ -1,5 +1,5 @@
 // libraries
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-hot-toast";
 import {
@@ -19,7 +19,6 @@ import {useDropdownMenu} from "hooks/useDropdownMenu";
 import {showModal} from "stores/slices/appSlice";
 
 const DesktopToolbar = ({
-                            data,
                             anchorEl,
                             isOpenDropdownMenu,
                             onCloseDropdownMenu,
@@ -27,6 +26,7 @@ const DesktopToolbar = ({
                         }) => {
 
     const dispatch = useDispatch();
+    const {activeChat} = useSelector(state => state.chat);
     const {t} = useTranslation();
 
     return (
@@ -98,7 +98,7 @@ const DesktopToolbar = ({
                     }}
                     onClick={() => {
                         onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteContact", data: data}));
+                        dispatch(showModal({type: "deleteContact", data: activeChat}));
                     }}
                 >
 
@@ -121,7 +121,6 @@ const DesktopToolbar = ({
 }
 
 const MobileToolbar = ({
-                           data,
                            anchorEl,
                            isOpenDropdownMenu,
                            onCloseDropdownMenu,
@@ -129,6 +128,7 @@ const MobileToolbar = ({
                        }) => {
 
     const dispatch = useDispatch();
+    const {activeChat} = useSelector(state => state.chat);
     const {t} = useTranslation();
 
     return (
@@ -228,7 +228,7 @@ const MobileToolbar = ({
                     }}
                     onClick={() => {
                         onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteContact", data: data}));
+                        dispatch(showModal({type: "deleteContact", data: activeChat}));
                     }}
                 >
 
@@ -250,7 +250,7 @@ const MobileToolbar = ({
     )
 }
 
-const Toolbar = ({data}) => {
+const Toolbar = () => {
 
     const isTablet = useMediaQuery('(min-width: 768px)');
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
@@ -261,14 +261,12 @@ const Toolbar = ({data}) => {
             {
                 isTablet ?
                     <DesktopToolbar
-                        data={data}
                         anchorEl={anchorEl}
                         isOpenDropdownMenu={isOpenDropdownMenu}
                         onOpenDropdownMenu={_handleShowDropdownMenu}
                         onCloseDropdownMenu={_handleHideDropdownMenu}
                     /> :
                     <MobileToolbar
-                        data={data}
                         anchorEl={anchorEl}
                         isOpenDropdownMenu={isOpenDropdownMenu}
                         onOpenDropdownMenu={_handleShowDropdownMenu}

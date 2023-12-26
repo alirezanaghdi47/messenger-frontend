@@ -122,8 +122,9 @@ const UserItem = ({userItem}) => {
     )
 }
 
-const Users = ({users}) => {
+const Users = () => {
 
+    const {users} = useSelector(state => state.chat);
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (

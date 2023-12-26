@@ -71,7 +71,7 @@ const ModalContent = () => {
 
             {
                 !isLoading && !error && data.length > 0 ? (
-                    <Users users={data}/>
+                    <Users/>
                 ) : (
                     <EmptyPlaceholder/>
                 )

@@ -59,7 +59,7 @@ const ModalContent = ({data}) => {
                 variant="body2"
                 color="textPrimary"
             >
-                {t("typography.deleteContent")}
+                {t("typography.deleteChat")}
             </Typography>
 
             <Stack

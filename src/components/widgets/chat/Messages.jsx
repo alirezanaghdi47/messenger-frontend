@@ -26,7 +26,7 @@ const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/Messa
 export const TextMessage = ({message}) => {
 
     const {_id} = useSelector(state => state.setting.profile);
-    const {language , fontSize} = useSelector(state => state.setting.appearance);
+    const {language, fontSize} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
@@ -46,6 +46,7 @@ export const TextMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -117,19 +118,20 @@ export const TextMessage = ({message}) => {
 
 export const FileMessage = ({message}) => {
 
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
-
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     return (
         <Card
             sx={{
                 display: "flex",
-                gap: 1,
+                gap: 2,
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -137,6 +139,7 @@ export const FileMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -150,43 +153,34 @@ export const FileMessage = ({message}) => {
                     justifyContent: "start",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <LazyLoadImage
-                    src="/images/placeholder.jpg"
-                    alt="image"
-                    visibleByDefault
-                    effect="blur"
-                    width={50}
-                    height={50}
-                    style={{borderRadius: 8}}
-                />
-
                 <Stack
                     direction="column"
-                    gap={1}
+                    gap={0.5}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "start",
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.primary"
+                        color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.primary"
                     }}
                 >
 
                     <Typography
                         variant="subtitle2"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        lineHeight={2}
                     >
-                        نام فایل
+                        {message?.name}
                     </Typography>
 
                     <Typography
                         variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        {formattedByte(300000)}
+                        {formattedByte(message?.size)}
                     </Typography>
 
                 </Stack>
@@ -195,25 +189,29 @@ export const FileMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 
@@ -224,6 +222,8 @@ export const FileMessage = ({message}) => {
 export const ImageMessage = ({message}) => {
 
     const dispatch = useDispatch();
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
@@ -236,7 +236,7 @@ export const ImageMessage = ({message}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -244,6 +244,7 @@ export const ImageMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -262,12 +263,12 @@ export const ImageMessage = ({message}) => {
 
                 <Box
                     style={{cursor: "pointer"}}
-                    onClick={() => dispatch(showModal({type: "imagePreview"}))}
+                    onClick={() => dispatch(showModal({type: "imagePreview", data: message}))}
                 >
 
                     <LazyLoadImage
-                        src={message.content}
-                        alt="image"
+                        src={message?.content}
+                        alt={message?.name}
                         visibleByDefault
                         effect="blur"
                         width={250}
@@ -292,9 +293,9 @@ export const ImageMessage = ({message}) => {
 
                     <Chip
                         variant="caption"
-                        color={message.me ? "primary" : "secondary"}
+                        color={message?.userId?._id === _id ? "primary" : "secondary"}
                         size="small"
-                        label={formattedByte(300000)}
+                        label={formattedByte(message?.size)}
                     />
 
                 </Box>
@@ -303,25 +304,29 @@ export const ImageMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 
@@ -332,6 +337,7 @@ export const ImageMessage = ({message}) => {
 export const MusicMessage = ({message}) => {
 
     const dispatch = useDispatch();
+    const {_id} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
@@ -344,7 +350,7 @@ export const MusicMessage = ({message}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -352,6 +358,7 @@ export const MusicMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -370,10 +377,10 @@ export const MusicMessage = ({message}) => {
 
                 <IconButton
                     variant="contained"
-                    color={message.me ? "primary" : "secondary"}
+                    color={message?.userId?._id === _id ? "primary" : "secondary"}
                     size="large"
                     sx={{order: language === "fa" ? 2 : 1}}
-                    onClick={() => dispatch(showModal({type: "musicPlayer"}))}
+                    onClick={() => dispatch(showModal({type: "musicPlayer", data: message}))}
                 >
                     <LuPlay size={20}/>
                 </IconButton>
@@ -392,16 +399,16 @@ export const MusicMessage = ({message}) => {
 
                     <Typography
                         variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        00:10
+                        {formattedMilisecond(message?.duration * 1000)}
                     </Typography>
 
                     <Typography
                         variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        {formattedByte(300000)}
+                        {formattedByte(message?.size)}
                     </Typography>
 
                 </Stack>
@@ -410,25 +417,29 @@ export const MusicMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 
@@ -439,6 +450,8 @@ export const MusicMessage = ({message}) => {
 export const VideoMessage = ({message}) => {
 
     const dispatch = useDispatch();
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
@@ -450,7 +463,7 @@ export const VideoMessage = ({message}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -458,6 +471,7 @@ export const VideoMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -475,8 +489,8 @@ export const VideoMessage = ({message}) => {
             >
 
                 <LazyLoadImage
-                    src="/images/desktop-2.jpg"
-                    alt="image"
+                    src={message?.thumbnail}
+                    alt={message?.name}
                     visibleByDefault
                     effect="blur"
                     width={250}
@@ -499,8 +513,8 @@ export const VideoMessage = ({message}) => {
 
                     <Chip
                         variant="caption"
-                        color={message.me ? "primary" : "secondary"}
-                        label="11:11"
+                        color={message?.userId?._id === _id ? "primary" : "secondary"}
+                        label={formattedMilisecond(message?.duration * 1000)}
                         size="small"
                     />
 
@@ -519,16 +533,16 @@ export const VideoMessage = ({message}) => {
 
                     <Chip
                         variant="caption"
-                        color={message.me ? "primary" : "secondary"}
+                        color={message?.userId?._id === _id ? "primary" : "secondary"}
                         size="small"
-                        label={formattedByte(300000)}
+                        label={formattedByte(message?.size)}
                     />
 
                 </Box>
 
                 <IconButton
                     variant="contained"
-                    color={message.me ? "primary" : "secondary"}
+                    color={message?.userId?._id === _id ? "primary" : "secondary"}
                     size="large"
                     sx={{
                         position: "absolute",
@@ -536,7 +550,7 @@ export const VideoMessage = ({message}) => {
                         left: "50%",
                         transform: "translate(-50% , -50%)",
                     }}
-                    onClick={() => dispatch(showModal({type: "videoPlayer"}))}
+                    onClick={() => dispatch(showModal({type: "videoPlayer", data: message}))}
                 >
                     <LuPlay size={20}/>
                 </IconButton>
@@ -545,25 +559,29 @@ export const VideoMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 
@@ -573,7 +591,8 @@ export const VideoMessage = ({message}) => {
 
 export const LogMessage = ({message}) => {
 
-    const {fontSize} = useSelector(state => state.setting.appearance);
+    const {_id} = useSelector(state => state.setting.profile);
+    const {language, fontSize} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
@@ -594,6 +613,7 @@ export const LogMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -616,13 +636,13 @@ export const LogMessage = ({message}) => {
                         alignItems: "center",
                         width: 32,
                         height: 32,
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
+                        color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
                         borderRadius: 1
                     }}
                 >
 
-                    {(message.content.status === "voiceCall") && <FiPhone size={20}/>}
-                    {(message.content.status === "videoCall") && <FiVideo size={20}/>}
+                    {(message?.status === "voiceCall") && <FiPhone size={20}/>}
+                    {(message?.status === "videoCall") && <FiVideo size={20}/>}
 
                 </Box>
 
@@ -638,23 +658,23 @@ export const LogMessage = ({message}) => {
 
                     <Typography
                         variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        {t(`typography.${message.content.status}`)}
+                        {t(`typography.${message?.status}`)}
                     </Typography>
 
                     {
-                        message.content.time > 0 ? (
+                        message?.time > 0 ? (
                             <Typography
                                 variant="caption"
-                                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                                color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                             >
-                                {formattedMilisecond(message.content.time)}
+                                {formattedMilisecond(message?.time)}
                             </Typography>
                         ) : (
                             <Typography
                                 variant="caption"
-                                color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                                color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                             >
                                 {t("typography.rejected")}
                             </Typography>
@@ -667,25 +687,29 @@ export const LogMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 
@@ -696,11 +720,12 @@ export const LogMessage = ({message}) => {
 export const LocationMessage = ({message}) => {
 
     const theme = useTheme();
+    const {_id} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
     const _handleShowDetail = () => {
-        window.location.href = `https://www.google.com/maps/search/${message.content[0]},${message.content[1]}`;
+        // window.location.href = `https://www.google.com/maps/search/${message?.content[0]},${message?.content[1]}`;
     }
 
     return (
@@ -711,7 +736,7 @@ export const LocationMessage = ({message}) => {
                 flexDirection: 'column',
                 justifyContent: "center",
                 alignItems: "start",
-                bgcolor: message.me ? "primary.light" : "background.default",
+                bgcolor: message?.userId?._id === _id ? "primary.light" : "background.default",
                 padding: 1.5,
             }}
             elevation={0}
@@ -719,6 +744,7 @@ export const LocationMessage = ({message}) => {
         >
 
             <MessageDropdownMenu
+                data={message}
                 contextMenu={contextMenu}
                 isOpen={contextMenu !== null}
                 onClose={_handleHideContextMenu}
@@ -741,7 +767,7 @@ export const LocationMessage = ({message}) => {
                         alignItems: "center",
                         width: 32,
                         height: 32,
-                        color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
+                        color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary",
                         borderRadius: 1
                     }}
                 >
@@ -764,17 +790,15 @@ export const LocationMessage = ({message}) => {
 
                     <Typography
                         variant="body2"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
                         iran , tehran
                     </Typography>
 
                     <Typography
                         variant="caption"
-                        color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        sx={{
-                            direction: language === "fa" ? "rtl" : "ltr"
-                        }}
+                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        sx={{direction: language === "fa" ? "rtl" : "ltr"}}
                     >
                         35.9624 , 53.1234
                     </Typography>
@@ -785,25 +809,29 @@ export const LocationMessage = ({message}) => {
 
             <Stack
                 direction="row"
-                gap={0.5}
+                gap={2}
                 sx={{
-                    direction: "rtl",
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "center",
                     width: "100%",
-                    color: message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                    color: message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                 }}
             >
 
-                <BiCheckDouble size={20}/>
-
                 <Typography
                     variant="caption"
-                    color={message.me ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
+                    color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
-                    11:11 | 1400/1/1
+                    {
+                        formatDistanceToNow(
+                            message?.createdAt,
+                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                        )
+                    }
                 </Typography>
+
+                <BiCheckDouble size={20}/>
 
             </Stack>
 

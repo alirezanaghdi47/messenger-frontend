@@ -1,14 +1,15 @@
 // libraries
 import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
+import { saveAs } from 'file-saver';
 import {Menu, MenuItem, Typography} from "@mui/material";
-import {FiCornerUpLeft, FiCornerUpRight} from "react-icons/fi";
+import {FiCornerUpLeft, FiCornerUpRight, FiDownload} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 // stores
-import {showModal , showPopup} from "stores/slices/appSlice";
+import {showModal, showPopup} from "stores/slices/appSlice";
 
-const MessageDropdownMenu = ({contextMenu, isOpen, onClose}) => {
+const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
 
     const dispatch = useDispatch();
     const {t} = useTranslation();
@@ -25,57 +26,87 @@ const MessageDropdownMenu = ({contextMenu, isOpen, onClose}) => {
             }
         >
 
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: 'ternary.main'
-                }}
-                onClick={() => {
-                    onClose();
-                    dispatch(showModal({type: "forwardChat"}));
-                }}
-            >
+            {
+                (data?.type !== 0 && data.type !== 5) && (
+                    <MenuItem
+                        sx={{
+                            display: "flex",
+                            gap: 1,
+                            justifyContent: "start",
+                            alignItems: "center",
+                            color: 'ternary.main'
+                        }}
+                        onClick={() => {
+                            onClose();
+                            saveAs(data?.content , data?.name);
+                        }}
+                    >
 
-                <FiCornerUpRight size={20}/>
+                        <FiDownload size={20}/>
 
-                <Typography
-                    variant="body2"
-                    color="ternary"
-                    fontWeight='bold'
-                >
-                    {t("menu.forward")}
-                </Typography>
+                        <Typography
+                            variant="body2"
+                            color="ternary"
+                            fontWeight='bold'
+                        >
+                            {t("menu.download")}
+                        </Typography>
 
-            </MenuItem>
+                    </MenuItem>
+                )
+            }
 
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: 'ternary.main'
-                }}
-                onClick={() => {
-                    onClose();
-                    dispatch(showPopup({type: "replyChat"}));
-                }}
-            >
+            {/*<MenuItem*/}
+            {/*    sx={{*/}
+            {/*        display: "flex",*/}
+            {/*        gap: 1,*/}
+            {/*        justifyContent: "start",*/}
+            {/*        alignItems: "center",*/}
+            {/*        color: 'ternary.main'*/}
+            {/*    }}*/}
+            {/*    onClick={() => {*/}
+            {/*        onClose();*/}
+            {/*        dispatch(showModal({type: "forwardChat"}));*/}
+            {/*    }}*/}
+            {/*>*/}
 
-                <FiCornerUpLeft size={20}/>
+            {/*    <FiCornerUpRight size={20}/>*/}
 
-                <Typography
-                    variant="body2"
-                    color="ternary"
-                    fontWeight='bold'
-                >
-                    {t("menu.reply")}
-                </Typography>
+            {/*    <Typography*/}
+            {/*        variant="body2"*/}
+            {/*        color="ternary"*/}
+            {/*        fontWeight='bold'*/}
+            {/*    >*/}
+            {/*        {t("menu.forward")}*/}
+            {/*    </Typography>*/}
 
-            </MenuItem>
+            {/*</MenuItem>*/}
+
+            {/*<MenuItem*/}
+            {/*    sx={{*/}
+            {/*        display: "flex",*/}
+            {/*        gap: 1,*/}
+            {/*        justifyContent: "start",*/}
+            {/*        alignItems: "center",*/}
+            {/*        color: 'ternary.main'*/}
+            {/*    }}*/}
+            {/*    onClick={() => {*/}
+            {/*        onClose();*/}
+            {/*        dispatch(showPopup({type: "replyChat"}));*/}
+            {/*    }}*/}
+            {/*>*/}
+
+            {/*    <FiCornerUpLeft size={20}/>*/}
+
+            {/*    <Typography*/}
+            {/*        variant="body2"*/}
+            {/*        color="ternary"*/}
+            {/*        fontWeight='bold'*/}
+            {/*    >*/}
+            {/*        {t("menu.reply")}*/}
+            {/*    </Typography>*/}
+
+            {/*</MenuItem>*/}
 
             <MenuItem
                 sx={{
@@ -87,7 +118,7 @@ const MessageDropdownMenu = ({contextMenu, isOpen, onClose}) => {
                 }}
                 onClick={() => {
                     onClose();
-                    dispatch(showModal({type: "deleteChat"}));
+                    dispatch(showModal({type: "deleteChat", data: data}));
                 }}
             >
 

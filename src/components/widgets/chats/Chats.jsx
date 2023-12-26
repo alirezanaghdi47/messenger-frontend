@@ -133,13 +133,15 @@ const ChatItem = ({chatItem}) => {
     )
 }
 
-const Chats = ({chats}) => {
+const Chats = () => {
+
+    const {chats} = useSelector(state => state.chat);
 
     return (
         <Stack
             component="ul"
             direction="column"
-            className="custom-scrollbar"
+            className="remove-scrollbar"
             sx={{
                 display: "flex",
                 justifyContent: "start",

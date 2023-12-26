@@ -1,4 +1,5 @@
 // libraries
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
@@ -11,8 +12,9 @@ import TextInput from "components/modules/TextInput";
 // stores
 import {useAddTextMessageMutation} from "stores/apis/messageApi";
 
-const MessageForm = ({data}) => {
+const MessageForm = () => {
 
+    const {activeChat} = useSelector(state => state.chat);
     const [addTextMessage, response] = useAddTextMessageMutation();
     const {t} = useTranslation();
 
@@ -21,7 +23,7 @@ const MessageForm = ({data}) => {
             text: "",
         },
         onSubmit: async (result, {resetForm}) => {
-            addTextMessage({text: result.text, chatId: data?._id});
+            addTextMessage({text: result.text, chatId: activeChat?._id});
             resetForm();
         }
     });

@@ -8,7 +8,7 @@ import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 import UserInfo from "components/widgets/chat/UserInfo.jsx";
 import Toolbar from "components/widgets/chat/Toolbar.jsx";
 
-const Header = ({data}) => {
+const Header = () => {
 
     const navigate = useNavigate();
     const {language} = useSelector(state => state.setting.appearance);
@@ -48,9 +48,9 @@ const Header = ({data}) => {
                 )
             }
 
-            <UserInfo data={data}/>
+            <UserInfo/>
 
-            <Toolbar data={data}/>
+            <Toolbar/>
 
         </Stack>
     )

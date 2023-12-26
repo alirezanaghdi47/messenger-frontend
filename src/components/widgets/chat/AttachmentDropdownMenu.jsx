@@ -1,27 +1,41 @@
 // libraries
 import {useRef} from "react";
+import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next"
 import {Menu, MenuItem, Typography} from "@mui/material";
 import toast from "react-hot-toast";
 import {FiFile, FiFilm, FiImage, FiMapPin, FiMusic} from "react-icons/fi";
 
-const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
+// stores
+import {
+    useAddFileMessageMutation, useAddImageMessageMutation,
+    useAddLocationMessageMutation, useAddMusicMessageMutation,
+    useAddVideoMessageMutation
+} from "stores/apis/messageApi";
 
-    const {t} = useTranslation();
+const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const fileRef = useRef(null);
     const imageRef = useRef(null);
     const videoRef = useRef(null);
     const musicRef = useRef(null);
+    const {activeChat} = useSelector(state => state.chat);
+    const [addFileMessage] = useAddFileMessageMutation();
+    const [addImageMessage] = useAddImageMessageMutation();
+    const [addMusicMessage] = useAddMusicMessageMutation();
+    const [addVideoMessage] = useAddVideoMessageMutation();
+    const [addLocationMessage] = useAddLocationMessageMutation();
+    const {t} = useTranslation();
 
     const _handleSendFile = async (e) => {
 
         const file = await e.target.files[0];
 
-        if (file.size > 50 * 1_024_000){
+        if (file.size > 50 * 1_024_000) {
             toast.error(t("error.fileMaxSize"));
         } else {
-            console.log(file);
+            onClose();
+            addFileMessage({file, chatId: activeChat?._id});
         }
 
         fileRef.current.value = null;
@@ -30,12 +44,13 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const _handleSendImage = async (e) => {
 
-        const file = await e.target.files[0];
+        const image = await e.target.files[0];
 
-        if (file.size > 5 * 1_024_000){
+        if (image.size > 5 * 1_024_000) {
             toast.error(t("error.imageMaxSize"));
         } else {
-            console.log(file);
+            onClose();
+            addImageMessage({image, chatId: activeChat?._id});
         }
 
         imageRef.current.value = null;
@@ -44,12 +59,13 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const _handleSendVideo = async (e) => {
 
-        const file = await e.target.files[0];
+        const video = await e.target.files[0];
 
-        if (file.size > 10 * 1_024_000){
+        if (video.size > 10 * 1_024_000) {
             toast.error(t("error.videoMaxSize"));
         } else {
-            console.log(file);
+            onClose();
+            addVideoMessage({video, chatId: activeChat?._id});
         }
 
         videoRef.current.value = null;
@@ -58,12 +74,13 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const _handleSendMusic = async (e) => {
 
-        const file = await e.target.files[0];
+        const music = await e.target.files[0];
 
-        if (file.size > 5 * 1_024_000){
+        if (music.size > 5 * 1_024_000) {
             toast.error(t("error.videoMaxSize"));
         } else {
-            console.log(file);
+            onClose();
+            addMusicMessage({music, chatId: activeChat?._id});
         }
 
         musicRef.current.value = null;
@@ -73,8 +90,9 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const _handleSendLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((res) => {
-                console.log(res.coords.latitude , res.coords.longitude);
-            } , (err) => {
+                onClose();
+                addLocationMessage({location: res.coords.latitude, chatId: activeChat?._id});
+            }, (err) => {
                 toast.error(t("error.geoLocationFailed"));
             });
         } else {
@@ -180,7 +198,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                     onChange={_handleSendVideo}
                     style={{display: "none"}}
                 />
-                
+
                 <FiFilm size={20}/>
 
                 <Typography

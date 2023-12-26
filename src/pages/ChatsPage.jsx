@@ -59,7 +59,7 @@ const ChatsPage = () => {
 
                         {
                             !isLoading && !error && data.length > 0 ? (
-                                <Chats chats={data}/>
+                                <Chats/>
                             ) : (
                                 <EmptyPlaceholder/>
                             )

@@ -2,6 +2,7 @@
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import Slider from "rc-slider";
 import {Box, Button, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {LuPlay, LuPause, LuVolume2, LuVolumeX} from "react-icons/lu";
@@ -13,7 +14,7 @@ import 'rc-slider/assets/index.css';
 // utils
 import {formattedSecond} from "utils/functions";
 
-const VideoPlayer = ({src}) => {
+const VideoPlayer = ({src, thumbnail}) => {
 
     const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();

@@ -6,8 +6,9 @@ import {formatDistanceToNow} from "date-fns";
 import {faIR, enUS} from 'date-fns/locale';
 import {Stack, Typography} from "@mui/material";
 
-const UserInfo = ({data}) => {
+const UserInfo = () => {
 
+    const {activeChat} = useSelector(state => state.chat);
     const {_id} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
@@ -25,7 +26,7 @@ const UserInfo = ({data}) => {
         >
 
             <LazyLoadImage
-                src={data.participantIds.find(item => item._id !== _id)?.avatar}
+                src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
                 alt="avatar"
                 visibleByDefault
                 effect="blur"
@@ -50,7 +51,7 @@ const UserInfo = ({data}) => {
                     fontWeight='bold'
                     noWrap
                 >
-                    {data.participantIds.find(item => item._id !== _id)?.userName}
+                    {activeChat.participantIds.find(item => item._id !== _id)?.userName}
                 </Typography>
 
                 <Typography
@@ -62,7 +63,7 @@ const UserInfo = ({data}) => {
                     &nbsp;
                     {
                         formatDistanceToNow(
-                            data.participantIds.find(item => item._id !== _id)?.lastSeen,
+                            activeChat.participantIds.find(item => item._id !== _id)?.lastSeen,
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }

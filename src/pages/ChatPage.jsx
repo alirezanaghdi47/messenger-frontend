@@ -33,12 +33,12 @@ const ChatPage = () => {
     const params = useParams();
     const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
-    const {data: chat, error: chatError, isLoading: chatIsLoading} = useGetChatQuery(params.chatId);
-    const {data: messages, error: messagesError, isLoading: messagesIsLoading} = useGetAllMessageQuery(chat?._id , {skip: Boolean(chatError || !chat)});
+    const {data: activeChat, error: activeChatError, isLoading: activeChatIsLoading} = useGetChatQuery(params.chatId);
+    const {data: messages, error: messagesError, isLoading: messagesIsLoading} = useGetAllMessageQuery(activeChat?._id , {skip: Boolean(activeChatError || !activeChat)});
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
-    return !chatIsLoading && !chatError && chat ? (
+    return Boolean(!activeChatIsLoading && !activeChatError && activeChat) && (
         <Stack
             component="main"
             direction="column"
@@ -70,7 +70,7 @@ const ChatPage = () => {
             }}
         >
 
-            <Header data={chat}/>
+            <Header/>
 
             {
                 !messagesIsLoading && !messagesError && messages?.length > 0 ? (
@@ -133,11 +133,9 @@ const ChatPage = () => {
                 )
             }
 
-            <Footer data={chat}/>
+            <Footer/>
 
         </Stack>
-    ) : (
-        <Navigate to="/chat"/>
     )
 }
 

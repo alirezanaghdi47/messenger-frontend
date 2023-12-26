@@ -1,15 +1,18 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import {formatDistanceToNow} from "date-fns";
+import {enUS, faIR} from "date-fns/locale";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
 
-const ModalHeader = () => {
+const ModalHeader = ({data}) => {
 
     const dispatch = useDispatch();
+    const {language} = useSelector(state => state.setting.appearance);
 
     return (
         <Stack
@@ -34,8 +37,8 @@ const ModalHeader = () => {
             >
 
                 <LazyLoadImage
-                    src="/images/avatar.jpg"
-                    alt="avatar"
+                    src={data?.userId?.avatar}
+                    alt={data?.userId?.userName}
                     visibleByDefault
                     width={40}
                     height={40}
@@ -59,7 +62,7 @@ const ModalHeader = () => {
                         fontWeight='bold'
                         noWrap
                     >
-                        علیرضا نقدی
+                        {data?.userId?.userName}
                     </Typography>
 
                     <Typography
@@ -67,7 +70,12 @@ const ModalHeader = () => {
                         color="textPrimary"
                         noWrap
                     >
-                        Front End Developer
+                        {
+                            formatDistanceToNow(
+                                data?.createdAt,
+                                {locale: language === "en" ? enUS : faIR, addSuffix: true}
+                            )
+                        }
                     </Typography>
 
                 </Stack>
@@ -86,7 +94,7 @@ const ModalHeader = () => {
     )
 }
 
-const ModalContent = () => {
+const ModalContent = ({data}) => {
 
     return (
         <Container
@@ -106,8 +114,8 @@ const ModalContent = () => {
             >
 
                 <LazyLoadImage
-                    src="/images/desktop-1.jpg"
-                    alt="background"
+                    src={data.content}
+                    alt={data.name}
                     visibleByDefault
                     width="100%"
                     height="100%"
@@ -154,9 +162,9 @@ const ImagePreviewModal = () => {
                 }}
             >
 
-                <ModalHeader/>
+                <ModalHeader data={modal.data}/>
 
-                <ModalContent/>
+                <ModalContent data={modal.data}/>
 
             </Stack>
 
