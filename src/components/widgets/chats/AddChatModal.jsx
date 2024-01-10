@@ -1,4 +1,5 @@
 // libraries
+import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
@@ -9,8 +10,12 @@ import SearchBar from "components/widgets/chats/Searchbar";
 import Users from "components/widgets/chats/Users";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
+// providers
+import {SocketContext} from "providers/Socket";
+
 // stores
 import {hideModal} from "stores/slices/appSlice";
+import {setUsers} from "stores/slices/chatSlice";
 import {useGetAllUserQuery} from "stores/apis/chatApi";
 
 const ModalHeader = () => {
@@ -53,7 +58,8 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
-    const {data, error, isLoading} = useGetAllUserQuery();
+    const {users} = useSelector(state => state.chat);
+    useGetAllUserQuery();
 
     return (
         <Stack
@@ -70,7 +76,7 @@ const ModalContent = () => {
             <SearchBar/>
 
             {
-                !isLoading && !error && data.length > 0 ? (
+                users.length > 0 ? (
                     <Users/>
                 ) : (
                     <EmptyPlaceholder/>
@@ -85,7 +91,16 @@ const AddChatModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
+    const {_id} = useSelector(state => state.setting.profile);
+    const {socket} = useContext(SocketContext);
     const isTablet = useMediaQuery('(max-width: 768px)');
+
+    useEffect(() => {
+        socket?.current?.emit("getAllUser", {userId: _id});
+        socket?.current?.on("getAllUserResponse", data => {
+            dispatch(setUsers(data));
+        });
+    }, []);
 
     return (
         <Modal

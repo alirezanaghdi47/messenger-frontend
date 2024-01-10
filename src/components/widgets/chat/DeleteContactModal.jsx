@@ -1,4 +1,5 @@
 // libraries
+import {useContext, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
@@ -11,6 +12,9 @@ import {
 } from "@mui/material";
 import {LuTrash2} from "react-icons/lu";
 
+// providers
+import {SocketContext} from "providers/Socket";
+
 // stores
 import {hideModal} from "stores/slices/appSlice";
 import {useDeleteChatMutation} from "stores/apis/chatApi";
@@ -19,8 +23,25 @@ const ModalContent = ({data}) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [deleteChat] = useDeleteChatMutation();
+    const {_id} = useSelector(state => state.setting.profile);
+    const [deleteChat , deleteChatResponse] = useDeleteChatMutation();
     const {t} = useTranslation();
+    const {socket} = useContext(SocketContext);
+
+    useEffect(() => {
+
+        if (deleteChatResponse.status === "fulfilled") {
+            socket?.current?.emit("deleteChat", {
+                userId: _id,
+                chat: deleteChatResponse?.data,
+                receiverIds: deleteChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
+                socketId: socket?.current?.id
+            })
+            navigate("/chat");
+            dispatch(hideModal());
+        }
+
+    }, [deleteChatResponse]);
 
     return (
         <Stack
@@ -84,11 +105,7 @@ const ModalContent = ({data}) => {
                 <Button
                     variant="contained"
                     color="error"
-                    onClick={() => {
-                        deleteChat(data?._id);
-                        navigate("/chat");
-                        dispatch(hideModal());
-                    }}
+                    onClick={() => deleteChat(data?._id)}
                 >
                     {t("button.delete")}
                 </Button>

@@ -1,4 +1,5 @@
 // libraries
+import {useSelector} from "react-redux";
 import Loadable from '@loadable/component';
 import {IconButton} from "@mui/material";
 import {LuPaperclip} from "react-icons/lu";
@@ -10,6 +11,7 @@ const AttachmentDropdownMenu = Loadable(() => import("components/widgets/chat/At
 
 const Attachment = () => {
 
+    const {queueMessage} = useSelector(state => state.chat);
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
 
     return (
@@ -19,6 +21,7 @@ const Attachment = () => {
                 varinat="text"
                 color="ternary"
                 onClick={_handleShowDropdownMenu}
+                disabled={Object.keys(queueMessage).length > 0}
             >
                 <LuPaperclip size={20}/>
             </IconButton>

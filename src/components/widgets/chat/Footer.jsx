@@ -3,7 +3,6 @@ import {Stack} from "@mui/material";
 
 // components
 import Attachment from "components/widgets/chat/Attachment.jsx";
-import VoiceRecorder from "components/widgets/chat/VoiceRecorder";
 import MessageForm from "components/widgets/chat/MessageForm";
 
 const Footer = () => {
@@ -29,8 +28,6 @@ const Footer = () => {
                 padding: 2
             }}
         >
-
-            <VoiceRecorder/>
 
             <Attachment/>
 

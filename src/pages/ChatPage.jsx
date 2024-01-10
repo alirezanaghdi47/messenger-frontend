@@ -1,6 +1,6 @@
 // libraries
-import {useRef} from "react";
-import {Navigate, useParams} from "react-router-dom";
+import {useContext, useEffect, useRef} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Loadable from "@loadable/component";
 import {alpha, Stack, useTheme, useMediaQuery} from "@mui/material";
@@ -14,6 +14,9 @@ import ActionButton from "components/widgets/chat/ActionButton";
 
 // hocs
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
+
+// providers
+import {SocketContext} from "providers/Socket";
 
 // stores
 import {useGetChatQuery} from "stores/apis/chatApi";
@@ -29,16 +32,45 @@ const DeleteContactModal = Loadable(() => import("components/widgets/chat/Delete
 
 const ChatPage = () => {
 
-    const listRef = useRef(null);
+    const lastMessageRef = useRef(null);
     const params = useParams();
+    const navigate = useNavigate();
     const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
-    const {data: activeChat, error: activeChatError, isLoading: activeChatIsLoading} = useGetChatQuery(params.chatId);
-    const {data: messages, error: messagesError, isLoading: messagesIsLoading} = useGetAllMessageQuery(activeChat?._id , {skip: Boolean(activeChatError || !activeChat)});
+    const {activeChat , messages} = useSelector(state => state.chat);
+    const {refetch: refetch1} = useGetChatQuery(params.chatId);
+    const {refetch: refetch2} = useGetAllMessageQuery(activeChat?._id);
+    const {socket} = useContext(SocketContext);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
-    return Boolean(!activeChatIsLoading && !activeChatError && activeChat) && (
+    useEffect(() => {
+        refetch1();
+    } , [params.chatId]);
+
+    useEffect(() => {
+        refetch2();
+    }, [activeChat._id]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (!activeChat) navigate("/chat");
+        } , 1000);
+    } , [params.chatId]);
+
+    useEffect(() => {
+        socket?.current?.on("deleteChatResponse", data => {
+            if (params.chatId === data) navigate("/chat");
+        });
+        socket?.current?.emit("joinRoom", {chatId: params?.chatId, socketId: socket?.current?.id});
+        return () => socket?.current?.emit("leaveRoom", {chatId: params?.chatId, socketId: socket?.current?.id});
+    }, [socket.current , params.chatId]);
+
+    useEffect(() => {
+        lastMessageRef?.current?.scrollIntoView({behavior: "smooth"});
+    }, [messages]);
+
+    return Object.keys(activeChat).length > 0 && (
         <Stack
             component="main"
             direction="column"
@@ -73,12 +105,10 @@ const ChatPage = () => {
             <Header/>
 
             {
-                !messagesIsLoading && !messagesError && messages?.length > 0 ? (
+                messages?.length > 0 ? (
                     <Conversations
-                        ref={listRef}
+                        lastMessageRef={lastMessageRef}
                         data={messages}
-                        error={messagesError}
-                        isLoading={messagesIsLoading}
                     />
                 ) : (
                     <EmptyPlaceholder/>
@@ -86,8 +116,8 @@ const ChatPage = () => {
             }
 
             {
-                !messagesIsLoading && !messagesError && messages?.length > 20 && (
-                    <ActionButton ref={listRef}/>
+                messages?.length > 20 && (
+                    <ActionButton lastMessageRef={lastMessageRef}/>
                 )
             }
 

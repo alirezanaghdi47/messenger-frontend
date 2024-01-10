@@ -2,6 +2,9 @@
 import {Route, Routes} from "react-router-dom";
 import Loadable from '@loadable/component';
 
+// providers
+import Socket from "providers/Socket";
+
 // pages
 const Home = Loadable(() => import('pages/HomePage'));
 const Chats = Loadable(() => import('pages/ChatsPage'));
@@ -16,23 +19,52 @@ const Router = () => {
     return (
         <Routes>
 
-            <Route path="/" element={<Home/>}/>
+            <Route
+                path="/"
+                element={<Home/>}
+            />
 
-            <Route path="/chat" element={<Chats/>}>
+            <Route
+                path="/chat"
+                element={
+                    <Socket>
+                        <Chats/>
+                    </Socket>
+                }
+            >
 
-                <Route path="/chat/:chatId" element={<Chat/>}/>
+                <Route
+                    path="/chat/:chatId"
+                    element={
+                        <Socket>
+                            <Chat/>
+                        </Socket>
+                    }
+                />
 
             </Route>
 
-            <Route path="/setting" element={<Setting/>}>
+            <Route
+                path="/setting"
+                element={<Setting/>}
+            >
 
-                <Route path="/setting/profile" element={<Profile/>}/>
+                <Route
+                    path="/setting/profile"
+                    element={<Profile/>}
+                />
 
-                <Route path="/setting/appearance" element={<Appearance/>}/>
+                <Route
+                    path="/setting/appearance"
+                    element={<Appearance/>}
+                />
 
             </Route>
 
-            <Route path="/*" element={<NotFound/>}/>
+            <Route
+                path="/*"
+                element={<NotFound/>}
+            />
 
         </Routes>
     )

@@ -1,12 +1,11 @@
 // libraries
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {formatDistanceToNow} from "date-fns";
-import {enUS, faIR} from "date-fns/locale";
-import {Box, Stack , Badge, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Stack, Badge, Typography, useMediaQuery, useTheme} from "@mui/material";
+
+// providers
+import {SocketContext} from "providers/Socket";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
@@ -14,21 +13,30 @@ import {useAddChatMutation} from "stores/apis/chatApi";
 
 const UserItem = ({userItem}) => {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {language} = useSelector(state => state.setting.appearance);
-    const [addChat, response] = useAddChatMutation();
-    const {t} = useTranslation();
+    const {_id} = useSelector(state => state.setting.profile);
+    const [addChat, addChatResponse] = useAddChatMutation();
+    const {onlineUsers} = useSelector(state => state.chat);
+    const {socket} = useContext(SocketContext);
     const theme = useTheme();
+    const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === userItem?._id));
 
     useEffect(() => {
 
-        if (response?.data?._id) {
+        if (addChatResponse.isSuccess) {
             dispatch(hideModal());
-            navigate(`/chat/${response?.data?._id}`);
         }
 
-    }, [response]);
+        if (addChatResponse.status === "fulfilled" && addChatResponse?.data) {
+            socket?.current?.emit("addChat", {
+                userId: _id,
+                chat: addChatResponse?.data,
+                receiverIds: addChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
+                socketId: socket?.current?.id
+            });
+        }
+
+    }, [addChatResponse]);
 
     return (
         <Box
@@ -58,15 +66,15 @@ const UserItem = ({userItem}) => {
                 }}
             >
 
-                {/*<Badge*/}
-                {/*    color="success"*/}
-                {/*    variant="dot"*/}
-                {/*    overlap="circular"*/}
-                {/*    anchorOrigin={{*/}
-                {/*        vertical: 'bottom',*/}
-                {/*        horizontal: 'right',*/}
-                {/*    }}*/}
-                {/*>*/}
+                <Badge
+                    color={isActiveReceiver ? "success" : "secondary"}
+                    variant="dot"
+                    overlap="circular"
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                >
 
                     <LazyLoadImage
                         src={userItem?.avatar}
@@ -78,7 +86,7 @@ const UserItem = ({userItem}) => {
                         style={{borderRadius: "50%"}}
                     />
 
-                {/*</Badge>*/}
+                </Badge>
 
                 <Stack
                     direction="column"
@@ -97,21 +105,6 @@ const UserItem = ({userItem}) => {
                         noWrap
                     >
                         {userItem?.userName}
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="textSecondary"
-                        noWrap
-                    >
-                        {t("typography.lastSeen")}
-                        &nbsp;
-                        {
-                            formatDistanceToNow(
-                                userItem?.lastSeen,
-                                {locale: language === "en" ? enUS : faIR, addSuffix: true}
-                            )
-                        }
                     </Typography>
 
                 </Stack>

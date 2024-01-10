@@ -2,16 +2,15 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {formatDistanceToNow} from "date-fns";
-import {faIR, enUS} from 'date-fns/locale';
-import {Stack, Typography} from "@mui/material";
+import {Stack, Typography , Badge} from "@mui/material";
 
 const UserInfo = () => {
 
-    const {activeChat} = useSelector(state => state.chat);
+    const {activeChat , onlineUsers , isTypingUsers} = useSelector(state => state.chat);
     const {_id} = useSelector(state => state.setting.profile);
-    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+    const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === activeChat?.participantIds.find(user => user._id !== _id)?._id));
+    const isTypingReceiver = Boolean(isTypingUsers.find(user => user.userId === activeChat?.participantIds.find(user => user._id !== _id)?._id));
 
     return (
         <Stack
@@ -25,15 +24,27 @@ const UserInfo = () => {
             }}
         >
 
-            <LazyLoadImage
-                src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
-                alt="avatar"
-                visibleByDefault
-                effect="blur"
-                width={40}
-                height={40}
-                style={{borderRadius: "50%"}}
-            />
+            <Badge
+                color={isActiveReceiver ? "success" : "secondary"}
+                variant="dot"
+                overlap="circular"
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+            >
+
+                <LazyLoadImage
+                    src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
+                    alt="avatar"
+                    visibleByDefault
+                    effect="blur"
+                    width={40}
+                    height={40}
+                    style={{borderRadius: "50%"}}
+                />
+
+            </Badge>
 
             <Stack
                 direction="column"
@@ -54,20 +65,17 @@ const UserInfo = () => {
                     {activeChat.participantIds.find(item => item._id !== _id)?.userName}
                 </Typography>
 
-                <Typography
-                    variant="caption"
-                    color="textSecondary"
-                    noWrap
-                >
-                    {t("typography.lastSeen")}
-                    &nbsp;
-                    {
-                        formatDistanceToNow(
-                            activeChat.participantIds.find(item => item._id !== _id)?.lastSeen,
-                            {locale: language === "en" ? enUS : faIR, addSuffix: true}
-                        )
-                    }
-                </Typography>
+                {
+                    isTypingReceiver && (
+                        <Typography
+                            variant="caption"
+                            color="textSecondary"
+                            noWrap
+                        >
+                            {t("typography.isTyping")}
+                        </Typography>
+                    )
+                }
 
             </Stack>
 

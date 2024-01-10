@@ -1,17 +1,20 @@
 // libraries
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import { saveAs } from 'file-saver';
 import {Menu, MenuItem, Typography} from "@mui/material";
-import {FiCornerUpLeft, FiCornerUpRight, FiDownload} from "react-icons/fi";
+import {FiCornerUpLeft, FiCornerUpRight, FiDownload, FiX} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 // stores
 import {showModal, showPopup} from "stores/slices/appSlice";
+import {messageController} from "stores/apis/messageApi";
+import {setMessages, unSetQueueMessage} from "stores/slices/chatSlice";
 
 const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
 
     const dispatch = useDispatch();
+    const {messages} = useSelector(state => state.chat);
     const {t} = useTranslation();
 
     return (
@@ -27,7 +30,7 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
         >
 
             {
-                (data?.type !== 0 && data.type !== 5) && (
+                (data?.type !== 0 && data.type !== 5 && data.type !== 6) && (
                     <MenuItem
                         sx={{
                             display: "flex",
@@ -50,6 +53,38 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
                             fontWeight='bold'
                         >
                             {t("menu.download")}
+                        </Typography>
+
+                    </MenuItem>
+                )
+            }
+
+            {
+                (data?.type === 6) && (
+                    <MenuItem
+                        sx={{
+                            display: "flex",
+                            gap: 1,
+                            justifyContent: "start",
+                            alignItems: "center",
+                            color: "error.main"
+                        }}
+                        onClick={() => {
+                            messageController.abort();
+                            dispatch(setMessages(messages.filter(message => message._id !== data._id)));
+                            dispatch(unSetQueueMessage());
+                            onClose();
+                        }}
+                    >
+
+                        <FiX size={20}/>
+
+                        <Typography
+                            variant="body2"
+                            color="error"
+                            fontWeight='bold'
+                        >
+                            {t("menu.cancel")}
                         </Typography>
 
                     </MenuItem>
@@ -108,31 +143,35 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
 
             {/*</MenuItem>*/}
 
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "error.main"
-                }}
-                onClick={() => {
-                    onClose();
-                    dispatch(showModal({type: "deleteChat", data: data}));
-                }}
-            >
+            {
+                (data?.type !== 6) && (
+                    <MenuItem
+                        sx={{
+                            display: "flex",
+                            gap: 1,
+                            justifyContent: "start",
+                            alignItems: "center",
+                            color: "error.main"
+                        }}
+                        onClick={() => {
+                            onClose();
+                            dispatch(showModal({type: "deleteChat", data: data}));
+                        }}
+                    >
 
-                <LuTrash2 size={20}/>
+                        <LuTrash2 size={20}/>
 
-                <Typography
-                    variant="body2"
-                    color="error"
-                    fontWeight='bold'
-                >
-                    {t("menu.delete")}
-                </Typography>
+                        <Typography
+                            variant="body2"
+                            color="error"
+                            fontWeight='bold'
+                        >
+                            {t("menu.delete")}
+                        </Typography>
 
-            </MenuItem>
+                    </MenuItem>
+                )
+            }
 
         </Menu>
     )

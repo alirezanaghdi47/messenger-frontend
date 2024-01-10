@@ -1,8 +1,7 @@
 // libraries
-import {forwardRef, useLayoutEffect} from "react";
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Stack} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 
 // components
 import {
@@ -11,10 +10,10 @@ import {
     LocationMessage,
     VideoMessage,
     ImageMessage,
-    MusicMessage
+    MusicMessage, QueueMessage
 } from "components/widgets/chat/Messages";
 
-const ConversationItem = ({conversationItem}) => {
+const ConversationItem = ({conversationItem , lastMessageRef}) => {
 
     const {_id} = useSelector(state => state.setting.profile);
 
@@ -73,23 +72,21 @@ const ConversationItem = ({conversationItem}) => {
                 {conversationItem.type === 3 && <MusicMessage message={conversationItem}/>}
                 {conversationItem.type === 4 && <VideoMessage message={conversationItem}/>}
                 {conversationItem.type === 5 && <LocationMessage message={conversationItem}/>}
+                {conversationItem.type === 6 && <QueueMessage/>}
 
             </Stack>
+
+            <Box ref={lastMessageRef}/>
 
         </Stack>
     )
 }
 
-const Conversations = forwardRef(({data , error , isLoading}, ref) => {
-
-    useLayoutEffect(() => {
-        ref?.current?.scrollTo({top: ref?.current?.scrollHeight});
-    }, []);
+const Conversations = ({data , lastMessageRef}) => {
 
     return (
         <Stack
             id="messages"
-            ref={ref}
             component="ul"
             direction="column"
             gap={2}
@@ -108,16 +105,17 @@ const Conversations = forwardRef(({data , error , isLoading}, ref) => {
         >
 
             {
-                !isLoading && !error && data.map(conversationItem =>
+                data.map(conversationItem =>
                     <ConversationItem
                         key={conversationItem?._id}
                         conversationItem={conversationItem}
+                        lastMessageRef={lastMessageRef}
                     />
                 )
             }
 
         </Stack>
     )
-})
+}
 
 export default Conversations;

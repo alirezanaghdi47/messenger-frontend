@@ -8,6 +8,7 @@ const TextInput = ({
                        placeholder,
                        value,
                        onChange,
+                       onKeyDown,
                        startIcon,
                        endIcon,
                        rows = 1,
@@ -61,6 +62,7 @@ const TextInput = ({
                 multiline={rows > 1}
                 rows={rows}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
                 disabled={disabled}
             />
 

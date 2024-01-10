@@ -1,5 +1,6 @@
 // libraries
 import {Outlet, useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {useMediaQuery, Stack} from "@mui/material";
 
 // components
@@ -22,7 +23,8 @@ import {useGetAllChatQuery} from "stores/apis/chatApi";
 const ChatsPage = () => {
 
     const params = useParams();
-    const {data, error, isLoading} = useGetAllChatQuery();
+    const {chats} = useSelector(state => state.chat);
+    useGetAllChatQuery();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
     return (
@@ -58,7 +60,7 @@ const ChatsPage = () => {
                         <SearchBar/>
 
                         {
-                            !isLoading && !error && data.length > 0 ? (
+                            chats.length > 0 ? (
                                 <Chats/>
                             ) : (
                                 <EmptyPlaceholder/>

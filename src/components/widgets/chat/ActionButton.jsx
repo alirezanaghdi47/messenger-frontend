@@ -1,24 +1,21 @@
 // libraries
-import {forwardRef, useEffect} from "react";
+import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {useToggle} from "@react-hooks-library/core";
 import {Grow, IconButton} from "@mui/material";
 import {FiChevronDown} from "react-icons/fi";
 
-const ActionButton = forwardRef((props, ref) => {
-
-    const {bool: showButton, setTrue: setShowButton, setFalse: setHideButton} = useToggle(true);
+const ActionButton = ({lastMessageRef}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
+    const {bool: showButton, setTrue: setShowButton, setFalse: setHideButton} = useToggle(true);
 
     const _handleScroll = (e) => {
-
         if (e.target.scrollTop + e.target.clientHeight + 200 < e.target.scrollHeight){
             setShowButton();
         } else {
             setHideButton();
         }
-
     }
 
     useEffect(() => {
@@ -38,14 +35,14 @@ const ActionButton = forwardRef((props, ref) => {
                     left: 16,
                     bottom: 96
                 }}
-                onClick={() => ref?.current?.scrollTo({top: ref?.current?.scrollHeight})}
+                onClick={() => lastMessageRef?.current?.scrollIntoView({behavior: "smooth"})}
             >
                 <FiChevronDown size={20}/>
             </IconButton>
 
         </Grow>
     )
-})
+}
 
 export default ActionButton;
 

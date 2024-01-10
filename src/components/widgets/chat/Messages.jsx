@@ -4,12 +4,12 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
-import {formatDistanceToNow} from "date-fns";
+import {format} from "date-fns";
 import {enUS, faIR} from "date-fns/locale";
 import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
-import {LuMapPin, LuPlay} from "react-icons/lu";
+import {LuClock, LuMapPin, LuPlay} from "react-icons/lu";
 
 // hooks
 import {useContextMenu} from "hooks/useContextMenu";
@@ -101,8 +101,9 @@ export const TextMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -204,8 +205,9 @@ export const FileMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -319,8 +321,9 @@ export const ImageMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -432,8 +435,9 @@ export const MusicMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -574,8 +578,9 @@ export const VideoMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -702,8 +707,9 @@ export const LogMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -824,8 +830,9 @@ export const LocationMessage = ({message}) => {
                     color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
                 >
                     {
-                        formatDistanceToNow(
-                            message?.createdAt,
+                        format(
+                            new Date(message?.createdAt),
+                            language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                             {locale: language === "en" ? enUS : faIR, addSuffix: true}
                         )
                     }
@@ -833,6 +840,95 @@ export const LocationMessage = ({message}) => {
 
                 <BiCheckDouble size={20}/>
 
+            </Stack>
+
+        </Card>
+    )
+}
+
+export const QueueMessage = () => {
+
+    const {_id} = useSelector(state => state.setting.profile);
+    const {queueMessage} = useSelector(state => state.chat);
+    const theme = useTheme();
+    const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
+
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                gap: 2,
+                flexDirection: 'column',
+                justifyContent: "center",
+                alignItems: "start",
+                bgcolor: queueMessage?.userId?._id === _id ? "primary.light" : "background.default",
+                padding: 1.5,
+            }}
+            elevation={0}
+            onContextMenu={_handleShowContextMenu}
+        >
+
+            <MessageDropdownMenu
+                data={queueMessage}
+                contextMenu={contextMenu}
+                isOpen={contextMenu !== null}
+                onClose={_handleHideContextMenu}
+            />
+
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    color: queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+
+                <Stack
+                    direction="column"
+                    gap={0.5}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                        color: queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.primary"
+                    }}
+                >
+
+                    <Typography
+                        variant="subtitle2"
+                        color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        lineHeight={2}
+                    >
+                        {queueMessage?.name}
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                    >
+                        {formattedByte(queueMessage?.progress * queueMessage?.size / 100)} / {formattedByte(queueMessage?.size)}
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
+
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    color: queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
+                }}
+            >
+                <LuClock size={20}/>
             </Stack>
 
         </Card>

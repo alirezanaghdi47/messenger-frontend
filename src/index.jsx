@@ -8,7 +8,6 @@ import Redux from "providers/Redux.jsx";
 import I18n from "providers/I18n.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-
     <BrowserRouter>
 
         <Redux>

@@ -1,26 +1,24 @@
 // libraries
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {formatDistanceToNow} from "date-fns";
-import {enUS, faIR} from "date-fns/locale";
-import {Badge, Box, Chip, Stack, Typography, useTheme} from "@mui/material";
-import {BiCheck, BiCheckDouble} from "react-icons/bi";
+import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
+import {BiCheckDouble} from "react-icons/bi";
 
 const ChatItem = ({chatItem}) => {
 
-    const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
     const {_id} = useSelector(state => state.setting.profile);
-    const {language} = useSelector(state => state.setting.appearance);
+    const {onlineUsers} = useSelector(state => state.chat);
     const theme = useTheme();
+    const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === chatItem?.participantIds.find(user => user._id !== _id)?._id));
 
     return (
         <Box
             component="li"
             sx={{width: "100%"}}
-            onClick={() => location.pathname === `/chat/${chatItem._id}` ? navigate("/chat") : navigate(`/chat/${chatItem._id}`)}
+            onClick={() => navigate(`/chat/${chatItem._id}`)}
         >
 
             <Stack
@@ -39,27 +37,27 @@ const ChatItem = ({chatItem}) => {
                 }}
             >
 
-                {/*<Badge*/}
-                {/*    color="success"*/}
-                {/*    variant="dot"*/}
-                {/*    overlap="circular"*/}
-                {/*    anchorOrigin={{*/}
-                {/*        vertical: 'bottom',*/}
-                {/*        horizontal: 'right',*/}
-                {/*    }}*/}
-                {/*>*/}
+                <Badge
+                    color={isActiveReceiver ? "success" : "secondary"}
+                    variant="dot"
+                    overlap="circular"
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
+                >
 
-                <LazyLoadImage
-                    src={chatItem?.participantIds.find(item => item._id !== _id)?.avatar}
-                    alt="avatar"
-                    visibleByDefault
-                    width={40}
-                    height={40}
-                    effect='blur'
-                    style={{borderRadius: "50%"}}
-                />
+                    <LazyLoadImage
+                        src={chatItem?.participantIds.find(item => item._id !== _id)?.avatar}
+                        alt="avatar"
+                        visibleByDefault
+                        width={40}
+                        height={40}
+                        effect='blur'
+                        style={{borderRadius: "50%"}}
+                    />
 
-                {/*</Badge>*/}
+                </Badge>
 
                 <Stack
                     direction="column"
@@ -82,25 +80,6 @@ const ChatItem = ({chatItem}) => {
                         {chatItem?.participantIds.find(item => item._id !== _id)?.userName}
                     </Typography>
 
-                    <Typography
-                        variant="caption"
-                        color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}
-                    >
-                        {
-                            formatDistanceToNow(
-                                chatItem.participantIds.find(item => item._id !== _id)?.lastSeen,
-                                {locale: language === "en" ? enUS : faIR, addSuffix: true}
-                            )
-                        }
-                    </Typography>
-
-                    {/*<Typography*/}
-                    {/*    variant="caption"*/}
-                    {/*    color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textSecondary"}*/}
-                    {/*>*/}
-                    {/*    ... {t("typography.isTyping")}*/}
-                    {/*</Typography>*/}
-
                 </Stack>
 
                 <Stack
@@ -115,13 +94,6 @@ const ChatItem = ({chatItem}) => {
                         color: params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
                     }}
                 >
-
-                    {/*<Chip*/}
-                    {/*    variant="filled"*/}
-                    {/*    size="small"*/}
-                    {/*    color="success"*/}
-                    {/*    label="1"*/}
-                    {/*/>*/}
 
                     <BiCheckDouble size={20}/>
 

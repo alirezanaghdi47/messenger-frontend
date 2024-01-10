@@ -1,4 +1,5 @@
 // libraries
+import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {
@@ -10,6 +11,9 @@ import {
 } from "@mui/material";
 import {LuTrash2} from "react-icons/lu";
 
+// providers
+import {SocketContext} from "providers/Socket";
+
 // stores
 import {hideModal} from "stores/slices/appSlice";
 import {useDeleteMessageMutation} from "stores/apis/messageApi";
@@ -17,8 +21,20 @@ import {useDeleteMessageMutation} from "stores/apis/messageApi";
 const ModalContent = ({data}) => {
 
     const dispatch = useDispatch();
-    const [deleteMessage , response] = useDeleteMessageMutation();
+    const {activeChat} = useSelector(state => state.chat);
+    const [deleteMessage , deleteMessageResponse] = useDeleteMessageMutation();
     const {t} = useTranslation();
+    const {socket} = useContext(SocketContext);
+
+    useEffect(() => {
+        if (deleteMessageResponse.status === "fulfilled"){
+            socket?.current?.emit("deleteMessage", {
+                messageId: deleteMessageResponse?.data?._id,
+                chatId: activeChat?._id,
+            });
+            dispatch(hideModal());
+        }
+    }, [deleteMessageResponse]);
 
     return (
         <Stack
@@ -82,10 +98,7 @@ const ModalContent = ({data}) => {
                 <Button
                     variant="contained"
                     color="error"
-                    onClick={() => {
-                        deleteMessage(data?._id);
-                        dispatch(hideModal());
-                    }}
+                    onClick={() => deleteMessage(data?._id)}
                 >
                     {t("button.delete")}
                 </Button>

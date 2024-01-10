@@ -1,15 +1,20 @@
 // libraries
-import {useRef} from "react";
+import {useContext, useEffect, useRef} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next"
 import {Menu, MenuItem, Typography} from "@mui/material";
 import toast from "react-hot-toast";
 import {FiFile, FiFilm, FiImage, FiMapPin, FiMusic} from "react-icons/fi";
 
+// providers
+import {SocketContext} from "providers/Socket";
+
 // stores
 import {
-    useAddFileMessageMutation, useAddImageMessageMutation,
-    useAddLocationMessageMutation, useAddMusicMessageMutation,
+    useAddFileMessageMutation,
+    useAddImageMessageMutation,
+    useAddLocationMessageMutation,
+    useAddMusicMessageMutation,
     useAddVideoMessageMutation
 } from "stores/apis/messageApi";
 
@@ -19,13 +24,60 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const imageRef = useRef(null);
     const videoRef = useRef(null);
     const musicRef = useRef(null);
+    const {socket} = useContext(SocketContext);
+    const {_id} = useSelector(state => state.setting.profile);
     const {activeChat} = useSelector(state => state.chat);
-    const [addFileMessage] = useAddFileMessageMutation();
-    const [addImageMessage] = useAddImageMessageMutation();
-    const [addMusicMessage] = useAddMusicMessageMutation();
-    const [addVideoMessage] = useAddVideoMessageMutation();
-    const [addLocationMessage] = useAddLocationMessageMutation();
+    const [addFileMessage , addFileResponse] = useAddFileMessageMutation();
+    const [addImageMessage, addImageResponse] = useAddImageMessageMutation();
+    const [addMusicMessage, addMusicResponse] = useAddMusicMessageMutation();
+    const [addVideoMessage, addVideoResponse] = useAddVideoMessageMutation();
+    const [addLocationMessage , addLocationResponse] = useAddLocationMessageMutation();
     const {t} = useTranslation();
+
+    useEffect(() => {
+        if (addFileResponse.status === "fulfilled"){
+            socket?.current?.emit("addMessage", {
+                message: addFileResponse.data,
+                chatId: activeChat?._id,
+            });
+        }
+    }, [addFileResponse]);
+
+    useEffect(() => {
+        if (addImageResponse.status === "fulfilled"){
+            socket?.current?.emit("addMessage", {
+                message: addImageResponse.data,
+                chatId: activeChat?._id,
+            });
+        }
+    }, [addImageResponse]);
+
+    useEffect(() => {
+        if (addVideoResponse.status === "fulfilled"){
+            socket?.current?.emit("addMessage", {
+                message: addVideoResponse.data,
+                chatId: activeChat?._id,
+            });
+        }
+    }, [addVideoResponse]);
+
+    useEffect(() => {
+        if (addMusicResponse.status === "fulfilled"){
+            socket?.current?.emit("addMessage", {
+                message: addMusicResponse.data,
+                chatId: activeChat?._id,
+            });
+        }
+    }, [addMusicResponse]);
+
+    useEffect(() => {
+        if (addLocationResponse.status === "fulfilled"){
+            socket?.current?.emit("addMessage", {
+                message: addLocationResponse.data,
+                chatId: activeChat?._id,
+            });
+        }
+    }, [addLocationResponse]);
 
     const _handleSendFile = async (e) => {
 
@@ -34,8 +86,8 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         if (file.size > 50 * 1_024_000) {
             toast.error(t("error.fileMaxSize"));
         } else {
+            addFileMessage({file, chatId: activeChat?._id , userId: _id});
             onClose();
-            addFileMessage({file, chatId: activeChat?._id});
         }
 
         fileRef.current.value = null;
@@ -49,8 +101,8 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         if (image.size > 5 * 1_024_000) {
             toast.error(t("error.imageMaxSize"));
         } else {
+            addImageMessage({image, chatId: activeChat?._id, userId: _id});
             onClose();
-            addImageMessage({image, chatId: activeChat?._id});
         }
 
         imageRef.current.value = null;
@@ -64,8 +116,8 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         if (video.size > 10 * 1_024_000) {
             toast.error(t("error.videoMaxSize"));
         } else {
+            addVideoMessage({video, chatId: activeChat?._id, userId: _id});
             onClose();
-            addVideoMessage({video, chatId: activeChat?._id});
         }
 
         videoRef.current.value = null;
@@ -77,10 +129,10 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         const music = await e.target.files[0];
 
         if (music.size > 5 * 1_024_000) {
-            toast.error(t("error.videoMaxSize"));
+            toast.error(t("error.musicMaxSize"));
         } else {
+            addMusicMessage({music, chatId: activeChat?._id, userId: _id});
             onClose();
-            addMusicMessage({music, chatId: activeChat?._id});
         }
 
         musicRef.current.value = null;
@@ -90,8 +142,8 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const _handleSendLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((res) => {
+                addLocationMessage({location: res.coords.latitude, chatId: activeChat?._id, userId: _id});
                 onClose();
-                addLocationMessage({location: res.coords.latitude, chatId: activeChat?._id});
             }, (err) => {
                 toast.error(t("error.geoLocationFailed"));
             });

@@ -3,7 +3,7 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import axios from "axios";
 
 // stores
-import {setActiveChat, setChats, setUsers} from "stores/slices/chatSlice";
+import {addChat, setActiveChat, setChats, setUsers} from "stores/slices/chatSlice";
 
 // utils
 import {axiosBaseQuery} from "utils/functions";
@@ -80,12 +80,15 @@ export const chatApi = createApi({
                         }
                     });
 
+                    if (response.data.data){
+                        await dispatch(addChat(response.data.data));
+                    }
+
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["chat", "allChat"],
         }),
         deleteChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {

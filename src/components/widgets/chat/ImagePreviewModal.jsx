@@ -1,7 +1,7 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import {formatDistanceToNow} from "date-fns";
+import {format} from "date-fns";
 import {enUS, faIR} from "date-fns/locale";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
@@ -71,8 +71,9 @@ const ModalHeader = ({data}) => {
                         noWrap
                     >
                         {
-                            formatDistanceToNow(
-                                data?.createdAt,
+                            format(
+                                new Date(data?.createdAt),
+                                language === "en" ? "yyyy/MM/dd , hh:mm:dd" : "hh:mm:dd , yyyy/MM/dd",
                                 {locale: language === "en" ? enUS : faIR, addSuffix: true}
                             )
                         }

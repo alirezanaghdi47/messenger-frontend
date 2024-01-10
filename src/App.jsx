@@ -13,8 +13,8 @@ import "styles/vazirmatn.css";
 
 const App = () => {
 
-    const theme = useTheme();
     const {language, darkMode} = useSelector(state => state.setting.appearance);
+    const theme = useTheme();
 
     return (
         <Mui>
