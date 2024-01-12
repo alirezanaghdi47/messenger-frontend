@@ -1,12 +1,13 @@
 // libraries
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {useSelector} from "react-redux";
 import Loadable from '@loadable/component';
-
-// providers
-import Socket from "providers/Socket";
 
 // pages
 const Home = Loadable(() => import('pages/HomePage'));
+const Auth = Loadable(() => import('pages/AuthPage'));
+const Login = Loadable(() => import('pages/LoginPage'));
+const Register = Loadable(() => import('pages/RegisterPage'));
 const Chats = Loadable(() => import('pages/ChatsPage'));
 const Chat = Loadable(() => import('pages/ChatPage'));
 const Setting = Loadable(() => import('pages/SettingPage'));
@@ -15,6 +16,9 @@ const Appearance = Loadable(() => import('pages/AppearancePage'));
 const NotFound = Loadable(() => import('pages/NotFoundPage'));
 
 const Router = () => {
+
+    const {token, expire} = useSelector(state => state.auth);
+    const isAuthenticated = Boolean(token && Math.floor(Date.now() < expire));
 
     return (
         <Routes>
@@ -25,28 +29,37 @@ const Router = () => {
             />
 
             <Route
+                path="/auth"
+                element={!isAuthenticated ? <Auth/> : <Navigate to="/chat"/>}
+            >
+
+                <Route
+                    path="/auth/login"
+                    element={<Login/>}
+                />
+
+                <Route
+                    path="/auth/register"
+                    element={<Register/>}
+                />
+
+            </Route>
+
+            <Route
                 path="/chat"
-                element={
-                    <Socket>
-                        <Chats/>
-                    </Socket>
-                }
+                element={isAuthenticated ? <Chats/> : <Navigate to="/auth/login"/>}
             >
 
                 <Route
                     path="/chat/:chatId"
-                    element={
-                        <Socket>
-                            <Chat/>
-                        </Socket>
-                    }
+                    element={<Chat/>}
                 />
 
             </Route>
 
             <Route
                 path="/setting"
-                element={<Setting/>}
+                element={isAuthenticated ? <Setting/> : <Navigate to="/auth/login"/>}
             >
 
                 <Route

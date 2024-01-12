@@ -142,7 +142,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const _handleSendLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((res) => {
-                addLocationMessage({location: res.coords.latitude, chatId: activeChat?._id, userId: _id});
+                addLocationMessage({location: res.coords, chatId: activeChat?._id, userId: _id});
                 onClose();
             }, (err) => {
                 toast.error(t("error.geoLocationFailed"));

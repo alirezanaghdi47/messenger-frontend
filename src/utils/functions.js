@@ -73,3 +73,15 @@ export const formattedSecond = (second) => {
     }
     return `${mm}:${ss}`
 }
+
+export const throttle = (callback, delay) => {
+    let lastTime = 0;
+
+    return function () {
+        let now = Date.now();
+        if (now - lastTime >= delay) {
+            callback();
+            lastTime = now;
+        }
+    };
+}

@@ -15,14 +15,6 @@ export const themeList = [
     {id: 2, title: "select.dark", value: true, background: "/images/dark-mode.jpg"},
 ];
 
-export const fontSizeList = [
-    {id: 1, title: "12", value: 12, size: "caption"},
-    {id: 2, title: "14", value: 14, size: "body2"},
-    {id: 3, title: "16", value: 16, size: "body1"},
-    {id: 4, title: "18", value: 18, size: "h6"},
-    {id: 5, title: "20", value: 20, size: "h5"},
-];
-
 export const colorList = [
     {id: 1, color: {dark: "#60a5fa", light: "#2563eb"}},
     {id: 2, color: {dark: "#fb923c", light: "#d97706"}},

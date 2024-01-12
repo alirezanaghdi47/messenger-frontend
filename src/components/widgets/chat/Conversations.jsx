@@ -2,6 +2,7 @@
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack} from "@mui/material";
+import {FiUser} from "react-icons/fi";
 
 // components
 import {
@@ -10,7 +11,8 @@ import {
     LocationMessage,
     VideoMessage,
     ImageMessage,
-    MusicMessage, QueueMessage
+    MusicMessage,
+    QueueMessage
 } from "components/widgets/chat/Messages";
 
 const ConversationItem = ({conversationItem , lastMessageRef}) => {
@@ -42,15 +44,34 @@ const ConversationItem = ({conversationItem , lastMessageRef}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src={conversationItem?.userId?.avatar}
-                    alt="avatar"
-                    visibleByDefault
-                    effect="blur"
-                    width={30}
-                    height={30}
-                    style={{borderRadius: "50%"}}
-                />
+                {
+                    conversationItem?.userId?.avatar ? (
+                        <LazyLoadImage
+                            src={conversationItem?.userId?.avatar}
+                            alt="avatar"
+                            visibleByDefault
+                            effect="blur"
+                            width={30}
+                            height={30}
+                            style={{borderRadius: "50%"}}
+                        />
+                    ) : (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                bgcolor: "background.default",
+                                color: "ternary.main",
+                                width: 40,
+                                height: 40,
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <FiUser size={20}/>
+                        </Box>
+                    )
+                }
 
             </Stack>
 

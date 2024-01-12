@@ -1,4 +1,6 @@
 // libraries
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
@@ -17,8 +19,9 @@ import {editProfileSchema} from "utils/validations.js";
 
 const Account = () => {
 
-    const {avatar, userName, biography} = useSelector(state => state.setting.profile);
-    const [editProfile] = useEditProfileMutation();
+    const navigate = useNavigate();
+    const {avatar, biography} = useSelector(state => state.setting.profile);
+    const [editProfile , editProfileResponse] = useEditProfileMutation();
     const {t} = useTranslation();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -26,14 +29,21 @@ const Account = () => {
         enableReinitialize: true,
         initialValues: {
             avatar: null,
-            userName: userName ? userName : "",
-            biography: biography ? biography : ""
+            biography: biography ? biography : "",
         },
         validationSchema: editProfileSchema,
         onSubmit: async (result) => {
             editProfile({...result , preview: avatar});
         }
     });
+
+    useEffect(() => {
+
+        if (editProfileResponse.isSuccess) {
+            navigate("/setting");
+        }
+
+    }, [editProfileResponse]);
 
     return (
         <Stack
@@ -58,16 +68,6 @@ const Account = () => {
                 onBlur={() => formik.setFieldTouched("avatar")}
                 touched={formik.touched.avatar}
                 error={formik.errors.avatar}
-            />
-
-            <TextInput
-                label={t("input.userName")}
-                name="userName"
-                value={formik.values.userName}
-                onChange={formik.handleChange}
-                onBlur={() => formik.setFieldTouched("userName")}
-                error={formik.errors.userName}
-                touched={formik.touched.userName}
             />
 
             <TextInput

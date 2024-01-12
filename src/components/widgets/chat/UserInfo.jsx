@@ -2,7 +2,8 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Stack, Typography , Badge} from "@mui/material";
+import {Box , Stack, Typography , Badge} from "@mui/material";
+import {FiUser} from "react-icons/fi";
 
 const UserInfo = () => {
 
@@ -34,15 +35,34 @@ const UserInfo = () => {
                 }}
             >
 
-                <LazyLoadImage
-                    src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
-                    alt="avatar"
-                    visibleByDefault
-                    effect="blur"
-                    width={40}
-                    height={40}
-                    style={{borderRadius: "50%"}}
-                />
+                {
+                    activeChat.participantIds.find(item => item._id !== _id)?.avatar ? (
+                        <LazyLoadImage
+                            src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
+                            alt="avatar"
+                            visibleByDefault
+                            effect="blur"
+                            width={40}
+                            height={40}
+                            style={{borderRadius: "50%"}}
+                        />
+                    ) : (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                bgcolor: "background.default",
+                                color: "ternary.main",
+                                width: 40,
+                                height: 40,
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <FiUser size={20}/>
+                        </Box>
+                    )
+                }
 
             </Badge>
 

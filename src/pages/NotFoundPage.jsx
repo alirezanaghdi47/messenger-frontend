@@ -2,16 +2,16 @@
 import Error from "components/widgets/not-found/Error";
 
 // layouts
-import SecondaryLayout from "layouts/SecondaryLayout.jsx";
+import TernaryLayout from "layouts/TernaryLayout.jsx";
 
 const NotFoundPage = () => {
 
     return (
-        <SecondaryLayout>
+        <TernaryLayout>
 
             <Error/>
 
-        </SecondaryLayout>
+        </TernaryLayout>
     )
 }
 

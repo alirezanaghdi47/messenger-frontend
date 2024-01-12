@@ -6,7 +6,6 @@ import axios from "axios";
 import {
     setBackground,
     setColor,
-    setFontSize,
     setLanguage,
     setProfile,
     setTheme
@@ -24,16 +23,17 @@ export const settingApi = createApi({
         editProfile: builder.mutation({
             queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
                     const formData = new FormData();
 
                     formData.append("avatar", arg.avatar);
                     formData.append("preview", arg.preview);
-                    formData.append("userName", arg.userName);
                     formData.append("biography", arg.biography);
 
                     const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editProfile", formData, {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -48,9 +48,12 @@ export const settingApi = createApi({
         editLanguage: builder.mutation({
             queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editLanguage", arg, {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -65,9 +68,12 @@ export const settingApi = createApi({
         editColor: builder.mutation({
             queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editColor", arg, {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -82,9 +88,12 @@ export const settingApi = createApi({
         editBackground: builder.mutation({
             queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editBackground", arg, {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -96,29 +105,15 @@ export const settingApi = createApi({
                 }
             },
         }),
-        editFontSize: builder.mutation({
-            queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
-                try {
-                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editFontSize", arg, {
-                        headers: {
-                            token: await getState().auth.token,
-                        }
-                    });
-
-                    await dispatch(setFontSize(response.data.data));
-
-                    return {data: response.data.data};
-                } catch (error) {
-                    return {error}
-                }
-            },
-        }),
         editTheme: builder.mutation({
             queryFn: async (arg, {dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.put(process.env.REACT_APP_API_URL + "/api/user/editTheme", arg, {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -138,6 +133,5 @@ export const {
     useEditLanguageMutation,
     useEditColorMutation,
     useEditBackgroundMutation,
-    useEditFontSizeMutation,
     useEditThemeMutation
 } = settingApi;

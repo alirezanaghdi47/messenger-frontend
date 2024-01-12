@@ -10,11 +10,11 @@ const initialState = {
         avatar: "",
         userName: "",
         biography: "",
+        phoneNumber: "",
     },
     appearance: {
         language: "fa",
         darkMode: false,
-        fontSize: 14,
         color: {
             light: colorList[0].color.light,
             dark: colorList[0].color.dark,
@@ -33,9 +33,9 @@ export const settingSlice = createSlice({
             state.profile.userName = action.payload.userName;
             state.profile.email = action.payload.email;
             state.profile.biography = action.payload.biography;
+            state.profile.phoneNumber = action.payload.phoneNumber;
             state.appearance.language = action.payload.language;
             state.appearance.darkMode = action.payload.darkMode;
-            state.appearance.fontSize = action.payload.fontSize;
             state.appearance.color.light = action.payload.color.light;
             state.appearance.color.dark = action.payload.color.dark;
             state.appearance.background = action.payload.background;
@@ -43,14 +43,10 @@ export const settingSlice = createSlice({
         unSetUser: () => initialState,
         setProfile: (state, action) => {
             state.profile.avatar = action.payload.avatar;
-            state.profile.userName = action.payload.userName;
             state.profile.biography = action.payload.biography;
         },
         setLanguage: (state, action) => {
             state.appearance.language = action.payload;
-        },
-        setFontSize: (state, action) => {
-            state.appearance.fontSize = action.payload;
         },
         setColor: (state, action) => {
             state.appearance.color = action.payload;
@@ -68,7 +64,6 @@ export const {
     setUser,
     unSetUser,
     setLanguage,
-    setFontSize,
     setColor,
     setBackground,
     setTheme,

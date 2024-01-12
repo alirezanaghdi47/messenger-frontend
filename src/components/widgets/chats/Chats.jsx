@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
+import {FiUser} from "react-icons/fi";
 
 const ChatItem = ({chatItem}) => {
 
@@ -47,15 +48,34 @@ const ChatItem = ({chatItem}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src={chatItem?.participantIds.find(item => item._id !== _id)?.avatar}
-                        alt="avatar"
-                        visibleByDefault
-                        width={40}
-                        height={40}
-                        effect='blur'
-                        style={{borderRadius: "50%"}}
-                    />
+                    {
+                        chatItem?.participantIds.find(item => item._id !== _id)?.avatar ? (
+                            <LazyLoadImage
+                                src={chatItem?.participantIds.find(item => item._id !== _id)?.avatar}
+                                alt="avatar"
+                                visibleByDefault
+                                width={40}
+                                height={40}
+                                effect='blur'
+                                style={{borderRadius: "50%"}}
+                            />
+                        ) : (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    bgcolor: "background.default",
+                                    color: "ternary.main",
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: "50%"
+                                }}
+                            >
+                                <FiUser size={20}/>
+                            </Box>
+                        )
+                    }
 
                 </Badge>
 

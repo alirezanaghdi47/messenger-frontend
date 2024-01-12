@@ -5,7 +5,7 @@ import {useOrientation} from "@uidotdev/usehooks";
 // components
 import Orientation from "components/partials/Orientation";
 
-const SecondaryLayout = ({children}) => {
+const TernaryLayout = ({children}) => {
 
     const {angle, type} = useOrientation();
 
@@ -13,13 +13,10 @@ const SecondaryLayout = ({children}) => {
 
     return !isOriented ? (
 
-        <Container
-            maxWidth="xl"
-            disableGutters
-        >
+        <Container maxWidth="sm">
 
             <Stack
-                direction="row"
+                direction="column"
                 sx={{
                     position: "relative",
                     display: "flex",
@@ -38,5 +35,5 @@ const SecondaryLayout = ({children}) => {
     ) : <Orientation/>
 }
 
-export default SecondaryLayout;
+export default TernaryLayout;
 

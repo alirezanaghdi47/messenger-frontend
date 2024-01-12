@@ -62,10 +62,7 @@ const Header = ({title}) => {
             <IconButton
                 variant="text"
                 color="ternary"
-                onClick={() => {
-                    dispatch(signOut());
-                    window.open("http://localhost:4000/api/auth/logout" , "_self");
-                }}
+                onClick={() => dispatch(signOut())}
             >
                 <FiLogOut size={20}/>
             </IconButton>

@@ -38,18 +38,20 @@ const ChatPage = () => {
     const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
     const {activeChat , messages} = useSelector(state => state.chat);
-    const {refetch: refetch1} = useGetChatQuery(params.chatId);
-    const {refetch: refetch2} = useGetAllMessageQuery(activeChat?._id);
+    const {refetch: getChatRefetch} = useGetChatQuery(params.chatId);
+    const {refetch: getAllMessageRefetch} = useGetAllMessageQuery(activeChat?._id , {skip: Object.keys(activeChat).length === 0});
     const {socket} = useContext(SocketContext);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
     useEffect(() => {
-        refetch1();
+        getChatRefetch();
     } , [params.chatId]);
 
     useEffect(() => {
-        refetch2();
+        if (Object.keys(activeChat).length > 0){
+            getAllMessageRefetch();
+        }
     }, [activeChat._id]);
 
     useEffect(() => {

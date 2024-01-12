@@ -8,7 +8,12 @@ import {setMessages, setProgressQueueMessage, setQueueMessage, unSetQueueMessage
 // utils
 import {axiosBaseQuery} from "utils/functions";
 
-export const messageController = new AbortController();
+let abortController = new AbortController();
+
+export const cancelRequest = () => {
+    abortController.abort();
+    abortController = new AbortController();
+}
 
 export const messageApi = createApi({
     reducerPath: 'messageApi',
@@ -20,10 +25,13 @@ export const messageApi = createApi({
         getAllMessage: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.get(process.env.REACT_APP_API_URL + "/api/message/getAllMessage", {
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg
+                            chatId: arg,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -39,23 +47,29 @@ export const messageApi = createApi({
         addTextMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+                    const messages = await getState().chat.messages;
+
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addTextMessage", {text: arg.text}, {
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         }
                     });
+
+                    await dispatch(setMessages([...messages, response.data.data]));
 
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["allMessage"],
         }),
         addFileMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
                     const {_id, avatar} = await getState().setting.profile;
                     const messages = await getState().chat.messages;
 
@@ -84,9 +98,10 @@ export const messageApi = createApi({
                         },
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         },
-                        signal: messageController.signal
+                        signal: abortController.signal
                     });
 
                     await dispatch(unSetQueueMessage());
@@ -94,6 +109,7 @@ export const messageApi = createApi({
 
                     return {data: response.data.data};
                 } catch (error) {
+                    console.log(error);
                     return {error}
                 }
             },
@@ -101,6 +117,7 @@ export const messageApi = createApi({
         addImageMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
                     const {_id, avatar} = await getState().setting.profile;
                     const messages = await getState().chat.messages;
 
@@ -129,9 +146,10 @@ export const messageApi = createApi({
                         },
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         },
-                        signal: messageController.signal
+                        signal: abortController.signal
                     });
 
                     await dispatch(unSetQueueMessage());
@@ -146,6 +164,7 @@ export const messageApi = createApi({
         addMusicMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
                     const {_id, avatar} = await getState().setting.profile;
                     const messages = await getState().chat.messages;
 
@@ -174,9 +193,10 @@ export const messageApi = createApi({
                         },
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         },
-                        signal: messageController.signal
+                        signal: abortController.signal
                     });
 
                     await dispatch(unSetQueueMessage());
@@ -191,6 +211,7 @@ export const messageApi = createApi({
         addVideoMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
                     const {_id, avatar} = await getState().setting.profile;
                     const messages = await getState().chat.messages;
 
@@ -219,9 +240,10 @@ export const messageApi = createApi({
                         },
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         },
-                        signal: messageController.signal
+                        signal: abortController.signal
                     });
 
                     await dispatch(unSetQueueMessage());
@@ -236,36 +258,46 @@ export const messageApi = createApi({
         addLocationMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+                    const messages = await getState().chat.messages;
+
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addLocationMessage", {location: arg.location}, {
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg.chatId
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
                         }
                     });
+
+                    await dispatch(setMessages([...messages, response.data.data]));
 
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["allMessage"],
         }),
         deleteMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+                    const messages = await getState().chat.messages;
+
                     const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/message/deleteMessage", {
                         headers: {
                             token: await getState().auth.token,
-                            messageId: arg
+                            messageId: arg,
+                            "Accept-Language": language,
                         }
                     });
+
+                    await dispatch(setMessages(messages.filter(message => message._id !== response.data.data._id)));
 
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["allMessage"],
         }),
     }),
 });

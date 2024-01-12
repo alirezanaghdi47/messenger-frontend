@@ -3,7 +3,6 @@
     "domain": "Messenger",
     "typography": {
       "language": "Language",
-      "fontSize": "Font size",
       "exampleMessage": "Hello , how are you ?",
       "color": "Color",
       "background": "Background",
@@ -40,7 +39,11 @@
       "fastTitle": "Fast",
       "fastMessage": "Send your messages at the speed of light",
       "secureTitle": "Secure",
-      "secureMessage": "Protecting your privacy is one of our goals"
+      "secureMessage": "Protecting your privacy is one of our goals",
+      "login": "Sign In",
+      "register": "Sign Up",
+      "createAccount": "Do you have any account ?",
+      "haveAccount": "I have an account"
     },
     "select": {
       "dark": "Dark",
@@ -52,6 +55,8 @@
       "avatar": "Avatar",
       "userName": "User name",
       "biography": "Biography",
+      "phoneNumber": "Phone Number",
+      "code": "Verify Code",
       "privateChat": "Private chat",
       "voiceCall": "Voice call",
       "videoCall": "Video call"
@@ -95,26 +100,31 @@
       "back": "Back",
       "restart": "Restart",
       "submit": "Submit",
+      "verify": "Verify",
       "next": "Next",
       "prev": "Prev",
       "cancel": "Cancel",
       "send": "Send",
       "show": "Show",
       "delete": "Delete",
-      "google": "Continue with Google"
+      "login": "Sign In",
+      "register": "Sign Up"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",
       "avatarType": "Avatar type should be png , jpg , jpeg",
-      "userNameRequired": "UserName is required",
-      "userNameMinLength": "UserName characters should be less than 8",
+      "userNameFormat": "UserName can be combine of letter , number , (-,.,_,@)",
+      "userNameMinLength": "UserName characters should be more than 8",
       "userNameMaxLength": "UserName characters should be less than 40",
+      "userNameRequired": "UserName is required",
       "biographyMaxLength": "biography characters should be less than 200",
       "geoLocationNotSupport": "GeoLocation not supported",
       "geoLocationFailed": "GeoLocation is failed",
       "fileMaxSize": "Maximum file size should be 50 MB",
       "ImageMaxSize": "Maximum image size should be 5 MB",
-      "videoMaxSize": "Maximum video size should be 10 MB"
+      "videoMaxSize": "Maximum video size should be 10 MB",
+      "phoneNumberFormat": "Phone Number is valid",
+      "phoneNumberRequired": "Phone Number is required"
     }
   }
 }

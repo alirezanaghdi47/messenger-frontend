@@ -42,10 +42,7 @@ const Appbar = () => {
             <IconButton
                 variant="text"
                 color="light"
-                onClick={() => {
-                    dispatch(signOut());
-                    window.open("http://localhost:4000/api/auth/logout" , "_self");
-                }}
+                onClick={() => dispatch(signOut())}
             >
                 {<FiLogOut size={20}/>}
             </IconButton>

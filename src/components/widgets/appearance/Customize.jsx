@@ -3,7 +3,6 @@ import {Stack, useMediaQuery} from "@mui/material";
 
 // components
 import Language from "components/widgets/appearance/Language.jsx";
-import FontSize from "components/widgets/appearance/FontSize.jsx";
 import Color from "components/widgets/appearance/Color.jsx";
 import Background from "components/widgets/appearance/Background.jsx";
 import Theme from "components/widgets/appearance/Theme.jsx";
@@ -31,8 +30,6 @@ const Customize = () => {
         >
 
             <Language/>
-
-            <FontSize/>
 
             <Color/>
 

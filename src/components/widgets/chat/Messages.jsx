@@ -1,21 +1,20 @@
 // libraries
-import {useDispatch} from "react-redux";
-import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
+import {useSelector , useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {format} from "date-fns";
 import {enUS, faIR} from "date-fns/locale";
-import {Box, Card, Chip, IconButton, Stack, Typography, useTheme} from "@mui/material";
+import {Box, Card, Chip, CircularProgress, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {BiCheckDouble} from "react-icons/bi";
 import {FiPhone, FiVideo} from "react-icons/fi";
-import {LuClock, LuMapPin, LuPlay} from "react-icons/lu";
+import {LuMapPin, LuPlay} from "react-icons/lu";
 
 // hooks
 import {useContextMenu} from "hooks/useContextMenu";
 
 // utils
-import {fontSizeList} from "utils/constants";
 import {formattedByte, formattedMilisecond} from "utils/functions";
 
 // stores
@@ -26,7 +25,7 @@ const MessageDropdownMenu = Loadable(() => import("components/widgets/chat/Messa
 export const TextMessage = ({message}) => {
 
     const {_id} = useSelector(state => state.setting.profile);
-    const {language, fontSize} = useSelector(state => state.setting.appearance);
+    const {language} = useSelector(state => state.setting.appearance);
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
@@ -77,7 +76,7 @@ export const TextMessage = ({message}) => {
             {/*</Stack>*/}
 
             <Typography
-                variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                variant="body2"
                 color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                 lineHeight={2}
             >
@@ -597,7 +596,7 @@ export const VideoMessage = ({message}) => {
 export const LogMessage = ({message}) => {
 
     const {_id} = useSelector(state => state.setting.profile);
-    const {language, fontSize} = useSelector(state => state.setting.appearance);
+    const {language} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const theme = useTheme();
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
@@ -662,7 +661,7 @@ export const LogMessage = ({message}) => {
                 >
 
                     <Typography
-                        variant={fontSizeList.find(fontSizeItem => fontSizeItem.value === fontSize).size}
+                        variant="body2"
                         color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
                         {t(`typography.${message?.status}`)}
@@ -730,10 +729,6 @@ export const LocationMessage = ({message}) => {
     const {language} = useSelector(state => state.setting.appearance);
     const {contextMenu, _handleShowContextMenu, _handleHideContextMenu} = useContextMenu();
 
-    const _handleShowDetail = () => {
-        // window.location.href = `https://www.google.com/maps/search/${message?.content[0]},${message?.content[1]}`;
-    }
-
     return (
         <Card
             sx={{
@@ -791,22 +786,15 @@ export const LocationMessage = ({message}) => {
                         alignItems: "start",
                         cursor: "pointer"
                     }}
-                    onClick={_handleShowDetail}
                 >
 
                     <Typography
+                        component={Link}
+                        to={message?.content}
                         variant="body2"
                         color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     >
-                        iran , tehran
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color={message?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        sx={{direction: language === "fa" ? "rtl" : "ltr"}}
-                    >
-                        35.9624 , 53.1234
+                        موقعیت من
                     </Typography>
 
                 </Stack>
@@ -888,49 +876,79 @@ export const QueueMessage = () => {
             >
 
                 <Stack
-                    direction="column"
-                    gap={0.5}
+                    direction="row"
+                    gap={2}
                     sx={{
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "start",
+                        alignItems: "center",
                         color: queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.primary"
                     }}
                 >
 
-                    <Typography
-                        variant="subtitle2"
-                        color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                        lineHeight={2}
+                    <Stack
+                        direction="column"
+                        gap={2}
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "start",
+                        }}
                     >
-                        {queueMessage?.name}
-                    </Typography>
 
-                    <Typography
-                        variant="caption"
-                        color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
-                    >
-                        {formattedByte(queueMessage?.progress * queueMessage?.size / 100)} / {formattedByte(queueMessage?.size)}
-                    </Typography>
+                        <Typography
+                            variant="caption"
+                            color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        >
+                            {queueMessage?.name}
+                        </Typography>
+
+                        <Typography
+                            variant="caption"
+                            color={queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        >
+                            {formattedByte(queueMessage?.progress * queueMessage?.size / 100)} / {formattedByte(queueMessage?.size)}
+                        </Typography>
+
+                    </Stack>
+
+                    <CircularProgressWithLabel value={queueMessage?.progress}/>
 
                 </Stack>
 
             </Stack>
 
-            <Stack
-                direction="row"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "end",
-                    alignItems: "center",
-                    width: "100%",
-                    color: queueMessage?.userId?._id === _id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"
-                }}
-            >
-                <LuClock size={20}/>
-            </Stack>
-
         </Card>
     )
+}
+
+function CircularProgressWithLabel(props) {
+    return (
+        <Box sx={{position: 'relative', display: 'inline-flex'}}>
+            <CircularProgress
+                variant="determinate"
+                {...props}
+                sx={{color: (theme) => theme.palette.secondary.main}}
+                size={48}
+                thickness={4}
+            />
+            <Box
+                sx={{
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    position: 'absolute',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <Typography variant="caption" component="div" color="light.main">
+                    {`${Math.round(props.value)}%`}
+                </Typography>
+            </Box>
+        </Box>
+    );
 }

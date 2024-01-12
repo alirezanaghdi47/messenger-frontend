@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
-import {FiInfo, FiUser} from "react-icons/fi";
+import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
 const UserDetail = () => {
 
@@ -20,18 +20,22 @@ const UserDetail = () => {
             }}
         >
 
-            <LazyLoadImage
-                src={avatar}
-                alt="avatar"
-                visibleByDefault
-                width="100%"
-                height="100%"
-                effect='blur'
-                style={{
-                    objectFit: "cover",
-                    objectPosition: "center",
-                }}
-            />
+            {
+                avatar && (
+                    <LazyLoadImage
+                        src={avatar}
+                        alt="avatar"
+                        visibleByDefault
+                        width="100%"
+                        height="100%"
+                        effect='blur'
+                        style={{
+                            objectFit: "cover",
+                            objectPosition: "center",
+                        }}
+                    />
+                )
+            }
 
         </Box>
     )
@@ -39,13 +43,13 @@ const UserDetail = () => {
 
 const UserLinks = () => {
 
-    const {userName, biography} = useSelector(state => state.setting.profile);
+    const {userName, biography , phoneNumber} = useSelector(state => state.setting.profile);
     const {t} = useTranslation();
 
     return (
         <Stack
             direction="column"
-            gap={2}
+            gap={4}
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -94,6 +98,52 @@ const UserLinks = () => {
                         noWrap
                     >
                         {t("input.userName")}
+                    </Typography>
+
+                </Stack>
+
+            </Stack>
+
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    width: "100%",
+                    color: "ternary.main"
+                }}
+            >
+
+                <FiPhone size={20}/>
+
+                <Stack
+                    direction="column"
+                    gap={1}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "start",
+                        width: "100%",
+                    }}
+                >
+
+                    <Typography
+                        variant="subtitle2"
+                        color="textPrimary"
+                        fontWeight='bold'
+                        noWrap
+                    >
+                        {phoneNumber}
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        color="textSecondary"
+                        noWrap
+                    >
+                        {t("input.phoneNumber")}
                     </Typography>
 
                 </Stack>

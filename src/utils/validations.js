@@ -15,11 +15,20 @@ export const editProfileSchema = Yup.object().shape({
             return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
         }
     }),
-    userName: Yup.string().min(8, i18n.t("error.userNameMinLength")).max(20, i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
-    biography: Yup.string().max(50, i18n.t("error.biographyMaxLength"))
+    biography: Yup.string().max(200, i18n.t("error.biographyMaxLength")),
 });
 
-export const addEntryLockSchema = Yup.object().shape({
-    password: Yup.string().matches(/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/, i18n.t("error.passwordFormat")).required(i18n.t("error.passwordRequired")),
-    passwordRepeat: Yup.string().matches(/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/, i18n.t("error.passwordRepeatFormat") ).oneOf([Yup.ref('password'), null], i18n.t("error.passwordRepeatEqual")).required(i18n.t("error.passwordRepeatRequired")),
+export const registerSchema = Yup.object().shape({
+    userName: Yup.string().matches(/^[a-z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
+    phoneNumber: Yup.string().matches(/^(098|0098|98|\+98|0)?9(0[0-5]|[1 3]\d|2[0-3]|9[0-9]|41)\d{7}$/g , i18n.t("error.phoneNumberFormat")).required(i18n.t("error.phoneNumberRequired")),
 });
+
+export const loginSchema = Yup.object().shape({
+    phoneNumber: Yup.string().matches(/^(098|0098|98|\+98|0)?9(0[0-5]|[1 3]\d|2[0-3]|9[0-9]|41)\d{7}$/g , i18n.t("error.phoneNumberFormat")).required(i18n.t("error.phoneNumberRequired")),
+});
+
+export const verifyUserSchema = Yup.object().shape({
+    code: Yup.string().min(6 , i18n.t("error.codeLength")).max(6 , i18n.t("error.codeLength")).required(i18n.t("error.codeRequired")),
+});
+
+

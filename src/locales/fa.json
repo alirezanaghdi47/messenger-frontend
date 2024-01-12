@@ -3,7 +3,6 @@
     "domain": "پیام رسان",
     "typography": {
       "language": "زبان",
-      "fontSize": "اندازه فونت",
       "exampleMessage": "سلام چطوری ؟",
       "color": "رنگ",
       "background": "پس زمینه",
@@ -40,7 +39,11 @@
       "fastTitle": "سریع",
       "fastMessage": "پیام های خود را با سرعت نور ارسال کنید",
       "secureTitle": "ایمن",
-      "secureMessage": "حفظ حریم خصوصی شما جزو اهداف ماست"
+      "secureMessage": "حفظ حریم خصوصی شما جزو اهداف ماست",
+      "login": "ورود",
+      "register": "عضویت",
+      "createAccount": "حساب کاربری ندارید ؟",
+      "haveAccount": "من حساب کاربری دارم"
     },
     "select": {
       "dark": "تاریک",
@@ -52,6 +55,8 @@
       "avatar": "آواتار",
       "userName": "نام کاربری",
       "biography": "بیوگرافی",
+      "phoneNumber": "شماره همراه",
+      "code": "کد اعتبارسنجی",
       "showStatus": "مشاهده وضعیت",
       "privateChat": "گفتگو شخصی",
       "voiceCall": "تماس صوتی",
@@ -96,26 +101,33 @@
       "back": "بازگشت",
       "restart": "بازنشانی",
       "submit": "ثبت",
+      "verify": "اعتبارسنجی",
       "next": "بعدی",
       "prev": "قبلی",
       "cancel": "انصراف",
       "send": "ارسال",
       "show": "مشاهده",
       "delete": "حذف",
-      "google": "ادامه با گوگل"
+      "login": "ورود",
+      "register": "عضویت"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",
       "avatarType": "فرمت های مورد قبول برای آواتار عبارت اند از png , jpg , jpeg",
-      "userNameRequired": "نام کاربری الزامی است",
-      "userNameMinLength": "تعداد کاراکتر های نام کاربری باید کمتر از 8 باشد",
+      "userNameFormat": "نام کاربری می تواند ترکیبی از حروف ، اعداد و (-،.،_،@) باشد",
+      "userNameMinLength": "تعداد کاراکتر های نام کاربری باید بیشتر از 8 باشد",
       "userNameMaxLength": "تعداد کاراکتر های نام کاربری باید کمتر از 40 باشد",
+      "userNameRequired": "نام کاربری الزامی است",
       "biographyMaxLength": "تعداد کاراکتر های بیوگرافی باید کمتر از 200 باشد",
       "geoLocationNotSupport": "موقعیت مکانی پشتیبانی نمیشود",
       "geoLocationFailed": "دریافت موقعیت مکانی با مشکل مواجه شده است",
       "fileMaxSize": "حداکثر حجم فایل ارسالی باید 50 مگابایت باشد",
       "ImageMaxSize": "حداکثر حجم عکس ارسالی باید 5 مگابایت باشد",
-      "videoMaxSize": "حداکثر حجم ویدیو ارسالی باید 10 مگابایت باشد"
+      "videoMaxSize": "حداکثر حجم ویدیو ارسالی باید 10 مگابایت باشد",
+      "phoneNumberFormat": "فرمت شماره همراه نادرست است",
+      "phoneNumberRequired": "شماره همراه الزامی است",
+      "codeLength": "کد اعتبارسنجی 6 رقمی است",
+      "codeRequired": "کد اعتبارسنجی الزامی است"
     }
   }
 }

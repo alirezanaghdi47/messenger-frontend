@@ -16,7 +16,7 @@ const Error = () => {
     return (
         <Stack
             direction="column"
-            gap={2}
+            gap={4}
             sx={{
                 display: "flex",
                 justifyContent: "center",

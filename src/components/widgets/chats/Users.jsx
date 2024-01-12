@@ -3,6 +3,7 @@ import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Badge, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {FiUser} from "react-icons/fi";
 
 // providers
 import {SocketContext} from "providers/Socket";
@@ -76,15 +77,34 @@ const UserItem = ({userItem}) => {
                     }}
                 >
 
-                    <LazyLoadImage
-                        src={userItem?.avatar}
-                        alt="avatar"
-                        visibleByDefault
-                        width={40}
-                        height={40}
-                        effect='blur'
-                        style={{borderRadius: "50%"}}
-                    />
+                    {
+                        userItem?.avatar ? (
+                            <LazyLoadImage
+                                src={userItem?.avatar}
+                                alt="avatar"
+                                visibleByDefault
+                                width={40}
+                                height={40}
+                                effect='blur'
+                                style={{borderRadius: "50%"}}
+                            />
+                        ) : (
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    bgcolor: "background.default",
+                                    color: "ternary.main",
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: "50%"
+                                }}
+                            >
+                                <FiUser size={20}/>
+                            </Box>
+                        )
+                    }
 
                 </Badge>
 

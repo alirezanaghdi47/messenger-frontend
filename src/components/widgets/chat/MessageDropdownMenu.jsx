@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import { saveAs } from 'file-saver';
 import {Menu, MenuItem, Typography} from "@mui/material";
-import {FiCornerUpLeft, FiCornerUpRight, FiDownload, FiX} from "react-icons/fi";
+import {FiDownload, FiX} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 // stores
 import {showModal, showPopup} from "stores/slices/appSlice";
-import {messageController} from "stores/apis/messageApi";
+import {cancelRequest} from "stores/apis/messageApi";
 import {setMessages, unSetQueueMessage} from "stores/slices/chatSlice";
 
 const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
@@ -70,7 +70,7 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
                             color: "error.main"
                         }}
                         onClick={() => {
-                            messageController.abort();
+                            cancelRequest();
                             dispatch(setMessages(messages.filter(message => message._id !== data._id)));
                             dispatch(unSetQueueMessage());
                             onClose();
@@ -90,58 +90,6 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
                     </MenuItem>
                 )
             }
-
-            {/*<MenuItem*/}
-            {/*    sx={{*/}
-            {/*        display: "flex",*/}
-            {/*        gap: 1,*/}
-            {/*        justifyContent: "start",*/}
-            {/*        alignItems: "center",*/}
-            {/*        color: 'ternary.main'*/}
-            {/*    }}*/}
-            {/*    onClick={() => {*/}
-            {/*        onClose();*/}
-            {/*        dispatch(showModal({type: "forwardChat"}));*/}
-            {/*    }}*/}
-            {/*>*/}
-
-            {/*    <FiCornerUpRight size={20}/>*/}
-
-            {/*    <Typography*/}
-            {/*        variant="body2"*/}
-            {/*        color="ternary"*/}
-            {/*        fontWeight='bold'*/}
-            {/*    >*/}
-            {/*        {t("menu.forward")}*/}
-            {/*    </Typography>*/}
-
-            {/*</MenuItem>*/}
-
-            {/*<MenuItem*/}
-            {/*    sx={{*/}
-            {/*        display: "flex",*/}
-            {/*        gap: 1,*/}
-            {/*        justifyContent: "start",*/}
-            {/*        alignItems: "center",*/}
-            {/*        color: 'ternary.main'*/}
-            {/*    }}*/}
-            {/*    onClick={() => {*/}
-            {/*        onClose();*/}
-            {/*        dispatch(showPopup({type: "replyChat"}));*/}
-            {/*    }}*/}
-            {/*>*/}
-
-            {/*    <FiCornerUpLeft size={20}/>*/}
-
-            {/*    <Typography*/}
-            {/*        variant="body2"*/}
-            {/*        color="ternary"*/}
-            {/*        fontWeight='bold'*/}
-            {/*    >*/}
-            {/*        {t("menu.reply")}*/}
-            {/*    </Typography>*/}
-
-            {/*</MenuItem>*/}
 
             {
                 (data?.type !== 6) && (

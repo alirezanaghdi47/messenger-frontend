@@ -44,35 +44,6 @@ const Socket = ({children}) => {
         dispatch(setIsTypingUsers(isTypingUsers.filter(user => user.userId !== data.userId && user.chatId !== data.chatId)));
     }
 
-    // const _handleGetAllChatResponse = (data) => {
-    //     dispatch(setChats(data));
-    // }
-    //
-    // const _handleGetChatResponse = (data) => {
-    //     dispatch(setChat(data));
-    // }
-    //
-    // const _handleAddChatResponse = (data) => {
-    //     if (data.participantIds[0] === _id) dispatch(hideModal());
-    //     socket?.current?.emit("getAllChat", {userId: _id, socketId: socket?.current?.id});
-    //     socket?.current?.on("getAllChatResponse", data => {
-    //         dispatch(setChats(data));
-    //     });
-    // }
-    //
-    // const _handleDeleteChatResponse = (data) => {
-    //     if (data._id === params.chatId) navigate("/chat");
-    //     socket?.current?.emit("getAllChat", {userId: _id, socketId: socket?.current?.id});
-    //     socket?.current?.on("getAllChatResponse", data => {
-    //         dispatch(hideModal());
-    //         dispatch(setChats(data));
-    //     });
-    // }
-    //
-    // const _handleGetAllMessageResponse = (data) => {
-    //     dispatch(setMessages(data));
-    // }
-
     const _handleAddChatResponse = async (data) => {
         dispatch(addChat(data));
     }
@@ -95,16 +66,10 @@ const Socket = ({children}) => {
         socket?.current?.on('connect', _handleConnect);
         socket?.current?.on('startTypingResponse', _handleStartTypingResponse);
         socket?.current?.on('stopTypingResponse', _handleStopTypingResponse);
-        // socket?.current?.on('getAllChatResponse', _handleGetAllChatResponse);
-        // socket?.current?.on('getChatResponse', _handleGetChatResponse);
-        // socket?.current?.on('addChatResponse', _handleAddChatResponse);
-        // socket?.current?.on('deleteChatResponse', _handleDeleteChatResponse);
-        // socket?.current?.on('getAllMessageResponse', _handleGetAllMessageResponse);
         socket?.current?.on('addChatResponse', _handleAddChatResponse);
         socket?.current?.on('deleteChatResponse', _handleDeleteChatResponse);
         socket?.current?.on('addMessageResponse', _handleAddMessageResponse);
         socket?.current?.on('deleteMessageResponse', _handleDeleteMessageResponse);
-        // socket?.current?.on('addLocationMessageResponse', _handleAddMessageResponse);
         socket?.current?.on('disconnect', _handleDisConnect);
 
         return () => {

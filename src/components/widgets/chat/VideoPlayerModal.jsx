@@ -4,7 +4,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {format} from "date-fns";
 import {enUS, faIR} from "date-fns/locale";
 import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
-import {FiX} from "react-icons/fi";
+import {FiUser, FiX} from "react-icons/fi";
 
 // components
 import VideoPlayer from "components/modules/VideoPlayer";
@@ -39,15 +39,34 @@ const ModalHeader = ({data}) => {
                 }}
             >
 
-                <LazyLoadImage
-                    src={data?.userId?.avatar}
-                    alt={data?.userId?.userName}
-                    visibleByDefault
-                    width={40}
-                    height={40}
-                    effect='blur'
-                    style={{borderRadius: "50%"}}
-                />
+                {
+                    data?.userId?.avatar ? (
+                        <LazyLoadImage
+                            src={data?.userId?.avatar}
+                            alt={data?.userId?.userName}
+                            visibleByDefault
+                            width={40}
+                            height={40}
+                            effect='blur'
+                            style={{borderRadius: "50%"}}
+                        />
+                    ) : (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                bgcolor: "background.default",
+                                color: "ternary.main",
+                                width: 40,
+                                height: 40,
+                                borderRadius: "50%"
+                            }}
+                        >
+                            <FiUser size={20}/>
+                        </Box>
+                    )
+                }
 
                 <Stack
                     direction="column"

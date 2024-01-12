@@ -18,9 +18,12 @@ export const chatApi = createApi({
         getAllUser: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllUser", {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -36,9 +39,12 @@ export const chatApi = createApi({
         getAllChat: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.get(process.env.REACT_APP_API_URL + "/api/chat/getAllChat", {
                         headers: {
                             token: await getState().auth.token,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -54,10 +60,13 @@ export const chatApi = createApi({
         getChat: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.get(process.env.REACT_APP_API_URL + "/api/chat/getChat", {
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg
+                            chatId: arg,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -73,10 +82,13 @@ export const chatApi = createApi({
         addChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addChat", null, {
                         headers: {
                             token: await getState().auth.token,
-                            receiverId: arg
+                            receiverId: arg,
+                            "Accept-Language": language,
                         }
                     });
 
@@ -93,10 +105,13 @@ export const chatApi = createApi({
         deleteChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
+                    const {language} = await getState().setting.appearance;
+
                     const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/chat/deleteChat", {
                         headers: {
                             token: await getState().auth.token,
-                            chatId: arg
+                            chatId: arg,
+                            "Accept-Language": language,
                         }
                     });
 

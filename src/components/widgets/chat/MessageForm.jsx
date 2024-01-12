@@ -1,5 +1,5 @@
 // libraries
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
@@ -19,6 +19,7 @@ import {useAddTextMessageMutation} from "stores/apis/messageApi";
 
 const MessageForm = () => {
 
+    const [isTyping , setIsTyping] = useState(false);
     const {socket} = useContext(SocketContext);
     const params = useParams();
     const {_id} = useSelector(state => state.setting.profile);
@@ -74,7 +75,10 @@ const MessageForm = () => {
             value={formik.values.text}
             onChange={formik.handleChange}
             onKeyDown={(e) => {
-                socket?.current?.emit('startTyping', {userId: _id , chatId: params.chatId , socketId: socket?.current?.id});
+                if (!isTyping){
+                    socket?.current?.emit('startTyping', {userId: _id , chatId: params.chatId , socketId: socket?.current?.id});
+                    setIsTyping(true);
+                }
                 let lastTypingTime = new Date().getTime();
                 let timer = 2000;
                 setTimeout(() => {
@@ -82,6 +86,7 @@ const MessageForm = () => {
                     let timeDifference = timeNow - lastTypingTime;
                     if (timeDifference >= timer){
                         socket?.current?.emit('stopTyping', {userId: _id , chatId: params.chatId , socketId: socket?.current?.id});
+                        setIsTyping(false);
                     }
                 } , timer);
             }}
