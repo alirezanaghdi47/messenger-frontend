@@ -41,7 +41,7 @@ const VerifyUserForm = ({session}) => {
 
         if (verifyUserResponse.isSuccess) {
             if (verifyUserResponse.data.status === "success") {
-                dispatch(signIn({token: verifyUserResponse.data.data, expire: 1000000000000000}));
+                dispatch(signIn({token: verifyUserResponse.data.data, expire: jwtDecode(verifyUserResponse.data.data)?.exp}));
                 dispatch(setUser(jwtDecode(verifyUserResponse.data.data)));
                 toast.success(verifyUserResponse.data.message);
                 navigate("/chat");

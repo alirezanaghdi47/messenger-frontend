@@ -2,12 +2,12 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box , Stack, Typography , Badge} from "@mui/material";
+import {Box, Stack, Typography, Badge} from "@mui/material";
 import {FiUser} from "react-icons/fi";
 
-const UserInfo = () => {
+const User = () => {
 
-    const {activeChat , onlineUsers , isTypingUsers} = useSelector(state => state.chat);
+    const {activeChat, onlineUsers, isTypingUsers} = useSelector(state => state.chat);
     const {_id} = useSelector(state => state.setting.profile);
     const {t} = useTranslation();
     const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === activeChat?.participantIds.find(user => user._id !== _id)?._id));
@@ -100,6 +100,98 @@ const UserInfo = () => {
             </Stack>
 
         </Stack>
+    )
+}
+
+const Group = () => {
+
+    const {activeChat} = useSelector(state => state.chat);
+    const {t} = useTranslation();
+
+    return (
+        <Stack
+            direction="row"
+            gap={1}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                width: "max-content",
+            }}
+        >
+
+            {
+                activeChat?.groupId?.avatar ? (
+                    <LazyLoadImage
+                        src={activeChat?.groupId?.avatar}
+                        alt="avatar"
+                        visibleByDefault
+                        effect="blur"
+                        width={40}
+                        height={40}
+                        style={{borderRadius: "50%"}}
+                    />
+                ) : (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            bgcolor: "background.default",
+                            color: "ternary.main",
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50%"
+                        }}
+                    >
+                        <FiUser size={20}/>
+                    </Box>
+                )
+            }
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "start"
+                }}
+            >
+
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    fontWeight='bold'
+                    noWrap
+                >
+                    {activeChat?.groupId?.name}
+                </Typography>
+
+                <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    noWrap
+                >
+                    {activeChat?.participantIds?.length}
+                    &nbsp;
+                    {t("typography.member")}
+                </Typography>
+
+            </Stack>
+
+        </Stack>
+    )
+}
+
+const UserInfo = () => {
+
+    const {activeChat} = useSelector(state => state.chat);
+
+    return activeChat?.groupId ? (
+        <Group/>
+    ) : (
+        <User/>
     )
 }
 

@@ -3,13 +3,13 @@ import i18n from "i18next";
 
 export const editProfileSchema = Yup.object().shape({
     avatar: Yup.mixed().nullable().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
-        if (value === null) {
+        if (value) {
             return true;
         } else {
             return value.size <= 5 * 1_024_000;
         }
     }).test("fileType", i18n.t("error.avatarType"), (value) => {
-        if (value === null) {
+        if (value) {
             return true;
         } else {
             return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
@@ -31,4 +31,24 @@ export const verifyUserSchema = Yup.object().shape({
     code: Yup.string().min(6 , i18n.t("error.codeLength")).max(6 , i18n.t("error.codeLength")).required(i18n.t("error.codeRequired")),
 });
 
+export const addTextMessageSchema = Yup.object().shape({
+    text: Yup.string().trim().required(),
+});
 
+export const addGroupSchema = Yup.object().shape({
+    avatar: Yup.mixed().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
+        if (value) {
+            return true;
+        } else {
+            return value.size <= 5 * 1_024_000;
+        }
+    }).test("fileType", i18n.t("error.avatarType"), (value) => {
+        if (value) {
+            return true;
+        } else {
+            return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
+        }
+    }),
+    name: Yup.string().matches(/^[a-z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
+    description: Yup.string().max(200, i18n.t("error.biographyMaxLength")),
+});

@@ -1,43 +1,19 @@
 // libraries
-import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
-import {FiUser} from "react-icons/fi";
-
-// providers
-import {SocketContext} from "providers/Socket";
+import {Box, Stack, Badge, Typography, useTheme, Checkbox} from "@mui/material";
+import {FiCheck, FiUser} from "react-icons/fi";
 
 // stores
-import {hideModal} from "stores/slices/appSlice";
-import {useAddChatMutation} from "stores/apis/chatApi";
+import {setStepper} from "stores/slices/appSlice";
 
 const UserItem = ({userItem}) => {
 
     const dispatch = useDispatch();
-    const {_id} = useSelector(state => state.setting.profile);
-    const [addChat, addChatResponse] = useAddChatMutation();
+    const {stepper} = useSelector(state => state.app);
     const {onlineUsers} = useSelector(state => state.chat);
-    const {socket} = useContext(SocketContext);
     const theme = useTheme();
     const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === userItem?._id));
-
-    useEffect(() => {
-
-        if (addChatResponse.isSuccess) {
-            dispatch(hideModal());
-        }
-
-        if (addChatResponse.status === "fulfilled" && addChatResponse?.data) {
-            socket?.current?.emit("addChat", {
-                userId: _id,
-                chat: addChatResponse?.data,
-                receiverIds: addChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
-                socketId: socket?.current?.id
-            });
-        }
-
-    }, [addChatResponse]);
 
     return (
         <Box
@@ -50,7 +26,13 @@ const UserItem = ({userItem}) => {
                     borderBottom: "none"
                 }
             }}
-            onClick={() => addChat(userItem?._id)}
+            onClick={() => dispatch(setStepper({
+                step: 1,
+                data: {
+                    ...stepper.data,
+                    participantIds: stepper.data.participantIds.find(participantId => participantId === userItem?._id) ? stepper.data.participantIds.filter(participantId => participantId !== userItem?._id) : [...stepper.data.participantIds, userItem?._id]
+                }
+            }))}
         >
 
             <Stack
@@ -66,6 +48,26 @@ const UserItem = ({userItem}) => {
                     cursor: "pointer",
                 }}
             >
+
+                {
+                    stepper.data.participantIds.includes(userItem?._id) && (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: 24,
+                                height: 24,
+                                bgcolor: "primary.main",
+                                color: "light.main",
+                                borderRadius: "50%",
+                                marginRight: 1
+                            }}
+                        >
+                            <FiCheck size={20}/>
+                        </Box>
+                    )
+                }
 
                 <Badge
                     color={isActiveReceiver ? "success" : "secondary"}
@@ -135,7 +137,7 @@ const UserItem = ({userItem}) => {
     )
 }
 
-const Users = () => {
+const Contacts = () => {
 
     const {users} = useSelector(state => state.chat);
 
@@ -143,7 +145,7 @@ const Users = () => {
         <Stack
             component="ul"
             direction="column"
-            className="custom-scrollbar"
+            className="remove-scrollbar"
             sx={{
                 display: "flex",
                 justifyContent: "start",
@@ -167,5 +169,4 @@ const Users = () => {
     )
 }
 
-export default Users;
-
+export default Contacts;

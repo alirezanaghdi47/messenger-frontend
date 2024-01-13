@@ -17,6 +17,9 @@ import {SocketContext} from "providers/Socket";
 // stores
 import {useAddTextMessageMutation} from "stores/apis/messageApi";
 
+// utils
+import {addTextMessageSchema} from "utils/validations";
+
 const MessageForm = () => {
 
     const [isTyping , setIsTyping] = useState(false);
@@ -40,6 +43,7 @@ const MessageForm = () => {
         initialValues: {
             text: "",
         },
+        validationSchema: addTextMessageSchema,
         onSubmit: async (result, {resetForm}) => {
             addTextMessage({text: result.text, chatId: activeChat?._id});
             resetForm();

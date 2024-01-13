@@ -17,7 +17,7 @@ const PrivateRouteHoc = (WrappedComponent) => {
 
         useEffect(() => {
 
-            if (token && expire < Math.floor(Date.now() / 1000)) {
+            if (!token || expire < Math.floor(Date.now() / 1000)) {
                 dispatch(signOut());
                 dispatch(unSetUser());
             }

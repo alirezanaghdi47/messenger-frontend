@@ -84,10 +84,40 @@ export const chatApi = createApi({
                 try {
                     const {language} = await getState().setting.appearance;
 
-                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addChat", null, {
+                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addChat", {receiverId: arg}, {
                         headers: {
                             token: await getState().auth.token,
-                            receiverId: arg,
+                            "Accept-Language": language,
+                        }
+                    });
+
+                    if (response.data.data){
+                        await dispatch(addChat(response.data.data));
+                    }
+
+                    return {data: response.data.data};
+                } catch (error) {
+                    return {error}
+                }
+            },
+        }),
+        addGroup: builder.mutation({
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
+                try {
+                    const {language} = await getState().setting.appearance;
+
+                    const formData = new FormData();
+
+                    formData.append("avatar", arg.avatar);
+                    formData.append("name", arg.name);
+                    formData.append("description", arg.description);
+                    arg.participantIds.map(participantId => {
+                        formData.append("receiverIds[]", participantId);
+                    })
+
+                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addGroup", formData, {
+                        headers: {
+                            token: await getState().auth.token,
                             "Accept-Language": language,
                         }
                     });
@@ -130,5 +160,6 @@ export const {
     useGetAllChatQuery,
     useGetChatQuery,
     useAddChatMutation,
+    useAddGroupMutation,
     useDeleteChatMutation
 } = chatApi;

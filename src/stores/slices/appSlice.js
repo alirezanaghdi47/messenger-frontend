@@ -11,6 +11,10 @@ const initialState = {
         isOpen: false,
         type: null,
         data: null,
+    },
+    stepper: {
+        step: 0,
+        data: null,
     }
 }
 
@@ -38,6 +42,14 @@ export const appSlice = createSlice({
             state.popup.type = null
             state.popup.data = null;
         },
+        setStepper: (state, action) => {
+            state.stepper.step = action.payload.step;
+            state.stepper.data = action.payload.data ?? state.stepper.data;
+        },
+        unSetStepper: (state, action) => {
+            state.stepper.step = 0;
+            state.stepper.data = null;
+        },
     },
 })
 
@@ -46,6 +58,8 @@ export const {
     hideModal,
     showPopup,
     hidePopup,
+    setStepper,
+    unSetStepper
 } = appSlice.actions;
 
 export default appSlice.reducer;

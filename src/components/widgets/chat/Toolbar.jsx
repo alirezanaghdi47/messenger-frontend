@@ -41,29 +41,35 @@ const DesktopToolbar = ({
             }}
         >
 
-            <IconButton
-                component="li"
-                variant="text"
-                color="ternary"
-                onClick={() => {
-                    onCloseDropdownMenu();
-                    toast.success(t("typography.comingSoon"));
-                }}
-            >
-                <FiPhone size={20}/>
-            </IconButton>
+            {
+                !activeChat?.groupId && (
+                    <>
+                        <IconButton
+                            component="li"
+                            variant="text"
+                            color="ternary"
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                toast.success(t("typography.comingSoon"));
+                            }}
+                        >
+                            <FiPhone size={20}/>
+                        </IconButton>
 
-            <IconButton
-                component="li"
-                variant="text"
-                color="ternary"
-                onClick={() => {
-                    onCloseDropdownMenu();
-                    toast.success(t("typography.comingSoon"));
-                }}
-            >
-                <FiVideo size={20}/>
-            </IconButton>
+                        <IconButton
+                            component="li"
+                            variant="text"
+                            color="ternary"
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                toast.success(t("typography.comingSoon"));
+                            }}
+                        >
+                            <FiVideo size={20}/>
+                        </IconButton>
+                    </>
+                )
+            }
 
             <IconButton
                 component="li"
@@ -166,57 +172,66 @@ const MobileToolbar = ({
                 onClose={onCloseDropdownMenu}
             >
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                    onClick={() => {
-                        onCloseDropdownMenu();
-                        toast.success(t("typography.comingSoon"));
-                    }}
-                >
+                {
+                    !activeChat?.groupId && (
+                        <MenuItem
+                            sx={{
+                                display: "flex",
+                                gap: 1,
+                                justifyContent: "start",
+                                alignItems: "center",
+                                color: "ternary.main"
+                            }}
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                toast.success(t("typography.comingSoon"));
+                            }}
+                        >
 
-                    <FiPhone size={20}/>
+                            <FiPhone size={20}/>
 
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.voiceCall")}
-                    </Typography>
+                            <Typography
+                                variant="body2"
+                                color="textSecondary"
+                                fontWeight='bold'
+                            >
+                                {t("menu.voiceCall")}
+                            </Typography>
 
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "ternary.main"
-                    }}
-                    onClick={() => {
-                        onCloseDropdownMenu();
-                        toast.success(t("typography.comingSoon"));
-                    }}
-                >
+                    )
+                }
 
-                    <FiVideo size={20}/>
+                {
+                    !activeChat?.groupId && (
+                        <MenuItem
+                            sx={{
+                                display: "flex",
+                                gap: 1,
+                                justifyContent: "start",
+                                alignItems: "center",
+                                color: "ternary.main"
+                            }}
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                toast.success(t("typography.comingSoon"));
+                            }}
+                        >
 
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        fontWeight='bold'
-                    >
-                        {t("menu.videoCall")}
-                    </Typography>
+                            <FiVideo size={20}/>
 
-                </MenuItem>
+                            <Typography
+                                variant="body2"
+                                color="textSecondary"
+                                fontWeight='bold'
+                            >
+                                {t("menu.videoCall")}
+                            </Typography>
+
+                        </MenuItem>
+                    )
+                }
 
                 <MenuItem
                     sx={{

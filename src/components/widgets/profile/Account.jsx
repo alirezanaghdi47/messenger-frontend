@@ -73,7 +73,7 @@ const Account = () => {
             <TextInput
                 label={t("input.biography")}
                 name="biography"
-                rows={6}
+                rows={4}
                 value={formik.values.biography}
                 onChange={formik.handleChange}
                 onBlur={() => formik.setFieldTouched("biography")}

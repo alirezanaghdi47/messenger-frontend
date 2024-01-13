@@ -18,7 +18,7 @@ const NotFound = Loadable(() => import('pages/NotFoundPage'));
 const Router = () => {
 
     const {token, expire} = useSelector(state => state.auth);
-    const isAuthenticated = Boolean(token && Math.floor(Date.now() < expire));
+    const isAuthenticated = Boolean(token && Math.floor(Date.now() / 1000) < expire);
 
     return (
         <Routes>

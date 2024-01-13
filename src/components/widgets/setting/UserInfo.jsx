@@ -14,7 +14,7 @@ const UserDetail = () => {
             sx={{
                 position: "relative",
                 width: "calc(100% + 32px)",
-                height: 360,
+                height: 300,
                 bgcolor: "secondary.main",
                 marginTop: -2,
             }}
@@ -54,7 +54,8 @@ const UserLinks = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "start",
-                width: "100%"
+                width: "100%",
+                paddingX: 2
             }}
         >
 

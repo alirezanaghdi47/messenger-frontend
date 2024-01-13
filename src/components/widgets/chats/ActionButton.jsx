@@ -2,7 +2,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from '@loadable/component';
-import {toast} from "react-hot-toast";
 import {IconButton, Menu, MenuItem, Typography , useMediaQuery} from "@mui/material";
 import {FiPlus} from "react-icons/fi";
 import {LuMessageCircle, LuUsers} from "react-icons/lu";
@@ -14,6 +13,7 @@ import {useDropdownMenu} from "hooks/useDropdownMenu";
 import {showModal} from "stores/slices/appSlice";
 
 const AddChatModal = Loadable(() => import("components/widgets/chats/AddChatModal"));
+const AddGroupModal = Loadable(() => import("components/widgets/chats/AddGroupModal"));
 
 const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
 
@@ -46,8 +46,8 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         alignItems: "center",
                     }}
                     onClick={() => {
-                        onClose();
                         dispatch(showModal({type: 'createChat'}));
+                        onClose();
                     }}
                 >
 
@@ -71,8 +71,8 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
                         alignItems: "center",
                     }}
                     onClick={() => {
+                        dispatch(showModal({type: 'createGroup'}));
                         onClose();
-                        toast.success(t("typography.comingSoon"));
                     }}
                 >
 
@@ -93,6 +93,12 @@ const ActionButtonMenu = ({anchorEl, isOpen, onClose}) => {
             {
                 Boolean(modal?.isOpen && modal?.type === "createChat") && (
                     <AddChatModal/>
+                )
+            }
+
+            {
+                Boolean(modal?.isOpen && modal?.type === "createGroup") && (
+                    <AddGroupModal/>
                 )
             }
 
