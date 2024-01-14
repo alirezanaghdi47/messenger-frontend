@@ -2,14 +2,14 @@ import * as Yup from "yup";
 import i18n from "i18next";
 
 export const editProfileSchema = Yup.object().shape({
-    avatar: Yup.mixed().nullable().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
-        if (value) {
+    avatar: Yup.mixed().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
+        if (Object.keys(value).length === 0) {
             return true;
         } else {
             return value.size <= 5 * 1_024_000;
         }
     }).test("fileType", i18n.t("error.avatarType"), (value) => {
-        if (value) {
+        if (Object.keys(value).length === 0) {
             return true;
         } else {
             return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
@@ -37,13 +37,13 @@ export const addTextMessageSchema = Yup.object().shape({
 
 export const addGroupSchema = Yup.object().shape({
     avatar: Yup.mixed().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
-        if (value) {
+        if (Object.keys(value).length === 0) {
             return true;
         } else {
-            return value.size <= 5 * 1_024_000;
+            return value && value.size <= 5 * 1_024_000;
         }
     }).test("fileType", i18n.t("error.avatarType"), (value) => {
-        if (value) {
+        if (Object.keys(value).length === 0) {
             return true;
         } else {
             return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);

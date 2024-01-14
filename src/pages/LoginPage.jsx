@@ -6,7 +6,6 @@ import {Stack} from "@mui/material";
 import Header from "components/widgets/login/Header";
 import LoginForm from "components/widgets/login/LoginForm";
 import VerifyUserForm from "components/widgets/login/VerifyUserForm";
-import Link from "components/widgets/login/Action";
 
 const LoginPage = () => {
 
@@ -39,8 +38,6 @@ const LoginPage = () => {
                     />
                 )
             }
-
-            <Link/>
 
         </Stack>
     );

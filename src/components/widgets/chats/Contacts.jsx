@@ -1,8 +1,8 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Stack, Badge, Typography, useTheme, Checkbox} from "@mui/material";
-import {FiCheck, FiUser} from "react-icons/fi";
+import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
+import {FiUser} from "react-icons/fi";
 
 // stores
 import {setStepper} from "stores/slices/appSlice";
@@ -18,10 +18,14 @@ const UserItem = ({userItem}) => {
     return (
         <Box
             component="li"
+            gap={1}
             sx={{
                 width: "100%",
+                bgcolor: stepper.data.participantIds.includes(userItem?._id) && "primary.main",
                 borderBottom: `1px solid ${theme.palette.secondary.main}`,
-                paddingY: 2,
+                borderRadius: 1,
+                padding: 1.5,
+                cursor: "pointer",
                 "&:last-of-type": {
                     borderBottom: "none"
                 }
@@ -48,26 +52,6 @@ const UserItem = ({userItem}) => {
                     cursor: "pointer",
                 }}
             >
-
-                {
-                    stepper.data.participantIds.includes(userItem?._id) && (
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                width: 24,
-                                height: 24,
-                                bgcolor: "primary.main",
-                                color: "light.main",
-                                borderRadius: "50%",
-                                marginRight: 1
-                            }}
-                        >
-                            <FiCheck size={20}/>
-                        </Box>
-                    )
-                }
 
                 <Badge
                     color={isActiveReceiver ? "success" : "secondary"}
@@ -122,7 +106,7 @@ const UserItem = ({userItem}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color="textPrimary"
+                        color={stepper.data.participantIds.includes(userItem?._id) ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         noWrap
                     >

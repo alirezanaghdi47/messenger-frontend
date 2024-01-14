@@ -42,8 +42,10 @@
       "fastMessage": "Send your messages at the speed of light",
       "secureTitle": "Secure",
       "secureMessage": "Protecting your privacy is one of our goals",
-      "login": "Sign In",
-      "register": "Sign Up",
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "login": "Login",
+      "register": "Register",
       "createAccount": "Do you have any account ?",
       "haveAccount": "I have an account"
     },
@@ -102,6 +104,7 @@
       "english": "English",
       "back": "Back",
       "restart": "Restart",
+      "reSendCode": "Resend Verify Code",
       "submit": "Submit",
       "verify": "Verify",
       "next": "Next",
@@ -110,8 +113,10 @@
       "send": "Send",
       "show": "Show",
       "delete": "Delete",
-      "login": "Sign In",
-      "register": "Sign Up"
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "login": "Login",
+      "register": "Register"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

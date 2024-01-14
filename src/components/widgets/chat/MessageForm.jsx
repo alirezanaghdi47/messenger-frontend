@@ -4,9 +4,8 @@ import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
-import {toast} from "react-hot-toast";
 import {IconButton} from "@mui/material";
-import {LuSend, LuSmile} from "react-icons/lu";
+import {LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "components/modules/TextInput";
@@ -22,7 +21,7 @@ import {addTextMessageSchema} from "utils/validations";
 
 const MessageForm = () => {
 
-    const [isTyping , setIsTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
     const {socket} = useContext(SocketContext);
     const params = useParams();
     const {_id} = useSelector(state => state.setting.profile);
@@ -31,7 +30,7 @@ const MessageForm = () => {
     const {t} = useTranslation();
 
     useEffect(() => {
-        if (addTextMessageResponse.status === "fulfilled"){
+        if (addTextMessageResponse.status === "fulfilled") {
             socket?.current?.emit("addMessage", {
                 message: addTextMessageResponse.data,
                 chatId: activeChat?._id,
@@ -58,15 +57,6 @@ const MessageForm = () => {
         <TextInput
             name="text"
             placeholder={t("input.text")}
-            startIcon={
-                <IconButton
-                    varinat="text"
-                    color="ternary"
-                    onClick={() => toast.success(t("typography.comingSoon"))}
-                >
-                    <LuSmile size={20}/>
-                </IconButton>
-            }
             endIcon={
                 <IconButton
                     varinat="text"
@@ -79,8 +69,12 @@ const MessageForm = () => {
             value={formik.values.text}
             onChange={formik.handleChange}
             onKeyDown={(e) => {
-                if (!isTyping){
-                    socket?.current?.emit('startTyping', {userId: _id , chatId: params.chatId , socketId: socket?.current?.id});
+                if (!isTyping) {
+                    socket?.current?.emit('startTyping', {
+                        userId: _id,
+                        chatId: params.chatId,
+                        socketId: socket?.current?.id
+                    });
                     setIsTyping(true);
                 }
                 let lastTypingTime = new Date().getTime();
@@ -88,11 +82,15 @@ const MessageForm = () => {
                 setTimeout(() => {
                     let timeNow = new Date().getTime();
                     let timeDifference = timeNow - lastTypingTime;
-                    if (timeDifference >= timer){
-                        socket?.current?.emit('stopTyping', {userId: _id , chatId: params.chatId , socketId: socket?.current?.id});
+                    if (timeDifference >= timer) {
+                        socket?.current?.emit('stopTyping', {
+                            userId: _id,
+                            chatId: params.chatId,
+                            socketId: socket?.current?.id
+                        });
                         setIsTyping(false);
                     }
-                } , timer);
+                }, timer);
             }}
             error={formik.errors.text}
         />

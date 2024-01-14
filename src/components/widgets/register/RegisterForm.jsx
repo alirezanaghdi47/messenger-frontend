@@ -1,10 +1,10 @@
 // libraries
 import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
-import {Button, Stack} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {FiUserPlus} from "react-icons/fi";
 
 // components
@@ -78,26 +78,44 @@ const RegisterForm = () => {
                 touched={formik.touched.phoneNumber}
             />
 
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<FiUserPlus size={20}/>}
+                fullWidth
+                onClick={formik.handleSubmit}
+            >
+                {t("button.signUp")}
+            </Button>
+
             <Stack
                 direction="row"
                 gap={2}
                 sx={{
                     display: "flex",
-                    justifyContent: "end",
+                    justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
                 }}
             >
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<FiUserPlus size={20}/>}
-                    fullWidth
-                    onClick={formik.handleSubmit}
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
                 >
-                    {t("button.register")}
-                </Button>
+                    {t("typography.haveAccount")}
+                </Typography>
+
+                <Typography
+                    component={Link}
+                    to="/auth/login"
+                    variant="body2"
+                    color="primary.main"
+                    fontWeight="bold"
+                    sx={{textDecoration: "none"}}
+                >
+                    {t("typography.login")}
+                </Typography>
 
             </Stack>
 

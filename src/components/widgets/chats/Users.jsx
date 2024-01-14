@@ -44,11 +44,9 @@ const UserItem = ({userItem}) => {
             component="li"
             sx={{
                 width: "100%",
-                borderBottom: `1px solid ${theme.palette.secondary.main}`,
-                paddingY: 2,
-                "&:last-of-type": {
-                    borderBottom: "none"
-                }
+                borderRadius: 1,
+                padding: 1.5,
+                cursor: "pointer",
             }}
             onClick={() => addChat(userItem?._id)}
         >

@@ -210,6 +210,11 @@ const Mui = ({children}) => {
                     disableFocusRipple: true
                 }
             },
+            MuiPopover:{
+                defaultProps:{
+                    elevation: 2
+                }
+            },
             MuiChip: {
                 styleOverrides: {
                     root: ({theme, ownerState}) => ({

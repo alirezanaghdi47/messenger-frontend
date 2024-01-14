@@ -22,7 +22,7 @@ const Header = () => {
                 color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.login")}
+                {t("typography.signIn")}
             </Typography>
 
         </Stack>

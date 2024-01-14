@@ -103,7 +103,9 @@ const ConversationItem = ({conversationItem , lastMessageRef}) => {
     )
 }
 
-const Conversations = ({data , lastMessageRef}) => {
+const Conversations = ({lastMessageRef}) => {
+
+    const {messages} = useSelector(state => state.chat);
 
     return (
         <Stack
@@ -126,10 +128,10 @@ const Conversations = ({data , lastMessageRef}) => {
         >
 
             {
-                data.map(conversationItem =>
+                messages.map(message =>
                     <ConversationItem
-                        key={conversationItem?._id}
-                        conversationItem={conversationItem}
+                        key={message?._id}
+                        conversationItem={message}
                         lastMessageRef={lastMessageRef}
                     />
                 )

@@ -136,6 +136,7 @@ export const chatApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
+                    const chats = await getState().chat.chats;
 
                     const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/chat/deleteChat", {
                         headers: {
@@ -145,12 +146,13 @@ export const chatApi = createApi({
                         }
                     });
 
+                    await dispatch(setChats(chats.filter(chat => chat._id !== response.data.data._id)));
+
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
-            invalidatesTags: ["allChat"],
         }),
     }),
 })

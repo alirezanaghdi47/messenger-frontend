@@ -7,7 +7,7 @@ import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
 import {jwtDecode} from "jwt-decode";
 import {Button, Stack} from "@mui/material";
-import {FiCheck} from "react-icons/fi";
+import {FiCheck, FiRotateCw} from "react-icons/fi";
 
 // components
 import TextInput from "components/modules/TextInput";
@@ -41,7 +41,10 @@ const VerifyUserForm = ({session}) => {
 
         if (verifyUserResponse.isSuccess) {
             if (verifyUserResponse.data.status === "success") {
-                dispatch(signIn({token: verifyUserResponse.data.data, expire: jwtDecode(verifyUserResponse.data.data)?.exp}));
+                dispatch(signIn({
+                    token: verifyUserResponse.data.data,
+                    expire: jwtDecode(verifyUserResponse.data.data)?.exp
+                }));
                 dispatch(setUser(jwtDecode(verifyUserResponse.data.data)));
                 toast.success(verifyUserResponse.data.message);
                 navigate("/chat");
@@ -75,25 +78,34 @@ const VerifyUserForm = ({session}) => {
                 touched={formik.touched.code}
             />
 
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<FiCheck size={20}/>}
+                fullWidth
+                onClick={formik.handleSubmit}
+            >
+                {t("button.verify")}
+            </Button>
+
             <Stack
                 direction="row"
                 gap={2}
                 sx={{
                     display: "flex",
-                    justifyContent: "end",
+                    justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
                 }}
             >
 
                 <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<FiCheck size={20}/>}
-                    fullWidth
-                    onClick={formik.handleSubmit}
+                    variant="text"
+                    color="ternary"
+                    startIcon={<FiRotateCw size={20}/>}
+                    onClick={() => navigate(0)}
                 >
-                    {t("button.verify")}
+                    {t("button.reSendCode")}
                 </Button>
 
             </Stack>

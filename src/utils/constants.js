@@ -1,9 +1,4 @@
-export const version = "1.5.0";
-
-export const dateTimeList = [
-    {id: 1, title: "button.12h", value: "12h"},
-    {id: 2, title: "button.24h", value: "24h"},
-];
+export const version = "1.6.0";
 
 export const languageList = [
     {id: 1, title: "button.persian", value: "fa", flag: "/images/fa.png"},

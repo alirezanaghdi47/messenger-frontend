@@ -3,7 +3,6 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/register/Header";
-import Action from "components/widgets/register/Action";
 import RegisterForm from "components/widgets/register/RegisterForm";
 
 const RegisterPage = () => {
@@ -25,8 +24,6 @@ const RegisterPage = () => {
             <Header/>
 
             <RegisterForm/>
-
-            <Action/>
 
         </Stack>
     );

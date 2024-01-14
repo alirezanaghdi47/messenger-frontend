@@ -9,8 +9,8 @@ import {alpha, Stack, useTheme, useMediaQuery} from "@mui/material";
 import Header from "components/widgets/chat/Header.jsx";
 import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 import ActionButton from "components/widgets/chat/ActionButton";
+import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // hocs
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
@@ -38,27 +38,22 @@ const ChatPage = () => {
     const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
     const {activeChat , messages} = useSelector(state => state.chat);
-    const {refetch: getChatRefetch} = useGetChatQuery(params.chatId);
-    const {refetch: getAllMessageRefetch} = useGetAllMessageQuery(activeChat?._id , {skip: Object.keys(activeChat).length === 0});
+    const {isFetching: isFetchingActiveChat, refetch: refetchActiveChat} = useGetChatQuery(params.chatId);
+    const {isFetching: isFetchingMessages , refetch: refetchMessages} = useGetAllMessageQuery(params.chatId);
     const {socket} = useContext(SocketContext);
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
     useEffect(() => {
-        getChatRefetch();
+        refetchActiveChat();
+        refetchMessages();
     } , [params.chatId]);
 
     useEffect(() => {
-        if (Object.keys(activeChat).length > 0){
-            getAllMessageRefetch();
+        if (!isFetchingActiveChat && (!activeChat || Object.keys(activeChat).length === 0)){
+            navigate("/chat");
         }
-    }, [activeChat._id]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            if (!activeChat) navigate("/chat");
-        } , 1000);
-    } , [params.chatId]);
+    }, [activeChat?._id]);
 
     useEffect(() => {
         socket?.current?.on("deleteChatResponse", data => {
@@ -72,7 +67,7 @@ const ChatPage = () => {
         lastMessageRef?.current?.scrollIntoView({behavior: "smooth"});
     }, [messages]);
 
-    return Object.keys(activeChat).length > 0 && (
+    return !isFetchingActiveChat && !isFetchingMessages && (
         <Stack
             component="main"
             direction="column"
@@ -108,10 +103,7 @@ const ChatPage = () => {
 
             {
                 messages?.length > 0 ? (
-                    <Conversations
-                        lastMessageRef={lastMessageRef}
-                        data={messages}
-                    />
+                    <Conversations lastMessageRef={lastMessageRef}/>
                 ) : (
                     <EmptyPlaceholder/>
                 )

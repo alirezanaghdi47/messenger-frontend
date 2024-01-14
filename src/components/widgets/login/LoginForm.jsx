@@ -1,9 +1,10 @@
 // libraries
 import {useEffect} from "react";
+import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
-import {Button, Stack} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {FiLogIn} from "react-icons/fi";
 
 // components
@@ -65,26 +66,44 @@ const LoginForm = ({setSession}) => {
                 touched={formik.touched.phoneNumber}
             />
 
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<FiLogIn size={20}/>}
+                fullWidth
+                onClick={formik.handleSubmit}
+            >
+                {t("button.signIn")}
+            </Button>
+
             <Stack
                 direction="row"
                 gap={2}
                 sx={{
                     display: "flex",
-                    justifyContent: "end",
+                    justifyContent: "center",
                     alignItems: "center",
                     width: "100%",
                 }}
             >
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<FiLogIn size={20}/>}
-                    fullWidth
-                    onClick={formik.handleSubmit}
+                <Typography
+                    variant="body2"
+                    color="textPrimary"
                 >
-                    {t("button.login")}
-                </Button>
+                    {t("typography.createAccount")}
+                </Typography>
+
+                <Typography
+                    component={Link}
+                    to="/auth/register"
+                    variant="body2"
+                    color="primary.main"
+                    fontWeight="bold"
+                    sx={{textDecoration: "none"}}
+                >
+                    {t("typography.register")}
+                </Typography>
 
             </Stack>
 

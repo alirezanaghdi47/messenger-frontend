@@ -28,7 +28,7 @@ const Account = () => {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            avatar: null,
+            avatar: {},
             biography: biography ? biography : "",
         },
         validationSchema: editProfileSchema,

@@ -36,9 +36,9 @@ const User = () => {
             >
 
                 {
-                    activeChat.participantIds.find(item => item._id !== _id)?.avatar ? (
+                    activeChat?.participantIds.find(item => item._id !== _id)?.avatar ? (
                         <LazyLoadImage
-                            src={activeChat.participantIds.find(item => item._id !== _id)?.avatar}
+                            src={activeChat?.participantIds.find(item => item._id !== _id)?.avatar}
                             alt="avatar"
                             visibleByDefault
                             effect="blur"
@@ -82,7 +82,7 @@ const User = () => {
                     fontWeight='bold'
                     noWrap
                 >
-                    {activeChat.participantIds.find(item => item._id !== _id)?.userName}
+                    {activeChat?.participantIds.find(item => item._id !== _id)?.userName}
                 </Typography>
 
                 {
