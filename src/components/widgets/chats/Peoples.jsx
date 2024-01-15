@@ -5,12 +5,12 @@ import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
 import {FiUser} from "react-icons/fi";
 
 // stores
-import {setStepper} from "stores/slices/appSlice";
+import {showModal} from "stores/slices/appSlice";
 
 const UserItem = ({userItem}) => {
 
     const dispatch = useDispatch();
-    const {stepper} = useSelector(state => state.app);
+    const {modal} = useSelector(state => state.app);
     const {onlineUsers} = useSelector(state => state.chat);
     const theme = useTheme();
     const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === userItem?._id));
@@ -21,7 +21,7 @@ const UserItem = ({userItem}) => {
             gap={1}
             sx={{
                 width: "100%",
-                bgcolor: stepper.data.participantIds.includes(userItem?._id) && "primary.main",
+                bgcolor: modal.data.includes(userItem?._id) && "primary.main",
                 borderBottom: `1px solid ${theme.palette.secondary.main}`,
                 borderRadius: 1,
                 padding: 1.5,
@@ -30,12 +30,9 @@ const UserItem = ({userItem}) => {
                     borderBottom: "none"
                 }
             }}
-            onClick={() => dispatch(setStepper({
-                step: 1,
-                data: {
-                    ...stepper.data,
-                    participantIds: stepper.data.participantIds.find(participantId => participantId === userItem?._id) ? stepper.data.participantIds.filter(participantId => participantId !== userItem?._id) : [...stepper.data.participantIds, userItem?._id]
-                }
+            onClick={() => dispatch(showModal({
+                type: modal.type,
+                data: modal.data.find(userId => userId === userItem?._id) ? modal.data.filter(userId => userId !== userItem?._id) : [...modal.data, userItem?._id]
             }))}
         >
 
@@ -106,7 +103,7 @@ const UserItem = ({userItem}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={stepper.data.participantIds.includes(userItem?._id) ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={modal.data.includes(userItem?._id) ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         noWrap
                     >
@@ -121,7 +118,7 @@ const UserItem = ({userItem}) => {
     )
 }
 
-const Contacts = () => {
+const Peoples = () => {
 
     const {users, filteredUsers} = useSelector(state => state.chat);
 
@@ -158,4 +155,4 @@ const Contacts = () => {
     )
 }
 
-export default Contacts;
+export default Peoples;

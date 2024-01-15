@@ -3,10 +3,12 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
     chats: [],
+    filteredChats: [],
     activeChat: {},
     onlineUsers: [],
     isTypingUsers: [],
     users: [],
+    filteredUsers: [],
     groups: [],
     messages: [],
     queueMessage: {},
@@ -19,55 +21,64 @@ export const chatSlice = createSlice({
         setChats: (state, action) => {
             state.chats = action.payload;
         },
-        addChat: (state , action) => {
+        addChat: (state, action) => {
             state.chats.push(action.payload);
         },
-        deleteChat: (state , action) => {
+        deleteChat: (state, action) => {
             state.chats = state.chats.filter(chat => chat._id !== action.payload);
         },
-        unSetChats: (state, action) => {
+        unSetChats: (state) => {
             state.chats = [];
         },
         setActiveChat: (state, action) => {
             state.activeChat = action.payload;
         },
-        unSetActiveChat: (state, action) => {
+        unSetActiveChat: (state) => {
             state.activeChat = {};
         },
         setUsers: (state, action) => {
             state.users = action.payload;
         },
-        unSetUsers: (state, action) => {
+        unSetUsers: (state) => {
             state.users = [];
         },
         setOnlineUsers: (state, action) => {
             state.onlineUsers = action.payload;
         },
-        unSetOnlineUsers: (state, action) => {
+        unSetOnlineUsers: (state) => {
             state.onlineUsers = [];
         },
         setIsTypingUsers: (state, action) => {
             state.isTypingUsers = action.payload;
         },
-        unSetIsTypingUsers: (state, action) => {
+        unSetIsTypingUsers: (state) => {
             state.isTypingUsers = [];
         },
         setGroups: (state, action) => {
             state.groups = action.payload;
         },
-        unSetGroups: (state, action) => {
+        unSetGroups: (state) => {
             state.groups = [];
+        },
+        joinGroup: (state, action) => {
+            state.chats.push(action.payload);
+        },
+        leaveGroup: (state, action) => {
+            state.chats = [...state.chats.filter(chat => chat._id !== action.payload._id), action.payload];
+            if (state.activeChat?._id === action.payload._id) {
+                state.activeChat = action.payload;
+            }
         },
         setMessages: (state, action) => {
             state.messages = action.payload;
         },
-        addMessage: (state , action) => {
-          state.messages.push(action.payload);
+        addMessage: (state, action) => {
+            state.messages.push(action.payload);
         },
-        deleteMessage: (state , action) => {
+        deleteMessage: (state, action) => {
             state.messages = state.messages.filter(message => message._id !== action.payload);
         },
-        unSetMessages: (state, action) => {
+        unSetMessages: (state) => {
             state.messages = [];
         },
         setQueueMessage: (state, action) => {
@@ -81,7 +92,19 @@ export const chatSlice = createSlice({
                 ...state.queueMessage,
                 progress: action.payload,
             }
-        }
+        },
+        setFilteredChats: (state, action) => {
+            state.filteredChats = action.payload;
+        },
+        unSetFilteredChats: (state) => {
+            state.filteredChats = [];
+        },
+        setFilteredUsers: (state, action) => {
+            state.filteredUsers = action.payload;
+        },
+        unSetFilteredUsers: (state) => {
+            state.filteredUsers = [];
+        },
     },
 })
 
@@ -100,13 +123,19 @@ export const {
     unSetIsTypingUsers,
     setGroups,
     unSetGroups,
+    joinGroup,
+    leaveGroup,
     setMessages,
     addMessage,
     deleteMessage,
     unSetMessages,
     setQueueMessage,
     setProgressQueueMessage,
-    unSetQueueMessage
+    unSetQueueMessage,
+    setFilteredChats,
+    unSetFilteredChats,
+    setFilteredUsers,
+    unSetFilteredUsers,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

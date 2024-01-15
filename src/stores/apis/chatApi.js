@@ -132,6 +132,51 @@ export const chatApi = createApi({
                 }
             },
         }),
+        joinGroupChat: builder.mutation({
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
+                try {
+                    const {language} = await getState().setting.appearance;
+
+                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/joinGroup", {receiverIds: arg.receiverIds}, {
+                        headers: {
+                            token: await getState().auth.token,
+                            chatId: arg.chatId,
+                            "Accept-Language": language,
+                        }
+                    });
+
+                    if (response.data.data){
+                        await dispatch(setActiveChat(response.data.data));
+                    }
+
+                    return {data: response.data.data};
+                } catch (error) {
+                    return {error}
+                }
+            },
+        }),
+        leaveGroupChat: builder.mutation({
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
+                try {
+                    const {language} = await getState().setting.appearance;
+                    const chats = await getState().chat.chats;
+
+                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/leaveGroup", null, {
+                        headers: {
+                            token: await getState().auth.token,
+                            chatId: arg,
+                            "Accept-Language": language,
+                        }
+                    });
+
+                    await dispatch(setChats(chats.filter(chat => chat._id !== response.data.data._id)));
+
+                    return {data: response.data.data};
+                } catch (error) {
+                    return {error}
+                }
+            },
+        }),
         deleteChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
@@ -163,5 +208,7 @@ export const {
     useGetChatQuery,
     useAddChatMutation,
     useAddGroupMutation,
+    useJoinGroupChatMutation,
+    useLeaveGroupChatMutation,
     useDeleteChatMutation
 } = chatApi;

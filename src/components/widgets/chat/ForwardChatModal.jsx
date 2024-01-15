@@ -5,7 +5,7 @@ import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/materia
 import {FiX} from "react-icons/fi";
 
 // components
-import SearchBar from "components/widgets/chats/Searchbar";
+import ChatsSearchbar from "components/widgets/chats/ChatsSearchbar";
 import Users from "components/widgets/chats/Users";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
@@ -65,7 +65,7 @@ const ModalContent = () => {
             }}
         >
 
-            <SearchBar/>
+            <ChatsSearchbar/>
 
             <Users/>
 

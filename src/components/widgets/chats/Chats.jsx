@@ -237,7 +237,7 @@ const ChatItem = ({chatItem}) => {
 
 const Chats = () => {
 
-    const {chats} = useSelector(state => state.chat);
+    const {chats , filteredChats} = useSelector(state => state.chat);
 
     return (
         <Stack
@@ -255,7 +255,12 @@ const Chats = () => {
         >
 
             {
-                chats.map(chatItem =>
+                filteredChats.length > 0 ? filteredChats.map(chatItem =>
+                    <ChatItem
+                        key={chatItem?._id}
+                        chatItem={chatItem}
+                    />
+                ) : chats.map(chatItem =>
                     <ChatItem
                         key={chatItem?._id}
                         chatItem={chatItem}

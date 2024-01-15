@@ -2,12 +2,12 @@
 import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
-import {FiX} from "react-icons/fi";
+import {Button, IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
+import {FiCheck, FiX} from "react-icons/fi";
 
 // components
 import UsersSearchbar from "components/widgets/chats/UsersSearchbar";
-import Users from "components/widgets/chats/Users";
+import Peoples from "components/widgets/chats/Peoples";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
 // providers
@@ -16,7 +16,7 @@ import {SocketContext} from "providers/Socket";
 // stores
 import {hideModal} from "stores/slices/appSlice";
 import {setUsers} from "stores/slices/chatSlice";
-import {useGetAllUserQuery} from "stores/apis/chatApi";
+import {useGetAllUserQuery, useJoinGroupChatMutation} from "stores/apis/chatApi";
 
 const ModalHeader = () => {
 
@@ -41,7 +41,7 @@ const ModalHeader = () => {
                 fontWeight='bold'
                 noWrap
             >
-                {t("typography.createChat")}
+                {t("typography.joinGroup")}
             </Typography>
 
             <IconButton
@@ -58,8 +58,31 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
-    const {users , filteredUsers} = useSelector(state => state.chat);
+    const dispatch = useDispatch();
+    const {_id} = useSelector(state => state.setting.profile);
+    const {modal} = useSelector(state => state.app);
+    const {users, filteredUsers , activeChat} = useSelector(state => state.chat);
     useGetAllUserQuery();
+    const [joinGroupChat , joinGroupChatResponse] = useJoinGroupChatMutation();
+    const {t} = useTranslation();
+    const {socket} = useContext(SocketContext);
+
+    useEffect(() => {
+
+        if (joinGroupChatResponse.isSuccess) {
+            dispatch(hideModal());
+        }
+
+        if (joinGroupChatResponse.status === "fulfilled") {
+            socket?.current?.emit("joinGroup", {
+                userId: _id,
+                chat: activeChat,
+                receiverIds: activeChat?.participantIds.filter(user => user._id !== _id).map(item => item._id),
+                socketId: socket?.current?.id
+            });
+        }
+
+    }, [joinGroupChatResponse]);
 
     return (
         <Stack
@@ -71,6 +94,7 @@ const ModalContent = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
+                height: "100%"
             }}
         >
 
@@ -78,17 +102,49 @@ const ModalContent = () => {
 
             {
                 (filteredUsers.length > 0 || users.length > 0) ? (
-                    <Users/>
+                    <Peoples/>
                 ) : (
                     <EmptyPlaceholder/>
                 )
             }
 
+            <Stack
+                direction="row"
+                gap={2}
+                sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                    alignItems: "center",
+                    width: "100%",
+                    marginTop: "auto"
+                }}
+            >
+
+                <Button
+                    variant="text"
+                    color="ternary"
+                    startIcon={<FiX size={20}/>}
+                    onClick={() => dispatch(hideModal())}
+                >
+                    {t("button.cancel")}
+                </Button>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    endIcon={<FiCheck size={20}/>}
+                    onClick={() => joinGroupChat({chatId: activeChat?._id, receiverIds: modal.data})}
+                >
+                    {t("button.submit")}
+                </Button>
+
+            </Stack>
+
         </Stack>
     )
 }
 
-const AddChatModal = () => {
+const JoinGroupModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
@@ -105,7 +161,7 @@ const AddChatModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "createChat")}
+            open={Boolean(modal?.isOpen && modal?.type === "joinGroup")}
             onClose={() => dispatch(hideModal())}
             sx={{
                 display: "flex",
@@ -141,4 +197,4 @@ const AddChatModal = () => {
     )
 }
 
-export default AddChatModal;
+export default JoinGroupModal;

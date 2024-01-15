@@ -6,7 +6,7 @@ import {useMediaQuery, Stack} from "@mui/material";
 // components
 import Appbar from "components/widgets/chats/Appbar.jsx";
 import Chats from "components/widgets/chats/Chats.jsx";
-import SearchBar from "components/widgets/chats/Searchbar.jsx";
+import ChatsSearchbar from "components/widgets/chats/ChatsSearchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 import Empty from "components/widgets/chats/Empty";
@@ -23,7 +23,7 @@ import {useGetAllChatQuery} from "stores/apis/chatApi";
 const ChatsPage = () => {
 
     const params = useParams();
-    const {chats} = useSelector(state => state.chat);
+    const {chats, filteredChats} = useSelector(state => state.chat);
     useGetAllChatQuery();
     const isTablet = useMediaQuery('(max-width: 768px)');
 
@@ -57,10 +57,10 @@ const ChatsPage = () => {
 
                         <Appbar/>
 
-                        <SearchBar/>
+                        <ChatsSearchbar/>
 
                         {
-                            chats.length > 0 ? (
+                            (filteredChats.length > 0 || chats.length > 0) ? (
                                 <Chats/>
                             ) : (
                                 <EmptyPlaceholder/>

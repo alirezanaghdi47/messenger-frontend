@@ -44,9 +44,13 @@ const UserItem = ({userItem}) => {
             component="li"
             sx={{
                 width: "100%",
+                borderBottom: `1px solid ${theme.palette.secondary.main}`,
                 borderRadius: 1,
                 padding: 1.5,
                 cursor: "pointer",
+                "&:last-of-type": {
+                    borderBottom: "none"
+                }
             }}
             onClick={() => addChat(userItem?._id)}
         >
@@ -135,7 +139,7 @@ const UserItem = ({userItem}) => {
 
 const Users = () => {
 
-    const {users} = useSelector(state => state.chat);
+    const {users, filteredUsers} = useSelector(state => state.chat);
 
     return (
         <Stack
@@ -153,7 +157,12 @@ const Users = () => {
         >
 
             {
-                users.map(userItem =>
+                filteredUsers.length > 0 ? filteredUsers.map(userItem =>
+                    <UserItem
+                        key={userItem?._id}
+                        userItem={userItem}
+                    />
+                ) : users.map(userItem =>
                     <UserItem
                         key={userItem?._id}
                         userItem={userItem}

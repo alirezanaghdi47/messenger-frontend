@@ -10,7 +10,9 @@ import {
     addMessage,
     deleteMessage,
     addChat,
-    deleteChat
+    deleteChat,
+    leaveGroup,
+    joinGroup
 } from "stores/slices/chatSlice";
 
 export const SocketContext = createContext(null);
@@ -52,6 +54,14 @@ const Socket = ({children}) => {
         dispatch(deleteChat(data));
     }
 
+    const _handleJoinGroupResponse = async (data) => {
+        dispatch(joinGroup(data));
+    }
+
+    const _handleLeaveGroupResponse = async (data) => {
+        dispatch(leaveGroup(data));
+    }
+
     const _handleAddMessageResponse = async (data) => {
         dispatch(addMessage(data));
     }
@@ -67,6 +77,8 @@ const Socket = ({children}) => {
         socket?.current?.on('startTypingResponse', _handleStartTypingResponse);
         socket?.current?.on('stopTypingResponse', _handleStopTypingResponse);
         socket?.current?.on('addChatResponse', _handleAddChatResponse);
+        socket?.current?.on('joinGroupResponse', _handleJoinGroupResponse);
+        socket?.current?.on('leaveGroupResponse', _handleLeaveGroupResponse);
         socket?.current?.on('deleteChatResponse', _handleDeleteChatResponse);
         socket?.current?.on('addMessageResponse', _handleAddMessageResponse);
         socket?.current?.on('deleteMessageResponse', _handleDeleteMessageResponse);

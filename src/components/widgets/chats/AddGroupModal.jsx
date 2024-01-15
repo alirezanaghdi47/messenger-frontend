@@ -9,7 +9,7 @@ import {FiCheck, FiChevronLeft, FiChevronRight, FiX} from "react-icons/fi";
 // components
 import AvatarInput from "components/modules/AvatarInput";
 import TextInput from "components/modules/TextInput";
-import SearchBar from "components/widgets/chats/Searchbar";
+import UsersSearchbar from "components/widgets/chats/UsersSearchbar";
 import Contacts from "components/widgets/chats/Contacts";
 import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
 
@@ -70,7 +70,7 @@ const ModalContent = () => {
     const {stepper} = useSelector(state => state.app);
     const {_id} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
-    const {users} = useSelector(state => state.chat);
+    const {users, filteredUsers} = useSelector(state => state.chat);
     useGetAllUserQuery();
     const [addGroup, addGroupResponse] = useAddGroupMutation();
     const {t} = useTranslation();
@@ -172,9 +172,9 @@ const ModalContent = () => {
             {
                 stepper.step === 1 && (
                     <>
-                        <SearchBar/>
+                        <UsersSearchbar/>
                         {
-                            users.length > 0 ? (
+                            (filteredUsers.length > 0 || users.length > 0) ? (
                                 <Contacts/>
                             ) : (
                                 <EmptyPlaceholder/>

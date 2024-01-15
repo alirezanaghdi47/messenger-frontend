@@ -29,6 +29,7 @@ const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardC
 const ReplyChatPopup = Loadable(() => import("components/widgets/chat/ReplyChatPopup"));
 const DeleteChatModal = Loadable(() => import("components/widgets/chat/DeleteChatModal"));
 const DeleteContactModal = Loadable(() => import("components/widgets/chat/DeleteContactModal"));
+const JoinGroupModal = Loadable(() => import("components/widgets/chats/JoinGroupModal"));
 
 const ChatPage = () => {
 
@@ -142,6 +143,12 @@ const ChatPage = () => {
             {
                 Boolean(popup?.isOpen && popup?.type === "replyChat") && (
                     <ReplyChatPopup/>
+                )
+            }
+
+            {
+                Boolean(modal?.isOpen && modal?.type === "joinGroup") && (
+                    <JoinGroupModal/>
                 )
             }
 
