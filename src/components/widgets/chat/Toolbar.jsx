@@ -120,7 +120,7 @@ const DesktopToolbar = ({
             >
 
                 {
-                    Object.hasOwn(activeChat, "groupId") && (
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id ? (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -146,18 +146,14 @@ const DesktopToolbar = ({
                             </Typography>
 
                         </MenuItem>
-                    )
-                }
-
-                {
-                    Object.hasOwn(activeChat, "groupId") && (
+                    ) : (
                         <MenuItem
                             sx={{
                                 display: "flex",
                                 gap: 1,
                                 justifyContent: "start",
                                 alignItems: "center",
-                                color: "ternary.main"
+                                color: "error.main"
                             }}
                             onClick={() => {
                                 onCloseDropdownMenu();
@@ -169,7 +165,7 @@ const DesktopToolbar = ({
 
                             <Typography
                                 variant="body2"
-                                color="ternary"
+                                color="error"
                                 fontWeight='bold'
                             >
                                 {t("menu.leave")}
@@ -179,31 +175,35 @@ const DesktopToolbar = ({
                     )
                 }
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "error.main"
-                    }}
-                    onClick={() => {
-                        onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteContact", data: activeChat}));
-                    }}
-                >
+                {
+                    ((Object.hasOwn(activeChat , "groupId") && activeChat?.groupId?.adminId === _id) || !Object.hasOwn(activeChat , "groupId")) && (
+                        <MenuItem
+                            sx={{
+                                display: "flex",
+                                gap: 1,
+                                justifyContent: "start",
+                                alignItems: "center",
+                                color: "error.main"
+                            }}
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                dispatch(showModal({type: "deleteContact", data: activeChat}));
+                            }}
+                        >
 
-                    <FiTrash2 size={20}/>
+                            <FiTrash2 size={20}/>
 
-                    <Typography
-                        variant="body2"
-                        color="error"
-                        fontWeight='bold'
-                    >
-                        {t("menu.delete")}
-                    </Typography>
+                            <Typography
+                                variant="body2"
+                                color="error"
+                                fontWeight='bold'
+                            >
+                                {t("menu.delete")}
+                            </Typography>
 
-                </MenuItem>
+                        </MenuItem>
+                    )
+                }
 
             </Menu>
 
@@ -277,7 +277,7 @@ const MobileToolbar = ({
             >
 
                 {
-                    !activeChat?.groupId && (
+                    !Object.hasOwn(activeChat , "groupId") && (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -308,7 +308,7 @@ const MobileToolbar = ({
                 }
 
                 {
-                    !activeChat?.groupId && (
+                    !Object.hasOwn(activeChat , "groupId") && (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -338,7 +338,7 @@ const MobileToolbar = ({
                 }
 
                 {
-                    Object.hasOwn(activeChat, "groupId") && (
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id ? (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -364,18 +364,14 @@ const MobileToolbar = ({
                             </Typography>
 
                         </MenuItem>
-                    )
-                }
-
-                {
-                    Object.hasOwn(activeChat, "groupId") && (
+                    ) : (
                         <MenuItem
                             sx={{
                                 display: "flex",
                                 gap: 1,
                                 justifyContent: "start",
                                 alignItems: "center",
-                                color: "ternary.main"
+                                color: "error.main"
                             }}
                             onClick={() => {
                                 onCloseDropdownMenu();
@@ -387,7 +383,7 @@ const MobileToolbar = ({
 
                             <Typography
                                 variant="body2"
-                                color="ternary"
+                                color="error"
                                 fontWeight='bold'
                             >
                                 {t("menu.leave")}
@@ -397,31 +393,35 @@ const MobileToolbar = ({
                     )
                 }
 
-                <MenuItem
-                    sx={{
-                        display: "flex",
-                        gap: 1,
-                        justifyContent: "start",
-                        alignItems: "center",
-                        color: "error.main"
-                    }}
-                    onClick={() => {
-                        onCloseDropdownMenu();
-                        dispatch(showModal({type: "deleteContact", data: activeChat}));
-                    }}
-                >
+                {
+                    ((Object.hasOwn(activeChat , "groupId") && activeChat?.groupId?.adminId === _id) || !Object.hasOwn(activeChat , "groupId")) && (
+                        <MenuItem
+                            sx={{
+                                display: "flex",
+                                gap: 1,
+                                justifyContent: "start",
+                                alignItems: "center",
+                                color: "error.main"
+                            }}
+                            onClick={() => {
+                                onCloseDropdownMenu();
+                                dispatch(showModal({type: "deleteContact", data: activeChat}));
+                            }}
+                        >
 
-                    <FiTrash2 size={20}/>
+                            <FiTrash2 size={20}/>
 
-                    <Typography
-                        variant="body2"
-                        color="error"
-                        fontWeight='bold'
-                    >
-                        {t("menu.delete")}
-                    </Typography>
+                            <Typography
+                                variant="body2"
+                                color="error"
+                                fontWeight='bold'
+                            >
+                                {t("menu.delete")}
+                            </Typography>
 
-                </MenuItem>
+                        </MenuItem>
+                    )
+                }
 
             </Menu>
 

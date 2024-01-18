@@ -67,11 +67,11 @@ const ModalHeader = () => {
 const ModalContent = () => {
 
     const dispatch = useDispatch();
-    const {stepper} = useSelector(state => state.app);
+    const {stepper , modal} = useSelector(state => state.app);
     const {_id} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
     const {users, filteredUsers} = useSelector(state => state.chat);
-    useGetAllUserQuery();
+    const {refetch: allUserRefetch} = useGetAllUserQuery();
     const [addGroup, addGroupResponse] = useAddGroupMutation();
     const {t} = useTranslation();
     const {socket} = useContext(SocketContext);
@@ -84,7 +84,7 @@ const ModalContent = () => {
         },
         validationSchema: addGroupSchema,
         onSubmit: async (result) => {
-            dispatch(setStepper({step: 1 , data: {...result , participantIds: []}}));
+            dispatch(setStepper({step: 1 , data: {...result , participantIds: [_id]}}));
         }
     });
 
@@ -105,6 +105,10 @@ const ModalContent = () => {
         }
 
     }, [addGroupResponse]);
+
+    useEffect(() => {
+        allUserRefetch();
+    }, [Boolean(modal.isOpen && modal.type === "createGroup")]);
 
     return (
         <Stack

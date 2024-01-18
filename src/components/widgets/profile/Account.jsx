@@ -48,7 +48,7 @@ const Account = () => {
     return (
         <Stack
             direction="column"
-            gap={4}
+            gap={2}
             sx={{
                 width: "100%",
                 height: isTablet ? "calc(100dvh - 70px)" : "max-content",

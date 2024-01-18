@@ -85,3 +85,9 @@ export const throttle = (callback, delay) => {
         }
     };
 }
+
+export const convertHexToEmoji = (hex) => {
+    const codePoints = [hex].map(hex => parseInt(hex, 16));
+    const emoji = String.fromCodePoint.apply(null, codePoints);
+    return emoji;
+}

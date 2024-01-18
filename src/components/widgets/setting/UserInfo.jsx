@@ -49,7 +49,7 @@ const UserLinks = () => {
     return (
         <Stack
             direction="column"
-            gap={4}
+            gap={2}
             sx={{
                 display: "flex",
                 justifyContent: "center",

@@ -8,6 +8,7 @@
       "background": "Background",
       "theme": "Theme",
       "isOnline": "Online",
+      "isOffline": "Offline",
       "isTyping": "Is Typing ...",
       "notFound": "Page not found",
       "empty": "Data not found",
@@ -131,7 +132,7 @@
       "geoLocationNotSupport": "GeoLocation not supported",
       "geoLocationFailed": "GeoLocation is failed",
       "fileMaxSize": "Maximum file size should be 50 MB",
-      "ImageMaxSize": "Maximum image size should be 5 MB",
+      "ImageMaxSize": "Maximum image size should be 25 MB",
       "videoMaxSize": "Maximum video size should be 10 MB",
       "phoneNumberFormat": "Phone Number is valid",
       "phoneNumberRequired": "Phone Number is required"

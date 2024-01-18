@@ -16,7 +16,7 @@ import {SocketContext} from "providers/Socket";
 // stores
 import {hideModal} from "stores/slices/appSlice";
 import {setUsers} from "stores/slices/chatSlice";
-import {useGetAllUserQuery, useJoinGroupChatMutation} from "stores/apis/chatApi";
+import {useGetAllRemainingUserQuery, useJoinGroupChatMutation} from "stores/apis/chatApi";
 
 const ModalHeader = () => {
 
@@ -62,7 +62,7 @@ const ModalContent = () => {
     const {_id} = useSelector(state => state.setting.profile);
     const {modal} = useSelector(state => state.app);
     const {users, filteredUsers , activeChat} = useSelector(state => state.chat);
-    useGetAllUserQuery();
+    const {refetch: allRemainingUserRefetch} = useGetAllRemainingUserQuery(activeChat?.participantIds.map(user => user._id));
     const [joinGroupChat , joinGroupChatResponse] = useJoinGroupChatMutation();
     const {t} = useTranslation();
     const {socket} = useContext(SocketContext);
@@ -77,12 +77,16 @@ const ModalContent = () => {
             socket?.current?.emit("joinGroup", {
                 userId: _id,
                 chat: activeChat,
-                receiverIds: activeChat?.participantIds.filter(user => user._id !== _id).map(item => item._id),
+                receiverIds: activeChat?.participantIds.map(user => user._id),
                 socketId: socket?.current?.id
             });
         }
 
     }, [joinGroupChatResponse]);
+
+    useEffect(() => {
+        allRemainingUserRefetch();
+    } , [Boolean(modal.isOpen && modal.type === "joinGroup")])
 
     return (
         <Stack

@@ -1,4 +1,5 @@
 // libraries
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
@@ -120,7 +121,14 @@ const UserItem = ({userItem}) => {
 
 const Peoples = () => {
 
-    const {users, filteredUsers} = useSelector(state => state.chat);
+    const dispatch = useDispatch();
+    const {modal} = useSelector(state => state.app);
+    const {_id} = useSelector(state => state.setting.profile);
+    const {users, filteredUsers , activeChat} = useSelector(state => state.chat);
+
+    useEffect(() => {
+        dispatch(showModal({type: modal.type , data: activeChat.participantIds.map(user => user._id)?.filter(item => item !== _id)}));
+    }, [Boolean(modal.isOpen && modal.type === "joinGroup")]);
 
     return (
         <Stack

@@ -273,10 +273,7 @@ export const ImageMessage = ({message}) => {
                         visibleByDefault
                         effect="blur"
                         width={250}
-                        style={{
-                            aspectRatio: 3 / 2,
-                            borderRadius: 8,
-                        }}
+                        style={{borderRadius: 8}}
                     />
 
                 </Box>

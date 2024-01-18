@@ -19,7 +19,7 @@ export const editProfileSchema = Yup.object().shape({
 });
 
 export const registerSchema = Yup.object().shape({
-    userName: Yup.string().matches(/^[a-z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
+    userName: Yup.string().matches(/^[a-zA-Z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
     phoneNumber: Yup.string().matches(/^(098|0098|98|\+98|0)?9(0[0-5]|[1 3]\d|2[0-3]|9[0-9]|41)\d{7}$/g , i18n.t("error.phoneNumberFormat")).required(i18n.t("error.phoneNumberRequired")),
 });
 
@@ -49,6 +49,6 @@ export const addGroupSchema = Yup.object().shape({
             return ['image/png', 'image/jpg', 'image/jpeg'].includes(value.type);
         }
     }),
-    name: Yup.string().matches(/^[a-z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
+    name: Yup.string().matches(/^[a-zA-Z0-9_\.\-\@]+$/ , i18n.t("error.userNameFormat")).min(8,i18n.t("error.userNameMinLength")).max(40 , i18n.t("error.userNameMaxLength")).required(i18n.t("error.userNameRequired")),
     description: Yup.string().max(200, i18n.t("error.biographyMaxLength")),
 });

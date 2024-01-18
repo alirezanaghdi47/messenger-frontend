@@ -1,4 +1,4 @@
-export const version = "1.6.0";
+export const version = "1.8.0";
 
 export const languageList = [
     {id: 1, title: "button.persian", value: "fa", flag: "/images/fa.png"},
@@ -23,4 +23,8 @@ export const backgroundList = [
     {id: 3, background: "/images/desktop-3.jpg"},
     {id: 4, background: "/images/desktop-4.jpg"},
     {id: 5, background: "/images/desktop-5.jpg"},
+];
+
+export const emojiList = [
+    "1F600", "1F601", "1F602", "1F923", "1F605", "1F609", "1F60D", "1F60E", "1F914", "1F611", "1F623", "1F625", "1F910", "1F614", "1F629", "1F632", "1F631", "1F621", "1F446", "1F447" , "1F44D" , "1F44F" , "1F496"
 ];

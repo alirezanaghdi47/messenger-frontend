@@ -26,6 +26,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const musicRef = useRef(null);
     const {socket} = useContext(SocketContext);
     const {_id} = useSelector(state => state.setting.profile);
+    const {language} = useSelector(state => state.setting.appearance);
     const {activeChat} = useSelector(state => state.chat);
     const [addFileMessage , addFileResponse] = useAddFileMessageMutation();
     const [addImageMessage, addImageResponse] = useAddImageMessageMutation();
@@ -113,7 +114,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
         const video = await e.target.files[0];
 
-        if (video.size > 10 * 1_024_000) {
+        if (video.size > 25 * 1_024_000) {
             toast.error(t("error.videoMaxSize"));
         } else {
             addVideoMessage({video, chatId: activeChat?._id, userId: _id});
@@ -157,11 +158,11 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
             anchorEl={anchorEl}
             anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: language === "en" ? 'left' : 'right',
             }}
             transformOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: language === "en" ? 'left' : 'right',
             }}
             open={isOpen}
             onClose={onClose}

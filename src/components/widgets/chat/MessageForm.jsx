@@ -9,6 +9,7 @@ import {LuSend} from "react-icons/lu";
 
 // components
 import TextInput from "components/modules/TextInput";
+import EmojiPicker from "components/widgets/chat/EmojiPicker";
 
 // providers
 import {SocketContext} from "providers/Socket";
@@ -54,46 +55,53 @@ const MessageForm = () => {
     }, [params.chatId]);
 
     return (
-        <TextInput
-            name="text"
-            placeholder={t("input.text")}
-            endIcon={
-                <IconButton
-                    varinat="text"
-                    color="ternary"
-                    onClick={formik.handleSubmit}
-                >
-                    <LuSend size={20}/>
-                </IconButton>
-            }
-            value={formik.values.text}
-            onChange={formik.handleChange}
-            onKeyDown={(e) => {
-                if (!isTyping) {
-                    socket?.current?.emit('startTyping', {
-                        userId: _id,
-                        chatId: params.chatId,
-                        socketId: socket?.current?.id
-                    });
-                    setIsTyping(true);
+        <>
+            <EmojiPicker
+                text={formik.values.text}
+                setText={(value) => formik.setFieldValue("text", value)}
+            />
+
+            <TextInput
+                name="text"
+                placeholder={t("input.text")}
+                endIcon={
+                    <IconButton
+                        varinat="text"
+                        color="ternary"
+                        onClick={formik.handleSubmit}
+                    >
+                        <LuSend size={20}/>
+                    </IconButton>
                 }
-                let lastTypingTime = new Date().getTime();
-                let timer = 2000;
-                setTimeout(() => {
-                    let timeNow = new Date().getTime();
-                    let timeDifference = timeNow - lastTypingTime;
-                    if (timeDifference >= timer) {
-                        socket?.current?.emit('stopTyping', {
+                value={formik.values.text}
+                onChange={formik.handleChange}
+                onKeyDown={(e) => {
+                    if (!isTyping) {
+                        socket?.current?.emit('startTyping', {
                             userId: _id,
                             chatId: params.chatId,
                             socketId: socket?.current?.id
                         });
-                        setIsTyping(false);
+                        setIsTyping(true);
                     }
-                }, timer);
-            }}
-            error={formik.errors.text}
-        />
+                    let lastTypingTime = new Date().getTime();
+                    let timer = 2000;
+                    setTimeout(() => {
+                        let timeNow = new Date().getTime();
+                        let timeDifference = timeNow - lastTypingTime;
+                        if (timeDifference >= timer) {
+                            socket?.current?.emit('stopTyping', {
+                                userId: _id,
+                                chatId: params.chatId,
+                                socketId: socket?.current?.id
+                            });
+                            setIsTyping(false);
+                        }
+                    }, timer);
+                }}
+                error={formik.errors.text}
+            />
+        </>
     )
 }
 

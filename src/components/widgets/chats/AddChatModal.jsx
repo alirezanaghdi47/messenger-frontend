@@ -58,8 +58,13 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
+    const {modal} = useSelector(state => state.app);
     const {users , filteredUsers} = useSelector(state => state.chat);
-    useGetAllUserQuery();
+    const {refetch: allUserRefetch} = useGetAllUserQuery();
+
+    useEffect(() => {
+        allUserRefetch();
+    }, [Boolean(modal.isOpen && modal.type === "createChat")]);
 
     return (
         <Stack

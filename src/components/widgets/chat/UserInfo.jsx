@@ -25,46 +25,34 @@ const User = () => {
             }}
         >
 
-            <Badge
-                color={isActiveReceiver ? "success" : "secondary"}
-                variant="dot"
-                overlap="circular"
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                }}
-            >
-
-                {
-                    activeChat?.participantIds.find(item => item._id !== _id)?.avatar ? (
-                        <LazyLoadImage
-                            src={activeChat?.participantIds.find(item => item._id !== _id)?.avatar}
-                            alt="avatar"
-                            visibleByDefault
-                            effect="blur"
-                            width={40}
-                            height={40}
-                            style={{borderRadius: "50%"}}
-                        />
-                    ) : (
-                        <Box
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                bgcolor: "background.default",
-                                color: "ternary.main",
-                                width: 40,
-                                height: 40,
-                                borderRadius: "50%"
-                            }}
-                        >
-                            <FiUser size={20}/>
-                        </Box>
-                    )
-                }
-
-            </Badge>
+            {
+                activeChat?.participantIds.find(item => item._id !== _id)?.avatar ? (
+                    <LazyLoadImage
+                        src={activeChat?.participantIds.find(item => item._id !== _id)?.avatar}
+                        alt="avatar"
+                        visibleByDefault
+                        effect="blur"
+                        width={40}
+                        height={40}
+                        style={{borderRadius: "50%"}}
+                    />
+                ) : (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            bgcolor: "background.default",
+                            color: "ternary.main",
+                            width: 40,
+                            height: 40,
+                            borderRadius: "50%"
+                        }}
+                    >
+                        <FiUser size={20}/>
+                    </Box>
+                )
+            }
 
             <Stack
                 direction="column"
@@ -86,13 +74,22 @@ const User = () => {
                 </Typography>
 
                 {
-                    isTypingReceiver && (
+                    isTypingReceiver ? (
                         <Typography
                             variant="caption"
                             color="textSecondary"
                             noWrap
                         >
                             {t("typography.isTyping")}
+                        </Typography>
+                    ) : (
+                        <Typography
+                            variant="caption"
+                            color={isActiveReceiver ? "success.main" : "textSecondary"}
+                            fontWeight='bold'
+                            noWrap
+                        >
+                            {isActiveReceiver ? t("typography.isOnline") : t("typography.isOffline")}
                         </Typography>
                     )
                 }

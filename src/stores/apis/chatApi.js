@@ -36,6 +36,28 @@ export const chatApi = createApi({
             },
             providesTags: ["allUser"]
         }),
+        getAllRemainingUser: builder.query({
+            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
+                try {
+                    const {language} = await getState().setting.appearance;
+
+                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllRemainingUser", {
+                        headers: {
+                            token: await getState().auth.token,
+                            filteredUserIds: JSON.stringify(arg),
+                            "Accept-Language": language,
+                        }
+                    });
+
+                    await dispatch(setUsers(response.data.data));
+
+                    return {data: response.data.data};
+                } catch (error) {
+                    return {error}
+                }
+            },
+            providesTags: ["allRemainingUser"]
+        }),
         getAllChat: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
@@ -204,6 +226,7 @@ export const chatApi = createApi({
 
 export const {
     useGetAllUserQuery,
+    useGetAllRemainingUserQuery,
     useGetAllChatQuery,
     useGetChatQuery,
     useAddChatMutation,
