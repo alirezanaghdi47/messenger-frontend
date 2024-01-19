@@ -3,6 +3,10 @@ import {useSelector} from "react-redux";
 import {useTheme} from "@mui/material";
 import {Toaster} from "react-hot-toast";
 
+// helpers
+import InstallPWA from "helpers/InstallPwa";
+import Offline from "helpers/Offline";
+
 // providers
 import Mui from "providers/Mui.jsx";
 import Router from "providers/Router.jsx";
@@ -34,6 +38,10 @@ const App = () => {
                     }
                 }}
             />
+
+            <InstallPWA/>
+
+            <Offline/>
 
             <Router/>
 

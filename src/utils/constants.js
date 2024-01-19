@@ -1,4 +1,4 @@
-export const version = "1.8.0";
+export const version = "1.9.0";
 
 export const languageList = [
     {id: 1, title: "button.persian", value: "fa", flag: "/images/fa.png"},

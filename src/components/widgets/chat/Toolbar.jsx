@@ -120,7 +120,7 @@ const DesktopToolbar = ({
             >
 
                 {
-                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id ? (
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id && (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -146,7 +146,11 @@ const DesktopToolbar = ({
                             </Typography>
 
                         </MenuItem>
-                    ) : (
+                    )
+                }
+
+                {
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId !== _id && (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -338,7 +342,7 @@ const MobileToolbar = ({
                 }
 
                 {
-                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id ? (
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId === _id && (
                         <MenuItem
                             sx={{
                                 display: "flex",
@@ -364,7 +368,11 @@ const MobileToolbar = ({
                             </Typography>
 
                         </MenuItem>
-                    ) : (
+                    )
+                }
+
+                {
+                    Object.hasOwn(activeChat, "groupId") && activeChat?.groupId?.adminId !== _id && (
                         <MenuItem
                             sx={{
                                 display: "flex",

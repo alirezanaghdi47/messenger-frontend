@@ -1,7 +1,7 @@
 {
-  "short_name": "Messenger",
-  "name": "Messenger",
-  "description": "a messenger for chatting & calling",
+  "short_name": "Talkative",
+  "name": "Talkative",
+  "description": "Connect and chat with friends seamlessly on Messenger Web App. Enjoy instant messaging, voice and video calls, and stay connected with your social circle. Experience a user-friendly interface and real-time communication on the go.",
   "scope": "/",
   "start_url": ".",
   "display": "standalone",

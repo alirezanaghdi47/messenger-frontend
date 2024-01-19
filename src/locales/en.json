@@ -2,6 +2,8 @@
   "translation": {
     "domain": "Messenger",
     "typography": {
+      "installPwa": "Do you want to use PWA of website ? ",
+      "offline": "You are offline",
       "language": "Language",
       "exampleMessage": "Hello , how are you ?",
       "color": "Color",
@@ -119,7 +121,9 @@
       "signIn": "Sign In",
       "signUp": "Sign Up",
       "login": "Login",
-      "register": "Register"
+      "register": "Register",
+      "accept": "Accept",
+      "reject": "Reject"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

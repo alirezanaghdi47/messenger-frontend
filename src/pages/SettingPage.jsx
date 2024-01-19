@@ -1,6 +1,6 @@
 // libraries
 import {Outlet, useLocation} from "react-router-dom";
-import {Stack , useMediaQuery} from "@mui/material";
+import {Stack, useMediaQuery} from "@mui/material";
 
 // components
 import Appbar from "components/widgets/setting/Appbar.jsx";

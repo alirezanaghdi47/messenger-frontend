@@ -2,6 +2,8 @@
   "translation": {
     "domain": "پیام رسان",
     "typography": {
+      "installPwa": "آیا مایل به استفاده از وب اپلیکیشن سایت هستید ؟",
+      "offline": "شما به اینترنت متصل نیستید",
       "language": "زبان",
       "exampleMessage": "سلام چطوری ؟",
       "color": "رنگ",
@@ -118,7 +120,9 @@
       "show": "مشاهده",
       "delete": "حذف",
       "signIn": "ورود",
-      "signUp": "عضویت"
+      "signUp": "عضویت",
+      "accept": "مایل هستم",
+      "reject": "تمایلی ندارم"
     },
     "error": {
       "avatarSize": "حجم آواتار باید کمتر از 5 مگابایت باشد",
