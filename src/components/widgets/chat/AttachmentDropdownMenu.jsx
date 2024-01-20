@@ -32,7 +32,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const [addImageMessage, addImageResponse] = useAddImageMessageMutation();
     const [addMusicMessage, addMusicResponse] = useAddMusicMessageMutation();
     const [addVideoMessage, addVideoResponse] = useAddVideoMessageMutation();
-    const [addLocationMessage , addLocationResponse] = useAddLocationMessageMutation();
+    // const [addLocationMessage , addLocationResponse] = useAddLocationMessageMutation();
     const {t} = useTranslation();
 
     useEffect(() => {
@@ -71,14 +71,14 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
         }
     }, [addMusicResponse]);
 
-    useEffect(() => {
-        if (addLocationResponse.status === "fulfilled"){
-            socket?.current?.emit("addMessage", {
-                message: addLocationResponse.data,
-                chatId: activeChat?._id,
-            });
-        }
-    }, [addLocationResponse]);
+    // useEffect(() => {
+    //     if (addLocationResponse.status === "fulfilled"){
+    //         socket?.current?.emit("addMessage", {
+    //             message: addLocationResponse.data,
+    //             chatId: activeChat?._id,
+    //         });
+    //     }
+    // }, [addLocationResponse]);
 
     const _handleSendFile = async (e) => {
 
@@ -140,18 +140,18 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     }
 
-    const _handleSendLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((res) => {
-                addLocationMessage({location: res.coords, chatId: activeChat?._id, userId: _id});
-                onClose();
-            }, (err) => {
-                toast.error(t("error.geoLocationFailed"));
-            });
-        } else {
-            toast.error(t("error.geoLocationNotSupport"));
-        }
-    }
+    // const _handleSendLocation = () => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition((res) => {
+    //             addLocationMessage({location: res.coords, chatId: activeChat?._id, userId: _id});
+    //             onClose();
+    //         }, (err) => {
+    //             toast.error(t("error.geoLocationFailed"));
+    //         });
+    //     } else {
+    //         toast.error(t("error.geoLocationNotSupport"));
+    //     }
+    // }
 
     return (
         <Menu
@@ -297,28 +297,28 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
             </MenuItem>
 
             {/* location */}
-            <MenuItem
-                sx={{
-                    display: "flex",
-                    gap: 1,
-                    justifyContent: "start",
-                    alignItems: "center",
-                    color: "ternary.main"
-                }}
-                onClick={_handleSendLocation}
-            >
+            {/*<MenuItem*/}
+            {/*    sx={{*/}
+            {/*        display: "flex",*/}
+            {/*        gap: 1,*/}
+            {/*        justifyContent: "start",*/}
+            {/*        alignItems: "center",*/}
+            {/*        color: "ternary.main"*/}
+            {/*    }}*/}
+            {/*    onClick={_handleSendLocation}*/}
+            {/*>*/}
 
-                <FiMapPin size={20}/>
+            {/*    <FiMapPin size={20}/>*/}
 
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    fontWeight='bold'
-                >
-                    {t("menu.location")}
-                </Typography>
+            {/*    <Typography*/}
+            {/*        variant="body2"*/}
+            {/*        color="textSecondary"*/}
+            {/*        fontWeight='bold'*/}
+            {/*    >*/}
+            {/*        {t("menu.location")}*/}
+            {/*    </Typography>*/}
 
-            </MenuItem>
+            {/*</MenuItem>*/}
 
         </Menu>
     )

@@ -1,4 +1,5 @@
 // libraries
+import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useOnline} from '@react-hooks-library/core';
@@ -7,14 +8,23 @@ import {Modal, Stack, useMediaQuery, alpha, Typography} from "@mui/material";
 
 const Offline = () => {
 
+    const [showBanner , setShowBanner] = useState(false);
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const isOnline = useOnline();
     const isMobile = useMediaQuery('(max-width: 576px)');
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setShowBanner(!isOnline);
+        } , 1000);
+
+        return () => clearTimeout(timeout);
+    }, [isOnline]);
+
     return (
         <Modal
-            open={!isOnline}
+            open={showBanner}
             onClose={() => null}
             disableAutoFocus
             hideBackdrop

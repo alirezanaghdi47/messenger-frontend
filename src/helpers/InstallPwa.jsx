@@ -10,13 +10,14 @@ import {FiCheck, FiX} from "react-icons/fi";
 
 const InstallPWA = () => {
 
+    const [showBanner, setShowBanner] = useState(false);
     const [supportPWA, setSupportPWA] = useState(false);
     const [promptInstall, setPromptInstall] = useState(null);
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
     const [cookies, setCookie] = useCookies(["pwa-installer"]);
     const isOnline = useOnline();
-    const isMobile = useMediaQuery('(max-width: 576px)');
+    const isTablet = useMediaQuery('(max-width: 768px)');
 
     const beforeInstallPrompt = e => {
         e.preventDefault();
@@ -33,7 +34,8 @@ const InstallPWA = () => {
         e.preventDefault();
         if (!promptInstall) return;
         const result = await promptInstall.prompt();
-        if (result.outcome === "accepted"){
+
+        if (result.outcome === "accepted") {
             setCookie("pwa-installer", "accepted");
         } else if (result.outcome === "dismissed") {
             setCookie("pwa-installer", "dismissed");
@@ -46,11 +48,19 @@ const InstallPWA = () => {
         setCookie("pwa-installer", "rejected");
     };
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setShowBanner(isOnline && isTablet && supportPWA && !cookies["pwa-installer"])
+        }, 1000);
+
+        return () => clearTimeout(timeout);
+    }, [isOnline, isTablet, supportPWA, cookies["pwa-installer"]]);
+
     if (!supportPWA) return null;
 
     return (
         <Modal
-            open={Boolean(isOnline && supportPWA && !cookies["pwa-installer"])}
+            open={showBanner}
             onClose={_handleReject}
             disableAutoFocus
             hideBackdrop
@@ -71,8 +81,8 @@ const InstallPWA = () => {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: isMobile ? "100%" : 480,
-                    height: isMobile ? "100%" : "max-content",
+                    width: "100%",
+                    height: "100%",
                     padding: 4,
                 }}
             >
