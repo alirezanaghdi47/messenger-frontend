@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Button, Stack} from "@mui/material";
@@ -9,15 +10,25 @@ import Header from "components/widgets/appearance/Header";
 
 // stores
 import {useEditLanguageMutation} from "stores/apis/settingApi";
+import {setLanguage} from "stores/slices/settingSlice";
 
-// utils
-import {languageList} from "utils/constants.js";
+const languageList = [
+    {id: 1, title: "button.persian", value: "fa", flag: "/images/fa.png"},
+    {id: 2, title: "button.english", value: "en", flag: "/images/en.png"},
+];
 
 const LanguageItem = ({languageItem}) => {
 
+    const dispatch = useDispatch();
     const {language} = useSelector(state => state.setting.appearance);
-    const [editLanguage] = useEditLanguageMutation();
+    const [editLanguage , editLanguageResponse] = useEditLanguageMutation();
     const {t} = useTranslation();
+
+    useEffect(() => {
+        if (editLanguageResponse.status === "fulfilled") {
+            dispatch(setLanguage(editLanguageResponse.data));
+        }
+    }, [editLanguageResponse]);
 
     return (
         <Button

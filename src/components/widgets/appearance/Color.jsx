@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {Box, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
 
@@ -8,14 +9,26 @@ import Header from "components/widgets/appearance/Header";
 
 // stores
 import {useEditColorMutation} from "stores/apis/settingApi";
+import {setColor} from "stores/slices/settingSlice";
 
-// utils
-import {colorList} from "utils/constants.js";
+const colorList = [
+    {id: 1, color: {dark: "#60a5fa", light: "#2563eb"}},
+    {id: 2, color: {dark: "#fb923c", light: "#d97706"}},
+    {id: 3, color: {dark: "#e879f9", light: "#c026d3"}},
+    {id: 4, color: {dark: "#22d3ee", light: "#0891b2"}},
+];
 
 const ColorItem = ({colorItem}) => {
 
+    const dispatch = useDispatch();
     const {darkMode, color} = useSelector(state => state.setting.appearance);
-    const [editColor] = useEditColorMutation();
+    const [editColor , editColorResponse] = useEditColorMutation();
+
+    useEffect(() => {
+        if (editColorResponse.status === "fulfilled") {
+            dispatch(setColor(editColorResponse.data));
+        }
+    }, [editColorResponse]);
 
     return (
         <Box

@@ -1,7 +1,7 @@
 // libraries
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
@@ -13,18 +13,20 @@ import {FiCheck, FiRotateCw} from "react-icons/fi";
 import TextInput from "components/modules/TextInput";
 
 // stores
-import {useVerifyUserMutation} from "stores/apis/authApi";
+import {useVerifyMutation} from "stores/apis/authApi";
 import {signIn} from "stores/slices/authSlice";
 import {setUser} from "stores/slices/settingSlice";
+import {unSetSession} from "stores/slices/sessionSlice";
 
 // utils
 import {verifyUserSchema} from "utils/validations";
 
-const VerifyUserForm = ({session}) => {
+const Form = () => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [verifyUser, verifyUserResponse] = useVerifyUserMutation();
+    const dispatch = useDispatch();
+    const {userId , expire} = useSelector(state => state.session);
+    const [verify, verifyResponse] = useVerifyMutation();
     const {t} = useTranslation();
 
     const formik = useFormik({
@@ -33,26 +35,26 @@ const VerifyUserForm = ({session}) => {
         },
         validationSchema: verifyUserSchema,
         onSubmit: async (result) => {
-            verifyUser({...result, ...session});
+            verify({...result, userId , expire});
         }
     });
 
     useEffect(() => {
-
-        if (verifyUserResponse.isSuccess) {
-            if (verifyUserResponse.data.status === "success") {
+        if (verifyResponse.isSuccess) {
+            if (verifyResponse.data.status === "success") {
                 dispatch(signIn({
-                    token: verifyUserResponse.data.data,
-                    expire: jwtDecode(verifyUserResponse.data.data)?.exp
+                    token: verifyResponse.data.data,
+                    expire: jwtDecode(verifyResponse.data.data)?.exp
                 }));
-                dispatch(setUser(jwtDecode(verifyUserResponse.data.data)));
-                toast.success(verifyUserResponse.data.message);
+                dispatch(setUser(jwtDecode(verifyResponse.data.data)));
+                toast.success(verifyResponse.data.message);
                 navigate("/chat");
+                dispatch(unSetSession());
             } else {
-                toast.error(verifyUserResponse.data.message);
+                toast.error(verifyResponse.data.message);
             }
         }
-    }, [verifyUserResponse]);
+    }, [verifyResponse]);
 
     return (
         <Stack
@@ -103,7 +105,7 @@ const VerifyUserForm = ({session}) => {
                     variant="text"
                     color="ternary"
                     startIcon={<FiRotateCw size={20}/>}
-                    onClick={() => navigate(0)}
+                    onClick={() => navigate("/auth/login")}
                 >
                     {t("button.reSendCode")}
                 </Button>
@@ -114,4 +116,4 @@ const VerifyUserForm = ({session}) => {
     )
 }
 
-export default VerifyUserForm;
+export default Form;

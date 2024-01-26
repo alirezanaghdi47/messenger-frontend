@@ -1,0 +1,13 @@
+body[data-theme='dark'] {
+  --dark: #f8fafc;
+  --gray: #f8fafc;
+  --secondary: #e2e8f0;
+  --light: #1e293b;
+}
+
+body[data-theme='light'] {
+  --dark: #1e293b;
+  --gray: #334155;
+  --secondary: #475569;
+  --light: #f8fafc;
+}

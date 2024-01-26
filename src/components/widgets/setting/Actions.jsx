@@ -7,7 +7,7 @@ import {FiChevronLeft, FiChevronRight, FiLogOut} from "react-icons/fi";
 // stores
 import {signOut} from "stores/slices/authSlice";
 
-const Appbar = () => {
+const Actions = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -51,5 +51,5 @@ const Appbar = () => {
     )
 }
 
-export default Appbar;
+export default Actions;
 

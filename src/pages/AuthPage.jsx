@@ -61,40 +61,30 @@ const AuthPage = () => {
                             padding: 2
                         }}
                     >
-
                         <Header/>
-
                         <Outlet/>
-
                         <Footer/>
-
                     </Stack>
 
                 </Grid>
 
-                {
-                    !isTablet && (
-                        <Grid
-                            component="aside"
-                            item
-                            md={6}
-                            lg={7}
-                            xl={8}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                width: "100%",
-                                minHeight: "100dvh",
-                                height: "100%",
-                            }}
-                        >
-
-                            <Slider/>
-
-                        </Grid>
-                    )
-                }
+                <Grid
+                    component="aside"
+                    item
+                    md={6}
+                    lg={7}
+                    xl={8}
+                    sx={{
+                        display: isTablet ? "none" : "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        minHeight: "100dvh",
+                        height: "100%",
+                    }}
+                >
+                    <Slider/>
+                </Grid>
 
             </Grid>
 

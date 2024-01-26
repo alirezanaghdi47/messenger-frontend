@@ -5,7 +5,103 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Typography} from "@mui/material";
 import {FiInfo, FiPhone, FiUser} from "react-icons/fi";
 
-const UserDetail = () => {
+const ListItem = ({label , value , icon}) => {
+
+    const {t} = useTranslation();
+
+    return (
+        <Stack
+            direction="row"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                width: "100%",
+                color: "ternary.main"
+            }}
+        >
+
+            {icon}
+
+            <Stack
+                direction="column"
+                gap={1}
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "start",
+                    width: "100%",
+                }}
+            >
+
+                <Typography
+                    variant="subtitle2"
+                    color="textPrimary"
+                    fontWeight='bold'
+                    noWrap
+                >
+                    {label}
+                </Typography>
+
+                <Typography
+                    variant="caption"
+                    color="textSecondary"
+                    noWrap
+                >
+                    {t(value)}
+                </Typography>
+
+            </Stack>
+
+        </Stack>
+    )
+}
+
+const List = () => {
+
+    const {userName, biography , phoneNumber} = useSelector(state => state.setting.profile);
+
+    return (
+        <Stack
+            direction="column"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "start",
+                width: "100%",
+                paddingX: 2
+            }}
+        >
+
+            <ListItem
+                label={userName}
+                value="input.userName"
+                icon={<FiUser size={20}/>}
+            />
+
+            <ListItem
+                label={phoneNumber}
+                value="input.phoneNumber"
+                icon={<FiPhone size={20}/>}
+            />
+
+            {
+                biography && (
+                    <ListItem
+                        label={biography}
+                        value="input.biography"
+                        icon={<FiInfo size={20}/>}
+                    />
+                )
+            }
+
+        </Stack>
+    )
+}
+
+const Image = () => {
 
     const {avatar} = useSelector(state => state.setting.profile);
 
@@ -41,170 +137,6 @@ const UserDetail = () => {
     )
 }
 
-const UserLinks = () => {
-
-    const {userName, biography , phoneNumber} = useSelector(state => state.setting.profile);
-    const {t} = useTranslation();
-
-    return (
-        <Stack
-            direction="column"
-            gap={2}
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "start",
-                width: "100%",
-                paddingX: 2
-            }}
-        >
-
-            <Stack
-                direction="row"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                    width: "100%",
-                    color: "ternary.main"
-                }}
-            >
-
-                <FiUser size={20}/>
-
-                <Stack
-                    direction="column"
-                    gap={1}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "start",
-                        width: "100%",
-                    }}
-                >
-
-                    <Typography
-                        variant="subtitle2"
-                        color="textPrimary"
-                        fontWeight='bold'
-                        noWrap
-                    >
-                        {userName}
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="textSecondary"
-                        noWrap
-                    >
-                        {t("input.userName")}
-                    </Typography>
-
-                </Stack>
-
-            </Stack>
-
-            <Stack
-                direction="row"
-                gap={2}
-                sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                    width: "100%",
-                    color: "ternary.main"
-                }}
-            >
-
-                <FiPhone size={20}/>
-
-                <Stack
-                    direction="column"
-                    gap={1}
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "start",
-                        width: "100%",
-                    }}
-                >
-
-                    <Typography
-                        variant="subtitle2"
-                        color="textPrimary"
-                        fontWeight='bold'
-                        noWrap
-                    >
-                        {phoneNumber}
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="textSecondary"
-                        noWrap
-                    >
-                        {t("input.phoneNumber")}
-                    </Typography>
-
-                </Stack>
-
-            </Stack>
-
-            {
-                biography && (
-                    <Stack
-                        direction="row"
-                        gap={2}
-                        sx={{
-                            display: "flex",
-                            justifyContent: "start",
-                            alignItems: "center",
-                            width: "100%",
-                            color: "ternary.main"
-                        }}
-                    >
-
-                        <FiInfo size={20}/>
-
-                        <Stack
-                            direction="column"
-                            gap={1}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "start",
-                                width: "100%",
-                            }}
-                        >
-
-                            <Typography
-                                variant="subtitle2"
-                                color="textPrimary"
-                                fontWeight='bold'
-                                noWrap
-                            >
-                                {biography}
-                            </Typography>
-
-                            <Typography
-                                variant="caption"
-                                color="textSecondary"
-                                noWrap
-                            >
-                                {t("input.biography")}
-                            </Typography>
-
-                        </Stack>
-
-                    </Stack>
-                )
-            }
-
-        </Stack>
-    )
-}
-
 const UserInfo = () => {
 
     return (
@@ -218,11 +150,8 @@ const UserInfo = () => {
                 width: "100%",
             }}
         >
-
-            <UserDetail/>
-
-            <UserLinks/>
-
+            <Image/>
+            <List/>
         </Stack>
     )
 }

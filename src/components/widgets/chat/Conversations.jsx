@@ -8,7 +8,6 @@ import {FiUser} from "react-icons/fi";
 import {
     FileMessage,
     TextMessage,
-    LocationMessage,
     VideoMessage,
     ImageMessage,
     MusicMessage,
@@ -92,7 +91,6 @@ const ConversationItem = ({conversationItem , lastMessageRef}) => {
                 {conversationItem.type === 2 && <ImageMessage message={conversationItem}/>}
                 {conversationItem.type === 3 && <MusicMessage message={conversationItem}/>}
                 {conversationItem.type === 4 && <VideoMessage message={conversationItem}/>}
-                {conversationItem.type === 5 && <LocationMessage message={conversationItem}/>}
                 {conversationItem.type === 6 && <QueueMessage/>}
 
             </Stack>

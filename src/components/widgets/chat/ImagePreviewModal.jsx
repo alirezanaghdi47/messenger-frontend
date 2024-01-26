@@ -157,8 +157,9 @@ const ImagePreviewModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "imagePreview")}
+            open={Boolean(modal?.isOpen && modal?.type === '-${modal.data._id}')}
             onClose={() => dispatch(hideModal())}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -181,11 +182,8 @@ const ImagePreviewModal = () => {
                     padding: 2,
                 }}
             >
-
                 <ModalHeader data={modal.data}/>
-
                 <ModalContent data={modal.data}/>
-
             </Stack>
 
         </Modal>

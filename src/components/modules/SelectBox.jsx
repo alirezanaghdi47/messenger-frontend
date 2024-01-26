@@ -12,7 +12,6 @@ const SelectBox = ({
                        error,
                        touched,
                        options,
-                       icon,
                        size = "small",
                        color = "primary",
                        variant = "outlined",

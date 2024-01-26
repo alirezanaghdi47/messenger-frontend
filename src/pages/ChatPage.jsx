@@ -1,42 +1,31 @@
 // libraries
 import {useContext, useEffect, useRef} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import Loadable from "@loadable/component";
 import {alpha, Stack, useTheme, useMediaQuery} from "@mui/material";
 
 // components
 import Header from "components/widgets/chat/Header.jsx";
 import Footer from "components/widgets/chat/Footer.jsx";
 import Conversations from "components/widgets/chat/Conversations.jsx";
-import ActionButton from "components/widgets/chat/ActionButton";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import ScrollBottom from "components/widgets/chat/ScrollBottom";
+import NoData from "components/partials/NoData";
 
 // hocs
 import PrivateRouteHoc from "hocs/PrivateRouteHoc";
 
 // providers
-import {SocketContext} from "providers/Socket";
+import {SocketContext} from "providers/SocketProvider";
 
 // stores
 import {useGetChatQuery} from "stores/apis/chatApi";
 import {useGetAllMessageQuery} from "stores/apis/messageApi";
-
-const ImagePreviewModal = Loadable(() => import("components/widgets/chat/ImagePreviewModal"));
-const MusicPlayerModal = Loadable(() => import("components/widgets/chat/MusicPlayerModal"));
-const VideoPlayerModal = Loadable(() => import("components/widgets/chat/VideoPlayerModal"));
-const ForwardChatModal = Loadable(() => import("components/widgets/chat/ForwardChatModal"));
-const ReplyChatPopup = Loadable(() => import("components/widgets/chat/ReplyChatPopup"));
-const DeleteChatModal = Loadable(() => import("components/widgets/chat/DeleteChatModal"));
-const DeleteContactModal = Loadable(() => import("components/widgets/chat/DeleteContactModal"));
-const JoinGroupModal = Loadable(() => import("components/widgets/chats/JoinGroupModal"));
 
 const ChatPage = () => {
 
     const lastMessageRef = useRef(null);
     const params = useParams();
     const navigate = useNavigate();
-    const {modal, popup} = useSelector(state => state.app);
     const {background} = useSelector(state => state.setting.appearance);
     const {activeChat , messages} = useSelector(state => state.chat);
     const {isFetching: isFetchingActiveChat, refetch: refetchActiveChat} = useGetChatQuery(params.chatId);
@@ -51,16 +40,11 @@ const ChatPage = () => {
     } , [params.chatId]);
 
     useEffect(() => {
-        if (!isFetchingActiveChat && (!activeChat || Object.keys(activeChat).length === 0)){
-            navigate("/chat");
-        }
-    }, [activeChat?._id]);
-
-    useEffect(() => {
         socket?.current?.on("deleteChatResponse", data => {
             if (params.chatId === data) navigate("/chat");
         });
         socket?.current?.emit("joinRoom", {chatId: params?.chatId, socketId: socket?.current?.id});
+
         return () => socket?.current?.emit("leaveRoom", {chatId: params?.chatId, socketId: socket?.current?.id});
     }, [socket.current , params.chatId]);
 
@@ -68,7 +52,11 @@ const ChatPage = () => {
         lastMessageRef?.current?.scrollIntoView({behavior: "smooth"});
     }, [messages]);
 
-    return !isFetchingActiveChat && !isFetchingMessages && (
+    if (!isFetchingActiveChat && !isFetchingMessages && !activeChat?._id){
+        return <Navigate to="/chat"/>;
+    }
+
+    return !isFetchingActiveChat && !isFetchingMessages && activeChat?._id && (
         <Stack
             component="main"
             direction="column"
@@ -106,61 +94,13 @@ const ChatPage = () => {
                 messages?.length > 0 ? (
                     <Conversations lastMessageRef={lastMessageRef}/>
                 ) : (
-                    <EmptyPlaceholder/>
+                    <NoData/>
                 )
             }
 
             {
                 messages?.length > 20 && (
-                    <ActionButton lastMessageRef={lastMessageRef}/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "imagePreview") && (
-                    <ImagePreviewModal/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "musicPlayer") && (
-                    <MusicPlayerModal/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "videoPlayer") && (
-                    <VideoPlayerModal/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "forwardChat") && (
-                    <ForwardChatModal/>
-                )
-            }
-
-            {
-                Boolean(popup?.isOpen && popup?.type === "replyChat") && (
-                    <ReplyChatPopup/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "joinGroup") && (
-                    <JoinGroupModal/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "deleteChat") && (
-                    <DeleteChatModal/>
-                )
-            }
-
-            {
-                Boolean(modal?.isOpen && modal?.type === "deleteContact") && (
-                    <DeleteContactModal/>
+                    <ScrollBottom lastMessageRef={lastMessageRef}/>
                 )
             }
 

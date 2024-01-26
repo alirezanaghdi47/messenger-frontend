@@ -1,48 +1,51 @@
 // libraries
 import {useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
 import {Button, Stack, Typography} from "@mui/material";
-import {FiUserPlus} from "react-icons/fi";
+import {FiLogIn} from "react-icons/fi";
 
 // components
 import TextInput from "components/modules/TextInput";
 
 // stores
-import {useRegisterMutation} from "stores/apis/authApi";
+import {setSession} from "stores/slices/sessionSlice";
+import {useLoginMutation} from "stores/apis/authApi";
 
 // utils
-import {registerSchema} from "utils/validations";
+import {loginSchema} from "utils/validations";
 
-const RegisterForm = () => {
+const Form = () => {
 
     const navigate = useNavigate();
-    const [register , registerResponse] = useRegisterMutation();
+    const dispatch = useDispatch();
+    const [login , loginResponse] = useLoginMutation();
     const {t} = useTranslation();
 
     const formik = useFormik({
         initialValues: {
-            userName: "",
             phoneNumber: "",
         },
-        validationSchema: registerSchema,
+        validationSchema: loginSchema,
         onSubmit: async (result) => {
-            register(result);
+            login(result);
         }
     });
 
     useEffect(() => {
-        if (registerResponse.isSuccess){
-            if (registerResponse.data.status === "success"){
-                toast.success(registerResponse.data.message);
-                navigate("/auth/login");
+        if (loginResponse.isSuccess){
+            if (loginResponse.data.status === "success"){
+                toast.success(loginResponse.data.message);
+                dispatch(setSession(loginResponse.data.data));
+                navigate("/auth/verify");
             } else {
-                toast.error(registerResponse.data.message);
+                toast.error(loginResponse.data.message);
             }
         }
-    }, [registerResponse]);
+    }, [loginResponse]);
 
     return (
         <Stack
@@ -59,16 +62,6 @@ const RegisterForm = () => {
         >
 
             <TextInput
-                label={t("input.userName")}
-                name="userName"
-                value={formik.values.userName}
-                onChange={formik.handleChange}
-                onBlur={() => formik.setFieldTouched("userName")}
-                error={formik.errors.userName}
-                touched={formik.touched.userName}
-            />
-
-            <TextInput
                 label={t("input.phoneNumber")}
                 name="phoneNumber"
                 value={formik.values.phoneNumber}
@@ -81,11 +74,11 @@ const RegisterForm = () => {
             <Button
                 variant="contained"
                 color="primary"
-                startIcon={<FiUserPlus size={20}/>}
+                startIcon={<FiLogIn size={20}/>}
                 fullWidth
                 onClick={formik.handleSubmit}
             >
-                {t("button.signUp")}
+                {t("button.signIn")}
             </Button>
 
             <Stack
@@ -103,18 +96,18 @@ const RegisterForm = () => {
                     variant="body2"
                     color="textPrimary"
                 >
-                    {t("typography.haveAccount")}
+                    {t("typography.createAccount")}
                 </Typography>
 
                 <Typography
                     component={Link}
-                    to="/auth/login"
+                    to="/auth/register"
                     variant="body2"
                     color="primary.main"
                     fontWeight="bold"
                     sx={{textDecoration: "none"}}
                 >
-                    {t("typography.login")}
+                    {t("typography.register")}
                 </Typography>
 
             </Stack>
@@ -123,4 +116,4 @@ const RegisterForm = () => {
     )
 }
 
-export default RegisterForm;
+export default Form;

@@ -1,3 +1,5 @@
+@use "variables";
+
 .text-truncate {
   white-space: nowrap !important;
   overflow: hidden !important;
@@ -14,46 +16,20 @@
   }
 }
 
-body[data-theme='light'] {
+.custom-scrollbar {
 
-  .custom-scrollbar {
-
-    &::-webkit-scrollbar {
-      width: 8px !important;
-      height: 8px !important;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #475569 !important;
-      border-radius: 16px !important;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #334155 !important;
-    }
-
+  &::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
   }
 
-}
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--secondary) !important;
+    border-radius: 16px !important;
+  }
 
-body[data-theme='dark'] {
-
-  .custom-scrollbar {
-
-    &::-webkit-scrollbar {
-      width: 8px !important;
-      height: 8px !important;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #e2e8f0 !important;
-      border-radius: 16px !important;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #e2e8f0 !important;
-    }
-
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--gray) !important;
   }
 
 }

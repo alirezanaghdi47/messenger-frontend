@@ -7,17 +7,17 @@ import io from 'socket.io-client';
 import {
     setIsTypingUsers,
     setOnlineUsers,
-    addMessage,
-    deleteMessage,
-    addChat,
-    deleteChat,
-    leaveGroup,
-    joinGroup
+    insertMessage,
+    removeMessage,
+    insertChat,
+    removeChat,
+    leaveGroupChat,
+    joinGroupChat
 } from "stores/slices/chatSlice";
 
 export const SocketContext = createContext(null);
 
-const Socket = ({children}) => {
+const SocketProvider = ({children}) => {
 
     const socket = useRef(null);
     const dispatch = useDispatch();
@@ -47,27 +47,27 @@ const Socket = ({children}) => {
     }
 
     const _handleAddChatResponse = async (data) => {
-        dispatch(addChat(data));
+        dispatch(insertChat(data));
     }
 
     const _handleDeleteChatResponse = async (data) => {
-        dispatch(deleteChat(data));
+        dispatch(removeChat(data));
     }
 
-    const _handleJoinGroupResponse = async (data) => {
-        dispatch(joinGroup(data));
+    const _handleJoinGroupChatResponse = async (data) => {
+        dispatch(joinGroupChat(data));
     }
 
-    const _handleLeaveGroupResponse = async (data) => {
-        dispatch(leaveGroup(data));
+    const _handleLeaveGroupChatResponse = async (data) => {
+        dispatch(leaveGroupChat(data));
     }
 
     const _handleAddMessageResponse = async (data) => {
-        dispatch(addMessage(data));
+        dispatch(insertMessage(data));
     }
 
     const _handleDeleteMessageResponse = async (data) => {
-        dispatch(deleteMessage(data));
+        dispatch(removeMessage(data));
     }
 
     useEffect(() => {
@@ -77,8 +77,8 @@ const Socket = ({children}) => {
         socket?.current?.on('startTypingResponse', _handleStartTypingResponse);
         socket?.current?.on('stopTypingResponse', _handleStopTypingResponse);
         socket?.current?.on('addChatResponse', _handleAddChatResponse);
-        socket?.current?.on('joinGroupResponse', _handleJoinGroupResponse);
-        socket?.current?.on('leaveGroupResponse', _handleLeaveGroupResponse);
+        socket?.current?.on('joinGroupChatResponse', _handleJoinGroupChatResponse);
+        socket?.current?.on('leaveGroupChatResponse', _handleLeaveGroupChatResponse);
         socket?.current?.on('deleteChatResponse', _handleDeleteChatResponse);
         socket?.current?.on('addMessageResponse', _handleAddMessageResponse);
         socket?.current?.on('deleteMessageResponse', _handleDeleteMessageResponse);
@@ -97,4 +97,4 @@ const Socket = ({children}) => {
     )
 }
 
-export default Socket;
+export default SocketProvider;

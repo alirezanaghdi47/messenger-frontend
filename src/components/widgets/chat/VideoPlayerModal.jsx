@@ -138,12 +138,10 @@ const ModalContent = ({data}) => {
                     maxWidth: 992,
                 }}
             >
-
                 <VideoPlayer
                     src={data?.content}
                     thumbnail={data?.thumbnail}
                 />
-
             </Box>
 
         </Container>
@@ -158,8 +156,9 @@ const VideoPlayerModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "videoPlayer")}
+            open={Boolean(modal?.isOpen && modal?.type === `videoPlayer-${modal.data._id}`)}
             onClose={() => dispatch(hideModal())}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",

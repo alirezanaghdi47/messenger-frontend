@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 // stores
 import {signOut} from "stores/slices/authSlice";
-import {unSetUser} from "../stores/slices/settingSlice";
+import {unSetUser} from "stores/slices/settingSlice";
 
 const PrivateRouteHoc = (WrappedComponent) => {
     const PrivateRouteHoc = (props) => {
@@ -16,15 +16,13 @@ const PrivateRouteHoc = (WrappedComponent) => {
         const isAuth = Boolean(token && expire > Math.floor(Date.now() / 1000));
 
         useEffect(() => {
-
             if (!token || expire < Math.floor(Date.now() / 1000)) {
                 dispatch(signOut());
                 dispatch(unSetUser());
             }
-
         }, [location.key]);
 
-        return isAuth ? <WrappedComponent {...props}/> : <Navigate to='/'/>
+        return isAuth ? <WrappedComponent {...props}/> : <Navigate to='/auth/login'/>
     }
 
     return PrivateRouteHoc;

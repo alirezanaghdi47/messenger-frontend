@@ -27,6 +27,7 @@ const InstallPWA = () => {
 
     useEffect(() => {
         window.addEventListener("beforeinstallprompt", beforeInstallPrompt);
+
         return () => window.removeEventListener("transitionend", beforeInstallPrompt);
     }, []);
 
@@ -49,11 +50,7 @@ const InstallPWA = () => {
     };
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setShowBanner(isOnline && isTablet && supportPWA && !cookies["pwa-installer"])
-        }, 1000);
-
-        return () => clearTimeout(timeout);
+        setShowBanner(isOnline && isTablet && supportPWA && !cookies["pwa-installer"]);
     }, [isOnline, isTablet, supportPWA, cookies["pwa-installer"]]);
 
     if (!supportPWA) return null;
@@ -93,7 +90,7 @@ const InstallPWA = () => {
                     visibleByDefault
                     effect="blur"
                     width="100%"
-                    style={{maxWidth: 240}}
+                    style={{maxWidth: 160}}
                 />
 
                 <Typography

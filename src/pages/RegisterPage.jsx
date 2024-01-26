@@ -3,7 +3,7 @@ import {Stack} from "@mui/material";
 
 // components
 import Header from "components/widgets/register/Header";
-import RegisterForm from "components/widgets/register/RegisterForm";
+import Form from "components/widgets/register/Form";
 
 const RegisterPage = () => {
 
@@ -20,11 +20,8 @@ const RegisterPage = () => {
                 maxWidth: 480
             }}
         >
-
             <Header/>
-
-            <RegisterForm/>
-
+            <Form/>
         </Stack>
     );
 }

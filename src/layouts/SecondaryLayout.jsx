@@ -1,17 +1,9 @@
 // libraries
 import {Container, Stack} from "@mui/material";
-import {useOrientation} from "@uidotdev/usehooks";
-
-// components
-import Orientation from "components/partials/Orientation";
 
 const SecondaryLayout = ({children}) => {
 
-    const {angle, type} = useOrientation();
-
-    const isOriented = angle === 90 && type === "landscape-primary";
-
-    return !isOriented ? (
+    return (
 
         <Container
             maxWidth="xl"
@@ -34,8 +26,7 @@ const SecondaryLayout = ({children}) => {
             </Stack>
 
         </Container>
-
-    ) : <Orientation/>
+    )
 }
 
 export default SecondaryLayout;

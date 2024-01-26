@@ -8,7 +8,7 @@ import i18n from "i18next";
 import fa from "locales/fa.json";
 import en from "locales/en.json";
 
-const I18n = ({children}) => {
+const I18nProvider = ({children}) => {
 
     const {language} = useSelector(state => state.setting.appearance);
 
@@ -38,4 +38,4 @@ const I18n = ({children}) => {
 
 }
 
-export default I18n;
+export default I18nProvider;

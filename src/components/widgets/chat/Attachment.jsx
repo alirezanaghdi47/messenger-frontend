@@ -16,7 +16,6 @@ const Attachment = () => {
 
     return (
         <>
-
             <IconButton
                 varinat="text"
                 color="ternary"
@@ -31,7 +30,6 @@ const Attachment = () => {
                 isOpen={isOpenDropdownMenu}
                 onClose={_handleHideDropdownMenu}
             />
-
         </>
     )
 }

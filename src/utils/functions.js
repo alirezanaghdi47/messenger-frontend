@@ -2,8 +2,7 @@
 import i18n from "i18next";
 import axios from "axios";
 
-export const axiosBaseQuery = ({baseUrl} = {baseUrl: ''}) =>
-    async ({url, method, data, params, headers}) => {
+export const axiosBaseQuery = ({baseUrl} = {baseUrl: ''}) => async ({url, method, data, params, headers}) => {
         try {
             const result = await axios({
                 url: baseUrl + url,
@@ -25,7 +24,6 @@ export const axiosBaseQuery = ({baseUrl} = {baseUrl: ''}) =>
     }
 
 export const formattedMilisecond = (ms) => {
-
     const minuteTime = Number(Math.floor(ms / 60000));
     const secondTime = Number(((ms % 60000) / 1000).toFixed(0));
 
@@ -43,11 +41,9 @@ export const formattedMilisecond = (ms) => {
         if (minuteTime > 0 && secondTime === 0) return `${minuteTime} ${minuteText}`;
         if (secondTime > 0 && minuteTime === 0) return `${secondTime} ${secondText}`;
     }
-
 }
 
 export const formattedByte = (byte) => {
-
     let i = -1;
     const enByteUnits = ['kB', 'MB', 'GB'];
     const faByteUnits = ['کیلوبایت', 'مگابایت', 'گیگابایت '];
@@ -60,7 +56,6 @@ export const formattedByte = (byte) => {
     const byteUnit = i18n.language === "fa" ? faByteUnits : enByteUnits;
 
     return `${Math.max(byte, 0.1).toFixed(1)} ${byteUnit[i]}`;
-
 }
 
 export const formattedSecond = (second) => {
@@ -71,6 +66,7 @@ export const formattedSecond = (second) => {
     if (hh) {
         return `${hh}:${('0' + mm).slice(-2)}:${ss}`
     }
+
     return `${mm}:${ss}`
 }
 
@@ -89,5 +85,6 @@ export const throttle = (callback, delay) => {
 export const convertHexToEmoji = (hex) => {
     const codePoints = [hex].map(hex => parseInt(hex, 16));
     const emoji = String.fromCodePoint.apply(null, codePoints);
+
     return emoji;
 }

@@ -1,18 +1,17 @@
 // libraries
-import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
 import {FiUser} from "react-icons/fi";
 
 // stores
-import {showModal} from "stores/slices/appSlice";
+import {updateModal} from "stores/slices/appSlice";
 
 const UserItem = ({userItem}) => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
-    const {onlineUsers} = useSelector(state => state.chat);
+    const {onlineUsers , activeChat} = useSelector(state => state.chat);
     const theme = useTheme();
     const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === userItem?._id));
 
@@ -22,7 +21,7 @@ const UserItem = ({userItem}) => {
             gap={1}
             sx={{
                 width: "100%",
-                bgcolor: modal.data.includes(userItem?._id) && "primary.main",
+                bgcolor: modal?.data?.participantIds.map(user => user?._id).includes(userItem?._id) && "primary.main",
                 borderBottom: `1px solid ${theme.palette.secondary.main}`,
                 borderRadius: 1,
                 padding: 1.5,
@@ -31,9 +30,9 @@ const UserItem = ({userItem}) => {
                     borderBottom: "none"
                 }
             }}
-            onClick={() => dispatch(showModal({
-                type: modal.type,
-                data: modal.data.find(userId => userId === userItem?._id) ? modal.data.filter(userId => userId !== userItem?._id) : [...modal.data, userItem?._id]
+            onClick={() => dispatch(updateModal({
+                ...activeChat,
+                participantIds: modal.data.participantIds.map(user => user._id).includes(userItem._id) ? modal.data.participantIds.filter(user => user._id !== userItem._id) : [...modal?.data?.participantIds, userItem]
             }))}
         >
 
@@ -104,7 +103,7 @@ const UserItem = ({userItem}) => {
 
                     <Typography
                         variant="subtitle2"
-                        color={modal.data.includes(userItem?._id) ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                        color={modal?.data?.participantIds.map(user => user?._id).includes(userItem?._id) ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                         fontWeight='bold'
                         noWrap
                     >
@@ -119,16 +118,9 @@ const UserItem = ({userItem}) => {
     )
 }
 
-const Peoples = () => {
+const Users = () => {
 
-    const dispatch = useDispatch();
-    const {modal} = useSelector(state => state.app);
-    const {_id} = useSelector(state => state.setting.profile);
-    const {users, filteredUsers , activeChat} = useSelector(state => state.chat);
-
-    useEffect(() => {
-        dispatch(showModal({type: modal.type , data: activeChat.participantIds.map(user => user._id)?.filter(item => item !== _id)}));
-    }, [Boolean(modal.isOpen && modal.type === "joinGroup")]);
+    const {users, filteredUsers} = useSelector(state => state.chat);
 
     return (
         <Stack
@@ -163,4 +155,4 @@ const Peoples = () => {
     )
 }
 
-export default Peoples;
+export default Users;

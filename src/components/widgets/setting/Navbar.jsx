@@ -4,12 +4,12 @@ import {useTranslation} from "react-i18next";
 import {Stack, Typography, useTheme} from "@mui/material";
 import {LuPalette, LuUser} from "react-icons/lu";
 
-const linkList = [
+const navbarList = [
     {id: 1, title: "menu.profile", value: "profile", icon: <LuUser size={20}/>},
     {id: 2, title: "menu.appearance", value: "appearance", icon: <LuPalette size={20}/>},
 ];
 
-const LinkItem = ({linkItem}) => {
+const NavbarItem = ({navbarItem}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -26,31 +26,31 @@ const LinkItem = ({linkItem}) => {
                 justifyContent: "start",
                 alignItems: "center",
                 width: "100%",
-                bgcolor: location.pathname === "/setting/" + linkItem.value && "primary.main",
-                color: location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
+                bgcolor: location.pathname === "/setting/" + navbarItem.value && "primary.main",
+                color: location.pathname === "/setting/" + navbarItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary",
                 borderRadius: 1,
                 padding: 1.5,
                 cursor: "pointer"
             }}
-            onClick={() => navigate(`/setting/${linkItem.value}`)}
+            onClick={() => navigate(`/setting/${navbarItem.value}`)}
         >
 
-            {linkItem.icon}
+            {navbarItem.icon}
 
             <Typography
                 variant="subtitle2"
-                color={location.pathname === "/setting/" + linkItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
+                color={location.pathname === "/setting/" + navbarItem.value ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                 fontWeight='bold'
                 noWrap
             >
-                {t(linkItem.title)}
+                {t(navbarItem.title)}
             </Typography>
 
         </Stack>
     )
 }
 
-const Links = () => {
+const Navbar = () => {
 
     return (
         <Stack
@@ -65,10 +65,10 @@ const Links = () => {
         >
 
             {
-                linkList.map(linkItem =>
-                    <LinkItem
-                        key={linkItem.id}
-                        linkItem={linkItem}
+                navbarList.map(navbarItem =>
+                    <NavbarItem
+                        key={navbarItem.id}
+                        navbarItem={navbarItem}
                     />
                 )
             }
@@ -77,4 +77,4 @@ const Links = () => {
     )
 }
 
-export default Links;
+export default Navbar;

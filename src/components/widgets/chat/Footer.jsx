@@ -28,11 +28,8 @@ const Footer = () => {
                 padding: 2
             }}
         >
-
             <Attachment/>
-
             <MessageForm/>
-
         </Stack>
     )
 }

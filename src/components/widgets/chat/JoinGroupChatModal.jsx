@@ -7,16 +7,17 @@ import {FiCheck, FiX} from "react-icons/fi";
 
 // components
 import UsersSearchbar from "components/widgets/chats/UsersSearchbar";
-import Peoples from "components/widgets/chats/Peoples";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import Users from "components/widgets/chat/Users";
+import NoData from "components/partials/NoData";
 
 // providers
-import {SocketContext} from "providers/Socket";
+import {SocketContext} from "providers/SocketProvider";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
-import {setUsers} from "stores/slices/chatSlice";
-import {useGetAllRemainingUserQuery, useJoinGroupChatMutation} from "stores/apis/chatApi";
+import {setActiveChat} from "stores/slices/chatSlice";
+import {useGetAllRemainingUserQuery} from "stores/apis/userApi";
+import {useJoinGroupChatMutation} from "stores/apis/chatApi";
 
 const ModalHeader = () => {
 
@@ -41,7 +42,7 @@ const ModalHeader = () => {
                 fontWeight='bold'
                 noWrap
             >
-                {t("typography.joinGroup")}
+                {t("typography.joinGroupChat")}
             </Typography>
 
             <IconButton
@@ -68,25 +69,21 @@ const ModalContent = () => {
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
-
-        if (joinGroupChatResponse.isSuccess) {
-            dispatch(hideModal());
-        }
-
         if (joinGroupChatResponse.status === "fulfilled") {
-            socket?.current?.emit("joinGroup", {
+            socket?.current?.emit("joinGroupChat", {
                 userId: _id,
-                chat: activeChat,
-                receiverIds: activeChat?.participantIds.map(user => user._id),
+                chat: joinGroupChatResponse?.data,
+                receiverIds: joinGroupChatResponse?.data?.participantIds.map(user => user._id),
                 socketId: socket?.current?.id
             });
+            dispatch(setActiveChat(joinGroupChatResponse.data));
+            dispatch(hideModal());
         }
-
     }, [joinGroupChatResponse]);
 
     useEffect(() => {
         allRemainingUserRefetch();
-    } , [Boolean(modal.isOpen && modal.type === "joinGroup")])
+    } , [Boolean(modal.isOpen && modal.type === "joinGroupChat")])
 
     return (
         <Stack
@@ -106,9 +103,9 @@ const ModalContent = () => {
 
             {
                 (filteredUsers.length > 0 || users.length > 0) ? (
-                    <Peoples/>
+                    <Users/>
                 ) : (
-                    <EmptyPlaceholder/>
+                    <NoData/>
                 )
             }
 
@@ -137,7 +134,7 @@ const ModalContent = () => {
                     variant="contained"
                     color="primary"
                     endIcon={<FiCheck size={20}/>}
-                    onClick={() => joinGroupChat({chatId: activeChat?._id, receiverIds: modal.data})}
+                    onClick={() => joinGroupChat({chatId: activeChat?._id, receiverIds: modal.data?.participantIds})}
                 >
                     {t("button.submit")}
                 </Button>
@@ -148,25 +145,17 @@ const ModalContent = () => {
     )
 }
 
-const JoinGroupModal = () => {
+const JoinGroupChatModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
-    const {_id} = useSelector(state => state.setting.profile);
-    const {socket} = useContext(SocketContext);
     const isTablet = useMediaQuery('(max-width: 768px)');
-
-    useEffect(() => {
-        socket?.current?.emit("getAllUser", {userId: _id});
-        socket?.current?.on("getAllUserResponse", data => {
-            dispatch(setUsers(data));
-        });
-    }, []);
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "joinGroup")}
+            open={Boolean(modal?.isOpen && modal?.type === "joinGroupChat")}
             onClose={() => dispatch(hideModal())}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -190,15 +179,12 @@ const JoinGroupModal = () => {
                     padding: 2,
                 }}
             >
-
                 <ModalHeader/>
-
                 <ModalContent/>
-
             </Stack>
 
         </Modal>
     )
 }
 
-export default JoinGroupModal;
+export default JoinGroupChatModal;

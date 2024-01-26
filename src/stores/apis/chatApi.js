@@ -3,7 +3,7 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import axios from "axios";
 
 // stores
-import {addChat, setActiveChat, setChats, setUsers} from "stores/slices/chatSlice";
+import {setActiveChat, setChats} from "stores/slices/chatSlice";
 
 // utils
 import {axiosBaseQuery} from "utils/functions";
@@ -13,51 +13,7 @@ export const chatApi = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_URL,
     }),
-    tagTypes: ["allUser", "allChat", "chat"],
     endpoints: (builder) => ({
-        getAllUser: builder.query({
-            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
-                try {
-                    const {language} = await getState().setting.appearance;
-
-                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllUser", {
-                        headers: {
-                            token: await getState().auth.token,
-                            "Accept-Language": language,
-                        }
-                    });
-
-                    await dispatch(setUsers(response.data.data));
-
-                    return {data: response.data.data};
-                } catch (error) {
-                    return {error}
-                }
-            },
-            providesTags: ["allUser"]
-        }),
-        getAllRemainingUser: builder.query({
-            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
-                try {
-                    const {language} = await getState().setting.appearance;
-
-                    const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/getAllRemainingUser", {
-                        headers: {
-                            token: await getState().auth.token,
-                            filteredUserIds: JSON.stringify(arg),
-                            "Accept-Language": language,
-                        }
-                    });
-
-                    await dispatch(setUsers(response.data.data));
-
-                    return {data: response.data.data};
-                } catch (error) {
-                    return {error}
-                }
-            },
-            providesTags: ["allRemainingUser"]
-        }),
         getAllChat: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
@@ -77,7 +33,6 @@ export const chatApi = createApi({
                     return {error}
                 }
             },
-            providesTags: ["allChat"]
         }),
         getChat: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
@@ -99,7 +54,6 @@ export const chatApi = createApi({
                     return {error}
                 }
             },
-            providesTags: ["chat"]
         }),
         addChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
@@ -113,17 +67,13 @@ export const chatApi = createApi({
                         }
                     });
 
-                    if (response.data.data){
-                        await dispatch(addChat(response.data.data));
-                    }
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
                 }
             },
         }),
-        addGroup: builder.mutation({
+        addGroupChat: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
@@ -133,22 +83,15 @@ export const chatApi = createApi({
                     formData.append("avatar", arg.avatar);
                     formData.append("name", arg.name);
                     formData.append("description", arg.description);
-                    arg.participantIds.map(participantId => {
-                        formData.append("receiverIds[]", participantId);
-                    })
 
-                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addGroup", formData, {
+                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/chat/addGroupChat", formData, {
                         headers: {
                             token: await getState().auth.token,
                             "Accept-Language": language,
                         }
                     });
 
-                    if (response.data.data){
-                        await dispatch(addChat(response.data.data));
-                    }
-
-                    return {data: response.data.data};
+                    return {data: response.data};
                 } catch (error) {
                     return {error}
                 }
@@ -159,17 +102,13 @@ export const chatApi = createApi({
                 try {
                     const {language} = await getState().setting.appearance;
 
-                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/joinGroup", {receiverIds: arg.receiverIds}, {
+                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/joinGroupChat", {receiverIds: arg.receiverIds}, {
                         headers: {
                             token: await getState().auth.token,
                             chatId: arg.chatId,
                             "Accept-Language": language,
                         }
                     });
-
-                    if (response.data.data){
-                        await dispatch(setActiveChat(response.data.data));
-                    }
 
                     return {data: response.data.data};
                 } catch (error) {
@@ -181,17 +120,14 @@ export const chatApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const chats = await getState().chat.chats;
 
-                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/leaveGroup", null, {
+                    const response = await axios.put(process.env.REACT_APP_API_URL + "/api/chat/leaveGroupChat", null, {
                         headers: {
                             token: await getState().auth.token,
                             chatId: arg,
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setChats(chats.filter(chat => chat._id !== response.data.data._id)));
 
                     return {data: response.data.data};
                 } catch (error) {
@@ -203,7 +139,6 @@ export const chatApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const chats = await getState().chat.chats;
 
                     const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/chat/deleteChat", {
                         headers: {
@@ -212,8 +147,6 @@ export const chatApi = createApi({
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setChats(chats.filter(chat => chat._id !== response.data.data._id)));
 
                     return {data: response.data.data};
                 } catch (error) {
@@ -225,12 +158,10 @@ export const chatApi = createApi({
 })
 
 export const {
-    useGetAllUserQuery,
-    useGetAllRemainingUserQuery,
     useGetAllChatQuery,
     useGetChatQuery,
     useAddChatMutation,
-    useAddGroupMutation,
+    useAddGroupChatMutation,
     useJoinGroupChatMutation,
     useLeaveGroupChatMutation,
     useDeleteChatMutation

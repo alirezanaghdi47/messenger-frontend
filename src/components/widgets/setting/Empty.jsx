@@ -1,6 +1,7 @@
 // libraries
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Typography , useMediaQuery} from "@mui/material";
 
 const Empty = () => {
@@ -28,9 +29,11 @@ const Empty = () => {
             }}
         >
 
-            <img
+            <LazyLoadImage
                 src={darkMode ? "/images/setting-dark.svg" : "/images/setting-light.svg"}
                 alt="empty"
+                visibleByDefault
+                effect="blur"
                 width="100%"
                 style={{maxWidth: 240}}
             />

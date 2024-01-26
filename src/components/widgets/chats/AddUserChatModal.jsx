@@ -1,16 +1,18 @@
 // libraries
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
+import {IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
 import {FiX} from "react-icons/fi";
 
 // components
-import ChatsSearchbar from "components/widgets/chats/ChatsSearchbar";
+import UsersSearchbar from "components/widgets/chats/UsersSearchbar";
 import Users from "components/widgets/chats/Users";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import NoData from "components/partials/NoData";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
+import {useGetAllUserQuery} from "stores/apis/userApi";
 
 const ModalHeader = () => {
 
@@ -35,7 +37,7 @@ const ModalHeader = () => {
                 fontWeight='bold'
                 noWrap
             >
-                {t("typography.forwardChat")}
+                {t("typography.createChat")}
             </Typography>
 
             <IconButton
@@ -52,6 +54,14 @@ const ModalHeader = () => {
 
 const ModalContent = () => {
 
+    const {modal} = useSelector(state => state.app);
+    const {users , filteredUsers} = useSelector(state => state.chat);
+    const {refetch: allUserRefetch} = useGetAllUserQuery();
+
+    useEffect(() => {
+        allUserRefetch();
+    }, [Boolean(modal.isOpen && modal.type === "addUserChat")]);
+
     return (
         <Stack
             direction="column"
@@ -65,17 +75,21 @@ const ModalContent = () => {
             }}
         >
 
-            <ChatsSearchbar/>
+            <UsersSearchbar/>
 
-            <Users/>
-
-            {/*<EmptyPlaceholder/>*/}
+            {
+                (filteredUsers.length > 0 || users.length > 0) ? (
+                    <Users/>
+                ) : (
+                    <NoData/>
+                )
+            }
 
         </Stack>
     )
 }
 
-const ForwardChatModal = () => {
+const AddUserChatModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
@@ -83,8 +97,9 @@ const ForwardChatModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "forwardChat")}
+            open={Boolean(modal?.isOpen && modal?.type === "addUserChat")}
             onClose={() => dispatch(hideModal())}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -108,15 +123,12 @@ const ForwardChatModal = () => {
                     padding: 2,
                 }}
             >
-
                 <ModalHeader/>
-
                 <ModalContent/>
-
             </Stack>
 
         </Modal>
     )
 }
 
-export default ForwardChatModal;
+export default AddUserChatModal;

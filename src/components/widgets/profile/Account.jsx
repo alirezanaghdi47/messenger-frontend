@@ -38,11 +38,9 @@ const Account = () => {
     });
 
     useEffect(() => {
-
         if (editProfileResponse.isSuccess) {
             navigate("/setting");
         }
-
     }, [editProfileResponse]);
 
     return (

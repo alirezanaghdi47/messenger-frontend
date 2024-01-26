@@ -2,7 +2,6 @@
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
-import {LazyLoadImage} from "react-lazy-load-image-component";
 import Slider from "rc-slider";
 import {Box, Button, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {LuPlay, LuPause, LuVolume2, LuVolumeX} from "react-icons/lu";
@@ -14,13 +13,9 @@ import 'rc-slider/assets/index.css';
 // utils
 import {formattedSecond} from "utils/functions";
 
-const VideoPlayer = ({src, thumbnail}) => {
-
-    const {language} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
+const VideoPlayer = ({src , thumbnail}) => {
 
     const playerRef = useRef(null);
-
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
     const [seeking, setSeeking] = useState(false);
@@ -28,26 +23,36 @@ const VideoPlayer = ({src, thumbnail}) => {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
     const [playbackRate, setPlaybackRate] = useState(1);
+    const {language} = useSelector(state => state.setting.appearance);
+    const theme = useTheme();
 
     const _handlePlaybackRateChange = () => {
         if (playbackRate === 1) setPlaybackRate(1.5);
         if (playbackRate === 1.5) setPlaybackRate(2);
         if (playbackRate === 2) setPlaybackRate(1);
     }
+
     const _handleToggleVolume = () => setVolume(0);
+
     const _handleVolumeChange = (value) => {
         setVolume(value);
         setMuted(false);
     }
+
     const _handleTogglePlaying = () => setPlaying(!playing);
+
     const _handleSeekMouseDown = () => setSeeking(true);
+
     const _handleSeekChange = (value) => {
         setPlayed(value);
         playerRef?.current?.seekTo(value);
         setPlaying(true);
     }
+
     const _handleSeekMouseUp = () => setSeeking(false);
+
     const _handleDuration = (duration) => setDuration(duration);
+
     const _handleProgress = (state) => {
         if (!seeking) {
             setPlayed(state?.played);

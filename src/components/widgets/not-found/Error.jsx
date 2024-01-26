@@ -6,7 +6,6 @@ import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {Button, Stack, Typography} from "@mui/material";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 
-
 const Error = () => {
 
     const navigate = useNavigate();

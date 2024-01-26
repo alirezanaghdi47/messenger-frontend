@@ -4,7 +4,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Stack} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
 
-const Appbar = () => {
+const Header = () => {
 
     const navigate = useNavigate();
 
@@ -69,5 +69,5 @@ const Appbar = () => {
     )
 }
 
-export default Appbar;
+export default Header;
 

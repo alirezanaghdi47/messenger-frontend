@@ -27,6 +27,9 @@ export const appSlice = createSlice({
             state.modal.type = action.payload?.type || null;
             state.modal.data = action.payload?.data || null;
         },
+        updateModal: (state, action) => {
+            state.modal.data = action.payload;
+        },
         hideModal: (state, action) => {
             state.modal.isOpen = false;
             state.modal.type = null
@@ -55,6 +58,7 @@ export const appSlice = createSlice({
 
 export const {
     showModal,
+    updateModal,
     hideModal,
     showPopup,
     hidePopup,

@@ -2,15 +2,6 @@
 import {createApi} from '@reduxjs/toolkit/query/react';
 import axios from "axios";
 
-// stores
-import {
-    setBackground,
-    setColor,
-    setLanguage,
-    setProfile,
-    setTheme
-} from "stores/slices/settingSlice";
-
 // utils
 import {axiosBaseQuery} from "utils/functions";
 
@@ -37,8 +28,6 @@ export const settingApi = createApi({
                         }
                     });
 
-                    await dispatch(setProfile(response.data.data));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -56,8 +45,6 @@ export const settingApi = createApi({
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setLanguage(response.data.data));
 
                     return {data: response.data.data};
                 } catch (error) {
@@ -77,8 +64,6 @@ export const settingApi = createApi({
                         }
                     });
 
-                    await dispatch(setColor(response.data.data));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -97,8 +82,6 @@ export const settingApi = createApi({
                         }
                     });
 
-                    await dispatch(setBackground(response.data.data));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -116,8 +99,6 @@ export const settingApi = createApi({
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setTheme(response.data.data));
 
                     return {data: response.data.data};
                 } catch (error) {

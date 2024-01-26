@@ -6,11 +6,12 @@ import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
 import {FiUser} from "react-icons/fi";
 
 // providers
-import {SocketContext} from "providers/Socket";
+import {SocketContext} from "providers/SocketProvider";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
 import {useAddChatMutation} from "stores/apis/chatApi";
+import {insertChat} from "stores/slices/chatSlice";
 
 const UserItem = ({userItem}) => {
 
@@ -23,8 +24,7 @@ const UserItem = ({userItem}) => {
     const isActiveReceiver = Boolean(onlineUsers.find(user => user.userId === userItem?._id));
 
     useEffect(() => {
-
-        if (addChatResponse.isSuccess) {
+        if (addChatResponse.isSuccess){
             dispatch(hideModal());
         }
 
@@ -35,8 +35,8 @@ const UserItem = ({userItem}) => {
                 receiverIds: addChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
                 socketId: socket?.current?.id
             });
+            dispatch(insertChat(addChatResponse?.data));
         }
-
     }, [addChatResponse]);
 
     return (

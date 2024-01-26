@@ -1,9 +1,6 @@
 // libraries
 import {createSlice} from '@reduxjs/toolkit';
 
-// utils
-import {backgroundList, colorList} from "utils/constants.js";
-
 const initialState = {
     profile: {
         _id: "",
@@ -16,10 +13,10 @@ const initialState = {
         language: "fa",
         darkMode: false,
         color: {
-            light: colorList[0].color.light,
-            dark: colorList[0].color.dark,
+            light: "#2563eb",
+            dark: "#60a5fa",
         },
-        background: backgroundList[0].background,
+        background: '/images/desktop-1.jpg',
     },
 }
 

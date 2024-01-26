@@ -8,9 +8,7 @@ const NotFoundPage = () => {
 
     return (
         <TernaryLayout>
-
             <Error/>
-
         </TernaryLayout>
     )
 }

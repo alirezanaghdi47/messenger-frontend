@@ -138,9 +138,7 @@ const ModalContent = ({data}) => {
                     maxWidth: 992,
                 }}
             >
-
                 <MusicPlayer src={data?.content}/>
-
             </Box>
 
         </Container>
@@ -155,8 +153,9 @@ const MusicPlayerModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "musicPlayer")}
+            open={Boolean(modal?.isOpen && modal?.type === `musicPlayer-${modal.data._id}`)}
             onClose={() => dispatch(hideModal())}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -179,11 +178,8 @@ const MusicPlayerModal = () => {
                     padding: 2,
                 }}
             >
-
                 <ModalHeader data={modal.data}/>
-
                 <ModalContent data={modal.data}/>
-
             </Stack>
 
         </Modal>

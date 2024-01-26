@@ -4,11 +4,11 @@ import {useSelector} from "react-redux";
 import {useMediaQuery, Stack} from "@mui/material";
 
 // components
-import Appbar from "components/widgets/chats/Appbar.jsx";
+import Header from "components/widgets/chats/Header.jsx";
 import Chats from "components/widgets/chats/Chats.jsx";
 import ChatsSearchbar from "components/widgets/chats/ChatsSearchbar.jsx";
 import ActionButton from "components/widgets/chats/ActionButton.jsx";
-import EmptyPlaceholder from "components/partials/EmptyPlaceholder";
+import NoData from "components/partials/NoData";
 import Empty from "components/widgets/chats/Empty";
 
 // hocs
@@ -55,7 +55,7 @@ const ChatsPage = () => {
                         }}
                     >
 
-                        <Appbar/>
+                        <Header/>
 
                         <ChatsSearchbar/>
 
@@ -63,7 +63,7 @@ const ChatsPage = () => {
                             (filteredChats.length > 0 || chats.length > 0) ? (
                                 <Chats/>
                             ) : (
-                                <EmptyPlaceholder/>
+                                <NoData/>
                             )
                         }
 

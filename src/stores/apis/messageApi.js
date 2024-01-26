@@ -3,7 +3,7 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 import axios from "axios";
 
 // stores
-import {setMessages, setProgressQueueMessage, setQueueMessage, unSetQueueMessage} from "stores/slices/chatSlice";
+import {setMessages, setProgressQueueMessage} from "stores/slices/chatSlice";
 
 // utils
 import {axiosBaseQuery} from "utils/functions";
@@ -20,7 +20,6 @@ export const messageApi = createApi({
     baseQuery: axiosBaseQuery({
         baseUrl: process.env.REACT_APP_API_URL,
     }),
-    tagTypes: ["allMessage"],
     endpoints: (builder) => ({
         getAllMessage: builder.query({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
@@ -42,13 +41,11 @@ export const messageApi = createApi({
                     return {error}
                 }
             },
-            providesTags: ["allMessage"]
         }),
         addTextMessage: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const messages = await getState().chat.messages;
 
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addTextMessage", {text: arg.text}, {
                         headers: {
@@ -57,8 +54,6 @@ export const messageApi = createApi({
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setMessages([...messages, response.data.data]));
 
                     return {data: response.data.data};
                 } catch (error) {
@@ -70,27 +65,9 @@ export const messageApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const {_id, avatar} = await getState().setting.profile;
-                    const messages = await getState().chat.messages;
 
                     const formData = new FormData();
                     formData.append("file", arg.file);
-
-                    await dispatch(setQueueMessage({
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.file.name,
-                        size: arg.file.size,
-                        progress: 0,
-                        userId: {_id, avatar}
-                    }));
-                    await dispatch(setMessages([...messages, {
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.file.name,
-                        size: arg.file.size,
-                        userId: {_id, avatar}
-                    }]));
 
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addFileMessage", formData, {
                         onUploadProgress: (progressEvent) => {
@@ -104,9 +81,6 @@ export const messageApi = createApi({
                         signal: abortController.signal
                     });
 
-                    await dispatch(unSetQueueMessage());
-                    await dispatch(setMessages([...messages, response.data.data]));
-
                     return {data: response.data.data};
                 } catch (error) {
                     console.log(error);
@@ -118,27 +92,9 @@ export const messageApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const {_id, avatar} = await getState().setting.profile;
-                    const messages = await getState().chat.messages;
 
                     const formData = new FormData();
                     formData.append("image", arg.image);
-
-                    await dispatch(setQueueMessage({
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.image.name,
-                        size: arg.image.size,
-                        progress: 0,
-                        userId: {_id, avatar}
-                    }));
-                    await dispatch(setMessages([...messages, {
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.image.name,
-                        size: arg.image.size,
-                        userId: {_id, avatar}
-                    }]));
 
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addImageMessage", formData, {
                         onUploadProgress: (progressEvent) => {
@@ -152,9 +108,6 @@ export const messageApi = createApi({
                         signal: abortController.signal
                     });
 
-                    await dispatch(unSetQueueMessage());
-                    await dispatch(setMessages([...messages, response.data.data]));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -165,27 +118,9 @@ export const messageApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const {_id, avatar} = await getState().setting.profile;
-                    const messages = await getState().chat.messages;
 
                     const formData = new FormData();
                     formData.append("music", arg.music);
-
-                    await dispatch(setQueueMessage({
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.music.name,
-                        size: arg.music.size,
-                        progress: 0,
-                        userId: {_id, avatar}
-                    }));
-                    await dispatch(setMessages([...messages, {
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.music.name,
-                        size: arg.music.size,
-                        userId: {_id, avatar}
-                    }]));
 
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addMusicMessage", formData, {
                         onUploadProgress: (progressEvent) => {
@@ -199,9 +134,6 @@ export const messageApi = createApi({
                         signal: abortController.signal
                     });
 
-                    await dispatch(unSetQueueMessage());
-                    await dispatch(setMessages([...messages, response.data.data]));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -212,27 +144,9 @@ export const messageApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const {_id, avatar} = await getState().setting.profile;
-                    const messages = await getState().chat.messages;
 
                     const formData = new FormData();
                     formData.append("video", arg.video);
-
-                    await dispatch(setQueueMessage({
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.video.name,
-                        size: arg.video.size,
-                        progress: 0,
-                        userId: {_id, avatar}
-                    }));
-                    await dispatch(setMessages([...messages, {
-                        _id: `${arg.chatId}-${arg.userId}`,
-                        type: 6,
-                        name: arg.video.name,
-                        size: arg.video.size,
-                        userId: {_id, avatar}
-                    }]));
 
                     const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addVideoMessage", formData, {
                         onUploadProgress: (progressEvent) => {
@@ -246,31 +160,6 @@ export const messageApi = createApi({
                         signal: abortController.signal
                     });
 
-                    await dispatch(unSetQueueMessage());
-                    await dispatch(setMessages([...messages, response.data.data]));
-
-                    return {data: response.data.data};
-                } catch (error) {
-                    return {error}
-                }
-            },
-        }),
-        addLocationMessage: builder.mutation({
-            queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
-                try {
-                    const {language} = await getState().setting.appearance;
-                    const messages = await getState().chat.messages;
-
-                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/message/addLocationMessage", {location: arg.location}, {
-                        headers: {
-                            token: await getState().auth.token,
-                            chatId: arg.chatId,
-                            "Accept-Language": language,
-                        }
-                    });
-
-                    await dispatch(setMessages([...messages, response.data.data]));
-
                     return {data: response.data.data};
                 } catch (error) {
                     return {error}
@@ -281,7 +170,6 @@ export const messageApi = createApi({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
-                    const messages = await getState().chat.messages;
 
                     const response = await axios.delete(process.env.REACT_APP_API_URL + "/api/message/deleteMessage", {
                         headers: {
@@ -290,8 +178,6 @@ export const messageApi = createApi({
                             "Accept-Language": language,
                         }
                     });
-
-                    await dispatch(setMessages(messages.filter(message => message._id !== response.data.data._id)));
 
                     return {data: response.data.data};
                 } catch (error) {

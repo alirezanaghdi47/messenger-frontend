@@ -15,11 +15,7 @@ import {formattedSecond} from "utils/functions";
 
 const MusicPlayer = ({src}) => {
 
-    const {language} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
-
     const playerRef = useRef(null);
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
@@ -28,6 +24,8 @@ const MusicPlayer = ({src}) => {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
     const [playbackRate, setPlaybackRate] = useState(1);
+    const {language} = useSelector(state => state.setting.appearance);
+    const theme = useTheme();
 
     const _handlePlaybackRateChange = () => {
         if (playbackRate === 1) setPlaybackRate(1.5);
@@ -35,28 +33,33 @@ const MusicPlayer = ({src}) => {
         if (playbackRate === 2) setPlaybackRate(1);
     }
 
-    const _handleToggleVolume = (e) => {
-        setAnchorEl(anchorEl ? null : e.currentTarget)
-    }
+    const _handleToggleVolume = (e) => setAnchorEl(anchorEl ? null : e.currentTarget);
 
     const _handleVolumeChange = (value) => {
         setVolume(value);
         setMuted(false);
     }
+
     const _handleTogglePlaying = () => setPlaying(!playing);
+
     const _handleSeekMouseDown = () => setSeeking(true);
+
     const _handleSeekChange = (value) => {
         setPlayed(value);
         playerRef?.current?.seekTo(value);
         setPlaying(true);
     }
+
     const _handleSeekMouseUp = () => setSeeking(false);
+
     const _handleDuration = (duration) => setDuration(duration);
+
     const _handleProgress = (state) => {
         if (!seeking) {
             setPlayed(state?.played);
         }
     }
+
     const _handleEnded = () => setPlaying(true);
 
     return (

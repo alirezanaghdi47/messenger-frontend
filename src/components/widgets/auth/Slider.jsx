@@ -10,15 +10,67 @@ import {Stack, Typography} from "@mui/material";
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-const slideList = [
-    {id: 1, title: "typography.fastTitle", message: "typography.fastMessage", image: {light: "/images/fast-light.svg" , dark: "/images/fast-dark.svg"}},
-    {id: 2, title: "typography.secureTitle", message: "typography.secureMessage", image: {light: "/images/secure-light.svg" , dark: "/images/secure-dark.svg"}},
+const sliderList = [
+    {
+        id: 1,
+        title: "typography.fastTitle",
+        message: "typography.fastMessage",
+        image: {light: "/images/fast-light.svg", dark: "/images/fast-dark.svg"}
+    },
+    {
+        id: 2,
+        title: "typography.secureTitle",
+        message: "typography.secureMessage",
+        image: {light: "/images/secure-light.svg", dark: "/images/secure-dark.svg"}
+    },
 ];
 
-const Slider = () => {
+const SliderItem = ({sliderItem}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
+
+    return (
+        <Stack
+            direction="column"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+
+            <LazyLoadImage
+                src={darkMode ? sliderItem.image.dark : sliderItem.image.light}
+                alt={sliderItem.title}
+                visibleByDefault
+                effect="blur"
+                width="100%"
+                style={{height: 200}}
+            />
+
+            <Typography
+                variant="h6"
+                color="textPrimary"
+                fontWeight='bold'
+            >
+                {t(sliderItem.title)}
+            </Typography>
+
+            <Typography
+                variant="body2"
+                color="textSecondary"
+                textAlign="center"
+            >
+                {t(sliderItem.message)}
+            </Typography>
+
+        </Stack>
+    )
+}
+
+const Slider = () => {
 
     return (
         <Swiper
@@ -26,51 +78,14 @@ const Slider = () => {
             spaceBetween={16}
             slidesPerView={1}
             autoplay={{delay: 1500}}
+            loop
             style={{width: "100%"}}
         >
 
             {
-                slideList.map(slideItem =>
-
-                    <SwiperSlide key={slideItem.id}>
-
-                        <Stack
-                            direction="column"
-                            gap={2}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-
-                            <LazyLoadImage
-                                src={darkMode ? slideItem.image.dark : slideItem.image.light}
-                                alt={slideItem.title}
-                                visibleByDefault
-                                effect="blur"
-                                width="100%"
-                                style={{height: 200}}
-                            />
-
-                            <Typography
-                                variant="h6"
-                                color="textPrimary"
-                                fontWeight='bold'
-                            >
-                                {t(slideItem.title)}
-                            </Typography>
-
-                            <Typography
-                                variant="body2"
-                                color="textSecondary"
-                                textAlign="center"
-                            >
-                                {t(slideItem.message)}
-                            </Typography>
-
-                        </Stack>
-
+                sliderList.map(sliderItem =>
+                    <SwiperSlide key={sliderItem.id}>
+                        <SliderItem sliderItem={sliderItem}/>
                     </SwiperSlide>
                 )
             }

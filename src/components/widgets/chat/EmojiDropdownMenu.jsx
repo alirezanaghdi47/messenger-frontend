@@ -4,7 +4,26 @@ import {Card, Grid, Grow, IconButton} from "@mui/material";
 
 // utils
 import {convertHexToEmoji} from "utils/functions";
-import {emojiList} from "utils/constants";
+
+export const emojiList = [
+    "1F600", "1F601", "1F602", "1F923", "1F605", "1F609", "1F60D", "1F60E", "1F914", "1F611", "1F623", "1F625", "1F910", "1F614", "1F629", "1F632", "1F631", "1F621", "1F446", "1F447" , "1F44D" , "1F44F" , "1F496"
+];
+
+const GridItem = ({gridItem , onClick}) => {
+    return (
+        <Grid
+            item
+            xs={4}
+        >
+            <IconButton
+                color="secondary"
+                onClick={onClick}
+            >
+                {convertHexToEmoji(gridItem)}
+            </IconButton>
+        </Grid>
+    )
+}
 
 const EmojiDropdownMenu = ({isOpen, onClose, text, setText}) => {
 
@@ -32,21 +51,14 @@ const EmojiDropdownMenu = ({isOpen, onClose, text, setText}) => {
                 <Grid container>
                     {
                         emojiList.map((emojiItem , index) =>
-                            <Grid
+                            <GridItem
                                 key={index}
-                                item
-                                xs={4}
-                            >
-                                <IconButton
-                                    color="secondary"
-                                    onClick={() => {
-                                        setText(text + convertHexToEmoji(emojiItem) + " ");
-                                        onClose()
-                                    }}
-                                >
-                                    {convertHexToEmoji(emojiItem)}
-                                </IconButton>
-                            </Grid>
+                                gridItem={emojiItem}
+                                onClick={() => {
+                                    setText(text + convertHexToEmoji(emojiItem) + " ");
+                                    onClose()
+                                }}
+                            />
                         )
                     }
 

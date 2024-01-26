@@ -2,7 +2,6 @@
 import {useEffect, useState} from "react";
 
 export const useContextMenu = () => {
-
     const [contextMenu, setContextMenu] = useState(null);
 
     const handleContextMenu = (e) => e.preventDefault();
@@ -28,6 +27,5 @@ export const useContextMenu = () => {
     }, []);
 
     return {contextMenu , _handleShowContextMenu, _handleHideContextMenu};
-
 }
 

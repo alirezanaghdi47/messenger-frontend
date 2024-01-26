@@ -5,7 +5,7 @@ import {IconButton, Stack , useMediaQuery} from "@mui/material";
 import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
 
 // components
-import UserInfo from "components/widgets/chat/UserInfo.jsx";
+import Info from "components/widgets/chat/Info.jsx";
 import Toolbar from "components/widgets/chat/Toolbar.jsx";
 
 const Header = () => {
@@ -48,7 +48,7 @@ const Header = () => {
                 )
             }
 
-            <UserInfo/>
+            <Info/>
 
             <Toolbar/>
 

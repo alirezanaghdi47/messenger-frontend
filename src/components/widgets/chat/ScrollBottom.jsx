@@ -5,12 +5,12 @@ import {useToggle} from "@react-hooks-library/core";
 import {Grow, IconButton} from "@mui/material";
 import {FiChevronDown} from "react-icons/fi";
 
-const ActionButton = ({lastMessageRef}) => {
+const ScrollBottom = ({lastMessageRef}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {bool: showButton, setTrue: setShowButton, setFalse: setHideButton} = useToggle(true);
 
-    const _handleScroll = (e) => {
+    const _handleToggleButton = (e) => {
         if (e.target.scrollTop + e.target.clientHeight + 200 < e.target.scrollHeight){
             setShowButton();
         } else {
@@ -19,7 +19,7 @@ const ActionButton = ({lastMessageRef}) => {
     }
 
     useEffect(() => {
-        document.getElementById("messages").addEventListener("scroll" , _handleScroll);
+        document.getElementById("messages").addEventListener("scroll" , _handleToggleButton);
     }, []);
 
     return (
@@ -44,5 +44,5 @@ const ActionButton = ({lastMessageRef}) => {
     )
 }
 
-export default ActionButton;
+export default ScrollBottom;
 

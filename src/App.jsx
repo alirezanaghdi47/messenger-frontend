@@ -1,15 +1,13 @@
-// libraries
-import {useSelector} from "react-redux";
-import {useTheme} from "@mui/material";
-import {Toaster} from "react-hot-toast";
+// components
+import Toaster from "components/modules/Toaster";
 
 // helpers
-import InstallPWA from "helpers/InstallPwa";
-import Offline from "helpers/Offline";
+import InstallPWA from "components/partials/InstallPwa";
+import PreventOrientation from "components/partials/PreventOrientation";
 
 // providers
-import Mui from "providers/Mui.jsx";
-import Router from "providers/Router.jsx";
+import MuiProvider from "providers/MuiProvider.jsx";
+import RouterProvider from "providers/RouterProvider.jsx";
 
 // styles
 import "styles/global.scss";
@@ -17,35 +15,13 @@ import "styles/vazirmatn.css";
 
 const App = () => {
 
-    const {language, darkMode} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
-
     return (
-        <Mui>
-
-            <Toaster
-                position="top-center"
-                containerStyle={{
-                    fontSize: theme.typography.body2.fontSize,
-                    fontWeight: "bold",
-                    fontFamily: language === "fa" ? "Vazirmatn FD" : "Vazirmatn"
-                }}
-                toastOptions={{
-                    duration: 1500,
-                    style: {
-                        background: darkMode ? theme.palette.common.white : theme.palette.common.black,
-                        color: darkMode ? theme.palette.common.black : theme.palette.common.white
-                    }
-                }}
-            />
-
+        <MuiProvider>
+            <RouterProvider/>
+            <Toaster/>
             <InstallPWA/>
-
-            <Offline/>
-
-            <Router/>
-
-        </Mui>
+            <PreventOrientation/>
+        </MuiProvider>
     )
 };
 

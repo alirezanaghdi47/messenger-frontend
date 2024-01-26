@@ -3,9 +3,9 @@ import {Outlet, useLocation} from "react-router-dom";
 import {Stack, useMediaQuery} from "@mui/material";
 
 // components
-import Appbar from "components/widgets/setting/Appbar.jsx";
+import Actions from "components/widgets/setting/Actions.jsx";
 import Version from "components/widgets/setting/Version.jsx";
-import Links from "components/widgets/setting/Links.jsx";
+import Navbar from "components/widgets/setting/Navbar.jsx";
 import UserInfo from "components/widgets/setting/UserInfo.jsx";
 import Empty from "components/widgets/setting/Empty";
 
@@ -54,15 +54,10 @@ const SettingPage = () => {
                             padding: 2
                         }}
                     >
-
-                        <Appbar/>
-
+                        <Actions/>
                         <UserInfo/>
-
-                        <Links/>
-
+                        <Navbar/>
                         <Version/>
-
                     </Stack>
                 )
             }

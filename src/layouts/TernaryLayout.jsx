@@ -1,17 +1,9 @@
 // libraries
 import {Container, Stack} from "@mui/material";
-import {useOrientation} from "@uidotdev/usehooks";
-
-// components
-import Orientation from "components/partials/Orientation";
 
 const TernaryLayout = ({children}) => {
 
-    const {angle, type} = useOrientation();
-
-    const isOriented = angle === 90 && type === "landscape-primary";
-
-    return !isOriented ? (
+    return (
 
         <Container maxWidth="sm">
 
@@ -31,8 +23,7 @@ const TernaryLayout = ({children}) => {
             </Stack>
 
         </Container>
-
-    ) : <Orientation/>
+    )
 }
 
 export default TernaryLayout;

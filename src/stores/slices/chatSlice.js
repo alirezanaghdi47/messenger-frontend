@@ -21,10 +21,10 @@ export const chatSlice = createSlice({
         setChats: (state, action) => {
             state.chats = action.payload;
         },
-        addChat: (state, action) => {
+        insertChat: (state, action) => {
             state.chats.push(action.payload);
         },
-        deleteChat: (state, action) => {
+        removeChat: (state, action) => {
             state.chats = state.chats.filter(chat => chat._id !== action.payload);
         },
         unSetChats: (state) => {
@@ -60,10 +60,13 @@ export const chatSlice = createSlice({
         unSetGroups: (state) => {
             state.groups = [];
         },
-        joinGroup: (state, action) => {
-            state.chats.push(action.payload);
+        joinGroupChat: (state, action) => {
+            state.chats = [...state.chats.filter(chat => chat._id !== action.payload._id), action.payload];
+            if (state.activeChat?._id === action.payload._id) {
+                state.activeChat = action.payload;
+            }
         },
-        leaveGroup: (state, action) => {
+        leaveGroupChat: (state, action) => {
             state.chats = [...state.chats.filter(chat => chat._id !== action.payload._id), action.payload];
             if (state.activeChat?._id === action.payload._id) {
                 state.activeChat = action.payload;
@@ -72,10 +75,10 @@ export const chatSlice = createSlice({
         setMessages: (state, action) => {
             state.messages = action.payload;
         },
-        addMessage: (state, action) => {
+        insertMessage: (state, action) => {
             state.messages.push(action.payload);
         },
-        deleteMessage: (state, action) => {
+        removeMessage: (state, action) => {
             state.messages = state.messages.filter(message => message._id !== action.payload);
         },
         unSetMessages: (state) => {
@@ -110,8 +113,8 @@ export const chatSlice = createSlice({
 
 export const {
     setChats,
-    addChat,
-    deleteChat,
+    insertChat,
+    removeChat,
     unSetChats,
     setActiveChat,
     unSetActiveChat,
@@ -123,11 +126,11 @@ export const {
     unSetIsTypingUsers,
     setGroups,
     unSetGroups,
-    joinGroup,
-    leaveGroup,
+    joinGroupChat,
+    leaveGroupChat,
     setMessages,
-    addMessage,
-    deleteMessage,
+    insertMessage,
+    removeMessage,
     unSetMessages,
     setQueueMessage,
     setProgressQueueMessage,

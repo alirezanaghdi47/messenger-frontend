@@ -1,5 +1,6 @@
-import * as Yup from "yup";
+// libraries
 import i18n from "i18next";
+import * as Yup from "yup";
 
 export const editProfileSchema = Yup.object().shape({
     avatar: Yup.mixed().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
@@ -35,7 +36,7 @@ export const addTextMessageSchema = Yup.object().shape({
     text: Yup.string().trim().required(),
 });
 
-export const addGroupSchema = Yup.object().shape({
+export const addGroupChatSchema = Yup.object().shape({
     avatar: Yup.mixed().test("fileSize",  i18n.t("error.avatarSize"), (value) => {
         if (Object.keys(value).length === 0) {
             return true;

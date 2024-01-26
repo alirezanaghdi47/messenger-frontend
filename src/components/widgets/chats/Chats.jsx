@@ -3,7 +3,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
-// import {BiCheckDouble} from "react-icons/bi";
 import {FiUser} from "react-icons/fi";
 
 const UserChat = ({chatItem}) => {
@@ -95,23 +94,6 @@ const UserChat = ({chatItem}) => {
 
             </Stack>
 
-            {/*<Stack*/}
-            {/*    direction="column"*/}
-            {/*    gap={1}*/}
-            {/*    sx={{*/}
-            {/*        display: "flex",*/}
-            {/*        justifyContent: "end",*/}
-            {/*        alignItems: "end",*/}
-            {/*        width: 60,*/}
-            {/*        height: 40,*/}
-            {/*        color: params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"*/}
-            {/*    }}*/}
-            {/*>*/}
-
-            {/*    <BiCheckDouble size={20}/>*/}
-
-            {/*</Stack>*/}
-
         </Stack>
     )
 }
@@ -119,7 +101,6 @@ const UserChat = ({chatItem}) => {
 const GroupChat = ({chatItem}) => {
 
     const params = useParams();
-    const {_id} = useSelector(state => state.setting.profile);
     const theme = useTheme();
 
     return (
@@ -191,23 +172,6 @@ const GroupChat = ({chatItem}) => {
 
             </Stack>
 
-            {/*<Stack*/}
-            {/*    direction="column"*/}
-            {/*    gap={1}*/}
-            {/*    sx={{*/}
-            {/*        display: "flex",*/}
-            {/*        justifyContent: "end",*/}
-            {/*        alignItems: "end",*/}
-            {/*        width: 60,*/}
-            {/*        height: 40,*/}
-            {/*        color: params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "text.secondary"*/}
-            {/*    }}*/}
-            {/*>*/}
-
-            {/*    <BiCheckDouble size={20}/>*/}
-
-            {/*</Stack>*/}
-
         </Stack>
     )
 }
@@ -222,22 +186,14 @@ const ChatItem = ({chatItem}) => {
             sx={{width: "100%"}}
             onClick={() => navigate(`/chat/${chatItem._id}`)}
         >
-
-            {
-                chatItem?.groupId ? (
-                    <GroupChat chatItem={chatItem}/>
-                ) : (
-                    <UserChat chatItem={chatItem}/>
-                )
-            }
-
+            {chatItem?.groupId ? <GroupChat chatItem={chatItem}/> : <UserChat chatItem={chatItem}/>}
         </Box>
     )
 }
 
 const Chats = () => {
 
-    const {chats , filteredChats} = useSelector(state => state.chat);
+    const {chats, filteredChats} = useSelector(state => state.chat);
 
     return (
         <Stack

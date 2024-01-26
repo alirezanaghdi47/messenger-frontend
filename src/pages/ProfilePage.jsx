@@ -29,11 +29,8 @@ const ProfilePage = () => {
                 height: "100dvh",
             }}
         >
-
             <Header title="typography.profile"/>
-
             <Account/>
-
         </Stack>
     )
 }

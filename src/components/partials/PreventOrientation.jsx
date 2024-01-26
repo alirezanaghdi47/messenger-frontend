@@ -2,25 +2,21 @@
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
-import {useOnline} from '@react-hooks-library/core';
-import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Modal, Stack, useMediaQuery, alpha, Typography} from "@mui/material";
+import {useOrientation} from "@uidotdev/usehooks";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
+import {alpha, Modal, Stack, Typography} from "@mui/material";
 
-const Offline = () => {
+const PreventOrientation = () => {
 
     const [showBanner , setShowBanner] = useState(false);
     const {darkMode} = useSelector(state => state.setting.appearance);
     const {t} = useTranslation();
-    const isOnline = useOnline();
-    const isMobile = useMediaQuery('(max-width: 576px)');
+    const {angle , type} = useOrientation();
+    const isOriented = angle === 90 && type === "landscape-primary";
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setShowBanner(!isOnline);
-        } , 1000);
-
-        return () => clearTimeout(timeout);
-    }, [isOnline]);
+        setShowBanner(isOriented);
+    }, [isOriented]);
 
     return (
         <Modal
@@ -45,33 +41,35 @@ const Offline = () => {
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: isMobile ? "100%" : 480,
-                    height: isMobile ? "100%" : "max-content",
+                    width: "100%",
+                    height: "100%",
                     padding: 4,
                 }}
             >
 
                 <LazyLoadImage
-                    src={darkMode ? "/images/offline-dark.svg" : "/images/offline-light.svg"}
-                    alt="pwa"
+                    src={darkMode ? "/images/orientation-dark.svg" : "/images/orientation-light.svg"}
+                    alt="orientation"
                     visibleByDefault
                     effect="blur"
                     width="100%"
-                    style={{maxWidth: 240}}
+                    style={{maxWidth: 160}}
                 />
 
                 <Typography
-                    variant="h6"
+                    variant="subtitle1"
                     color="secondary.main"
                     fontWeight='bold'
+                    textAlign="center"
+                    lineHeight={2}
                 >
-                    {t("typography.offline")}
+                    {t("typography.preventOrientation")}
                 </Typography>
 
             </Stack>
 
         </Modal>
-    );
-};
+    )
+}
 
-export default Offline;
+export default PreventOrientation;

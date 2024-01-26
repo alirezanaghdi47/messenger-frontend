@@ -1,46 +1,48 @@
 // libraries
 import {useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {toast} from "react-hot-toast";
 import {Button, Stack, Typography} from "@mui/material";
-import {FiLogIn} from "react-icons/fi";
+import {FiUserPlus} from "react-icons/fi";
 
 // components
 import TextInput from "components/modules/TextInput";
 
 // stores
-import {useLoginMutation} from "stores/apis/authApi";
+import {useRegisterMutation} from "stores/apis/authApi";
 
 // utils
-import {loginSchema} from "utils/validations";
+import {registerSchema} from "utils/validations";
 
-const LoginForm = ({setSession}) => {
+const Form = () => {
 
-    const [login , loginResponse] = useLoginMutation();
+    const navigate = useNavigate();
+    const [register , registerResponse] = useRegisterMutation();
     const {t} = useTranslation();
 
     const formik = useFormik({
         initialValues: {
+            userName: "",
             phoneNumber: "",
         },
-        validationSchema: loginSchema,
+        validationSchema: registerSchema,
         onSubmit: async (result) => {
-            login(result);
+            register(result);
         }
     });
 
     useEffect(() => {
-        if (loginResponse.isSuccess){
-            if (loginResponse.data.status === "success"){
-                toast.success(loginResponse.data.message);
-                setSession(loginResponse.data.data);
+        if (registerResponse.isSuccess){
+            if (registerResponse.data.status === "success"){
+                toast.success(registerResponse.data.message);
+                navigate("/auth/login");
             } else {
-                toast.error(loginResponse.data.message);
+                toast.error(registerResponse.data.message);
             }
         }
-    }, [loginResponse]);
+    }, [registerResponse]);
 
     return (
         <Stack
@@ -57,6 +59,16 @@ const LoginForm = ({setSession}) => {
         >
 
             <TextInput
+                label={t("input.userName")}
+                name="userName"
+                value={formik.values.userName}
+                onChange={formik.handleChange}
+                onBlur={() => formik.setFieldTouched("userName")}
+                error={formik.errors.userName}
+                touched={formik.touched.userName}
+            />
+
+            <TextInput
                 label={t("input.phoneNumber")}
                 name="phoneNumber"
                 value={formik.values.phoneNumber}
@@ -69,11 +81,11 @@ const LoginForm = ({setSession}) => {
             <Button
                 variant="contained"
                 color="primary"
-                startIcon={<FiLogIn size={20}/>}
+                startIcon={<FiUserPlus size={20}/>}
                 fullWidth
                 onClick={formik.handleSubmit}
             >
-                {t("button.signIn")}
+                {t("button.signUp")}
             </Button>
 
             <Stack
@@ -91,18 +103,18 @@ const LoginForm = ({setSession}) => {
                     variant="body2"
                     color="textPrimary"
                 >
-                    {t("typography.createAccount")}
+                    {t("typography.haveAccount")}
                 </Typography>
 
                 <Typography
                     component={Link}
-                    to="/auth/register"
+                    to="/auth/login"
                     variant="body2"
                     color="primary.main"
                     fontWeight="bold"
                     sx={{textDecoration: "none"}}
                 >
-                    {t("typography.register")}
+                    {t("typography.login")}
                 </Typography>
 
             </Stack>
@@ -111,4 +123,4 @@ const LoginForm = ({setSession}) => {
     )
 }
 
-export default LoginForm;
+export default Form;

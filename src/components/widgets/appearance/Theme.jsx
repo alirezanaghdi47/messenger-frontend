@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
@@ -9,14 +10,24 @@ import Header from "components/widgets/appearance/Header";
 
 // stores
 import {useEditThemeMutation} from "stores/apis/settingApi";
+import {setTheme} from "stores/slices/settingSlice";
 
-// utils
-import {themeList} from "utils/constants.js";
+const themeList = [
+    {id: 1, title: "select.light", value: false, background: "/images/light-mode.jpg"},
+    {id: 2, title: "select.dark", value: true, background: "/images/dark-mode.jpg"},
+];
 
 const ThemeItem = ({themeItem}) => {
 
+    const dispatch = useDispatch();
     const {darkMode} = useSelector(state => state.setting.appearance);
-    const [editTheme] = useEditThemeMutation();
+    const [editTheme , editThemeResponse] = useEditThemeMutation();
+
+    useEffect(() => {
+        if (editThemeResponse.status === "fulfilled") {
+            dispatch(setTheme(editThemeResponse.data));
+        }
+    }, [editThemeResponse]);
 
     return (
         <Grid

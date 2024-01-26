@@ -1,5 +1,6 @@
 // libraries
-import {useSelector} from "react-redux";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {Box, Grid, Stack} from "@mui/material";
 import {FiCheck} from "react-icons/fi";
@@ -9,14 +10,27 @@ import Header from "components/widgets/appearance/Header";
 
 // stores
 import {useEditBackgroundMutation} from "stores/apis/settingApi";
+import {setBackground} from "stores/slices/settingSlice";
 
-// utils
-import {backgroundList} from "utils/constants.js";
+const backgroundList = [
+    {id: 1, background: '/images/desktop-1.jpg'},
+    {id: 2, background: "/images/desktop-2.jpg"},
+    {id: 3, background: "/images/desktop-3.jpg"},
+    {id: 4, background: "/images/desktop-4.jpg"},
+    {id: 5, background: "/images/desktop-5.jpg"},
+];
 
 const BackgroundItem = ({backgroundItem}) => {
 
+    const dispatch = useDispatch();
     const {background} = useSelector(state => state.setting.appearance);
-    const [editBackground] = useEditBackgroundMutation();
+    const [editBackground , editBackgroundResponse] = useEditBackgroundMutation();
+
+    useEffect(() => {
+        if (editBackgroundResponse.status === "fulfilled") {
+            dispatch(setBackground(editBackgroundResponse.data));
+        }
+    }, [editBackgroundResponse]);
 
     return (
         <Grid

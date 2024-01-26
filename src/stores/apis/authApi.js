@@ -45,12 +45,12 @@ export const authApi = createApi({
                 }
             },
         }),
-        verifyUser: builder.mutation({
+        verify: builder.mutation({
             queryFn: async (arg, {signal, dispatch, getState}, extraOptions, baseQuery) => {
                 try {
                     const {language} = await getState().setting.appearance;
 
-                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/verifyUser", {code: arg.code}, {
+                    const response = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/verify", {code: arg.code}, {
                         headers: {
                             expire: arg.expire,
                             userId: arg.userId,
@@ -70,5 +70,5 @@ export const authApi = createApi({
 export const {
     useRegisterMutation,
     useLoginMutation,
-    useVerifyUserMutation,
+    useVerifyMutation,
 } = authApi;

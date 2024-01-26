@@ -10,7 +10,6 @@ const NumberInput = ({
                        onChange,
                        startIcon,
                        endIcon,
-                       rows = 1,
                        touched,
                        error,
                        onBlur,

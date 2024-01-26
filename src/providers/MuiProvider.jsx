@@ -18,7 +18,7 @@ const emptyCache = createCache({
     key: "mui-ltr",
 });
 
-const Mui = ({children}) => {
+const MuiProvider = ({children}) => {
 
     const {language, darkMode, color} = useSelector(state => state.setting.appearance);
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -28,19 +28,11 @@ const Mui = ({children}) => {
     }, [language]);
 
     useEffect(() => {
-        if (darkMode === "auto") {
-            document.body.setAttribute("data-theme", prefersDarkMode ? "dark" : "light");
-        } else {
-            document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
-        }
+        document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
     }, [darkMode, prefersDarkMode]);
 
     const mode = useMemo(() => {
-        if (darkMode === "auto") {
-            return prefersDarkMode ? "dark" : "light";
-        } else {
-            return darkMode ? "dark" : "light";
-        }
+        return darkMode ? "dark" : "light";
     } , [darkMode, prefersDarkMode]);
 
     const addonTheme = createTheme({
@@ -369,17 +361,12 @@ const Mui = ({children}) => {
 
     return (
         <CacheProvider value={language === "fa" ? cacheRtl : emptyCache}>
-
             <ThemeProvider theme={customizedTheme}>
-
                 <CssBaseline/>
-
                 {children}
-
             </ThemeProvider>
-
         </CacheProvider>
     );
 }
 
-export default Mui;
+export default MuiProvider;

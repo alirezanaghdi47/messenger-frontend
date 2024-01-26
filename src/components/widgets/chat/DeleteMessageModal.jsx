@@ -1,6 +1,5 @@
 // libraries
 import {useContext, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {
@@ -13,35 +12,31 @@ import {
 import {LuTrash2} from "react-icons/lu";
 
 // providers
-import {SocketContext} from "providers/Socket";
+import {SocketContext} from "providers/SocketProvider";
 
 // stores
 import {hideModal} from "stores/slices/appSlice";
-import {useDeleteChatMutation} from "stores/apis/chatApi";
+import {useDeleteMessageMutation} from "stores/apis/messageApi";
+import {removeMessage} from "stores/slices/chatSlice";
 
 const ModalContent = ({data}) => {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {_id} = useSelector(state => state.setting.profile);
-    const [deleteChat , deleteChatResponse] = useDeleteChatMutation();
+    const {activeChat} = useSelector(state => state.chat);
+    const [deleteMessage , deleteMessageResponse] = useDeleteMessageMutation();
     const {t} = useTranslation();
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
-
-        if (deleteChatResponse.status === "fulfilled") {
-            socket?.current?.emit("deleteChat", {
-                userId: _id,
-                chat: deleteChatResponse?.data,
-                receiverIds: deleteChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
-                socketId: socket?.current?.id
-            })
-            navigate("/chat");
+        if (deleteMessageResponse.status === "fulfilled"){
+            socket?.current?.emit("deleteMessage", {
+                messageId: deleteMessageResponse?.data?._id,
+                chatId: activeChat?._id,
+            });
+            dispatch(removeMessage(deleteMessageResponse?.data?._id));
             dispatch(hideModal());
         }
-
-    }, [deleteChatResponse]);
+    }, [deleteMessageResponse]);
 
     return (
         <Stack
@@ -80,7 +75,7 @@ const ModalContent = ({data}) => {
                 variant="body2"
                 color="textPrimary"
             >
-                {t("typography.deleteChat")}
+                {t("typography.deleteMessage")}
             </Typography>
 
             <Stack
@@ -105,7 +100,7 @@ const ModalContent = ({data}) => {
                 <Button
                     variant="contained"
                     color="error"
-                    onClick={() => deleteChat(data?._id)}
+                    onClick={() => deleteMessage(data?._id)}
                 >
                     {t("button.delete")}
                 </Button>
@@ -116,19 +111,20 @@ const ModalContent = ({data}) => {
     )
 }
 
-const DeleteChatModal = () => {
+const DeleteMessageModal = () => {
 
     const dispatch = useDispatch();
     const {modal} = useSelector(state => state.app);
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === "deleteContact")}
+            open={Boolean(modal?.isOpen && modal?.type === `deleteMessage-${modal.data._id}`)}
             onClose={() => dispatch(hideModal())}
             onContextMenuCapture={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
             }}
+            disableAutoFocus
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -150,14 +146,12 @@ const DeleteChatModal = () => {
                     padding: 2,
                 }}
             >
-
                 <ModalContent data={modal?.data}/>
-
             </Stack>
 
         </Modal>
     )
 }
 
-export default DeleteChatModal;
+export default DeleteMessageModal;
 

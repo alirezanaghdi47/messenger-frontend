@@ -2,10 +2,10 @@
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {LazyLoadImage} from "react-lazy-load-image-component";
-import {Box, Stack, Typography, Badge} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 import {FiUser} from "react-icons/fi";
 
-const User = () => {
+const UserChat = () => {
 
     const {activeChat, onlineUsers, isTypingUsers} = useSelector(state => state.chat);
     const {_id} = useSelector(state => state.setting.profile);
@@ -100,7 +100,7 @@ const User = () => {
     )
 }
 
-const Group = () => {
+const GroupChat = () => {
 
     const {activeChat} = useSelector(state => state.chat);
     const {t} = useTranslation();
@@ -181,15 +181,9 @@ const Group = () => {
     )
 }
 
-const UserInfo = () => {
-
+const Info = () => {
     const {activeChat} = useSelector(state => state.chat);
-
-    return activeChat?.groupId ? (
-        <Group/>
-    ) : (
-        <User/>
-    )
+    return activeChat?.groupId ? <GroupChat/> : <UserChat/>
 }
 
-export default UserInfo;
+export default Info;

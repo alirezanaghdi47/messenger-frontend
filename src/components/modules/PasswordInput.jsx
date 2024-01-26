@@ -11,7 +11,6 @@ const PasswordInput = ({
                            value,
                            onChange,
                            startIcon,
-                           rows = 1,
                            touched,
                            error,
                            onBlur,
@@ -70,8 +69,6 @@ const PasswordInput = ({
                     )
                 }}
                 value={value}
-                multiline={rows > 1}
-                rows={rows}
                 onChange={onChange}
                 disabled={disabled}
             />

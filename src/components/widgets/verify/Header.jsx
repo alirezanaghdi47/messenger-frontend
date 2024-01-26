@@ -2,16 +2,13 @@
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 
-const version = "1.9.2";
-
-const Version = () => {
+const Header = () => {
 
     const {t} = useTranslation();
 
     return (
         <Stack
-            direction="column"
-            gap={1}
+            direction="row"
             sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -21,16 +18,15 @@ const Version = () => {
         >
 
             <Typography
-                variant="body2"
-                color="textSecondary"
+                variant="h5"
+                color="textPrimary"
                 fontWeight="bold"
             >
-                {t("typography.version")} {version}
+                {t("typography.verify")}
             </Typography>
 
         </Stack>
     )
 }
 
-export default Version;
-
+export default Header;

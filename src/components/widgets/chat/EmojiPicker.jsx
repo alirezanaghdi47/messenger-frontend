@@ -1,5 +1,6 @@
 // libraries
 import {useRef} from "react";
+import Loadable from "@loadable/component";
 import {useClickOutside} from "@react-hooks-library/core";
 import {Box, IconButton} from "@mui/material";
 import {LuSmile} from "react-icons/lu";
@@ -8,12 +9,11 @@ import {LuSmile} from "react-icons/lu";
 import {useDropdownMenu} from "hooks/useDropdownMenu";
 
 // components
-import EmojiDropdownMenu from "components/widgets/chat/EmojiDropdownMenu";
+const EmojiDropdownMenu = Loadable(() => import("components/widgets/chat/EmojiDropdownMenu"));
 
 const EmojiPicker = ({text , setText}) => {
 
     const ref = useRef(null);
-
     const {anchorEl , isOpenDropdownMenu, _handleHideDropdownMenu, _handleToggleDropdownMenu} = useDropdownMenu();
 
     useClickOutside(ref, () => {
