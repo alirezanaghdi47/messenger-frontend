@@ -83,7 +83,6 @@ export const messageApi = createApi({
 
                     return {data: response.data.data};
                 } catch (error) {
-                    console.log(error);
                     return {error}
                 }
             },

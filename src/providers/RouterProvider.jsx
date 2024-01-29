@@ -1,5 +1,6 @@
 // libraries
 import {Navigate, Route, Routes} from "react-router-dom";
+import {useSelector} from "react-redux";
 import Loadable from '@loadable/component';
 
 // pages
@@ -16,17 +17,20 @@ const NotFound = Loadable(() => import('pages/NotFoundPage'));
 
 const RouterProvider = () => {
 
+    const {token, expire} = useSelector(state => state.auth);
+    const isAuth = Boolean(token && expire > Math.floor(Date.now() / 1000));
+
     return (
         <Routes>
 
             <Route
                 path="/"
-                element={<Navigate to="/chat"/>}
+                element={isAuth ? <Navigate to="/chat"/> : <Navigate to="/auth/login"/>}
             />
 
             <Route
                 path="/auth"
-                element={<Auth/>}
+                element={!isAuth ? <Auth/> : <Navigate to="/chat"/>}
             >
 
                 <Route
@@ -48,7 +52,7 @@ const RouterProvider = () => {
 
             <Route
                 path="/chat"
-                element={<Chats/>}
+                element={isAuth ? <Chats/> : <Navigate to="/auth/login"/>}
             >
 
                 <Route
@@ -60,7 +64,7 @@ const RouterProvider = () => {
 
             <Route
                 path="/setting"
-                element={<Setting/>}
+                element={isAuth ? <Setting/> : <Navigate to="/auth/login"/>}
             >
 
                 <Route

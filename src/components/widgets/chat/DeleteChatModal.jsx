@@ -31,7 +31,6 @@ const ModalContent = ({data}) => {
 
     useEffect(() => {
         if (deleteChatResponse.status === "fulfilled") {
-            console.log(deleteChatResponse)
             socket?.current?.emit("deleteChat", {
                 userId: _id,
                 chat: deleteChatResponse?.data,

@@ -157,7 +157,7 @@ const ImagePreviewModal = () => {
 
     return (
         <Modal
-            open={Boolean(modal?.isOpen && modal?.type === '-${modal.data._id}')}
+            open={Boolean(modal?.isOpen && modal?.type === `imagePreview-${modal.data._id}`)}
             onClose={() => dispatch(hideModal())}
             disableAutoFocus
             sx={{

@@ -1,6 +1,6 @@
 // libraries
 import {useEffect} from "react";
-import {Navigate, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 // stores
@@ -13,7 +13,6 @@ const PrivateRouteHoc = (WrappedComponent) => {
         const location = useLocation();
         const dispatch = useDispatch();
         const {token, expire} = useSelector(state => state.auth);
-        const isAuth = Boolean(token && expire > Math.floor(Date.now() / 1000));
 
         useEffect(() => {
             if (!token || expire < Math.floor(Date.now() / 1000)) {
@@ -22,7 +21,7 @@ const PrivateRouteHoc = (WrappedComponent) => {
             }
         }, [location.key]);
 
-        return isAuth ? <WrappedComponent {...props}/> : <Navigate to='/auth/login'/>
+        return <WrappedComponent {...props}/>;
     }
 
     return PrivateRouteHoc;

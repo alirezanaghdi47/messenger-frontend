@@ -1,7 +1,7 @@
 // libraries
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import {useFormik} from "formik";
 import {Button, Stack, useMediaQuery} from "@mui/material";
@@ -13,6 +13,7 @@ import AvatarInput from "components/modules/AvatarInput.jsx";
 
 // stores
 import {useEditProfileMutation} from "stores/apis/settingApi";
+import {setProfile} from "stores/slices/settingSlice";
 
 // utils
 import {editProfileSchema} from "utils/validations.js";
@@ -20,6 +21,7 @@ import {editProfileSchema} from "utils/validations.js";
 const Account = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {avatar, biography} = useSelector(state => state.setting.profile);
     const [editProfile , editProfileResponse] = useEditProfileMutation();
     const {t} = useTranslation();
@@ -39,6 +41,7 @@ const Account = () => {
 
     useEffect(() => {
         if (editProfileResponse.isSuccess) {
+            dispatch(setProfile(editProfileResponse.data));
             navigate("/setting");
         }
     }, [editProfileResponse]);

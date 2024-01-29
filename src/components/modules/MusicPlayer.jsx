@@ -3,9 +3,8 @@ import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
 import Slider from 'rc-slider';
-import {Button, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
-import {LuPlay, LuPause, LuVolume2} from "react-icons/lu";
-import {FiX} from "react-icons/fi";
+import {IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {LuPlay, LuPause, LuVolume2, LuRefreshCw} from "react-icons/lu";
 
 // styles
 import 'rc-slider/assets/index.css';
@@ -13,36 +12,237 @@ import 'rc-slider/assets/index.css';
 // utils
 import {formattedSecond} from "utils/functions";
 
+const Duration = ({duration, played}) => {
+
+    return (
+        <Stack
+            direction="row"
+            gap={1}
+            sx={{
+                display: "flex",
+                justifyContent: 'space-between',
+                alignItems: "center",
+                width: "100%",
+                marginTop: 1
+            }}
+        >
+
+            <Typography
+                variant="caption"
+                color="textPrimary"
+                fontWeight="bold"
+            >
+                {formattedSecond(duration)}
+            </Typography>
+
+            <Typography
+                variant="caption"
+                color="textPrimary"
+                fontWeight="bold"
+            >
+                {formattedSecond(duration * played)}
+            </Typography>
+
+        </Stack>
+    )
+}
+
+const TimeLine = ({played, _handleSeekChange, _handleSeekMouseDown, _handleSeekMouseUp}) => {
+
+    const theme = useTheme();
+
+    return (
+        <Stack
+            direction="row"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: 'center',
+                alignItems: "center",
+                width: "100%",
+            }}
+        >
+
+            <Slider
+                min={0}
+                max={0.999999}
+                step={0.0000000000000001}
+                value={played}
+                onBeforeChange={_handleSeekMouseDown}
+                onChange={_handleSeekChange}
+                onAfterChange={_handleSeekMouseUp}
+                style={{
+                    width: "100%",
+                    height: 4,
+                    padding: 0
+                }}
+                trackStyle={{
+                    height: 4,
+                    background: theme.palette.primary.main,
+                }}
+                handleStyle={{
+                    width: 16,
+                    height: 16,
+                    background: theme.palette.primary.main,
+                    opacity: 1,
+                    border: "none",
+                    boxShadow: "none",
+                    marginTop: -6,
+                }}
+                railStyle={{
+                    height: 4,
+                    background: theme.palette.secondary.main
+                }}
+            />
+
+        </Stack>
+    )
+}
+
+const Reset = ({_handleReset}) => {
+
+    return (
+        <IconButton
+            variant="text"
+            color="ternary"
+            onClick={_handleReset}
+        >
+            <LuRefreshCw size={20}/>
+        </IconButton>
+    )
+}
+
+const PlayPause = ({playing, played, _handleTogglePlaying}) => {
+
+    return (
+        <IconButton
+            variant="contained"
+            color="primary"
+            size="large"
+            onClick={_handleTogglePlaying}
+        >
+            {(!playing || played === 0) ? <LuPlay size={20}/> : <LuPause size={20}/>}
+        </IconButton>
+    )
+}
+
+const Volume = ({volume, _handleVolumeChange}) => {
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const theme = useTheme();
+
+    const _handleToggleVolume = (e) => setAnchorEl(anchorEl ? null : e.currentTarget);
+
+    return (
+        <>
+            <Popper
+                open={Boolean(anchorEl)}
+                placement="right"
+                anchorEl={anchorEl}
+                sx={{zIndex: 1500}}
+            >
+
+                <Slider
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    value={volume}
+                    onChange={_handleVolumeChange}
+                    style={{
+                        width: 60,
+                        height: 4,
+                        padding: 0,
+                        marginLeft: 8,
+                    }}
+                    trackStyle={{
+                        left: 0,
+                        height: 4,
+                        background: theme.palette.primary.main,
+                    }}
+                    handleStyle={{
+                        width: 16,
+                        height: 16,
+                        background: theme.palette.primary.main,
+                        opacity: 1,
+                        border: "none",
+                        boxShadow: "none",
+                        marginTop: -6,
+                    }}
+                    railStyle={{
+                        height: 4,
+                        background: theme.palette.secondary.main
+                    }}
+                />
+
+            </Popper>
+
+            <IconButton
+                variant="text"
+                color="ternary"
+                onClick={_handleToggleVolume}
+            >
+                <LuVolume2 size={20}/>
+            </IconButton>
+        </>
+    )
+}
+
+const Toolbar = ({playing, played, volume, _handleTogglePlaying, _handleVolumeChange , _handleReset}) => {
+
+    return (
+        <Stack
+            direction="row"
+            gap={2}
+            sx={{
+                display: "flex",
+                justifyContent: 'space-between',
+                alignItems: "center",
+                width: "100%",
+            }}
+        >
+
+            <Reset
+                _handleReset={_handleReset}
+            />
+
+            <PlayPause
+                playing={playing}
+                played={played}
+                _handleTogglePlaying={_handleTogglePlaying}
+            />
+
+            <Volume
+                volume={volume}
+                _handleVolumeChange={_handleVolumeChange}
+            />
+
+        </Stack>
+    )
+}
+
 const MusicPlayer = ({src}) => {
 
     const playerRef = useRef(null);
-    const [anchorEl, setAnchorEl] = useState(null);
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
     const [seeking, setSeeking] = useState(false);
     const [played, setPlayed] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
-    const [playbackRate, setPlaybackRate] = useState(1);
     const {language} = useSelector(state => state.setting.appearance);
-    const theme = useTheme();
-
-    const _handlePlaybackRateChange = () => {
-        if (playbackRate === 1) setPlaybackRate(1.5);
-        if (playbackRate === 1.5) setPlaybackRate(2);
-        if (playbackRate === 2) setPlaybackRate(1);
-    }
-
-    const _handleToggleVolume = (e) => setAnchorEl(anchorEl ? null : e.currentTarget);
 
     const _handleVolumeChange = (value) => {
         setVolume(value);
         setMuted(false);
     }
 
-    const _handleTogglePlaying = () => setPlaying(!playing);
+    const _handleTogglePlaying = () => {
+        setPlaying(!playing);
+    }
 
-    const _handleSeekMouseDown = () => setSeeking(true);
+    const _handleSeekMouseDown = () => {
+        setSeeking(true);
+    }
 
     const _handleSeekChange = (value) => {
         setPlayed(value);
@@ -50,9 +250,13 @@ const MusicPlayer = ({src}) => {
         setPlaying(true);
     }
 
-    const _handleSeekMouseUp = () => setSeeking(false);
+    const _handleSeekMouseUp = () => {
+        setSeeking(false);
+    }
 
-    const _handleDuration = (duration) => setDuration(duration);
+    const _handleDuration = (duration) => {
+        setDuration(duration);
+    }
 
     const _handleProgress = (state) => {
         if (!seeking) {
@@ -60,12 +264,21 @@ const MusicPlayer = ({src}) => {
         }
     }
 
-    const _handleEnded = () => setPlaying(true);
+    const _handleEnded = () => {
+        setPlaying(true);
+    }
+
+    const _handleReset = () => {
+        setPlayed(0);
+        setPlaying(false);
+        setSeeking(false);
+    }
 
     return (
         <>
             <Stack
                 direction="column"
+                gap={1}
                 sx={{
                     direction: language === "en" ? "rtl" : "ltr",
                     display: "flex",
@@ -75,161 +288,26 @@ const MusicPlayer = ({src}) => {
                 }}
             >
 
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: 'center',
-                        alignItems: "center",
-                        width: "100%",
-                        padding: 1
-                    }}
-                >
+                <TimeLine
+                    played={played}
+                    _handleSeekChange={_handleSeekChange}
+                    _handleSeekMouseDown={_handleSeekMouseDown}
+                    _handleSeekMouseUp={_handleSeekMouseUp}
+                />
 
-                    <Slider
-                        min={0}
-                        max={0.999999}
-                        step={0.0000000000000001}
-                        value={played}
-                        onBeforeChange={_handleSeekMouseDown}
-                        onChange={_handleSeekChange}
-                        onAfterChange={_handleSeekMouseUp}
-                        style={{
-                            width: "100%",
-                            height: 4,
-                            padding: 0
-                        }}
-                        trackStyle={{
-                            height: 4,
-                            background: theme.palette.primary.main,
-                        }}
-                        handleStyle={{
-                            width: 16,
-                            height: 16,
-                            background: theme.palette.primary.main,
-                            opacity: 1,
-                            border: "none",
-                            boxShadow: "none",
-                            marginTop: -6,
-                        }}
-                        railStyle={{
-                            height: 4,
-                            background: theme.palette.secondary.main
-                        }}
-                    />
+                <Duration
+                    played={played}
+                    duration={duration}
+                />
 
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: 'space-between',
-                        alignItems: "center",
-                        width: "100%",
-                        padding: 1
-                    }}
-                >
-
-                    <Typography
-                        variant="caption"
-                        color="textPrimary"
-                        fontWeight="bold"
-                    >
-                        {formattedSecond(duration)}
-                    </Typography>
-
-                    <Typography
-                        variant="caption"
-                        color="textPrimary"
-                        fontWeight="bold"
-                    >
-                        {formattedSecond(duration * played)}
-                    </Typography>
-
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    gap={2}
-                    sx={{
-                        display: "flex",
-                        justifyContent: 'space-between',
-                        alignItems: "center",
-                        width: "100%",
-                    }}
-                >
-
-                    <Button
-                        variant="text"
-                        color="ternary"
-                        size="small"
-                        onClick={_handlePlaybackRateChange}
-                    >
-                        {playbackRate}
-                        <FiX size={16} style={{marginRight: 4}}/>
-                    </Button>
-
-                    <IconButton
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={_handleTogglePlaying}
-                    >
-                        {(!playing || played === 0) ? <LuPlay size={20}/> : <LuPause size={20}/>}
-                    </IconButton>
-
-                    <Popper
-                        open={Boolean(anchorEl)}
-                        placement="right"
-                        anchorEl={anchorEl}
-                        sx={{zIndex: 1500}}
-                    >
-
-                        <Slider
-                            min={0}
-                            max={1}
-                            step={0.01}
-                            value={volume}
-                            onChange={_handleVolumeChange}
-                            style={{
-                                width: 40,
-                                height: 4,
-                                padding: 0
-                            }}
-                            trackStyle={{
-                                left: 0,
-                                height: 4,
-                                background: theme.palette.primary.main,
-                            }}
-                            handleStyle={{
-                                width: 16,
-                                height: 16,
-                                background: theme.palette.primary.main,
-                                opacity: 1,
-                                border: "none",
-                                boxShadow: "none",
-                                marginTop: -6,
-                            }}
-                            railStyle={{
-                                height: 4,
-                                background: theme.palette.secondary.main
-                            }}
-                        />
-
-                    </Popper>
-
-                    <IconButton
-                        variant="text"
-                        color="ternary"
-                        onClick={_handleToggleVolume}
-                    >
-                        <LuVolume2 size={20}/>
-                    </IconButton>
-
-                </Stack>
+                <Toolbar
+                    played={played}
+                    playing={playing}
+                    volume={volume}
+                    _handleTogglePlaying={_handleTogglePlaying}
+                    _handleVolumeChange={_handleVolumeChange}
+                    _handleReset={_handleReset}
+                />
 
             </Stack>
 
@@ -241,7 +319,6 @@ const MusicPlayer = ({src}) => {
                 playing={playing}
                 volume={volume}
                 muted={muted}
-                playbackRate={playbackRate}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
                 onEnded={_handleEnded}

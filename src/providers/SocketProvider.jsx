@@ -21,6 +21,7 @@ const SocketProvider = ({children}) => {
 
     const socket = useRef(null);
     const dispatch = useDispatch();
+    const {token} = useSelector(state => state.auth);
     const {_id} = useSelector(state => state.setting.profile);
     const {onlineUsers, isTypingUsers} = useSelector(state => state.chat);
 
@@ -71,7 +72,13 @@ const SocketProvider = ({children}) => {
     }
 
     useEffect(() => {
-        socket.current = io.connect(process.env.REACT_APP_API_URL);
+        if (token) {
+            socket.current = io.connect(process.env.REACT_APP_API_URL, {
+                query: {token}
+            });
+        } else {
+            return null;
+        }
 
         socket?.current?.on('connect', _handleConnect);
         socket?.current?.on('startTypingResponse', _handleStartTypingResponse);
