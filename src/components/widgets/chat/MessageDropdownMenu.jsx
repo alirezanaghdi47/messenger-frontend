@@ -2,8 +2,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 import Loadable from "@loadable/component";
+import { saveAs } from 'file-saver';
 import {Menu, MenuItem, Typography} from "@mui/material";
-import {FiX} from "react-icons/fi";
+import {FiDownload, FiX} from "react-icons/fi";
 import {LuTrash2} from "react-icons/lu";
 
 // stores
@@ -59,6 +60,20 @@ const MessageDropdownMenu = ({data, contextMenu, isOpen, onClose}) => {
                 anchorPosition={isOpen ? {top: contextMenu.mouseY, left: contextMenu.mouseX} : undefined}
                 elevation={2}
             >
+
+                {
+                    (data?.type === 1 || data?.type === 2 || data?.type === 3 || data?.type === 4) && (
+                        <MessageDropdownMenuItem
+                            label="menu.download"
+                            color="ternary"
+                            icon={<FiDownload size={20}/>}
+                            onClick={() => {
+                                saveAs(data?.content , data?.name);
+                                onClose();
+                            }}
+                        />
+                    )
+                }
 
                 {
                     data?.type === 6 ? (

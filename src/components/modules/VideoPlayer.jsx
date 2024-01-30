@@ -2,7 +2,7 @@
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import ReactPlayer from 'react-player';
-import screenfull from "screenfull";
+import {useFullscreen} from "ahooks";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Slider from "rc-slider";
 import {Box, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
@@ -14,7 +14,7 @@ import 'rc-slider/assets/index.css';
 // utils
 import {formattedSecond} from "utils/functions";
 
-const TimeLine = ({played , _handleSeekChange , _handleSeekMouseDown , _handleSeekMouseUp}) => {
+const TimeLine = ({played, _handleSeekChange, _handleSeekMouseDown, _handleSeekMouseUp}) => {
 
     const theme = useTheme();
 
@@ -53,7 +53,7 @@ const TimeLine = ({played , _handleSeekChange , _handleSeekMouseDown , _handleSe
     )
 }
 
-const Duration = ({duration , played}) => {
+const Duration = ({duration, played}) => {
 
     return (
         <Stack
@@ -86,21 +86,22 @@ const Duration = ({duration , played}) => {
     )
 }
 
-const FullScreen = ({_handleFullScreen}) => {
+const FullScreen = ({isFullscreen, _handleToggleFullScreen}) => {
 
     return (
         <IconButton
             variant="text"
             color="light"
             size="small"
-            onClick={_handleFullScreen}
+            onClick={_handleToggleFullScreen}
+            sx={{marginRight: "auto"}}
         >
-            {screenfull.isFullscreen ? <LuMinimize size={20}/> : <LuMaximize size={20}/>}
+            {isFullscreen ? <LuMinimize size={20}/> : <LuMaximize size={20}/>}
         </IconButton>
     )
 }
 
-const PlayPause = ({played , playing , _handleTogglePlaying}) => {
+const PlayPause = ({played, playing, _handleTogglePlaying}) => {
 
     return (
         <IconButton
@@ -114,62 +115,46 @@ const PlayPause = ({played , playing , _handleTogglePlaying}) => {
     )
 }
 
-const Volume = ({volume , _handleVolumeChange}) => {
+const Volume = ({volume, _handleVolumeChange}) => {
 
-    const [anchorEl, setAnchorEl] = useState(null);
     const theme = useTheme();
-
-    const _handleToggleVolume = (e) => {
-        setAnchorEl(anchorEl ? null : e.currentTarget);
-    }
 
     return (
         <>
-            <Popper
-                open={Boolean(anchorEl)}
-                placement="right"
-                anchorEl={anchorEl}
-                sx={{zIndex: 1500}}
-            >
-
-                <Slider
-                    min={0}
-                    max={1}
-                    step={0.01}
-                    value={volume}
-                    onChange={_handleVolumeChange}
-                    style={{
-                        width: 60,
-                        height: 4,
-                        padding: 0,
-                        marginLeft: 8,
-                    }}
-                    trackStyle={{
-                        left: 0,
-                        height: 4,
-                        background: theme.palette.primary.main,
-                    }}
-                    handleStyle={{
-                        width: 16,
-                        height: 16,
-                        background: theme.palette.primary.main,
-                        opacity: 1,
-                        border: "none",
-                        boxShadow: "none",
-                        marginTop: -6,
-                    }}
-                    railStyle={{
-                        height: 4,
-                        background: theme.palette.secondary.main
-                    }}
-                />
-
-            </Popper>
+            <Slider
+                min={0}
+                max={1}
+                step={0.01}
+                value={volume}
+                onChange={_handleVolumeChange}
+                style={{
+                    width: 60,
+                    height: 4,
+                    padding: 0,
+                }}
+                trackStyle={{
+                    left: 0,
+                    height: 4,
+                    background: theme.palette.primary.main,
+                }}
+                handleStyle={{
+                    width: 16,
+                    height: 16,
+                    background: theme.palette.primary.main,
+                    opacity: 1,
+                    border: "none",
+                    boxShadow: "none",
+                    marginTop: -6,
+                }}
+                railStyle={{
+                    height: 4,
+                    background: theme.palette.secondary.main
+                }}
+            />
 
             <IconButton
                 variant="text"
                 color="light"
-                onClick={_handleToggleVolume}
             >
                 <LuVolume2 size={20}/>
             </IconButton>
@@ -177,7 +162,15 @@ const Volume = ({volume , _handleVolumeChange}) => {
     )
 }
 
-const Toolbar = ({played , playing , volume , _handleTogglePlaying , _handleVolumeChange , _handleFullScreen}) => {
+const Toolbar = ({
+                     played,
+                     playing,
+                     volume,
+                     isFullscreen,
+                     _handleTogglePlaying,
+                     _handleVolumeChange,
+                     _handleToggleFullScreen
+                 }) => {
 
     return (
         <Stack
@@ -185,14 +178,20 @@ const Toolbar = ({played , playing , volume , _handleTogglePlaying , _handleVolu
             gap={2}
             sx={{
                 display: "flex",
-                justifyContent: 'space-between',
+                justifyContent: 'end',
                 alignItems: "center",
                 width: "100%"
             }}
         >
 
             <FullScreen
-                _handleFullScreen={_handleFullScreen}
+                isFullscreen={isFullscreen}
+                _handleToggleFullScreen={_handleToggleFullScreen}
+            />
+
+            <Volume
+                volume={volume}
+                _handleVolumeChange={_handleVolumeChange}
             />
 
             <PlayPause
@@ -201,16 +200,11 @@ const Toolbar = ({played , playing , volume , _handleTogglePlaying , _handleVolu
                 _handleTogglePlaying={_handleTogglePlaying}
             />
 
-            <Volume
-                volume={volume}
-                _handleVolumeChange={_handleVolumeChange}
-            />
-
         </Stack>
     )
 }
 
-const Poster = ({thumbnail ,playing , played , _handleTogglePlaying}) => {
+const Poster = ({thumbnail, playing, played, _handleTogglePlaying}) => {
 
     return (
         <Box
@@ -254,6 +248,7 @@ const Poster = ({thumbnail ,playing , played , _handleTogglePlaying}) => {
 
 const VideoPlayer = ({src, thumbnail}) => {
 
+    const containerRef = useRef(null);
     const playerRef = useRef(null);
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(false);
@@ -263,12 +258,10 @@ const VideoPlayer = ({src, thumbnail}) => {
     const [volume, setVolume] = useState(1);
     const {language} = useSelector(state => state.setting.appearance);
 
-    const _handleFullScreen = () => {
-        if (screenfull.isFullscreen){
-            screenfull.exit();
-        } else {
-            screenfull.request(document.getElementById("player"));
-        }
+    const [isFullscreen, {toggleFullscreen}] = useFullscreen(containerRef);
+
+    const _handleToggleFullScreen = () => {
+        toggleFullscreen();
     }
 
     const _handleVolumeChange = (value) => {
@@ -307,11 +300,11 @@ const VideoPlayer = ({src, thumbnail}) => {
 
     return (
         <Box
-            id="player"
+            ref={containerRef}
             sx={{
                 position: "relative",
                 width: "100%",
-                maxWidth: screenfull.isFullscreen ? "100%" : 640,
+                maxWidth: isFullscreen ? "100%" : 640,
                 height: "100%",
                 aspectRatio: 16 / 9,
                 borderRadius: 1,
@@ -333,7 +326,7 @@ const VideoPlayer = ({src, thumbnail}) => {
                 onDuration={(duration) => _handleDuration(duration)}
                 style={{
                     width: "100%",
-                    maxWidth: screenfull.isFullscreen ? "100%" : 640,
+                    // maxWidth: isFullscreen ? "100%" : 640,
                     aspectRatio: 16 / 9,
                 }}
             />
@@ -350,7 +343,7 @@ const VideoPlayer = ({src, thumbnail}) => {
                     justifyContent: 'end',
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: screenfull.isFullscreen ? "100%" : 640,
+                    // maxWidth: isFullscreen ? "100%" : 640,
                     height: "100%",
                     background: 'linear-gradient(180deg, rgba(32, 32, 32, 0) 0%, #000000d1 100%)',
                     borderRadius: 1,
@@ -374,9 +367,10 @@ const VideoPlayer = ({src, thumbnail}) => {
                     playing={playing}
                     played={played}
                     volume={volume}
+                    isFullscreen={isFullscreen}
                     _handleTogglePlaying={_handleTogglePlaying}
                     _handleVolumeChange={_handleVolumeChange}
-                    _handleFullScreen={_handleFullScreen}
+                    _handleToggleFullScreen={_handleToggleFullScreen}
                 />
 
             </Stack>

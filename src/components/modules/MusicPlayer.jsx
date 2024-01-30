@@ -270,7 +270,7 @@ const MusicPlayer = ({src}) => {
 
     const _handleReset = () => {
         setPlayed(0);
-        setPlaying(false);
+        playerRef?.current?.seekTo(0);
         setSeeking(false);
     }
 
