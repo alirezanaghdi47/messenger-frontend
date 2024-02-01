@@ -12,7 +12,7 @@ const precacheRoutes = [
     '/favicon.ico',
     '/robot.txt',
     '/manifest.json',
-    '/icon-192x192.png', '/icon-256x256.png', '/icon-384x384.png', '/icon-512x512.png', '/maskable_icon.png', '/logo192.png', '/logo512.png', '/screenshot-1.png', '/screenshot-2.png',
+    '/icon-192x192.png', '/icon-256x256.png', '/icon-384x384.png', '/icon-512x512.png', '/maskable_icon.png', '/screenshot-1.png', '/screenshot-2.png',
     '/images/offline-dark.svg', '/images/offline-light.svg', '/images/pwa-dark.svg', '/images/pwa-light.svg', '/images/orientation-dark.svg', '/images/orientation-light.svg'
 ];
 

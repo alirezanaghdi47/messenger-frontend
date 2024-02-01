@@ -1,5 +1,6 @@
 // libraries
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {IconButton, Stack} from "@mui/material";
 import {FiSettings} from "react-icons/fi";
@@ -7,6 +8,7 @@ import {FiSettings} from "react-icons/fi";
 const Header = () => {
 
     const navigate = useNavigate();
+    const {darkMode} = useSelector(state => state.setting.appearance);
 
     const _handleRedirect = () => navigate("/setting");
 
@@ -35,7 +37,7 @@ const Header = () => {
             >
 
                 <LazyLoadImage
-                    src="/images/logo.png"
+                    src={darkMode ? "/images/logo-dark.png" : "/images/logo-light.png"}
                     alt="logo"
                     visibleByDefault
                     width={40}

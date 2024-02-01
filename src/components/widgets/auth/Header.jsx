@@ -1,8 +1,11 @@
 // libraries
-import {Stack} from "@mui/material";
+import {useSelector} from "react-redux";
 import {LazyLoadImage} from "react-lazy-load-image-component";
+import {Stack} from "@mui/material";
 
 const Header = () => {
+
+    const {darkMode} = useSelector(state => state.setting.appearance);
 
     return (
         <Stack
@@ -16,7 +19,7 @@ const Header = () => {
         >
 
             <LazyLoadImage
-                src="/images/logo.png"
+                src={darkMode ? "/images/logo-dark.png" : "/images/logo-light.png"}
                 alt="logo"
                 visibleByDefault
                 width={40}
