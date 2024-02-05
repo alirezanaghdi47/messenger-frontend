@@ -1,6 +1,7 @@
 // libraries
 import {useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Virtuoso} from 'react-virtuoso';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack, Badge, Typography, useTheme} from "@mui/material";
 import {FiUser} from "react-icons/fi";
@@ -35,6 +36,7 @@ const UserItem = ({userItem}) => {
                 receiverIds: addChatResponse?.data?.participantIds.filter(user => user._id !== _id).map(item => item._id),
                 socketId: socket?.current?.id
             });
+
             dispatch(insertChat(addChatResponse?.data));
         }
     }, [addChatResponse]);
@@ -142,35 +144,21 @@ const Users = () => {
     const {users, filteredUsers} = useSelector(state => state.chat);
 
     return (
-        <Stack
-            component="ul"
-            direction="column"
-            className="custom-scrollbar"
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                width: "100%",
-                height: 320,
-                overflowY: "scroll"
-            }}
-        >
-
-            {
-                filteredUsers.length > 0 ? filteredUsers.map(userItem =>
-                    <UserItem
-                        key={userItem?._id}
-                        userItem={userItem}
-                    />
-                ) : users.map(userItem =>
-                    <UserItem
-                        key={userItem?._id}
-                        userItem={userItem}
-                    />
-                )
+        <Virtuoso
+            totalCount={Math.max(filteredUsers.length, users.length)}
+            data={filteredUsers.length > 0 ? filteredUsers : users}
+            itemContent={(index , userItem) =>
+                <UserItem
+                    key={userItem?._id}
+                    userItem={userItem}
+                />
             }
-
-        </Stack>
+            style={{
+                width: "100%",
+                height: "100%"
+            }}
+            className="custom-scrollbar"
+        />
     )
 }
 

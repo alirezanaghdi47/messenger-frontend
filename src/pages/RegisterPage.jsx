@@ -20,8 +20,11 @@ const RegisterPage = () => {
                 maxWidth: 480
             }}
         >
+
             <Header/>
+
             <Form/>
+
         </Stack>
     );
 }

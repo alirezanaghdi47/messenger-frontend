@@ -18,11 +18,14 @@ export const useContextMenu = () => {
         );
     };
 
-    const _handleHideContextMenu = () => setContextMenu(null);
+    const _handleHideContextMenu = () => {
+        setContextMenu(null);
+    }
 
     useEffect(() => {
         const appElement = document.getElementById('root');
         appElement.addEventListener('contextmenu', handleContextMenu);
+
         return () => appElement.removeEventListener('contextmenu', handleContextMenu);
     }, []);
 

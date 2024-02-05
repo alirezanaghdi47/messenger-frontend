@@ -73,9 +73,7 @@ const SocketProvider = ({children}) => {
 
     useEffect(() => {
         if (token) {
-            socket.current = io.connect(process.env.REACT_APP_API_URL, {
-                query: {token}
-            });
+            socket.current = io.connect(process.env.REACT_APP_API_URL, {query: {token}});
         } else {
             return null;
         }

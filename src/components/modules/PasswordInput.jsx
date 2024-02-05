@@ -20,6 +20,10 @@ const PasswordInput = ({
     const {t} = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
 
+    const _handleTogglePassword = () => {
+        setShowPassword(prevState => !prevState);
+    }
+
     return (
         <FormControl
             variant="outlined"
@@ -55,16 +59,13 @@ const PasswordInput = ({
                     ) : null,
                     endAdornment: (
                         <InputAdornment position="end">
-
                             <IconButton
                                 variant="text"
                                 color="ternary"
-                                onClick={() => setShowPassword(!showPassword)}
+                                onClick={_handleTogglePassword}
                             >
                                 {showPassword ? <FiEyeOff size={20}/> : <FiEye size={20}/>}
-
                             </IconButton>
-
                         </InputAdornment>
                     )
                 }}

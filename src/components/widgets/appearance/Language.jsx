@@ -24,6 +24,10 @@ const LanguageItem = ({languageItem}) => {
     const [editLanguage , editLanguageResponse] = useEditLanguageMutation();
     const {t} = useTranslation();
 
+    const _handleEditLanguage = () => {
+        editLanguage({language: languageItem.value});
+    }
+
     useEffect(() => {
         if (editLanguageResponse.status === "fulfilled") {
             dispatch(setLanguage(editLanguageResponse.data));
@@ -44,7 +48,7 @@ const LanguageItem = ({languageItem}) => {
                     effect='blur'
                 />
             }
-            onClick={() => editLanguage({language: languageItem.value})}
+            onClick={_handleEditLanguage}
         >
             {t(languageItem.title)}
         </Button>

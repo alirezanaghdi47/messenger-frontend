@@ -50,9 +50,9 @@ const EmojiDropdownMenu = ({isOpen, onClose, text, setText}) => {
 
                 <Grid container>
                     {
-                        emojiList.map((emojiItem , index) =>
+                        emojiList.map(emojiItem =>
                             <GridItem
-                                key={index}
+                                key={emojiItem}
                                 gridItem={emojiItem}
                                 onClick={() => {
                                     setText(text + convertHexToEmoji(emojiItem) + " ");

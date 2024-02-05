@@ -1,6 +1,7 @@
 // libraries
 import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {Virtuoso} from 'react-virtuoso';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Badge, Box, Stack, Typography, useTheme} from "@mui/material";
 import {FiUser} from "react-icons/fi";
@@ -186,7 +187,13 @@ const ChatItem = ({chatItem}) => {
             sx={{width: "100%"}}
             onClick={() => navigate(`/chat/${chatItem._id}`)}
         >
-            {chatItem?.groupId ? <GroupChat chatItem={chatItem}/> : <UserChat chatItem={chatItem}/>}
+            {
+                chatItem?.groupId ? (
+                    <GroupChat chatItem={chatItem}/>
+                ) : (
+                    <UserChat chatItem={chatItem}/>
+                )
+            }
         </Box>
     )
 }
@@ -196,35 +203,21 @@ const Chats = () => {
     const {chats, filteredChats} = useSelector(state => state.chat);
 
     return (
-        <Stack
-            component="ul"
-            direction="column"
-            className="remove-scrollbar"
-            sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
+        <Virtuoso
+            totalCount={Math.max(filteredChats.length, chats.length)}
+            data={filteredChats.length > 0 ? filteredChats : chats}
+            itemContent={(index , chatItem) =>
+                <ChatItem
+                    key={chatItem?._id}
+                    chatItem={chatItem}
+                />
+            }
+            style={{
                 width: "100%",
                 height: "calc(100dvh - 140px)",
-                overflowY: "scroll"
             }}
-        >
-
-            {
-                filteredChats.length > 0 ? filteredChats.map(chatItem =>
-                    <ChatItem
-                        key={chatItem?._id}
-                        chatItem={chatItem}
-                    />
-                ) : chats.map(chatItem =>
-                    <ChatItem
-                        key={chatItem?._id}
-                        chatItem={chatItem}
-                    />
-                )
-            }
-
-        </Stack>
+            className="custom-scrollbar"
+        />
     )
 }
 

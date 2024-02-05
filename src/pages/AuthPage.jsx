@@ -61,9 +61,13 @@ const AuthPage = () => {
                             padding: 2
                         }}
                     >
+
                         <Header/>
+
                         <Outlet/>
+
                         <Footer/>
+
                     </Stack>
 
                 </Grid>

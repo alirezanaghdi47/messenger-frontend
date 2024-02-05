@@ -25,8 +25,11 @@ const VerifyPage = () => {
                     maxWidth: 480
                 }}
             >
+
                 <Header/>
+
                 <Form/>
+
             </Stack>
         );
     } else {

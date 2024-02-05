@@ -1,29 +1,22 @@
 // libraries
-import {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {useToggle} from "@react-hooks-library/core";
-import {Grow, IconButton} from "@mui/material";
+import {IconButton} from "@mui/material";
 import {FiChevronDown} from "react-icons/fi";
 
-const ScrollBottom = ({lastMessageRef}) => {
+const ScrollBottom = ({messagesCount, listRef}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
-    const {bool: showButton, setTrue: setShowButton, setFalse: setHideButton} = useToggle(true);
 
-    const _handleToggleButton = (e) => {
-        if (e.target.scrollTop + e.target.clientHeight + 200 < e.target.scrollHeight){
-            setShowButton();
-        } else {
-            setHideButton();
-        }
+    const _handleScrollToLastMessage = () => {
+        listRef?.current?.scrollToIndex({
+            index: messagesCount,
+            align: "bottom",
+            behavior: "auto"
+        });
     }
 
-    useEffect(() => {
-        document.getElementById("messages").addEventListener("scroll" , _handleToggleButton);
-    }, []);
-
     return (
-        <Grow in={showButton}>
+        // <Grow in={showScrollBottom}>
 
             <IconButton
                 variant="contained"
@@ -35,12 +28,12 @@ const ScrollBottom = ({lastMessageRef}) => {
                     left: 16,
                     bottom: 96
                 }}
-                onClick={() => lastMessageRef?.current?.scrollIntoView({behavior: "smooth"})}
+                onClick={_handleScrollToLastMessage}
             >
                 <FiChevronDown size={20}/>
             </IconButton>
 
-        </Grow>
+        // </Grow>
     )
 }
 

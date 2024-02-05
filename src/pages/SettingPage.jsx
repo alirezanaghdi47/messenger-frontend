@@ -54,10 +54,15 @@ const SettingPage = () => {
                             padding: 2
                         }}
                     >
+
                         <Actions/>
+
                         <UserInfo/>
+
                         <Navbar/>
+
                         <Version/>
+
                     </Stack>
                 )
             }

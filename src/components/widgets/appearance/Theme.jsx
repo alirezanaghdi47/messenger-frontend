@@ -23,6 +23,10 @@ const ThemeItem = ({themeItem}) => {
     const {darkMode} = useSelector(state => state.setting.appearance);
     const [editTheme , editThemeResponse] = useEditThemeMutation();
 
+    const _handleEditTheme = () => {
+        editTheme({darkMode: themeItem.value});
+    }
+
     useEffect(() => {
         if (editThemeResponse.status === "fulfilled") {
             dispatch(setTheme(editThemeResponse.data));
@@ -37,7 +41,7 @@ const ThemeItem = ({themeItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => editTheme({darkMode: themeItem.value})}
+            onClick={_handleEditTheme}
         >
 
             <Box

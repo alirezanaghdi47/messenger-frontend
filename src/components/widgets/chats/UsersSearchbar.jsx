@@ -14,7 +14,6 @@ import {setFilteredUsers , unSetFilteredUsers} from "stores/slices/chatSlice";
 const SearchBar = () => {
 
     const dispatch = useDispatch();
-    const {_id} = useSelector(state => state.setting.profile);
     const {users , filteredUsers} = useSelector(state => state.chat);
     const {t} = useTranslation();
 

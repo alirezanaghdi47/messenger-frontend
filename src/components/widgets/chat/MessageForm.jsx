@@ -21,7 +21,7 @@ import {insertMessage} from "stores/slices/chatSlice";
 // utils
 import {addTextMessageSchema} from "utils/validations";
 
-const MessageForm = () => {
+const MessageForm = ({messagesCount, listRef}) => {
 
     const [isTyping, setIsTyping] = useState(false);
     const params = useParams();
@@ -38,7 +38,16 @@ const MessageForm = () => {
                 message: addTextMessageResponse.data,
                 chatId: activeChat?._id,
             });
+
             dispatch(insertMessage(addTextMessageResponse.data));
+
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messagesCount,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            } , 150);
         }
     }, [addTextMessageResponse]);
 
@@ -52,6 +61,33 @@ const MessageForm = () => {
             resetForm();
         }
     });
+
+    const _handleKeyDown = (e) => {
+        if (!isTyping) {
+            socket?.current?.emit('startTyping', {
+                userId: _id,
+                chatId: params.chatId,
+                socketId: socket?.current?.id
+            });
+            setIsTyping(true);
+        }
+
+        let lastTypingTime = new Date().getTime();
+        let timer = 2000;
+
+        setTimeout(() => {
+            let timeNow = new Date().getTime();
+            let timeDifference = timeNow - lastTypingTime;
+            if (timeDifference >= timer) {
+                socket?.current?.emit('stopTyping', {
+                    userId: _id,
+                    chatId: params.chatId,
+                    socketId: socket?.current?.id
+                });
+                setIsTyping(false);
+            }
+        }, timer);
+    }
 
     useEffect(() => {
         return () => formik.handleReset();
@@ -78,30 +114,7 @@ const MessageForm = () => {
                 }
                 value={formik.values.text}
                 onChange={formik.handleChange}
-                onKeyDown={(e) => {
-                    if (!isTyping) {
-                        socket?.current?.emit('startTyping', {
-                            userId: _id,
-                            chatId: params.chatId,
-                            socketId: socket?.current?.id
-                        });
-                        setIsTyping(true);
-                    }
-                    let lastTypingTime = new Date().getTime();
-                    let timer = 2000;
-                    setTimeout(() => {
-                        let timeNow = new Date().getTime();
-                        let timeDifference = timeNow - lastTypingTime;
-                        if (timeDifference >= timer) {
-                            socket?.current?.emit('stopTyping', {
-                                userId: _id,
-                                chatId: params.chatId,
-                                socketId: socket?.current?.id
-                            });
-                            setIsTyping(false);
-                        }
-                    }, timer);
-                }}
+                onKeyDown={_handleKeyDown}
                 error={formik.errors.text}
             />
         </>

@@ -179,8 +179,11 @@ const JoinGroupChatModal = () => {
                     padding: 2,
                 }}
             >
+
                 <ModalHeader/>
+
                 <ModalContent/>
+
             </Stack>
 
         </Modal>

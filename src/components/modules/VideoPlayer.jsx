@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player';
 import {useFullscreen} from "ahooks";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import Slider from "rc-slider";
-import {Box, IconButton, Popper, Stack, Typography, useTheme} from "@mui/material";
+import {Box, IconButton, Stack, Typography, useTheme} from "@mui/material";
 import {LuPlay, LuPause, LuVolume2, LuMaximize, LuMinimize} from "react-icons/lu";
 
 // styles
@@ -270,7 +270,7 @@ const VideoPlayer = ({src, thumbnail}) => {
     }
 
     const _handleTogglePlaying = () => {
-        setPlaying(!playing);
+        setPlaying(prevState => !prevState);
     }
 
     const _handleSeekMouseDown = () => {
@@ -296,7 +296,9 @@ const VideoPlayer = ({src, thumbnail}) => {
             setPlayed(state?.played);
         }
     }
-    const _handleEnded = () => setPlaying(true);
+    const _handleEnded = () => {
+        setPlaying(true);
+    }
 
     return (
         <Box

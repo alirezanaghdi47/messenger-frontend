@@ -17,10 +17,15 @@ const App = () => {
 
     return (
         <MuiProvider>
+
             <RouterProvider/>
+
             <Toaster/>
+
             <InstallPWA/>
+
             <PreventOrientation/>
+
         </MuiProvider>
     )
 };

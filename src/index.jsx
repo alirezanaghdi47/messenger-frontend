@@ -13,15 +13,25 @@ import SocketProvider from "providers/SocketProvider";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
+
         <ReduxProvider>
+
            <CookieProvider>
+
                <I18nProvider>
+
                    <SocketProvider>
+
                        <App/>
+
                    </SocketProvider>
+
                </I18nProvider>
+
            </CookieProvider>
+
         </ReduxProvider>
+
     </BrowserRouter>
 );
 

@@ -29,8 +29,11 @@ const AppearancePage = () => {
                 height: "100dvh",
             }}
         >
+
             <Header title="typography.appearance"/>
+
             <Customize/>
+
         </Stack>
     )
 }

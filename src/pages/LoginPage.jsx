@@ -20,8 +20,11 @@ const LoginPage = () => {
                 maxWidth: 480
             }}
         >
+
             <Header/>
+
             <Form/>
+
         </Stack>
     );
 }

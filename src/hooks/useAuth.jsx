@@ -8,7 +8,6 @@ import {signOut} from "stores/slices/authSlice";
 import {unSetUser} from "stores/slices/settingSlice";
 
 const useAuth = () => {
-
     const [isAuth , setIsAuth] = useState(false);
     const location = useLocation();
     const dispatch = useDispatch();

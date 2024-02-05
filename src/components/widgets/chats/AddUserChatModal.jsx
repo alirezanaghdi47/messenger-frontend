@@ -72,6 +72,7 @@ const ModalContent = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
+                height: "100%"
             }}
         >
 
@@ -116,15 +117,18 @@ const AddUserChatModal = () => {
                     justifyContent: "start",
                     alignItems: "center",
                     width: isTablet ? "100%" : 480,
-                    height: isTablet ? "100%" : "max-content",
+                    height: isTablet ? "100%" : 480,
                     bgcolor: "background.paper",
                     borderRadius: isTablet ? 0 : 1,
                     boxShadow: 1,
                     padding: 2,
                 }}
             >
+
                 <ModalHeader/>
+
                 <ModalContent/>
+
             </Stack>
 
         </Modal>

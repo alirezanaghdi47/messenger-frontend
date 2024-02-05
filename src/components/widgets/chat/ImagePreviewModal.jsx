@@ -182,8 +182,11 @@ const ImagePreviewModal = () => {
                     padding: 2,
                 }}
             >
+
                 <ModalHeader data={modal.data}/>
+
                 <ModalContent data={modal.data}/>
+
             </Stack>
 
         </Modal>

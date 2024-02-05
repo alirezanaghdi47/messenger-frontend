@@ -27,13 +27,14 @@ const InstallPWA = () => {
 
     useEffect(() => {
         window.addEventListener("beforeinstallprompt", beforeInstallPrompt);
-
         return () => window.removeEventListener("transitionend", beforeInstallPrompt);
     }, []);
 
     const _handleAccept = async (e) => {
         e.preventDefault();
+
         if (!promptInstall) return;
+
         const result = await promptInstall.prompt();
 
         if (result.outcome === "accepted") {

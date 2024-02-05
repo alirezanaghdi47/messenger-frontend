@@ -237,7 +237,7 @@ const MusicPlayer = ({src}) => {
     }
 
     const _handleTogglePlaying = () => {
-        setPlaying(!playing);
+        setPlaying(prevState => !prevState);
     }
 
     const _handleSeekMouseDown = () => {

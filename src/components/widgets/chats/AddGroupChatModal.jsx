@@ -223,8 +223,11 @@ const AddGroupChatModal = () => {
                     padding: 2,
                 }}
             >
+
                 <ModalHeader/>
+
                 <ModalContent/>
+
             </Stack>
 
         </Modal>

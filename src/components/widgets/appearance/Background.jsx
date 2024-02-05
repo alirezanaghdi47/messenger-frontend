@@ -26,6 +26,10 @@ const BackgroundItem = ({backgroundItem}) => {
     const {background} = useSelector(state => state.setting.appearance);
     const [editBackground , editBackgroundResponse] = useEditBackgroundMutation();
 
+    const _handleEditBackground = () => {
+        editBackground({background: backgroundItem.background});
+    }
+
     useEffect(() => {
         if (editBackgroundResponse.status === "fulfilled") {
             dispatch(setBackground(editBackgroundResponse.data));
@@ -40,7 +44,7 @@ const BackgroundItem = ({backgroundItem}) => {
             sm={4}
             lg={3}
             sx={{cursor: "pointer"}}
-            onClick={() => editBackground({background: backgroundItem.background})}
+            onClick={_handleEditBackground}
         >
 
             <Box

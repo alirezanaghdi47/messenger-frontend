@@ -2,7 +2,7 @@
 import {forwardRef, useContext, useEffect, useRef} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {useTranslation} from "react-i18next"
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {Menu, MenuItem, Typography} from "@mui/material";
 import toast from "react-hot-toast";
 import {FiFile, FiFilm, FiImage, FiMusic} from "react-icons/fi";
@@ -18,7 +18,8 @@ import {
     useAddVideoMessageMutation
 } from "stores/apis/messageApi";
 import {
-    insertMessage, removeMessage,
+    insertMessage,
+    removeMessage,
     setQueueMessage,
     unSetQueueMessage
 } from "stores/slices/chatSlice";
@@ -61,7 +62,7 @@ const AttachmentDropdownMenuItem = forwardRef(({label, icon, acceptType, onClick
     )
 });
 
-const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
+const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClose}) => {
 
     const fileRef = useRef(null);
     const imageRef = useRef(null);
@@ -70,7 +71,7 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
     const dispatch = useDispatch();
     const {_id, avatar} = useSelector(state => state.setting.profile);
     const {language} = useSelector(state => state.setting.appearance);
-    const {activeChat , queueMessage} = useSelector(state => state.chat);
+    const {activeChat, queueMessage} = useSelector(state => state.chat);
     const [addFileMessage, addFileResponse] = useAddFileMessageMutation();
     const [addImageMessage, addImageResponse] = useAddImageMessageMutation();
     const [addVideoMessage, addVideoResponse] = useAddVideoMessageMutation();
@@ -86,7 +87,16 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                 message: addFileResponse.data,
                 chatId: activeChat?._id,
             });
+
             dispatch(insertMessage(addFileResponse.data));
+
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messagesCount,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            }, 150);
         }
     }, [addFileResponse]);
 
@@ -98,7 +108,16 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                 message: addImageResponse.data,
                 chatId: activeChat?._id,
             });
+
             dispatch(insertMessage(addImageResponse.data));
+
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messagesCount,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            }, 150);
         }
     }, [addImageResponse]);
 
@@ -110,7 +129,16 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                 message: addVideoResponse.data,
                 chatId: activeChat?._id,
             });
+
             dispatch(insertMessage(addVideoResponse.data));
+
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messagesCount,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            }, 150);
         }
     }, [addVideoResponse]);
 
@@ -122,7 +150,16 @@ const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
                 message: addMusicResponse.data,
                 chatId: activeChat?._id,
             });
+
             dispatch(insertMessage(addMusicResponse.data));
+
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messagesCount,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            }, 150);
         }
     }, [addMusicResponse]);
 

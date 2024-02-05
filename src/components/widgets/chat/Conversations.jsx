@@ -1,5 +1,6 @@
 // libraries
 import {useSelector} from "react-redux";
+import {Virtuoso} from 'react-virtuoso';
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Box, Stack} from "@mui/material";
 import {FiUser} from "react-icons/fi";
@@ -14,7 +15,7 @@ import {
     QueueMessage
 } from "components/widgets/chat/Messages";
 
-const ConversationItem = ({conversationItem , lastMessageRef}) => {
+const ConversationItem = ({conversationItem}) => {
 
     const {_id} = useSelector(state => state.setting.profile);
 
@@ -95,47 +96,43 @@ const ConversationItem = ({conversationItem , lastMessageRef}) => {
 
             </Stack>
 
-            <Box ref={lastMessageRef}/>
-
         </Stack>
     )
 }
 
-const Conversations = ({lastMessageRef}) => {
+const Conversations = ({listRef}) => {
 
     const {messages} = useSelector(state => state.chat);
 
     return (
-        <Stack
-            id="messages"
-            component="ul"
-            direction="column"
-            gap={2}
-            className="custom-scrollbar"
-            sx={{
-                position: "absolute",
-                top: 80,
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "start",
-                width: "100%",
-                height: "calc(100dvh - 160px)",
-                padding: 2,
-                overflowY: "scroll"
-            }}
-        >
-
-            {
-                messages.map(message =>
+        <Virtuoso
+            ref={listRef}
+            totalCount={messages}
+            data={messages}
+            followOutput="smooth"
+            itemContent={(index, message) =>
+                <Box
+                    sx={{
+                        paddingX: 1,
+                        paddingY: 2,
+                    }}
+                >
                     <ConversationItem
                         key={message?._id}
                         conversationItem={message}
-                        lastMessageRef={lastMessageRef}
                     />
-                )
+                </Box>
             }
-
-        </Stack>
+            style={{
+                position: "absolute",
+                top: 80,
+                width: "100%",
+                height: "calc(100dvh - 160px)",
+                overflowX: "hidden",
+                paddingTop: 16
+            }}
+            className="custom-scrollbar"
+        />
     )
 }
 

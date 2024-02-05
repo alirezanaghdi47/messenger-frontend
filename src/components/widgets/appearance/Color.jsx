@@ -24,6 +24,10 @@ const ColorItem = ({colorItem}) => {
     const {darkMode, color} = useSelector(state => state.setting.appearance);
     const [editColor , editColorResponse] = useEditColorMutation();
 
+    const _handleEditColor = () => {
+        editColor({color: colorItem.color});
+    }
+
     useEffect(() => {
         if (editColorResponse.status === "fulfilled") {
             dispatch(setColor(editColorResponse.data));
@@ -41,7 +45,7 @@ const ColorItem = ({colorItem}) => {
                 borderRadius: "50%",
                 cursor: "pointer",
             }}
-            onClick={() => editColor({color: colorItem.color})}
+            onClick={_handleEditColor}
         >
 
             {

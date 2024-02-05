@@ -28,10 +28,15 @@ const Customize = () => {
             }}
             className="remove-scrollbar"
         >
+
             <Language/>
+
             <Color/>
+
             <Background/>
+
             <Theme/>
+
         </Stack>
     )
 }
