@@ -2,6 +2,7 @@
 import {useContext, useEffect, useRef} from "react";
 import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {useToggle} from "@react-hooks-library/core";
 import {alpha, Stack, useTheme, useMediaQuery} from "@mui/material";
 
 // components
@@ -31,6 +32,7 @@ const ChatPage = () => {
     const {isFetching: isFetchingActiveChat, refetch: refetchActiveChat} = useGetChatQuery(params.chatId);
     const {isFetching: isFetchingMessages, refetch: refetchMessages} = useGetAllMessageQuery(params.chatId);
     const {socket} = useContext(SocketContext);
+    const {bool: showScrollBottom, setTrue: _handleShowScrollBottom, setFalse: _handleHideScrollBottom} = useToggle();
     const isTablet = useMediaQuery('(max-width: 768px)');
     const theme = useTheme();
 
@@ -38,6 +40,18 @@ const ChatPage = () => {
         refetchActiveChat();
         refetchMessages();
     }, [params.chatId]);
+
+    useEffect(() => {
+        if (!isFetchingMessages){
+            setTimeout(() => {
+                listRef?.current?.scrollToIndex({
+                    index: messages?.length,
+                    align: "bottom",
+                    behavior: "auto"
+                });
+            } , 150);
+        }
+    }, [isFetchingMessages , messages]);
 
     useEffect(() => {
         socket?.current?.on("deleteChatResponse", data => {
@@ -88,21 +102,23 @@ const ChatPage = () => {
 
             {
                 messages?.length > 0 ? (
-                    <Conversations listRef={listRef}/>
+                    <Conversations
+                        listRef={listRef}
+                        _handleShowScrollBottom={_handleShowScrollBottom}
+                        _handleHideScrollBottom={_handleHideScrollBottom}
+                    />
                 ) : (
                     <NoData/>
                 )
             }
 
             <ScrollBottom
-                messagesCount={messages.length}
+                showScrollBottom={showScrollBottom}
+                messagesCount={messages?.length}
                 listRef={listRef}
             />
 
-            <Footer
-                messagesCount={messages.length}
-                listRef={listRef}
-            />
+            <Footer />
 
         </Stack>
     )

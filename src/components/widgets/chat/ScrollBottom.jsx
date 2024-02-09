@@ -1,9 +1,9 @@
 // libraries
 import {useSelector} from "react-redux";
-import {IconButton} from "@mui/material";
+import {IconButton , Grow} from "@mui/material";
 import {FiChevronDown} from "react-icons/fi";
 
-const ScrollBottom = ({messagesCount, listRef}) => {
+const ScrollBottom = ({showScrollBottom , messagesCount, listRef}) => {
 
     const {darkMode} = useSelector(state => state.setting.appearance);
 
@@ -16,7 +16,7 @@ const ScrollBottom = ({messagesCount, listRef}) => {
     }
 
     return (
-        // <Grow in={showScrollBottom}>
+        <Grow in={showScrollBottom}>
 
             <IconButton
                 variant="contained"
@@ -33,7 +33,7 @@ const ScrollBottom = ({messagesCount, listRef}) => {
                 <FiChevronDown size={20}/>
             </IconButton>
 
-        // </Grow>
+        </Grow>
     )
 }
 

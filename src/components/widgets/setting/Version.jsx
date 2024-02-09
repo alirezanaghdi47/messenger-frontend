@@ -2,7 +2,7 @@
 import {useTranslation} from "react-i18next";
 import {Stack, Typography} from "@mui/material";
 
-const version = "1.9.5";
+const version = "1.9.6";
 
 const Version = () => {
 

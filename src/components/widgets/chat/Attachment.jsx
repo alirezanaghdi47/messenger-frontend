@@ -9,7 +9,7 @@ import {useDropdownMenu} from "hooks/useDropdownMenu";
 
 const AttachmentDropdownMenu = Loadable(() => import("components/widgets/chat/AttachmentDropdownMenu"));
 
-const Attachment = ({messagesCount , listRef}) => {
+const Attachment = () => {
 
     const {queueMessage} = useSelector(state => state.chat);
     const {anchorEl, isOpenDropdownMenu, _handleShowDropdownMenu, _handleHideDropdownMenu} = useDropdownMenu();
@@ -26,8 +26,6 @@ const Attachment = ({messagesCount , listRef}) => {
             </IconButton>
 
             <AttachmentDropdownMenu
-                listRef={listRef}
-                messagesCount={messagesCount}
                 anchorEl={anchorEl}
                 isOpen={isOpenDropdownMenu}
                 onClose={_handleHideDropdownMenu}

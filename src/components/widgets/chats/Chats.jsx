@@ -79,7 +79,7 @@ const UserChat = ({chatItem}) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "start",
-                    width: "calc(100% - 100px)",
+                    width: "calc(100% - 64px)",
                     height: 40,
                 }}
             >
@@ -89,6 +89,7 @@ const UserChat = ({chatItem}) => {
                     color={params.chatId === chatItem._id ? theme.palette.getContrastText(theme.palette.primary.main) : "textPrimary"}
                     fontWeight='bold'
                     className="text-truncate"
+                    width="100%"
                 >
                     {chatItem?.participantIds.find(item => item._id !== _id)?.userName}
                 </Typography>

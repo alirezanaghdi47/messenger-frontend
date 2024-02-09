@@ -5,7 +5,7 @@ import {Stack} from "@mui/material";
 import Attachment from "components/widgets/chat/Attachment.jsx";
 import MessageForm from "components/widgets/chat/MessageForm";
 
-const Footer = ({messagesCount , listRef}) => {
+const Footer = () => {
 
     return (
         <Stack
@@ -29,15 +29,9 @@ const Footer = ({messagesCount , listRef}) => {
             }}
         >
 
-            <Attachment
-                messagesCount={messagesCount}
-                listRef={listRef}
-            />
+            <Attachment/>
 
-            <MessageForm
-                messagesCount={messagesCount}
-                listRef={listRef}
-            />
+            <MessageForm/>
 
         </Stack>
     )

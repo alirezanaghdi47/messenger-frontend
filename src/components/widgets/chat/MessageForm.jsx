@@ -21,7 +21,7 @@ import {insertMessage} from "stores/slices/chatSlice";
 // utils
 import {addTextMessageSchema} from "utils/validations";
 
-const MessageForm = ({messagesCount, listRef}) => {
+const MessageForm = () => {
 
     const [isTyping, setIsTyping] = useState(false);
     const params = useParams();
@@ -40,14 +40,6 @@ const MessageForm = ({messagesCount, listRef}) => {
             });
 
             dispatch(insertMessage(addTextMessageResponse.data));
-
-            setTimeout(() => {
-                listRef?.current?.scrollToIndex({
-                    index: messagesCount,
-                    align: "bottom",
-                    behavior: "auto"
-                });
-            } , 150);
         }
     }, [addTextMessageResponse]);
 

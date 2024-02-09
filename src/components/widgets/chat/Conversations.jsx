@@ -87,12 +87,12 @@ const ConversationItem = ({conversationItem}) => {
                 }}
             >
 
-                {conversationItem.type === 0 && <TextMessage message={conversationItem}/>}
-                {conversationItem.type === 1 && <FileMessage message={conversationItem}/>}
-                {conversationItem.type === 2 && <ImageMessage message={conversationItem}/>}
-                {conversationItem.type === 3 && <MusicMessage message={conversationItem}/>}
-                {conversationItem.type === 4 && <VideoMessage message={conversationItem}/>}
-                {conversationItem.type === 6 && <QueueMessage/>}
+                {conversationItem?.type === 0 && <TextMessage message={conversationItem}/>}
+                {conversationItem?.type === 1 && <FileMessage message={conversationItem}/>}
+                {conversationItem?.type === 2 && <ImageMessage message={conversationItem}/>}
+                {conversationItem?.type === 3 && <MusicMessage message={conversationItem}/>}
+                {conversationItem?.type === 4 && <VideoMessage message={conversationItem}/>}
+                {conversationItem?.type === 6 && <QueueMessage/>}
 
             </Stack>
 
@@ -100,7 +100,7 @@ const ConversationItem = ({conversationItem}) => {
     )
 }
 
-const Conversations = ({listRef}) => {
+const Conversations = ({listRef , _handleShowScrollBottom , _handleHideScrollBottom}) => {
 
     const {messages} = useSelector(state => state.chat);
 
@@ -108,14 +108,18 @@ const Conversations = ({listRef}) => {
         <Virtuoso
             ref={listRef}
             totalCount={messages}
+            context={{messages}}
             data={messages}
-            followOutput="smooth"
+            atBottomStateChange={(atBottom) => {
+                if (atBottom){
+                    _handleHideScrollBottom();
+                } else {
+                    _handleShowScrollBottom();
+                }
+            }}
             itemContent={(index, message) =>
                 <Box
-                    sx={{
-                        paddingX: 1,
-                        paddingY: 2,
-                    }}
+                    sx={{padding: 1}}
                 >
                     <ConversationItem
                         key={message?._id}

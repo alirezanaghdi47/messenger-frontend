@@ -1,9 +1,9 @@
 // libraries
 import {useDispatch, useSelector} from "react-redux";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {format} from "date-fns";
 import {enUS, faIR} from "date-fns/locale";
-import {Box, Container, IconButton, Modal, Stack, Typography , useMediaQuery} from "@mui/material";
+import {Box, Container, IconButton, Modal, Stack, Typography, useMediaQuery} from "@mui/material";
 import {FiUser, FiX} from "react-icons/fi";
 
 // stores
@@ -130,7 +130,10 @@ const ModalContent = ({data}) => {
                 sx={{
                     width: "100%",
                     maxWidth: 992,
+                    maxHeight: "75dvh",
+                    overflowY: "scroll",
                 }}
+                className="custom-scrollbar"
             >
 
                 <LazyLoadImage

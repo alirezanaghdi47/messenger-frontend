@@ -62,7 +62,7 @@ const AttachmentDropdownMenuItem = forwardRef(({label, icon, acceptType, onClick
     )
 });
 
-const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClose}) => {
+const AttachmentDropdownMenu = ({anchorEl, isOpen, onClose}) => {
 
     const fileRef = useRef(null);
     const imageRef = useRef(null);
@@ -89,14 +89,6 @@ const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClo
             });
 
             dispatch(insertMessage(addFileResponse.data));
-
-            setTimeout(() => {
-                listRef?.current?.scrollToIndex({
-                    index: messagesCount,
-                    align: "bottom",
-                    behavior: "auto"
-                });
-            }, 150);
         }
     }, [addFileResponse]);
 
@@ -110,14 +102,6 @@ const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClo
             });
 
             dispatch(insertMessage(addImageResponse.data));
-
-            setTimeout(() => {
-                listRef?.current?.scrollToIndex({
-                    index: messagesCount,
-                    align: "bottom",
-                    behavior: "auto"
-                });
-            }, 150);
         }
     }, [addImageResponse]);
 
@@ -131,14 +115,6 @@ const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClo
             });
 
             dispatch(insertMessage(addVideoResponse.data));
-
-            setTimeout(() => {
-                listRef?.current?.scrollToIndex({
-                    index: messagesCount,
-                    align: "bottom",
-                    behavior: "auto"
-                });
-            }, 150);
         }
     }, [addVideoResponse]);
 
@@ -152,14 +128,6 @@ const AttachmentDropdownMenu = ({messagesCount, listRef, anchorEl, isOpen, onClo
             });
 
             dispatch(insertMessage(addMusicResponse.data));
-
-            setTimeout(() => {
-                listRef?.current?.scrollToIndex({
-                    index: messagesCount,
-                    align: "bottom",
-                    behavior: "auto"
-                });
-            }, 150);
         }
     }, [addMusicResponse]);
 

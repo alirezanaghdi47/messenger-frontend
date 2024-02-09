@@ -233,7 +233,11 @@ export const ImageMessage = ({message}) => {
                 >
 
                     <Box
-                        style={{cursor: "pointer"}}
+                        style={{
+                            cursor: "pointer",
+                            maxHeight: 300,
+                            overflow: "hidden"
+                        }}
                         onClick={() => dispatch(showModal({type: `imagePreview-${message?._id}`, data: message}))}
                     >
 
