@@ -7,19 +7,12 @@ import {precacheAndRoute, createHandlerBoundToURL} from 'workbox-precaching';
 import {registerRoute} from 'workbox-routing';
 import {CacheFirst} from 'workbox-strategies';
 
-const precacheRoutes = [
-    '/index.html',
-    '/favicon.ico',
-    '/robot.txt',
-    '/manifest.json',
-    '/icon-192x192.png', '/icon-256x256.png', '/icon-384x384.png', '/icon-512x512.png', '/maskable_icon.png', '/screenshot-1.png', '/screenshot-2.png',
-    '/images/offline-dark.svg', '/images/offline-light.svg', '/images/pwa-dark.svg', '/images/pwa-light.svg', '/images/orientation-dark.svg', '/images/orientation-light.svg'
-];
-
 clientsClaim();
-const ignored = self.__WB_MANIFEST;
-precacheAndRoute(precacheRoutes);
-// precacheAndRoute(self.__WB_MANIFEST); for precaching
+
+self.skipWaiting();
+
+precacheAndRoute(self.__WB_MANIFEST);
+// const ignored = self.__WB_MANIFEST;
 
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
@@ -69,8 +62,6 @@ registerRoute(
     })
 );
 
-// This allows the web app to trigger skipWaiting via
-// registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'SKIP_WAITING') {
         self.skipWaiting();

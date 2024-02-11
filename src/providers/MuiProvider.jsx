@@ -33,7 +33,7 @@ const MuiProvider = ({children}) => {
 
     const mode = useMemo(() => {
         return darkMode ? "dark" : "light";
-    } , [darkMode, prefersDarkMode]);
+    }, [darkMode, prefersDarkMode]);
 
     const addonTheme = createTheme({
         direction: language === "fa" ? "rtl" : "ltr",
@@ -82,10 +82,10 @@ const MuiProvider = ({children}) => {
             success: {
                 main: "#0F9D58"
             },
-            light:{
+            light: {
                 main: "#e2e8f0"
             },
-            dark:{
+            dark: {
                 main: "#475569"
             },
             contrastThreshold: mode === "dark" ? 3 : 2,
@@ -103,7 +103,7 @@ const MuiProvider = ({children}) => {
             Array(20).fill("none")
         ],
         typography: {
-            fontFamily: language === "fa" ? "Vazirmatn FD , sans-serif" : "Vazirmatn , sans-serif",
+            fontFamily: language === "fa" ? "Vazirmatn FD" : "Vazirmatn"
         },
         components: {
             MuiCssBaseline: {
@@ -128,12 +128,12 @@ const MuiProvider = ({children}) => {
                     }
                 }
             },
-            MuiTypography:{
-              styleOverrides:{
-                  root: ({theme, ownerState}) => ({
-                      lineHeight: "100%"
-                  }),
-              }
+            MuiTypography: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        lineHeight: "100%"
+                    }),
+                }
             },
             MuiTabs: {
                 styleOverrides: {
@@ -155,6 +155,23 @@ const MuiProvider = ({children}) => {
                         lineHeight: "100%"
                     }),
                 },
+            },
+            MuiSnackbarContent: {
+                styleOverrides: {
+                    root: ({theme, ownerState}) => ({
+                        fontWeight: "bold",
+                        background: darkMode ? theme.palette.common.white : theme.palette.common.black,
+                        color: darkMode ? theme.palette.common.black : theme.palette.common.white,
+                        padding: 16
+                    }),
+                    action: ({theme, ownerState}) => ({
+                        padding: 0,
+                        marginLeft: 8,
+                    }),
+                },
+                defaultProps: {
+                    elevation: 2,
+                }
             },
             MuiButtonBase: {
                 defaultProps: {
@@ -202,8 +219,8 @@ const MuiProvider = ({children}) => {
                     disableFocusRipple: true
                 }
             },
-            MuiPopover:{
-                defaultProps:{
+            MuiPopover: {
+                defaultProps: {
                     elevation: 2
                 }
             },

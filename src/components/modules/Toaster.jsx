@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Toaster as ReactToaster} from "react-hot-toast";
 import {useTheme} from "@mui/material";
 
-const Toaster = ()=> {
+const Toaster = () => {
 
     const {language, darkMode} = useSelector(state => state.setting.appearance);
     const theme = useTheme();

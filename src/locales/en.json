@@ -49,7 +49,8 @@
       "register": "Register",
       "createAccount": "Do you have any account ?",
       "haveAccount": "I have an account",
-      "verify": "Verify"
+      "verify": "Verify",
+      "updatePwa": "New version of web app is available"
     },
     "select": {
       "dark": "Dark",
@@ -114,7 +115,8 @@
       "login": "Login",
       "register": "Register",
       "accept": "Accept",
-      "reject": "Reject"
+      "reject": "Reject",
+      "update": "Update"
     },
     "error": {
       "avatarSize": "Avatar size should be less than 5MB",

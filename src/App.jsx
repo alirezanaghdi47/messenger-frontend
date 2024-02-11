@@ -1,9 +1,8 @@
 // components
-import Toaster from "components/modules/Toaster";
-
-// helpers
 import InstallPWA from "components/partials/InstallPwa";
 import PreventOrientation from "components/partials/PreventOrientation";
+import UpdatePwa from "components/partials/UpdatePwa";
+import Toaster from "components/modules/Toaster";
 
 // providers
 import MuiProvider from "providers/MuiProvider.jsx";
@@ -23,6 +22,8 @@ const App = () => {
             <Toaster/>
 
             <InstallPWA/>
+
+            <UpdatePwa/>
 
             <PreventOrientation/>
 
